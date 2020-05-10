@@ -13,12 +13,6 @@ export default abstract class Component extends HTMLElement {
     
     
 
-    this.rerender()
-
-    
-  }
-
-  protected rerender() {
     this.sr.html("")
     if (this.elementBodyExtention !== false) {
       this.elementBody = ce("element-body")
@@ -38,10 +32,12 @@ export default abstract class Component extends HTMLElement {
       this.mostInnerComponentbody = this.sr
       this.sr.html("<!--General styles--><style>" + require('./element.css').toString() + "</style><!--Main styles--><style>" + this.stl() + "</style>" + interpolateHTMLWithLang(this.pug()))
     }
+
+    
   }
 
   private attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
-    this[attrName] = newVal
+    this[attrName](newVal)
   }
 
   public abstract stl(): string;
@@ -66,18 +62,21 @@ export default abstract class Component extends HTMLElement {
 
 
 /*
-import Element from "./../element";
+import Element from "../element"
 
 export default class Example extends Element {
+
   constructor() {
     super()
 
+
   }
+
   stl() {
     return require("./example.css").toString()
   }
   pug() {
-    return require("./example.pug").toString()
+    return require("./example.pug").default
   }
 }
 

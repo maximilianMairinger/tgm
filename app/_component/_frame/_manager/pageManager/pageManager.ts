@@ -1,6 +1,6 @@
 import Manager from "../manager";
 import {ImportanceMap, Import} from "../../../../lib/lazyLoad"
-import HomePage from "../../_page/homepage/homePage";
+import HomePage from "../../_page/_sectionedPage/homepage/homePage";
 import _404Page from "../../_page/404/404";
 import MaxsSandbox from "../../_page/maxsSandbox/maxsSandbox";
 import GeorgsSandbox from "../../_page/georgsSanbox/georgsSanbox";
@@ -16,7 +16,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       {
         key: new Import("", 10, (_HomePage: typeof HomePage) => 
           new _HomePage(this.element)
-        ), val: () => import(/* webpackChunkName: "homePage" */"../../_page/homepage/homePage")
+        ), val: () => import(/* webpackChunkName: "homePage" */"../../_page/_sectionedPage/homepage/homePage")
       },
       {
         key: new Import("404", 0, (__404Page: typeof _404Page) => 

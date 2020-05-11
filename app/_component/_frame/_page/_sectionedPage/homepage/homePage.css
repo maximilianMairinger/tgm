@@ -1,0 +1,7 @@
+h2 {
+  display: block;
+  background: linear-gradient(rgb(49, 6, 6), rgb(52, 63, 52));
+  height: 100%;
+  margin: 0;
+  color: rgb(202, 202, 202)
+}

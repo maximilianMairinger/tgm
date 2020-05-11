@@ -34,6 +34,11 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "maxsSandbox" */"../../_page/maxsSandbox/maxsSandbox")
       },
       {
+        key: new Import("test/123", 0, (_MaxsSandbox: typeof MaxsSandbox) => 
+          new _MaxsSandbox()
+        ), val: () => import(/* webpackChunkName: "maxsSandbox" */"../../_page/maxsSandbox/maxsSandbox")
+      },
+      {
         key: new Import("danielsSandbox", 0, (_DanielsSandbox: typeof DanielsSandbox) => 
           new _DanielsSandbox()
         ), val: () => import(/* webpackChunkName: "danielsSandbox" */"../../_page/danielsSandbox/danielsSandbox")

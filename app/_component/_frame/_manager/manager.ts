@@ -31,7 +31,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private managedElementMap: ResourcesMap
 
-  constructor(importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private notFoundElementName: ManagementElementName = "404" as any, private pushDomain: boolean = true,  public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true,  public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
     this.firstFrameSet = new Promise((res) => {
       this.resFirstFrameSet = res;
@@ -55,7 +55,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
       this.body.apd(e)
     })
 
-
+    
     let initElemName = domain.get(domainLevel, this.setElem.bind(this))
     setTimeout(() => {
       this.managedElementMap = load(initElemName)
@@ -115,38 +115,50 @@ export default abstract class Manager<ManagementElementName extends string> exte
   }
 
   private currentManagedElementName: ManagementElementName
-  private nextPageName: ManagementElementName
+  private nextPageToken: Symbol
 
   public element(): ManagementElementName
-  public element(to: ManagementElementName): void
-  public element(to?: ManagementElementName) {
-    if (to) domain.set(this.domainLevel, to, this.pushDomain)
+  public element(to: ManagementElementName, push?: boolean): void
+  public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
+    if (to) domain.set(this.domainLevel, to, push)
     else return this.currentManagedElementName
   }
 
   private setElem(to: ManagementElementName) {
-    this.nextPageName = to;
-    try {
-      this.managedElementMap.get(to).then((mod) => {
-        if (to === this.nextPageName) {
-          this.swapFrame(mod);
-          this.currentManagedElementName = to;
-        }
-      });
+    let nextPageToken = Symbol("nextPageToken")
+    this.nextPageToken = nextPageToken;
+
+    let pageProm = this.managedElementMap.get(to)
+    while(pageProm === undefined) {
+      to = to.substr(0, to.lastIndexOf("/") + 1) as any
+      pageProm = this.managedElementMap.get(to)
     }
-    catch(e) {
-      try {
-        this.managedElementMap.get(this.notFoundElementName).then((mod) => {
-          if (to === this.nextPageName) {
-            this.swapFrame(mod);
-            this.currentManagedElementName = to;
-          }
-        })
+
+    pageProm.then((mod) => {
+      if (nextPageToken === this.nextPageToken) {
+        this.swapFrame(mod);
+        this.currentManagedElementName = to;
       }
-      catch(e) {
-        throw new UnknownFrameException(to)
-      }
-    }
+    })
+
+
+    // try {
+      
+      
+    // }
+    // catch(e) {
+    //   try {
+    //     this.managedElementMap.get(this.notFoundElementName).then((mod) => {
+    //       if (to === this.nextPageName) {
+    //         this.swapFrame(mod);
+    //         this.currentManagedElementName = to;
+    //       }
+    //     })
+    //   }
+    //   catch(e) {
+    //     throw new UnknownFrameException(to)
+    //   }
+    // }
   }
 
   protected async activationCallback(active: boolean) {

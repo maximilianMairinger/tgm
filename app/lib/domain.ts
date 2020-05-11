@@ -52,8 +52,7 @@ function replace(subdomain: string, badKey: string, goodKey: string, preventWarn
 export function set(level: number, subdomain: string, push: boolean = false, preventWarning = false) {
 
 
-  subdomain = replace(subdomain, "/", "-", preventWarning)
-  subdomain = replace(subdomain, " ", "_", preventWarning)
+  subdomain = replace(subdomain, " ", "-", preventWarning)
 
   let length = domainIndex.length;
   if (length < level || level < 0) {
@@ -79,15 +78,25 @@ export function set(level: number, subdomain: string, push: boolean = false, pre
 
 
 type DomainFragment = string
-export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => void, defaultDomain: string = ""): DomainFragment {
+export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => void): DomainFragment {
   if (subscription) {
     ls.add(() => {
-      let domain = domainIndex[domainLevel]
-      subscription((domain !== undefined) ? domain : defaultDomain)
+      let myDomainIndex = domainIndex.clone()
+      for (let i = 0; i < domainLevel; i++) {
+        myDomainIndex.shift() 
+      }
+      
+      let domain = myDomainIndex.join("/")
+      subscription(domain)
     })
   }
-  let domain = domainIndex[domainLevel]
-  return (domain !== undefined) ? domain : defaultDomain
+  let myDomainIndex = domainIndex.clone()
+  for (let i = 0; i < domainLevel; i++) {
+    myDomainIndex.shift() 
+  }
+  
+  let domain = myDomainIndex.join("/")
+  return domain
   
 
   

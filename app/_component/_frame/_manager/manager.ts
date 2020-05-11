@@ -56,8 +56,11 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
 
     let initElemName = domain.get(domainLevel, "", this.setElem.bind(this))
-    this.managedElementMap = load(initElemName)
-    this.setElem(initElemName as ManagementElementName)
+    setTimeout(() => {
+      this.managedElementMap = load(initElemName)
+      this.setElem(initElemName as ManagementElementName)
+    }, 0)
+    
 
     
   }

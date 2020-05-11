@@ -1,55 +1,53 @@
 import Page from "../page";
 import * as domain from "./../../../../lib/domain"
-
-
-
+import scrollTo from "animated-scroll-to";
+import WaapiEasing from "waapi-easing";
 
 type QuerySelector = string
 export default abstract class SectionedPage extends Page {
   public readonly sectionIndex: {[name: string]: HTMLElement}
-  constructor(sectionIndex: {[name: string]: HTMLElement | QuerySelector}, level: number) {
+  private inScrollAnimation = false
+  constructor(sectionIndex: {[name: string]: HTMLElement | QuerySelector}, domainLevel: number) {
     super()
     this.sectionIndex = sectionIndex as any
 
     let intersectingIndex: Element[] = []
     let observer = new IntersectionObserver((c) => {
-    
-      c.ea((q) => {
-        if (q.isIntersecting) { 
-          if (Math.abs(0 - q.boundingClientRect.y) > Math.abs(q.rootBounds.y - q.boundingClientRect.bottom)) {
-            intersectingIndex.inject(q.target, 0)
+      if (!this.inScrollAnimation) {
+        c.ea((q) => {
+          if (q.isIntersecting) { 
+            if (Math.abs(0 - q.boundingClientRect.y) > Math.abs(q.rootBounds.y - q.boundingClientRect.bottom)) {
+              intersectingIndex.inject(q.target, 0)
+            }
+            else {
+              intersectingIndex.add(q.target)
+            }
           }
           else {
-            intersectingIndex.add(q.target)
+            
+            try {
+              intersectingIndex.rmV(q.target)
+            }
+            catch(e) {
+  
+            }
           }
-        }
-        else {
-          
-          try {
-            intersectingIndex.rmV(q.target)
+        })
+  
+        let elem = intersectingIndex.first
+  
+        
+        for (let name in sectionIndex) {
+          if (sectionIndex[name] === elem) {
+            domain.set(domainLevel, name, false)
           }
-          catch(e) {
-
-          }
-        }
-      })
-
-      let elem = intersectingIndex.first
-
-      console.log(intersectingIndex)
-      
-      for (let name in sectionIndex) {
-        if (sectionIndex[name] === elem) {
-          domain.set(level, name, false)
         }
       }
     }, {
       threshold: 0,
       rootMargin: "-33.333%"
-      
     })
 
-    console.log("ww")
 
 
     for (let name in sectionIndex) {
@@ -60,7 +58,24 @@ export default abstract class SectionedPage extends Page {
     
     
 
-    
+    domain.get(domainLevel, (e) => {
+      this.inScrollAnimation = true
+      scrollTo(sectionIndex[e] as HTMLElement, {
+        cancelOnUserAction: true,
+        verticalOffset: -50,
+        speed: 1150,
+        elementToScroll: this.elementBody,
+        easing: new WaapiEasing("ease").function
 
+      }).then(() => {
+        this.inScrollAnimation = false
+      })
+    }, true)
+
+  }
+
+
+  stl() {
+    return require("./sectionedPage.css").toString()
   }
 }

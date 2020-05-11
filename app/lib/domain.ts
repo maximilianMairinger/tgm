@@ -89,25 +89,38 @@ export function set(level: number, subdomain: string, push: boolean = true, prev
 
 
 type DomainFragment = string
-export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => void): DomainFragment {
+export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => void, onlyInterestedInLevel: boolean = false): DomainFragment {
   if (subscription) {
     ls.add(() => {
-      let myDomainIndex = domainIndex.clone()
-      for (let i = 0; i < domainLevel; i++) {
-        myDomainIndex.shift() 
+      
+      
+      if (!onlyInterestedInLevel) {
+        let myDomainIndex = domainIndex.clone()
+        for (let i = 0; i < domainLevel; i++) {
+          myDomainIndex.shift() 
+        }
+        subscription(myDomainIndex.join(dir))
+      }
+      else {
+        subscription(domainIndex[domainLevel])
       }
       
-      let domain = myDomainIndex.join(dir)
-      subscription(domain)
+      
     })
   }
-  let myDomainIndex = domainIndex.clone()
-  for (let i = 0; i < domainLevel; i++) {
-    myDomainIndex.shift() 
+
+  if (!onlyInterestedInLevel) {
+    let myDomainIndex = domainIndex.clone()
+    for (let i = 0; i < domainLevel; i++) {
+      myDomainIndex.shift() 
+    }
+    
+    return myDomainIndex.join(dir)
+  }
+  else {
+    return domainIndex[domainLevel]
   }
   
-  let domain = myDomainIndex.join(dir)
-  return domain
   
 
   

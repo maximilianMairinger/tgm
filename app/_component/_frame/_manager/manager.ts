@@ -30,7 +30,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
 
   private managedElementMap: ResourcesMap
-  constructor(importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private pushDomain: boolean = true,  public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
     this.firstFrameSet = new Promise((res) => {
       this.resFirstFrameSet = res;
@@ -116,7 +116,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
   public element(): ManagementElementName
   public element(to: ManagementElementName): void
   public element(to?: ManagementElementName) {
-    if (to) domain.set(this.domainLevel, to)
+    if (to) domain.set(this.domainLevel, to, this.pushDomain)
     else return this.currentManagedElementName
   }
 

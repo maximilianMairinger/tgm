@@ -36,7 +36,6 @@ export default abstract class Component extends HTMLElement {
   }
 
   protected attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
-    console.log("qwe", attrName)
     this[attrName](newVal)
   }
 

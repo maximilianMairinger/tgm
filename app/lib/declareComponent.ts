@@ -1,4 +1,4 @@
-import Component from "../_element/component";
+import Component from "../_component/component";
 
 /**
  * Declare new Component and append it to the customElementRegitry

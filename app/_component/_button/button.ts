@@ -4,7 +4,7 @@ import declareComponent from "./../../lib/declareComponent"
 export default declareComponent("button", class Button extends Component {
 
   constructor() {
-    super(false)
+    super()
 
   }
 

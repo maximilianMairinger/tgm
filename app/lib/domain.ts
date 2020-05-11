@@ -1,4 +1,5 @@
 import decodeUri from "fast-decode-uri-component"
+import * as global from "./../global"
 
 
 const commonTitle = "TGM";
@@ -16,12 +17,15 @@ function fc(s: string): string {
 }
 
 function getCurrentSubDomainPath() {
-  return decodeUri(document.location.pathname)
+  return decodeUri(document.location.pathname) as string
 }
 
 function parseUrlToDomainIndex() {
+  let currentDomain = getCurrentSubDomainPath()
   domainIndex = getCurrentSubDomainPath().split(dir)
   domainIndex.remove("");
+  
+  history.replaceState(argData, updateTitle(), !currentDomain.endsWith("/") ? currentDomain + dir : currentDomain)
 }
 parseUrlToDomainIndex()
 
@@ -34,7 +38,6 @@ function updateTitle() {
   titleElement.innerHTML = title
   return title
 }
-updateTitle()
 
 function replace(subdomain: string, badKey: string, goodKey: string, preventWarning: boolean): string {
   if (subdomain.includes(badKey)) {
@@ -60,18 +63,15 @@ export function set(level: number, subdomain: string, push: boolean = false, pre
   domainIndex.splice(level+1);
   if (domainIndex[level] === subdomain) return;
   domainIndex[level] = subdomain;
-  let domain = dir + domainIndex.join(dir)
+  let domain = dir + domainIndex.join(dir) + dir
   
 
   
   
-  if (domain !== getCurrentSubDomainPath()) {
+  // if (domain !== getCurrentSubDomainPath() + dir) {
     let title = updateTitle()
-
-    let args: [any, string, string] = [argData, title, domain]
-    if (push) history.pushState(...args);
-    else history.replaceState(...args);
-  }
+    history[push ? "pushState" : "replaceState"](argData, title, domain)
+  // }
   
 
   
@@ -98,7 +98,6 @@ let ls = []
 
 window.onpopstate = function(e) {
   parseUrlToDomainIndex()
-  updateTitle()
 
   ls.ea((f) => {
     f()

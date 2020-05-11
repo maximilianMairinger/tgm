@@ -49,7 +49,7 @@ function replace(subdomain: string, badKey: string, goodKey: string, preventWarn
 }
 
 
-export function set(level: number, subdomain: string, push: boolean = false, preventWarning = false) {
+export function set(level: number, subdomain: string, push: boolean = true, preventWarning = false) {
 
 
   subdomain = replace(subdomain, " ", "-", preventWarning)
@@ -59,20 +59,31 @@ export function set(level: number, subdomain: string, push: boolean = false, pre
     if (preventWarning) console.warn("Unexpected index: " + level + ". Replacing it with " + length + ".")
     level = length
   }
+
   domainIndex.splice(level+1);
-  if (domainIndex[level] === subdomain) return;
-  domainIndex[level] = subdomain;
-  let domain = dir + domainIndex.join(dir) + dir
   
+  let subdomains = subdomain.split(dir)
+  let anyChange = false
+  subdomains.ea((sub, i) => {
+    let ind = i + level
+    if (domainIndex[ind] !== sub) {
+      anyChange = true
+      domainIndex[ind] = sub
+    }
+  })
+  if (!anyChange) return;
+  let endDomain = dir + domainIndex.join(dir)
+  if (!endDomain.endsWith(dir)) endDomain += dir
 
-  
-  
-  // if (domain !== getCurrentSubDomainPath() + dir) {
-    let title = updateTitle()
-    history[push ? "pushState" : "replaceState"](argData, title, domain)
-  // }
-  
-
+  let title = updateTitle()
+  console.log(endDomain)
+  if (push) {
+    history.pushState(argData, title, endDomain)
+    ls.Call([])
+  }
+  else {
+    history.replaceState(argData, title, endDomain)
+  }
   
 }
 
@@ -86,7 +97,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         myDomainIndex.shift() 
       }
       
-      let domain = myDomainIndex.join("/")
+      let domain = myDomainIndex.join(dir)
       subscription(domain)
     })
   }
@@ -95,7 +106,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
     myDomainIndex.shift() 
   }
   
-  let domain = myDomainIndex.join("/")
+  let domain = myDomainIndex.join(dir)
   return domain
   
 
@@ -108,8 +119,10 @@ let ls = []
 window.onpopstate = function(e) {
   parseUrlToDomainIndex()
 
-  ls.ea((f) => {
-    f()
-  })
+  ls.Call([])
   
 };
+
+setTimeout(() => {
+  set(0, "test/123", true)
+}, 1000)

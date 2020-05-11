@@ -1,5 +1,5 @@
 import interpolateHTMLWithLang from "../lib/interpolateHTMLWithLang";
-import "./../global"
+import "../global"
 
 export default abstract class Component extends HTMLElement {
   protected sr: ShadowRoot;
@@ -16,7 +16,7 @@ export default abstract class Component extends HTMLElement {
 
     this.sr.html("")
     if (this.elementBodyExtention !== false) {
-      this.elementBody = ce("element-body")
+      this.elementBody = ce("component-body")
       if (this.elementBodyExtention === undefined) {
         this.mostInnerComponentbody = this.elementBody  
       }
@@ -25,19 +25,18 @@ export default abstract class Component extends HTMLElement {
         this.elementBody.apd(this.mostInnerComponentbody)
       }
 
-      this.sr.html("<!--General styles--><style>" + require('./element.css').toString() + "</style><!--Main styles--><style>" + this.stl() + "</style>")
+      this.sr.html("<!--General styles--><style>" + require('./component.css').toString() + "</style><!--Main styles--><style>" + this.stl() + "</style>")
       this.sr.append(this.elementBody)
       this.mostInnerComponentbody.innerHTML = interpolateHTMLWithLang(this.pug())
     }
     else {
       this.mostInnerComponentbody = this.sr
-      this.sr.html("<!--General styles--><style>" + require('./element.css').toString() + "</style><!--Main styles--><style>" + this.stl() + "</style>" + interpolateHTMLWithLang(this.pug()))
+      this.sr.html("<!--General styles--><style>" + require('./component.css').toString() + "</style><!--Main styles--><style>" + this.stl() + "</style>" + interpolateHTMLWithLang(this.pug()))
     }
-
-    
   }
 
   protected attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
+    console.log("qwe", attrName)
     this[attrName](newVal)
   }
 

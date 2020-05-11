@@ -81,7 +81,7 @@ ${swInjection}
     path = formatPath(path)
 
     console.log("Change at: \"" + path + "\"; Restaring app.")
-    //@ts-ignore
+
     sse.send("reloadPlease");
   })
 

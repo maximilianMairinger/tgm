@@ -1,6 +1,7 @@
-import Element from "../element"
+import Component from "../component"
+import declareComponent from "./../../lib/declareComponent"
 
-export default class Button extends Element {
+export default declareComponent("button", class Button extends Component {
 
   constructor() {
     super(false)
@@ -8,9 +9,11 @@ export default class Button extends Element {
   }
 
 
-  // static get observedAttributes() {
-  //   return ['content'];
-  // }
+  content(s: string) {
+    console.log("content", s)
+    this.q("hello-test").text(s)
+  }
+
 
   stl() {
     return require("./button.css").toString()
@@ -18,6 +21,4 @@ export default class Button extends Element {
   pug() {
     return require("./button.pug").default
   }
-}
-
-window.customElements.define('c-button', Button);
+})

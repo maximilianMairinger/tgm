@@ -1,10 +1,15 @@
-import Element from "../element"
-import Button from "./../_button/button"
+import Component from "../component"
+import "./../_button/button"
+import declareComponent from "./../../lib/declareComponent"
 
-export default class Site extends Element {
-
+export default declareComponent("site", class extends Component {
+  
   constructor() {
     super();
+  }
+
+  test123() {
+
   }
 
   stl() {
@@ -13,6 +18,4 @@ export default class Site extends Element {
   pug() {
     return require("./site.pug").default
   }
-}
-
-window.customElements.define('c-site', Site);
+})

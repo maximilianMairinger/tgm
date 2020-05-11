@@ -3,6 +3,8 @@ import * as domain from "./../../../../lib/domain"
 import scrollTo from "animated-scroll-to";
 import WaapiEasing from "waapi-easing";
 
+const padding = -70
+
 type QuerySelector = string
 export default abstract class SectionedPage extends Page {
   public readonly sectionIndex: {[name: string]: HTMLElement}
@@ -58,11 +60,11 @@ export default abstract class SectionedPage extends Page {
     
     
 
-    domain.get(domainLevel, (e) => {
+    let init = domain.get(domainLevel, (e) => {
       this.inScrollAnimation = true
       scrollTo(sectionIndex[e] as HTMLElement, {
         cancelOnUserAction: true,
-        verticalOffset: -50,
+        verticalOffset: padding,
         speed: 1150,
         elementToScroll: this.elementBody,
         easing: new WaapiEasing("ease").function
@@ -71,6 +73,12 @@ export default abstract class SectionedPage extends Page {
         this.inScrollAnimation = false
       })
     }, true)
+
+
+    setTimeout(() => {
+      (sectionIndex[init] as HTMLElement).scrollIntoView(true);
+      this.elementBody.scrollBy(0, padding)
+    }, 0)
 
   }
 

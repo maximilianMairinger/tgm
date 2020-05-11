@@ -14,7 +14,7 @@ export default abstract class Indecator extends Component {
   }
   protected async removeIndecation() {
     await this.ongoingAnimation
-    let elem = this.container.childs().first
+    let elem = this.container.childs()
     this.ongoingAnimation = elem.anim({opacity: 0})
     await this.ongoingAnimation
     elem.remove()

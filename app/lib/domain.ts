@@ -79,7 +79,7 @@ export function set(level: number, subdomain: string, push: boolean = false, pre
 
 
 type DomainFragment = string
-export function get(domainLevel: number, defaultDomain: string, subscription?: (domainFragment: DomainFragment) => void): DomainFragment {
+export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => void, defaultDomain: string = ""): DomainFragment {
   if (subscription) {
     ls.add(() => {
       let domain = domainIndex[domainLevel]

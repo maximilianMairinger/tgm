@@ -6,7 +6,7 @@ import lazyLoad, { ImportanceMap, Import, ResourcesMap } from "../../../lib/lazy
 
 export class UnknownFrameException<ManagementElementName extends string> extends Error {
   constructor(frame: ManagementElementName) {
-    super("Unable to resolve frame \"" + frame + "\".")
+    super("Unable to resolve frame \"" + frame + "\". Cannot fallback to 404 element.")
   }
 }
 
@@ -30,7 +30,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
 
   private managedElementMap: ResourcesMap
-  constructor(importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private pushDomain: boolean = true,  public blurCallback?: Function, public preserveFocus?: boolean) {
+
+  constructor(importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private notFoundElementName: ManagementElementName = "404" as any, private pushDomain: boolean = true,  public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
     this.firstFrameSet = new Promise((res) => {
       this.resFirstFrameSet = res;
@@ -55,9 +56,10 @@ export default abstract class Manager<ManagementElementName extends string> exte
     })
 
 
-    let initElemName = domain.get(domainLevel, "", this.setElem.bind(this))
+    let initElemName = domain.get(domainLevel, this.setElem.bind(this))
     setTimeout(() => {
       this.managedElementMap = load(initElemName)
+      if (this.managedElementMap.get(notFoundElementName) === undefined) console.error("404 elementName: \"" + notFoundElementName + "\" is not found in given importanceMap", importanceMap)
       this.setElem(initElemName as ManagementElementName)
     }, 0)
     
@@ -69,7 +71,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
    * @param to frame to be swaped to
    */
   private swapFrame(to: Frame): void {
-    console.log("hello")
     if (to === undefined) {
       throw new Error();
     }
@@ -134,7 +135,17 @@ export default abstract class Manager<ManagementElementName extends string> exte
       });
     }
     catch(e) {
-      throw new UnknownFrameException(to)
+      try {
+        this.managedElementMap.get(this.notFoundElementName).then((mod) => {
+          if (to === this.nextPageName) {
+            this.swapFrame(mod);
+            this.currentManagedElementName = to;
+          }
+        })
+      }
+      catch(e) {
+        throw new UnknownFrameException(to)
+      }
     }
   }
 

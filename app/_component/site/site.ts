@@ -1,16 +1,15 @@
 import Component from "../component"
-import "./../_button/button"
 import declareComponent from "./../../lib/declareComponent"
+import PageManager from "../_frame/_manager/pageManager/pageManager";
 
 export default declareComponent("site", class extends Component {
   
-  constructor() {
+  constructor() { 
     super();
+    this.apd(new PageManager())
   }
 
-  test123() {
-
-  }
+  
 
   stl() {
     return require("./site.css").toString()

@@ -5,7 +5,7 @@ import Component from "../_component/component";
  * @param name Name of the component, how it should be refelected in the dom (when not starting with "c-", "c-" will be prefixed) 
  * @param component The component class; observedAttributes will be injected automatically
  */
-export default function declareComponent<Comp extends {new(): Component}>(name: string, component: Comp): Comp {
+export function declareComponent<Comp>(name: string, component: Comp){
   //@ts-ignore
   if (!component.observedAttributes) {
     //@ts-ignore
@@ -13,7 +13,10 @@ export default function declareComponent<Comp extends {new(): Component}>(name: 
   }
 
   if (!name.startsWith("c-")) name = "c-" + name
+  //@ts-ignore
   window.customElements.define(name, component)
 
-  return component
+  return component as Comp
 }
+
+export default declareComponent

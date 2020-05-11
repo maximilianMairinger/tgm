@@ -121,8 +121,4 @@ window.onpopstate = function(e) {
 
   ls.Call([])
   
-};
-
-setTimeout(() => {
-  set(0, "test/123", true)
-}, 1000)
+}

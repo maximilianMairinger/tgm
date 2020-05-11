@@ -1,5 +1,5 @@
 import liveReloadServer from "./liveReloadServer"
-let app = liveReloadServer()
+let app = liveReloadServer("*")
 
 
 import delay from "delay"

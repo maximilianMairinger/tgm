@@ -55,9 +55,27 @@ export default abstract class Manager<ManagementElementName extends string> exte
       this.body.apd(e)
     })
 
-    
+    console.log("ww")
     let initElemName = domain.get(domainLevel, this.setElem.bind(this))
     setTimeout(() => {
+      let pageProm: any
+      
+      try {
+        pageProm = importanceMap.getByString(initElemName)
+      }
+      catch(e) {
+
+      }
+      
+      while(pageProm === undefined) {
+        try {
+          initElemName = initElemName.substr(0, initElemName.lastIndexOf("/") + 1) as any
+        }
+        catch(e) {
+
+        }
+        pageProm = importanceMap.getByString(initElemName)
+      }
       this.managedElementMap = load(initElemName)
       if (this.managedElementMap.get(notFoundElementName) === undefined) console.error("404 elementName: \"" + notFoundElementName + "\" is not found in given importanceMap", importanceMap)
       this.setElem(initElemName as ManagementElementName)

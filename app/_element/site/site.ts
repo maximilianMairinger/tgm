@@ -1,11 +1,10 @@
 import Element from "../element"
+import Button from "./../_button/button"
 
 export default class Site extends Element {
 
   constructor() {
-    super()
-
-
+    super();
   }
 
   stl() {

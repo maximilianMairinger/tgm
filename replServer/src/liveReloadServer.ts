@@ -2,6 +2,7 @@ import express from "express"
 import SSE from "express-sse"
 import chokidar from "chokidar"
 import yargs from "yargs"
+//@ts-ignore
 const args = yargs.argv
 import pth from "path"
 import bodyParser from "body-parser"
@@ -55,9 +56,9 @@ export default function init(publicPath: string = "./public", indexUrl: string =
   const swInjUrl = `<!-- Code Injected By the live server -->
 <script>
 (() => {
-let url = "streamUrl";
-swInjection}
-)()
+let url = "${streamUrl}";
+${swInjection}
+})()
 </script>`
   
 

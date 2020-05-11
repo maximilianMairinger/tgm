@@ -1,4 +1,5 @@
 import interpolateHTMLWithLang from "../lib/interpolateHTMLWithLang";
+import "./../global"
 
 export default abstract class Component extends HTMLElement {
   protected sr: ShadowRoot;
@@ -36,7 +37,7 @@ export default abstract class Component extends HTMLElement {
     
   }
 
-  private attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
+  protected attributeChangedCallback(attrName: string, oldVal: string, newVal: string) {
     this[attrName](newVal)
   }
 

@@ -1,0 +1,40 @@
+import SectionedPage, { QuerySelector } from "../sectionedPage";
+import lazyLoad, { ImportanceMap, ResourcesMap } from "../../../../../lib/lazyLoad";
+import LoadingIndecator from "../../../../_indecator/loadingIndecator/loadingIndecator";
+import * as domain from "../../../../../lib/domain";
+
+export default abstract class PageSection extends SectionedPage<Promise<any>> {
+
+  private loadMe: (initalKey?: string) => ResourcesMap
+  private resResourceMap: Function
+
+  constructor(sectionIndex: ImportanceMap<() => Promise<any>, any>, domainLevel: number) {
+
+    
+
+    
+
+    let res: Function
+    super(new Promise((r) => {
+      res = r
+    }), domainLevel)
+    this.resResourceMap = res
+
+    this.loadMe = lazyLoad(sectionIndex, e => {
+      this.apd(e)
+      e.anim({opacity: 1})
+    })
+
+
+  }
+  async initialActivationCallback() {
+    let resourceMap = this.loadMe()
+    this.resResourceMap(resourceMap)
+    await (resourceMap.entries().next().value[1] as Promise<any>)
+    
+    super.initialActivationCallback()
+  }
+  // stl() {
+  //   return super.stl() + require("./lazySectionedPage.css").toString()
+  // }
+}

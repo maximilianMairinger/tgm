@@ -84,7 +84,7 @@ export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, 
         kk = k;
       }
     });
-    if (!kk || !vv) throw "No such value found";
+    if (!kk || !vv) throw new Error("No such value found")
     return {key: kk, val: vv};
   }
   public set(key: Import<string, Mod>, val: Func): this {

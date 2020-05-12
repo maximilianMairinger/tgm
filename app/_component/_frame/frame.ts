@@ -1,22 +1,37 @@
 import Component from "./../component";
 
 export default abstract class Frame extends Component {
-  protected active: boolean = false;
+  public readonly active: boolean = false;
   constructor(body?: HTMLElement) {
     super(body);
   }
-  public activate(): boolean | void | Promise<boolean | void> {
+  public activate(): Promise<boolean> {
     return this.vate(true)
   }
-  public deactivate(): boolean | void | Promise<boolean | void> {
+  public deactivate(): Promise<boolean> {
     return this.vate(false)
   }
-  public vate(activate: boolean): boolean | void | Promise<boolean | void> {
-    this.active = activate;
-    return this.activationCallback(activate)
+  public async vate(activate: boolean): Promise<boolean> {
+    (this as any).active = activate
+
+    let res = true
+    if (activate) {
+      if (this.initialActivationCallback) {
+        let acRes = await this.initialActivationCallback()
+        if (acRes === undefined) acRes = true
+        if (!acRes) res = false
+      }
+    }
+    if (this.activationCallback) {
+      let acRes = await this.activationCallback(activate)
+      if (acRes === undefined) acRes = true
+      if (!acRes) res = false
+    }
+    return res
   }
   stl() {
     return require("./frame.css").toString()
   }
-  protected abstract activationCallback(active: boolean): boolean | void | Promise<boolean | void>
+  protected activationCallback?(active: boolean): boolean | void | Promise<boolean | void>
+  protected initialActivationCallback?(): boolean | void | Promise<boolean | void>
 }

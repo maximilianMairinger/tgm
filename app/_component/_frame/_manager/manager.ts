@@ -4,20 +4,14 @@ import * as domain from "../../../lib/domain";
 import lazyLoad, { ImportanceMap, Import, ResourcesMap } from "../../../lib/lazyLoad";
 
 
-export class UnknownFrameException<ManagementElementName extends string> extends Error {
-  constructor(frame: ManagementElementName) {
-    super("Unable to resolve frame \"" + frame + "\". Cannot fallback to 404 element.")
-  }
-}
-
+// TODO: load only when inited
 
 
 export default abstract class Manager<ManagementElementName extends string> extends Frame {
-  private resFirstFrameSet: Function;
-  private firstFrameSet: Promise<any>;
+  private resLoaded: Function;
 
   protected busySwaping: boolean = false;
-  protected currentFrame: Frame;
+  public currentFrame: Frame;
 
   protected body: HTMLElement;
 
@@ -25,6 +19,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
 
   private loadingElem: any;
+  private loaded: Promise<void>
 
 
 
@@ -33,8 +28,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   constructor(importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true,  public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
-    this.firstFrameSet = new Promise((res) => {
-      this.resFirstFrameSet = res;
+    this.loaded = new Promise((res) => {
+      this.resLoaded = res
     })
 
     this.body = ce("manager-body");
@@ -68,7 +63,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
       
       while(pageProm === undefined) {
         try {
-          initElemName = initElemName.substr(0, initElemName.lastIndexOf("/") + 1) as any
+          initElemName = initElemName.substr(0, initElemName.lastIndexOf("/")) as any
         }
         catch(e) {
 
@@ -107,11 +102,10 @@ export default abstract class Manager<ManagementElementName extends string> exte
     to.show();
     if (!this.preserveFocus) to.focus();
 
-    let activationResult: boolean | void | Promise<boolean | void>
+    let activationResult: boolean
     if (this.active) activationResult = await to.activate();
-    if (activationResult === undefined) activationResult = true
-    if (!activationResult) {
-      
+    
+    if (!activationResult) {  
       this.setElem(this.notFoundElementName)
       if (from !== undefined) {
         from.hide()
@@ -133,7 +127,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     }
 
     this.currentFrame = to;
-    this.resFirstFrameSet();
+    this.resLoaded();
 
     if (from === undefined) {
       showAnim.then(finalFunction);
@@ -169,7 +163,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
         to = this.notFoundElementName
         break
       }
-      to = to.substr(0, to.lastIndexOf("/") + 1) as any
+      to = to.substr(0, to.lastIndexOf("/")) as any
       pageProm = this.managedElementMap.get(to)
     } 
 
@@ -182,10 +176,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
   }
 
   protected async activationCallback(active: boolean) {
-    await this.firstFrameSet;
-    //@ts-ignore
-    if (this.currentFrame.active !== active)
-      this.currentFrame.vate(active);
+    await this.loaded
+    if (this.currentFrame.active !== active) this.currentFrame.vate(active)
   }
   stl() {
     return super.stl() + require('./manager.css').toString();

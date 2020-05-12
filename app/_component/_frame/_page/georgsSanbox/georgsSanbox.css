@@ -4,6 +4,7 @@ container {
     height: auto;
     width: 100%;
     margin: 50px 50px;
+    justify-content: space-between;
 }
 
 c-textblob {

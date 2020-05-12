@@ -62,13 +62,15 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
       
       while(pageProm === undefined) {
+        if (initElemName === "") {
+          initElemName = this.notFoundElementName
+          break
+        }
+        initElemName = initElemName.substr(0, initElemName.lastIndexOf("/")) as any
         try {
-          initElemName = initElemName.substr(0, initElemName.lastIndexOf("/")) as any
+          pageProm = importanceMap.getByString(initElemName)
         }
-        catch(e) {
-
-        }
-        pageProm = importanceMap.getByString(initElemName)
+        catch(e) {}
       }
       this.managedElementMap = load(initElemName)
       if (this.managedElementMap.get(notFoundElementName) === undefined) console.error("404 elementName: \"" + notFoundElementName + "\" is not found in given importanceMap", importanceMap)
@@ -83,7 +85,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
    * Swaps to given Frame
    * @param to frame to be swaped to
    */
-  private async swapFrame(to: Frame): Promise<boolean | void> {
+  private async swapFrame(to: Frame): Promise<void | {wrapped: Promise<void>} | boolean> {
     if (to === undefined) {
       throw new Error();
     }
@@ -108,15 +110,20 @@ export default abstract class Manager<ManagementElementName extends string> exte
     
     if (!activationResult) {  
       to.hide()
-      await this.setElem(this.notFoundElementName)
-      if (from !== undefined) {
-        from.hide()
-        from.deactivate()
+
+
+      return {
+        wrapped: (async () => {
+          this.busySwaping = false
+          await this.setElem(this.notFoundElementName)
+          if (from !== undefined) {
+            from.hide()
+            from.deactivate()
+          }
+          
+          
+        })()
       }
-      
-      this.busySwaping = false
-      
-      return
     }
     
     to.css("zIndex", 100)
@@ -167,12 +174,16 @@ export default abstract class Manager<ManagementElementName extends string> exte
       pageProm = this.managedElementMap.get(to)
     } 
 
-    await pageProm.then(async (mod) => {
+    let ensureLoad: {wrapped: Promise<void>} | void | boolean
+    await pageProm.priorityThen(async (mod) => {
       if (nextPageToken === this.nextPageToken) {
         this.currentManagedElementName = to
-        await this.swapFrame(mod)
+        ensureLoad = await this.swapFrame(mod)
+
       }
     })
+
+    if (ensureLoad instanceof Object) await ensureLoad.wrapped
   }
 
   protected async activationCallback(active: boolean) {

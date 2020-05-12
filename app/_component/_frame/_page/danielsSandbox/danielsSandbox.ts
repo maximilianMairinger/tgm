@@ -1,11 +1,10 @@
 import { declareComponent } from "../../../../lib/declareComponent"
 import Page from "../page"
-
+import "../../../_card/newscard/newscard";
 
 export default declareComponent("daniels-sandbox", class extends Page {
   constructor() {
     super()
-    
   }
 
   protected activationCallback(active: boolean): void {

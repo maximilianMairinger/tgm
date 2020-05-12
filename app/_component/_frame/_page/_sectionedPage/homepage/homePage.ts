@@ -21,8 +21,8 @@ export default declareComponent("home-page", class HomePage extends SectionedPag
     }
   }
 
-  protected activationCallback(active: boolean): void {
-    
+  protected activationCallback(active: boolean) {
+    return super.activationCallback(active)
   }
   stl() {
     return super.stl() + require("./homePage.css").toString()

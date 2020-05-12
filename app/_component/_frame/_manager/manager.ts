@@ -55,7 +55,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
       this.body.apd(e)
     })
 
-    console.log("ww")
     let initElemName = domain.get(domainLevel, this.setElem.bind(this))
     setTimeout(() => {
       let pageProm: any
@@ -88,7 +87,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
    * Swaps to given Frame
    * @param to frame to be swaped to
    */
-  private swapFrame(to: Frame): void {
+  private async swapFrame(to: Frame): Promise<boolean | void> {
     if (to === undefined) {
       throw new Error();
     }
@@ -108,7 +107,23 @@ export default abstract class Manager<ManagementElementName extends string> exte
     to.show();
     if (!this.preserveFocus) to.focus();
 
-    if (this.active) to.activate();
+    let activationResult: boolean | void | Promise<boolean | void>
+    if (this.active) activationResult = await to.activate();
+    if (activationResult === undefined) activationResult = true
+    if (!activationResult) {
+      
+      this.setElem(this.notFoundElementName)
+      if (from !== undefined) {
+        from.hide()
+        from.deactivate()
+      }
+      to.hide()
+
+      this.busySwaping = false
+      
+      return
+    }
+    
     to.css("zIndex", "100")
     let showAnim = to.anim([{opacity: 0, scale: 1.05, offset: 0}, {opacity: 1, scale: 1}]);
     let finalFunction = () => {
@@ -130,6 +145,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }).then(finalFunction);
 
     }
+
+    return activationResult
   }
 
   private currentManagedElementName: ManagementElementName
@@ -148,35 +165,20 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
     let pageProm = this.managedElementMap.get(to)
     while(pageProm === undefined) {
+      if (to === "") {
+        to = this.notFoundElementName
+        break
+      }
       to = to.substr(0, to.lastIndexOf("/") + 1) as any
       pageProm = this.managedElementMap.get(to)
-    }
+    } 
 
-    pageProm.then((mod) => {
+    pageProm.then(async (mod) => {
       if (nextPageToken === this.nextPageToken) {
-        this.swapFrame(mod);
-        this.currentManagedElementName = to;
+        this.currentManagedElementName = to
+        await this.swapFrame(mod)
       }
     })
-
-
-    // try {
-      
-      
-    // }
-    // catch(e) {
-    //   try {
-    //     this.managedElementMap.get(this.notFoundElementName).then((mod) => {
-    //       if (to === this.nextPageName) {
-    //         this.swapFrame(mod);
-    //         this.currentManagedElementName = to;
-    //       }
-    //     })
-    //   }
-    //   catch(e) {
-    //     throw new UnknownFrameException(to)
-    //   }
-    // }
   }
 
   protected async activationCallback(active: boolean) {
@@ -186,6 +188,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
       this.currentFrame.vate(active);
   }
   stl() {
-    return require('./manager.css').toString();
+    return super.stl() + require('./manager.css').toString();
   }
 }

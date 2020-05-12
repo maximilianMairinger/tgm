@@ -6,4 +6,7 @@ export default abstract class Page extends Frame {
     super()
 
   }
+  stl() {
+    return super.stl() + require("./page.css").toString()
+  }
 }

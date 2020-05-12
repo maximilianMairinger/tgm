@@ -6,7 +6,9 @@ export default declareComponent("site", class extends Component {
   
   constructor() { 
     super();
-    this.apd(new PageManager())
+    let pageManager = new PageManager()
+    this.apd(pageManager)
+    pageManager.activate()
   }
 
   

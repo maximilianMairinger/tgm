@@ -102,7 +102,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         subscription(myDomainIndex.join(dir))
       }
       else {
-        subscription(domainIndex[domainLevel])
+        subscription(domainIndex[domainLevel] === undefined ? "" : domainIndex[domainLevel])
       }
       
       
@@ -118,12 +118,16 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
     return myDomainIndex.join(dir)
   }
   else {
-    return domainIndex[domainLevel]
+    return domainIndex[domainLevel] === undefined ? "" : domainIndex[domainLevel]
   }
   
   
 
   
+}
+
+export function got(subscription: (domainFragment: DomainFragment) => void) {
+  ls.rmV(subscription)
 }
 
 

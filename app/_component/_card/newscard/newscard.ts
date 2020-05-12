@@ -16,17 +16,55 @@ export default declareComponent("newscard", class extends Card {
         super.setDarkTheme();
     }
 
-    setDate(to: string) {this.q("date").innerHTML = to}
-    setCardTitle(to: string) {this.q("card-title").innerHTML = to}
-    setSkewCardColor(hex: string) {this.q("skew-card").setAttribute("background-color",hex)}
-    setImage(url: string) {this.q("img-container").setAttribute("background-image", "url("+url+")")}
-    setTextTitle(to: string) {this.q("text-title").innerHTML = to};
-    setTextContent(to: string) {this.q("text-content").innerHTML = to}
-    setTextMore(to: string, click: Function) {
-        this.q("text-more").innerHTML = to;
-        this.q("text-more").on("click",click())
+    subheading(): string
+    subheading(to: string): void
+    subheading(to?: string) {
+      if (to) this.q("subheading").text(to)
+      else return this.q("subheading").text()
     }
 
+    cardtitle(): string
+    cardtitle(to: string):void
+    cardtitle(to?: string) {
+        if(to) this.q("card-title").text(to)
+        else return this.q("card-title").text()
+    }
+
+    skewcardcolor(): string
+    skewcardcolor(to: string): void
+    skewcardcolor(to?: string) {
+        if(to)this.q("skew-card").setAttribute("style","background-color: "+ to);
+        else return this.q("skew-card").getAttribute("style");
+    }
+
+    image():string
+    image(to: string): void
+    image(to?: string) {
+        if(to) this.q("img-container").setAttribute("style","background-image: url('" + to + "')");
+        else return this.q("img-container").getAttribute("style");
+    }
+
+    texttitle(): string
+    texttitle(to: string):void
+    texttitle(to?: string) {
+        if(to)this.q("text-title").text(to)
+        else return this.q("text-title").text()
+    }
+
+    textcontent():string
+    textcontent(to: string):void
+    textcontent(to?: string) {
+        if(to)this.q("text-content").text(to)
+        else return this.q("text-content").text();
+    }
+
+    textmore():string
+    textmore(to: string):void
+    textmore(to?: string) {
+        if(to)this.q("text-more").text(to)
+        else return this.q("text-more").text()
+    }
+ 
     stl() {
       return super.stl() + require("./newscard.css").toString()
     }

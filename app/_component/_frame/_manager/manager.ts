@@ -119,10 +119,10 @@ export default abstract class Manager<ManagementElementName extends string> exte
       return
     }
     
-    to.css("zIndex", "100")
+    to.css("zIndex", 100)
     let showAnim = to.anim([{opacity: 0, scale: 1.05, offset: 0}, {opacity: 1, scale: 1}]);
     let finalFunction = () => {
-      to.css("zIndex", "0")
+      to.css("zIndex", 0)
       this.busySwaping = false;
       if (this.wantedFrame !== to) this.swapFrame(this.wantedFrame);
     }

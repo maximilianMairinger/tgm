@@ -1,9 +1,9 @@
 export default function init<Func extends () => Promise<any>>(resources: ImportanceMap<any, any>, globalInitFunc?: (instance: any) => void | Promise<void>) {
   const resolvements = new Map<string, Function>();
   const indexMap = new ResourcesMap();
-  return function load(initalKey?: string): ResourcesMap{
+  return function load(initalKey?: string): ResourcesMap {
     try {
-      if (initalKey !== undefined) resources.getByString(initalKey).key.importance = 1000000000;
+      if (initalKey !== undefined) resources.getByString(initalKey).key.importance = 1000000;
     }
     catch (e) {
       console.warn("Unexpected initalKey");
@@ -13,16 +13,35 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
 
       if (imp.val !== undefined) if (indexMap.get(imp.val) === undefined) {
         let prom = new Promise((res) => {
-          resolvements.set(imp.val, res);
+          resolvements.set(imp.val, (a: any) => {
+            res(a)
+
+            return new Promise((res) => {
+              setTimeout(async () => {
+                await Promise.all(thenResults)
+                res()
+              }, 0)
+            })
+          })
         })
         let superThen = prom.then.bind(prom)
-        prom.then = function(cb) {
+        let thenResults = []
+        //@ts-ignore
+        prom.priorityThen = function(cb) {
           if (!resources.loadedImports.includes(imp)) {
-            imp.importance = Infinity
+            imp.importance += 1000000
             resources.changedImportance = true
           }
-          return superThen(cb)
+          return prom.then(cb)
         }
+        prom.then = function(cb) {
+          return superThen((a: any) => {
+            let res = cb(a)
+            thenResults.add(res)
+            return res
+          })
+        }
+        //@ts-ignore
         indexMap.set(imp.val, prom);
       }
     });
@@ -32,7 +51,8 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
         if (imp.val !== undefined) {
           let instance = imp.initer((await e()).default);
           if (globalInitFunc !== undefined) await globalInitFunc(instance);
-          resolvements.get(imp.val)(instance);
+          await resolvements.get(imp.val)(instance)
+          
         }
         // just load it (and preseve in webpack cache)
         else (await e());
@@ -42,8 +62,8 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
   }
 }
 
-export class ResourcesMap extends Map<string, Promise<any>> {
-  public get(key: string): Promise<any> {
+export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb: (a: any) => void) => void}> {
+  public get(key: string): Promise<any> & {priorityThen: (cb: (a: any) => void) => void} {
     let val = super.get(key);
     if (typeof val === "function") {
       //@ts-ignore
@@ -95,17 +115,17 @@ export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, 
   public changedImportance = false
   public loadedImports = []
   public async forEachOrdered(loop: (e?: Func, key?: Import<string, Mod>, i?: number) => any) {
-    this.importanceList.sort((a, b) => a.importance - b.importance)
+    this.importanceList.sort((a, b) => b.importance - a.importance)
     for (let i = 0; i < this.importanceList.length; i++) {
       if (this.changedImportance) {
-        this.importanceList.sort((a, b) => a.importance - b.importance)
+        this.importanceList.sort((a, b) => b.importance - a.importance)
         this.changedImportance = false
-        i = 0
+        i = -1
         continue
       }
       if (!this.loadedImports.includes(this.importanceList[i])) {
-        await loop(this.get(this.importanceList[i]), this.importanceList[i], i);
         this.loadedImports.add(this.importanceList[i])
+        await loop(this.get(this.importanceList[i]), this.importanceList[i], i);
       }
     }
   }

@@ -7,7 +7,6 @@ import PageSection from "./_lazySectionedPage/lazySectionedPage";
 
 const padding = -70
 
-console.log("wqwe")
 
 type SectionIndex = {[name in Name]: HTMLElement | QuerySelector}
 type Name = string
@@ -122,8 +121,11 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       }
       else {
         // setTimeout(async () => {
-          (await sectionIndex.get(init)).scrollIntoView(true);
-          this.elementBody.scrollBy(0, padding)
+          sectionIndex.get(init).priorityThen((e) => {
+            e.scrollIntoView(true);
+            this.elementBody.scrollBy(0, padding)
+          })
+          
         // }, 0)
       }
     }

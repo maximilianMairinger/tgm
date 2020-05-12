@@ -33,7 +33,7 @@ export default abstract class PageSection extends SectionedPage<Promise<any>> {
     this.resResourceMap(resourceMap)
     await resourceMap.get(init)
     
-    super.initialActivationCallback()
+    await super.initialActivationCallback()
   }
   // stl() {
   //   return super.stl() + require("./lazySectionedPage.css").toString()

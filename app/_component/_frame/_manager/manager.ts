@@ -51,7 +51,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     })
 
     let initElemName = domain.get(domainLevel, this.setElem.bind(this))
-    setTimeout(() => {
+    setTimeout(async () => {
       let pageProm: any
       
       try {
@@ -72,7 +72,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
       this.managedElementMap = load(initElemName)
       if (this.managedElementMap.get(notFoundElementName) === undefined) console.error("404 elementName: \"" + notFoundElementName + "\" is not found in given importanceMap", importanceMap)
-      this.setElem(initElemName as ManagementElementName)
+      await this.setElem(initElemName as ManagementElementName)
+      this.resLoaded();
     }, 0)
     
 
@@ -106,13 +107,13 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (this.active) activationResult = await to.activate();
     
     if (!activationResult) {  
-      this.setElem(this.notFoundElementName)
+      to.hide()
+      await this.setElem(this.notFoundElementName)
       if (from !== undefined) {
         from.hide()
         from.deactivate()
       }
-      to.hide()
-
+      
       this.busySwaping = false
       
       return
@@ -127,7 +128,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
     }
 
     this.currentFrame = to;
-    this.resLoaded();
 
     if (from === undefined) {
       showAnim.then(finalFunction);
@@ -153,7 +153,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     else return this.currentManagedElementName
   }
 
-  private setElem(to: ManagementElementName) {
+  private async setElem(to: ManagementElementName) {
     let nextPageToken = Symbol("nextPageToken")
     this.nextPageToken = nextPageToken;
 
@@ -167,7 +167,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
       pageProm = this.managedElementMap.get(to)
     } 
 
-    pageProm.then(async (mod) => {
+    await pageProm.then(async (mod) => {
       if (nextPageToken === this.nextPageToken) {
         this.currentManagedElementName = to
         await this.swapFrame(mod)

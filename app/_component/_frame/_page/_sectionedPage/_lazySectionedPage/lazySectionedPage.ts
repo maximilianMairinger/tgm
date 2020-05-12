@@ -28,9 +28,10 @@ export default abstract class PageSection extends SectionedPage<Promise<any>> {
 
   }
   async initialActivationCallback() {
+    let init = domain.get(this.domainLevel)
     let resourceMap = this.loadMe()
     this.resResourceMap(resourceMap)
-    await (resourceMap.entries().next().value[1] as Promise<any>)
+    await resourceMap.get(init)
     
     super.initialActivationCallback()
   }

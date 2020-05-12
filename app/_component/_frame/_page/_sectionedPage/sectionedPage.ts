@@ -18,7 +18,6 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   private inScrollAnimation = false
   constructor(sectionIndex: T, protected domainLevel: number) {
     super()
-    debugger
     //@ts-ignore
     this.sectionIndex = sectionIndex instanceof Promise ? sectionIndex.then((sectionIndex) => this.prepSectionIndex(sectionIndex)) : this.prepSectionIndex(sectionIndex)
 
@@ -117,7 +116,6 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
 
       let init = domain.get(this.domainLevel, this.domainFunc, true)
-      debugger
       if (init === "") init = sectionIndex.entries().next().value[0]
       if (sectionIndex.get(init) === undefined) {
         return false

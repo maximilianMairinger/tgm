@@ -2,6 +2,7 @@ import Component from "./../component";
 
 export default abstract class Frame extends Component {
   public readonly active: boolean = false;
+  public readonly initiallyActivated = false
   constructor(body?: HTMLElement) {
     super(body);
   }
@@ -11,16 +12,16 @@ export default abstract class Frame extends Component {
   public deactivate(): Promise<boolean> {
     return this.vate(false)
   }
+  
   public async vate(activate: boolean): Promise<boolean> {
     (this as any).active = activate
 
     let res = true
-    if (activate) {
-      if (this.initialActivationCallback) {
-        let acRes = await this.initialActivationCallback()
-        if (acRes === undefined) acRes = true
-        if (!acRes) res = false
-      }
+    if (activate && this.initialActivationCallback && !this.initiallyActivated) {
+      let acRes = await this.initialActivationCallback();
+      (this as any).initiallyActivated = true
+      if (acRes === undefined) acRes = true
+      if (!acRes) res = false
     }
     if (this.activationCallback) {
       let acRes = await this.activationCallback(activate)

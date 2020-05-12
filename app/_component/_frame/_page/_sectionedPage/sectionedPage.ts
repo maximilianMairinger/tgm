@@ -27,13 +27,14 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     let map = new Map()
     for (let name in sectionIndex) {
-      if (!(sectionIndex[name] instanceof HTMLElement)){
-        let elem = this.q(sectionIndex[name] as any)
-        map.set(name, Promise.resolve(elem))
-      }
-      else {
-        map.set(name, Promise.resolve(sectionIndex[name]))
-      }
+      let elem: any
+      if (!(sectionIndex[name] instanceof HTMLElement)) elem = this.q(sectionIndex[name] as any)
+      else elem = sectionIndex[name]
+
+      let prom = Promise.resolve(elem)
+      //@ts-ignore
+      prom.priorityThen = prom.then
+      map.set(name, prom)
     }
 
     return map

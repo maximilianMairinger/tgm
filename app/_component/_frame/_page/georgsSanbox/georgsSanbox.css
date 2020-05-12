@@ -1,0 +1,11 @@
+container{
+    display: block;
+    height: auto;
+    width: 100%;
+    padding: 50px 100px;
+}
+
+c-textblob{
+    display: block;
+    width: 25%
+}

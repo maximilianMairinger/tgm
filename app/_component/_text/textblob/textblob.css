@@ -1,0 +1,29 @@
+textblob {
+    display: block;
+}
+
+heading {
+    display: block;
+    font-size: 5em;
+}
+
+subheading {
+    display: block;
+    font-size: 3em;
+    color: #27a1d4;
+}
+
+note {
+    position: absolute;
+    top: 15px;
+    left: -50px;
+
+}
+
+content {
+    display: block;
+}
+
+a.link {
+
+}

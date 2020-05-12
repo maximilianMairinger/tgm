@@ -1,29 +1,62 @@
 textblob {
-    display: block;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
-heading {
-    display: block;
-    font-size: 5em;
+notebox {
+    display: flex;
+    flex-direction: row;
 }
 
-subheading {
+notebox note {
+    margin-top: 5px;
+    align-content: flex-start;
+    line-height: 0.8em;
+    font-size: 11px;
+    font-family: 'PT Mono', monospace;
+}
+
+notebox connector {
     display: block;
-    font-size: 3em;
+    width: 25px;
+    padding: 0 5px;
+}
+
+notebox connector hr {
+    height: 1px;
+    background: black;
+}
+
+textbox {
+    margin-top: 5px;
+    margin-left: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+textbox heading {
+    font-size: 60px;
+    line-height: 0.8em;
+}
+
+textbox subheading {
+    margin-top: 0.25em;
+    font-size: 35px;
     color: #27a1d4;
 }
 
-note {
-    position: absolute;
-    top: 15px;
-    left: -50px;
-
+textbox *:nth-child(n+3) {
+    margin-top: 1em;
 }
 
-content {
-    display: block;
+textbox content {
+    font-size: 13px;
 }
 
-a.link {
-
+textbox a.link {
+    font-size: 13px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
 }

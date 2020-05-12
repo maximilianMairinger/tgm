@@ -1,11 +1,13 @@
-container{
-    display: block;
+container {
+    display: flex;
+    flex-direction: row;
     height: auto;
     width: 100%;
-    padding: 50px 100px;
+    margin: 50px 50px;
 }
 
-c-textblob{
+c-textblob {
+    position: relative;
     display: block;
-    width: 25%
+    width: 30%;
 }

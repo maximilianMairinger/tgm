@@ -26,14 +26,26 @@ export default declareComponent("textblob", class Textblob extends Text {
         note():string
         note(note:string):void
         note(note?:string){
-            if (note) this.q("note").text(note);
+            if (note) {
+                var notebox:HTMLElement = document.createElement("notebox");
+                var noteElement:HTMLElement = document.createElement("note");
+                noteElement.text(note);
+                var connector:HTMLElement = document.createElement("connector");
+                var hr:HTMLElement = document.createElement("hr");
+                connector.append(hr);
+                notebox.append(noteElement);
+                notebox.append(connector);
+                this.q("textblob").append(notebox)
+            }
             else return this.q("note").text();
         }
 
         content():string
         content(content:string):void
         content(content?:string) {
-            if (content) this.q("content").text(content);
+            if (content) {
+                this.q("content").text(content);
+            }
             else return this.q("content").text();
         }
 

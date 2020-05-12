@@ -11,3 +11,16 @@ c-textblob {
     display: block;
     width: 30%;
 }
+
+@media only screen and (max-width: 768px) {
+    container {
+        display: flex;
+        flex-direction: column;
+        margin: 150px 50px;
+    }
+
+    c-textblob {
+        width: 70% !important;
+        height: 350px;
+    }
+}

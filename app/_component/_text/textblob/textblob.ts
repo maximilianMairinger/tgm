@@ -31,7 +31,7 @@ export default declareComponent("textblob", class Textblob extends Text {
                 var noteElement:HTMLElement = document.createElement("note");
                 noteElement.text(note);
                 var connector:HTMLElement = document.createElement("connector");
-                var hr:HTMLElement = document.createElement("hr");
+                var hr:HTMLElement = document.createElement("HR");
                 connector.append(hr);
                 notebox.append(noteElement);
                 notebox.append(connector);

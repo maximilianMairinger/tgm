@@ -7,15 +7,16 @@ text-blob {
 note-box {
     display: flex;
     flex-direction: row;
+    width: 120px;
     margin-right: 5px;
-    width: 140px;
+    padding-top: 6px;
     justify-content: flex-start;
 }
 
 note-box note-text {
-    margin-top: 5px;
+    margin-top: 2px;
     align-content: flex-start;
-    line-height: 0.8em;
+    line-height: 1.2em;
     font-size: 11px;
     font-family: 'PT Mono', monospace;
     text-transform: uppercase;
@@ -23,8 +24,8 @@ note-box note-text {
 
 note-box connector-box {
     display: block;
-    width: 25px;
-    padding-left: 5px;
+    width: 30px;
+    padding-left: 12px;
 }
 
 note-box connector-box hr {
@@ -40,7 +41,7 @@ note-box spacing-box {
 
 text-box {
     margin-top: 5px;
-    margin-left: 3px;
+    margin-left: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

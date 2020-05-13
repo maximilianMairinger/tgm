@@ -1,9 +1,9 @@
 export default function init<Func extends () => Promise<any>>(resources: ImportanceMap<any, any>, globalInitFunc?: (instance: any) => void | Promise<void>) {
   const resolvements = new Map<string, Function>();
   const indexMap = new ResourcesMap();
-  return function load(initalKey?: string): ResourcesMap{
+  return function load(initalKey?: string): ResourcesMap {
     try {
-      if (initalKey !== undefined) resources.getByString(initalKey).key.importance = 1000000000;
+      if (initalKey !== undefined) resources.getByString(initalKey).key.importance = 1000000;
     }
     catch (e) {
       console.warn("Unexpected initalKey");
@@ -13,26 +13,49 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
 
       if (imp.val !== undefined) if (indexMap.get(imp.val) === undefined) {
         let prom = new Promise((res) => {
-          resolvements.set(imp.val, res);
+          resolvements.set(imp.val, async (a: any) => {
+            let load = a.loadedCallback ? a.loadedCallback() : undefined
+            res(a)
+
+            await Promise.all([...thenResults, load])
+          })
         })
-        let superThen = prom.then.bind(prom)
-        prom.then = function(cb) {
+
+        let thenResults = []
+        //@ts-ignore
+        prom.priorityThen = function(cb) {
+          let thenRes: any
+          thenResults.add(new Promise((r) => {
+            thenRes = r
+          }))
           if (!resources.loadedImports.includes(imp)) {
-            imp.importance = Infinity
+            imp.importance += 1000000
             resources.changedImportance = true
           }
-          return superThen(cb)
+          
+          return prom.then((a) => {
+            let res = cb(a)
+            if (res instanceof Promise) res.then(thenRes)
+            else thenRes()
+            return res
+          })
         }
+        //@ts-ignore
         indexMap.set(imp.val, prom);
       }
     });
+
+    
+    //@ts-ignore
+    indexMap.reloadStatusPromises();
 
     (async () => {
       await resources.forEachOrdered(async <Mod>(e: () => Promise<{default: {new(): Mod}}>, imp: Import<string, Mod>) => {
         if (imp.val !== undefined) {
           let instance = imp.initer((await e()).default);
           if (globalInitFunc !== undefined) await globalInitFunc(instance);
-          resolvements.get(imp.val)(instance);
+          await resolvements.get(imp.val)(instance)
+          
         }
         // just load it (and preseve in webpack cache)
         else (await e());
@@ -42,8 +65,22 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
   }
 }
 
-export class ResourcesMap extends Map<string, Promise<any>> {
-  public get(key: string): Promise<any> {
+export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb: (a: any) => void) => void}> {
+  public fullyLoaded: Promise<any>
+  public anyLoaded: Promise<any>
+  constructor(a?: any) {
+    super(a)
+  }
+  private reloadStatusPromises() {
+    let proms = []
+    this.forEach((e) => {
+      proms.add(e)
+    })
+    
+    this.fullyLoaded = Promise.all(proms)
+    this.anyLoaded = Promise.race(proms)
+  }
+  public get(key: string): Promise<any> & {priorityThen: (cb: (a: any) => void) => void} {
     let val = super.get(key);
     if (typeof val === "function") {
       //@ts-ignore
@@ -84,7 +121,7 @@ export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, 
         kk = k;
       }
     });
-    if (!kk || !vv) throw "No such value found";
+    if (!kk || !vv) throw new Error("No such value found")
     return {key: kk, val: vv};
   }
   public set(key: Import<string, Mod>, val: Func): this {
@@ -95,17 +132,17 @@ export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, 
   public changedImportance = false
   public loadedImports = []
   public async forEachOrdered(loop: (e?: Func, key?: Import<string, Mod>, i?: number) => any) {
-    this.importanceList.sort((a, b) => a.importance - b.importance)
+    this.importanceList.sort((a, b) => b.importance - a.importance)
     for (let i = 0; i < this.importanceList.length; i++) {
       if (this.changedImportance) {
-        this.importanceList.sort((a, b) => a.importance - b.importance)
+        this.importanceList.sort((a, b) => b.importance - a.importance)
         this.changedImportance = false
-        i = 0
+        i = -1
         continue
       }
       if (!this.loadedImports.includes(this.importanceList[i])) {
-        await loop(this.get(this.importanceList[i]), this.importanceList[i], i);
         this.loadedImports.add(this.importanceList[i])
+        await loop(this.get(this.importanceList[i]), this.importanceList[i], i);
       }
     }
   }

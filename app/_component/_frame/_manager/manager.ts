@@ -4,20 +4,14 @@ import * as domain from "../../../lib/domain";
 import lazyLoad, { ImportanceMap, Import, ResourcesMap } from "../../../lib/lazyLoad";
 
 
-export class UnknownFrameException<ManagementElementName extends string> extends Error {
-  constructor(frame: ManagementElementName) {
-    super("Unable to resolve frame \"" + frame + "\". Cannot fallback to 404 element.")
-  }
-}
-
+// TODO: load only when inited
 
 
 export default abstract class Manager<ManagementElementName extends string> extends Frame {
-  private resFirstFrameSet: Function;
-  private firstFrameSet: Promise<any>;
+  private resLoaded: Function;
 
   protected busySwaping: boolean = false;
-  protected currentFrame: Frame;
+  public currentFrame: Frame;
 
   protected body: HTMLElement;
 
@@ -25,6 +19,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
 
   private loadingElem: any;
+  private loaded: Promise<void>
 
 
 
@@ -33,8 +28,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   constructor(importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true,  public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
-    this.firstFrameSet = new Promise((res) => {
-      this.resFirstFrameSet = res;
+    this.loaded = new Promise((res) => {
+      this.resLoaded = res
     })
 
     this.body = ce("manager-body");
@@ -55,9 +50,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
       this.body.apd(e)
     })
 
-    console.log("ww")
     let initElemName = domain.get(domainLevel, this.setElem.bind(this))
-    setTimeout(() => {
+    setTimeout(async () => {
       let pageProm: any
       
       try {
@@ -68,17 +62,20 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
       
       while(pageProm === undefined) {
+        if (initElemName === "") {
+          initElemName = this.notFoundElementName
+          break
+        }
+        initElemName = initElemName.substr(0, initElemName.lastIndexOf("/")) as any
         try {
-          initElemName = initElemName.substr(0, initElemName.lastIndexOf("/") + 1) as any
+          pageProm = importanceMap.getByString(initElemName)
         }
-        catch(e) {
-
-        }
-        pageProm = importanceMap.getByString(initElemName)
+        catch(e) {}
       }
       this.managedElementMap = load(initElemName)
       if (this.managedElementMap.get(notFoundElementName) === undefined) console.error("404 elementName: \"" + notFoundElementName + "\" is not found in given importanceMap", importanceMap)
-      this.setElem(initElemName as ManagementElementName)
+      await this.setElem(initElemName as ManagementElementName)
+      this.resLoaded();
     }, 0)
     
 
@@ -88,7 +85,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
    * Swaps to given Frame
    * @param to frame to be swaped to
    */
-  private swapFrame(to: Frame): void {
+  private async swapFrame(to: Frame): Promise<void | {wrapped: Promise<void>} | boolean> {
     if (to === undefined) {
       throw new Error();
     }
@@ -108,17 +105,36 @@ export default abstract class Manager<ManagementElementName extends string> exte
     to.show();
     if (!this.preserveFocus) to.focus();
 
-    if (this.active) to.activate();
-    to.css("zIndex", "100")
+    let activationResult: boolean
+    if (this.active) activationResult = await to.activate();
+    
+    if (!activationResult) {  
+      to.hide()
+
+
+      return {
+        wrapped: (async () => {
+          this.busySwaping = false
+          await this.setElem(this.notFoundElementName)
+          if (from !== undefined) {
+            from.hide()
+            from.deactivate()
+          }
+          
+          
+        })()
+      }
+    }
+    
+    to.css("zIndex", 100)
     let showAnim = to.anim([{opacity: 0, scale: 1.05, offset: 0}, {opacity: 1, scale: 1}]);
     let finalFunction = () => {
-      to.css("zIndex", "0")
+      to.css("zIndex", 0)
       this.busySwaping = false;
       if (this.wantedFrame !== to) this.swapFrame(this.wantedFrame);
     }
 
     this.currentFrame = to;
-    this.resFirstFrameSet();
 
     if (from === undefined) {
       showAnim.then(finalFunction);
@@ -130,6 +146,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }).then(finalFunction);
 
     }
+
+    return activationResult
   }
 
   private currentManagedElementName: ManagementElementName
@@ -142,50 +160,37 @@ export default abstract class Manager<ManagementElementName extends string> exte
     else return this.currentManagedElementName
   }
 
-  private setElem(to: ManagementElementName) {
+  private async setElem(to: ManagementElementName) {
     let nextPageToken = Symbol("nextPageToken")
     this.nextPageToken = nextPageToken;
 
     let pageProm = this.managedElementMap.get(to)
     while(pageProm === undefined) {
-      to = to.substr(0, to.lastIndexOf("/") + 1) as any
+      if (to === "") {
+        to = this.notFoundElementName
+        break
+      }
+      to = to.substr(0, to.lastIndexOf("/")) as any
       pageProm = this.managedElementMap.get(to)
-    }
+    } 
 
-    pageProm.then((mod) => {
+    let ensureLoad: {wrapped: Promise<void>} | void | boolean
+    await pageProm.priorityThen(async (mod) => {
       if (nextPageToken === this.nextPageToken) {
-        this.swapFrame(mod);
-        this.currentManagedElementName = to;
+        this.currentManagedElementName = to
+        ensureLoad = await this.swapFrame(mod)
+
       }
     })
 
-
-    // try {
-      
-      
-    // }
-    // catch(e) {
-    //   try {
-    //     this.managedElementMap.get(this.notFoundElementName).then((mod) => {
-    //       if (to === this.nextPageName) {
-    //         this.swapFrame(mod);
-    //         this.currentManagedElementName = to;
-    //       }
-    //     })
-    //   }
-    //   catch(e) {
-    //     throw new UnknownFrameException(to)
-    //   }
-    // }
+    if (ensureLoad instanceof Object) await ensureLoad.wrapped
   }
 
   protected async activationCallback(active: boolean) {
-    await this.firstFrameSet;
-    //@ts-ignore
-    if (this.currentFrame.active !== active)
-      this.currentFrame.vate(active);
+    await this.loaded
+    if (this.currentFrame.active !== active) this.currentFrame.vate(active)
   }
   stl() {
-    return require('./manager.css').toString();
+    return super.stl() + require('./manager.css').toString();
   }
 }

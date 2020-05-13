@@ -12,7 +12,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
     
   }
   stl() {
-    return require("./maxsSandbox.css").toString()
+    return super.stl() + require("./maxsSandbox.css").toString()
   }
   pug() {
     return require("./maxsSandbox.pug").default

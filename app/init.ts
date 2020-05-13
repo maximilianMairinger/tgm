@@ -6,7 +6,7 @@ import global from "./global"
 export async function init() {
   await global()
   
-  const main = (await import("./main")).default
+  const main = (await require("./main")).default
   main()
 
 

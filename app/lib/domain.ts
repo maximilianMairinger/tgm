@@ -4,6 +4,9 @@ import * as global from "./../global"
 
 const commonTitle = "TGM";
 const commonTitleSeperator = " - "
+const commonSubtileSeperator = " > "
+const maxSubtiles = 2
+const toMuchSubtitlesTruncate = "..."
 const argData = "internal";
 
 const titleElement = document.querySelector("title")
@@ -30,11 +33,18 @@ function parseUrlToDomainIndex() {
 parseUrlToDomainIndex()
 
 function updateTitle() {
-  let subtitle = domainIndex.Replace((e) => {
-    return fc(e)
-  }).join(" ")
-  let title = commonTitle
-  if (subtitle.length !== 0) title += commonTitleSeperator + subtitle
+  let myDomainIndex = [...domainIndex]
+  let title = commonTitle + commonTitleSeperator
+  if (myDomainIndex.length > maxSubtiles) {
+    myDomainIndex = myDomainIndex.splice(myDomainIndex.length - maxSubtiles)
+    title = title + toMuchSubtitlesTruncate + commonSubtileSeperator
+  }
+  else title
+  let subtitle = myDomainIndex.replace((e) => {
+    return e.length < 3 ? e.toUpperCase() : fc(e)
+  }).join(commonSubtileSeperator)
+  
+  if (subtitle.length !== 0) title += subtitle
   titleElement.innerHTML = title
   return title
 }
@@ -49,7 +59,7 @@ function replace(subdomain: string, badKey: string, goodKey: string, preventWarn
 }
 
 
-export function set(level: number, subdomain: string, push: boolean = true, preventWarning = false) {
+export function set(subdomain: string, level: number = 0, push: boolean = true, preventWarning = false) {
 
 
   subdomain = replace(subdomain, " ", "-", preventWarning)
@@ -79,7 +89,9 @@ export function set(level: number, subdomain: string, push: boolean = true, prev
   console.log(endDomain)
   if (push) {
     history.pushState(argData, title, endDomain)
-    ls.Call([])
+    ls.forEach((val) => {
+      val()
+    })
   }
   else {
     history.replaceState(argData, title, endDomain)
@@ -91,7 +103,7 @@ export function set(level: number, subdomain: string, push: boolean = true, prev
 type DomainFragment = string
 export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => void, onlyInterestedInLevel: boolean = false): DomainFragment {
   if (subscription) {
-    ls.add(() => {
+    ls.set(subscription, () => {
       
       
       if (!onlyInterestedInLevel) {
@@ -127,15 +139,20 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
 }
 
 export function got(subscription: (domainFragment: DomainFragment) => void) {
-  ls.rmV(subscription)
+  ls.delete(subscription)
 }
 
 
-let ls = []
+let ls = new Map()
 
 window.onpopstate = function(e) {
   parseUrlToDomainIndex()
 
-  ls.Call([])
+  ls.forEach((val) => {
+    val()
+  })
   
 }
+
+//@ts-ignore
+window.domain = {set, get}

@@ -33,17 +33,17 @@ textbox {
     margin-left: 3px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 textbox heading {
-    font-size: 60px;
+    font-size:  calc(30px + (60 - 35) * ((100vw - 300px) / (1600 - 300)));
     line-height: 0.8em;
 }
 
 textbox subheading {
     margin-top: 0.25em;
-    font-size: 35px;
+    font-size:  calc(25px + (35 - 25) * ((100vw - 300px) / (1600 - 300)));
     color: #27a1d4;
 }
 
@@ -70,5 +70,15 @@ textbox a.link {
 
     notebox connector {
         width: 35px;
+    }
+
+    textbox heading {
+        font-size:  calc(35px + (80 - 35) * ((100vw - 300px) / (1600 - 300)));
+    }
+
+    textbox subheading {
+        margin-top: 0.25em;
+        font-size:  calc(35px + (45 - 35) * ((100vw - 300px) / (1600 - 300)));
+        color: #27a1d4;
     }
 }

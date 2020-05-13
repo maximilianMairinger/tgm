@@ -19,8 +19,8 @@ inner-wrapper {
 }
 
 logo {
-    margin-top: -3px;
-    background-image: url("https://gruenstattgrau.at/wp-content/uploads/2019/01/tgm_logoquadrat-450x450.png");
+    margin-top: 13px;
+    background-image: url("./logo.svg");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -36,7 +36,7 @@ items {
 
 hbar {
     display: block;
-    background: #b3bece;
+    background:#C2BFBC;
     height: .5px;
     width: 100%;
     grid-row-start: 2;
@@ -48,6 +48,7 @@ item {
     margin-top: 5px;
     color: #585e66;
     grid-row-start: 3;
+    transition-duration: 0.3s;
 }
 
 item:after {
@@ -88,6 +89,7 @@ mobile-logo {
         max-width: -webkit-fill-available;
         min-width: 0px;
         height: fit-content;
+        margin-bottom: 45px;
         display: grid;
         grid-template-rows: 2fr;
         grid-template-columns: 1fr;
@@ -108,6 +110,7 @@ mobile-logo {
 
     item {
         margin-top: 5px;
+        margin-bottom: 5px;
         color: #585e66;
         grid-row-start: auto;
         grid-column-start: 1;
@@ -143,7 +146,7 @@ mobile-logo {
     }
 
     mobile-container {
-        background: url("https://gruenstattgrau.at/wp-content/uploads/2019/01/tgm_logoquadrat-450x450.png") no-repeat left center;
+        background: url("./logo.svg") no-repeat left center;
         display: block;
         margin: auto;
         height: 100%;

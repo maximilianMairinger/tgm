@@ -45,7 +45,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "danielsSandbox" */"../../_page/danielsSandbox/danielsSandbox")
       },
       {
-        key: new Import("tagesschule/it", 0, (itPage: typeof ItPage) => 
+        key: new Import("tagesschule/it", 20, (itPage: typeof ItPage) => 
           new itPage(this.element, 2)
         ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
       }

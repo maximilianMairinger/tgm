@@ -23,9 +23,9 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   }
 
   private prepSectionIndex(sectionIndex: any): ResourcesMap {
-    if (sectionIndex instanceof Map) return sectionIndex
+    if (sectionIndex instanceof ResourcesMap) return sectionIndex
 
-    let map = new Map()
+    let map = new ResourcesMap()
     for (let name in sectionIndex) {
       let elem: any
       if (!(sectionIndex[name] instanceof HTMLElement)) elem = this.q(sectionIndex[name] as any)
@@ -34,6 +34,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       let prom = Promise.resolve(elem)
       //@ts-ignore
       prom.priorityThen = prom.then
+      //@ts-ignore
       map.set(name, prom)
     }
 

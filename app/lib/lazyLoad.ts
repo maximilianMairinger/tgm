@@ -13,31 +13,30 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
 
       if (imp.val !== undefined) if (indexMap.get(imp.val) === undefined) {
         let prom = new Promise((res) => {
-          resolvements.set(imp.val, (a: any) => {
+          resolvements.set(imp.val, async (a: any) => {
+            let load = a.loadedCallback ? a.loadedCallback() : undefined
             res(a)
 
-            return new Promise((res) => {
-              setTimeout(async () => {
-                await Promise.all(thenResults)
-                res()
-              }, 0)
-            })
+            await Promise.all([...thenResults, load])
           })
         })
-        let superThen = prom.then.bind(prom)
+
         let thenResults = []
         //@ts-ignore
         prom.priorityThen = function(cb) {
+          let thenRes: any
+          thenResults.add(new Promise((r) => {
+            thenRes = r
+          }))
           if (!resources.loadedImports.includes(imp)) {
             imp.importance += 1000000
             resources.changedImportance = true
           }
-          return prom.then(cb)
-        }
-        prom.then = function(cb) {
-          return superThen((a: any) => {
+          
+          return prom.then((a) => {
             let res = cb(a)
-            thenResults.add(res)
+            if (res instanceof Promise) res.then(thenRes)
+            else thenRes()
             return res
           })
         }
@@ -45,6 +44,10 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
         indexMap.set(imp.val, prom);
       }
     });
+
+    
+    //@ts-ignore
+    indexMap.reloadStatusPromises();
 
     (async () => {
       await resources.forEachOrdered(async <Mod>(e: () => Promise<{default: {new(): Mod}}>, imp: Import<string, Mod>) => {
@@ -63,6 +66,20 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
 }
 
 export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb: (a: any) => void) => void}> {
+  public fullyLoaded: Promise<any>
+  public anyLoaded: Promise<any>
+  constructor(a?: any) {
+    super(a)
+  }
+  private reloadStatusPromises() {
+    let proms = []
+    this.forEach((e) => {
+      proms.add(e)
+    })
+    
+    this.fullyLoaded = Promise.all(proms)
+    this.anyLoaded = Promise.race(proms)
+  }
   public get(key: string): Promise<any> & {priorityThen: (cb: (a: any) => void) => void} {
     let val = super.get(key);
     if (typeof val === "function") {

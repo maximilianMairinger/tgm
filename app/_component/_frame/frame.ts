@@ -33,6 +33,8 @@ export default abstract class Frame extends Component {
   stl() {
     return require("./frame.css").toString()
   }
+  
   protected activationCallback?(active: boolean): boolean | void | Promise<boolean | void>
   protected initialActivationCallback?(): boolean | void | Promise<boolean | void>
+  protected loadedCallback?(): boolean | void | Promise<boolean | void>
 }

@@ -42,6 +42,7 @@ export default declareComponent("textblob", class Textblob extends Text {
                 connector.append(hr);
                 notebox.append(notetext);
                 notebox.append(connector);
+                notebox.append(ce("spacing-box"))
                 this.q("text-blob").append(notebox)
             } else return this.q("note-text").text();
         }

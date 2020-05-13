@@ -8,7 +8,7 @@ note-box {
     display: flex;
     flex-direction: row;
     margin-right: 5px;
-    width: 75px;
+    width: 140px;
     justify-content: flex-start;
 }
 
@@ -27,10 +27,14 @@ note-box connector-box {
 }
 
 note-box connector-box hr {
-    height: 1.5px;
+    height: 2px;
     background: black;
     border: none;
     font-size: 15px;
+}
+
+note-box spacing-box {
+    flex-grow: 1;
 }
 
 text-box {

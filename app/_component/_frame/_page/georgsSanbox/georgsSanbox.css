@@ -1,21 +1,31 @@
 container {
+    display: block;
+    margin: 50px 50px;
+}
+
+flex-container {
     display: flex;
     flex-direction: row;
     height: auto;
     width: 96%;
-    margin: 50px 2%;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
 c-textblob {
     position: relative;
     display: block;
-    width: 21%;
-    margin: 0 2%;
-    min-width: 250px;
+    width: 45%;
+    min-width: 500px;
     height: 400px;
     font-size: calc(30px + (45 - 30) * ((100vw - 300px) / (1600 - 300)));
+}
+
+c-textblob.first{
+    position: relative;
+    display: block;
+    width: 80%;
+    font-size: calc(30px + (55 - 30) * ((100vw - 300px) / (1600 - 300)));
 }
 
 @media only screen and (max-width: 768px) {

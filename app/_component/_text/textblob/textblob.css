@@ -1,15 +1,17 @@
-textblob {
+text-blob {
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-end;
 }
 
-notebox {
+note-box {
     display: flex;
     flex-direction: row;
+    margin-right: 5px;
+    width: 75px;
 }
 
-notebox note {
+note-box note-text {
     margin-top: 5px;
     align-content: flex-start;
     line-height: 0.8em;
@@ -17,18 +19,24 @@ notebox note {
     font-family: 'PT Mono', monospace;
 }
 
-notebox connector {
+note-box connector-box {
     display: block;
     width: 25px;
-    padding: 0 5px;
+    padding-left: 12px;
 }
 
-notebox connector hr {
-    height: 1px;
+note-box connector-box hr {
+    height: 1.5px;
     background: black;
+    border: none;
+    font-size: 15px;
 }
 
-textbox {
+note-box spacing-box {
+    flex-grow: 1;
+}
+
+text-box {
     margin-top: 5px;
     margin-left: 3px;
     display: flex;
@@ -36,26 +44,31 @@ textbox {
     justify-content: flex-start;
 }
 
-textbox heading {
-    font-size:  calc(30px + (60 - 35) * ((100vw - 300px) / (1600 - 300)));
+text-box *:nth-child(-n+2){
+    font-weight: bold;
+}
+
+text-box heading-text {
+    /* font-size:  calc(30px + (60 - 35) * ((100vw - 300px) / (1600 - 300))); */
     line-height: 0.8em;
 }
 
-textbox subheading {
+text-box subheading-text {
     margin-top: 0.25em;
-    font-size:  calc(25px + (35 - 25) * ((100vw - 300px) / (1600 - 300)));
+    font-size: 0.6em;
     color: #27a1d4;
 }
 
-textbox *:nth-child(n+3) {
+text-box *:nth-child(n+3) {
     margin-top: 1em;
 }
 
-textbox content {
+text-box content-text {
     font-size: 13px;
+    max-width: 250px;
 }
 
-textbox a.link {
+text-box a.link {
     font-size: 13px;
     font-weight: bold;
     color: black;
@@ -63,22 +76,21 @@ textbox a.link {
 }
 
 @media only screen and (max-width: 768px) {
-    textblob {
+    text-blob {
         display: flex;
         flex-direction: column-reverse;
     }
 
-    notebox connector {
+    note-box{
+        width: 100%;
+    }
+
+    note-box connector-box {
         width: 35px;
     }
 
-    textbox heading {
-        font-size:  calc(35px + (80 - 35) * ((100vw - 300px) / (1600 - 300)));
-    }
-
-    textbox subheading {
+    text-box subheading-text {
         margin-top: 0.25em;
-        font-size:  calc(35px + (45 - 35) * ((100vw - 300px) / (1600 - 300)));
         color: #27a1d4;
     }
 }

@@ -13,8 +13,9 @@ c-textblob {
     display: block;
     width: 21%;
     margin: 0 2%;
-    min-width: 16em;
+    min-width: 250px;
     height: 400px;
+    font-size: calc(30px + (45 - 30) * ((100vw - 300px) / (1600 - 300)));
 }
 
 @media only screen and (max-width: 768px) {
@@ -27,5 +28,6 @@ c-textblob {
     c-textblob {
         width: 80% !important;
         min-width: 0;
+        font-size: calc(35px + (80 - 35) * ((100vw - 300px) / (1600 - 300)));
     }
 }

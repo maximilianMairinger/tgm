@@ -12,59 +12,65 @@ export default declareComponent("textblob", class Textblob extends Text {
         heading(): string
         heading(heading: string): void
         heading(heading?: string) {
-            if (heading) this.q("heading").text(heading);
-            else return this.q("heading").text();
+            if (heading) this.q("heading-text").text(heading);
+            else return this.q("heading-text").text();
         }
 
-        subheading():string
-        subheading(subheading:string):void
-        subheading(subheading?:string){
-            if (subheading) this.q("subheading").text(subheading);
-            else return this.q("subheading").text();
+        subheading(): string
+        subheading(subheading: string): void
+        subheading(subheading?: string) {
+            if (subheading) this.q("subheading-text").text(subheading);
+            else return this.q("subheading-text").text();
         }
 
-        note():string
-        note(note:string):void
-        note(note?:string){
+        hscale():string
+        hscale(hscale:string):void
+        hscale(hscale?:string){
+            if(hscale) this.q("subheading-text").css("font-size", hscale + "em");
+            else return this.q("subheading-text").css("font-size");
+        }
+
+        note(): string
+        note(note: string): void
+        note(note?: string) {
             if (note) {
-                var notebox:HTMLElement = document.createElement("notebox");
-                var noteElement:HTMLElement = document.createElement("note");
-                noteElement.text(note);
-                var connector:HTMLElement = document.createElement("connector");
-                var hr:HTMLElement = document.createElement("HR");
+                let notebox = ce("note-box");
+                let notetext = ce("note-text");
+                notetext.text(note);
+                let connector = ce("connector-box");
+                let hr = ce("HR");
                 connector.append(hr);
-                notebox.append(noteElement);
+                notebox.append(notetext);
                 notebox.append(connector);
-                this.q("textblob").append(notebox)
-            }
-            else return this.q("note").text();
+                notebox.append(ce("spacing-text"))
+                this.q("text-blob").append(notebox)
+            } else return this.q("note-text").text();
         }
 
-        content():string
-        content(content:string):void
-        content(content?:string) {
+        content(): string
+        content(content: string): void
+        content(content?: string) {
             if (content) {
-                this.q("content").text(content);
-            }
-            else return this.q("content").text();
+                this.q("content-text").text(content);
+            } else return this.q("content-text").text();
         }
 
-        linktext():string
-        linktext(linktext:string):void
-        linktext(linktext?:string){
-            if(linktext) this.q("a.link").html(linktext);
+        linktext(): string
+        linktext(linktext: string): void
+        linktext(linktext?: string) {
+            if (linktext) this.q("a.link").html(linktext);
             else return this.q("a.link").html();
         }
 
-        linkhref():string
-        linkhref(linkhref:string):void
-        linkhref(linkhref?:string){
-            if(linkhref) this.q("a.link").setAttribute("href", linkhref);
+        linkhref(): string
+        linkhref(linkhref: string): void
+        linkhref(linkhref?: string) {
+            if (linkhref) this.q("a.link").setAttribute("href", linkhref);
             else return this.q("a.link").getAttribute("href");
         }
 
 
-    stl() {
+        stl() {
             return require("./textblob.css").toString()
         }
 

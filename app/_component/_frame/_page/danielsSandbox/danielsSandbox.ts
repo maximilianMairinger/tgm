@@ -1,6 +1,7 @@
 import { declareComponent } from "../../../../lib/declareComponent"
 import Page from "../page"
 import "../../../_card/newscard/newscard";
+import "../../../footleiste/footleiste"
 
 export default declareComponent("daniels-sandbox", class extends Page {
   constructor() {

@@ -23,6 +23,13 @@ export default declareComponent("textblob", class Textblob extends Text {
             else return this.q("subheading-text").text();
         }
 
+        hsize():string
+        hsize(hsize:string):void
+        hsize(hsize?:string){
+            if(hsize)this.q("text-box").css("font-size", `calc(30px + (${hsize} - 30) * ((100vw - 300px) / (1600 - 300)))`);
+            else return this.q("text-box").css("font-size");
+        }
+
         hscale():string
         hscale(hscale:string):void
         hscale(hscale?:string){

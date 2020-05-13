@@ -44,6 +44,7 @@ text-box {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    font-size: calc(30px + (45 - 30) * ((100vw - 300px) / (1600 - 300)));
 }
 
 text-box *:nth-child(-n+2){
@@ -89,6 +90,10 @@ text-box a.link {
 
     note-box connector-box {
         width: 35px;
+    }
+
+    text-box{
+        font-size: calc(30px + (55 - 25) * ((100vw - 300px) / (1600 - 300)));;;
     }
 
     text-box subheading-text {

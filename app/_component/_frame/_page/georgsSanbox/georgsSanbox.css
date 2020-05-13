@@ -19,14 +19,12 @@ c-textblob {
     width: 45%;
     min-width: 500px;
     height: 400px;
-    font-size: calc(30px + (45 - 30) * ((100vw - 300px) / (1600 - 300)));
 }
 
 c-textblob.first{
     position: relative;
     display: block;
     width: 80%;
-    font-size: calc(30px + (55 - 30) * ((100vw - 300px) / (1600 - 300)));
 }
 
 @media only screen and (max-width: 768px) {
@@ -37,8 +35,7 @@ c-textblob.first{
     }
 
     c-textblob {
-        width: 80% !important;
+        width: 80%;
         min-width: 0;
-        font-size: calc(35px + (80 - 35) * ((100vw - 300px) / (1600 - 300)));
     }
 }

@@ -15,7 +15,7 @@ export type QuerySelector = string
 export default abstract class SectionedPage<T extends FullSectionIndex> extends Page {
   public readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
   private inScrollAnimation = false
-  constructor(sectionIndex: T, protected domainLevel: number) {
+  constructor(sectionIndex: T, protected domainLevel: number, protected sectionChangeCallback?: (section: string) => void) {
     super()
     //@ts-ignore
     this.sectionIndex = sectionIndex instanceof Promise ? sectionIndex.then((sectionIndex) => this.prepSectionIndex(sectionIndex)) : this.prepSectionIndex(sectionIndex)
@@ -42,11 +42,10 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   }
 
   private observer: IntersectionObserver
+  private currentlyActiveSectionName: string
   async initialActivationCallback() {
     //@ts-ignore
     let sectionIndex: ResourcesMap = await this.sectionIndex
-
-    
 
 
     let intersectingIndex: Element[] = []
@@ -80,8 +79,10 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         globalToken = myToken
         sectionIndex.forEach(async (val, name) => {
           if ((await val) === elem) {
-            if (myToken !== globalToken) return
-            domain.set(this.domainLevel, name, false)
+            if (myToken !== globalToken || this.currentlyActiveSectionName === name) return
+            this.sectionChangeCallback(name)
+            domain.set(name, this.domainLevel, false)
+            this.currentlyActiveSectionName = name
           }
         })
       }
@@ -92,9 +93,15 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   }
 
 
-  private domainFunc = async (e) => {
+  private domainFunc = (async (domain: string) => {
+    //@ts-ignore
+    let sectionIndex: ResourcesMap = await this.sectionIndex
+    if (domain === "") domain = sectionIndex.entries().next().value[0]
     this.inScrollAnimation = true
-    scrollTo(await (await this.sectionIndex as any).get(e) as HTMLElement, {
+    this.currentlyActiveSectionName = domain
+    if (this.sectionChangeCallback) this.sectionChangeCallback(domain)
+    let elem = await sectionIndex.get(domain) as HTMLElement
+    if (elem !== undefined) scrollTo(elem, {
       cancelOnUserAction: true,
       verticalOffset: padding,
       speed: 1150,
@@ -104,7 +111,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     }).then(() => {
       this.inScrollAnimation = false
     })
-  }
+  }).bind(this);
 
   protected async activationCallback(active: boolean) {
     //@ts-ignore
@@ -115,7 +122,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       })
 
 
-
+      
       let init = domain.get(this.domainLevel, this.domainFunc, true)
       if (init === "") init = sectionIndex.entries().next().value[0]
       if (sectionIndex.get(init) === undefined) {

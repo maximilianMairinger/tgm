@@ -11,12 +11,14 @@ import { declareComponent } from "../../../../lib/declareComponent"
 export type PageName = ""
 
 export default declareComponent("page-manager", class PageManager extends Manager<PageName> {
-  constructor() {
+  constructor(pageChangeCallback?: (page: string, sectiones: string[]) => void, sectionChangeCallback?: (section: string) => void) {
+
+
     super(new ImportanceMap<() => Promise<any>, any>(
 
       {
         key: new Import("", 10, (homePage: typeof HomePage) => 
-          new homePage(this.element)
+          new homePage(this.element, sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "homePage" */"../../_page/_sectionedPage/homepage/homePage")
       },
       {
@@ -46,10 +48,10 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/it", 20, (itPage: typeof ItPage) => 
-          new itPage(this.element, 2)
+          new itPage(this.element, sectionChangeCallback, 2)
         ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
       }
-    ), 0)
+    ), 0, pageChangeCallback)
 
 
 

@@ -5,20 +5,20 @@ import { ResourcesMap } from "../../../../../lib/lazyLoad"
 
 
 export default declareComponent("home-page", class HomePage extends SectionedPage<{[name: string]: string}> {
-  constructor(private setPageCb: (domain: string) => void, domainLevel = 0) {
+  constructor(private setPageCb: (page: string) => void, sectionChangeCallback?: (section: string) => void, domainLevel = 0) {
     super({
       section1: ".a",
       section2: ".b",
       section3: ".c",
       section4: ".d",
       section5: ".e",
-    }, domainLevel);
+    }, domainLevel, sectionChangeCallback);
 
 
     this.sectionIndex.forEach((elem, name) => {
       elem.then((e) => {
         e.on("click", () => {
-          set(domainLevel, name)
+          set(name, domainLevel)
         })
       })
     })

@@ -2,6 +2,7 @@ import Frame from "./../frame";
 import LoadingIndecator from "../../_indecator/loadingIndecator/loadingIndecator";
 import * as domain from "../../../lib/domain";
 import lazyLoad, { ImportanceMap, Import, ResourcesMap } from "../../../lib/lazyLoad";
+import SectionedPage from "../_page/_sectionedPage/sectionedPage";
 
 
 // TODO: load only when inited
@@ -26,7 +27,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private managedElementMap: ResourcesMap
 
-  constructor(importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true,  public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[]) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
     this.loaded = new Promise((res) => {
       this.resLoaded = res
@@ -156,7 +157,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
   public element(): ManagementElementName
   public element(to: ManagementElementName, push?: boolean): void
   public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
-    if (to) domain.set(this.domainLevel, to, push)
+    if (to) domain.set(to, this.domainLevel, push)
     else return this.currentManagedElementName
   }
 
@@ -175,11 +176,14 @@ export default abstract class Manager<ManagementElementName extends string> exte
     } 
 
     let ensureLoad: {wrapped: Promise<void>} | void | boolean
-    await pageProm.priorityThen(async (mod) => {
+    await pageProm.priorityThen(async (frame: Frame | SectionedPage<any>) => {
       if (nextPageToken === this.nextPageToken) {
         this.currentManagedElementName = to
-        ensureLoad = await this.swapFrame(mod)
-
+        ensureLoad = await this.swapFrame(frame);
+        (async () => {
+          if ((frame as SectionedPage<any>).sectionIndex && this.pageChangeCallback) this.pageChangeCallback(to, [...(await (frame as SectionedPage<any>).sectionIndex).keys()])
+        })()
+        
       }
     })
 

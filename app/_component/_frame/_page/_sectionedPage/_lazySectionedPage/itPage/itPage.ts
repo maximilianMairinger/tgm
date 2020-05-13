@@ -7,7 +7,7 @@ import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
 
 
 export default declareComponent("it-page", class itPage extends LazySectionedPage {
-  constructor(private setPageCb: (domain: string) => void, domainLevel = 1) {
+  constructor(private setPageCb: (domain: string) => void, sectionChangeCallback?: (section: string) => void, domainLevel = 1) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -21,14 +21,14 @@ export default declareComponent("it-page", class itPage extends LazySectionedPag
         ), val: () => import(/* webpackChunkName: "testSection2" */"../../../../_pageSection/testSection2/testSection2")
       },
     
-    ), domainLevel)
+    ), domainLevel, sectionChangeCallback)
 
 
     this.sectionIndex.then((sectionIndex) => {
       sectionIndex.forEach((elem, name) => {
         elem.then((e) => {
           e.on("click", () => {
-            set(domainLevel, name)
+            set(name, domainLevel)
           })
         })
       })

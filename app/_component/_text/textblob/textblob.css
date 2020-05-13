@@ -18,6 +18,7 @@ note-box note-text {
     line-height: 0.8em;
     font-size: 11px;
     font-family: 'PT Mono', monospace;
+    text-transform: uppercase;
 }
 
 note-box connector-box {

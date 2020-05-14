@@ -17,7 +17,7 @@ export default declareComponent("it-page", class itPage extends LazySectionedPag
       },
       {
         key: new Import("section2", 1, (Section2: typeof TestSection2) => 
-          new Section2()
+          new Section2()  
         ), val: () => import(/* webpackChunkName: "testSection2" */"../../../../_pageSection/testSection2/testSection2")
       },
     
@@ -35,9 +35,6 @@ export default declareComponent("it-page", class itPage extends LazySectionedPag
     })
   }
 
-  protected activationCallback(active: boolean) {
-    return super.activationCallback(active)
-  }
   stl() {
     return super.stl() + require("./itPage.css").toString()
   }

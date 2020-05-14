@@ -47,8 +47,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
     });
 
     
-
-    
   }
 
   private domainSubscription: domain.DomainSubscription
@@ -57,7 +55,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
       this.body.apd(e)
     })
 
-    this.domainSubscription = domain.get(this.domainLevel, this.setElem.bind(this))
+    this.domainSubscription = domain.get(this.domainLevel, this.setElem.bind(this), false, "")
     let initElemName = this.domainSubscription.domain
     let pageProm: any
     

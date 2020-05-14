@@ -43,13 +43,13 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
   private observer: IntersectionObserver
   private currentlyActiveSectionName: string
+  private intersectingIndex: Element[] = []
   async initialActivationCallback() {
     //@ts-ignore
     let sectionIndex: ResourcesMap = await this.sectionIndex
     this.domainSubscription =  domain.get(this.domainLevel, async (domain: string) => {
       //@ts-ignore
       let sectionIndex: ResourcesMap = await this.sectionIndex
-      debugger
       if (domain === "") domain = sectionIndex.entries().next().value[0]
       this.inScrollAnimation = true
       this.currentlyActiveSectionName = domain
@@ -65,26 +65,26 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       }).then(() => {
         this.inScrollAnimation = false
       })
+      else this.inScrollAnimation = false
     }, true, sectionIndex.entries().next().value[0])
 
 
-    let intersectingIndex: Element[] = []
     let globalToken: Symbol
     this.observer = new IntersectionObserver(async (c) => {
       if (!this.inScrollAnimation) {
         c.ea((q) => {
           if (q.isIntersecting) { 
             if (Math.abs(0 - q.boundingClientRect.y) > Math.abs(q.rootBounds.y - q.boundingClientRect.bottom)) {
-              intersectingIndex.inject(q.target, 0)
+              this.intersectingIndex.inject(q.target, 0)
             }
             else {
-              intersectingIndex.add(q.target)
+              this.intersectingIndex.add(q.target)
             }
           }
           else {
             
             try {
-              intersectingIndex.rmV(q.target)
+              this.intersectingIndex.rmV(q.target)
             }
             catch(e) {
   
@@ -92,7 +92,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
           }
         })
   
-        let elem = intersectingIndex.first as PageSection
+        let elem = this.intersectingIndex.first as PageSection
   
         
         let myToken = Symbol("Token")
@@ -124,6 +124,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     if (active) {
 
       let init = this.domainSubscription.domain
+      console.log("init", init)
       if (sectionIndex.get(init) === undefined) {
         return false
       }
@@ -141,6 +142,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       })
     }
     else {
+      this.intersectingIndex.clear()
       sectionIndex.forEach(async (elem) => {
         this.observer.unobserve(await elem)
       })

@@ -1,0 +1,19 @@
+:host {
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--strong-text-color)
+}
+
+slot {
+  font-weight: inherit;
+  cursor: inherit;
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+  font-weight: inherit;
+  cursor: inherit;
+}

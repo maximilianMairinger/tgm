@@ -1,0 +1,36 @@
+component-body {
+  display: flex;
+  align-items: center;
+}
+
+left-content {
+  position: absolute;
+  left: 100px;
+  display: inline-block;
+}
+
+left-content > c-tgm-logo {
+  height: 32px;
+  width: 52px;
+  position: relative;
+  float: left;
+}
+
+c-button#homeButton {
+  position: absolute;
+  left: 0;
+  height: 32px;
+  width: 52px; 
+  opacity: .2;
+}
+
+right-content {
+  display: inline-block;
+  position: absolute;
+  right: 100px;
+  height: 20px;
+}
+
+/* tgm-logo {
+  background-image: ;
+} */

@@ -1,12 +1,15 @@
 import Component from "../component"
 import declareComponent from "./../../lib/declareComponent"
+import "./../_themeAble/_icon/tgmLogo/tgmLogo"
+import "./../_button/button"
 
 
-export default declareComponent("site", class Header extends Component {
+export default declareComponent("header", class Header extends Component {
   
   constructor() { 
     super()
     
+
   }
 
   

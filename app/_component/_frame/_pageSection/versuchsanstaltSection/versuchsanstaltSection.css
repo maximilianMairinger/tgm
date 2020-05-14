@@ -10,7 +10,6 @@ versuchsanstalt-container {
     display: flex;
     width: 100%;
     flex-direction: row;
-    flex-wrap: nowrap;
     justify-content: space-between;
 }
 
@@ -19,13 +18,14 @@ versuchsanstalt-container c-textblob {
     display: flex;
     width: auto;
     color: #f8f9ff;
-    margin: 12vh 0;
+    margin-bottom: 12vh;
 }
 
 versuchsanstalt-document-container {
     position: relative;
     display: block;
     flex-grow: 1;
+    min-width: 400px;
     margin-top: 50px;
     margin-left: 50px;
 }
@@ -45,10 +45,12 @@ versuchsanstalt-circle {
     z-index: 0;
     position: absolute;
     border-radius: 100%;
-    top: -900px;
-    right: -500px;
-    height: 1300px;
-    width: 1300px;
+    top: -40vw;
+    right: -30vw;
+    height: 65vw;
+    min-height: 600px;
+    width: 65vw;
+    min-width: 600px;
     background: #3f4957;
     box-shadow: 0 0 30px -20px black;
 }
@@ -75,8 +77,8 @@ versuchsanstalt-L {
 @media only screen and (max-width: 768px) {
 
     versuchsanstalt-section{
-        padding-left: 5vw;
-        padding-right: 5vw;
+        padding-left: 10vw;
+        padding-right: 10vw;
     }
 
     versuchsanstalt-container {
@@ -93,8 +95,9 @@ versuchsanstalt-L {
     versuchsanstalt-document-container {
         align-self: center;
         width: 100%;
-        height: min(calc(100vw - 50px), 500px);
-        margin-top: 50px;
+        height: calc(100vw - 50px);
+        max-height: 380px;
+        margin-top: 80px;
         margin-left: 0;
         margin-bottom: 60px;
     }
@@ -108,7 +111,7 @@ versuchsanstalt-L {
         top: min(-100vw, -450px);
         left: min(-30vw, -200px);
         right: min(-70vw, -500px);
-        height: max(200vw, 900px);
+        height: max(200vw, 1050px);
         width: unset;
     }
 

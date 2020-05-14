@@ -115,12 +115,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
         wrapped: (async () => {
           this.busySwaping = false
           await this.setElem(this.notFoundElementName)
-          if (from !== undefined) {
-            from.hide()
-            
-          }
-          
-          
         })()
       }
     }
@@ -154,6 +148,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
   public element(): ManagementElementName
   public element(to: ManagementElementName, push?: boolean): void
   public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
+    debugger
     if (to === null) {
       if (this.managedElementMap.get(this.domainSubscription.domain) === undefined) this.setElem(this.notFoundElementName)
     }
@@ -164,6 +159,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
   }
 
   private async setElem(to: ManagementElementName) {
+    debugger
     let nextPageToken = Symbol("nextPageToken")
     this.nextPageToken = nextPageToken;
 

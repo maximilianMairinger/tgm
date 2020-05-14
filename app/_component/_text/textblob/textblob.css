@@ -58,7 +58,7 @@ text-box heading-text {
     /* font-size:  calc(0.6em + (1em - 0.6em) * ((100vw - 300px) / (1600 - 300))); */
     margin-top: calc(-0.15 * 1.2em);
     line-height: 1.2em;
-    overflow-x: hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 

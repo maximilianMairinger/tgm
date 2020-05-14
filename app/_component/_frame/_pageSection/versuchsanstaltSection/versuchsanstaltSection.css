@@ -36,7 +36,7 @@ versuchsanstalt-document {
     height: 100%;
     background-image: url(./../../../../res/img/versuchsanstallt_document.svg);
     background-repeat: no-repeat;
-    background-size: min(100%, 400px) 100%;
+    background-size: min(100%, 600px) 100%;
     background-position: right;
 }
 
@@ -44,10 +44,10 @@ versuchsanstalt-circle {
     z-index: 0;
     position: absolute;
     border-radius: 100%;
-    top: -800px;
-    right: -400px;
-    height: 1100px;
-    width: 1100px;
+    top: -900px;
+    right: -500px;
+    height: 1300px;
+    width: 1300px;
     background: #3f4957;
     box-shadow: 0 0 30px -20px black;
 }

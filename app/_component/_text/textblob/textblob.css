@@ -2,6 +2,7 @@ text-blob {
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-end;
+    width: 100%;
 }
 
 note-box {

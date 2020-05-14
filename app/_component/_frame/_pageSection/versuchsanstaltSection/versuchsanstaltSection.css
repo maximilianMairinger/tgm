@@ -1,12 +1,11 @@
-versuchsanstalt-section{
+versuchsanstalt-section {
     display: block;
-    position: relative;
     background: #3c4552;
     padding: 100px 50px 125px 50px;
     overflow: hidden;
 }
 
-versuchsanstalt-section container{
+versuchsanstalt-container {
     position: relative;
     display: flex;
     width: 100%;
@@ -15,7 +14,7 @@ versuchsanstalt-section container{
     justify-content: space-between;
 }
 
-versuchsanstalt-section c-textblob{
+versuchsanstalt-container c-textblob {
     position: relative;
     display: flex;
     width: auto;
@@ -23,7 +22,7 @@ versuchsanstalt-section c-textblob{
     margin-bottom: 100px;
 }
 
-versuchsanstalt-document-container{
+versuchsanstalt-document-container {
     position: relative;
     display: block;
     flex-grow: 1;
@@ -50,7 +49,7 @@ versuchsanstalt-circle {
     height: 1100px;
     width: 1100px;
     background: #3f4957;
-    box-shadow:  0 0 30px -20px black;
+    box-shadow: 0 0 30px -20px black;
 }
 
 versuchsanstalt-L-container {
@@ -58,10 +57,10 @@ versuchsanstalt-L-container {
     left: 100px;
     bottom: -135px;
     height: 175px;
-    width: 100px;
+    width: 75px;
 }
 
-versuchsanstalt-L{
+versuchsanstalt-L {
     display: block;
     position: relative;
     width: 100%;
@@ -73,5 +72,45 @@ versuchsanstalt-L{
 }
 
 @media only screen and (max-width: 768px) {
+
+    versuchsanstalt-section{
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+
+    versuchsanstalt-container {
+        flex-direction: column;
+    }
+
+    versuchsanstalt-container c-textblob {
+        align-self: center;
+        margin-bottom: 0px;
+        width: min(100%, 350px);
+    }
+
+
+    versuchsanstalt-document-container {
+        align-self: center;
+        width: 100%;
+        height: min(calc(100vw - 50px), 500px);
+        margin-top: 50px;
+        margin-bottom: 60px;
+    }
+
+    versuchsanstalt-document {
+        background-position: center;
+    }
+
+    versuchsanstalt-circle {
+        top: min(-100vw, -450px);
+        left: min(-30vw, -200px);
+        right: min(-70vw, -500px);
+        height: max(200vw, 900px);
+        width: unset;
+    }
+
+    versuchsanstalt-L-container {
+        left: max(calc(20vw - 50px), 0px);
+    }
 
 }

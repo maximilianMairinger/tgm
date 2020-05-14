@@ -1,6 +1,7 @@
 import Component from "../component";
 import { Tel } from "extended-dom";
 import declareComponent from "../../lib/declareComponent";
+import * as domain from "./../../lib/domain"
 
 
 const pressedClass = "pressed";
@@ -57,9 +58,9 @@ export default declareComponent("button", class Button extends Component {
       this.blur();
     }, false)
 
-    this.focusOnHover = focusOnHover;
-    this.blurOnMouseOut = blurOnMouseOut;
-    this.hotkey = hotkey
+    this.focusOnHover(focusOnHover);
+    this.blurOnMouseOut(blurOnMouseOut);
+    this.hotkey(hotkey)
   }
   private enableForce(prevFocus: boolean) {
     //@ts-ignore
@@ -83,30 +84,54 @@ export default declareComponent("button", class Button extends Component {
     if (!this.enabled) return
     this.disableForce(prevBlur)
   }
-  public set blurOnMouseOut(to: boolean) {
+
+  private _link: string
+  private linkFn: any
+  public link(): string
+  public link(to: string): void
+  public link(to?: string) {
+    if (to !== undefined) {
+      if (to !== null) {
+        this.linkFn = this.addActivationCallback(() => {
+          domain.set(to)
+        })
+      }
+      else this.removeActivationCallback(this.linkFn)
+      
+    }
+    else return this._link
+  }
+
+  public blurOnMouseOut(to: boolean) {
     if (to) this.mouseOutListener.enable();
     else this.mouseOutListener.disable();
   }
-  public addActivationCallback(cb?: (e: MouseEvent | KeyboardEvent) => void) {
-    if (cb !== undefined) this.callbacks.add(cb);
+  public addActivationCallback(cb: (e: MouseEvent | KeyboardEvent) => void) {
+    this.callbacks.add(cb);
+    return cb
   }
-  public removeActivationCallback(cb?: (e: MouseEvent | KeyboardEvent) => void) {
-    if (cb !== undefined) this.callbacks.removeV(cb);
+  public removeActivationCallback(cb: (e: MouseEvent | KeyboardEvent) => void) {
+    this.callbacks.removeV(cb);
+    return cb
   }
-  public set focusOnHover(to: boolean) {
-    this.doesFocusOnHover = to;
-    if (to) {
-      this.mouseOverListener.enable();
-      this.mouseOutListener.enable();
+
+  public focusOnHover(): boolean
+  public focusOnHover(to: boolean): void
+  public focusOnHover(to?: boolean) {
+    if (to !== undefined) {
+      this.doesFocusOnHover = to;
+      if (to) {
+        this.mouseOverListener.enable();
+        this.mouseOutListener.enable();
+      }
+      else {
+        this.mouseOverListener.disable();
+        this.mouseOutListener.disable();
+      }
     }
-    else {
-      this.mouseOverListener.disable();
-      this.mouseOutListener.disable();
-    }
+    else return this.doesFocusOnHover;
   }
-  public get focusOnHover(): boolean {
-    return this.doesFocusOnHover;
-  }
+
   public click(e?: MouseEvent | KeyboardEvent) {
     if (e !== undefined && !this.obtainDefault) e.preventDefault();
     if (this.enabled) {
@@ -116,24 +141,30 @@ export default declareComponent("button", class Button extends Component {
     }
   }
   private hotKeyListener: (e: KeyboardEvent) => void
-  public set hotkey(to: string) {
-    if (to === undefined) {
-      if (this._hotKey !== undefined) {
-        document.off("keydown", this.hotKeyListener)
-        delete this.hotKeyListener
+
+  public hotkey(): string
+  public hotkey(to: string): void
+  public hotkey(to?: string) {
+    if (to !== undefined) {
+      if (to === null) {
+        if (this._hotKey !== undefined) {
+          document.off("keydown", this.hotKeyListener)
+          delete this.hotKeyListener
+        }
       }
-    }
-    else if (this._hotKey === undefined) {
-      this.hotKeyListener = (e) => {
-        if (this.offsetParent !== null) if (e.key === this._hotKey) this.click()
+      else if (this._hotKey === undefined) {
+        this.hotKeyListener = (e) => {
+          if (this.offsetParent !== null) if (e.key === this._hotKey) this.click()
+        }
+        document.on("keydown", this.hotKeyListener)
       }
-      document.on("keydown", this.hotKeyListener)
+      this._hotKey = to
     }
-    this._hotKey = to
+    else {
+      return this._hotKey
+    }
   }
-  public get hotkey() {
-    return this._hotKey
-  }
+
   stl() {
     return require('./button.css').toString();
   }

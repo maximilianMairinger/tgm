@@ -8,7 +8,7 @@ text-blob {
 note-box {
     display: flex;
     flex-direction: row;
-    width: 120px;
+    width: 130px;
     margin-right: 15px;
     margin-bottom: 2px;
     padding-top: 6px;
@@ -19,7 +19,7 @@ note-box note-text {
     margin-top: 2px;
     align-content: flex-start;
     line-height: 1.2em;
-    font-size: 11px;
+    font-size: 12px;
     font-family: 'PT Mono', monospace;
     text-transform: uppercase;
     white-space: nowrap;

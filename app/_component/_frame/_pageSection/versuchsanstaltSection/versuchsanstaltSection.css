@@ -1,7 +1,7 @@
 versuchsanstalt-section {
     display: block;
     background: #3c4552;
-    padding: 100px 50px 125px 50px;
+    padding: 100px 100px 125px 100px;
     overflow: hidden;
 }
 
@@ -19,7 +19,7 @@ versuchsanstalt-container c-textblob {
     display: flex;
     width: auto;
     color: #f8f9ff;
-    margin: 12vh;
+    margin: 12vh 0;
 }
 
 versuchsanstalt-document-container {
@@ -85,7 +85,7 @@ versuchsanstalt-L {
 
     versuchsanstalt-container c-textblob {
         align-self: center;
-        margin-bottom: 0;
+        margin: 0;
         width: min(100%,  26.5em);
     }
 

@@ -47,7 +47,7 @@ text-box {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    font-size: calc(30px + (45 - 30) * ((100vw - 300px) / (1600 - 300)));
+    font-size: calc(30px + (45 - 30) * ((100vw - 768px) / (1600 - 768)));
 }
 
 text-box *:nth-child(-n+2){
@@ -65,7 +65,7 @@ text-box heading-text {
 
 text-box subheading-text {
     margin-top: calc(2px + (-0.15 * 1.2em));
-    font-size: 0.6em;
+    font-size: max(0.6em, calc(30px * 0.8));
     color: #27a1d4;
     letter-spacing: 0.05em;
 }
@@ -101,7 +101,7 @@ text-box a.link {
     }
 
     text-box{
-        font-size: calc(30px + (55 - 25) * ((100vw - 300px) / (1600 - 300)));
+        font-size: calc(30px + (45 - 30) * ((100vw - 300px) / (768 - 300)));
     }
 
     text-box subheading-text {

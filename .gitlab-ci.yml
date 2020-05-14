@@ -1,0 +1,30 @@
+image: node:latest
+stages:
+  - build
+  - deploy
+cache:
+  paths:
+    - node_modules/
+build:
+  stage: build
+  script:
+    - npm install
+    - npm run buildProdApp
+  only:
+    - dev
+    - master
+deploy:
+  stage: deploy
+  before_script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - npm run buildProdApp
+  script:
+    - ssh tgmwebsite-dev-01 -l root 'rm -rf /var/www/html/*'
+    - scp index.html root@tgmwebsite-dev-01:/var/www/html/
+    - scp -r * root@tgmwebsite-dev-01:/var/www/html/
+  only:
+    - dev
+    - master

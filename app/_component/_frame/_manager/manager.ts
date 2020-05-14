@@ -155,7 +155,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
   public element(to: ManagementElementName, push?: boolean): void
   public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
     if (to === null) {
-      this.setElem(this.notFoundElementName)
+      if (this.managedElementMap.get(this.currentManagedElementName) === undefined) this.setElem(this.notFoundElementName)
     }
     else {
       if (to) domain.set(to, this.domainLevel, push)
@@ -164,8 +164,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
   }
 
   private async setElem(to: ManagementElementName) {
-    debugger
-    console.log(to)
     let nextPageToken = Symbol("nextPageToken")
     this.nextPageToken = nextPageToken;
 

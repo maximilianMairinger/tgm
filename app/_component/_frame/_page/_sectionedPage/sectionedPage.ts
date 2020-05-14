@@ -70,7 +70,6 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
           this.inScrollAnimation = false
         }
         else {
-          debugger
           this.setPage(null)
           this.inScrollAnimation = false
           res(false)

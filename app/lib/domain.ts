@@ -185,8 +185,6 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         
       }
       else {
-
-        // TODO: when setting state to a pageSection, the section index doesnt get updated (observer)
         let domain = domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
         if (domain !== lastDomain) {
           let res = await subscription(domain)

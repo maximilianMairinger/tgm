@@ -21,6 +21,7 @@ note-box note-text {
     font-size: 11px;
     font-family: 'PT Mono', monospace;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
 note-box connector-box {
@@ -54,26 +55,27 @@ text-box *:nth-child(-n+2){
 
 text-box heading-text {
     /* font-size:  calc(0.6em + (1em - 0.6em) * ((100vw - 300px) / (1600 - 300))); */
-    margin-top: calc((1 - 1.2) * 0.5em);
+    margin-top: calc(-0.15 * 1.2em);
     line-height: 1.2em;
     overflow-x: hidden;
     text-overflow: ellipsis;
 }
 
 text-box subheading-text {
-    margin-top: calc(0.25em + ((1 - 1.2) * 0.5em));
+    margin-top: calc(5px + (-0.15 * 1.2em));
     font-size: 0.6em;
     color: #27a1d4;
 }
 
 text-box content-text {
-    max-width: 250px;
+    max-width: 300px;
     margin-top: 14px;
     font-size: 13px;
+    line-height: 1.5em;
 }
 
 text-box a.link {
-    margin-top: 8px;
+    margin-top: 14px;
     font-size: 13px;
     font-weight: bold;
     color: black;
@@ -95,7 +97,7 @@ text-box a.link {
     }
 
     text-box{
-        font-size: calc(30px + (55 - 25) * ((100vw - 300px) / (1600 - 300)));;;
+        font-size: calc(30px + (55 - 25) * ((100vw - 300px) / (1600 - 300)));
     }
 
     text-box subheading-text {

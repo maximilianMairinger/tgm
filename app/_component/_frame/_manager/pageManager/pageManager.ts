@@ -6,6 +6,7 @@ import MaxsSandbox from "../../_page/maxsSandbox/maxsSandbox";
 import GeorgsSandbox from "../../_page/georgsSanbox/georgsSanbox";
 import DanielsSandbox from "../../_page/danielsSandbox/danielsSandbox";
 import ItPage from "../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage";
+import Homepage from "../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage";
 import { declareComponent } from "../../../../lib/declareComponent"
 
 export type PageName = ""
@@ -48,6 +49,11 @@ export default declareComponent("page-manager", class PageManager extends Manage
         key: new Import("tagesschule/it", 20, (itPage: typeof ItPage) => 
           new itPage(this.element, 2)
         ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
+      },
+      {
+        key: new Import("homepage", 20, (homepage: typeof Homepage) =>
+            new Homepage(this.element, 1)
+        ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
       }
     ), 0)
 

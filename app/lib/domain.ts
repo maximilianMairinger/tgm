@@ -1,5 +1,6 @@
 import decodeUri from "fast-decode-uri-component"
 import * as global from "./../global"
+import slugify from "slugify"
 
 
 const commonTitle = "TGM";
@@ -33,7 +34,6 @@ function parseUrlToDomainIndex() {
 parseUrlToDomainIndex()
 
 
-// clean index of ""
 function updateTitle() {
   let myDomainIndex = [...domainIndex]
   let title = commonTitle
@@ -55,24 +55,17 @@ function updateTitle() {
   return title
 }
 
-function replace(subdomain: string, badKey: string, goodKey: string, preventWarning: boolean): string {
-  if (subdomain.includes(badKey)) {
-    let oldSubdomain = subdomain;
-    subdomain = subdomain.replace(badKey, goodKey)
-    if (preventWarning) console.warn("Found at least one \"" + badKey + "\" in given subdomain: \"" + oldSubdomain + "\". Replacing it with \"" + goodKey + "\"; Resulting in \"" + subdomain + "\".")
-  }
-  return subdomain
-}
 
 
-export async function set(subdomain: string, level: number = 0, push: boolean = true, preventWarning = false) {
+
+export async function set(subdomain: string, level: number = 0, push: boolean = true) {
 
 
-  subdomain = replace(subdomain, " ", "-", preventWarning)
+  subdomain = slugify(subdomain)
 
   let length = domainIndex.length;
   if (length < level || level < 0) {
-    if (preventWarning) console.warn("Unexpected index: " + level + ". Replacing it with " + length + ".")
+    console.warn("Unexpected index: " + level + ". Replacing it with " + length + ".")
     level = length
   }
 

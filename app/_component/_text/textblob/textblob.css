@@ -60,24 +60,27 @@ text-box heading-text {
     line-height: 1.2em;
     overflow: hidden;
     text-overflow: ellipsis;
+    letter-spacing: 0.07em;
 }
 
 text-box subheading-text {
-    margin-top: calc(5px + (-0.15 * 1.2em));
+    margin-top: calc(2px + (-0.15 * 1.2em));
     font-size: 0.6em;
     color: #27a1d4;
+    letter-spacing: 0.05em;
 }
 
 text-box content-text {
-    max-width: 300px;
+    max-width: 21.6em;
     margin-top: 14px;
-    font-size: 13px;
+    font-size: 16px;
     line-height: 1.5em;
+    letter-spacing: 0.02em;
 }
 
 text-box a.link {
     margin-top: 14px;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: bold;
     color: black;
     text-decoration: none;

@@ -19,7 +19,7 @@ versuchsanstalt-container c-textblob {
     display: flex;
     width: auto;
     color: #f8f9ff;
-    margin-bottom: 100px;
+    margin: 12vh;
 }
 
 versuchsanstalt-document-container {
@@ -27,6 +27,7 @@ versuchsanstalt-document-container {
     display: block;
     flex-grow: 1;
     margin-top: 50px;
+    margin-left: 50px;
 }
 
 versuchsanstalt-document {
@@ -36,8 +37,8 @@ versuchsanstalt-document {
     height: 100%;
     background-image: url(./../../../../res/img/versuchsanstallt_document.svg);
     background-repeat: no-repeat;
-    background-size: min(100%, 600px) 100%;
-    background-position: right;
+    background-size: min(100%, 500px) 100%;
+    background-position: center;
 }
 
 versuchsanstalt-circle {
@@ -84,8 +85,8 @@ versuchsanstalt-L {
 
     versuchsanstalt-container c-textblob {
         align-self: center;
-        margin-bottom: 0px;
-        width: min(100%, 350px);
+        margin-bottom: 0;
+        width: min(100%,  26.5em);
     }
 
 
@@ -99,6 +100,7 @@ versuchsanstalt-L {
 
     versuchsanstalt-document {
         background-position: center;
+        background-size: 100% 100%;
     }
 
     versuchsanstalt-circle {

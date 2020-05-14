@@ -15,7 +15,7 @@ export type QuerySelector = string
 export default abstract class SectionedPage<T extends FullSectionIndex> extends Page {
   public readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
   private inScrollAnimation = false
-  constructor(sectionIndex: T, protected domainLevel: number, protected sectionChangeCallback?: (section: string) => void) {
+  constructor(sectionIndex: T, protected domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void) {
     super()
     //@ts-ignore
     this.sectionIndex = sectionIndex instanceof Promise ? sectionIndex.then((sectionIndex) => this.prepSectionIndex(sectionIndex)) : this.prepSectionIndex(sectionIndex)
@@ -47,25 +47,36 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   async initialActivationCallback() {
     //@ts-ignore
     let sectionIndex: ResourcesMap = await this.sectionIndex
-    this.domainSubscription =  domain.get(this.domainLevel, async (domain: string) => {
-      //@ts-ignore
-      let sectionIndex: ResourcesMap = await this.sectionIndex
-      if (domain === "") domain = sectionIndex.entries().next().value[0]
-      this.inScrollAnimation = true
-      this.currentlyActiveSectionName = domain
-      if (this.sectionChangeCallback) this.sectionChangeCallback(domain)
-      let elem = await sectionIndex.get(domain) as HTMLElement
-      if (elem !== undefined) scrollTo(elem, {
-        cancelOnUserAction: true,
-        verticalOffset: padding,
-        speed: 1150,
-        elementToScroll: this.elementBody,
-        easing: new WaapiEasing("ease").function
-  
-      }).then(() => {
-        this.inScrollAnimation = false
+    this.domainSubscription =  domain.get(this.domainLevel, (domain: string) => {
+      return new Promise<boolean>(async (res) => {
+        //@ts-ignore
+        let sectionIndex: ResourcesMap = await this.sectionIndex
+              
+        this.inScrollAnimation = true
+        this.currentlyActiveSectionName = domain
+        if (this.sectionChangeCallback) this.sectionChangeCallback(domain)
+
+        let elem = await sectionIndex.get(domain) as HTMLElement
+        if (elem !== undefined) {
+          res(true)
+          await scrollTo(elem, {
+            cancelOnUserAction: true,
+            verticalOffset: padding,
+            speed: 1150,
+            elementToScroll: this.elementBody,
+            easing: new WaapiEasing("ease").function
+
+          })
+          this.inScrollAnimation = false
+        }
+        else {
+          debugger
+          this.setPage(null)
+          this.inScrollAnimation = false
+          res(false)
+        }
       })
-      else this.inScrollAnimation = false
+     
     }, true, sectionIndex.entries().next().value[0])
 
 

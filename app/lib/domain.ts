@@ -32,19 +32,25 @@ function parseUrlToDomainIndex() {
 }
 parseUrlToDomainIndex()
 
+
+// clean index of ""
 function updateTitle() {
   let myDomainIndex = [...domainIndex]
-  let title = commonTitle + commonTitleSeperator
+  let title = commonTitle
   if (myDomainIndex.length > maxSubtiles) {
     myDomainIndex = myDomainIndex.splice(myDomainIndex.length - maxSubtiles)
-    title = title + toMuchSubtitlesTruncate + commonSubtileSeperator
+    title = title + commonTitleSeperator + toMuchSubtitlesTruncate + commonSubtileSeperator
   }
-  else title
+  else if (myDomainIndex.length !== 0) {
+    title += commonTitleSeperator
+  }
+
   let subtitle = myDomainIndex.replace((e) => {
     return e.length < 3 ? e.toUpperCase() : fc(e)
   }).join(commonSubtileSeperator)
+
+  title += subtitle
   
-  if (subtitle.length !== 0) title += subtitle
   titleElement.innerHTML = title
   return title
 }
@@ -59,7 +65,7 @@ function replace(subdomain: string, badKey: string, goodKey: string, preventWarn
 }
 
 
-export function set(subdomain: string, level: number = 0, push: boolean = true, preventWarning = false) {
+export async function set(subdomain: string, level: number = 0, push: boolean = true, preventWarning = false) {
 
 
   subdomain = replace(subdomain, " ", "-", preventWarning)
@@ -70,33 +76,50 @@ export function set(subdomain: string, level: number = 0, push: boolean = true, 
     level = length
   }
 
-  domainIndex.splice(level+1);
+  
   
   let subdomains = subdomain.split(dir)
+  domainIndex.splice(level + subdomains.length);
   let anyChange = false
   subdomains.ea((sub, i) => {
+    if (sub === "") sub = undefined
     let ind = i + level
     if (domainIndex[ind] !== sub) {
       anyChange = true
-      domainIndex[ind] = sub
+      if (sub === undefined) domainIndex.rmI(ind)
+      else domainIndex[ind] = sub
     }
   })
   if (!anyChange) return;
   let endDomain = dir + domainIndex.join(dir)
   if (!endDomain.endsWith(dir)) endDomain += dir
 
+
   let title = updateTitle()
-  console.log(endDomain)
   if (push) {
-    history.pushState(argData, title, endDomain)
-    ls.forEach((val) => {
-      val()
-    })
+    let lastMinuteChange: any[]
+    for (let keyValue of ls) {
+      let r = await keyValue[1]()
+      if (r) lastMinuteChange = r
+    }
+    //@ts-ignore
+    if (lastMinuteChange) set(...lastMinuteChange)
+    else history.pushState(argData, title, endDomain)
   }
   else {
-    history.replaceState(argData, title, endDomain)
+    replaceState(argData, title, endDomain)
   }
+
+
   
+  
+}
+
+
+const replaceStateListener = []
+function replaceState(argData: any, title: any, endDomain: any) {
+  history.replaceState(argData, title, endDomain)
+  replaceStateListener.Call([])
 }
 
 
@@ -116,67 +139,11 @@ export class DomainSubscription {
 
 
 type DomainFragment = string
-export function get(domainLevel: number, subscription: (domainFragment: DomainFragment) => void, onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainSubscription
+export function get(domainLevel: number, subscription: (domainFragment: DomainFragment) => (boolean | Promise<void> | Promise<boolean> | void), onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainSubscription
 export function get(domainLevel: number, subscription: undefined | null, onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainFragment
 export function get(domainLevel: number, subscription?: undefined, onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainFragment
-export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => void, onlyInterestedInLevel: boolean = false, defaultDomain = ""): DomainFragment | DomainSubscription {
-  if (subscription) {
-    let lastDomain: string
-    let f = () => {
-      
-      
-      if (!onlyInterestedInLevel) {
-        let myDomainIndex = domainIndex.clone()
-        for (let i = 0; i < domainLevel; i++) {
-          myDomainIndex.shift() 
-        }
-        let joined = myDomainIndex.join(dir)
-        joined = joined === "" ? defaultDomain : joined
-        if (lastDomain !== joined) {
-          lastDomain = joined
-          subscription(joined)
-        }
-        
-      }
-      else {
-        let domain = domainIndex[domainLevel] === undefined || domainIndex[domainLevel] === "" ? defaultDomain : domainIndex[domainLevel]
-        if (domain !== lastDomain) {
-          lastDomain = domain
-          subscription(domain)
-        }
-        
-      }
-      
-      
-    }
-
-
-    ls.set(subscription, f)
-
-    let getDomain = () => {
-      if (!onlyInterestedInLevel) {
-        let myDomainIndex = domainIndex.clone()
-        for (let i = 0; i < domainLevel; i++) {
-          myDomainIndex.shift() 
-        }
-    
-        let joined = myDomainIndex.join(dir)
-        return joined === "" ? defaultDomain : joined
-      }
-      else {
-        return domainIndex[domainLevel] === undefined || domainIndex[domainLevel] === "" ? defaultDomain : domainIndex[domainLevel]
-      }
-    }
-
-
-    return new DomainSubscription(getDomain, () => {
-      ls.set(subscription, f)
-    }, () => {
-      ls.delete(subscription)
-    })
-
-  }
-  else {
+export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => (boolean |  Promise<void> | Promise<boolean> | void), onlyInterestedInLevel: boolean = false, defaultDomain = ""): DomainFragment | DomainSubscription {
+  let calcCurrentDomain = (() => {
     if (!onlyInterestedInLevel) {
       let myDomainIndex = domainIndex.clone()
       for (let i = 0; i < domainLevel; i++) {
@@ -189,6 +156,67 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
     else {
       return domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
     }
+  })
+  let currentDomain = calcCurrentDomain()
+
+
+  if (subscription) {
+    let lastDomain: string = currentDomain
+    replaceStateListener.add(() => {
+      lastDomain = calcCurrentDomain()
+    })
+    let f = async () => {
+      
+      if (!onlyInterestedInLevel) {
+        let myDomainIndex = domainIndex.clone()
+        for (let i = 0; i < domainLevel; i++) {
+          myDomainIndex.shift() 
+        }
+        let joined = myDomainIndex.join(dir)
+        let domain = joined === "" ? defaultDomain : joined
+        if (lastDomain !== domain) {
+          let res = await subscription(domain)
+          if (res === undefined) res = true
+          if (res) lastDomain = domain
+        }
+        if (joined !== domain) {
+          return [domain, domainLevel]
+        }
+        
+      }
+      else {
+
+        // TODO: when setting state to a pageSection, the section index doesnt get updated (observer)
+        let domain = domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
+        if (domain !== lastDomain) {
+          let res = await subscription(domain)
+          if (res === undefined) res = true
+          if (res) lastDomain = domain
+        }
+        if (domainIndex[domainLevel] !== domain) {
+          return [domain, domainLevel]
+        }
+
+        
+      }
+      
+      
+    }
+
+
+    ls.set(subscription, f)
+
+
+
+    return new DomainSubscription(calcCurrentDomain, () => {
+      ls.set(subscription, f)
+    }, () => {
+      ls.delete(subscription)
+    })
+
+  }
+  else {
+    return currentDomain
   }
 
   
@@ -205,8 +233,8 @@ let ls = new Map()
 window.onpopstate = function(e) {
   parseUrlToDomainIndex()
 
-  ls.forEach((val) => {
-    val()
+  ls.forEach((f) => {
+    f()
   })
   
 }

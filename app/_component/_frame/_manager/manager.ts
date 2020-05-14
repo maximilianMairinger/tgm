@@ -5,9 +5,6 @@ import lazyLoad, { ImportanceMap, Import, ResourcesMap } from "../../../lib/lazy
 import SectionedPage from "../_page/_sectionedPage/sectionedPage";
 
 
-// TODO: load only when inited
-
-
 export default abstract class Manager<ManagementElementName extends string> extends Frame {
   private resLoaded: Function;
 
@@ -55,7 +52,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
       this.body.apd(e)
     })
 
-    this.domainSubscription = domain.get(this.domainLevel, this.setElem.bind(this), false, "")
+    this.domainSubscription = domain.get(this.domainLevel, async (to: any) => {await this.setElem(to)}, false, "")
     let initElemName = this.domainSubscription.domain
     let pageProm: any
     
@@ -107,6 +104,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (!this.preserveFocus) to.focus();
 
     let activationResult: boolean
+    if (from !== undefined) from.deactivate()
     if (this.active) activationResult = await to.activate();
     
     if (!activationResult) {  
@@ -119,7 +117,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
           await this.setElem(this.notFoundElementName)
           if (from !== undefined) {
             from.hide()
-            from.deactivate()
+            
           }
           
           
@@ -143,7 +141,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
     else {
       showAnim.then(() => {
         from.hide()
-        from.deactivate();
       }).then(finalFunction);
 
     }
@@ -157,11 +154,18 @@ export default abstract class Manager<ManagementElementName extends string> exte
   public element(): ManagementElementName
   public element(to: ManagementElementName, push?: boolean): void
   public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
-    if (to) domain.set(to, this.domainLevel, push)
-    else return this.currentManagedElementName
+    if (to === null) {
+      this.setElem(this.notFoundElementName)
+    }
+    else {
+      if (to) domain.set(to, this.domainLevel, push)
+      else return this.currentManagedElementName
+    }
   }
 
   private async setElem(to: ManagementElementName) {
+    debugger
+    console.log(to)
     let nextPageToken = Symbol("nextPageToken")
     this.nextPageToken = nextPageToken;
 
@@ -176,21 +180,25 @@ export default abstract class Manager<ManagementElementName extends string> exte
     } 
 
     let ensureLoad: {wrapped: Promise<void>} | void | boolean
-    await pageProm.priorityThen(async (frame: Frame | SectionedPage<any>) => {
-      if (nextPageToken === this.nextPageToken) {
-        this.currentManagedElementName = to
-        ensureLoad = await this.swapFrame(frame);
-        (async () => {
-          if (this.pageChangeCallback) {
-            if ((frame as SectionedPage<any>).sectionIndex) this.pageChangeCallback(to, [...(await (frame as SectionedPage<any>).sectionIndex).keys()])
-            else this.pageChangeCallback(to, [])
-          }
-        })()
-        
-      }
-    })
-
-    if (ensureLoad instanceof Object) await ensureLoad.wrapped
+    if (this.currentManagedElementName !== to) {
+      await pageProm.priorityThen(async (frame: Frame | SectionedPage<any>) => {
+        if (nextPageToken === this.nextPageToken) {
+          this.currentManagedElementName = to;
+          (async () => {
+            if (this.pageChangeCallback) {
+              if ((frame as SectionedPage<any>).sectionIndex) this.pageChangeCallback(to, [...(await (frame as SectionedPage<any>).sectionIndex).keys()])
+              else this.pageChangeCallback(to, [])
+            }
+          })()
+          ensureLoad = await this.swapFrame(frame);
+          
+          
+        }
+      })
+  
+      if (ensureLoad instanceof Object) await ensureLoad.wrapped
+    }
+    
   }
 
   protected async activationCallback(active: boolean) {

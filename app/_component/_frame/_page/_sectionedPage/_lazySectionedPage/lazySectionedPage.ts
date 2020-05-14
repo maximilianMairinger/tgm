@@ -9,7 +9,7 @@ export default abstract class PageSection extends SectionedPage<Promise<any>> {
   private resResourceMap: Function
   private resourceMap: ResourcesMap
 
-  constructor(sectionIndex: ImportanceMap<() => Promise<any>, any>, domainLevel: number, sectionChangeCallback?: (section: string) => void) {
+  constructor(sectionIndex: ImportanceMap<() => Promise<any>, any>, domainLevel: number, setPage: (domain: string) => void, sectionChangeCallback?: (section: string) => void) {
 
     
 
@@ -18,7 +18,7 @@ export default abstract class PageSection extends SectionedPage<Promise<any>> {
     let res: Function
     super(new Promise((r) => {
       res = r
-    }), domainLevel, sectionChangeCallback)
+    }), domainLevel, setPage, sectionChangeCallback)
     this.resResourceMap = res
 
     this.loadMe = lazyLoad(sectionIndex, e => {

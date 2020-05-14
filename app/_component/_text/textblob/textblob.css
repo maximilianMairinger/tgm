@@ -1,0 +1,105 @@
+text-blob {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+note-box {
+    display: flex;
+    flex-direction: row;
+    width: 120px;
+    margin-right: 15px;
+    margin-bottom: 2px;
+    padding-top: 6px;
+    justify-content: flex-start;
+}
+
+note-box note-text {
+    margin-top: 2px;
+    align-content: flex-start;
+    line-height: 1.2em;
+    font-size: 11px;
+    font-family: 'PT Mono', monospace;
+    text-transform: uppercase;
+}
+
+note-box connector-box {
+    display: block;
+    width: 30px;
+    padding-left: 12px;
+}
+
+note-box connector-box hr {
+    height: 2px;
+    background: black;
+    border: none;
+    font-size: 15px;
+}
+
+note-box spacing-box {
+    flex-grow: 1;
+}
+
+text-box {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: calc(30px + (45 - 30) * ((100vw - 300px) / (1600 - 300)));
+}
+
+text-box *:nth-child(-n+2){
+    font-weight: bold;
+}
+
+text-box heading-text {
+    /* font-size:  calc(0.6em + (1em - 0.6em) * ((100vw - 300px) / (1600 - 300))); */
+    margin-top: calc((1 - 1.2) * 0.5em);
+    line-height: 1.2em;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+text-box subheading-text {
+    margin-top: calc(0.25em + ((1 - 1.2) * 0.5em));
+    font-size: 0.6em;
+    color: #27a1d4;
+}
+
+text-box content-text {
+    max-width: 250px;
+    margin-top: 14px;
+    font-size: 13px;
+}
+
+text-box a.link {
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 768px) {
+    text-blob {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    note-box{
+        width: 100%;
+    }
+
+    note-box connector-box {
+        width: 35px;
+    }
+
+    text-box{
+        font-size: calc(30px + (55 - 25) * ((100vw - 300px) / (1600 - 300)));;;
+    }
+
+    text-box subheading-text {
+        margin-top: 0.25em;
+        color: #27a1d4;
+    }
+}

@@ -1,0 +1,42 @@
+container {
+    display: block;
+    margin: 200px 100px 0 100px;
+}
+
+flex-container {
+    margin-top: 30%;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    width: 90%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+c-textblob {
+    position: relative;
+    display: block;
+    width: 45%;
+    min-width: 500px;
+    height: auto;
+    margin-bottom: 2em;
+}
+
+c-textblob.first{
+    position: relative;
+    display: block;
+    width: 80%;
+}
+
+@media only screen and (max-width: 768px) {
+    container {
+        display: flex;
+        flex-direction: column;
+        margin: 50px 10%;
+    }
+
+    c-textblob {
+        width: 80%;
+        min-width: 0;
+    }
+}

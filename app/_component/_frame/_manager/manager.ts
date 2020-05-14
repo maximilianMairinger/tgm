@@ -155,7 +155,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
   public element(to: ManagementElementName, push?: boolean): void
   public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
     if (to === null) {
-      if (this.managedElementMap.get(this.currentManagedElementName) === undefined) this.setElem(this.notFoundElementName)
+      if (this.managedElementMap.get(this.domainSubscription.domain) === undefined) this.setElem(this.notFoundElementName)
     }
     else {
       if (to) domain.set(to, this.domainLevel, push)

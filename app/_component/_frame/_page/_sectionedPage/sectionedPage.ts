@@ -139,13 +139,12 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         return false
       }
       else {
-        // setTimeout(async () => {
-          sectionIndex.get(init).priorityThen((e) => {
-            e.scrollIntoView(true);
-            this.elementBody.scrollBy(0, padding)
-          })
+        sectionIndex.get(init).priorityThen((e) => {
+          e.scrollIntoView(true);
+          this.elementBody.scrollBy(0, padding)
+        })
           
-        // }, 0)
+
       }
       sectionIndex.forEach(async (elem) => {
         this.observer.observe(await elem)

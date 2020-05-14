@@ -95,6 +95,7 @@ versuchsanstalt-L {
         width: 100%;
         height: min(calc(100vw - 50px), 500px);
         margin-top: 50px;
+        margin-left: 0;
         margin-bottom: 60px;
     }
 

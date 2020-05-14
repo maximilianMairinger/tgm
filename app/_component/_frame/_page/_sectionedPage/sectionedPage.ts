@@ -82,30 +82,30 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     let globalToken: Symbol
     this.observer = new IntersectionObserver(async (c) => {
-      if (!this.inScrollAnimation) {
-        c.ea((q) => {
-          if (q.isIntersecting) { 
-            if (Math.abs(0 - q.boundingClientRect.y) > Math.abs(q.rootBounds.y - q.boundingClientRect.bottom)) {
-              this.intersectingIndex.inject(q.target, 0)
-            }
-            else {
-              this.intersectingIndex.add(q.target)
-            }
+      
+      c.ea((q) => {
+        if (q.isIntersecting) { 
+          if (Math.abs(0 - q.boundingClientRect.y) > Math.abs(q.rootBounds.y - q.boundingClientRect.bottom)) {
+            this.intersectingIndex.inject(q.target, 0)
           }
           else {
-            
-            try {
-              this.intersectingIndex.rmV(q.target)
-            }
-            catch(e) {
-  
-            }
+            this.intersectingIndex.add(q.target)
           }
-        })
+        }
+        else {
+          
+          try {
+            this.intersectingIndex.rmV(q.target)
+          }
+          catch(e) {
+
+          }
+        }
+      })
+
+      let elem = this.intersectingIndex.first as PageSection
   
-        let elem = this.intersectingIndex.first as PageSection
-  
-        
+      if (!this.inScrollAnimation) {
         let myToken = Symbol("Token")
         globalToken = myToken
         sectionIndex.forEach(async (val, name) => {

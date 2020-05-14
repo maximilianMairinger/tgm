@@ -20,16 +20,16 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
 
   private loadingElem: any;
-  private loaded: Promise<void>
+  private firstFrameLoaded: Promise<void>
 
 
 
 
   private managedElementMap: ResourcesMap
 
-  constructor(importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[]) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[]) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
-    this.loaded = new Promise((res) => {
+    this.firstFrameLoaded = new Promise((res) => {
       this.resLoaded = res
     })
 
@@ -46,42 +46,44 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
     });
 
-
-    const load = lazyLoad(importanceMap, e => {
-      this.body.apd(e)
-    })
-
-    let initElemName = domain.get(domainLevel, this.setElem.bind(this))
-    setTimeout(async () => {
-      let pageProm: any
-      
-      try {
-        pageProm = importanceMap.getByString(initElemName)
-      }
-      catch(e) {
-
-      }
-      
-      while(pageProm === undefined) {
-        if (initElemName === "") {
-          initElemName = this.notFoundElementName
-          break
-        }
-        initElemName = initElemName.substr(0, initElemName.lastIndexOf("/")) as any
-        try {
-          pageProm = importanceMap.getByString(initElemName)
-        }
-        catch(e) {}
-      }
-      this.managedElementMap = load(initElemName)
-      if (this.managedElementMap.get(notFoundElementName) === undefined) console.error("404 elementName: \"" + notFoundElementName + "\" is not found in given importanceMap", importanceMap)
-      await this.setElem(initElemName as ManagementElementName)
-      this.resLoaded();
-    }, 0)
     
 
     
   }
+
+  private domainSubscription: domain.DomainSubscription
+  async loadedCallback() {
+    const load = lazyLoad(this.importanceMap, e => {
+      this.body.apd(e)
+    })
+
+    this.domainSubscription = domain.get(this.domainLevel, this.setElem.bind(this))
+    let initElemName = this.domainSubscription.domain
+    let pageProm: any
+    
+    try {
+      pageProm = this.importanceMap.getByString(initElemName)
+    }
+    catch(e) {}
+    
+    while(pageProm === undefined) {
+      if (initElemName === "") {
+        initElemName = this.notFoundElementName
+        break
+      }
+      initElemName = initElemName.substr(0, initElemName.lastIndexOf("/")) as any
+      try {
+        pageProm = this.importanceMap.getByString(initElemName)
+      }
+      catch(e) {}
+    }
+    this.managedElementMap = load(initElemName)
+    if (this.managedElementMap.get(this.notFoundElementName) === undefined) console.error("404 elementName: \"" + this.notFoundElementName + "\" is not found in given importanceMap", this.importanceMap)
+    await this.setElem(initElemName as ManagementElementName)
+    this.resLoaded();
+    await this.managedElementMap.fullyLoaded
+  }
+
   /**
    * Swaps to given Frame
    * @param to frame to be swaped to
@@ -194,7 +196,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
   }
 
   protected async activationCallback(active: boolean) {
-    await this.loaded
+    await this.firstFrameLoaded
     if (this.currentFrame.active !== active) this.currentFrame.vate(active)
   }
   stl() {

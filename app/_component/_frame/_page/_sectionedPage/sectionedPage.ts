@@ -46,6 +46,26 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   async initialActivationCallback() {
     //@ts-ignore
     let sectionIndex: ResourcesMap = await this.sectionIndex
+    this.domainSubscription =  domain.get(this.domainLevel, async (domain: string) => {
+      //@ts-ignore
+      let sectionIndex: ResourcesMap = await this.sectionIndex
+      debugger
+      if (domain === "") domain = sectionIndex.entries().next().value[0]
+      this.inScrollAnimation = true
+      this.currentlyActiveSectionName = domain
+      if (this.sectionChangeCallback) this.sectionChangeCallback(domain)
+      let elem = await sectionIndex.get(domain) as HTMLElement
+      if (elem !== undefined) scrollTo(elem, {
+        cancelOnUserAction: true,
+        verticalOffset: padding,
+        speed: 1150,
+        elementToScroll: this.elementBody,
+        easing: new WaapiEasing("ease").function
+  
+      }).then(() => {
+        this.inScrollAnimation = false
+      })
+    }, true, sectionIndex.entries().next().value[0])
 
 
     let intersectingIndex: Element[] = []
@@ -93,38 +113,17 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   }
 
 
-  private domainFunc = (async (domain: string) => {
-    //@ts-ignore
-    let sectionIndex: ResourcesMap = await this.sectionIndex
-    if (domain === "") domain = sectionIndex.entries().next().value[0]
-    this.inScrollAnimation = true
-    this.currentlyActiveSectionName = domain
-    if (this.sectionChangeCallback) this.sectionChangeCallback(domain)
-    let elem = await sectionIndex.get(domain) as HTMLElement
-    if (elem !== undefined) scrollTo(elem, {
-      cancelOnUserAction: true,
-      verticalOffset: padding,
-      speed: 1150,
-      elementToScroll: this.elementBody,
-      easing: new WaapiEasing("ease").function
-
-    }).then(() => {
-      this.inScrollAnimation = false
-    })
-  }).bind(this);
+  private domainSubscription: domain.DomainSubscription
 
   protected async activationCallback(active: boolean) {
     //@ts-ignore
     let sectionIndex: ResourcesMap = await this.sectionIndex
+
+    this.domainSubscription.vate(active)
+
     if (active) {
-      sectionIndex.forEach(async (elem) => {
-        this.observer.observe(await elem)
-      })
 
-
-      
-      let init = domain.get(this.domainLevel, this.domainFunc, true)
-      if (init === "") init = sectionIndex.entries().next().value[0]
+      let init = this.domainSubscription.domain
       if (sectionIndex.get(init) === undefined) {
         return false
       }
@@ -137,12 +136,14 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
           
         // }, 0)
       }
+      sectionIndex.forEach(async (elem) => {
+        this.observer.observe(await elem)
+      })
     }
     else {
       sectionIndex.forEach(async (elem) => {
         this.observer.unobserve(await elem)
       })
-      domain.got(this.domainFunc)
     }
   }
 

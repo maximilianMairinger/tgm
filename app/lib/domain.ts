@@ -100,10 +100,29 @@ export function set(subdomain: string, level: number = 0, push: boolean = true, 
 }
 
 
+export class DomainSubscription {
+  constructor(private getDomain: () => DomainFragment, public readonly activate: () => void,  public readonly deactivate: () => void) {
+
+  }
+  get domain(): DomainFragment {
+    return this.getDomain()
+  }
+  public vate(to: boolean) {
+    if (to) this.activate()
+    else this.deactivate()
+  }
+
+}
+
+
 type DomainFragment = string
-export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => void, onlyInterestedInLevel: boolean = false): DomainFragment {
+export function get(domainLevel: number, subscription: (domainFragment: DomainFragment) => void, onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainSubscription
+export function get(domainLevel: number, subscription: undefined | null, onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainFragment
+export function get(domainLevel: number, subscription?: undefined, onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainFragment
+export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => void, onlyInterestedInLevel: boolean = false, defaultDomain = ""): DomainFragment | DomainSubscription {
   if (subscription) {
-    ls.set(subscription, () => {
+    let lastDomain: string
+    let f = () => {
       
       
       if (!onlyInterestedInLevel) {
@@ -111,36 +130,74 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         for (let i = 0; i < domainLevel; i++) {
           myDomainIndex.shift() 
         }
-        subscription(myDomainIndex.join(dir))
+        let joined = myDomainIndex.join(dir)
+        joined = joined === "" ? defaultDomain : joined
+        if (lastDomain !== joined) {
+          lastDomain = joined
+          subscription(joined)
+        }
+        
       }
       else {
-        subscription(domainIndex[domainLevel] === undefined ? "" : domainIndex[domainLevel])
+        let domain = domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
+        if (domain !== lastDomain) {
+          lastDomain = domain
+          subscription(domain)
+        }
+        
       }
       
       
-    })
-  }
-
-  if (!onlyInterestedInLevel) {
-    let myDomainIndex = domainIndex.clone()
-    for (let i = 0; i < domainLevel; i++) {
-      myDomainIndex.shift() 
     }
+
+
+    ls.set(subscription, f)
+
+    let getDomain = () => {
+      if (!onlyInterestedInLevel) {
+        let myDomainIndex = domainIndex.clone()
+        for (let i = 0; i < domainLevel; i++) {
+          myDomainIndex.shift() 
+        }
     
-    return myDomainIndex.join(dir)
+        let joined = myDomainIndex.join(dir)
+        return joined === "" ? defaultDomain : joined
+      }
+      else {
+        return domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
+      }
+    }
+
+
+    return new DomainSubscription(getDomain, () => {
+      ls.set(subscription, f)
+    }, () => {
+      ls.delete(subscription)
+    })
+
   }
   else {
-    return domainIndex[domainLevel] === undefined ? "" : domainIndex[domainLevel]
+    if (!onlyInterestedInLevel) {
+      let myDomainIndex = domainIndex.clone()
+      for (let i = 0; i < domainLevel; i++) {
+        myDomainIndex.shift() 
+      }
+  
+      let joined = myDomainIndex.join(dir)
+      return joined === "" ? defaultDomain : joined
+    }
+    else {
+      return domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
+    }
   }
+
+  
   
   
 
   
 }
 
-export function got(subscription: (domainFragment: DomainFragment) => void) {
-  ls.delete(subscription)
-}
 
 
 let ls = new Map()

@@ -12,6 +12,7 @@ export default declareComponent("site", class extends Component {
     }, (section) => {
       console.log("section", section)
     })
+    pageManager.loadedCallback()
     this.apd(pageManager)
     pageManager.activate()
     // let header = new Header()

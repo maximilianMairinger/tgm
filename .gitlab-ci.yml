@@ -23,7 +23,6 @@ deploy:
     - npm run buildProdApp
   script:
     - ssh tgmwebsite-dev-01 -l root 'rm -rf /var/www/html/*'
-    - scp index.html root@tgmwebsite-dev-01:/var/www/html/
     - scp -r public/* root@tgmwebsite-dev-01:/var/www/html/
   only:
     - dev

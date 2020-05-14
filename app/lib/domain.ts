@@ -139,7 +139,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         
       }
       else {
-        let domain = domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
+        let domain = domainIndex[domainLevel] === undefined || domainIndex[domainLevel] === "" ? defaultDomain : domainIndex[domainLevel]
         if (domain !== lastDomain) {
           lastDomain = domain
           subscription(domain)
@@ -164,7 +164,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         return joined === "" ? defaultDomain : joined
       }
       else {
-        return domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
+        return domainIndex[domainLevel] === undefined || domainIndex[domainLevel] === "" ? defaultDomain : domainIndex[domainLevel]
       }
     }
 

@@ -9,7 +9,7 @@ build:
   stage: build
   script:
     - npm install
-    - npm run buildProdApp
+    - npm run build
   only:
     - dev
     - master
@@ -20,7 +20,7 @@ deploy:
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - npm run buildProdApp
+    - npm run build
   script:
     - ssh tgmwebsite-dev-01 -l root 'rm -rf /var/www/html/*'
     - scp -r public/* root@tgmwebsite-dev-01:/var/www/html/

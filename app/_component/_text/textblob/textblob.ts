@@ -11,7 +11,6 @@ export default declareComponent("textblob", class Textblob extends Text {
 
 
         mobileQueryFunc(mediaQuery){
-            console.log(this.textbox);
             if(!mediaQuery.matches)
                 this.textbox.css({"fontSize":`calc(${this.hsizeScale[1]}px + (${this.hsizeScale[0]} - ${this.hsizeScale[1]}) * ((100vw - 768px) / (1600 - 768)))`});
             else
@@ -21,7 +20,7 @@ export default declareComponent("textblob", class Textblob extends Text {
         constructor() {
             super();
             this.mediaQuery = window.matchMedia('(max-width: 768px)');
-            this.mediaQuery.addListener(this.mobileQueryFunc);
+            this.mediaQuery.addListener(this.mobileQueryFunc.bind(this));
         }
 
         heading(): string

@@ -3,6 +3,7 @@ import LoadingIndecator from "../../_indecator/loadingIndecator/loadingIndecator
 import * as domain from "../../../lib/domain";
 import lazyLoad, { ImportanceMap, Import, ResourcesMap } from "../../../lib/lazyLoad";
 import SectionedPage from "../_page/_sectionedPage/sectionedPage";
+import delay from "delay";
 
 
 export default abstract class Manager<ManagementElementName extends string> extends Frame {
@@ -119,8 +120,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
     }
     
-    to.css("zIndex", 100)
-    let showAnim = to.anim([{opacity: 0, scale: 1.05, offset: 0}, {opacity: 1, scale: 1}]);
+    to.css({zIndex: 100, opacity: 0, translateX: -7, scale: 1.01})
+    let showAnim = to.anim({opacity: 1, translateX: 0, scale: 1}, 350)
     let finalFunction = () => {
       to.css("zIndex", 0)
       this.busySwaping = false;
@@ -133,7 +134,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
       showAnim.then(finalFunction);
     }
     else {
-      showAnim.then(() => {
+      // let fromAnim = from.anim([{offset: 0, translateX: 0}, {translateX: 10}], 3000)
+      Promise.all([showAnim]).then(() => {
         from.hide()
       }).then(finalFunction);
 

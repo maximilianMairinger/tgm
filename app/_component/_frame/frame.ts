@@ -3,6 +3,7 @@ import Component from "./../component";
 export default abstract class Frame extends Component {
   public readonly active: boolean = false;
   public readonly initiallyActivated = false
+  public domainLevel?: number
   constructor(body?: HTMLElement) {
     super(body);
   }

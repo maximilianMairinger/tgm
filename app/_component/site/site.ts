@@ -7,8 +7,9 @@ export default declareComponent("site", class extends Component {
   
   constructor() { 
     super()
-    let pageManager = new PageManager((page, sections) => {
-      console.log("page", page, sections)
+    let pageManager = new PageManager((page, sections, domainLevel) => {
+      console.log("page", page, sections, domainLevel)
+      header.updateLinks(sections, domainLevel)
     }, (section) => {
       console.log("section", section)
     })

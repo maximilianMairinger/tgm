@@ -15,7 +15,7 @@ export type QuerySelector = string
 export default abstract class SectionedPage<T extends FullSectionIndex> extends Page {
   public readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
   private inScrollAnimation = false
-  constructor(sectionIndex: T, protected domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void) {
+  constructor(sectionIndex: T, public domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void) {
     super()
     //@ts-ignore
     this.sectionIndex = sectionIndex instanceof Promise ? sectionIndex.then((sectionIndex) => this.prepSectionIndex(sectionIndex)) : this.prepSectionIndex(sectionIndex)
@@ -132,7 +132,6 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     this.domainSubscription.vate(active)
 
     if (active) {
-
       let init = this.domainSubscription.domain
       console.log("init", init)
       if (sectionIndex.get(init) === undefined) {

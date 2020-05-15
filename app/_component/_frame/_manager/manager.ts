@@ -24,7 +24,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private managedElementMap: ResourcesMap
 
-  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[]) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
     this.firstFrameLoaded = new Promise((res) => {
       this.resLoaded = res
@@ -178,8 +178,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
           this.currentManagedElementName = to;
           (async () => {
             if (this.pageChangeCallback) {
-              if ((frame as SectionedPage<any>).sectionIndex) this.pageChangeCallback(to, [...(await (frame as SectionedPage<any>).sectionIndex).keys()])
-              else this.pageChangeCallback(to, [])
+              if ((frame as SectionedPage<any>).sectionIndex) this.pageChangeCallback(to, [...(await (frame as SectionedPage<any>).sectionIndex).keys()], frame.domainLevel || this.domainLevel)
+              else this.pageChangeCallback(to, [], frame.domainLevel || this.domainLevel)
             }
           })()
           ensureLoad = await this.swapFrame(frame);

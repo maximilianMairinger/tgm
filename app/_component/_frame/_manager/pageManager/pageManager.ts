@@ -11,8 +11,8 @@ import { declareComponent } from "../../../../lib/declareComponent"
 export type PageName = string
 
 export default declareComponent("page-manager", class PageManager extends Manager<PageName> {
-  constructor(pageChangeCallback?: (page: string, sectiones: string[]) => void, sectionChangeCallback?: (section: string) => void) {
-    let setPage = (a?: PageName) => {
+  constructor(pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, sectionChangeCallback?: (section: string) => void) {
+    let setPage = (a: PageName | null) => {
       this.element(a)
     }
 

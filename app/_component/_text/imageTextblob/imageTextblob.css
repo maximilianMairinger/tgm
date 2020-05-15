@@ -27,6 +27,7 @@ note-box {
 
 note-text {
     display: flex;
+    max-width: 100%;
     margin-left: 10px;
     line-height: 1.2em;
     font-size: 12px;
@@ -44,6 +45,7 @@ connector-box{
 connector-box hr{
     border: none;
     background: black;
+    width: 90%;
 }
 
 connector-box.top{
@@ -68,6 +70,7 @@ text-box{
 
 info-box{
     display: flex;
+    margin-top: 20px;
     flex-direction: column;
     align-content: center;
     justify-content: center;
@@ -86,7 +89,7 @@ info-box .bold{
     font-weight: bold;
 }
 
-info-box stellvertreter-text{
+stellvertreter-text{
     grid-column-start: 1;
     grid-column-end: 3;
     font-size: 16px;
@@ -138,12 +141,41 @@ image-text-blob.left image-container{
         height: 100%;
         min-height: unset;
         margin: 0!important;
+        margin-top: 100px!important;
         padding: 50px 10vw;
         flex-direction: column!important;
         justify-content: space-around!important;
     }
 
     info-grid{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    info-text{
+        width: 40%;
+        min-width: min(175px, 100%);
+        margin-bottom: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-grow: 1;
+    }
+
+    info-text:nth-child(2n),
+    stellvertreter-text ~ info-text:nth-child(2n-1){
+        margin-bottom: 25px;
+    }
+
+    stellvertreter-text ~ info-text:nth-child(2n){
+        margin-bottom: 0;
+    }
+
+    stellvertreter-text{
+        width: 100%;
+        margin-bottom: 15px;
     }
 
     content-box{
@@ -155,6 +187,7 @@ image-text-blob.left image-container{
     image-container{
         width: 100%;
         min-width: 85vw;
+        min-height: 300px;
     }
 
     image-text-blob.right image-container{

@@ -1,6 +1,6 @@
 import Component from "../component";
 
-type Theme = "dark" | "light"
+export type Theme = "dark" | "light"
 
 export default abstract class ThemAble extends Component {
   private themeStyleElement = ce("style")

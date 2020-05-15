@@ -1,7 +1,7 @@
 import Component from "../component"
 import declareComponent from "./../../lib/declareComponent"
 import PageManager from "../_frame/_manager/pageManager/pageManager";
-import Header from "./../header/header"
+import Header from "./../_themeAble/header/header"
 
 export default declareComponent("site", class extends Component {
   

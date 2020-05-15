@@ -1,19 +1,18 @@
-import Component from "../component"
-import declareComponent from "./../../lib/declareComponent"
-import "./../_themeAble/_icon/tgmLogo/tgmLogo"
-import "./../_button/button"
-import Link from "./../_themeAble/link/link"
+import ThemAble, { Theme } from "../themeAble"
+import declareComponent from "../../../lib/declareComponent"
+import "../_icon/tgmLogo/tgmLogo"
+import "../../_button/button"
+import Link from "../link/link"
 import { ElementList } from "extended-dom"
-import { lang } from "./../../lib/lang/lang"
+import { lang } from "../../../lib/lang/lang"
 import delay from "delay"
 
-console.log(lang.links.tagesschule.get(console.log))
 
 const linkAnimationOffset = 170
 const linkFadeInDuration = 800
 
 
-export default declareComponent("header", class Header extends Component {
+export default declareComponent("header", class Header extends ThemAble {
   private pathDisplayElem = this.q("path-display")
   private linkContainerElem = this.q("right-content")
   private underlineElem = this.q("slidy-underline")
@@ -24,9 +23,11 @@ export default declareComponent("header", class Header extends Component {
     
   }
 
+
   private currentLinkContents: string[]
   private currentLinkElems: ElementList<Link>
   private lastAnimationWrapper: HTMLElement
+  private lastSelectedElem: Element
   public async updateLinks(linkContents: string[], domainLevel: number) {
     let fadoutProm: Promise<any>
     let animationWrapper = ce("link-animation-wrapper")
@@ -66,9 +67,27 @@ export default declareComponent("header", class Header extends Component {
     
   }
 
-  public updateSelectedLink(newSelected: string) {
-    this.underlineElem.
-    console.log(newSelected)
+  public theme(): Theme
+  public theme(to: Theme)
+  public theme(to?: Theme): any {
+    this.currentLinkElems.Inner("theme", [to])
+    return super.theme(to)
+  }
+
+  public async updateSelectedLink(newSelected: string) {
+    let index = this.currentLinkContents.indexOf(newSelected)
+    let elem = this.currentLinkElems[index]
+    let bounds = elem.getBoundingClientRect()
+    
+    if (this.lastSelectedElem) {
+      this.lastSelectedElem.css({fontWeight: "normal"})
+    }
+
+    this.lastSelectedElem = elem
+    elem.css({fontWeight: "bold"})
+    await this.underlineElem.anim({left: bounds.left, width: bounds.width}, 500)
+    
+    
   }
 
   
@@ -80,3 +99,5 @@ export default declareComponent("header", class Header extends Component {
     return require("./header.pug").default
   }
 })
+
+const totalUnderlineOverflow = 5

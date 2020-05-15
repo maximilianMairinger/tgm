@@ -44,7 +44,7 @@ link-animation-wrapper {
 }
 
 right-content > link-animation-wrapper > c-link {
-  padding: 0 18px;
+  margin: 0 18px;
   font-weight: normal;
   opacity: 0;
   transform: translateX(-3px);
@@ -53,17 +53,20 @@ right-content > link-animation-wrapper > c-link {
   float: left;
 }
 
-right-content > c-link:first-of-type {
+right-content > link-animation-wrapper >  c-link:first-of-type {
   padding-left: 0;
 }
 
-right-content > c-link:last-of-type {
+right-content > link-animation-wrapper >  c-link:last-of-type {
   padding-right: 0;
 }
 
 slidy-underline {
   position: absolute;
-  right: 100px;
-  /* background: ; */
+  background: var(--strong-text-color);
+  width: 70px;
+  height: 2px;
+  transform: translateY(15px);
+  border-radius: 2px;
 }
 

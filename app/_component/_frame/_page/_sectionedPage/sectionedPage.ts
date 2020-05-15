@@ -14,7 +14,7 @@ type FullSectionIndex = ResourcesMap | SectionIndex | Promise<ResourcesMap | Sec
 export type QuerySelector = string
 export default abstract class SectionedPage<T extends FullSectionIndex> extends Page {
   public readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
-  private inScrollAnimation = false
+  private inScrollAnimation: Symbol
   constructor(sectionIndex: T, public domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void) {
     super()
     //@ts-ignore
@@ -52,7 +52,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         //@ts-ignore
         let sectionIndex: ResourcesMap = await this.sectionIndex
               
-        this.inScrollAnimation = true
+        let scrollAnimation = this.inScrollAnimation = Symbol()
         this.currentlyActiveSectionName = domain
         if (this.sectionChangeCallback) this.sectionChangeCallback(domain)
 
@@ -67,11 +67,11 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             easing: new WaapiEasing("ease").function
 
           })
-          this.inScrollAnimation = false
+          if (scrollAnimation === this.inScrollAnimation) this.inScrollAnimation = undefined
         }
         else {
           this.setPage(null)
-          this.inScrollAnimation = false
+          this.inScrollAnimation = undefined
           res(false)
         }
       })

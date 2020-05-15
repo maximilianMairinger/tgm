@@ -4,10 +4,23 @@ import declareComponent from "../../../lib/declareComponent";
 
 export default declareComponent("textblob", class Textblob extends Text {
 
-        constructor() {
-            super();
+        private hsizeScale = ["45", "30"];
+        private hmobileScale = ["45", "30"];
+        private mediaQuery:MediaQueryList;
+        private textbox = this.q("text-box");
+
+        mobileQueryFunc(mediaQuery){
+            if(!mediaQuery.matches)
+                this.textbox.css({"fontSize":`calc(${this.hsizeScale[1]}px + (${this.hsizeScale[0]} - ${this.hsizeScale[1]}) * ((100vw - 768px) / (1600 - 768)))`});
+            else
+                this.textbox.css({"fontSize":`calc(${this.hmobileScale[1]}px + (${this.hmobileScale[0]} - ${this.hmobileScale[1]}) * ((100vw - 300px) / (768 - 300)))`});
         }
 
+        constructor() {
+            super();
+            this.mediaQuery = window.matchMedia('(max-width: 768px)');
+            this.mediaQuery.addListener(this.mobileQueryFunc.bind(this));
+        }
 
         heading(): string
         heading(heading: string): void
@@ -23,18 +36,29 @@ export default declareComponent("textblob", class Textblob extends Text {
             else return this.q("subheading-text").text();
         }
 
-        hsize():string
-        hsize(hsize:string):void
-        hsize(hsize?:string){
-            if(hsize)this.q("text-box").css("font-size", `calc(30px + (${hsize} - 30) * ((100vw - 300px) / (1600 - 300)))`);
-            else return this.q("text-box").css("font-size");
+        hsize(): string[]
+        hsize(hsize: string): void
+        hsize(hsize?: string) {
+            if (hsize) {
+                this.hsizeScale = hsize.split("/");
+                this.mobileQueryFunc(this.mediaQuery);
+            } else return this.hsizeScale;
         }
 
-        hscale():string
-        hscale(hscale:string):void
-        hscale(hscale?:string){
-            if(hscale) this.q("subheading-text").css("font-size", hscale + "em");
-            else return this.q("subheading-text").css("font-size");
+        hmobile(): string[]
+        hmobile(hmobile: string): void
+        hmobile(hmobile?: string) {
+            if (hmobile) {
+                this.hmobileScale = hmobile.split("/");
+                this.mobileQueryFunc(this.mediaQuery);
+            } else return this.hmobileScale;
+        }
+
+        hscale(): string
+        hscale(hscale: string): void
+        hscale(hscale?: string) {
+            if (hscale) this.q("subheading-text").css({"fontSize": `max(${hscale}em, 25px)`});
+            else return this.q("subheading-text").css("fontSize");
         }
 
         note(): string
@@ -49,7 +73,7 @@ export default declareComponent("textblob", class Textblob extends Text {
                 connector.append(hr);
                 notebox.append(notetext);
                 notebox.append(connector);
-                notebox.append(ce("spacing-box"))
+                notebox.append(ce("spacing-box"));
                 this.q("text-blob").append(notebox)
             } else return this.q("note-text").text();
         }

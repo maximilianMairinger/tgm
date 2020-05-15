@@ -4,7 +4,8 @@
     "target": "esnext",
     "moduleResolution": "classic",
     "allowJs": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
   },
   "include": [
     "./server/src"

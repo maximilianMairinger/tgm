@@ -28,8 +28,10 @@ function parseUrlToDomainIndex() {
   let currentDomain = getCurrentSubDomainPath()
   domainIndex = getCurrentSubDomainPath().split(dir)
   domainIndex.remove("");
+
+  let endDomain = !currentDomain.endsWith("/") ? currentDomain + dir : currentDomain
   
-  history.replaceState(argData, updateTitle(), !currentDomain.endsWith("/") ? currentDomain + dir : currentDomain)
+  history.replaceState(argData, updateTitle(), endDomain)
 }
 parseUrlToDomainIndex()
 
@@ -60,20 +62,19 @@ function updateTitle() {
 
 export async function set(subdomain: string, level: number = 0, push: boolean = true) {
 
-
-  subdomain = slugify(subdomain)
-
-  let length = domainIndex.length;
-  if (length < level || level < 0) {
-    console.warn("Unexpected index: " + level + ". Replacing it with " + length + ".")
-    level = length
+  let originalLength = domainIndex.length;
+  if (originalLength < level || level < 0) {
+    console.warn("Unexpected index: " + level + ". Replacing it with " + originalLength + ".")
+    level = originalLength
   }
 
-  
-  
-  let subdomains = subdomain.split(dir)
-  domainIndex.splice(level + subdomains.length);
   let anyChange = false
+
+  let subdomains = subdomain.split(dir).replace(e => slugify(e))
+
+  domainIndex.splice(level + subdomains.length);
+  if (domainIndex.length !== originalLength) anyChange = true
+  
   subdomains.ea((sub, i) => {
     if (sub === "") sub = undefined
     let ind = i + level
@@ -87,11 +88,9 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
   let endDomain = dir + domainIndex.join(dir)
   if (!endDomain.endsWith(dir)) endDomain += dir
 
-
-  let title = updateTitle()
+  
   if (push) {
     let lastMinuteChange: any[]
-    debugger
     for (let keyValue of ls) {
       let r = await keyValue[1]()
       if (r) lastMinuteChange = r
@@ -99,13 +98,12 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     
     if (lastMinuteChange) {
       //@ts-ignore
-      if (typeof lastMinuteChange !== "symbol") set(...lastMinuteChange)
-      // if symbol is there dont pushState
+      set(...lastMinuteChange)
     }
-    else history.pushState(argData, title, endDomain)
+    else history.pushState(argData, updateTitle(), endDomain)
   }
   else {
-    replaceState(argData, title, endDomain)
+    replaceState(argData, updateTitle(), endDomain)
   }
 
 
@@ -135,8 +133,6 @@ export class DomainSubscription {
 
 }
 
-
-const alreadySetSymbol = Symbol("AlreadySet")
 
 type DomainFragment = string
 export function get(domainLevel: number, subscription: (domainFragment: DomainFragment) => (boolean | Promise<void> | Promise<boolean> | void), onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainSubscription
@@ -179,32 +175,23 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
           if (res === undefined) res = true
           if (res) lastDomain = domain
 
-          if (joined !== domain) {
-            return [domain, domainLevel]
-          }
         }
-        else if (joined !== domain) {
+        if (joined !== domain) {
           return [domain, domainLevel]
         }
-        else return alreadySetSymbol
         
       }
       else {
         let domain = domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
         if (domain !== lastDomain) {
-          debugger
           let res = await subscription(domain)
           if (res === undefined) res = true
           if (res) lastDomain = domain
 
-          if (domainIndex[domainLevel] !== domain) {
-            return [domain, domainLevel]
-          }
         }
-        else if (domainIndex[domainLevel] !== domain) {
+        if (domainIndex[domainLevel] !== domain) {
           return [domain, domainLevel]
         }
-        else return alreadySetSymbol
 
         
       }
@@ -239,12 +226,12 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
 
 let ls = new Map()
 
-window.onpopstate = function(e) {
+window.onpopstate = async function(e) {
   parseUrlToDomainIndex()
 
-  ls.forEach((f) => {
-    f()
-  })
+  for (let keyValue of ls) {
+    await keyValue[1]()
+  }
   
 }
 

@@ -12,7 +12,7 @@ const argData = "internal";
 
 const titleElement = document.querySelector("title")
 
-let dir = "/";
+export const dirString = "/";
 export let domainIndex: string[] = [];
 
 //First capital
@@ -26,10 +26,10 @@ function getCurrentSubDomainPath() {
 
 function parseUrlToDomainIndex() {
   let currentDomain = getCurrentSubDomainPath()
-  domainIndex = getCurrentSubDomainPath().split(dir)
+  domainIndex = getCurrentSubDomainPath().split(dirString)
   domainIndex.remove("");
 
-  let endDomain = !currentDomain.endsWith("/") ? currentDomain + dir : currentDomain
+  let endDomain = !currentDomain.endsWith("/") ? currentDomain + dirString : currentDomain
   
   history.replaceState(argData, updateTitle(), endDomain)
 }
@@ -70,7 +70,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
 
   let anyChange = false
 
-  let subdomains = subdomain.split(dir).replace(e => slugify(e))
+  let subdomains = subdomain.split(dirString).replace(e => slugify(e))
 
   domainIndex.splice(level + subdomains.length);
   if (domainIndex.length !== originalLength) anyChange = true
@@ -85,8 +85,8 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     }
   })
   if (!anyChange) return;
-  let endDomain = dir + domainIndex.join(dir)
-  if (!endDomain.endsWith(dir)) endDomain += dir
+  let endDomain = dirString + domainIndex.join(dirString)
+  if (!endDomain.endsWith(dirString)) endDomain += dirString
 
   
   if (push) {
@@ -146,7 +146,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         myDomainIndex.shift() 
       }
   
-      let joined = myDomainIndex.join(dir)
+      let joined = myDomainIndex.join(dirString)
       return joined === "" ? defaultDomain : joined
     }
     else {
@@ -168,7 +168,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         for (let i = 0; i < domainLevel; i++) {
           myDomainIndex.shift() 
         }
-        let joined = myDomainIndex.join(dir)
+        let joined = myDomainIndex.join(dirString)
         let domain = joined === "" ? defaultDomain : joined
         if (lastDomain !== domain) {
           let res = await subscription(domain)

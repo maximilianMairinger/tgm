@@ -9,7 +9,7 @@ import * as domain from "./../../../lib/domain"
 export default class Link extends ThemAble {
   private aElem = this.q("a") as unknown as HTMLAnchorElement
   private slotElem = this.sr.querySelector("slot")
-  constructor(content: string | Data<string>, link?: string, domainLevel?: number) {
+  constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0) {
     super(false)
     
     this.content(content)
@@ -25,10 +25,10 @@ export default class Link extends ThemAble {
 
     this.aElem.on("click", (e) => {
       let link = this.link()
-      debugger
+
       if (getBaseUrl(link) === location.origin) {
         e.preventDefault()
-        domain.set(link, domainLevel)
+        domain.set(link, this.domainLevel)
       }
     })
 
@@ -40,8 +40,14 @@ export default class Link extends ThemAble {
   link(to?: string): void
   link(to?: string): any {
     if (to) {
+      while (to.startsWith(domain.dirString)) {
+        to = to.substr(domain.dirString.length)
+      }
       this._link = to
-      this.aElem.href = to
+      let domainIndex = domain.domainIndex.clone()  
+      domainIndex.splice(this.domainLevel)
+      domainIndex.add(...to.split(domain.dirString))
+      this.aElem.href = domain.dirString + domainIndex.join(domain.dirString)
     }
     else return this._link
   }

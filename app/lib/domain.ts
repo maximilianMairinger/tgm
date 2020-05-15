@@ -176,8 +176,8 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         let domain = joined === "" ? defaultDomain : joined
         if (lastDomain !== domain) {
           let res = await subscription(domain)
-          if (res === undefined || res) lastDomain = domain
-          if (res) return alreadySetSymbol
+          if (res === undefined) res = true
+          if (res) lastDomain = domain
         }
         if (joined !== domain) {
           return [domain, domainLevel]
@@ -187,9 +187,10 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
       else {
         let domain = domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
         if (domain !== lastDomain) {
+          debugger
           let res = await subscription(domain)
-          if (res === undefined || res) lastDomain = domain
-          if (res) return alreadySetSymbol
+          if (res === undefined) res = true
+          if (res) lastDomain = domain
         }
         if (domainIndex[domainLevel] !== domain) {
           return [domain, domainLevel]

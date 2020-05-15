@@ -11,7 +11,7 @@ export default declareComponent("site", class extends Component {
       console.log("page", page, sections, domainLevel)
       header.updateLinks(sections, domainLevel)
     }, (section) => {
-      console.log("section", section)
+      header.updateSelectedLink(section)
     })
     pageManager.loadedCallback()
     this.apd(pageManager)

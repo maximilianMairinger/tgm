@@ -16,6 +16,7 @@ const linkFadeInDuration = 800
 export default declareComponent("header", class Header extends Component {
   private pathDisplayElem = this.q("path-display")
   private linkContainerElem = this.q("right-content")
+  private underlineElem = this.q("slidy-underline")
 
   constructor() { 
     super()
@@ -66,7 +67,8 @@ export default declareComponent("header", class Header extends Component {
   }
 
   public updateSelectedLink(newSelected: string) {
-    
+    this.underlineElem.
+    console.log(newSelected)
   }
 
   

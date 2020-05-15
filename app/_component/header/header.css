@@ -11,7 +11,7 @@ left-content {
 
 left-content > c-tgm-logo {
   height: 32px;
-  width: 52px;
+  width: 60px;
   position: relative;
   float: left;
 }
@@ -31,6 +31,17 @@ right-content {
   height: 20px;
 }
 
-/* tgm-logo {
-  background-image: ;
-} */
+right-content > c-link {
+  height: 100%;
+  padding: 0 20px;
+  font-weight: normal;
+}
+
+right-content > c-link:first-of-type {
+  padding-left: 0;
+}
+
+right-content > c-link:last-of-type {
+  padding-right: 0;
+}
+

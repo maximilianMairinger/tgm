@@ -4,6 +4,13 @@
     "abendschule": "Abendschule",
     "versuchsanstalt": "Versuchsanstalt",
     "kontakt": "Kontakt",
-    "Neuigkeiten": "Neuigkeiten"
+    "Neuigkeiten": "Neuigkeiten",
+
+
+    "section1": "Tagesschule",
+    "section2": "Abendschule",
+    "section3": "Versuchsanstalt",
+    "section4": "Kontakt",
+    "section5": "Neuigkeiten"
   }
 }

@@ -25,6 +25,7 @@ export default declareComponent("header", class Header extends Component {
     this.currentLinkContents = linkContents.clone()
     this.linkContainerElem.removeChilds()
     this.currentLinkElems = new ElementList()
+
     linkContents.ea((s) => {
       this.currentLinkElems.add(new Link(lang.links[s], s, domainLevel))
     })

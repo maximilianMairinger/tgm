@@ -4,6 +4,8 @@ import "./../textblob/textblob"
 import { ElementList } from "extended-dom";
 
 
+type Stellvertreter = {name: string, email: string}[]
+
 export default declareComponent("image-textblob", class Textblob extends Text {
 
   private type = "right";
@@ -58,22 +60,27 @@ export default declareComponent("image-textblob", class Textblob extends Text {
     else return this.q(".tel").text();
   }
 
-  stellvertreter(): ElementList
-  stellvertreter(stellvertreter: string)
-  stellvertreter(stellvertreter?: string) {
+  private _stellverterter: Stellvertreter
+  stellvertreter(): Stellvertreter
+  stellvertreter(stellvertreter: JSON | Stellvertreter): void
+  stellvertreter(stellvertreter?: JSON | Stellvertreter) {
     let infoGrid = this.q("info-grid");
     if (stellvertreter) {
-      console.log(stellvertreter);
-      let stellvertreterAry = stellvertreter.split(", ");
-      if (stellvertreterAry[0].includes(",")) stellvertreterAry = stellvertreter.split(",");
-      console.log(stellvertreterAry);
-      infoGrid.append(ce("stellvertreter-text").addClass("bold").text("Stellverteter"));
-      for (let i = 0; i < stellvertreterAry.length; i++) {
-        let stellvertreterData = stellvertreterAry[i].split("/");
-        infoGrid.append(ce("info-text").text(stellvertreterData[0]));
-        infoGrid.append(ce("info-text").text(stellvertreterData[1]));
+      let properStellvertreter: Stellvertreter
+      if (typeof stellvertreter === "string") {
+        properStellvertreter = JSON.parse(stellvertreter)
       }
-    } else return infoGrid.childs("stellvertreter-text ~ info-tex")
+      else properStellvertreter = stellvertreter as any
+
+      this._stellverterter = properStellvertreter
+
+      infoGrid.append(ce("stellvertreter-text").addClass("bold").text("Stellverteter"));
+      for (let i = 0; i < properStellvertreter.length; i++) {
+        let stellvertreterData = properStellvertreter[i];
+        infoGrid.append(ce("info-text").text(stellvertreterData.name));
+        infoGrid.append(ce("info-text").text(stellvertreterData.email));
+      }
+    } else return this._stellverterter
   }
 
   heading(): string

@@ -120,8 +120,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
     }
     
-    to.css({zIndex: 100, opacity: 0, translateX: -7, scale: 1.01})
-    let showAnim = to.anim({opacity: 1, translateX: 0, scale: 1}, 350)
+    to.css({zIndex: 100, opacity: 0, translateX: -5, scale: 1.005})
+    let showAnim = to.anim({opacity: 1, translateX: 0, scale: 1}, 400)
     let finalFunction = () => {
       to.css("zIndex", 0)
       this.busySwaping = false;

@@ -91,12 +91,17 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
   let title = updateTitle()
   if (push) {
     let lastMinuteChange: any[]
+    debugger
     for (let keyValue of ls) {
       let r = await keyValue[1]()
       if (r) lastMinuteChange = r
     }
-    //@ts-ignore
-    if (lastMinuteChange) set(...lastMinuteChange)
+    
+    if (lastMinuteChange) {
+      //@ts-ignore
+      if (typeof lastMinuteChange !== "symbol") set(...lastMinuteChange)
+      // if symbol is there dont pushState
+    }
     else history.pushState(argData, title, endDomain)
   }
   else {
@@ -130,6 +135,8 @@ export class DomainSubscription {
 
 }
 
+
+const alreadySetSymbol = Symbol("AlreadySet")
 
 type DomainFragment = string
 export function get(domainLevel: number, subscription: (domainFragment: DomainFragment) => (boolean | Promise<void> | Promise<boolean> | void), onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainSubscription
@@ -169,8 +176,8 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         let domain = joined === "" ? defaultDomain : joined
         if (lastDomain !== domain) {
           let res = await subscription(domain)
-          if (res === undefined) res = true
-          if (res) lastDomain = domain
+          if (res === undefined || res) lastDomain = domain
+          if (res) return alreadySetSymbol
         }
         if (joined !== domain) {
           return [domain, domainLevel]
@@ -181,12 +188,13 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         let domain = domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
         if (domain !== lastDomain) {
           let res = await subscription(domain)
-          if (res === undefined) res = true
-          if (res) lastDomain = domain
+          if (res === undefined || res) lastDomain = domain
+          if (res) return alreadySetSymbol
         }
         if (domainIndex[domainLevel] !== domain) {
           return [domain, domainLevel]
         }
+        else return alreadySetSymbol
 
         
       }

@@ -106,11 +106,11 @@ export default declareComponent("button", class Button extends Component {
     if (to) this.mouseOutListener.enable();
     else this.mouseOutListener.disable();
   }
-  public addActivationCallback(cb: (e: MouseEvent | KeyboardEvent) => void) {
+  public addActivationCallback<CB extends (e?: MouseEvent | KeyboardEvent) => void>(cb: CB): CB {
     this.callbacks.add(cb);
     return cb
   }
-  public removeActivationCallback(cb: (e: MouseEvent | KeyboardEvent) => void) {
+  public removeActivationCallback<CB extends (e?: MouseEvent | KeyboardEvent) => void>(cb: CB): CB {
     this.callbacks.removeV(cb);
     return cb
   }

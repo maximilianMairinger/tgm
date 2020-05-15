@@ -22,7 +22,7 @@ export default declareComponent("block-button", class BlockButton extends Ripple
     );
   }
   private activationCallbackIndex = new Map<Function, Function>()
-  public addActivationCallback(activationCallback: ((e?: MouseEvent | KeyboardEvent) => void | Promise<void>), animationDoneCb?: Function) {
+  public addActivationCallback<CB extends (e?: MouseEvent | KeyboardEvent) => (void | Promise<void>)>(activationCallback: CB, animationDoneCb?: Function): CB {
     
     let inner = async (e) => {
       let res = activationCallback.call(this, e)
@@ -39,15 +39,19 @@ export default declareComponent("block-button", class BlockButton extends Ripple
     }
     
 
+    
     super.addActivationCallback(inner)
-
     this.activationCallbackIndex.set(activationCallback, inner)
+    
+    return activationCallback
   }
-  public removeActivationCallback(activationCallback: ((e?: MouseEvent | KeyboardEvent) => void | Promise<void>)) {
+  public removeActivationCallback<CB extends (e?: MouseEvent | KeyboardEvent) => (void | Promise<void>)>(activationCallback: CB) {
     let inner = this.activationCallbackIndex.get(activationCallback)
     if (inner !== undefined) {
       super.removeActivationCallback(inner as (e?: MouseEvent | KeyboardEvent) => void)
     }
+
+    return activationCallback
   }
   private async loading() {
     let proms = []

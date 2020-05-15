@@ -59,7 +59,7 @@ export default declareComponent("textblob", class Textblob extends Text {
         hscale(): string
         hscale(hscale: string): void
         hscale(hscale?: string) {
-            if (hscale) this.q("subheading-text").css({"fontSize": `max(${hscale}em, calc(${this.hsizeScale[1]}px * 0.8))`});
+            if (hscale) this.q("subheading-text").css({"fontSize": `max(${hscale}em, 25px)`});
             else return this.q("subheading-text").css("fontSize");
         }
 

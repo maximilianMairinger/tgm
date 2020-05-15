@@ -154,6 +154,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       sectionIndex.forEach(async (elem) => {
         this.observer.unobserve(await elem)
       })
+      delete this.currentlyActiveSectionName
     }
   }
 

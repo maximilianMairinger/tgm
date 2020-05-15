@@ -1,6 +1,7 @@
 component-body {
   display: flex;
   align-items: center;
+  user-select: none;
 }
 
 left-content {
@@ -28,13 +29,28 @@ right-content {
   display: inline-block;
   position: absolute;
   right: 100px;
-  height: 20px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: calc(100% - 100px)
 }
 
-right-content > c-link {
-  height: 100%;
-  padding: 0 20px;
+link-animation-wrapper {
+  display: inline-block;  
+  transform: translateX(-17px);
+  position: absolute;
+  right: 0;
+
+}
+
+right-content > link-animation-wrapper > c-link {
+  padding: 0 18px;
   font-weight: normal;
+  opacity: 0;
+  transform: translateX(-3px);
+  
+  position: relative;
+  float: left;
 }
 
 right-content > c-link:first-of-type {

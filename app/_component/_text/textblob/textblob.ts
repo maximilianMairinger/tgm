@@ -9,7 +9,6 @@ export default declareComponent("textblob", class Textblob extends Text {
         private mediaQuery:MediaQueryList;
         private textbox = this.q("text-box");
 
-
         mobileQueryFunc(mediaQuery){
             if(!mediaQuery.matches)
                 this.textbox.css({"fontSize":`calc(${this.hsizeScale[1]}px + (${this.hsizeScale[0]} - ${this.hsizeScale[1]}) * ((100vw - 768px) / (1600 - 768)))`});

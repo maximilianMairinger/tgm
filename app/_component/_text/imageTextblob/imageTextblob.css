@@ -156,7 +156,7 @@ image-text-blob.left image-container{
 
     info-text{
         width: 30%;
-        min-width: min(175px, 100%);
+        min-width: min(140px, 100%);
         margin-bottom: 5px;
         white-space: nowrap;
         overflow: hidden;

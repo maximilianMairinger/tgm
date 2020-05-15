@@ -1,8 +1,16 @@
+
+:host {
+    display: block;
+    width: 100%;
+    height: fit-content;
+}
+
+component-body {
+    height: auto;
+}
 wrapper {
     padding-bottom: 60px;
     padding-top: 40px;
-    position: fixed;
-    bottom: 0px;
     display: block;
     width: 100%;
 }
@@ -51,6 +59,24 @@ item {
     transition-duration: 0.3s;
 }
 
+item {
+    display: none;
+}
+
+something {
+    margin-top: 5px;
+    color: #585e66;
+}
+
+max-du-tard {
+    width: 100%;
+    justify-content: space-around;
+    display: flex;
+    grid-row-start: 3;
+    grid-column-start: 1;
+    grid-column-end: 6;
+}
+
 item:after {
     content: '';
     width: 0px;
@@ -83,12 +109,17 @@ mobile-logo {
 }
 
 @media only screen and (max-width: 1000px) {  
+
+    max-du-tard {
+        display: none;
+    }
+
+    item {
+        display: block;
+    }
     wrapper {
       padding: 0px;
       margin: 0px;
-      position: fixed;
-      bottom: 0px;
-      display: block;
       width: 100%;
     }
 

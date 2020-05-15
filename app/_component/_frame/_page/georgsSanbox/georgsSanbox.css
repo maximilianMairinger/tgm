@@ -1,6 +1,8 @@
 /* CSS for imageTextSection */
 
-
+c-image-textblob{
+    display: block;
+}
 
 /* CSS for textblob */
 

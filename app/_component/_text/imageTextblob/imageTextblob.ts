@@ -1,13 +1,17 @@
 import Text from "./../text";
 import declareComponent from "../../../lib/declareComponent";
 import "./../textblob/textblob"
+import TextBlob, { MediaQuerySize } from "./../textblob/textblob"
 import { ElementList } from "extended-dom";
 
 
 type Stellvertreter = {name: string, email: string}[]
 
-export default declareComponent("image-textblob", class Textblob extends Text {
 
+
+
+export default declareComponent("image-textblob", class Textblob extends Text {
+  private textBlob = this.q("c-textblob") as TextBlob
   private type = "right";
 
   constructor() {
@@ -66,17 +70,11 @@ export default declareComponent("image-textblob", class Textblob extends Text {
   stellvertreter(stellvertreter?: JSON | Stellvertreter) {
     let infoGrid = this.q("info-grid");
     if (stellvertreter) {
-      let properStellvertreter: Stellvertreter
-      if (typeof stellvertreter === "string") {
-        properStellvertreter = JSON.parse(stellvertreter)
-      }
-      else properStellvertreter = stellvertreter as any
-
-      this._stellverterter = properStellvertreter
+      this._stellverterter = this.parseJSONProp(stellvertreter)
 
       infoGrid.append(ce("stellvertreter-text").addClass("bold").text("Stellverteter"));
-      for (let i = 0; i < properStellvertreter.length; i++) {
-        let stellvertreterData = properStellvertreter[i];
+      for (let i = 0; i < this._stellverterter.length; i++) {
+        let stellvertreterData = this._stellverterter[i];
         infoGrid.append(ce("info-text").text(stellvertreterData.name));
         infoGrid.append(ce("info-text").text(stellvertreterData.email));
       }
@@ -85,51 +83,44 @@ export default declareComponent("image-textblob", class Textblob extends Text {
 
   heading(): string
   heading(heading: string): void
-  heading(heading?: string) {
-    if (heading) this.q("c-textblob").setAttribute("heading", heading);
-    else return this.q("c-textblob").getAttribute("heading");
+  heading(heading?: string): any {
+    return this.textBlob.heading(heading)
   }
 
   subheading(): string
   subheading(subheading: string): void
-  subheading(subheading?: string) {
-    if (subheading) this.q("c-textblob").setAttribute("subheading", subheading);
-    else return this.q("c-textblob").getAttribute("subheading");
+  subheading(subheading?: string): any {
+    return this.textBlob.subheading(subheading)
   }
 
   content(): string
   content(content: string): void
-  content(content?: string) {
-    if (content) this.q("c-textblob").setAttribute("content", content);
-    else return this.q("c-textblob").getAttribute("content");
+  content(content?: string): any {
+    return this.textBlob.content(content)
   }
 
   linktext(): string
   linktext(linktext: string): void
-  linktext(linktext?: string) {
-    if (linktext) this.q("c-textblob").setAttribute("linktext", linktext);
-    else return this.q("c-textblob").getAttribute("linktext");
+  linktext(linktext?: string): any {
+    return this.textBlob.linktext(linktext)
   }
 
   linkhref(): string
   linkhref(linkhref: string): void
-  linkhref(linkhref?: string) {
-    if (linkhref) this.q("c-textblob").setAttribute("linkhref", linkhref);
-    else return this.q("c-textblob").getAttribute("linkhref");
+  linkhref(linkhref?: string): any {
+    return this.textBlob.linkhref(linkhref)
   }
 
-  hsize(): string
-  hsize(hsize: string): void
-  hsize(hsize?: string) {
-    if (hsize) this.q("c-textblob").setAttribute("hsize", hsize);
-    else return this.q("c-textblob").getAttribute("hsize");
+  hsize(): MediaQuerySize
+  hsize(hsize: JSON | MediaQuerySize): void
+  hsize(hsize?: JSON | MediaQuerySize): any {
+    return this.textBlob.hsize(hsize)
   }
 
-  hmobile(): string
-  hmobile(hmobile: string): void
-  hmobile(hmobile?: string) {
-    if (hmobile) this.q("c-textblob").setAttribute("hmobile", hmobile);
-    else return this.q("c-textblob").getAttribute("hmobile");
+  hmobile(): MediaQuerySize
+  hmobile(hmobile: JSON | MediaQuerySize): void
+  hmobile(hmobile?: JSON | MediaQuerySize): any {
+    return this.textBlob.hmobile(hmobile)
   }
 
   stl() {

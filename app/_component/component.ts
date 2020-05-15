@@ -57,6 +57,11 @@ export default abstract class Component extends HTMLElement {
     this.mostInnerComponentbody.append(...elems)
     return this
   }
+
+  protected parseJSONProp(prop: any) {
+    if (typeof prop === "string") return JSON.parse(prop)
+    else return prop
+  }
 }
 
 

@@ -48,7 +48,7 @@ item {
     margin-top: 5px;
     color: #585e66;
     grid-row-start: 3;
-    transition-duration: 0.7s;
+    transition-duration: 0.3s;
 }
 
 item:after {

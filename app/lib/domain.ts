@@ -59,8 +59,19 @@ function updateTitle() {
 
 
 
-
+let currentDomainSet: Promise<void>
+let inDomainSet = false
 export async function set(subdomain: string, level: number = 0, push: boolean = true) {
+  while (inDomainSet) {
+    await currentDomainSet
+  }
+
+
+  let res: Function
+  inDomainSet = true
+  currentDomainSet = new Promise((r) => {
+    res = r
+  })
 
   let originalLength = domainIndex.length;
   if (originalLength < level || level < 0) {
@@ -84,30 +95,37 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
       else domainIndex[ind] = sub
     }
   })
-  if (!anyChange) return;
+  if (!anyChange) {
+    inDomainSet = false
+    res()
+    return
+  }
   let endDomain = dirString + domainIndex.join(dirString)
   if (!endDomain.endsWith(dirString)) endDomain += dirString
 
   
   if (push) {
-    let lastMinuteChange: any[]
+    let recall: any
     for (let keyValue of ls) {
       let r = await keyValue[1]()
-      if (r) lastMinuteChange = r
+      if (r) recall = r
     }
     
-    if (lastMinuteChange) {
+    if (recall) {
       //@ts-ignore
-      set(...lastMinuteChange)
+      set(...recall)
     }
-    else history.pushState(argData, updateTitle(), endDomain)
+    else {
+      history.pushState(argData, updateTitle(), endDomain)
+    }
   }
   else {
     replaceState(argData, updateTitle(), endDomain)
   }
 
 
-  
+  inDomainSet = false
+  res()
   
 }
 
@@ -120,7 +138,7 @@ function replaceState(argData: any, title: any, endDomain: any) {
 
 
 export class DomainSubscription {
-  constructor(private getDomain: () => DomainFragment, public readonly activate: () => void,  public readonly deactivate: () => void) {
+  constructor(private getDomain: () => DomainFragment, public readonly activate: () => void, public readonly deactivate: () => void) {
 
   }
   get domain(): DomainFragment {
@@ -179,7 +197,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         if (joined !== domain) {
           return [domain, domainLevel]
         }
-        
+
       }
       else {
         let domain = domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
@@ -193,7 +211,6 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
           return [domain, domainLevel]
         }
 
-        
       }
       
       
@@ -206,8 +223,10 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
 
     return new DomainSubscription(calcCurrentDomain, () => {
       ls.set(subscription, f)
+      console.log("set", new Map(ls))
     }, () => {
       ls.delete(subscription)
+      console.log("del", new Map(ls))
     })
 
   }
@@ -225,14 +244,33 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
 
 
 let ls = new Map()
-
 window.onpopstate = async function(e) {
+  while(inDomainSet) {
+    await currentDomainSet
+  }
+
+
+  let res: Function
+  inDomainSet = true
+  currentDomainSet = new Promise((r) => {
+    res = r
+  })
+
+
+
   parseUrlToDomainIndex()
 
+
+  
   for (let keyValue of ls) {
     await keyValue[1]()
+    
   }
   
+  
+  inDomainSet = false
+  console.log("reses")
+  res()
 }
 
 //@ts-ignore

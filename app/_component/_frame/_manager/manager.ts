@@ -104,10 +104,18 @@ export default abstract class Manager<ManagementElementName extends string> exte
     to.show();
     if (!this.preserveFocus) to.focus();
 
-    let activationResult: boolean
-    if (from !== undefined) from.deactivate()
-    if (this.active) activationResult = await to.activate();
     
+    let activationsPromises = []
+    let activationProm: any
+    
+    if (from !== undefined) activationsPromises.add(from.deactivate())
+    if (this.active) activationsPromises.add(activationProm = await to.activate())
+    await Promise.all(activationsPromises)
+
+    debugger
+    let activationResult: boolean = await activationProm
+    debugger
+
     if (!activationResult) {  
       to.hide()
 
@@ -121,23 +129,26 @@ export default abstract class Manager<ManagementElementName extends string> exte
     }
     
     let showAnim = from !== undefined ? to.anim([{zIndex: 100, opacity: 0, translateX: -5, scale: 1.005, offset: 0}, {opacity: 1, translateX: 0, scale: 1}], 400) : to.anim([{offset: 0, opacity: 0}, {opacity: 1}], 400)
-    let finalFunction = () => {
-      to.css("zIndex", 0)
-      this.busySwaping = false;
-      if (this.wantedFrame !== to) this.swapFrame(this.wantedFrame);
-    }
 
     this.currentFrame = to;
 
     if (from === undefined) {
-      showAnim.then(finalFunction);
+      await showAnim
     }
     else {
       // let fromAnim = from.anim([{offset: 0, translateX: 0}, {translateX: 10}], 3000)
-      Promise.all([showAnim]).then(() => {
-        from.hide()
-      }).then(finalFunction);
+      await Promise.all([showAnim])
 
+      from.css({opacity: 0, display: "none"})
+
+    }
+
+
+    to.css("zIndex", 0)
+    this.busySwaping = false;
+    if (this.wantedFrame !== to) {
+      await this.swapFrame(this.wantedFrame);
+      return
     }
 
     return activationResult
@@ -150,7 +161,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
   public element(to: ManagementElementName, push?: boolean): void
   public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
     if (to === null) {
-      if (this.managedElementMap.get(this.domainSubscription.domain) === undefined) this.setElem(this.notFoundElementName)
+      if (this.managedElementMap.get(this.domainSubscription.domain) === undefined) return this.setElem(this.notFoundElementName)
     }
     else {
       if (to) domain.set(to, this.domainLevel, push)

@@ -7,12 +7,13 @@ component-body {
 left-content {
   position: absolute;
   left: 100px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
 }
 
 left-content > c-tgm-logo {
-  height: 32px;
-  width: 60px;
+  height: 36px;
+  width: 58px;
   position: relative;
   float: left;
 }
@@ -20,8 +21,8 @@ left-content > c-tgm-logo {
 c-button#homeButton {
   position: absolute;
   left: 0;
-  height: 32px;
-  width: 52px; 
+  height: 36px;
+  width: 58px;
   opacity: .2;
 }
 
@@ -70,4 +71,19 @@ slidy-underline {
   border-radius: 2px;
   opacity: 0;
 }
+
+path-display {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+
+}
+
+path-display c-arrow-icon {
+  margin: 0 16px;
+  height: 17px;
+  width: 6.5px;
+}
+
 

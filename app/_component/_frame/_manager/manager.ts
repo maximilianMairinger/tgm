@@ -130,24 +130,26 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
     this.currentFrame = to;
 
-    if (from === undefined) {
-      await showAnim
-    }
-    else {
-      // let fromAnim = from.anim([{offset: 0, translateX: 0}, {translateX: 10}], 3000)
-      await Promise.all([showAnim])
-
-      from.css({opacity: 0, display: "none"})
-
-    }
-
-
-    to.css("zIndex", 0)
-    this.busySwaping = false;
-    if (this.wantedFrame !== to) {
-      await this.swapFrame(this.wantedFrame);
-      return
-    }
+    (async () => {
+      if (from === undefined) {
+        await showAnim
+      }
+      else {
+        // let fromAnim = from.anim([{offset: 0, translateX: 0}, {translateX: 10}], 3000)
+        await Promise.all([showAnim])
+  
+        from.css({opacity: 0, display: "none"})
+  
+      }
+  
+  
+      to.css("zIndex", 0)
+      this.busySwaping = false;
+      if (this.wantedFrame !== to) {
+        await this.swapFrame(this.wantedFrame);
+        return
+      }
+    })()
 
     return activationResult
   }

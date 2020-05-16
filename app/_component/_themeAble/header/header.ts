@@ -6,6 +6,8 @@ import Link from "../link/link"
 import { ElementList } from "extended-dom"
 import { lang } from "../../../lib/lang/lang"
 import delay from "delay"
+import { domainIndex } from "./../../../lib/domain"
+import "./../_icon/arrow/arrow"
 
 
 const linkAnimationOffset = 170
@@ -16,12 +18,34 @@ export default declareComponent("header", class Header extends ThemAble {
   private pathDisplayElem = this.q("path-display")
   private linkContainerElem = this.q("right-content")
   private underlineElem = this.q("slidy-underline")
+  private tgmLogoIcon = this.q("c-tgm-logo")
+  private backLinkComponents: ElementList<ThemAble> = new ElementList()
 
   constructor() { 
     super()
     
     
   }
+
+
+
+  public updatePage(linkContents: string[], domainLevel: number) {
+    return Promise.all([
+      this.updateLinks(linkContents, domainLevel),
+      this.updatePathDisplay(domainLevel)
+    ])
+  }
+
+  public async updatePathDisplay (domainLevel: number) {
+    for (let i = 0; i < domainLevel; i++) {
+      const domain = domainIndex[i]
+
+      domain.big()
+
+    }
+    
+  }
+
 
 
   private linksUpdated = false

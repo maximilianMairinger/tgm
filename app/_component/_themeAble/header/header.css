@@ -68,5 +68,6 @@ slidy-underline {
   height: 2px;
   transform: translateY(15px);
   border-radius: 2px;
+  opacity: 0;
 }
 

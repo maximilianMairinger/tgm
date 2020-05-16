@@ -111,7 +111,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
           if ((await val) === elem) {
             if (myToken !== globalToken || this.currentlyActiveSectionName === name) return
             this.sectionChangeCallback(name)
-            domain.set(name, this.domainLevel, false)
+            if (this.currentlyActiveSectionName !== undefined) domain.set(name, this.domainLevel, false)
             this.currentlyActiveSectionName = name
           }
         })

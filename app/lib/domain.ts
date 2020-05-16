@@ -58,6 +58,31 @@ function updateTitle() {
 }
 
 
+function parseDomainToDomainIndex(domain: string, level: number) {
+
+  let originalLength = domainIndex.length;
+  if (originalLength < level || level < 0) {
+    console.warn("Unexpected index: " + level + ". Replacing it with " + originalLength + ".")
+    level = originalLength
+  }
+
+  let anyChange = false
+  let subdomains = domain.split(dirString).replace(e => slugify(e))
+  
+  domainIndex.splice(level + domain.length)
+  if (domainIndex.length !== originalLength) anyChange = true
+  
+  subdomains.ea((sub, i) => {
+    if (sub === "") sub = undefined
+    let ind = i + level
+    if (domainIndex[ind] !== sub) {
+      anyChange = true
+      if (sub === undefined) domainIndex.rmI(ind)
+      else domainIndex[ind] = sub
+    }
+  })
+  return anyChange
+}
 
 let currentDomainSet: Promise<void>
 let inDomainSet = false
@@ -74,33 +99,15 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     res = r
   })
 
-  let originalLength = domainIndex.length;
-  if (originalLength < level || level < 0) {
-    console.warn("Unexpected index: " + level + ". Replacing it with " + originalLength + ".")
-    level = originalLength
-  }
-
-  let anyChange = false
-
-  let subdomains = subdomain.split(dirString).replace(e => slugify(e))
-
-  domainIndex.splice(level + subdomains.length);
-  if (domainIndex.length !== originalLength) anyChange = true
-  
-  subdomains.ea((sub, i) => {
-    if (sub === "") sub = undefined
-    let ind = i + level
-    if (domainIndex[ind] !== sub) {
-      anyChange = true
-      if (sub === undefined) domainIndex.rmI(ind)
-      else domainIndex[ind] = sub
-    }
-  })
+  let anyChange = parseDomainToDomainIndex(subdomain, level)
   if (!anyChange) {
     inDomainSet = false
     res()
     return
   }
+
+
+
   let endDomain = dirString + domainIndex.join(dirString)
   if (!endDomain.endsWith(dirString)) endDomain += dirString
 
@@ -113,9 +120,12 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     }
     
     if (recall) {
+      let { domain, domainLevel } = recall
+      parseDomainToDomainIndex(domain, domainLevel)
+      let endDomain = domainIndex.join(dirString)
+
       domainIndex.set(domainIndexRollback)
-      //@ts-ignore
-      set(...recall)
+      set(endDomain, 0)
     }
     else {
       history.pushState(argData, updateTitle(), endDomain)
@@ -197,7 +207,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
 
         }
         if (joined !== domain) {
-          return [domain, domainLevel]
+          return {domain, domainLevel}
         }
 
       }
@@ -210,7 +220,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
 
         }
         if (domainIndex[domainLevel] !== domain) {
-          return [domain, domainLevel]
+          return {domain, domainLevel}
         }
 
       }

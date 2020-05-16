@@ -223,10 +223,8 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
 
     return new DomainSubscription(calcCurrentDomain, () => {
       ls.set(subscription, f)
-      console.log("set", new Map(ls))
     }, () => {
       ls.delete(subscription)
-      console.log("del", new Map(ls))
     })
 
   }
@@ -269,7 +267,6 @@ window.onpopstate = async function(e) {
   
   
   inDomainSet = false
-  console.log("reses")
   res()
 }
 

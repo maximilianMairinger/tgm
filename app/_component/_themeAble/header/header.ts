@@ -34,7 +34,14 @@ export default declareComponent("header", class Header extends ThemAble {
 
   private latestFadeRequest: Symbol
   public async updateLinks(linkContents: string[], domainLevel: number) {
-    // await this.updateSectionProm
+    let lastLinkElems = this.currentLinkElems
+
+    this.currentLinkContents = linkContents.clone()
+    this.currentLinkElems = new ElementList()
+    linkContents.ea((s) => {
+      this.currentLinkElems.add(new Link(lang.links[s], s, domainLevel))
+    })
+
     let fadeReq = this.latestFadeRequest = Symbol()
     if (this.inFadeInAnim) {
       await this.fadeInAnim
@@ -52,52 +59,49 @@ export default declareComponent("header", class Header extends ThemAble {
     
     let underlineFadeAnim: any
 
-    if (this.currentLinkElems) {
-      window.off("resize", this.resizeFn)
-      // let currentX = this.underlineElem.css("translateX")
-      // const baseDuration = 500
-      // let del = this.currentLinkElems.indexOf(this.lastSelectedElem) * (linkAnimationOffset / 2) - 100
-      // let duration = del + baseDuration
-      // underlineFadeAnim = Promise.all([
-      //   this.underlineElem.anim({opacity: 0}, duration),
-      //   this.underlineElem.anim({marginLeft: 20}, duration).then(() => this.underlineElem.css({marginLeft: 0})),
-      //   delay(del).then(() => this.underlineElem.anim({translateX: currentX + 15}, baseDuration))
-      // ])
-      
-      
-    }
-    
-
     let fadoutProm: Promise<any>
     let animationWrapper = ce("link-animation-wrapper")
     let lastAnimationWrapper = this.lastAnimationWrapper
     this.linkContainerElem.apd(animationWrapper)
     let lastLength: number
-    if (this.currentLinkElems) {
-      lastLength = this.currentLinkElems.length
+
+    if (lastLinkElems) {
+      window.off("resize", this.resizeFn)
+      let currentX = this.underlineElem.css("translateX")
+      const baseDuration = 500
+      let del = lastLinkElems.indexOf(this.lastSelectedElem) * (linkAnimationOffset / 2)
+      let duration = del + baseDuration
+      underlineFadeAnim = Promise.all([
+        this.underlineElem.anim({opacity: 0}, duration),
+        this.underlineElem.anim({marginLeft: 17}, duration).then(() => this.underlineElem.css({marginLeft: 0})),
+        delay(del).then(() => this.underlineElem.anim({translateX: currentX + 3}, baseDuration))
+      ])
+
+
+
+      lastLength = lastLinkElems.length
       fadoutProm =  Promise.all([
         lastAnimationWrapper.anim({translateX: 17}, (linkFadeInDuration + (lastLength-1) * linkAnimationOffset) / 2),
-        this.currentLinkElems.anim({opacity: 0, translateX: 3}, (linkFadeInDuration) / 2, linkAnimationOffset / 2)
+        lastLinkElems.anim({opacity: 0, translateX: 3}, (linkFadeInDuration) / 2, linkAnimationOffset / 2)
       ]).then(() => {
         lastAnimationWrapper.remove()
       })
+      
     }
     else lastLength = 0
 
-    this.lastAnimationWrapper = animationWrapper
-    this.currentLinkContents = linkContents.clone()
-    this.currentLinkElems = new ElementList()
-    let currentLength = this.currentLinkElems.length
+    
 
-    linkContents.ea((s) => {
-      this.currentLinkElems.add(new Link(lang.links[s], s, domainLevel))
-    })
+    this.lastAnimationWrapper = animationWrapper
+
+
+    let currentLength = this.currentLinkElems.length
     animationWrapper.apd(...this.currentLinkElems)
     
     await Promise.all([
       underlineFadeAnim,
       fadoutProm,
-      delay(fadoutProm ? (200 + (((lastLength * linkAnimationOffset) / 2) - currentLength * linkAnimationOffset)) : 0).then(async () => {
+      delay(fadoutProm ? (400 + (((lastLength * linkAnimationOffset) / 2) - currentLength * linkAnimationOffset)) : 0).then(async () => {
         if (fadeReq !== this.latestFadeRequest) {
           animationWrapper.remove()
           return
@@ -128,55 +132,49 @@ export default declareComponent("header", class Header extends ThemAble {
   }
 
   private updateLinkAnimationToken: Symbol
-  private updateSectionProm: Promise<void>
   public async updateSelectedLink(newSelected: string) {
-    // let res: Function
-    // this.updateSectionProm = new Promise((r) => {
-    //   res = r
-    // })
 
 
-    // let index = this.currentLinkContents.indexOf(newSelected)
-    // let elem = this.currentLinkElems[index]
+
     
-    // if (this.inFadeInAnim || this.linksUpdated) {
-    //   let updateLinkToken = this.updateLinkAnimationToken = Symbol()
-    //   this.linksUpdated = false
-    //   console.log("set")
-    //   this.lastSelectedElem = elem
-    //   elem.css({fontWeight: "bold"})
-    //   while (this.inFadeInAnim) {
-    //     await this.fadeInAnim
-    //     await delay(0)
-    //   }
 
-    //   if (updateLinkToken !== this.updateLinkAnimationToken) return
+
+    let index = this.currentLinkContents.indexOf(newSelected)
+    let elem = this.currentLinkElems[index]
+    
+    if (this.inFadeInAnim || this.linksUpdated) {
+      let updateLinkToken = this.updateLinkAnimationToken = Symbol()  
+      this.linksUpdated = false
+
+      if (this.lastSelectedElem) this.lastSelectedElem.css({fontWeight: "normal"})
+
+      this.lastSelectedElem = elem
+      elem.css({fontWeight: "bold"})
+
+      while (this.inFadeInAnim) {
+        await this.fadeInAnim
+      }
+
+      if (updateLinkToken !== this.updateLinkAnimationToken) return
+
+      let bounds = elem.getBoundingClientRect()
+      this.underlineElem.css({translateX: bounds.left, width: bounds.width})
+      window.on("resize", this.resizeFn)
+      await this.underlineElem.anim({opacity: 1}, 700)
+
+    }
+    else {
+      let index = this.currentLinkContents.indexOf(newSelected)
+      let elem = this.currentLinkElems[index]
+      let bounds = elem.getBoundingClientRect()
       
+      if (this.lastSelectedElem) this.lastSelectedElem.css({fontWeight: "normal"})
 
-    //   let bounds = elem.getBoundingClientRect()
-    //   this.underlineElem.css({translateX: bounds.left, width: bounds.width})
-    //   window.on("resize", this.resizeFn)
-    //   await this.underlineElem.anim({opacity: 1}, 700)
-
-    // }
-    // else {
-    //   let index = this.currentLinkContents.indexOf(newSelected)
-    //   let elem = this.currentLinkElems[index]
-    //   let bounds = elem.getBoundingClientRect()
-      
-    //   if (this.lastSelectedElem) {
-    //     this.lastSelectedElem.css({fontWeight: "normal"})
-    //   }
-
-    //   this.lastSelectedElem = elem
-    //   elem.css({fontWeight: "bold"})
-    //   await this.underlineElem.anim({translateX: bounds.left, width: bounds.width}, 500)
-    // }
-    
-
-
-    
-    // res()
+      this.lastSelectedElem = elem
+      elem.css({fontWeight: "bold"})
+      await this.underlineElem.anim({translateX: bounds.left, width: bounds.width}, 500)
+    }
+  
   }
 
   
@@ -189,4 +187,4 @@ export default declareComponent("header", class Header extends ThemAble {
   }
 })
 
-const totalUnderlineOverflow = 5
+// const totalUnderlineOverflow = 5

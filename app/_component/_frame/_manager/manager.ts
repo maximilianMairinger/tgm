@@ -112,9 +112,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (this.active) activationsPromises.add(activationProm = await to.activate())
     await Promise.all(activationsPromises)
 
-    debugger
     let activationResult: boolean = await activationProm
-    debugger
 
     if (!activationResult) {  
       to.hide()

@@ -66,6 +66,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     await currentDomainSet
   }
 
+  let domainIndexRollback = domainIndex.clone()
 
   let res: Function
   inDomainSet = true
@@ -112,6 +113,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     }
     
     if (recall) {
+      domainIndex.set(domainIndexRollback)
       //@ts-ignore
       set(...recall)
     }

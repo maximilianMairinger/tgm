@@ -2,9 +2,8 @@ import Frame from "./../frame";
 import LoadingIndecator from "../../_indecator/loadingIndecator/loadingIndecator";
 import * as domain from "../../../lib/domain";
 import lazyLoad, { ImportanceMap, Import, ResourcesMap } from "../../../lib/lazyLoad";
-
-
-// TODO: load only when inited
+import SectionedPage from "../_page/_sectionedPage/sectionedPage";
+import delay from "delay";
 
 
 export default abstract class Manager<ManagementElementName extends string> extends Frame {
@@ -19,16 +18,16 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
 
   private loadingElem: any;
-  private loaded: Promise<void>
+  private firstFrameLoaded: Promise<void>
 
 
 
 
   private managedElementMap: ResourcesMap
 
-  constructor(importanceMap: ImportanceMap<() => Promise<any>, any>, private domainLevel: number, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true,  public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
-    this.loaded = new Promise((res) => {
+    this.firstFrameLoaded = new Promise((res) => {
       this.resLoaded = res
     })
 
@@ -45,42 +44,42 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
     });
 
+    
+  }
 
-    const load = lazyLoad(importanceMap, e => {
+  private domainSubscription: domain.DomainSubscription
+  async loadedCallback() {
+    const load = lazyLoad(this.importanceMap, e => {
       this.body.apd(e)
     })
 
-    let initElemName = domain.get(domainLevel, this.setElem.bind(this))
-    setTimeout(async () => {
-      let pageProm: any
-      
+    this.domainSubscription = domain.get(this.domainLevel, async (to: any) => {await this.setElem(to)}, false, "")
+    let initElemName = this.domainSubscription.domain
+    let pageProm: any
+    
+    try {
+      pageProm = this.importanceMap.getByString(initElemName)
+    }
+    catch(e) {}
+    
+    while(pageProm === undefined) {
+      if (initElemName === "") {
+        initElemName = this.notFoundElementName
+        break
+      }
+      initElemName = initElemName.substr(0, initElemName.lastIndexOf("/")) as any
       try {
-        pageProm = importanceMap.getByString(initElemName)
+        pageProm = this.importanceMap.getByString(initElemName)
       }
-      catch(e) {
-
-      }
-      
-      while(pageProm === undefined) {
-        if (initElemName === "") {
-          initElemName = this.notFoundElementName
-          break
-        }
-        initElemName = initElemName.substr(0, initElemName.lastIndexOf("/")) as any
-        try {
-          pageProm = importanceMap.getByString(initElemName)
-        }
-        catch(e) {}
-      }
-      this.managedElementMap = load(initElemName)
-      if (this.managedElementMap.get(notFoundElementName) === undefined) console.error("404 elementName: \"" + notFoundElementName + "\" is not found in given importanceMap", importanceMap)
-      await this.setElem(initElemName as ManagementElementName)
-      this.resLoaded();
-    }, 0)
-    
-
-    
+      catch(e) {}
+    }
+    this.managedElementMap = load(initElemName)
+    if (this.managedElementMap.get(this.notFoundElementName) === undefined) console.error("404 elementName: \"" + this.notFoundElementName + "\" is not found in given importanceMap", this.importanceMap)
+    await this.setElem(initElemName as ManagementElementName)
+    this.resLoaded();
+    await this.managedElementMap.fullyLoaded
   }
+
   /**
    * Swaps to given Frame
    * @param to frame to be swaped to
@@ -94,58 +93,74 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
     this.wantedFrame = to;
     let from = this.currentFrame;
-    if (this.busySwaping) return;
-    this.busySwaping = true;
-    //Focus even when it is already the active frame
-    if (!this.preserveFocus) to.focus();
+    
+
     if (from === to) {
+      //Focus even when it is already the active frame
+      if (!this.preserveFocus) to.focus();
       this.busySwaping = false;
-      return;
+      return true;
     }
+    
+
+    
+    let activationsPromises = []
+    let activationProm: any
+
     to.show();
     if (!this.preserveFocus) to.focus();
-
-    let activationResult: boolean
-    if (this.active) activationResult = await to.activate();
     
+    if (from !== undefined) activationsPromises.add(from.deactivate())
+    if (this.active) activationsPromises.add(activationProm = to.activate())
+    await Promise.all(activationsPromises)
+
+    let activationResult: boolean = await activationProm
+
+    if (this.busySwaping) {
+      
+      return activationProm;
+    }
+    this.busySwaping = true;
+
+    
+
     if (!activationResult) {  
       to.hide()
+      await to.deactivate()
 
 
       return {
         wrapped: (async () => {
           this.busySwaping = false
           await this.setElem(this.notFoundElementName)
-          if (from !== undefined) {
-            from.hide()
-            from.deactivate()
-          }
-          
-          
         })()
       }
     }
     
-    to.css("zIndex", 100)
-    let showAnim = to.anim([{opacity: 0, scale: 1.05, offset: 0}, {opacity: 1, scale: 1}]);
-    let finalFunction = () => {
-      to.css("zIndex", 0)
-      this.busySwaping = false;
-      if (this.wantedFrame !== to) this.swapFrame(this.wantedFrame);
-    }
+    let showAnim = from !== undefined ? to.anim([{zIndex: 100, opacity: 0, translateX: -5, scale: 1.005, offset: 0}, {opacity: 1, translateX: 0, scale: 1}], 400) : to.anim([{offset: 0, opacity: 0}, {opacity: 1}], 400)
 
     this.currentFrame = to;
 
-    if (from === undefined) {
-      showAnim.then(finalFunction);
-    }
-    else {
-      showAnim.then(() => {
-        from.hide()
-        from.deactivate();
-      }).then(finalFunction);
-
-    }
+    (async () => {
+      if (from === undefined) {
+        await showAnim
+      }
+      else {
+        // let fromAnim = from.anim([{offset: 0, translateX: 0}, {translateX: 10}], 3000)
+        await Promise.all([showAnim])
+  
+        from.css({opacity: 0, display: "none"})
+  
+      }
+  
+  
+      to.css("zIndex", 0)
+      this.busySwaping = false;
+      if (this.wantedFrame !== to) {
+        await this.swapFrame(this.wantedFrame);
+        return
+      }
+    })()
 
     return activationResult
   }
@@ -156,8 +171,14 @@ export default abstract class Manager<ManagementElementName extends string> exte
   public element(): ManagementElementName
   public element(to: ManagementElementName, push?: boolean): void
   public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
-    if (to) domain.set(this.domainLevel, to, push)
-    else return this.currentManagedElementName
+    if (to === null) {
+      // FIXME: Do we need this check here?
+      if (this.managedElementMap.get(this.domainSubscription.domain) === undefined) return this.setElem(this.notFoundElementName)
+    }
+    else {
+      if (to) domain.set(to, this.domainLevel, push)
+      else return this.currentManagedElementName
+    }
   }
 
   private async setElem(to: ManagementElementName) {
@@ -175,19 +196,29 @@ export default abstract class Manager<ManagementElementName extends string> exte
     } 
 
     let ensureLoad: {wrapped: Promise<void>} | void | boolean
-    await pageProm.priorityThen(async (mod) => {
-      if (nextPageToken === this.nextPageToken) {
-        this.currentManagedElementName = to
-        ensureLoad = await this.swapFrame(mod)
-
-      }
-    })
-
-    if (ensureLoad instanceof Object) await ensureLoad.wrapped
+    if (this.currentManagedElementName !== to) {
+      await pageProm.priorityThen(async (frame: Frame | SectionedPage<any>) => {
+        if (nextPageToken === this.nextPageToken) {
+          this.currentManagedElementName = to;
+          (async () => {
+            if (this.pageChangeCallback) {
+              if ((frame as SectionedPage<any>).sectionIndex) this.pageChangeCallback(to, [...(await (frame as SectionedPage<any>).sectionIndex).keys()], frame.domainLevel || this.domainLevel)
+              else this.pageChangeCallback(to, [], frame.domainLevel || this.domainLevel)
+            }
+          })()
+          ensureLoad = await this.swapFrame(frame);
+          
+          
+        }
+      })
+  
+      if (ensureLoad instanceof Object) await ensureLoad.wrapped
+    }
+    
   }
 
   protected async activationCallback(active: boolean) {
-    await this.loaded
+    await this.firstFrameLoaded
     if (this.currentFrame.active !== active) this.currentFrame.vate(active)
   }
   stl() {

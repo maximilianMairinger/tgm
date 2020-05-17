@@ -32,7 +32,7 @@
     "@types/mongodb": "^3.5.10",
     "@types/node": "^13.13.2",
     "@types/nodemon": "^1.19.0",
-    "ajaon": "^1.5.10",
+    "ajaon": "^1.5.11",
     "body-parser": "^1.19.0",
     "chokidar": "^3.4.0",
     "concurrently": "^5.1.0",
@@ -72,8 +72,11 @@
   },
   "dependencies": {
     "animated-scroll-to": "^2.0.8",
-    "extended-dom": "^3.1.12",
+    "extended-dom": "^3.1.14",
     "fast-decode-uri-component": "^1.0.1",
+    "get-base-url": "^2.0.0",
+    "josm": "^1.1.2",
+    "slugify": "^1.4.0",
     "waapi-easing": "^1.0.0"
   }
 }

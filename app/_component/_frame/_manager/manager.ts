@@ -106,6 +106,9 @@ export default abstract class Manager<ManagementElementName extends string> exte
     
     let activationsPromises = []
     let activationProm: any
+
+    to.show();
+    if (!this.preserveFocus) to.focus();
     
     if (from !== undefined) activationsPromises.add(from.deactivate())
     if (this.active) activationsPromises.add(activationProm = to.activate())
@@ -113,11 +116,13 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
     let activationResult: boolean = await activationProm
 
-    if (this.busySwaping) return activationProm;
+    if (this.busySwaping) {
+      
+      return activationProm;
+    }
     this.busySwaping = true;
 
-    to.show();
-    if (!this.preserveFocus) to.focus();
+    
 
     if (!activationResult) {  
       to.hide()
@@ -167,7 +172,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
   public element(to: ManagementElementName, push?: boolean): void
   public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
     if (to === null) {
-      debugger
+      // FIXME: Do we need this check here?
       if (this.managedElementMap.get(this.domainSubscription.domain) === undefined) return this.setElem(this.notFoundElementName)
     }
     else {

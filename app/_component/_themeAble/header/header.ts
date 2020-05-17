@@ -38,13 +38,21 @@ export default declareComponent("header", class Header extends ThemAble {
   }
 
   public async updatePathDisplay (domainLevel: number) {
+    if (!this.pathDisplayElem.childs(1, true).empty) {
+      await this.pathDisplayElem.anim({opacity: 0, translateX: 5}, 500)
+    }
+    else {
+      this.pathDisplayElem.css({opacity: 0})
+    }
     this.pathDisplayElem.removeChilds()
+    this.pathDisplayElem.css({translateX: -5})
     for (let i = 0; i < domainLevel; i++) {
       const domainFragment = domainIndex[i]
 
       this.pathDisplayElem.apd(new ArrowIcon(), new Link(lang.links[domainFragment], domainFragment, i))
 
     }
+    await this.pathDisplayElem.anim({opacity: 1, translateX: .1}, 500)
     
   }
 

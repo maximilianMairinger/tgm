@@ -13,9 +13,9 @@ export default declareComponent("landing-section", class Landing extends PageSec
   
   }
   stl() {
-    return super.stl() + require("./testSection1.css").toString()
+    return super.stl() + require("./landingSection.css").toString()
   }
   pug() {
-    return require("./testSection1.pug").default
+    return require("./landingSection.pug").default
   }
 });

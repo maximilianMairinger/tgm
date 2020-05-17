@@ -39,12 +39,12 @@ parseUrlToDomainIndex()
 
 
 function renderSubtitle(myDomainIndex = domainIndex) {
-  return myDomainIndex.Replace((e) => {
+  return myDomainIndex.Replace((k) => {
     try {
-      return lang.links[e].get()
+      return lang.links[k].get()
     }
     catch (e) {
-      return e
+      return k
     }
     
   }).join(commonSubtileSeperator)

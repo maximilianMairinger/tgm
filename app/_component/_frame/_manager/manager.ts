@@ -93,17 +93,15 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
     this.wantedFrame = to;
     let from = this.currentFrame;
-    if (this.busySwaping) return;
-    this.busySwaping = true;
+    
 
     if (from === to) {
       //Focus even when it is already the active frame
       if (!this.preserveFocus) to.focus();
       this.busySwaping = false;
-      return;
+      return true;
     }
-    to.show();
-    if (!this.preserveFocus) to.focus();
+    
 
     
     let activationsPromises = []
@@ -115,9 +113,15 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
     let activationResult: boolean = await activationProm
 
+    if (this.busySwaping) return activationProm;
+    this.busySwaping = true;
+
+    to.show();
+    if (!this.preserveFocus) to.focus();
+
     if (!activationResult) {  
       to.hide()
-      to.deactivate()
+      await to.deactivate()
 
 
       return {

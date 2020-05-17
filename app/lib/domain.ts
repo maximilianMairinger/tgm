@@ -8,7 +8,7 @@ import lang from "./../lib/lang/lang"
 const commonTitle = "TGM";
 const commonTitleSeperator = " - "
 const commonSubtileSeperator = " > "
-const maxCharactersInTitle = 25
+const maxCharactersInTitle = 20
 const toMuchSubtitlesTruncate = "..."
 const argData = "internal";
 

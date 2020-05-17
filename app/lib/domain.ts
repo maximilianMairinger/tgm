@@ -8,7 +8,7 @@ import lang from "./../lib/lang/lang"
 const commonTitle = "TGM";
 const commonTitleSeperator = " - "
 const commonSubtileSeperator = " > "
-const maxSubtiles = 2
+const maxCharactersInTitle = 25
 const toMuchSubtitlesTruncate = "..."
 const argData = "internal";
 
@@ -38,18 +38,8 @@ function parseUrlToDomainIndex() {
 parseUrlToDomainIndex()
 
 
-function updateTitle() {
-  let myDomainIndex = [...domainIndex]
-  let title = commonTitle
-  if (myDomainIndex.length > maxSubtiles) {
-    myDomainIndex = myDomainIndex.splice(myDomainIndex.length - maxSubtiles)
-    title = title + commonTitleSeperator + toMuchSubtitlesTruncate + commonSubtileSeperator
-  }
-  else if (myDomainIndex.length !== 0) {
-    title += commonTitleSeperator
-  }
-
-  let subtitle = myDomainIndex.replace((e) => {
+function renderSubtitle(myDomainIndex = domainIndex) {
+  return myDomainIndex.Replace((e) => {
     try {
       return lang.links[e].get()
     }
@@ -58,6 +48,28 @@ function updateTitle() {
     }
     
   }).join(commonSubtileSeperator)
+}
+
+function updateTitle() {
+  let title = commonTitle
+
+  let subtitle = renderSubtitle()
+
+  let myDomainIndex = domainIndex.clone()
+  let tooMuchToTitles = false
+  while(subtitle.length > maxCharactersInTitle && myDomainIndex.length > 1) {
+    myDomainIndex.rmI(0)
+    subtitle = renderSubtitle(myDomainIndex)
+    tooMuchToTitles = true
+  }
+
+  if (subtitle.length !== 0) title += commonTitleSeperator
+
+  if (tooMuchToTitles) {
+    title = title + toMuchSubtitlesTruncate + commonSubtileSeperator
+  }
+
+
 
   title += subtitle
   

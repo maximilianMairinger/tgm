@@ -4,7 +4,7 @@ import { ImportanceMap, Import } from "../../../../../../lib/lazyLoad"
 import VersuchanstaltSection from "../../../../_pageSection/versuchsanstaltSection/versuchsanstaltSection"
 
 
-export default declareComponent("homepage", class homepage extends LazySectionedPage {
+export default declareComponent("home-page", class Homepage extends LazySectionedPage {
   constructor(setPage: (domain: string) => void, sectionChangeCallback?: (section: string) => void, domainLevel = 1) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
@@ -13,7 +13,7 @@ export default declareComponent("homepage", class homepage extends LazySectioned
           new _VersuchsanstaltSection()
         ), val: () => import(/* webpackChunkName: "VersuchsanstaltSection" */"../../../../_pageSection/versuchsanstaltSection/versuchsanstaltSection")
       },
-    ), domainLevel, setPage)
+    ), domainLevel, setPage, sectionChangeCallback)
   }
 
   stl() {

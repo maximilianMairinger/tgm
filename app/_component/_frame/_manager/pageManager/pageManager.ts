@@ -1,12 +1,12 @@
 import Manager from "../manager";
 import {ImportanceMap, Import} from "../../../../lib/lazyLoad"
-import HomePage from "../../_page/_sectionedPage/homepage/homePage";
+import TestPage from "../../_page/_sectionedPage/testPage/testPage";
 import _404Page from "../../_page/404/404";
 import MaxsSandbox from "../../_page/maxsSandbox/maxsSandbox";
 import GeorgsSandbox from "../../_page/georgsSanbox/georgsSanbox";
 import DanielsSandbox from "../../_page/danielsSandbox/danielsSandbox";
 import ItPage from "../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage";
-import Homepage from "../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage";
+import HomePage from "../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage";
 import { declareComponent } from "../../../../lib/declareComponent"
 
 export type PageName = string
@@ -18,11 +18,20 @@ export default declareComponent("page-manager", class PageManager extends Manage
     }
 
     super(new ImportanceMap<() => Promise<any>, any>(
-
       {
-        key: new Import("", 10, (homePage: typeof HomePage) => 
-          new homePage(setPage, sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "homePage" */"../../_page/_sectionedPage/homepage/homePage")
+        key: new Import("homepage", 20, (homepage: typeof HomePage) =>
+            new homepage(setPage, sectionChangeCallback, 1)
+        ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
+      },
+      {
+        key: new Import("", 20, (homepage: typeof HomePage) =>
+            new homepage(setPage, sectionChangeCallback, 0)
+        ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
+      },
+      {
+        key: new Import("test", 10, (testPage: typeof TestPage) => 
+          new testPage(setPage, sectionChangeCallback, 1)
+        ), val: () => import(/* webpackChunkName: "testPage" */"../../_page/_sectionedPage/testPage/testPage")
       },
       {
         key: new Import("404", 0, (__404Page: typeof _404Page) => 
@@ -36,11 +45,6 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("maxsSandbox", 0, (maxsSandbox: typeof MaxsSandbox) => 
-          new maxsSandbox()
-        ), val: () => import(/* webpackChunkName: "maxsSandbox" */"../../_page/maxsSandbox/maxsSandbox")
-      },
-      {
-        key: new Import("test/123", 0, (maxsSandbox: typeof MaxsSandbox) => 
           new maxsSandbox()
         ), val: () => import(/* webpackChunkName: "maxsSandbox" */"../../_page/maxsSandbox/maxsSandbox")
       },
@@ -63,12 +67,8 @@ export default declareComponent("page-manager", class PageManager extends Manage
         key: new Import("abendschule/elektrotechnik", 20, (itPage: typeof ItPage) => 
           new itPage(setPage, 2, sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
-      },
-      {
-        key: new Import("homepage", 20, (homepage: typeof Homepage) =>
-            new Homepage(setPage, sectionChangeCallback, 1)
-        ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
       }
+      
     ), 0, pageChangeCallback, "404")
 
 

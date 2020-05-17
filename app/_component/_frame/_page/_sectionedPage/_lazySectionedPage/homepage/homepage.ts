@@ -9,7 +9,7 @@ export default declareComponent("home-page", class Homepage extends LazySectione
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
-        key: new Import("section1", 1, (_VersuchsanstaltSection: typeof VersuchanstaltSection) =>
+        key: new Import("versuchsanstalt", 1, (_VersuchsanstaltSection: typeof VersuchanstaltSection) =>
           new _VersuchsanstaltSection()
         ), val: () => import(/* webpackChunkName: "VersuchsanstaltSection" */"../../../../_pageSection/versuchsanstaltSection/versuchsanstaltSection")
       },

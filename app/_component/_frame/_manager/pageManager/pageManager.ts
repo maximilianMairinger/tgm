@@ -51,22 +51,22 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/it", 20, (itPage: typeof ItPage) => 
-          new itPage(setPage, sectionChangeCallback, 2)
+          new itPage(setPage, 2, sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
       },
       {
         key: new Import("tagesschule/elektrotechnik", 20, (itPage: typeof ItPage) => 
-          new itPage(setPage, sectionChangeCallback, 2)
+          new itPage(setPage, 2, sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
       },
       {
         key: new Import("abendschule/elektrotechnik", 20, (itPage: typeof ItPage) => 
-          new itPage(setPage, sectionChangeCallback, 2)
+          new itPage(setPage, 2, sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
       },
       {
         key: new Import("homepage", 20, (homepage: typeof Homepage) =>
-            new Homepage(this.element, 1)
+            new Homepage(setPage, sectionChangeCallback, 1)
         ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
       }
     ), 0, pageChangeCallback, "404")

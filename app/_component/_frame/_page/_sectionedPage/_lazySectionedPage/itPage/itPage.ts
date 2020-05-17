@@ -7,7 +7,7 @@ import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
 
 
 export default declareComponent("it-page", class itPage extends LazySectionedPage {
-  constructor(setPage: (domain: string) => void, sectionChangeCallback?: (section: string) => void, domainLevel = 1) {
+  constructor(setPage: (domain: string) => void, domainLevel: number, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {

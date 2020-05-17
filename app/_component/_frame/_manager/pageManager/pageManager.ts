@@ -52,6 +52,16 @@ export default declareComponent("page-manager", class PageManager extends Manage
         key: new Import("tagesschule/it", 20, (itPage: typeof ItPage) => 
           new itPage(setPage, sectionChangeCallback, 2)
         ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
+      },
+      {
+        key: new Import("tagesschule/elektrotechnik", 20, (itPage: typeof ItPage) => 
+          new itPage(setPage, sectionChangeCallback, 2)
+        ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
+      },
+      {
+        key: new Import("abendschule/elektrotechnik", 20, (itPage: typeof ItPage) => 
+          new itPage(setPage, sectionChangeCallback, 2)
+        ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
       }
     ), 0, pageChangeCallback, "404")
 

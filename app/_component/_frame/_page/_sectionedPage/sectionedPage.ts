@@ -134,7 +134,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     if (active) {
       let init = this.domainSubscription.domain
-      console.log("init", init)
+
       if (sectionIndex.get(init) === undefined) {
         return false
       }

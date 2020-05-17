@@ -95,9 +95,10 @@ export default abstract class Manager<ManagementElementName extends string> exte
     let from = this.currentFrame;
     if (this.busySwaping) return;
     this.busySwaping = true;
-    //Focus even when it is already the active frame
-    if (!this.preserveFocus) to.focus();
+
     if (from === to) {
+      //Focus even when it is already the active frame
+      if (!this.preserveFocus) to.focus();
       this.busySwaping = false;
       return;
     }
@@ -109,13 +110,14 @@ export default abstract class Manager<ManagementElementName extends string> exte
     let activationProm: any
     
     if (from !== undefined) activationsPromises.add(from.deactivate())
-    if (this.active) activationsPromises.add(activationProm = await to.activate())
+    if (this.active) activationsPromises.add(activationProm = to.activate())
     await Promise.all(activationsPromises)
 
     let activationResult: boolean = await activationProm
 
     if (!activationResult) {  
       to.hide()
+      to.deactivate()
 
 
       return {
@@ -161,6 +163,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
   public element(to: ManagementElementName, push?: boolean): void
   public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
     if (to === null) {
+      debugger
       if (this.managedElementMap.get(this.domainSubscription.domain) === undefined) return this.setElem(this.notFoundElementName)
     }
     else {

@@ -1,3 +1,8 @@
 component-body {
   overflow-y: auto;
 }
+
+component-body > * {
+  display: inline-block;
+  width: 100%;
+}

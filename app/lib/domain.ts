@@ -1,6 +1,7 @@
 import decodeUri from "fast-decode-uri-component"
 import * as global from "./../global"
 import slugify from "slugify"
+import getBaseUrl from "get-base-url";
 
 
 const commonTitle = "TGM";
@@ -284,3 +285,21 @@ window.onpopstate = async function(e) {
 
 //@ts-ignore
 window.domain = {set, get}
+
+
+
+
+
+export function linkMeta(link: string) {
+  while (link.startsWith(dirString)) {
+    link = link.substr(dirString.length)
+  }
+  let domainIndexClone = domainIndex.clone()  
+  domainIndexClone.splice(this.domainLevel)
+  domainIndexClone.add(...link.split(dirString))
+  return {
+    link,
+    isOnOrigin: getBaseUrl(link) === getBaseUrl(),
+    href: dirString + domainIndexClone.join(dirString)
+  }
+}

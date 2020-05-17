@@ -1,8 +1,12 @@
 :host {
-  font-weight: bold;
-  cursor: pointer;
+  
   color: var(--strong-text-color);
   user-select: none;
+}
+
+:host(.active) {
+  font-weight: bold;
+  cursor: pointer;
 }
 
 slot {

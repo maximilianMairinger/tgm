@@ -1,8 +1,8 @@
 import declareComponent from "../../../lib/declareComponent"
-import getBaseUrl from "get-base-url"
 import ThemAble from "../themeAble";
 import { Data } from "josm"
 import * as domain from "./../../../lib/domain"
+
 
 
 
@@ -15,39 +15,45 @@ export default class Link extends ThemAble {
     this.content(content)
     if (link) this.link(link)
 
-    this.on("click", (e) => {
-      this.cbs.Call(e)
-    })
 
-    this.on("keydown", (e) => {
-      if (e.key === " " || e.key === "Enter") this.cbs.call(e)
-    })
-
-    this.aElem.on("click", (e) => {
+    let ev = (e: Event) => {
       let link = this.link()
-
-      if (getBaseUrl(link) === location.origin) {
-        e.preventDefault()
-        domain.set(link, this.domainLevel)
+      if (link) {
+        if (this.isLinkOnOrigin) {
+          e.preventDefault()
+          domain.set(link, this.domainLevel)
+        }
       }
+      
+      this.cbs.Call(e)
+    }
+
+    this.aElem.on("click", ev)
+    this.aElem.on("keydown", (e) => {
+      // enter is covered with click
+      if (e.key === " ") ev(e)
     })
 
   }
 
+  private isLinkOnOrigin: boolean
   private _link: string
 
   link(): string
   link(to?: string): void
   link(to?: string): any {
     if (to) {
-      while (to.startsWith(domain.dirString)) {
-        to = to.substr(domain.dirString.length)
-      }
-      this._link = to
-      let domainIndex = domain.domainIndex.clone()  
-      domainIndex.splice(this.domainLevel)
-      domainIndex.add(...to.split(domain.dirString))
-      this.aElem.href = domain.dirString + domainIndex.join(domain.dirString)
+      let link = domain.linkMeta(to)
+      this._link = link.link
+      this.aElem.href = link.href
+      this.isLinkOnOrigin = link.isOnOrigin
+      this.addClass("active")
+    }
+    else if (to === null) {
+      this.removeClass("active")
+      delete this._link
+      delete this.aElem.href
+      delete this.isLinkOnOrigin
     }
     else return this._link
   }

@@ -50,7 +50,7 @@ function updateTitle() {
   }
 
   let subtitle = myDomainIndex.replace((e) => {
-    return lang.links[e]
+    return lang.links[e].get()
   }).join(commonSubtileSeperator)
 
   title += subtitle

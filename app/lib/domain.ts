@@ -185,7 +185,15 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
       return domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
     }
   })
-  let currentDomain = calcCurrentDomain()
+  let currentDomain = calcCurrentDomain();
+  (() => {
+    let joined = domainIndex.join(dirString)
+    let domain = joined === "" ? defaultDomain : joined
+
+    if (joined !== domain) {
+      set(domain, domainLevel, false)
+    }
+  })()
 
 
   if (subscription) {

@@ -47,7 +47,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   async initialActivationCallback() {
     //@ts-ignore
     let sectionIndex: ResourcesMap = await this.sectionIndex
-    this.domainSubscription =  domain.get(this.domainLevel, (domain: string) => {
+    this.domainSubscription = domain.get(this.domainLevel, (domain: string) => {
       return new Promise<boolean>(async (res) => {
         //@ts-ignore
         let sectionIndex: ResourcesMap = await this.sectionIndex
@@ -77,6 +77,8 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       })
      
     }, true, sectionIndex.entries().next().value[0])
+
+    domain.set(this.domainSubscription.domain, this.domainLevel, false)
 
 
     let globalToken: Symbol

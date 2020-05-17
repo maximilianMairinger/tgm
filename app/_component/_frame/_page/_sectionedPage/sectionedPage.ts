@@ -76,7 +76,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         }
       })
      
-    }, true, sectionIndex.entries().next().value[0])
+    }, false, sectionIndex.entries().next().value[0])
 
 
 

@@ -8,7 +8,7 @@ const pressedClass = "pressed";
 
 
 
-export default declareComponent("button", class Button extends Component {
+export default declareComponent("button", class Button extends Component<HTMLAnchorElement> {
   private doesFocusOnHover: boolean;
   private mouseOverListener: Tel;
   private mouseOutListener: Tel;
@@ -16,8 +16,8 @@ export default declareComponent("button", class Button extends Component {
 
   private preferedTabIndex: number
   private _hotKey: string
-  constructor(protected readonly enabled: boolean = true, focusOnHover: boolean = false, public tabIndex: number = 0, public obtainDefault: boolean = false, public preventFocus = false, blurOnMouseOut: boolean = false, hotkey?: string) {
-    super(false);
+  constructor(protected readonly enabled: boolean = false, focusOnHover: boolean = false, public tabIndex: number = 0, public obtainDefault: boolean = false, public preventFocus = false, blurOnMouseOut: boolean = false, hotkey?: string) {
+    super(ce("a") as any as HTMLAnchorElement);
 
     if (enabled) this.enableForce(true)
     else this.enableForce(true)
@@ -26,35 +26,38 @@ export default declareComponent("button", class Button extends Component {
 
     let alreadyPressed = false;
 
-    this.on("mousedown", (e) => {
-      if (e.which === 1) this.click(e);
+    this.elementBody.on("click", (e) => {
+      /*if (e.which === 1)*/ this.click(e);
     });
-    this.on("mouseup", () => {
+    this.elementBody.on("mousedown", (e) => {
+      if (e.which === 1) this.addClass(pressedClass)
+    })
+    this.elementBody.on("mouseup", () => {
       this.removeClass(pressedClass);
     });
-    this.on("mouseout", () => {
+    this.elementBody.on("mouseout", () => {
       this.removeClass(pressedClass);
     })
-    this.on("keydown", (e) => {
-      if (e.key === " " || e.key === "Enter") if (!alreadyPressed) {
+    this.elementBody.on("keydown", (e) => {
+      if (e.key === " ") if (!alreadyPressed) {
         alreadyPressed = true;
         this.click(e)
       }
     });
-    this.on("keyup", ({key}) => {
+    this.elementBody.on("keyup", ({key}) => {
       if (key === " " || key === "Enter"){
         alreadyPressed = false;
         this.removeClass(pressedClass);
       }
     });
-    this.on("blur", () => {
+    this.elementBody.on("blur", () => {
       alreadyPressed = false;
     });
 
-    this.mouseOverListener = this.ls("mouseover", () => {
+    this.mouseOverListener = this.elementBody.ls("mouseover", () => {
       this.focus();
     }, false)
-    this.mouseOutListener = this.ls("mouseout", () => {
+    this.mouseOutListener = this.elementBody.ls("mouseout", () => {
       this.blur();
     }, false)
 
@@ -90,13 +93,23 @@ export default declareComponent("button", class Button extends Component {
   public link(): string
   public link(to: string): void
   public link(to?: string) {
+
     if (to !== undefined) {
       if (to !== null) {
-        this.linkFn = this.addActivationCallback(() => {
-          domain.set(to)
+        let link = domain.linkMeta(to)
+        this.elementBody.href = link.href
+        this._link = link.link
+        this.linkFn = this.addActivationCallback((e) => {
+          if (link.isOnOrigin) {
+            if (e) e.preventDefault()
+            domain.set(to)
+          }
+          
         })
       }
-      else this.removeActivationCallback(this.linkFn)
+      else {
+        this.removeActivationCallback(this.linkFn)
+      }
       
     }
     else return this._link
@@ -108,10 +121,12 @@ export default declareComponent("button", class Button extends Component {
   }
   public addActivationCallback<CB extends (e?: MouseEvent | KeyboardEvent) => void>(cb: CB): CB {
     this.callbacks.add(cb);
+    if (!this.enabled) this.enable()
     return cb
   }
   public removeActivationCallback<CB extends (e?: MouseEvent | KeyboardEvent) => void>(cb: CB): CB {
     this.callbacks.removeV(cb);
+    if (this.callbacks.empty && this.enabled) this.disable()
     return cb
   }
 
@@ -136,7 +151,6 @@ export default declareComponent("button", class Button extends Component {
     if (e !== undefined && !this.obtainDefault) e.preventDefault();
     if (this.enabled) {
       if (!this.preventFocus) this.focus();
-      this.addClass(pressedClass);
       this.callbacks.forEach(f => {f.call(this, e);});
     }
   }

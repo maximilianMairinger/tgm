@@ -78,7 +78,6 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
      
     }, true, sectionIndex.entries().next().value[0])
 
-    domain.set(this.domainSubscription.domain, this.domainLevel, false)
 
 
     let globalToken: Symbol

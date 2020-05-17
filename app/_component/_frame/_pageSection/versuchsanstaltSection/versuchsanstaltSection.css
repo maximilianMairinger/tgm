@@ -1,3 +1,9 @@
+component-body {
+    /* So that the circle (even when invisable) does not overlay hitboxes of the prior section */
+    overflow: hidden;
+}
+
+
 versuchsanstalt-section {
     display: block;
     background: #3c4552;

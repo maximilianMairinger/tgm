@@ -14,8 +14,8 @@ type FullSectionIndex = ResourcesMap | SectionIndex | Promise<ResourcesMap | Sec
 export type QuerySelector = string
 export default abstract class SectionedPage<T extends FullSectionIndex> extends Page {
   public readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
-  private inScrollAnimation = false
-  constructor(sectionIndex: T, protected domainLevel: number) {
+  private inScrollAnimation: Symbol
+  constructor(sectionIndex: T, public domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void) {
     super()
     //@ts-ignore
     this.sectionIndex = sectionIndex instanceof Promise ? sectionIndex.then((sectionIndex) => this.prepSectionIndex(sectionIndex)) : this.prepSectionIndex(sectionIndex)
@@ -42,46 +42,78 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   }
 
   private observer: IntersectionObserver
+  private currentlyActiveSectionName: string
+  private intersectingIndex: Element[] = []
   async initialActivationCallback() {
     //@ts-ignore
     let sectionIndex: ResourcesMap = await this.sectionIndex
+    this.domainSubscription = domain.get(this.domainLevel, (domain: string) => {
+      return new Promise<boolean>(async (res) => {
+        //@ts-ignore
+        let sectionIndex: ResourcesMap = await this.sectionIndex
+              
+        let scrollAnimation = this.inScrollAnimation = Symbol()
+        this.currentlyActiveSectionName = domain
+        if (this.sectionChangeCallback) this.sectionChangeCallback(domain)
 
-    
+        let elem = await sectionIndex.get(domain) as HTMLElement
+        if (elem !== undefined) {
+          res(true)
+          await scrollTo(elem, {
+            cancelOnUserAction: true,
+            verticalOffset: padding,
+            speed: 1150,
+            elementToScroll: this.elementBody,
+            easing: new WaapiEasing("ease").function
+
+          })
+          if (scrollAnimation === this.inScrollAnimation) this.inScrollAnimation = undefined
+        }
+        else {
+          this.setPage(null)
+          this.inScrollAnimation = undefined
+          res(false)
+        }
+      })
+     
+    }, false, sectionIndex.entries().next().value[0])
 
 
-    let intersectingIndex: Element[] = []
+
     let globalToken: Symbol
     this.observer = new IntersectionObserver(async (c) => {
-      if (!this.inScrollAnimation) {
-        c.ea((q) => {
-          if (q.isIntersecting) { 
-            if (Math.abs(0 - q.boundingClientRect.y) > Math.abs(q.rootBounds.y - q.boundingClientRect.bottom)) {
-              intersectingIndex.inject(q.target, 0)
-            }
-            else {
-              intersectingIndex.add(q.target)
-            }
+      
+      c.ea((q) => {
+        if (q.isIntersecting) { 
+          if (Math.abs(0 - q.boundingClientRect.y) > Math.abs(q.rootBounds.y - q.boundingClientRect.bottom)) {
+            this.intersectingIndex.inject(q.target, 0)
           }
           else {
-            
-            try {
-              intersectingIndex.rmV(q.target)
-            }
-            catch(e) {
-  
-            }
+            this.intersectingIndex.add(q.target)
           }
-        })
+        }
+        else {
+          
+          try {
+            this.intersectingIndex.rmV(q.target)
+          }
+          catch(e) {
+
+          }
+        }
+      })
+
+      let elem = this.intersectingIndex.first as PageSection
   
-        let elem = intersectingIndex.first as PageSection
-  
-        
+      if (!this.inScrollAnimation) {
         let myToken = Symbol("Token")
         globalToken = myToken
         sectionIndex.forEach(async (val, name) => {
           if ((await val) === elem) {
-            if (myToken !== globalToken) return
-            domain.set(this.domainLevel, name, false)
+            if (myToken !== globalToken || this.currentlyActiveSectionName === name) return
+            this.sectionChangeCallback(name)
+            if (this.currentlyActiveSectionName !== undefined) domain.set(name, this.domainLevel, false)
+            this.currentlyActiveSectionName = name
           }
         })
       }
@@ -92,50 +124,37 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   }
 
 
-  private domainFunc = async (e) => {
-    this.inScrollAnimation = true
-    scrollTo(await (await this.sectionIndex as any).get(e) as HTMLElement, {
-      cancelOnUserAction: true,
-      verticalOffset: padding,
-      speed: 1150,
-      elementToScroll: this.elementBody,
-      easing: new WaapiEasing("ease").function
-
-    }).then(() => {
-      this.inScrollAnimation = false
-    })
-  }
+  private domainSubscription: domain.DomainSubscription
 
   protected async activationCallback(active: boolean) {
     //@ts-ignore
     let sectionIndex: ResourcesMap = await this.sectionIndex
+    this.domainSubscription.vate(active)
+
     if (active) {
-      sectionIndex.forEach(async (elem) => {
-        this.observer.observe(await elem)
-      })
+      let init = this.domainSubscription.domain
 
-
-
-      let init = domain.get(this.domainLevel, this.domainFunc, true)
-      if (init === "") init = sectionIndex.entries().next().value[0]
       if (sectionIndex.get(init) === undefined) {
         return false
       }
       else {
-        // setTimeout(async () => {
-          sectionIndex.get(init).priorityThen((e) => {
-            e.scrollIntoView(true);
-            this.elementBody.scrollBy(0, padding)
-          })
+        sectionIndex.get(init).priorityThen((e) => {
+          e.scrollIntoView(true);
+          this.elementBody.scrollBy(0, padding)
+        })
           
-        // }, 0)
+
       }
+      sectionIndex.forEach(async (elem) => {
+        this.observer.observe(await elem)
+      })
     }
     else {
+      this.intersectingIndex.clear()
       sectionIndex.forEach(async (elem) => {
         this.observer.unobserve(await elem)
       })
-      domain.got(this.domainFunc)
+      delete this.currentlyActiveSectionName
     }
   }
 

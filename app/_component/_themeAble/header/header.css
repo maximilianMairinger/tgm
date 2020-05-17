@@ -1,0 +1,89 @@
+component-body {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+left-content {
+  position: absolute;
+  left: 100px;
+  display: flex;
+  align-items: center;
+}
+
+left-content > c-tgm-logo {
+  height: 36px;
+  width: 58px;
+  position: relative;
+  float: left;
+}
+
+c-button#homeButton {
+  position: absolute;
+  left: 0;
+  height: 36px;
+  width: 58px;
+  opacity: .2;
+}
+
+right-content {
+  display: inline-block;
+  position: absolute;
+  right: 100px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: calc(100% - 100px)
+}
+
+link-animation-wrapper {
+  display: inline-block;  
+  transform: translateX(-17px);
+  position: absolute;
+  right: 0;
+
+}
+
+right-content > link-animation-wrapper > c-link {
+  margin: 0 18px;
+  font-weight: normal;
+  opacity: 0;
+  transform: translateX(-3px);
+  
+  position: relative;
+  float: left;
+}
+
+right-content > link-animation-wrapper >  c-link:first-of-type {
+  padding-left: 0;
+}
+
+right-content > link-animation-wrapper >  c-link:last-of-type {
+  padding-right: 0;
+}
+
+slidy-underline {
+  position: absolute;
+  background: var(--strong-text-color);
+  width: 70px;
+  height: 2px;
+  transform: translateY(15px);
+  border-radius: 2px;
+  opacity: 0;
+}
+
+path-display {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+
+}
+
+path-display c-arrow-icon {
+  margin: 0 16px;
+  height: 17px;
+  width: 6.5px;
+}
+
+

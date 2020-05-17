@@ -9,20 +9,24 @@ import ItPage from "../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage"
 import Homepage from "../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage";
 import { declareComponent } from "../../../../lib/declareComponent"
 
-export type PageName = ""
+export type PageName = string
 
 export default declareComponent("page-manager", class PageManager extends Manager<PageName> {
-  constructor() {
+  constructor(pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, sectionChangeCallback?: (section: string) => void) {
+    let setPage = (a: PageName | null) => {
+      this.element(a)
+    }
+
     super(new ImportanceMap<() => Promise<any>, any>(
 
       {
         key: new Import("", 10, (homePage: typeof HomePage) => 
-          new homePage(this.element)
+          new homePage(setPage, sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "homePage" */"../../_page/_sectionedPage/homepage/homePage")
       },
       {
         key: new Import("404", 0, (__404Page: typeof _404Page) => 
-          new __404Page(this.element)
+          new __404Page(setPage)
         ), val: () => import(/* webpackChunkName: "404Page" */"../../_page/404/404")
       },
       {
@@ -47,7 +51,17 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/it", 20, (itPage: typeof ItPage) => 
-          new itPage(this.element, 2)
+          new itPage(setPage, sectionChangeCallback, 2)
+        ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
+      },
+      {
+        key: new Import("tagesschule/elektrotechnik", 20, (itPage: typeof ItPage) => 
+          new itPage(setPage, sectionChangeCallback, 2)
+        ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
+      },
+      {
+        key: new Import("abendschule/elektrotechnik", 20, (itPage: typeof ItPage) => 
+          new itPage(setPage, sectionChangeCallback, 2)
         ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
       },
       {
@@ -55,7 +69,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
             new Homepage(this.element, 1)
         ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
       }
-    ), 0)
+    ), 0, pageChangeCallback, "404")
 
 
 

@@ -1,0 +1,24 @@
+:host {
+  
+  color: var(--strong-text-color);
+  user-select: none;
+}
+
+:host(.active) {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+slot {
+  font-weight: inherit;
+  cursor: inherit;
+  display: inline-block;
+  text-decoration: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+  font-weight: inherit;
+  cursor: inherit;
+}

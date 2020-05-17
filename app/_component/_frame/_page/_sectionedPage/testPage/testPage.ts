@@ -4,7 +4,7 @@ import { set } from "../../../../../lib/domain"
 import { ResourcesMap } from "../../../../../lib/lazyLoad"
 
 
-export default declareComponent("home-page", class HomePage extends SectionedPage<{[name: string]: string}> {
+export default declareComponent("test-page", class TestPage extends SectionedPage<{[name: string]: string}> {
   constructor(setPage: (page: string) => void, sectionChangeCallback?: (section: string) => void, domainLevel = 0) {
     super({
       tagesschule: ".a",
@@ -25,14 +25,12 @@ export default declareComponent("home-page", class HomePage extends SectionedPag
 
   }
 
-  protected activationCallback(active: boolean) {
-    return super.activationCallback(active)
-  }
+
   stl() {
-    return super.stl() + require("./homePage.css").toString()
+    return super.stl() + require("./testPage.css").toString()
   }
   pug() {
-    return require("./homePage.pug").default
+    return require("./testPage.pug").default
   }
 
 }) 

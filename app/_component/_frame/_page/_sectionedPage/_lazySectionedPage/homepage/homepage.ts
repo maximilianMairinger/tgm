@@ -12,7 +12,7 @@ export default declareComponent("home-page", class Homepage extends LazySectione
       {
         key: new Import("tagesschule", 1, (landingSection: typeof LandingSection) =>
           new landingSection()
-        ), val: () => import(/* webpackChunkName: "VersuchsanstaltSection" */"../../../../_pageSection/landingSection/landingSection")
+        ), val: () => import(/* webpackChunkName: "LandingSection" */"../../../../_pageSection/landingSection/landingSection")
       },
       {
         key: new Import("versuchsanstalt", 1, (_VersuchsanstaltSection: typeof VersuchanstaltSection) =>

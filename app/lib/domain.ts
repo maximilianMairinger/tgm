@@ -299,7 +299,7 @@ window.onpopstate = async function(e) {
   parseUrlToDomainIndex()
 
 
-  
+
   for (let keyValue of ls) {
     await keyValue[1]()
     

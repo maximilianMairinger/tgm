@@ -129,7 +129,6 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   protected async activationCallback(active: boolean) {
     //@ts-ignore
     let sectionIndex: ResourcesMap = await this.sectionIndex
-
     this.domainSubscription.vate(active)
 
     if (active) {

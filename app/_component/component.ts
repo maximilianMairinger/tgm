@@ -1,7 +1,7 @@
 import interpolateHTMLWithLang from "../lib/interpolateHTMLWithLang";
 import "../global"
 
-export default abstract class Component<T extends Element | HTMLAnchorElement | false | never = never> extends HTMLElement {
+export default abstract class Component<T extends HTMLElement | HTMLAnchorElement | false | never = HTMLElement> extends HTMLElement {
   protected sr: ShadowRoot;
   protected elementBody: T extends (HTMLElement | HTMLAnchorElement) ? T : T extends false ? ShadowRoot : HTMLElement
 

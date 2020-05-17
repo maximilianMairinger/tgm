@@ -70,7 +70,7 @@ function parseDomainToDomainIndex(domain: string, level: number) {
   let anyChange = false
   let subdomains = domain.split(dirString).replace(e => slugify(e))
   
-  domainIndex.splice(level + domain.length)
+  domainIndex.splice(level + subdomains.length)
   if (domainIndex.length !== originalLength) anyChange = true
   
   subdomains.ea((sub, i) => {

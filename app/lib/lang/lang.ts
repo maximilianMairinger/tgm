@@ -9,7 +9,8 @@ interface Lang {
     "abendschule": "Abendschule",
     "versuchsanstalt": "Versuchsanstalt",
     "kontakt": "Kontakt",
-    "Neuigkeiten": "Neuigkeiten"
+    "Neuigkeiten": "Neuigkeiten",
+    "it": "IT"
   }
 }
 

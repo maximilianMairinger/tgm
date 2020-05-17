@@ -8,6 +8,7 @@ import { lang } from "../../../lib/lang/lang"
 import delay from "delay"
 import { domainIndex } from "./../../../lib/domain"
 import "./../_icon/arrow/arrow"
+import ArrowIcon from "./../_icon/arrow/arrow"
 
 
 const linkAnimationOffset = 170
@@ -37,10 +38,11 @@ export default declareComponent("header", class Header extends ThemAble {
   }
 
   public async updatePathDisplay (domainLevel: number) {
+    this.pathDisplayElem.removeChilds()
     for (let i = 0; i < domainLevel; i++) {
-      const domain = domainIndex[i]
+      const domainFragment = domainIndex[i]
 
-      domain.big()
+      this.pathDisplayElem.apd(new ArrowIcon(), new Link(lang.links[domainFragment], domainFragment, i))
 
     }
     

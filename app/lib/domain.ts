@@ -2,6 +2,7 @@ import decodeUri from "fast-decode-uri-component"
 import * as global from "./../global"
 import slugify from "slugify"
 import getBaseUrl from "get-base-url";
+import lang from "./../lib/lang/lang"
 
 
 const commonTitle = "TGM";
@@ -49,12 +50,12 @@ function updateTitle() {
   }
 
   let subtitle = myDomainIndex.replace((e) => {
-    return e.length < 3 ? e.toUpperCase() : fc(e)
+    return lang.links[e]
   }).join(commonSubtileSeperator)
 
   title += subtitle
   
-  titleElement.innerHTML = title
+  titleElement.txt(title)
   return title
 }
 

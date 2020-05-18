@@ -3,6 +3,7 @@ import Page from "../page"
 import "../../../_themeAble/_text/textblob/textblob"
 import "../../../_themeAble/_text/imageTextblob/imageTextblob"
 import "../../../_themeAble/_text/_thumbnail/schuelerprojekteThumbnail/schuelerprojekteThumbnail"
+import "../../../_themeAble/_text/_thumbnail/abteilungsThumbnail/abteilungsThumbnail"
 
 
 export default declareComponent("georgs-sandbox", class extends Page {

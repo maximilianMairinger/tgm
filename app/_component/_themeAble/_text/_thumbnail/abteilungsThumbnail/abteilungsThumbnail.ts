@@ -7,7 +7,6 @@ export default declareComponent("abteilungs-thumbnail", class AbteilungsThumbnai
 
     constructor(){
         super();
-        this.heading("");
         this.subheading("der Tagesschule");
         this.note("Abteilung");
         this.hsize({max:55, min:30});

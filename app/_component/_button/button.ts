@@ -7,8 +7,7 @@ import * as domain from "./../../lib/domain"
 const pressedClass = "pressed";
 
 
-
-export default declareComponent("button", class Button extends Component<HTMLAnchorElement> {
+export default class Button extends Component<HTMLAnchorElement> {
   private doesFocusOnHover: boolean;
   private mouseOverListener: Tel;
   private mouseOutListener: Tel;
@@ -185,6 +184,8 @@ export default declareComponent("button", class Button extends Component<HTMLAnc
   pug() {
     return require("./button.pug").default
   }
-})
+}
+
+declareComponent("button", Button)
 
 

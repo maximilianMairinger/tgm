@@ -5,6 +5,7 @@ import "../../../_themeAble/_text/imageTextblob/imageTextblob"
 import "../../../_themeAble/_text/_thumbnail/schuelerprojekteThumbnail/schuelerprojekteThumbnail"
 import "../../../_themeAble/_text/_thumbnail/abteilungsThumbnail/abteilungsThumbnail"
 import "../../../_themeAble/_text/_thumbnail/teamLeitungThumbnail/teamLeitungThumbnail"
+import "../../../_themeAble/_text/sectionTextblob/sectionTextblob"
 
 
 export default declareComponent("georgs-sandbox", class extends Page {

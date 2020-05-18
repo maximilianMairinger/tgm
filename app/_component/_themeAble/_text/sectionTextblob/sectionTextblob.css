@@ -1,0 +1,131 @@
+:host{
+    display: block;
+}
+
+component-body {
+    /* So that the circle (even when invisable) does not overlay hitboxes of the prior section */
+    overflow: hidden;
+}
+
+
+section-textblob {
+    display: block;
+    background: var(--primary-background-color);
+    padding: 100px 100px 125px 100px;
+    overflow: hidden;
+}
+
+section-textblob-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+section-textblob-container c-textblob {
+    position: relative;
+    display: flex;
+    width: auto;
+    margin-bottom: 12vh;
+}
+
+section-textblob-image-container {
+    position: relative;
+    display: block;
+    flex-grow: 1;
+    min-width: 400px;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+section-textblob-image {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /*background-image: url(./../../../../res/img/versuchsanstallt_image.svg);*/
+    background-repeat: no-repeat;
+    background-size: min(100%, 500px) 100%;
+    background-position: center;
+}
+
+section-textblob-circle {
+    z-index: 0;
+    position: absolute;
+    border-radius: 100%;
+    top: -40vw;
+    right: -30vw;
+    height: 65vw;
+    min-height: 600px;
+    width: 65vw;
+    min-width: 600px;
+    background: var(--secondary-background-color);
+    box-shadow: 0 0 30px -20px black;
+}
+
+section-textblob-extra-container {
+    position: absolute;
+    left: 100px;
+    bottom: -135px;
+    height: 175px;
+    width: 75px;
+}
+
+section-textblob-extra {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /*background-image: url(./../../../../res/img/L_one.svg);*/
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: left bottom;
+}
+
+@media only screen and (max-width: 768px) {
+
+    section-textblob-section{
+        padding-left: 10vw;
+        padding-right: 10vw;
+    }
+
+    section-textblob-container {
+        flex-direction: column;
+    }
+
+    section-textblob-container c-textblob {
+        align-self: center;
+        margin: 0;
+        width: min(100%,  26.5em);
+    }
+
+
+    section-textblob-image-container {
+        align-self: center;
+        width: 100%;
+        height: calc(100vw - 50px);
+        max-height: 380px;
+        margin-top: 80px;
+        margin-left: 0;
+        margin-bottom: 100px;
+    }
+
+    section-textblob-image {
+        background-position: center;
+        background-size: 100% 90%;
+    }
+
+    section-textblob-circle {
+        top: min(-100vw, -450px);
+        left: min(-30vw, -200px);
+        right: min(-70vw, -500px);
+        height: max(200vw, 1050px);
+        width: unset;
+    }
+
+    section-textblob-L-container {
+        left: max(calc(20vw - 50px), 0px);
+    }
+
+}

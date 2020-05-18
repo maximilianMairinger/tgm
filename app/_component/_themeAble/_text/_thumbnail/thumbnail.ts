@@ -1,5 +1,4 @@
 import Text from "../text";
-import declareComponent from "../../../../lib/declareComponent";
 import "../textblob/textblob"
 import TextBlob, { MediaQuerySize } from "./../textblob/textblob"
 import { ElementList } from "extended-dom";
@@ -8,7 +7,7 @@ import {Theme} from "../../themeAble";
 
 
 
-export default declareComponent("landing-textblob", class Textblob extends Text {
+export default abstract class Thumbnail extends Text {
   private textBlob = this.q("c-textblob") as TextBlob;
 
   constructor() {
@@ -71,12 +70,11 @@ export default declareComponent("landing-textblob", class Textblob extends Text 
   }
 
   stl() {
-    return require("./landingTextblob.css").toString()
+    return require("./thumbnail.css").toString()
   }
 
   pug() {
-    return require("./landingTextblob.pug").default
+    return require("./thumbnail.pug").default
   }
 
 }
-)

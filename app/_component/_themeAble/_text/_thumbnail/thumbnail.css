@@ -50,11 +50,6 @@ background-shader{
     background: black;
 }
 
-background-image{
-    background: url("/res/img/landingSchuelerprojekte.jpg") 40% 15% no-repeat;
-    z-index: 0;
-}
-
 @media only screen and (max-width: 768px) {
 
     :host{

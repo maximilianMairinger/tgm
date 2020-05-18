@@ -2,7 +2,7 @@ import { declareComponent } from "../../../../lib/declareComponent"
 import Page from "../page"
 import "../../../_themeAble/_text/textblob/textblob"
 import "../../../_themeAble/_text/imageTextblob/imageTextblob"
-import "../../../_themeAble/_text/landingTextblob/landingTextblob"
+import "../../../_themeAble/_text/_thumbnail/schuelerprojekteThumbnail/schuelerprojekteThumbnail"
 
 
 export default declareComponent("georgs-sandbox", class extends Page {

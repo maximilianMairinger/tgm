@@ -8,10 +8,7 @@ import {Theme} from "../../themeAble";
 
 type Stellvertreter = {name: string, email: string}[]
 
-
-
-
-export default declareComponent("image-textblob", class Textblob extends Text {
+export default declareComponent("image-textblob", class ImageTextblob extends Text {
   private textBlob = this.q("c-textblob") as TextBlob
   private type = "right";
 

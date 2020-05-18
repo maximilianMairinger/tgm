@@ -12,6 +12,7 @@ export default abstract class Thumbnail extends Text {
 
   constructor() {
     super();
+    this.theme('dark');
   }
 
   note(): string

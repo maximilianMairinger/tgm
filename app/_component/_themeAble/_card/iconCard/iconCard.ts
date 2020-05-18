@@ -2,6 +2,8 @@ import Card from "../card"
 import declareComponent from "../../../../lib/declareComponent"
 import Icon from "./../../_icon/icon"
 import { Data } from "josm"
+import Button from "./../../../_button/button"
+import "./../../../_button/button"
 
 
 
@@ -9,10 +11,12 @@ import { Data } from "josm"
 export default class IconCard extends Card {
   private iconContainer = this.q("icon-container")
   private contentContainer = this.q("content-container")
-  constructor(icon: Icon, content: string | Data<string>) {
+  private button = this.q("c-button") as Button
+  constructor(icon: Icon, content: string | Data<string>, link: string = "versuchsanstalt") {
     super()
     this.icon(icon)
     this.content(content)
+    this.button.link(link)
 
   }
 
@@ -27,15 +31,15 @@ export default class IconCard extends Card {
   icon(to?: Icon): any {
     if (to) {
       return (async () => {
-        let first = this.contentContainer.childs(1, true).empty
-        if (!first) await this.contentContainer.anim({opacity: 0})
-        this.contentContainer.removeChilds()
-        this.contentContainer.apd(to)
-        if (!first) await this.contentContainer.anim({opacity: 1})
+        let first = this.iconContainer.childs(1, true).empty
+        if (!first) await this.iconContainer.anim({opacity: 0})
+        this.iconContainer.removeChilds()
+        this.iconContainer.apd(to)
+        if (!first) await this.iconContainer.anim({opacity: 1})
       })()
       
     }
-    else this.contentContainer.childs()
+    else this.iconContainer.childs()
   }
 
 
@@ -45,7 +49,6 @@ export default class IconCard extends Card {
   pug() {
     return require("./iconCard.pug").default
   }
-  
 }
 
 

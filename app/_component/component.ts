@@ -55,6 +55,11 @@ export default abstract class Component<T extends HTMLElement | HTMLAnchorElemen
     this.elementBody.append(...elems)
     return this
   }
+
+  protected parseJSONProp(prop: any) {
+    if (typeof prop === "string") return JSON.parse(prop)
+    else return prop
+  }
 }
 
 

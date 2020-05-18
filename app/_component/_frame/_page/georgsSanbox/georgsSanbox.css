@@ -1,3 +1,11 @@
+/* CSS for imageTextSection */
+
+c-image-textblob{
+    display: block;
+}
+
+/* CSS for textblob */
+
 container {
     display: block;
     margin: 200px 100px 0 100px;

@@ -8,8 +8,20 @@ import Component from "../_component/component";
 export function declareComponent<Comp>(name: string, component: Comp){
   //@ts-ignore
   if (!component.observedAttributes) {
+    //Object.getOwnPropertyNames(Object.getPrototypeOf(Object.getPrototypeOf(component).prototype))
+    let attrbs = []
+    let cur = component
     //@ts-ignore
-    component.observedAttributes = Object.getOwnPropertyNames(component.prototype).rmV("constructor", "stl", "pug")
+    while (cur.prototype instanceof Component) {
+      //@ts-ignore
+      attrbs.add(...Object.getOwnPropertyNames(cur.prototype))
+      cur = Object.getPrototypeOf(cur)
+    }
+
+
+    //@ts-ignore
+    
+    component.observedAttributes = attrbs.rmV("constructor", "stl", "pug")
   }
 
   if (!name.startsWith("c-")) name = "c-" + name

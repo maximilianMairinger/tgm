@@ -1,5 +1,5 @@
 component-body {
-  min-height: 120vh;
+  min-height: 130vh;
   background: #fffbfa;
   background: linear-gradient(#eceef1 40vh, #fffbfa 60vh);
 }
@@ -24,7 +24,8 @@ big-image {
   height: 100%;
   display: block;
   position: absolute;
-  max-height: 120vh;
+  height: 1200px;
+  transition: background-position .6s;
 }
 
 text-container {
@@ -33,41 +34,169 @@ text-container {
   display: flex;
   align-items: center;
   position: absolute;
+  top: 0;
+  transition: .5s;
 }
 
 c-textblob {
   display: block;
   position: absolute;
   left: 100px;
-  
+  transition: .5s;
 }
 
-
-@media only screen and (max-width: 768px) {
-  text-container {
-    justify-content: center;
-  }
-  c-textblob {
-    left: unset
-  }
+card-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
+
 
 card-container {
-  width: calc(100% - 360px);
-  margin: 0 180px;
+  width: calc(100% - 13%);
   position: relative;
   display: flex;
-  margin-top: calc(100vh - 120px);
+  margin-top: max(calc(100vh - 100px), 600px);
+  /* This padding quickfix is needed because otherwise the shadow would be cut out from the top */
+  padding-top: 20px;
   margin-bottom: 100px;
   flex-wrap: wrap;
   justify-content: center;
-  
+  overflow-y: auto;
+  overflow-y: visible;
 }
 
+
+
 c-icon-card {
-  margin: 0 20px 56px 20px;
+  margin: 0 28px 56px 28px;
   width: calc(6% + 180px);
   min-width: 230px;
   height: 180px;
   background: #FEFBF9;
+}
+
+
+
+@media only screen and (max-width: 1200px) {
+  big-image {
+    background-position: 60% top;
+    
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  c-icon-card:first-of-type {
+    margin-left: 40px;
+  }
+  
+  card-container {
+    flex-wrap: nowrap;
+    justify-content: left;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%
+  }
+}
+
+
+
+
+@media only screen and (max-width: 900px) {
+  c-textblob {
+    left: unset;
+  }
+  text-container {
+    justify-content: center;
+    top: 200px;
+  }
+  big-image {
+    background-position: 98% top;
+    
+  }
+
+  
+}
+
+
+
+@media only screen and (max-width: 700px) {
+
+  big-image {
+    background-position: 95% top;
+    
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  big-image {
+    background-position: 90% top;
+    
+  }
+}
+
+@media only screen and (max-width: 500px) {
+
+  big-image {
+    background-position: 85% top;
+    
+  }
+}
+
+/* todo */
+
+@media only screen and (max-width: 400px) {
+
+  big-image {
+    background-position: 84% top;
+    
+  }
+
+  text-container {
+    justify-content: left;
+  }
+
+  c-textblob {
+    left: 40px;
+    max-width: calc(100% - 40px);
+  }
+
+
+
+}
+
+
+@media only screen and (max-width: 350px) {
+
+  big-image {
+    background-position: 83% top;
+    
+  }
+}
+
+@media only screen and (max-width: 320px) {
+
+  big-image {
+    background-position: 81% top;
+    
+  }
+}
+
+@media only screen and (max-width: 300px) {
+
+  big-image {
+    background-position: 80% top;
+    
+  }
+}
+
+
+
+@media only screen and (max-height: 500px) {
+
+  big-image {
+    background-position: 85% top;
+    
+  }
 }

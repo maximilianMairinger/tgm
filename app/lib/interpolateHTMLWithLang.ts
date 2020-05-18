@@ -5,6 +5,7 @@ const bracketOpen = "[";
 const bracketClose = "]";
 
 function interpolateHTMLWithLang(html: string) {
+  return html;
   let inter = "";
 
   let openIndex: number;

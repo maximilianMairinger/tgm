@@ -9,6 +9,7 @@
 
 :host {
   font-family: 'PT Sans', sans-serif;
+  letter-spacing: 0.2em;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=PT+Mono&family=PT+Sans:wght@400;700&display=swap');
@@ -22,6 +23,7 @@ c-header {
   backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid rgba(0,0,0,0.16);
   z-index: 101;
+  letter-spacing: .07em;
 
   background-color: rgba(255, 255, 255, .9);
 }

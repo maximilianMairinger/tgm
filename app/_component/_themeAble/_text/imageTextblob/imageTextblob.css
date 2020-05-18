@@ -5,6 +5,7 @@ image-text-blob{
     flex-wrap: nowrap;
     justify-content: flex-end;
     padding: 150px 100px 150px 100px;
+    overflow: hidden;
 }
 
 content-box {

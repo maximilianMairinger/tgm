@@ -1,5 +1,7 @@
 component-body {
-  height: 120vh;
+  min-height: 120vh;
+  background: #fffbfa;
+  background: linear-gradient(#eceef1 40vh, #fffbfa 60vh);
 }
 
 h2 {
@@ -22,11 +24,12 @@ big-image {
   height: 100%;
   display: block;
   position: absolute;
+  max-height: 120vh;
 }
 
 text-container {
   width: 100%;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 120px);
   display: flex;
   align-items: center;
   position: absolute;
@@ -49,3 +52,22 @@ c-textblob {
   }
 }
 
+card-container {
+  width: calc(100% - 360px);
+  margin: 0 180px;
+  position: relative;
+  display: flex;
+  margin-top: calc(100vh - 120px);
+  margin-bottom: 100px;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+}
+
+c-icon-card {
+  margin: 0 20px 56px 20px;
+  width: calc(6% + 180px);
+  min-width: 230px;
+  height: 180px;
+  background: #FEFBF9;
+}

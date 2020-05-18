@@ -56,7 +56,7 @@ card-container {
   width: calc(100% - 13%);
   position: relative;
   display: flex;
-  margin-top: max(calc(100vh - 100px), 600px);
+  margin-top: max(calc(100vh - 145px), 600px);
   /* This padding quickfix is needed because otherwise the shadow would be cut out from the top */
   padding-top: 20px;
   margin-bottom: 50px;
@@ -84,7 +84,9 @@ c-icon-card {
   margin: 0 28px 56px 28px;
   width: calc(6% + 180px);
   min-width: 230px;
-  height: 180px;
+  height: calc(4vw + 110px);
+  min-height: 160px;
+
   background: #FEFBF9;
 }
 

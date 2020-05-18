@@ -59,11 +59,23 @@ card-container {
   margin-top: max(calc(100vh - 100px), 600px);
   /* This padding quickfix is needed because otherwise the shadow would be cut out from the top */
   padding-top: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   flex-wrap: wrap;
   justify-content: center;
-  overflow-y: auto;
+
+  /* Only important on mobile */
+  overflow-x: auto;
   overflow-y: visible;
+}
+
+card-container {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+card-container::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
 }
 
 
@@ -89,13 +101,25 @@ c-icon-card {
   c-icon-card:first-of-type {
     margin-left: 40px;
   }
+
   
   card-container {
     flex-wrap: nowrap;
     justify-content: left;
     margin-left: 0;
     margin-right: 0;
-    width: 100%
+    width: 100%;
+    padding-right: 40px;
+  }
+
+  c-icon-card:last-of-type:after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 100%;
+    left: 100%;
+    position: relative;
+    float: left;
   }
 }
 

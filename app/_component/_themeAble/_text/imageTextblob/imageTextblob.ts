@@ -1,8 +1,9 @@
-import Text from "./../text";
-import declareComponent from "../../../lib/declareComponent";
-import "./../textblob/textblob"
+import Text from "../text";
+import declareComponent from "../../../../lib/declareComponent";
+import "../textblob/textblob"
 import TextBlob, { MediaQuerySize } from "./../textblob/textblob"
 import { ElementList } from "extended-dom";
+import {Theme} from "../../themeAble";
 
 
 type Stellvertreter = {name: string, email: string}[]
@@ -121,6 +122,13 @@ export default declareComponent("image-textblob", class Textblob extends Text {
   hmobile(hmobile: JSON | MediaQuerySize): void
   hmobile(hmobile?: JSON | MediaQuerySize): any {
     return this.textBlob.hmobile(hmobile)
+  }
+
+  theme():Theme
+  theme(to:Theme):void
+  theme(to?:Theme):any{
+    this.textBlob.theme(to)
+    return super.theme(to);
   }
 
   stl() {

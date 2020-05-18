@@ -34,6 +34,7 @@ note-text {
     text-transform: uppercase;
     white-space: nowrap;
     align-items: center;
+    color: var(--weak-text-color);
 }
 
 connector-box{
@@ -43,7 +44,7 @@ connector-box{
 
 connector-box hr{
     border: none;
-    background: black;
+    background: var(--strong-text-color);
     width: 90%;
 }
 
@@ -74,6 +75,7 @@ info-box{
     align-content: center;
     justify-content: center;
     flex-grow: 1;
+    color: var(--weak-text-color);
 }
 
 info-grid{
@@ -86,6 +88,7 @@ info-grid{
 
 info-box .bold{
     font-weight: bold;
+    color: var(--strong-text-color);
 }
 
 stellvertreter-text{

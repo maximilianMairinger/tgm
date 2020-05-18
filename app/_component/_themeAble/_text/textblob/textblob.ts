@@ -1,5 +1,6 @@
-import Text from "./../text";
-import declareComponent from "../../../lib/declareComponent";
+import Text from "../text";
+import declareComponent from "../../../../lib/declareComponent";
+import {Theme} from "../../themeAble";
 
 
 export type MediaQuerySize = { min: number, max: number }
@@ -119,7 +120,6 @@ export default class Textblob extends Text {
     if (linkhref) this.linkHref = this.link.href = linkhref;
     else return this.linkHref
   }
-
 
   stl() {
     return require("./textblob.css").toString()

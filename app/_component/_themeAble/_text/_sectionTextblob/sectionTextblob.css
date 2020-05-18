@@ -65,7 +65,7 @@ section-textblob-circle {
 
 @media only screen and (max-width: 768px) {
 
-    section-textblob-section{
+    section-textblob{
         padding-left: 10vw;
         padding-right: 10vw;
     }
@@ -77,6 +77,7 @@ section-textblob-circle {
     section-textblob-container c-textblob {
         align-self: center;
         margin: 0;
+        min-height: 550px;
         width: min(100%,  26.5em);
     }
 

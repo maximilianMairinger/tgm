@@ -1,0 +1,44 @@
+section-textblob{
+    padding: 75px 100px 75px 100px;
+    height: auto;
+}
+
+section-textblob-container c-textblob {
+    margin-top: 50px;
+    min-width: 550px;
+}
+
+section-textblob-image-container {
+    position: relative;
+    display: block;
+    flex-grow: 1;
+    min-width: 500px;
+    margin-top: -125px;
+    margin-left: 25px;
+}
+
+section-textblob-image{
+    background-image: url(./../../../../../res/img/TeamJobs_Grafik.svg);
+}
+
+@media only screen and (max-width: 768px) {
+    section-textblob{
+        padding-right: 10vw;
+        padding-left: 10vw;
+    }
+
+    section-textblob-container{
+        justify-content: space-between;
+    }
+
+
+    section-textblob-image-container {
+        margin-top: 0;
+        margin-left: 0;
+    }
+
+    section-textblob-container c-textblob {
+        min-width: unset;
+    }
+}
+

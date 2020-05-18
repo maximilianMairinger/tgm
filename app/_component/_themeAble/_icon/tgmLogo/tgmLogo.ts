@@ -10,9 +10,6 @@ export default declareComponent("tgm-logo", class TgmLogo extends Icon {
 
   }
 
-  stl() {
-    return super.stl() + require("./tgmLogo.css").toString()
-  }
   pug() {
     return require("./tgmLogo.pug").default
   }

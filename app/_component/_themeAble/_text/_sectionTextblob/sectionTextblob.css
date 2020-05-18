@@ -44,7 +44,6 @@ section-textblob-image {
     position: relative;
     width: 100%;
     height: 100%;
-    /*background-image: url(./../../../../res/img/versuchsanstallt_image.svg);*/
     background-repeat: no-repeat;
     background-size: min(100%, 500px) 100%;
     background-position: center;
@@ -62,25 +61,6 @@ section-textblob-circle {
     min-width: 600px;
     background: var(--secondary-background-color);
     box-shadow: 0 0 30px -20px black;
-}
-
-section-textblob-extra-container {
-    position: absolute;
-    left: 100px;
-    bottom: -135px;
-    height: 175px;
-    width: 75px;
-}
-
-section-textblob-extra {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    /*background-image: url(./../../../../res/img/L_one.svg);*/
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: left bottom;
 }
 
 @media only screen and (max-width: 768px) {

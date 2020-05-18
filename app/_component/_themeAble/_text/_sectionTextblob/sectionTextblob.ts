@@ -1,12 +1,11 @@
 import Text from "../text"
-import { declareComponent } from "../../../../lib/declareComponent"
 import "../textblob/textblob"
 import TextBlob, {MediaQuerySize} from "../textblob/textblob";
 import {Theme} from "../../themeAble";
 
 
 
-export default declareComponent("section-textblob", class SectionTextblob extends Text {
+export default abstract class SectionTextblob extends Text {
 
     private textBlob = this.q("c-textblob") as TextBlob
 
@@ -62,6 +61,12 @@ export default declareComponent("section-textblob", class SectionTextblob extend
         return this.textBlob.hmobile(hmobile)
     }
 
+    hscale(): number
+    hscale(hscale: number): void
+    hscale(hscale?: number): any {
+        return this.textBlob.hscale(hscale);
+    }
+
     theme():Theme
     theme(to:Theme):void
     theme(to?:Theme):any{
@@ -76,4 +81,4 @@ export default declareComponent("section-textblob", class SectionTextblob extend
     pug() {
         return require("./sectionTextblob.pug").default
     }
-});
+}

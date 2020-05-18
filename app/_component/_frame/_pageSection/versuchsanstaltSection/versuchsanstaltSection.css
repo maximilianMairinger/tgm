@@ -1,0 +1,128 @@
+component-body {
+    /* So that the circle (even when invisable) does not overlay hitboxes of the prior section */
+    overflow: hidden;
+}
+
+
+versuchsanstalt-section {
+    display: block;
+    background: #3c4552;
+    padding: 100px 100px 125px 100px;
+    overflow: hidden;
+}
+
+versuchsanstalt-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+versuchsanstalt-container c-textblob {
+    position: relative;
+    display: flex;
+    width: auto;
+    color: #f8f9ff;
+    margin-bottom: 12vh;
+}
+
+versuchsanstalt-document-container {
+    position: relative;
+    display: block;
+    flex-grow: 1;
+    min-width: 400px;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+versuchsanstalt-document {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: url(./../../../../res/img/versuchsanstallt_document.svg);
+    background-repeat: no-repeat;
+    background-size: min(100%, 500px) 100%;
+    background-position: center;
+}
+
+versuchsanstalt-circle {
+    z-index: 0;
+    position: absolute;
+    border-radius: 100%;
+    top: -40vw;
+    right: -30vw;
+    height: 65vw;
+    min-height: 600px;
+    width: 65vw;
+    min-width: 600px;
+    background: #3f4957;
+    box-shadow: 0 0 30px -20px black;
+}
+
+versuchsanstalt-L-container {
+    position: absolute;
+    left: 100px;
+    bottom: -135px;
+    height: 175px;
+    width: 75px;
+}
+
+versuchsanstalt-L {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: url(./../../../../res/img/L_one.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: left bottom;
+}
+
+@media only screen and (max-width: 768px) {
+
+    versuchsanstalt-section{
+        padding-left: 10vw;
+        padding-right: 10vw;
+    }
+
+    versuchsanstalt-container {
+        flex-direction: column;
+    }
+
+    versuchsanstalt-container c-textblob {
+        align-self: center;
+        margin: 0;
+        width: min(100%,  26.5em);
+    }
+
+
+    versuchsanstalt-document-container {
+        align-self: center;
+        width: 100%;
+        height: calc(100vw - 50px);
+        max-height: 380px;
+        margin-top: 80px;
+        margin-left: 0;
+        margin-bottom: 100px;
+    }
+
+    versuchsanstalt-document {
+        background-position: center;
+        background-size: 100% 90%;
+    }
+
+    versuchsanstalt-circle {
+        top: min(-100vw, -450px);
+        left: min(-30vw, -200px);
+        right: min(-70vw, -500px);
+        height: max(200vw, 1050px);
+        width: unset;
+    }
+
+    versuchsanstalt-L-container {
+        left: max(calc(20vw - 50px), 0px);
+    }
+
+}

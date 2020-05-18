@@ -9,7 +9,7 @@
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: white;
+  background: #a9a9a9;
 }
 
 :host(:focus){

@@ -1,12 +1,22 @@
 import Component from "../component"
 import declareComponent from "./../../lib/declareComponent"
 import PageManager from "../_frame/_manager/pageManager/pageManager";
+import Header from "./../_themeAble/header/header"
 
 export default declareComponent("site", class extends Component {
   
   constructor() { 
-    super();
-    this.apd(new PageManager())
+    super()
+    let pageManager = new PageManager((page, sections, domainLevel) => {
+      header.updatePage(sections, domainLevel)
+    }, (section) => {
+      header.updateSelectedLink(section)
+    })
+    pageManager.loadedCallback()
+    this.apd(pageManager)
+    pageManager.activate()
+    let header = new Header()
+    this.apd(header)
   }
 
   

@@ -13,7 +13,7 @@ export default declareComponent("daniels-sandbox", class extends Page {
     
   }
   stl() {
-    return require("./danielsSandbox.css").toString()
+    return super.stl() + require("./danielsSandbox.css").toString()
   }
   pug() {
     return require("./danielsSandbox.pug").default

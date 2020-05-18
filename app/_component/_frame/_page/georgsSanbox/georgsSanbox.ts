@@ -1,5 +1,7 @@
 import { declareComponent } from "../../../../lib/declareComponent"
 import Page from "../page"
+import "../../../_text/textblob/textblob"
+import "../../../_text/imageTextblob/imageTextblob"
 
 
 export default declareComponent("georgs-sandbox", class extends Page {
@@ -12,7 +14,7 @@ export default declareComponent("georgs-sandbox", class extends Page {
     
   }
   stl() {
-    return require("./georgsSanbox.css").toString()
+    return super.stl() + require("./georgsSanbox.css").toString()
   }
   pug() {
     return require("./georgsSanbox.pug").default

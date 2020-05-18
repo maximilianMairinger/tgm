@@ -12,7 +12,7 @@ export default declareComponent("404-page", class extends Page {
     
   }
   stl() {
-    return require("./404.css").toString()
+    return super.stl() + require("./404.css").toString()
   }
   pug() {
     return require("./404.pug").default

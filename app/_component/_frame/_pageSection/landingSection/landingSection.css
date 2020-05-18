@@ -1,0 +1,15 @@
+component-body {
+  height: 700px;
+  background: rgb(206, 108, 108);
+}
+
+h2 {
+  display: block;
+  height: 100%;
+  margin: 0;
+  color: rgb(151, 151, 151);
+  position: relative;
+  float: left;
+  width: 100%;
+  margin: 100px;
+}

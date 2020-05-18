@@ -8,6 +8,7 @@ import "../../../_themeAble/_text/_thumbnail/teamLeitungThumbnail/teamLeitungThu
 import "../../../_themeAble/_text/_sectionTextblob/versuchsanstalltSection/versuchsanstalltSection"
 import "../../../_themeAble/_text/_sectionTextblob/teamJobsSection/teamJobsSection"
 import "../../../_themeAble/_text/_sectionTextblob/informationenSection/informationenSection"
+import "../../../_themeAble/_text/_sectionTextblob/ausbildungSection/ausbildungSection"
 
 
 export default declareComponent("georgs-sandbox", class extends Page {

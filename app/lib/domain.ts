@@ -53,7 +53,8 @@ function renderSubtitle(myDomainIndex = domainIndex) {
 function updateTitle() {
   let title = commonTitle
 
-  let subtitle = renderSubtitle()
+  let originalSubtitle: string, subtitle: string
+  originalSubtitle = subtitle = renderSubtitle()
 
   let myDomainIndex = domainIndex.clone()
   let tooMuchToTitles = false
@@ -70,11 +71,9 @@ function updateTitle() {
   }
 
 
-
-  title += subtitle
   
-  titleElement.txt(title)
-  return title
+  titleElement.txt(title + subtitle)
+  return title + originalSubtitle
 }
 
 

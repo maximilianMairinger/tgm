@@ -1,22 +1,29 @@
+:host{
+    display: block;
+    height: calc(100% - 150px);
+}
+
 landing-textblob{
     position: relative;
     display: flex;
-    height: calc(100% - 150px);
-    width: calc(100% - 200px);
-    padding: 55px 100px 0 100px;
+    height: 100%;
+    width: 100%;
+    padding: 0 100px 0 100px;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 background-box{
     position: absolute;
     display: block;
-    top: -55px;
+    top: 0;
     left: -100px;
     right: -100px;
-    bottom: 55px;
+    bottom: 0;
+    box-sizing: border-box;
 }
 
 background-box *{
@@ -50,8 +57,11 @@ background-image{
 
 @media only screen and (max-width: 768px) {
 
+    :host{
+        height: calc(100% - 75px);
+    }
+
     landing-textblob{
-        width: calc(100% - 20vw);
         padding: 0 10vw;
     }
 

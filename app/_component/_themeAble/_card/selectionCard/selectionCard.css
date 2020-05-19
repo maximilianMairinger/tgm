@@ -1,9 +1,17 @@
 :host {
     display: block;
-    min-width: auto;
+    max-width: 860px;
+    min-width: 500px;
     user-select: auto;
 }
 
+@media only screen and (max-width: 768px) {
+    :host {
+        min-width: unset;
+    }
+
+
+}
 :host(:hover) {
     transform: unset;
     background: rgb(245, 245, 245);
@@ -95,7 +103,7 @@ selection-background{
 icon-container{
     display: block;
     position: relative;
-    margin-left: 10px;
+    margin-left: 5px;
     height: 35px;
     min-height: 35px;
     width: 35px;
@@ -134,6 +142,7 @@ text-container{
 }
 
 heading-text{
+    margin-bottom: 2px;
     font-weight: bold;
     color: var(--strong-text-color);
     overflow: hidden;
@@ -177,12 +186,14 @@ image-container{
     flex-grow: 1;
     max-width: 200px;
     width: calc(200 * ((100vw - 1150px)/(1600 - 1150)));
+    min-width: 115px;
     align-self: stretch;
     margin-right: 70px;
     margin-left: 10px;
     transform: skewX(-10deg);
     transform-origin: bottom left;
     overflow: hidden;
+    backface-visibility: hidden;
 }
 
 @media only screen and (max-width: 1150px) {
@@ -202,6 +213,7 @@ image-box{
     transform: skewX(10deg);
     background: url("../../../../res/img/abendschule_background.svg") 51% 32% no-repeat;
     background-size: 2300px 1275px;
+    backface-visibility: hidden;
 }
 
 @media only screen and (max-width: 768px) {

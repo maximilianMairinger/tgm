@@ -4,4 +4,7 @@
   --contrast-text-color: #1FA7E0;
   --primary-background-color: #F9FAFE;
   --secondary-background-color: #fefefe;
+  --soft-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
+  --medium-shadow: 0 0 15px 0 rgba(0, 0, 0, .15);
+  --medium-shadow-highlight: 0 0 15px 0 rgba(0, 0, 0, .15);
 }

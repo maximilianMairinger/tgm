@@ -19,7 +19,7 @@ export default declareComponent("landing-section", class Landing extends PageSec
   
   private mainHeaderElem = this.q("text-container > c-textblob")
   private tagesschuleHeaderElem = this.q("tagesschule-container > c-textblob")
-  private iconCards: ElementList<IconCard>
+  private iconCards: ElementList<HTMLElement>
   constructor() {
     super()
 
@@ -33,7 +33,7 @@ export default declareComponent("landing-section", class Landing extends PageSec
       () => new IconCard(new BioMedIcon, "Biomedizin7")
     ]
 
-    let elems = this.iconCards = new ElementList(...initerLs.Call())
+    let elems = this.iconCards = new ElementList(...initerLs.Call().replace((card) => ce("card-wrapper").apd(card)))
     elems.css({opacity: 0})
     
     this.cardContainer.apd(...elems);

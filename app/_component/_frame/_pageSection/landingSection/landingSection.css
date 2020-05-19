@@ -82,7 +82,10 @@ card-container::-webkit-scrollbar { /* WebKit */
   height: 0;
 }
 
-
+card-wrapper {
+  display: block;
+  transform: translateY(7px);
+}
 
 c-icon-card {
   margin: 0 28px 56px 28px;
@@ -92,8 +95,6 @@ c-icon-card {
   min-height: 160px;
 
   background: #FEFBF9;
-
-  transform: translateY(7px);
 
   /* scroll-snap-align: start;
   scroll-margin-left: 40px; */

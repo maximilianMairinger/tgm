@@ -85,17 +85,23 @@ text-box *:nth-child(n+3){
 
 text-box content-text {
     max-width: 21.6em;
-    margin-top: 14px;
     line-height: 1.5em;
     letter-spacing: 0.02em;
     color: var(--weak-text-color);
 }
 
-text-box a.link {
+text-box content-text:not(:empty){
     margin-top: 14px;
+}
+
+text-box a.link {
     font-weight: bold;
     color: var(--strong-text-color);
     text-decoration: none;
+}
+
+text-box a.link:not(:empty){
+    margin-top: 14px;
 }
 
 @media only screen and (max-width: 768px) {

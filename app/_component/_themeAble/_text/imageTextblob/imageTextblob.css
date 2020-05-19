@@ -174,7 +174,7 @@ image-text-blob.left image-container{
 
     info-text:nth-child(2n),
     stellvertreter-text ~ info-text:nth-child(2n-1){
-        margin-bottom: 25px;
+        margin-bottom: 7px;
         width: 60%;
     }
 
@@ -185,7 +185,7 @@ image-text-blob.left image-container{
 
     stellvertreter-text{
         width: 100%;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
     content-box{

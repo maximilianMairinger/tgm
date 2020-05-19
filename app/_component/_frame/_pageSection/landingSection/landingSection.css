@@ -43,7 +43,7 @@ text-container > c-textblob {
   display: block;
   position: absolute;
   left: 100px;
-  transition: .5s;
+  transition: top .5s;
 }
 
 card-wrapper {

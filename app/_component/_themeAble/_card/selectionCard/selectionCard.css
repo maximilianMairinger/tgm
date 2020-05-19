@@ -1,0 +1,166 @@
+:host {
+    display: block;
+    min-width: auto;
+}
+
+:host(:hover) {
+    transform: unset;
+    background: rgb(245, 245, 245);
+    box-shadow: 7px 7px 15px 0px rgba(0,0,0,.07);
+}
+
+selection-card{
+    display: flex;
+    width: 100%;
+    min-width: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+
+content-box{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 25px 0;
+}
+
+note-box{
+    display: block;
+}
+
+note-text{
+    font-size: 12px;
+    font-family: 'PT Mono', monospace;
+    color: var(--weak-text-color);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+c-textblob{
+    margin: 10px 0;
+}
+
+selection-container{
+    display: flex;
+    flex-direction: column;
+}
+
+selection-container selection-box:not(:last-child) info-container{
+    border-bottom: 1px solid var(--weak-text-color);
+}
+
+selection-box{
+    display: flex;
+    align-self: stretch;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+}
+
+selection-content{
+    display: flex;
+    z-index: 1;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 0 10px 10px;
+}
+
+selection-background{
+    position: absolute;
+    display: block;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    background: black;
+    border-radius: 5px;
+}
+
+icon-container{
+    display: block;
+    position: relative;
+    height: 35px;
+    width: 35px;
+}
+
+icon-box{
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: url("../../../../res/img/windmil.svg") center center no-repeat;
+    background-size: 100% 100%;
+}
+
+info-container{
+    display: flex;
+    flex-grow: 1;
+    align-self: stretch;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: -11px;
+    padding-bottom: 11px;
+    padding-right: 10px;
+    font-size: 15px;
+}
+
+text-container{
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+heading-text{
+    font-weight: bold;
+    color: var(--strong-text-color);
+}
+
+content-text{
+    color: var(--weak-text-color);
+    font-size: 13px;
+}
+
+link-container{
+    display: flex;
+    opacity: 0;
+    margin-left: 10px;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+
+selection-box:hover selection-background{
+    opacity: .05;
+    transition: 0.25s;
+}
+
+selection-box:hover link-container{
+    opacity: 1;
+    transition: 0.25s;
+}
+
+image-container{
+    position: relative;
+    display: block;
+    flex-grow: 1;
+    max-width: 200px;
+    align-self: stretch;
+    margin-right: 70px;
+    margin-left: 10px;
+    transform: skewX(-10deg);
+    transform-origin: bottom left;
+    overflow: hidden;
+}
+
+image-box{
+    position: absolute;
+    width: 400px;
+    left: -100px;
+    height: 100%;
+    display: block;
+    transform: skewX(10deg);
+    background: url("../../../../res/img/abendschule_background.svg") 51% 37% no-repeat;
+    background-size: 2300px 1275px;
+}

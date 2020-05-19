@@ -1,11 +1,40 @@
+
+test-container{
+    display: flex;
+    margin: 100px 230px 100px 230px;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+test-card{
+    display: block;
+    width: 25%;
+    align-self: stretch;
+    background: rgb(245, 245, 245);
+    border-radius: 15px;
+    box-shadow: 7px 7px 15px 0px rgba(0,0,0,.07);
+}
+
 c-selection-card{
-    margin-left: 100px;
+    width: 65%;
+    max-width: 1000px;
+    min-width: 500px;
+    margin-right: 10%;
 }
 
 @media only screen and (max-width: 768px) {
-    c-selection-card{
+    test-container{
+        margin-right: 10vw;
         margin-left: 10vw;
+        flex-direction: column;
     }
+
+    c-selection-card{
+        width: 100%;
+    }
+
+
 }
 
 /* CSS for textblob */

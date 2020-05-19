@@ -197,6 +197,10 @@ image-container{
 }
 
 @media only screen and (max-width: 1450px) {
+    selection-card{
+        flex-direction: row;
+    }
+
     image-container{
         display: none;
         margin-right: 10px;

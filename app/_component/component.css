@@ -12,6 +12,7 @@
   background: #a9a9a9;
 }
 
+
 :host(:focus){
   outline: none;
 }
@@ -35,5 +36,4 @@ component-body {
   position: absolute;
   color: rgb(59, 59, 59);
   transition: .3s color;
-  letter-spacing: .5px;
 }

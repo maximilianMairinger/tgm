@@ -1,0 +1,37 @@
+:host {
+  width: 250px;
+  height: 150px;
+}
+
+icon-container {
+  width: 100%;
+  height: 74%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+icon-container > * {
+  height: 75px;
+  width: 100%;
+}
+
+content-container {
+  width: 100%;
+  position: relative;
+  height: 26%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.26em;
+  font-weight: bold;
+}
+
+c-button {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}

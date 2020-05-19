@@ -10,9 +10,6 @@ export default declareComponent("arrow-icon", class ArrowIcon extends Icon {
 
   }
 
-  stl() {
-    return super.stl() + require("./arrow.css").toString()
-  }
   pug() {
     return require("./arrow.pug").default
   }

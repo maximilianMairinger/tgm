@@ -4,13 +4,13 @@ import declareComponent from "../../../../lib/declareComponent";
 
 
 
-export default declareComponent("tgm-logo", class SmallTgmLogo extends Icon {
+export default declareComponent("bio-med-icon", class BioMedIcon extends Icon {
   constructor() {
     super()
 
   }
 
   pug() {
-    return require("./smallTgmLogo.pug").default
+    return require("./bioMed.pug").default
   }
 })

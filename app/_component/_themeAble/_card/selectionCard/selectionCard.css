@@ -22,7 +22,7 @@ selection-card{
     display: flex;
     width: 100%;
     min-width: auto;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: space-between;
     padding: 0 35px;

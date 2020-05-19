@@ -19,12 +19,13 @@ section-textblob-image{
 @media only screen and (max-width: 768px) {
 
     section-textblob-image-container {
-        margin-top: 0;
+        margin-top: 50px;
         margin-left: 0;
         margin-bottom: 0;
     }
 
     section-textblob-container c-textblob {
+        margin-top: 0;
         min-width: unset;
     }
 }

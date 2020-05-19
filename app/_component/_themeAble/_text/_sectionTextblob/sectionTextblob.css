@@ -66,6 +66,7 @@ section-textblob-circle {
 @media only screen and (max-width: 768px) {
 
     section-textblob{
+        padding-top: 100px;
         padding-left: 10vw;
         padding-right: 10vw;
     }

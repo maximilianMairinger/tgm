@@ -1,5 +1,6 @@
 :host {
     display: inline-block;
+    width: 100%;
 }
 
 text-blob {
@@ -41,6 +42,8 @@ note-box connector-box hr {
     background: var(--strong-text-color);
     border: none;
     font-size: 15px;
+    margin-right: 0;
+    margin-left: 0;
 }
 
 note-box spacing-box {

@@ -31,6 +31,7 @@ section-textblob-image{
 
     section-textblob-container c-textblob {
         min-width: unset;
+        margin-top: 0;
     }
 
     section-textblob-circle {

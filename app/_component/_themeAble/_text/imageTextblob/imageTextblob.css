@@ -45,12 +45,15 @@ note-text {
 connector-box{
     display: block;
     height: auto;
+    margin-bottom: 5px;
 }
 
 connector-box hr{
     border: none;
     background: var(--strong-text-color);
     width: 90%;
+    margin-right: 0;
+    margin-left: 0;
 }
 
 connector-box.top{
@@ -174,8 +177,12 @@ image-text-blob.left image-container{
 
     info-text:nth-child(2n),
     stellvertreter-text ~ info-text:nth-child(2n-1){
-        margin-bottom: 7px;
+        margin-bottom: 9px;
         width: 60%;
+    }
+
+    stellvertreter-text ~ info-text:nth-child(2n-1){
+        margin-bottom: 11px;
     }
 
     stellvertreter-text ~ info-text:nth-child(2n){

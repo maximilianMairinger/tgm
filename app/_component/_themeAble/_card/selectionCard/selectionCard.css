@@ -126,7 +126,7 @@ info-container{
     align-items: center;
     margin-right: 2px;
     margin-bottom: -15px;
-    margin-left: 10px;
+    margin-left: 13px;
     padding-bottom: 15px;
     padding-right: 10px;
     font-size: 15px;
@@ -148,6 +148,7 @@ heading-text{
     color: var(--strong-text-color);
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 1.02em;
 }
 
 content-text{

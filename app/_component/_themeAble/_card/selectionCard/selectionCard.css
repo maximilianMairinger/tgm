@@ -78,7 +78,7 @@ selection-content{
     z-index: 1;
     flex-direction: row;
     align-items: center;
-    padding: 12px 0;
+    padding: 15px 0;
     max-width: 100%;
     box-sizing: border-box;
 }
@@ -105,10 +105,10 @@ icon-container{
     display: block;
     position: relative;
     margin-left: 5px;
-    height: 35px;
-    min-height: 35px;
-    width: 35px;
-    min-width: 35px;
+    height: 40px;
+    min-height: 40px;
+    width: 40px;
+    min-width: 40px;
 }
 
 icon-box{
@@ -125,9 +125,9 @@ info-container{
     flex-direction: row-reverse;
     align-items: center;
     margin-right: 2px;
-    margin-bottom: -12px;
+    margin-bottom: -15px;
     margin-left: 10px;
-    padding-bottom: 12px;
+    padding-bottom: 15px;
     padding-right: 10px;
     font-size: 15px;
     max-width: 100%;

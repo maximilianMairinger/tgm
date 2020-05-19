@@ -23,7 +23,7 @@ export default class IconCard extends Card {
   content(): string
   content(to: string | Data<string>): void
   content(to?: string | Data<string>): any {
-    this.contentContainer.text(to)
+    return this.contentContainer.text(to)
   }
 
   icon(): Icon

@@ -73,7 +73,6 @@ card-container {
 }
 
 card-container {
-  overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
@@ -82,8 +81,8 @@ card-container::-webkit-scrollbar { /* WebKit */
   height: 0;
 }
 
-card-wrapper {
-  display: block;
+icon-card-wrapper {
+  display: inline-block;
   transform: translateY(7px);
 }
 

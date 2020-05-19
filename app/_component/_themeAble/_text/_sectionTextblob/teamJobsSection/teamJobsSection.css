@@ -21,6 +21,7 @@ section-textblob-image{
     section-textblob-image-container {
         margin-top: 0;
         margin-left: 0;
+        margin-bottom: 0;
     }
 
     section-textblob-container c-textblob {

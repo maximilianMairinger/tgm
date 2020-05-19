@@ -7,17 +7,23 @@ export default declareComponent("site", class extends Component {
   
   constructor() { 
     super()
+    let header = new Header()
+
+
     let pageManager = new PageManager((page, sections, domainLevel) => {
       header.updatePage(sections, domainLevel)
     }, (section) => {
       header.updateSelectedLink(section)
     }, (scrollBarWidth) => {
-      
+      header.css({width: `calc(100% - ${scrollBarWidth}px)`})
     })
+    
     pageManager.loadedCallback()
     this.apd(pageManager)
     pageManager.activate()
-    let header = new Header()
+
+
+    
     this.apd(header)
   }
 

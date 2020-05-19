@@ -54,7 +54,7 @@ export default declareComponent("landing-section", class Landing extends PageSec
         if (token === accelerationToken) {
           animationFrameDelta.subscribe((timeLeft) => {
             if (token === accelerationToken) {
-              speed = timeLeft / accelearationDuration
+              speed = baseSpeed * (timeLeft / accelearationDuration)
             }
           }, accelearationDuration)
         }

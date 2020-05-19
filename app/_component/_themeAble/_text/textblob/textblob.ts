@@ -1,5 +1,6 @@
-import Text from "./../text";
-import declareComponent from "../../../lib/declareComponent";
+import Text from "../text";
+import declareComponent from "../../../../lib/declareComponent";
+import {Theme} from "../../themeAble";
 
 
 export type MediaQuerySize = { min: number, max: number }
@@ -11,20 +12,20 @@ export default class Textblob extends Text {
   private textbox = this.q("text-box");
 
 
-  private mediaQueryMatches: boolean
+  private mediaQueryMatches: boolean;
   mobileQueryFunc(mediaQuery: MediaQueryList) {
     if (!mediaQuery.matches) {
       if (this.mediaQueryMatches || this.mediaQueryMatches === undefined) {
-        this.mediaQueryMatches = false
-        this.textbox.css({ "fontSize": `calc(${this.hsizeScale.min}px + (${this.hsizeScale.max} - ${this.hsizeScale.min}) * ((100vw - 768px) / (1600 - 768)))` });
+        this.mediaQueryMatches = false;
+        this.textbox.css({ "fontSize": `max(27px, calc(${this.hsizeScale.min}px + (${this.hsizeScale.max} - ${this.hsizeScale.min}) * ((100vw - 768px) / (1600 - 768))))` });
       }
       
     }
       
     else {
       if (!this.mediaQueryMatches) {
-        this.mediaQueryMatches = true
-        this.textbox.css({ "fontSize": `calc(${this.hmobileScale.min}px + (${this.hmobileScale.max} - ${this.hmobileScale.min}) * ((100vw - 300px) / (768 - 300)))` });
+        this.mediaQueryMatches = true;
+        this.textbox.css({ "fontSize": `max(27px, calc(${this.hmobileScale.min}px + (${this.hmobileScale.max} - ${this.hmobileScale.min}) * ((100vw - 300px) / (768 - 300))))` });
       }
     }
       
@@ -56,6 +57,7 @@ export default class Textblob extends Text {
   hsize(hsize?: JSON | MediaQuerySize) {
     if (hsize) {
       this.hsizeScale = this.parseJSONProp(hsize)
+      this.mediaQueryMatches = undefined;
       this.mobileQueryFunc(this.mediaQuery);
     } 
     else return this.hsizeScale;
@@ -66,6 +68,7 @@ export default class Textblob extends Text {
   hmobile(hmobile?: MediaQuerySize | JSON) {
     if (hmobile) {
       this.hmobileScale = this.parseJSONProp(hmobile)
+      this.mediaQueryMatches = undefined;
       this.mobileQueryFunc(this.mediaQuery);
     } else return this.hmobileScale;
   }
@@ -119,7 +122,6 @@ export default class Textblob extends Text {
     if (linkhref) this.linkHref = this.link.href = linkhref;
     else return this.linkHref
   }
-
 
   stl() {
     return require("./textblob.css").toString()

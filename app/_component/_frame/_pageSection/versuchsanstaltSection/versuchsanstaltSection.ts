@@ -1,6 +1,6 @@
 import { declareComponent } from "../../../../lib/declareComponent"
 import PageSection from "../pageSection"
-import "../../../_text/textblob/textblob"
+import "../../../_themeAble/_text/textblob/textblob"
 
 
 

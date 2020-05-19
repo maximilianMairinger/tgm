@@ -3,6 +3,7 @@ import Card from "../card";
 import "../../link/link"
 import {Theme} from "../../themeAble";
 import Textblob from "../../_text/textblob/textblob";
+import "../../../_button/button"
 
 export default declareComponent("selection-card", class SelectionCard extends Card {
 

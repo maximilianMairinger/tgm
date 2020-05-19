@@ -34,7 +34,7 @@ content-box{
     flex-direction: column;
     align-items: stretch;
     padding: 35px 0;
-    max-width: 100%;
+    max-width: calc(100% - 195px);
     box-sizing: border-box;
 }
 
@@ -185,7 +185,7 @@ image-container{
     display: block;
     flex-grow: 1;
     max-width: 200px;
-    width: calc(200 * ((100vw - 1150px)/(1600 - 1150)));
+    width: calc(200 * ((100vw - 1300px)/(1600 - 1300)));
     min-width: 115px;
     align-self: stretch;
     margin-right: 70px;
@@ -196,10 +196,14 @@ image-container{
     backface-visibility: hidden;
 }
 
-@media only screen and (max-width: 1150px) {
+@media only screen and (max-width: 1450px) {
     image-container{
         display: none;
         margin-right: 10px;
+    }
+
+    content-box{
+        max-width: 100%;
     }
 }
 

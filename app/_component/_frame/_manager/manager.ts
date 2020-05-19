@@ -25,7 +25,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private managedElementMap: ResourcesMap
 
-  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (newWidth: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
     this.firstFrameLoaded = new Promise((res) => {
       this.resLoaded = res

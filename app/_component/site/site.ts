@@ -11,8 +11,8 @@ export default declareComponent("site", class extends Component {
       header.updatePage(sections, domainLevel)
     }, (section) => {
       header.updateSelectedLink(section)
-    }, (q) => {
-      console.log(q)
+    }, (scrollBarWidth) => {
+      
     })
     pageManager.loadedCallback()
     this.apd(pageManager)

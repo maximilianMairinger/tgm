@@ -10,7 +10,7 @@ import * as animationFrameDelta from "animation-frame-delta"
 import delay from "delay";
 animationFrameDelta.ignoreUnsubscriptionError()
 
-
+// TODO pagemanager propergate scroll position, so that the header underline can fade in / out in site
 
 export default declareComponent("landing-section", class Landing extends PageSection {
   private cardContainer = this.q("card-container")

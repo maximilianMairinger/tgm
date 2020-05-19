@@ -47,6 +47,8 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   async initialActivationCallback() {
     //@ts-ignore
     let sectionIndex: ResourcesMap = await this.sectionIndex
+
+
     this.domainSubscription = domain.get(this.domainLevel, (domain: string) => {
       return new Promise<boolean>(async (res) => {
         //@ts-ignore
@@ -78,7 +80,10 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
      
     }, false, sectionIndex.entries().next().value[0])
 
+    
 
+    let currentActiveSectionElem = await sectionIndex.get(this.domainSubscription.domain) as any as PageSection
+    currentActiveSectionElem.activate()
 
     let globalToken: Symbol
     this.observer = new IntersectionObserver(async (c) => {
@@ -104,6 +109,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       })
 
       let elem = this.intersectingIndex.first as PageSection
+
   
       if (!this.inScrollAnimation) {
         let myToken = Symbol("Token")
@@ -114,14 +120,22 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             if (this.sectionChangeCallback) this.sectionChangeCallback(name)
             if (this.currentlyActiveSectionName !== undefined) domain.set(name, this.domainLevel, false)
             this.currentlyActiveSectionName = name
+            if (currentActiveSectionElem !== elem) {
+              currentActiveSectionElem.deactivate();
+              elem.activate()
+              currentActiveSectionElem = elem
+            }
           }
         })
       }
+      else console.log(elem)
     }, {
       threshold: 0,
       rootMargin: "-33.333%"
     })
   }
+
+  
 
 
   private domainSubscription: domain.DomainSubscription

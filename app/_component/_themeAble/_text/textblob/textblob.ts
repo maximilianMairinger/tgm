@@ -98,7 +98,7 @@ export default class Textblob extends Text {
       notebox.append(notetext);
       notebox.append(connector);
       notebox.append(ce("spacing-box"));
-      this.q("text-blob").append(notebox)
+      this.q("text-blob").prepend(notebox)
     } else return this.q("note-text").text();
   }
 

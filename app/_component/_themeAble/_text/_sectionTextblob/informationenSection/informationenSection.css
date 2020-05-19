@@ -35,7 +35,8 @@ section-textblob-image{
 
     section-textblob-circle {
         top: min(-100vw, -450px);
-        height: max(200vw, 1100px);
+        height: 190vw;
+        min-height: 1070px;
         width: unset;
     }
 }

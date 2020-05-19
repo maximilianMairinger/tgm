@@ -13,10 +13,11 @@ section-textblob-image-container{
 @media only screen and (max-width: 768px) {
 
     section-textblob-circle {
-        top: min(-105vw, -350px);
+        top: min(-105vw, -400px);
         left: min(-30vw, -300px);
         right: min(-60vw, -600px);
-        height: max(195vw, 925px);
+        height: 180vw;
+        min-height: 950px;
         width: unset;
     }
 }

@@ -9,7 +9,7 @@ export default declareComponent("informationen-section", class InformationenSect
         this.heading("Informationen");
         this.subheading("zu den Projekten.");
         this.note("Vorweg");
-        this.hsize({max:68, min:40});
+        this.hsize({max:55, min:37});
         this.hmobile({max:40, min:30});
         this.content("Folgende Schülerprojekte wurden im Zuge des ITP-Unterrichts entwickelt. SchülerInnen haben die Möglichkeit ihre Kreativität auszueleben und wertvolle Lektionen fürs zukünfige Berufleben zu sammeln.\n" +
             "\n" +

@@ -11,8 +11,6 @@ import delay from "delay";
 animationFrameDelta.ignoreUnsubscriptionError()
 
 
-// TODO: scrollbar not overlayed by header
-
 
 export default declareComponent("landing-section", class Landing extends PageSection {
   private cardContainer = this.q("card-container")

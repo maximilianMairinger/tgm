@@ -15,6 +15,7 @@ wrapper {
 }
 
 left-panel {
+    z-index: 1;
     display: block;
     height: 100%;
     float: left;
@@ -35,7 +36,7 @@ left-skew {
     margin-left: -100px;
 }
 
-.right-panel {
+right-panel {
     background: #FFFAF7;
     overflow-x: scroll;
     align-items: center;
@@ -46,8 +47,13 @@ left-skew {
     margin-left: -200px;
 }
 
+placeholder {
+    height: 100%;
+    min-width: 20px;
+}
+
 c-newscard {
-    margin-right: 30px;
+    margin-right: 40px;
     display: inline-block;
 }
 

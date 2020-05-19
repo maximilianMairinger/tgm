@@ -1,7 +1,11 @@
-/* CSS for imageTextSection */
+c-selection-card{
+    margin-left: 100px;
+}
 
-c-image-textblob{
-    display: block;
+@media only screen and (max-width: 768px) {
+    c-selection-card{
+        margin-left: 10vw;
+    }
 }
 
 /* CSS for textblob */

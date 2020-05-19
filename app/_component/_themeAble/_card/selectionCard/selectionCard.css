@@ -2,6 +2,7 @@
     display: block;
     max-width: 860px;
     min-width: 500px;
+    width: auto;
     user-select: auto;
 }
 

@@ -17,7 +17,7 @@ test-card{
 }
 
 c-selection-card{
-    width: 65%;
+    max-width: 65%;
     margin-right: 10%;
 }
 
@@ -29,7 +29,7 @@ c-selection-card{
     }
 
     c-selection-card{
-        width: 100%;
+        max-width: 100%;
         min-width: unset;
         margin-right: 0;
     }

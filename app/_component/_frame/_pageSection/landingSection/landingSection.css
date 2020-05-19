@@ -67,6 +67,8 @@ card-container {
   /* Only important on mobile */
   overflow-x: auto;
   overflow-y: visible;
+/* 
+  scroll-snap-type: x proximity; */
 }
 
 card-container {
@@ -89,6 +91,8 @@ c-icon-card {
   min-height: 160px;
 
   background: #FEFBF9;
+  /* scroll-snap-align: start;
+  scroll-margin-left: 40px; */
 }
 
 

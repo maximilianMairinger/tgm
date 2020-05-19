@@ -28,42 +28,53 @@ export default declareComponent("landing-section", class Landing extends PageSec
     this.cardContainer.apd(...elems);
 
 
-    let ordered = new ElementList(...elems)
-
 
     let mobile: boolean
     window.on("resize", (r) => {
       let currMobile = r.width < 1000
       if (currMobile) {
         if (!mobile || mobile === undefined) {
-          // to desktop switch
+          // to mobile switch
+          this.cardContainer.on("scroll", f)
         }
       }
       else if (mobile || mobile === undefined) {
-
-        // to mobile switch
+        this.cardContainer.off("scroll", f)
+        // to desktop switch
         this.cardContainer.emptyNodes()
 
-        ordered.set(elems)
         this.cardContainer.apd(...elems)
       }
 
       mobile = currMobile
     })
 
-    let nextIndex = 0
-    this.cardContainer.on("scroll", () => {
+    // let nextIndex = 0
+    //initerLs[nextIndex - Math.floor(nextIndex / initerLs.length) * initerLs.length]()
+
+    let lastElem = elems.last
+    let f = () => {
+      if (this.cardContainer.scrollWidth - this.cardContainer.width() - lastElem.width() < this.cardContainer.scrollLeft) {
       
-      if (this.cardContainer.scrollWidth - this.cardContainer.width() - ordered.last.width() < this.cardContainer.scrollLeft) {
-        if (mobile) {
-          let elem = initerLs[nextIndex - Math.floor(nextIndex / initerLs.length) * initerLs.length]()
-          this.cardContainer.apd(elem)
-          ordered.add(elem)
-          console.log("apd")
-          nextIndex++
-        }
+
+        let elems = initerLs.Call()
+        this.cardContainer.apd(...elems)
+        lastElem = elems.last
+        console.log("apd")
+
       }
-    })
+      else if (this.cardContainer.width() > this.cardContainer.scrollLeft) {
+        let beforeWidth = this.cardContainer.scrollWidth
+        let elems = initerLs.Call()
+        this.cardContainer.prepend(...elems)
+        let afterWidth = this.cardContainer.scrollWidth
+        this.cardContainer.scrollBy(afterWidth - beforeWidth, 0)
+
+        console.log("prep")
+      }
+    }
+
+    
   }
 
   protected activationCallback(active: boolean) {

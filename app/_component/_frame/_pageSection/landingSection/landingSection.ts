@@ -11,7 +11,6 @@ import delay from "delay";
 animationFrameDelta.ignoreUnsubscriptionError()
 
 
-// TODO: tagesschule heading
 // TODO: scrollbar not overlayed by header
 
 

@@ -7,7 +7,7 @@ import BioMedIcon from "../../../_themeAble/_icon/bioMed/bioMed";
 import { ElementList } from "extended-dom";
 import scrollTo from "animated-scroll-to"
 import * as animationFrameDelta from "animation-frame-delta"
-
+animationFrameDelta.ignoreUnsubscriptionError()
 
 
 export default declareComponent("landing-section", class Landing extends PageSection {

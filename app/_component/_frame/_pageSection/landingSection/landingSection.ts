@@ -35,24 +35,31 @@ export default declareComponent("landing-section", class Landing extends PageSec
       this.cardContainer.scrollLeft += speed * delta
     }
 
-    this.cardContainer.on("mouseenter", () => {
+    this.cardContainer.on("mouseenter", stopAnimation)
+    this.cardContainer.on("mouseleave", () => {accelerate(1000)})
+    this.cardContainer.on("touchstart", stopAnimation)
+    this.cardContainer.on("touchend", () => {accelerate(0, 300)})
+
+    function stopAnimation() {
       speed = 0
-    })
-    let hoverToken: Symbol
-    this.cardContainer.on("mouseleave", () => {
-      let token = hoverToken = Symbol()
+    }
+    
+    
+
+    let accelerationToken: Symbol
+    
+    function accelerate(timeout: number, accelearationDuration = 1000) {
+      let token = accelerationToken = Symbol()
       setTimeout(() => {
-        if (token === hoverToken) {
-          const acceleration = 1000
+        if (token === accelerationToken) {
           animationFrameDelta.subscribe((timeLeft) => {
-            if (token === hoverToken) {
-              speed = timeLeft / acceleration
+            if (token === accelerationToken) {
+              speed = timeLeft / accelearationDuration
             }
-          }, acceleration)
-        } 
-      }, 1000)
-      
-    })
+          }, accelearationDuration)
+        }
+      }, timeout)
+    }
     
 
     let mobile: boolean

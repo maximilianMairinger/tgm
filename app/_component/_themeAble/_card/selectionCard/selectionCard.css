@@ -25,6 +25,8 @@ content-box{
     flex-direction: column;
     align-items: stretch;
     padding: 25px 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 note-box{
@@ -65,7 +67,9 @@ selection-content{
     z-index: 1;
     flex-direction: row;
     align-items: center;
-    padding: 10px 0 10px 10px;
+    padding: 10px 0 10px 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 selection-background{
@@ -82,7 +86,9 @@ icon-container{
     display: block;
     position: relative;
     height: 35px;
+    min-height: 35px;
     width: 35px;
+    min-width: 35px;
 }
 
 icon-box{
@@ -97,12 +103,14 @@ info-container{
     display: flex;
     flex-grow: 1;
     align-self: stretch;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center;
     margin-bottom: -11px;
     padding-bottom: 11px;
     padding-right: 10px;
     font-size: 15px;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 text-container{
@@ -110,17 +118,25 @@ text-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow: hidden;
 }
 
 heading-text{
     font-weight: bold;
     color: var(--strong-text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 content-text{
     color: var(--weak-text-color);
     font-size: 13px;
+    flex-basis: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+
 
 link-container{
     display: flex;
@@ -128,6 +144,8 @@ link-container{
     margin-left: 10px;
     flex-direction: row;
     justify-content: flex-end;
+    min-width: auto;
+    font-size: 14px;
 }
 
 
@@ -146,6 +164,7 @@ image-container{
     display: block;
     flex-grow: 1;
     max-width: 200px;
+    width: calc(200 * ((100vw - 1150px)/(1600 - 1150)));
     align-self: stretch;
     margin-right: 70px;
     margin-left: 10px;
@@ -154,6 +173,13 @@ image-container{
     overflow: hidden;
 }
 
+@media only screen and (max-width: 1150px) {
+    image-container{
+        margin-right: 10px;
+    }
+}
+
+
 image-box{
     position: absolute;
     width: 400px;
@@ -161,6 +187,17 @@ image-box{
     height: 100%;
     display: block;
     transform: skewX(10deg);
-    background: url("../../../../res/img/abendschule_background.svg") 51% 37% no-repeat;
+    background: url("../../../../res/img/abendschule_background.svg") 51% 32% no-repeat;
     background-size: 2300px 1275px;
+}
+
+@media only screen and (max-width: 768px) {
+
+    selection-box link-container{
+        opacity: 1;
+    }
+
+    image-container{
+        display: none;
+    }
 }

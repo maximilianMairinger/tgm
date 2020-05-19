@@ -3,7 +3,7 @@ test-container{
     display: flex;
     margin: 100px 230px 100px 230px;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
@@ -32,6 +32,7 @@ c-selection-card{
 
     c-selection-card{
         width: 100%;
+        min-width: unset;
     }
 
 

@@ -10,8 +10,13 @@ import * as animationFrameDelta from "animation-frame-delta"
 animationFrameDelta.ignoreUnsubscriptionError()
 
 
+// TODO: tagesschule heading
+// TODO: scrollbar not overlayed by header
+
+
 export default declareComponent("landing-section", class Landing extends PageSection {
   private cardContainer = this.q("card-container")
+  private tagesschuleElem = this.q("tagesschule-container > c-textblob")
   constructor() {
     super()
 
@@ -36,19 +41,20 @@ export default declareComponent("landing-section", class Landing extends PageSec
     }
 
     this.cardContainer.on("mouseenter", stopAnimation)
-    this.cardContainer.on("mouseleave", () => {accelerate(1000)})
+    this.cardContainer.on("mouseleave", () => {accelerate(500)})
     this.cardContainer.on("touchstart", stopAnimation)
-    this.cardContainer.on("touchend", () => {accelerate(0, 300)})
+    this.cardContainer.on("touchend", () => {accelerate(0)})
 
     function stopAnimation() {
       speed = 0
+      accelerationToken = Symbol()
     }
     
     
 
     let accelerationToken: Symbol
     
-    function accelerate(timeout: number, accelearationDuration = 1000) {
+    function accelerate(timeout: number, accelearationDuration = 300) {
       let token = accelerationToken = Symbol()
       setTimeout(() => {
         if (token === accelerationToken) {
@@ -73,12 +79,13 @@ export default declareComponent("landing-section", class Landing extends PageSec
           animationFrameDelta.subscribe(inifiniteScroll)
           
 
+          
           this.cardContainer.on("scroll", f)
         }
       }
       else if (mobile || mobile === undefined) {
         this.cardContainer.off("scroll", f)
-
+        
         animationFrameDelta.unsubscribe(inifiniteScroll)
         // to desktop switch
         this.cardContainer.emptyNodes()
@@ -115,11 +122,22 @@ export default declareComponent("landing-section", class Landing extends PageSec
       }
     }
 
+
+
+
+
+
+
+
+
+
+
+
     
   }
 
   protected activationCallback(active: boolean) {
-  
+    console.log("landing", active)
   }
   stl() {
     return super.stl() + require("./landingSection.css").toString()

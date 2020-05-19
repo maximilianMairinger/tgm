@@ -10,7 +10,6 @@ import "../../../_themeAble/_text/_sectionTextblob/teamJobsSection/teamJobsSecti
 import "../../../_themeAble/_text/_sectionTextblob/informationenSection/informationenSection"
 import "../../../_themeAble/_text/_sectionTextblob/ausbildungSection/ausbildungSection"
 import "../../../_themeAble/_card/selectionCard/selectionCard"
-import "../../../_themeAble/_card/anmeldenCard/anmeldenCard"
 
 
 export default declareComponent("georgs-sandbox", class extends Page {

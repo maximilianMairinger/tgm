@@ -1,7 +1,7 @@
 :host{
     display: block;
     height: calc(100% - 150px);
-    min-height: 700px;
+    min-height: 550px;
 }
 
 landing-textblob{

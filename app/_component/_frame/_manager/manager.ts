@@ -25,7 +25,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private managedElementMap: ResourcesMap
 
-  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollWidthChange?: (newWidth: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (newWidth: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
     this.firstFrameLoaded = new Promise((res) => {
       this.resLoaded = res
@@ -79,6 +79,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
     this.resLoaded();
     await this.managedElementMap.fullyLoaded
   }
+
+  private lastScrollbarWidth: number
 
   /**
    * Swaps to given Frame
@@ -137,8 +139,16 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
     }
     
-
-    if (this.onScrollWidthChange) this.onScrollWidthChange(to.clientWidth)
+    
+    if (this.onScrollBarWidthChange) {
+      //@ts-ignore
+      let scrollBarWidth = this.elementBody.clientWidth - to.elementBody.clientWidth
+      
+      if (scrollBarWidth !== this.lastScrollbarWidth) {
+        this.onScrollBarWidthChange(scrollBarWidth)
+        this.lastScrollbarWidth = scrollBarWidth
+      }
+    }
 
     let showAnim = from !== undefined ? to.anim([{zIndex: 100, opacity: 0, translateX: -5, scale: 1.005, offset: 0}, {opacity: 1, translateX: 0, scale: 1}], 400) : to.anim([{offset: 0, opacity: 0}, {opacity: 1}], 400)
 

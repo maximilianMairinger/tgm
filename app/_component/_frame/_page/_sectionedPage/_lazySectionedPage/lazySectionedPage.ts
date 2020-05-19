@@ -3,7 +3,7 @@ import lazyLoad, { ImportanceMap, ResourcesMap } from "../../../../../lib/lazyLo
 import LoadingIndecator from "../../../../_indecator/loadingIndecator/loadingIndecator";
 import * as domain from "../../../../../lib/domain";
 
-export default abstract class PageSection extends SectionedPage<Promise<any>> {
+export default abstract class LazySectionedPage extends SectionedPage<Promise<any>> {
 
   private loadMe: (initalKey?: string) => ResourcesMap
   private resResourceMap: Function

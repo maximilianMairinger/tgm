@@ -16,7 +16,9 @@ animationFrameDelta.ignoreUnsubscriptionError()
 
 export default declareComponent("landing-section", class Landing extends PageSection {
   private cardContainer = this.q("card-container")
-  private tagesschuleElem = this.q("tagesschule-container > c-textblob")
+  
+  private mainHeaderElem = this.q("text-container > c-textblob")
+  private tagesschuleHeaderElem = this.q("tagesschule-container > c-textblob")
   constructor() {
     super()
 
@@ -134,6 +136,24 @@ export default declareComponent("landing-section", class Landing extends PageSec
 
 
     
+  }
+
+  private currentlyShowingTagesschuleHeader = false
+  scrollProgressCallback(e: number) {
+    if (e > 300) {
+      if (!this.currentlyShowingTagesschuleHeader) {
+        this.mainHeaderElem.anim({translateY: -10, opacity: 0}, 400)
+        this.tagesschuleHeaderElem.anim({opacity: 1, translateY: .1}, 400)
+        this.currentlyShowingTagesschuleHeader = true
+      }
+    }
+    else if (e < 250) {
+      if (this.currentlyShowingTagesschuleHeader) {
+        this.mainHeaderElem.anim({translateY: .1, opacity: 1}, 400)
+        this.tagesschuleHeaderElem.anim({opacity: 0, translateY: 10}, 400)
+        this.currentlyShowingTagesschuleHeader = false
+      }
+    }
   }
 
   protected activationCallback(active: boolean) {

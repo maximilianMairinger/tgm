@@ -3,7 +3,8 @@ import * as domain from "./../../../../lib/domain"
 import scrollTo from "animated-scroll-to";
 import WaapiEasing from "waapi-easing";
 import { ResourcesMap } from "../../../../lib/lazyLoad";
-import PageSection from "./_lazySectionedPage/lazySectionedPage";
+import LazySectionedPage from "./_lazySectionedPage/lazySectionedPage";
+import PageSection from "../../_pageSection/pageSection";
 
 const padding = -70
 
@@ -81,9 +82,8 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     }, false, sectionIndex.entries().next().value[0])
 
     
-
-    let currentActiveSectionElem = await sectionIndex.get(this.domainSubscription.domain) as any as PageSection
-    currentActiveSectionElem.activate()
+    let currentlyActiveSectionElem = await sectionIndex.get(this.domainSubscription.domain) as any as PageSection
+    currentlyActiveSectionElem.activate()
 
     let globalToken: Symbol
     this.observer = new IntersectionObserver(async (c) => {
@@ -108,7 +108,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         }
       })
 
-      let elem = this.intersectingIndex.first as PageSection
+      let elem = this.intersectingIndex.first as LazySectionedPage
 
   
       if (!this.inScrollAnimation) {
@@ -120,18 +120,23 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             if (this.sectionChangeCallback) this.sectionChangeCallback(name)
             if (this.currentlyActiveSectionName !== undefined) domain.set(name, this.domainLevel, false)
             this.currentlyActiveSectionName = name
-            if (currentActiveSectionElem !== elem) {
-              currentActiveSectionElem.deactivate();
+            if (currentlyActiveSectionElem !== elem) {
+              currentlyActiveSectionElem.deactivate();
               elem.activate()
-              currentActiveSectionElem = elem
+              currentlyActiveSectionElem = elem
             }
           }
         })
       }
-      else console.log(elem)
     }, {
       threshold: 0,
       rootMargin: "-33.333%"
+    })
+
+
+
+    this.elementBody.on("scroll", () => {
+      if (currentlyActiveSectionElem.scrollProgressCallback) currentlyActiveSectionElem.scrollProgressCallback(this.elementBody.scrollTop - currentlyActiveSectionElem.offsetTop)
     })
   }
 

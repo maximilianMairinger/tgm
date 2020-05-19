@@ -7,6 +7,7 @@ import BioMedIcon from "../../../_themeAble/_icon/bioMed/bioMed";
 import { ElementList } from "extended-dom";
 import scrollTo from "animated-scroll-to"
 import * as animationFrameDelta from "animation-frame-delta"
+import delay from "delay";
 animationFrameDelta.ignoreUnsubscriptionError()
 
 
@@ -19,6 +20,7 @@ export default declareComponent("landing-section", class Landing extends PageSec
   
   private mainHeaderElem = this.q("text-container > c-textblob")
   private tagesschuleHeaderElem = this.q("tagesschule-container > c-textblob")
+  private iconCards: ElementList<IconCard>
   constructor() {
     super()
 
@@ -32,12 +34,13 @@ export default declareComponent("landing-section", class Landing extends PageSec
       () => new IconCard(new BioMedIcon, "Biomedizin7")
     ]
 
-    let elems = new ElementList(...initerLs.Call())
+    let elems = this.iconCards = new ElementList(...initerLs.Call())
+    elems.css({opacity: 0})
     
     this.cardContainer.apd(...elems);
 
-    let speed: number
-    const baseSpeed = speed = 1
+    let speed = 0
+    const fullSpeed = 1
     let inifiniteScroll = (delta: number) => {
       this.cardContainer.scrollLeft += speed * delta
     }
@@ -62,7 +65,7 @@ export default declareComponent("landing-section", class Landing extends PageSec
         if (token === accelerationToken) {
           animationFrameDelta.subscribe((timeLeft) => {
             if (token === accelerationToken) {
-              speed = baseSpeed * (timeLeft / accelearationDuration)
+              speed = fullSpeed * (timeLeft / accelearationDuration)
             }
           }, accelearationDuration)
         }
@@ -78,6 +81,7 @@ export default declareComponent("landing-section", class Landing extends PageSec
           // to mobile switch
 
           f()
+          accelerate(230)
           animationFrameDelta.subscribe(inifiniteScroll)
           
 
@@ -136,6 +140,10 @@ export default declareComponent("landing-section", class Landing extends PageSec
 
 
     
+  }
+
+  initialActivationCallback() {
+    delay(170).then(() => this.iconCards.anim({opacity: 1, translateY: .1}, 500, 60))
   }
 
   private currentlyShowingTagesschuleHeader = false

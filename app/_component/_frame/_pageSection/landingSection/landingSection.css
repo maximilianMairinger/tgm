@@ -92,6 +92,9 @@ c-icon-card {
   min-height: 160px;
 
   background: #FEFBF9;
+
+  transform: translateY(7px);
+
   /* scroll-snap-align: start;
   scroll-margin-left: 40px; */
 }

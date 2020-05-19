@@ -68,7 +68,7 @@ something {
     color: #585e66;
 }
 
-max-du-tard {
+qfix {
     width: 100%;
     justify-content: space-around;
     display: flex;
@@ -90,10 +90,30 @@ item:hover {
     cursor: pointer;
     font-weight: bold;
 }
-  
+
 item:hover:after {
     width: 100%;
 }
+
+something:after {
+    content: '';
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: #585e66;
+    transition: 300ms;
+}
+
+something:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+something:hover:after {
+    width: 100%;
+}
+  
+
 
 mobile-logo {
     display: none;
@@ -110,7 +130,7 @@ mobile-logo {
 
 @media only screen and (max-width: 1000px) {  
 
-    max-du-tard {
+    qfix {
         display: none;
     }
 

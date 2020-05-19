@@ -5,6 +5,8 @@ import TextBlob from "./../../../_themeAble/_text/textblob/textblob"
 import IconCard from "../../../_themeAble/_card/iconCard/iconCard";
 import BioMedIcon from "../../../_themeAble/_icon/bioMed/bioMed";
 import { ElementList } from "extended-dom";
+import scrollTo from "animated-scroll-to"
+import * as animationFrameDelta from "animation-frame-delta"
 
 
 
@@ -27,7 +29,31 @@ export default declareComponent("landing-section", class Landing extends PageSec
     
     this.cardContainer.apd(...elems);
 
+    let speed: number
+    const baseSpeed = speed = 1
+    let inifiniteScroll = (delta: number) => {
+      this.cardContainer.scrollLeft += speed * delta
+    }
 
+    this.cardContainer.on("mouseenter", () => {
+      speed = 0
+    })
+    let hoverToken: Symbol
+    this.cardContainer.on("mouseleave", () => {
+      let token = hoverToken = Symbol()
+      setTimeout(() => {
+        if (token === hoverToken) {
+          const acceleration = 1000
+          animationFrameDelta.subscribe((timeLeft) => {
+            if (token === hoverToken) {
+              speed = timeLeft / acceleration
+            }
+          }, acceleration)
+        } 
+      }, 1000)
+      
+    })
+    
 
     let mobile: boolean
     window.on("resize", (r) => {
@@ -35,11 +61,18 @@ export default declareComponent("landing-section", class Landing extends PageSec
       if (currMobile) {
         if (!mobile || mobile === undefined) {
           // to mobile switch
+
+          f()
+          animationFrameDelta.subscribe(inifiniteScroll)
+          
+
           this.cardContainer.on("scroll", f)
         }
       }
       else if (mobile || mobile === undefined) {
         this.cardContainer.off("scroll", f)
+
+        animationFrameDelta.unsubscribe(inifiniteScroll)
         // to desktop switch
         this.cardContainer.emptyNodes()
 
@@ -53,14 +86,16 @@ export default declareComponent("landing-section", class Landing extends PageSec
     //initerLs[nextIndex - Math.floor(nextIndex / initerLs.length) * initerLs.length]()
 
     let lastElem = elems.last
+
+    
+
     let f = () => {
       if (this.cardContainer.scrollWidth - this.cardContainer.width() - lastElem.width() < this.cardContainer.scrollLeft) {
-      
+
 
         let elems = initerLs.Call()
         this.cardContainer.apd(...elems)
         lastElem = elems.last
-        console.log("apd")
 
       }
       else if (this.cardContainer.width() > this.cardContainer.scrollLeft) {
@@ -70,7 +105,6 @@ export default declareComponent("landing-section", class Landing extends PageSec
         let afterWidth = this.cardContainer.scrollWidth
         this.cardContainer.scrollBy(afterWidth - beforeWidth, 0)
 
-        console.log("prep")
       }
     }
 

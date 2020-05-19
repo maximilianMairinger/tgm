@@ -108,6 +108,7 @@ tagesschule-container {
 tagesschule-container > c-textblob {
   opacity: 0;
   transform: translateY(10px);
+  max-width: 100%;
 }
 
 

@@ -1,7 +1,3 @@
-section-textblob{
-    padding: 75px 100px 75px 100px;
-    height: auto;
-}
 
 section-textblob-container c-textblob{
     width: 100%;
@@ -15,16 +11,12 @@ section-textblob-image-container{
 }
 
 @media only screen and (max-width: 768px) {
-    section-textblob{
-        padding-right: 10vw;
-        padding-left: 10vw;
-    }
 
     section-textblob-circle {
-        top: min(-80vw, -450px);
-        left: min(-30vw, -200px);
-        right: min(-60vw, -500px);
-        height: max(150vw, 1050px);
+        top: min(-105vw, -350px);
+        left: min(-30vw, -300px);
+        right: min(-60vw, -600px);
+        height: max(195vw, 925px);
         width: unset;
     }
 }

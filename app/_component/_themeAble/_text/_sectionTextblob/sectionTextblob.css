@@ -11,7 +11,7 @@ component-body {
 section-textblob {
     display: block;
     background: var(--primary-background-color);
-    padding: 100px 100px 125px 100px;
+    padding: 200px 100px 125px 100px;
     overflow: hidden;
 }
 
@@ -99,8 +99,8 @@ section-textblob-circle {
 
     section-textblob-circle {
         top: min(-100vw, -450px);
-        left: min(-30vw, -200px);
-        right: min(-70vw, -500px);
+        left: min(-30vw, -300px);
+        right: min(-60vw, -600px);
         height: max(200vw, 1050px);
         width: unset;
     }

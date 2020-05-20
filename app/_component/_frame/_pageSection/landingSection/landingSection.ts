@@ -32,7 +32,6 @@ export default declareComponent("landing-section", class Landing extends PageSec
     ]
 
     let elems = this.iconCards = new ElementList(...initerLs.Call().replace((card) => ce("icon-card-wrapper").apd(card)))
-    elems.css({opacity: 0})
     
     this.cardContainer.apd(...elems);
 

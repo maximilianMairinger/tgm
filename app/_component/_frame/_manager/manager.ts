@@ -25,7 +25,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private managedElementMap: ResourcesMap
 
-  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, public onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
     this.firstFrameLoaded = new Promise((res) => {
       this.resLoaded = res
@@ -81,6 +81,13 @@ export default abstract class Manager<ManagementElementName extends string> exte
   }
 
   private lastScrollbarWidth: number
+
+  private onScrollListener = () => {
+    //@ts-ignore
+    this.onScroll(this.currentFrame.elementBody.scrollTop)
+  }
+
+
 
   /**
    * Swaps to given Frame
@@ -150,6 +157,9 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
     }
 
+    //@ts-ignore
+    if (this.onScroll) to.elementBody.on("scroll", this.onScrollListener)
+
     let showAnim = from !== undefined ? to.anim([{zIndex: 100, opacity: 0, translateX: -5, scale: 1.005, offset: 0}, {opacity: 1, translateX: 0, scale: 1}], 400) : to.anim([{offset: 0, opacity: 0}, {opacity: 1}], 400)
 
     this.currentFrame = to;
@@ -159,6 +169,9 @@ export default abstract class Manager<ManagementElementName extends string> exte
         await showAnim
       }
       else {
+        //@ts-ignore
+        from.elementBody.off("scroll", this.onScrollListener)
+
         // let fromAnim = from.anim([{offset: 0, translateX: 0}, {translateX: 10}], 3000)
         await Promise.all([showAnim])
   

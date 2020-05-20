@@ -16,6 +16,8 @@ export default declareComponent("site", class extends Component {
       header.updateSelectedLink(section)
     }, (scrollBarWidth) => {
       header.css({width: `calc(100% - ${scrollBarWidth}px)`})
+    }, (prog) => {
+      console.log("scroll", prog)
     })
     
     pageManager.loadedCallback()

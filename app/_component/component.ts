@@ -1,5 +1,9 @@
 import "../global"
 import lang from "./../lib/lang"
+import { DataBase, Data } from "josm";
+
+type PrimElem = string | number | boolean | Element
+type Token = string | string[]
 
 export default abstract class Component<T extends HTMLElement | HTMLAnchorElement | false | never = HTMLElement> extends HTMLElement {
   protected sr: ShadowRoot;
@@ -51,8 +55,22 @@ export default abstract class Component<T extends HTMLElement | HTMLAnchorElemen
   public q(qs?: string) {
     return this.elementBody.childs(qs)
   }
-  public apd(...elems: Element[]) {
-    this.elementBody.apd(...elems)
+//   apd(to: PrimElem | PrimElem[], library?: {
+//     [key in string]: string | Data<string>;
+// } | DataBase, customTokens?: {
+//     open?: Token;
+//     close?: Token;
+//     escape?: Token;
+// }): this;
+// /**
+//  * Appends given elems
+//  */
+// apd(...elems: PrimElem[]): this;
+
+  public apd(...elems: PrimElem[]): this
+  public apd(to: PrimElem | PrimElem[], library?: {[key in string]: string | Data<string>;} | DataBase, customTokens?: {open?: Token; close?: Token; escape?: Token;}): this
+  public apd(...a: any): this {
+    this.elementBody.apd(...a)
     return this
   }
 

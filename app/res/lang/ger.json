@@ -1,0 +1,17 @@
+{
+  "tgm": "TGM",
+  "page": {
+    "landing": {
+      "main": {
+        "note": "wir sind",
+        "head": "Technik",
+        "sub": "von Herzen"
+      },
+      "veruchsanstalt": {
+        "note": "qwe1",
+        "head": "qwe2",
+        "sub": "qwe3"
+      }
+    }
+  }
+}

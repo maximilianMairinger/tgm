@@ -1,4 +1,9 @@
-{
+import { DataBase } from "josm"
+import ger from "./../res/lang/ger.json"
+
+
+
+interface Lang {
   "links": {
     "tagesschule": "Tagesschule",
     "abendschule": "Abendschule",
@@ -34,3 +39,9 @@
     }
   }
 }
+
+
+
+export const lang = new DataBase<Lang>(ger as Lang)
+export default lang
+

@@ -2,7 +2,7 @@ import decodeUri from "fast-decode-uri-component"
 import * as global from "./../global"
 import slugify from "slugify"
 import getBaseUrl from "get-base-url";
-import lang from "./../lib/lang/lang"
+import lang from "./../lib/lang"
 
 
 const commonTitle = "TGM";

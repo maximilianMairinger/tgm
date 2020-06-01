@@ -85,20 +85,27 @@ export default class Textblob extends Text {
     else return this._hscale
   }
 
+  private created:boolean = false;
+
   note(): string
   note(note: string): void
   note(note?: string) {
     if (note !== undefined) {
-      let notebox = ce("note-box");
-      let notetext = ce("note-text");
-      notetext.text(note);
-      let connector = ce("connector-box");
-      let hr = ce("HR");
-      connector.append(hr);
-      notebox.append(notetext);
-      notebox.append(connector);
-      notebox.append(ce("spacing-box"));
-      this.q("text-blob").prepend(notebox)
+      if(!this.created) {
+        let notebox = ce("note-box");
+        let notetext = ce("note-text");
+        notetext.text(note);
+        let connector = ce("connector-box");
+        let hr = ce("HR");
+        connector.append(hr);
+        notebox.append(notetext);
+        notebox.append(connector);
+        notebox.append(ce("spacing-box"));
+        this.q("text-blob").prepend(notebox)
+        this.created = true;
+      }else{
+        this.q("note-text").text(note);
+      }
     } else return this.q("note-text").text();
   }
 

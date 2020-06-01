@@ -29,6 +29,15 @@ export default declareComponent("header", class Header extends ThemAble {
   }
 
 
+  public onTop() {
+    console.log("onTop")
+  }
+
+  public notTop() {
+    console.log("notTop")
+  }
+
+
 
   public updatePage(linkContents: string[], domainLevel: number) {
     return Promise.all([

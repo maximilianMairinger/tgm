@@ -34,7 +34,7 @@ note-text {
     max-width: 100%;
     margin-left: 10px;
     line-height: 1.2em;
-    font-size: 12px;
+    font-size: 14px;
     font-family: 'PT Mono', monospace;
     text-transform: uppercase;
     white-space: nowrap;
@@ -45,12 +45,15 @@ note-text {
 connector-box{
     display: block;
     height: auto;
+    margin-bottom: 5px;
 }
 
 connector-box hr{
     border: none;
     background: var(--strong-text-color);
     width: 90%;
+    margin-right: 0;
+    margin-left: 0;
 }
 
 connector-box.top{
@@ -110,7 +113,7 @@ image-container{
     max-width: min(1100px, 70%);
     flex-grow: 1;
     overflow: hidden;
-    box-shadow: 0 0 30px -20px black;
+    box-shadow: var(--medium-shadow);
     justify-content: stretch;
 }
 
@@ -150,7 +153,7 @@ image-text-blob.left image-container{
         height: 100%;
         min-height: unset;
         margin: 0!important;
-        padding: 50px 10vw;
+        padding: 100px 10vw 100px 10vw;
         flex-direction: column!important;
         justify-content: space-around!important;
     }
@@ -165,7 +168,7 @@ image-text-blob.left image-container{
     info-text{
         width: 30%;
         min-width: min(140px, 100%);
-        margin-bottom: 5px;
+        margin-bottom: 2px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -174,8 +177,12 @@ image-text-blob.left image-container{
 
     info-text:nth-child(2n),
     stellvertreter-text ~ info-text:nth-child(2n-1){
-        margin-bottom: 25px;
+        margin-bottom: 9px;
         width: 60%;
+    }
+
+    stellvertreter-text ~ info-text:nth-child(2n-1){
+        margin-bottom: 11px;
     }
 
     stellvertreter-text ~ info-text:nth-child(2n){
@@ -185,7 +192,7 @@ image-text-blob.left image-container{
 
     stellvertreter-text{
         width: 100%;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
     content-box{
@@ -195,19 +202,21 @@ image-text-blob.left image-container{
     }
 
     image-container{
-        width: 100%;
+        width: calc(100% + 10vw);
+        max-width: unset;
         min-width: 85vw;
+        height: calc(200px + 30vw);
         min-height: 300px;
     }
 
     image-text-blob.right image-container{
         align-self: flex-start;
-        margin: 50px 0 50px -10vw;
+        margin: 50px 0 0 -10vw;
     }
 
 
     image-text-blob.left image-container{
         align-self: flex-end;
-        margin: 50px -10vw 50px 0;
+        margin: 50px -10vw 0 0;
     }
 }

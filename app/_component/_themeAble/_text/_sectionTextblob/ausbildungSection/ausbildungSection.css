@@ -1,0 +1,24 @@
+
+section-textblob-container c-textblob{
+    width: 100%;
+}
+
+section-textblob-image-container{
+    display: none;
+    width: 0;
+    height: 0;
+    min-width: unset;
+}
+
+@media only screen and (max-width: 768px) {
+
+    section-textblob-circle {
+        top: min(-105vw, -400px);
+        left: min(-30vw, -300px);
+        right: min(-60vw, -600px);
+        height: 180vw;
+        min-height: 950px;
+        width: unset;
+    }
+}
+

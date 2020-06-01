@@ -78,7 +78,7 @@ export default class Textblob extends Text {
   hscale(): number
   hscale(hscale: number): void
   hscale(hscale?: number): any {
-    if (hscale) {
+    if (hscale !== undefined) {
       this._hscale = hscale
       this.subheadingElem.css({ "fontSize": `max(${hscale}em, 25px)` });
     }
@@ -88,7 +88,7 @@ export default class Textblob extends Text {
   note(): string
   note(note: string): void
   note(note?: string) {
-    if (note) {
+    if (note !== undefined) {
       let notebox = ce("note-box");
       let notetext = ce("note-text");
       notetext.text(note);
@@ -98,7 +98,7 @@ export default class Textblob extends Text {
       notebox.append(notetext);
       notebox.append(connector);
       notebox.append(ce("spacing-box"));
-      this.q("text-blob").append(notebox)
+      this.q("text-blob").prepend(notebox)
     } else return this.q("note-text").text();
   }
 

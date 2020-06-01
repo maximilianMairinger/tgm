@@ -15,5 +15,22 @@
     "section3": "Section3",
     "section4": "Section4",
     "section5": "Section5"
+  },
+
+  "tgm": "TGM",
+  
+  "page": {
+    "landing": {
+      "main": {
+        "note": "wir sind",
+        "head": "Technologie",
+        "sub": "von Herzen"
+      },
+      "veruchsanstalt": {
+        "note": "qwe1",
+        "head": "qwe2",
+        "sub": "qwe3"
+      }
+    }
   }
 }

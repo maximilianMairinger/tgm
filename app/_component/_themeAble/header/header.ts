@@ -24,6 +24,7 @@ const slidyLineStretchDuration = slidyLineStretchFactor * 1000
 export default declareComponent("header", class Header extends ThemAble {
   private pathDisplayElem = this.q("path-display")
   private linkContainerElem = this.q("right-content")
+  private leftContent = this.q("left-content")
   private underlineElem = this.q("slidy-underline")
   private background = this.q("blurry-background")
   // private tgmLogoIcon = this.q("c-tgm-logo")
@@ -32,7 +33,29 @@ export default declareComponent("header", class Header extends ThemAble {
   constructor() { 
     super()
     
-    
+    let isLinkContainerCurrentlyHidden = false
+    window.on("resize", (q) => {
+      if (this.currentLinkElems) {
+        let links = this.currentLinkElems.first.getBoundingClientRect()
+        let logo = this.pathDisplayElem.getBoundingClientRect()
+
+        let margin = 100 + (isLinkContainerCurrentlyHidden ? 80 : 0)
+        if (links.left < logo.right + margin) {
+          if (!isLinkContainerCurrentlyHidden) {
+            isLinkContainerCurrentlyHidden = true
+            this.linkContainerElem.addClass("hide")
+            this.leftContent.addClass("mobile")
+          }
+        }
+        else {
+          if (isLinkContainerCurrentlyHidden) {
+            isLinkContainerCurrentlyHidden = false
+            this.linkContainerElem.removeClass("hide")
+            this.leftContent.removeClass("mobile")
+          }
+        }
+      }
+    })
   }
 
 

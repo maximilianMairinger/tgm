@@ -1,5 +1,5 @@
 import Component from "../component";
-import { Tel } from "extended-dom";
+import { EventListener } from "extended-dom";
 import declareComponent from "../../lib/declareComponent";
 import * as domain from "./../../lib/domain"
 
@@ -9,8 +9,8 @@ const pressedClass = "pressed";
 
 export default class Button extends Component<HTMLAnchorElement> {
   private doesFocusOnHover: boolean;
-  private mouseOverListener: Tel;
-  private mouseOutListener: Tel;
+  private mouseOverListener: EventListener;
+  private mouseOutListener: EventListener;
   private callbacks: ((e: MouseEvent | KeyboardEvent) => void)[] = [];
 
   private preferedTabIndex: number
@@ -53,10 +53,12 @@ export default class Button extends Component<HTMLAnchorElement> {
       alreadyPressed = false;
     });
 
-    this.mouseOverListener = this.elementBody.ls("mouseover", () => {
+    //@ts-ignore
+    this.mouseOverListener = this.elementBody.on("mouseover", () => {
       this.focus();
     }, false)
-    this.mouseOutListener = this.elementBody.ls("mouseout", () => {
+    //@ts-ignore
+    this.mouseOutListener = this.elementBody.on("mouseout", () => {
       this.blur();
     }, false)
 
@@ -115,8 +117,7 @@ export default class Button extends Component<HTMLAnchorElement> {
   }
 
   public blurOnMouseOut(to: boolean) {
-    if (to) this.mouseOutListener.enable();
-    else this.mouseOutListener.disable();
+    this.mouseOutListener.active(to)
   }
   public addActivationCallback<CB extends (e?: MouseEvent | KeyboardEvent) => void>(cb: CB): CB {
     this.callbacks.add(cb);
@@ -135,12 +136,12 @@ export default class Button extends Component<HTMLAnchorElement> {
     if (to !== undefined) {
       this.doesFocusOnHover = to;
       if (to) {
-        this.mouseOverListener.enable();
-        this.mouseOutListener.enable();
+        this.mouseOverListener.activate();
+        this.mouseOutListener.activate();
       }
       else {
-        this.mouseOverListener.disable();
-        this.mouseOutListener.disable();
+        this.mouseOverListener.deactivate();
+        this.mouseOutListener.deactivate();
       }
     }
     else return this.doesFocusOnHover;

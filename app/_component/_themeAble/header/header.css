@@ -4,6 +4,27 @@ component-body {
   user-select: none;
 }
 
+
+
+:host {
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.16);
+  
+  background-color: rgba(255, 255, 255, .9);
+}
+
+/* if backdrop support: very transparent and blurred */
+@supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
+  :host {
+    background-color: unset;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+  }
+}
+
+
+
+
 left-content {
   position: absolute;
   left: 100px;

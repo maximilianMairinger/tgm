@@ -47,7 +47,6 @@ c-textblob{
 
 image-container{
     display: block;
-    height: 200px;
     flex-grow: 1;
     margin: 0 5%;
 }
@@ -81,6 +80,10 @@ c-link{
 
     anmelden-card {
         padding: 40px;
+    }
+
+    image-container{
+        height: 200px;
     }
 }
 

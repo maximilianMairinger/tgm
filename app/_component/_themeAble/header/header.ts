@@ -16,6 +16,10 @@ const linkFadeInDuration = 800
 
 const notTopClassName = "blurry"
 
+const slidyLineStretchFactor = .7
+const slidyLineStretchOffset = slidyLineStretchFactor / 2
+const slidyLineStretchDuration = slidyLineStretchFactor * 1000
+
 
 export default declareComponent("header", class Header extends ThemAble {
   private pathDisplayElem = this.q("path-display")
@@ -64,7 +68,7 @@ export default declareComponent("header", class Header extends ThemAble {
       this.pathDisplayElem.apd(new ArrowIcon(), new Link(lang.links[domainFragment], domainFragment, i))
 
     }
-    await this.pathDisplayElem.anim({opacity: 1, translateX: .1}, 500)
+    await this.pathDisplayElem.anim({opacity: 1, translateX: 0}, 500)
     
   }
 
@@ -155,7 +159,7 @@ export default declareComponent("header", class Header extends ThemAble {
 
         return Promise.all([
           animationWrapper.anim({translateX: 0.1}, linkFadeInDuration + (currentLength-1) * linkAnimationOffset),
-          this.currentLinkElems.anim({opacity: 1, translateX: .1}, linkFadeInDuration, linkAnimationOffset)
+          this.currentLinkElems.anim({opacity: 1, translateX: 0}, linkFadeInDuration, linkAnimationOffset)
         ])
       })
     ])
@@ -212,13 +216,29 @@ export default declareComponent("header", class Header extends ThemAble {
     else {
       let index = this.currentLinkContents.indexOf(newSelected)
       let elem = this.currentLinkElems[index]
-      let bounds = elem.getBoundingClientRect()
+      let thisBounds = elem.getBoundingClientRect()
+      let lastBounds = this.lastSelectedElem.getBoundingClientRect()
       
       if (this.lastSelectedElem) this.lastSelectedElem.css({fontWeight: "normal"})
 
       this.lastSelectedElem = elem
       elem.css({fontWeight: "bold"})
-      await this.underlineElem.anim({translateX: bounds.left, width: bounds.width}, 500)
+
+      debugger
+      if (thisBounds.left < lastBounds.left) {
+        let width = (lastBounds.right - thisBounds.left) * slidyLineStretchFactor
+        await this.underlineElem.anim([
+          {translateX: thisBounds.left, width, offset: 1 - slidyLineStretchOffset}, 
+          {translateX: thisBounds.left, width: thisBounds.width}
+        ], slidyLineStretchDuration)  
+      }
+      else {
+        let width = (thisBounds.right - lastBounds.left) * slidyLineStretchFactor
+        await this.underlineElem.anim([
+          {translateX: lastBounds.left, width, offset: slidyLineStretchOffset}, 
+          {translateX: thisBounds.left, width: thisBounds.width}
+        ], slidyLineStretchDuration)
+      }
     }
   
   }

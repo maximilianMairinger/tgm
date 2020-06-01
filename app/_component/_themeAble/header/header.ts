@@ -21,8 +21,9 @@ export default declareComponent("header", class Header extends ThemAble {
   private pathDisplayElem = this.q("path-display")
   private linkContainerElem = this.q("right-content")
   private underlineElem = this.q("slidy-underline")
-  private tgmLogoIcon = this.q("c-tgm-logo")
-  private backLinkComponents: ElementList<ThemAble> = new ElementList()
+  private background = this.q("blurry-background")
+  // private tgmLogoIcon = this.q("c-tgm-logo")
+  // private backLinkComponents: ElementList<ThemAble> = new ElementList()
 
   constructor() { 
     super()
@@ -32,11 +33,11 @@ export default declareComponent("header", class Header extends ThemAble {
 
 
   public onTop() {
-    this.removeClass(notTopClassName)
+    this.background.removeClass(notTopClassName)
   }
 
   public notTop() {
-    this.addClass(notTopClassName)
+    this.background.addClass(notTopClassName)
   }
 
 

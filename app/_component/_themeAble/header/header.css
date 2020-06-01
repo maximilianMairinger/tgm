@@ -4,28 +4,35 @@ component-body {
   user-select: none;
 }
 
-:host {
-  transition: border-bottom .4s;
+blurry-background {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: opacity .3s;
+  border-bottom: 1px solid rgba(0,0,0,0.16);
+  opacity: 0;
+
+  /* Only when browser does not support blur */
+  background-color: rgba(255, 255, 255, .9);
+
+  
 }
 
-:host(.blurry) {
-  backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid rgba(0,0,0,0.16);
-  
-  background-color: rgba(255, 255, 255, .9);
+
+blurry-background.blurry {
+  opacity: 1;
 }
 
 /* if backdrop support: very transparent and blurred */
 @supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
-  :host(.blurry) {
+  blurry-background {
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: saturate(180%) blur(20px);
 
     background-color: unset;
-  }
-
-  :host {
-    border-bottom: 1px solid rgba(0, 0, 0, 0);
   }
 }
 

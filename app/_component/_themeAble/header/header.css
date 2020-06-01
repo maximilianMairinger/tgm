@@ -4,9 +4,11 @@ component-body {
   user-select: none;
 }
 
-
-
 :host {
+  transition: border-bottom .4s;
+}
+
+:host(.blurry) {
   backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid rgba(0,0,0,0.16);
   
@@ -15,10 +17,15 @@ component-body {
 
 /* if backdrop support: very transparent and blurred */
 @supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
-  :host {
-    background-color: unset;
+  :host(.blurry) {
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     backdrop-filter: saturate(180%) blur(20px);
+
+    background-color: unset;
+  }
+
+  :host {
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
   }
 }
 

@@ -14,6 +14,8 @@ import ArrowIcon from "./../_icon/arrow/arrow"
 const linkAnimationOffset = 170
 const linkFadeInDuration = 800
 
+const notTopClassName = "blurry"
+
 
 export default declareComponent("header", class Header extends ThemAble {
   private pathDisplayElem = this.q("path-display")
@@ -30,11 +32,11 @@ export default declareComponent("header", class Header extends ThemAble {
 
 
   public onTop() {
-    console.log("onTop")
+    this.removeClass(notTopClassName)
   }
 
   public notTop() {
-    console.log("notTop")
+    this.addClass(notTopClassName)
   }
 
 

@@ -101,7 +101,7 @@ export default class Button extends Component<HTMLAnchorElement> {
         this.linkFn = this.addActivationCallback((e) => {
           if (link.isOnOrigin) {
             if (e) e.preventDefault()
-            domain.set(to)
+            domain.set(to, 0, true)
           }
           
         })

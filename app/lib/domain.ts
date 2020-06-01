@@ -106,6 +106,7 @@ function parseDomainToDomainIndex(domain: string, level: number) {
 let currentDomainSet: Promise<void>
 let inDomainSet = false
 export async function set(subdomain: string, level: number = 0, push: boolean = true) {
+  initialGet = false
   while (inDomainSet) {
     await currentDomainSet
   }
@@ -144,7 +145,8 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
       let endDomain = domainIndex.join(dirString)
 
       domainIndex.set(domainIndexRollback)
-      set(endDomain, 0)
+      set(endDomain, 0, true)
+      console.log("af")
     }
     else {
       history.pushState(argData, updateTitle(), endDomain)
@@ -182,7 +184,7 @@ export class DomainSubscription {
 
 }
 
-
+let initialGet = true
 type DomainFragment = string
 export function get(domainLevel: number, subscription: (domainFragment: DomainFragment) => (boolean | Promise<void> | Promise<boolean> | void), onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainSubscription
 export function get(domainLevel: number, subscription: undefined | null, onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainFragment
@@ -204,6 +206,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
   })
   let currentDomain = calcCurrentDomain();
   (() => {
+    if (!initialGet) return
     let joined = domainIndex.join(dirString)
     let domain = joined === "" ? defaultDomain : joined
 

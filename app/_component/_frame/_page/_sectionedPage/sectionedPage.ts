@@ -83,7 +83,6 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     
     let currentlyActiveSectionElem = await sectionIndex.get(this.domainSubscription.domain) as any as PageSection
-    currentlyActiveSectionElem.activate()
 
     let globalToken: Symbol
     this.observer = new IntersectionObserver(async (c) => {
@@ -138,6 +137,9 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     this.elementBody.on("scroll", () => {
       if (currentlyActiveSectionElem.scrollProgressCallback) currentlyActiveSectionElem.scrollProgressCallback(this.elementBody.scrollTop - currentlyActiveSectionElem.offsetTop)
     })
+
+    if (currentlyActiveSectionElem === undefined) return false
+    currentlyActiveSectionElem.activate()
   }
 
   

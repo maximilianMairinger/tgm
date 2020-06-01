@@ -224,7 +224,6 @@ export default declareComponent("header", class Header extends ThemAble {
       this.lastSelectedElem = elem
       elem.css({fontWeight: "bold"})
 
-      debugger
       if (thisBounds.left < lastBounds.left) {
         let width = (lastBounds.right - thisBounds.left) * slidyLineStretchFactor
         await this.underlineElem.anim([

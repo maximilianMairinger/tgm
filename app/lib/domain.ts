@@ -146,7 +146,6 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
 
       domainIndex.set(domainIndexRollback)
       set(endDomain, 0, true)
-      console.log("af")
     }
     else {
       history.pushState(argData, updateTitle(), endDomain)

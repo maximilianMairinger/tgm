@@ -4,6 +4,7 @@
     min-width: 445px;
     width: auto;
     user-select: auto;
+    box-sizing: border-box;
 }
 
 @media only screen and (max-width: 768px) {
@@ -231,6 +232,12 @@ image-box{
     }
 
     content-box{
+        max-width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    :host{
         max-width: 100%;
     }
 }

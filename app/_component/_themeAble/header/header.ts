@@ -30,32 +30,43 @@ export default declareComponent("header", class Header extends ThemAble {
   // private tgmLogoIcon = this.q("c-tgm-logo")
   // private backLinkComponents: ElementList<ThemAble> = new ElementList()
 
-  constructor() { 
+  constructor(public linksShownChangeCallback?: (linksShown: boolean, init: boolean, func: any) => void) { 
     super()
     
     let isLinkContainerCurrentlyHidden = false
-    window.on("resize", (q) => {
-      if (this.currentLinkElems) {
-        let links = this.currentLinkElems.first.getBoundingClientRect()
-        let logo = this.pathDisplayElem.getBoundingClientRect()
+    window.on("resize", this.resizeHandler.bind(this))
+  }
 
-        let margin = 100 + (isLinkContainerCurrentlyHidden ? 80 : 0)
-        if (links.left < logo.right + margin) {
-          if (!isLinkContainerCurrentlyHidden) {
-            isLinkContainerCurrentlyHidden = true
-            this.linkContainerElem.addClass("hide")
-            this.leftContent.addClass("mobile")
-          }
-        }
-        else {
-          if (isLinkContainerCurrentlyHidden) {
-            isLinkContainerCurrentlyHidden = false
-            this.linkContainerElem.removeClass("hide")
-            this.leftContent.removeClass("mobile")
-          }
+
+  private isLinkContainerCurrentlyHidden: boolean
+  private initialResize = true
+  private resizeHandler() {
+    if (this.currentLinkElems) {
+      let links = this.currentLinkElems.first.getBoundingClientRect()
+      let logo = this.pathDisplayElem.getBoundingClientRect()
+
+      let margin = 100 + (this.isLinkContainerCurrentlyHidden ? 80 : 0)
+      if (links.left < logo.right + margin) {
+        if (!this.isLinkContainerCurrentlyHidden) {
+          this.isLinkContainerCurrentlyHidden = true
+          let func: "css" | "anim" = this.initialResize ? "css" : "anim"
+          this.linkContainerElem[func as any]({opacity: 0})
+          this.leftContent[func as any]({left: "8vw"})
+          if (this.linksShownChangeCallback) this.linksShownChangeCallback(false, this.initialResize, func)
+          this.initialResize = false
         }
       }
-    })
+      else {
+        if (this.isLinkContainerCurrentlyHidden || this.isLinkContainerCurrentlyHidden === undefined) {
+          this.isLinkContainerCurrentlyHidden = false
+          let func: "css" | "anim" = this.initialResize ? "css" : "anim"
+          this.linkContainerElem[func as any]({opacity: 1})
+          this.leftContent[func as any]({left: 100})
+          if (this.linksShownChangeCallback) this.linksShownChangeCallback(true, this.initialResize, func)
+          this.initialResize = false
+        }
+      }
+    }
   }
 
 
@@ -169,7 +180,11 @@ export default declareComponent("header", class Header extends ThemAble {
 
 
     let currentLength = this.currentLinkElems.length
+    
     animationWrapper.apd(...this.currentLinkElems)
+    this.resizeHandler()
+
+    
     
     await Promise.all([
       underlineFadeAnim,
@@ -187,9 +202,11 @@ export default declareComponent("header", class Header extends ThemAble {
       })
     ])
 
-    
     this.inFadeInAnim = false
     res()
+
+
+    
   }
 
   public theme(): Theme
@@ -275,4 +292,3 @@ export default declareComponent("header", class Header extends ThemAble {
   }
 })
 
-// const totalUnderlineOverflow = 5

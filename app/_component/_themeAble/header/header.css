@@ -44,13 +44,8 @@ left-content {
   left: 100px;
   display: flex;
   align-items: center;
-
-  transition: .4s left;
 }
 
-left-content.mobile {
-  left: 30px
-}
 
 
 left-content > c-tgm-logo {
@@ -76,13 +71,8 @@ right-content {
   align-items: center;
   height: 100%;
   width: calc(100% - 100px);
-
-  transition: .3s opacity;
 }
 
-right-content.hide {
-  opacity: 0;
-}
 
 link-animation-wrapper {
   display: inline-block;  

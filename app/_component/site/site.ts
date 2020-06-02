@@ -2,6 +2,7 @@ import Component from "../component"
 import declareComponent from "./../../lib/declareComponent"
 import PageManager from "../_frame/_manager/pageManager/pageManager";
 import Header from "./../_themeAble/header/header"
+import LowerNav from "./../_themeAble/lowerNav/lowerNav"
 
 
 const topLimit = 0
@@ -10,7 +11,23 @@ export default declareComponent("site", class extends Component {
   
   constructor() { 
     super()
-    let header = new Header()
+
+
+    let lowerNav = new LowerNav()
+    let currentlyShowingLowerNav: boolean
+    let header = new Header((hide, init, func) => {
+      
+      if (hide) {
+        currentlyShowingLowerNav = false
+        lowerNav[func]({opacity: 0, translateY: 10})
+      }
+      else {
+        currentlyShowingLowerNav = true
+        lowerNav[func]({opacity: 1, translateY: .1})
+      }
+      
+    })
+    
 
     let lastScrollProg = 0
 
@@ -39,7 +56,7 @@ export default declareComponent("site", class extends Component {
 
 
     
-    this.apd(header)
+    this.apd(header, lowerNav)
   }
 
   

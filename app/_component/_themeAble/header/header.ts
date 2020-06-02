@@ -33,7 +33,6 @@ export default declareComponent("header", class Header extends ThemAble {
   constructor(public linksShownChangeCallback?: (linksShown: boolean, init: boolean, func: any) => void) { 
     super()
     
-    let isLinkContainerCurrentlyHidden = false
     window.on("resize", this.resizeHandler.bind(this))
   }
 

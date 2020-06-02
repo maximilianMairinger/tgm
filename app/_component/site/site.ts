@@ -16,19 +16,25 @@ export default declareComponent("site", class extends Component {
 
     let lowerNav = new LowerNav()
     let currentlyShowingLowerNav: boolean
-    
 
-    let header = new Header((hide, init, func) => {
+
+    let header = new Header(async (hide, init, func) => {
       if (hide) {
         
         currentlyShowingLowerNav = false
 
-        lowerNav.disable(init, func)
+        header.updatePage(currentSectons, currentDomainLevel)
+        await lowerNav.disable(init, func)
+        header.updateSelectedLink(currentSection)
+
       }
       else {
         currentlyShowingLowerNav = true
 
-        lowerNav.enable(init, func)
+        lowerNav.updatePage(currentSectons, currentDomainLevel)
+        await lowerNav.enable(init, func)
+        lowerNav.updateSelectedLink(currentSection)
+
       }
       
     })
@@ -38,10 +44,19 @@ export default declareComponent("site", class extends Component {
 
     let lastScrollProg = 0
 
+    let currentDomainLevel = 0
+    let currentSectons: string[]
+    let currentSection: string
+
     let pageManager = new PageManager((page, sections, domainLevel) => {
-      header.updatePage(sections, domainLevel)
+      currentDomainLevel = domainLevel
+      currentSectons = sections
+      if (currentlyShowingLowerNav) lowerNav.updatePage(sections, domainLevel)
+      else header.updatePage(sections, domainLevel)
     }, (section) => {
-      header.updateSelectedLink(section)
+      currentSection = section
+      if (currentlyShowingLowerNav) lowerNav.updateSelectedLink(section)
+      else header.updateSelectedLink(section)
     }, (scrollBarWidth) => {
       navs.css({width: `calc(100% - ${scrollBarWidth}px)`})
     }, (prog) => {

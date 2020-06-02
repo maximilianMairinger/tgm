@@ -17,16 +17,15 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
   
 
   private enableToken: Symbol
-  public enable(init: boolean, func: "css" | "anim" = init ? "css" : "anim") {
-    console.log("en")
+  public async enable(init: boolean, func: "css" | "anim" = init ? "css" : "anim") {
     this.enableToken = Symbol()
     this.backgrounds.show()
-    this.backgrounds[func as any]({opacity: 1})
+    await this.backgrounds[func as any]({opacity: 1})
   }
-  public disable(init: boolean, func: "css" | "anim" = init ? "css" : "anim") {
+  public async disable(init: boolean, func: "css" | "anim" = init ? "css" : "anim") {
     let token = this.enableToken = Symbol()
     let r = this.backgrounds[func as any]({opacity: 0})
-    if (!init) r.then(() => {if (token === this.enableToken) this.backgrounds.hide()})
+    if (!init) await r.then(() => {if (token === this.enableToken) this.backgrounds.hide()})
   }
 
   public theme(): Theme
@@ -34,6 +33,15 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
   public theme(to?: Theme): any {
     this.currentLinkElems.Inner("theme", [to])
     return super.theme(to)
+  }
+
+
+  public async updatePage(linkContents: string[], domainLevel: number) {
+
+  }
+
+  public async updateSelectedLink(activeLink: string) {
+
   }
   
 

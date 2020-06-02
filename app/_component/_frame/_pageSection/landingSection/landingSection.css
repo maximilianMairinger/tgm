@@ -226,8 +226,8 @@ tagesschule-container > c-textblob {
   }
 
   text-container > c-textblob {
-    left: 40px;
-    max-width: calc(100% - 40px);
+    left: 8vw;
+    max-width: calc(100% - 8vw);
   }
 
 

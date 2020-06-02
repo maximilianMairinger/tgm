@@ -69,7 +69,7 @@ c-link{
     font-size: 15px;
 }
 
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 1450px) {
     anmelden-card {
         padding: 40px;
     }

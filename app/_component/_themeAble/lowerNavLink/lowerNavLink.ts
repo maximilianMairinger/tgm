@@ -8,7 +8,9 @@ import lang from "./../../../lib/lang"
 import { Data } from "josm"
 
 const iconIndex = {
-  abendschule: () => import("./../_icon/bioMed/bioMed")
+  abendschule: () => import("./../_icon/bioMed/bioMed"),
+  tagesschule: () => import("./../_icon/bioMed/bioMed"),
+  versuchsanstalt: () => import("./../_icon/bioMed/bioMed"),
 }
 
 

@@ -1,3 +1,7 @@
+:host {
+  display: block;
+}
+
 icon-container {
   display: flex;
   position: absolute;

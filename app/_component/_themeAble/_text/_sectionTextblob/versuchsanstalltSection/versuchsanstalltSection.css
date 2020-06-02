@@ -5,9 +5,9 @@ section-textblob-image{
 section-textblob-extra-container {
     position: absolute;
     left: 100px;
-    bottom: -135px;
-    height: 175px;
-    width: 75px;
+    bottom: -145px;
+    height: 250px;
+    width: 115px;
 }
 
 section-textblob-extra {
@@ -19,4 +19,14 @@ section-textblob-extra {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: left bottom;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    section-textblob-extra-container {
+        left: 0;
+        height: 175px;
+        width: 75px;
+    }
 }

@@ -52,9 +52,9 @@ c-selection-card{
 image-container {
     position: absolute;
     left: 200px;
-    top: -10px;
-    height: 175px;
-    width: 200px;
+    top: -14px;
+    height: 250px;
+    width: 300px;
 }
 
 image-box {
@@ -121,7 +121,7 @@ image-box {
 
     image-container {
         position: absolute;
-        left: calc(100px + 10vw);
+        left: 10vw;
         top: -10px;
         height: 175px;
         width: 200px;

@@ -1,14 +1,50 @@
 
+section-header{
+    display: block;
+    max-width: 100%;
+    margin: 50px 180px 100px 180px;
+    background: url("../../../../res/img/abendschule_background.svg") 80% 35% no-repeat;
+    background-size: 2300px 1275px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: max(27px, calc(35px + (100 - 35)*((100vw - 768px)/(1600 - 768))));
+    font-weight: bold;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+section-header[ellipsis]{
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+@media only screen and (max-width: 1450px) {
+    section-header{
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    section-header{
+        font-size: max(27px, calc(35px + (70 - 35)*((100vw - 300px)/(768 - 300))));
+        margin: 0 10vw;
+        color: #222934;
+    }
+}
+
 test-container{
     display: flex;
-    margin: 50px 205px 100px 205px;
+    margin: 0 205px 150px 205px;
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
 test-container * {
-    margin: 50px 25px 0 25px;
+    margin: 0 25px 50px 25px;
 }
 
 c-anmelden-card{

@@ -29,7 +29,7 @@ section-header[ellipsis]{
 
 @media only screen and (max-width: 768px) {
     section-header{
-        font-size: max(27px, calc(35px + (70 - 35)*((100vw - 300px)/(768 - 300))));
+        font-size: max(27px, calc(35px + (70 - 30)*((100vw - 300px)/(768 - 300))));
         margin: 0 10vw;
         color: #222934;
     }

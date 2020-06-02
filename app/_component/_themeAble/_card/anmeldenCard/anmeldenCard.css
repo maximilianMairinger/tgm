@@ -45,18 +45,10 @@ c-textblob{
     margin-bottom: 15px;
 }
 
-image-container{
+c-zertificate-man{
     display: block;
-    flex-grow: 1;
-    margin: 0 5%;
-}
-
-image-box{
-    display: block;
-    height: 100%;
     width: 100%;
-    background: darkblue url("../../../../res/img/zertificate_man.svg") center no-repeat;
-    background-size: contain;
+    flex-grow: 1;
 }
 
 content-box{
@@ -82,7 +74,7 @@ c-link{
         padding: 40px;
     }
 
-    image-container{
+    c-zertificate-man{
         height: 200px;
     }
 }

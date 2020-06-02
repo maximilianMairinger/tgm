@@ -8,11 +8,11 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
   private currentLinkElems: ElementList<ThemAble>
   private backgroundContainer = this.q("background-container")
   private backgrounds = this.backgroundContainer.childs()
+  private linkConteiner = this.q("link-container")
 
   constructor() { 
     super()
-    
-    console.log(this.backgrounds)
+
   }
   
 
@@ -28,16 +28,16 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
     if (!init) await r.then(() => {if (token === this.enableToken) this.backgrounds.hide()})
   }
 
-  public theme(): Theme
-  public theme(to: Theme): void
-  public theme(to?: Theme): any {
-    this.currentLinkElems.Inner("theme", [to])
-    return super.theme(to)
-  }
 
 
   public async updatePage(linkContents: string[], domainLevel: number) {
     console.log(linkContents, domainLevel)
+    this.currentLinkElems = new ElementList()
+    linkContents.ea((e) => {
+
+    })
+
+    this.linkConteiner.apd(this.currentLinkElems)
   }
 
   public async updateSelectedLink(activeLink: string) {
@@ -52,5 +52,3 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
     return require("./lowerNav.pug").default
   }
 })
-
-// const totalUnderlineOverflow = 5

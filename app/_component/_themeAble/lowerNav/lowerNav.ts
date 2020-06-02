@@ -6,11 +6,29 @@ import { ElementList } from "extended-dom"
 
 export default declareComponent("lower-nav", class LowerNav extends ThemAble {
   private currentLinkElems: ElementList<ThemAble>
+  private backgroundContainer = this.q("background-container")
+  private backgrounds = this.backgroundContainer.childs()
 
   constructor() { 
     super()
     
-    
+    console.log(this.backgrounds)
+  }
+  
+
+  private enableToken: Symbol
+  public enable(init: boolean, func: "css" | "anim" = init ? "css" : "anim") {
+    console.log("en")
+    this.enableToken = Symbol()
+    this.backgrounds.show()
+    this.backgroundContainer[func as any]({translateY: .1})
+    this.backgrounds[func as any]({opacity: 1})
+  }
+  public disable(init: boolean, func: "css" | "anim" = init ? "css" : "anim") {
+    let token = this.enableToken = Symbol()
+    this.backgroundContainer[func as any]({translateY: 10})
+    let r = this.backgrounds[func as any]({opacity: 0})
+    if (!init) r.then(() => {if (token === this.enableToken) this.backgrounds.hide()})
   }
 
   public theme(): Theme

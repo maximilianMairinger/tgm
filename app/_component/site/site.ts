@@ -3,6 +3,7 @@ import declareComponent from "./../../lib/declareComponent"
 import PageManager from "../_frame/_manager/pageManager/pageManager";
 import Header from "./../_themeAble/header/header"
 import LowerNav from "./../_themeAble/lowerNav/lowerNav"
+import { ElementList } from "extended-dom";
 
 
 const topLimit = 0
@@ -15,18 +16,24 @@ export default declareComponent("site", class extends Component {
 
     let lowerNav = new LowerNav()
     let currentlyShowingLowerNav: boolean
+    
+
     let header = new Header((hide, init, func) => {
-      
       if (hide) {
+        
         currentlyShowingLowerNav = false
-        lowerNav[func]({opacity: 0, translateY: 10})
+
+        lowerNav.disable(init, func)
       }
       else {
         currentlyShowingLowerNav = true
-        lowerNav[func]({opacity: 1, translateY: .1})
+
+        lowerNav.enable(init, func)
       }
       
     })
+
+    let navs = new ElementList<Element>(header, lowerNav)
     
 
     let lastScrollProg = 0
@@ -36,7 +43,7 @@ export default declareComponent("site", class extends Component {
     }, (section) => {
       header.updateSelectedLink(section)
     }, (scrollBarWidth) => {
-      header.css({width: `calc(100% - ${scrollBarWidth}px)`})
+      navs.css({width: `calc(100% - ${scrollBarWidth}px)`})
     }, (prog) => {
       if (lastScrollProg > topLimit) {
         if (prog <= topLimit) {

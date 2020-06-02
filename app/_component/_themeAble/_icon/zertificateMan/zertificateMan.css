@@ -12,6 +12,7 @@ zertificate-man svg {
     height: auto;
     background: url("../../../../res/img/abendschule_background.svg") 60% 32% no-repeat;
     background-size: 2300px 1275px;
+    backface-visibility: hidden;
 }
 
 zertificate-man #Group_169 #background{

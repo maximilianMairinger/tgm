@@ -19,7 +19,7 @@ test-container{
     display: flex;
     margin: 0 205px 100px 205px;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
@@ -29,7 +29,6 @@ test-container * {
 
 c-anmelden-card{
     width: 25%;
-    align-self: stretch;
 }
 
 
@@ -45,7 +44,17 @@ c-selection-card{
     }
 
     test-container{
-        justify-content: center;
+        margin: 0 100px 100px 100px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    c-selection-card{
+        width: auto;
+    }
+
+    c-anmelden-card{
+        width: auto;
     }
 }
 
@@ -53,7 +62,6 @@ c-selection-card{
     test-container{
         margin-right: 10vw;
         margin-left: 10vw;
-        flex-direction: column;
     }
 
     test-container *{
@@ -62,7 +70,6 @@ c-selection-card{
 
     c-selection-card{
         max-width: 100%;
-        width: 100%;
         min-width: unset;
         margin-right: 0;
     }

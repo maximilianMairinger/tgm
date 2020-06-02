@@ -67,10 +67,6 @@ c-link{
 }
 
 @media only screen and (max-width: 1250px) {
-    :host {
-        min-width: 450px;
-    }
-
     anmelden-card {
         padding: 40px;
     }
@@ -84,7 +80,6 @@ c-link{
 @media only screen and (max-width:  768px) {
     :host{
         width: 100%;
-        max-width: 100%;
         min-width: unset;
     }
 

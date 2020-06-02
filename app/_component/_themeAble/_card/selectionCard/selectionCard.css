@@ -213,7 +213,7 @@ image-box{
 @media only screen and (max-width: 1450px) {
 
     :host{
-        max-width: 585px;
+        max-width: 630px;
     }
 
     selection-card{
@@ -237,6 +237,10 @@ image-box{
 
 @media only screen and (max-width: 768px) {
 
+    :host{
+        max-width: 515px;
+    }
+
     selection-card{
         padding: 0 35px;
     }
@@ -246,7 +250,7 @@ image-box{
     }
 
     selection-box link-container{
-        opacity: 1;
+        display: none;
     }
 
     image-container{

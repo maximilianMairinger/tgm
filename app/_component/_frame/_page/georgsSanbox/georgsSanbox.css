@@ -2,7 +2,7 @@
 section-header{
     display: block;
     max-width: 100%;
-    margin: 50px 180px 100px 180px;
+    margin: 0 180px 100px 180px;
     background: url("../../../../res/img/abendschule_background.svg") 80% 35% no-repeat;
     background-size: 2300px 1275px;
     background-clip: text;
@@ -15,15 +15,9 @@ section-header{
     text-overflow: ellipsis;
 }
 
-section-header[ellipsis]{
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
 test-container{
     display: flex;
-    margin: 0 205px 150px 205px;
+    margin: 0 205px 100px 205px;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -40,7 +34,6 @@ c-anmelden-card{
 
 
 c-selection-card{
-    max-width: 65%;
     width: 50%;
     flex-grow: 1;
 }
@@ -53,10 +46,6 @@ c-selection-card{
 
     test-container{
         justify-content: center;
-    }
-
-    c-selection-card{
-        max-width: 90%;
     }
 }
 

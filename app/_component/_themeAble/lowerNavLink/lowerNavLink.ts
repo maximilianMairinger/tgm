@@ -12,7 +12,7 @@ const iconIndex = {
 }
 
 
-export default declareComponent("lower-nav-link", class LowerNavLink extends ThemAble {
+export default class LowerNavLink extends ThemAble {
   private buttonElem = this.q("c-button") as Button
   private textElem = this.q("text-container")
   private iconContainer = this.q("icon-container")
@@ -88,6 +88,7 @@ export default declareComponent("lower-nav-link", class LowerNavLink extends The
   pug() {
     return require("./lowerNavLink.pug").default
   }
-})
+}
 
 
+declareComponent("lower-nav-link", LowerNavLink)

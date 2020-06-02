@@ -2,6 +2,7 @@ import { declareComponent } from "../../../../../../lib/declareComponent"
 import LazySectionedPage from "../lazySectionedPage"
 import { ImportanceMap, Import } from "../../../../../../lib/lazyLoad"
 import VersuchanstaltSection from "../../../../_pageSection/versuchsanstaltSection/versuchsanstaltSection"
+import AbendschuleSection from "../../../../_pageSection/abendschuleSection/abendschuleSection"
 import LandingSection from "../../../../_pageSection/landingSection/landingSection"
 
 
@@ -18,6 +19,11 @@ export default declareComponent("home-page", class Homepage extends LazySectione
         key: new Import("versuchsanstalt", 1, (_VersuchsanstaltSection: typeof VersuchanstaltSection) =>
           new _VersuchsanstaltSection()
         ), val: () => import(/* webpackChunkName: "VersuchsanstaltSection" */"../../../../_pageSection/versuchsanstaltSection/versuchsanstaltSection")
+      },
+      {
+        key: new Import("abendschule", 1, (_AbendschuleSection: typeof AbendschuleSection) =>
+            new _AbendschuleSection()
+        ), val: () => import(/* webpackChunkName: "AbendschuleSection" */"../../../../_pageSection/abendschuleSection/abendschuleSection")
       }
     ), domainLevel, setPage, sectionChangeCallback)
   }

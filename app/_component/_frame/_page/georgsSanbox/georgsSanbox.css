@@ -8,7 +8,7 @@ section-header{
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    font-size: max(27px, calc(35px + (100 - 35)*((100vw - 768px)/(1600 - 768))));
+    font-size: max(27px, calc(60px + (100 - 60)*((100vw - 768px)/(1600 - 768))));
     font-weight: bold;
     text-align: right;
     overflow: hidden;
@@ -21,25 +21,11 @@ section-header[ellipsis]{
     color: transparent;
 }
 
-@media only screen and (max-width: 1450px) {
-    section-header{
-        text-align: center;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    section-header{
-        font-size: max(27px, calc(35px + (70 - 30)*((100vw - 300px)/(768 - 300))));
-        margin: 0 10vw;
-        color: #222934;
-    }
-}
-
 test-container{
     display: flex;
     margin: 0 205px 150px 205px;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 
@@ -55,6 +41,23 @@ c-anmelden-card{
 
 c-selection-card{
     max-width: 65%;
+    width: 50%;
+    flex-grow: 1;
+}
+
+@media only screen and (max-width: 1250px) {
+    section-header{
+        margin: 50px 100px 100px 100px;
+        text-align: center;
+    }
+
+    test-container{
+        justify-content: center;
+    }
+
+    c-selection-card{
+        max-width: 90%;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -70,6 +73,7 @@ c-selection-card{
 
     c-selection-card{
         max-width: 100%;
+        width: 100%;
         min-width: unset;
         margin-right: 0;
     }
@@ -78,6 +82,11 @@ c-selection-card{
         width: unset;
     }
 
+    section-header{
+        font-size: max(27px, calc(35px + (70 - 30)*((100vw - 300px)/(768 - 300))));
+        margin: 0 10vw;
+        color: #425870;
+    }
 
 }
 

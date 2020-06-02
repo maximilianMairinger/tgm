@@ -9,6 +9,12 @@ background-blur, background-color, background-container {
 
 background-color {
   border-top: 1px solid rgba(0,0,0,0.16);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+background-blur {
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 

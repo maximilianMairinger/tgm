@@ -21,12 +21,10 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
     console.log("en")
     this.enableToken = Symbol()
     this.backgrounds.show()
-    this.backgroundContainer[func as any]({translateY: .1})
     this.backgrounds[func as any]({opacity: 1})
   }
   public disable(init: boolean, func: "css" | "anim" = init ? "css" : "anim") {
     let token = this.enableToken = Symbol()
-    this.backgroundContainer[func as any]({translateY: 10})
     let r = this.backgrounds[func as any]({opacity: 0})
     if (!init) r.then(() => {if (token === this.enableToken) this.backgrounds.hide()})
   }

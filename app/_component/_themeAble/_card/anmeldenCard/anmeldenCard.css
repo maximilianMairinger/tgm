@@ -73,7 +73,9 @@ c-link{
     anmelden-card {
         padding: 40px;
     }
+}
 
+@media only screen and (max-width: 1250px) {
     c-zertificate-man{
         height: 200px;
     }

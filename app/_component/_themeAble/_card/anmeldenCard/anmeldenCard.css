@@ -57,12 +57,13 @@ content-box{
 }
 
 content-text{
-    font-size: 13px;
+    font-size: 15px;
 }
 
 c-link{
+    width: auto;
     margin-top: 15px;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 @media only screen and (max-width: 1450px) {

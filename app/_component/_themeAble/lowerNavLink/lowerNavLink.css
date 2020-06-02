@@ -1,5 +1,6 @@
 :host {
   display: block;
+  --padding: 5.5%;
 }
 
 icon-container {
@@ -9,21 +10,24 @@ icon-container {
   left: 0;
   right: 0;
 
-  height: 70%
+  height: calc(67% - var(--padding))
 }
 
 icon-container > * {
   margin: auto;
+  height: 100%;
+  min-height: 20px;
+  box-sizing: border-box;
+  padding-top: var(--padding);
 }
 
 text-container {
   display: block;
   position: absolute;
-  bottom: 0;
+  bottom: var(--padding);
   left: 0;
   right: 0;
 
-  height: 50%;
   text-align: center;
   width: 100%;
 
@@ -31,6 +35,8 @@ text-container {
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: bold;
+
+  font-size: 14px;
 }
 
 c-button {

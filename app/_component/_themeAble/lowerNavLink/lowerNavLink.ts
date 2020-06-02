@@ -44,9 +44,11 @@ export default class LowerNavLink extends ThemAble {
     if (!this.content()) {
       this.content(lang.links[link])
     }
-    else if (!this.icon()) {
+
+    if (!this.icon()) {
       this.icon(link)
     }
+
     this.href(link)
   }
 
@@ -67,14 +69,18 @@ export default class LowerNavLink extends ThemAble {
   private currentIconName: string
 
   public icon(): string
-  public icon(icon: string): void
+  public icon(icon: string): Promise<void>
   public icon(icon?: string): any {
     if (icon !== undefined) {
+      debugger
       let ic = iconIndex[icon]
       if (ic === undefined) console.warn("Unknown Icon: \"" + icon + "\".")
       else {
-        this.currentIconName = icon
-        this.iconContainer.html(iconIndex[icon]().default)
+        this.currentIconName = icon;
+
+        (async () => {
+          this.iconContainer.html(new ((await iconIndex[icon]()).default)())
+        })()
       }
       
     }

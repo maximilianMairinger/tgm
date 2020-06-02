@@ -23,9 +23,7 @@ export default declareComponent("site", class extends Component {
         
         currentlyShowingLowerNav = false
 
-        header.updatePage(currentSectons, currentDomainLevel)
         await lowerNav.disable(init, func)
-        header.updateSelectedLink(currentSection)
 
       }
       else {
@@ -52,11 +50,11 @@ export default declareComponent("site", class extends Component {
       currentDomainLevel = domainLevel
       currentSectons = sections
       if (currentlyShowingLowerNav) lowerNav.updatePage(sections, domainLevel)
-      else header.updatePage(sections, domainLevel)
+      header.updatePage(sections, domainLevel)
     }, (section) => {
       currentSection = section
       if (currentlyShowingLowerNav) lowerNav.updateSelectedLink(section)
-      else header.updateSelectedLink(section)
+      header.updateSelectedLink(section)
     }, (scrollBarWidth) => {
       navs.css({width: `calc(100% - ${scrollBarWidth}px)`})
     }, (prog) => {

@@ -37,11 +37,11 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
 
 
   public async updatePage(linkContents: string[], domainLevel: number) {
-
+    console.log(linkContents, domainLevel)
   }
 
   public async updateSelectedLink(activeLink: string) {
-
+    console.log(activeLink)
   }
   
 

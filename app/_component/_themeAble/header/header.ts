@@ -39,13 +39,14 @@ export default declareComponent("header", class Header extends ThemAble {
 
   private isLinkContainerCurrentlyHidden: boolean
   private initialResize = true
-  private resizeHandler() {
+  private resizeHandler(q: {width: number}) {
     if (this.currentLinkElems) {
-      let links = this.currentLinkElems.first.getBoundingClientRect()
+      
+      let linksLeft: number = !this.currentLinkElems.empty ? this.currentLinkElems.first.getBoundingClientRect().left : q.width - 200
       let logo = this.pathDisplayElem.getBoundingClientRect()
 
       let margin = 100 + (this.isLinkContainerCurrentlyHidden ? 80 : 0)
-      if (links.left < logo.right + margin) {
+      if (linksLeft < logo.right + margin) {
         if (!this.isLinkContainerCurrentlyHidden) {
           this.isLinkContainerCurrentlyHidden = true
           let func: "css" | "anim" = this.initialResize ? "css" : "anim"
@@ -181,8 +182,9 @@ export default declareComponent("header", class Header extends ThemAble {
     let currentLength = this.currentLinkElems.length
     
     animationWrapper.apd(...this.currentLinkElems)
-    this.resizeHandler()
-
+    
+    this.resizeHandler({width: this.clientWidth})
+    if (this.currentLinkElems.empty) return
     
     
     await Promise.all([

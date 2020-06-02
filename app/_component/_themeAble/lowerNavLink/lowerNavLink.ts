@@ -27,13 +27,12 @@ export default class LowerNavLink extends ThemAble {
    */
   constructor(link: keyof typeof iconIndex, domainLevel?: number, content?: keyof typeof iconIndex | Data<keyof typeof iconIndex>, icon?: keyof typeof iconIndex)
   constructor(link: string, domainLevel?: number, content?: string, icon?: keyof typeof iconIndex)
-  constructor(link: string, domainLevel: number = 0, content?: string | Data<string>, icon?: keyof typeof iconIndex) { 
+  constructor(link: string, domainLevel?: number, content?: string | Data<string>, icon?: keyof typeof iconIndex) { 
     super()
 
     this.content(content)
     this.icon(icon)
-
-    this.buttonElem.link(link, domainLevel)
+    this.link(link, domainLevel)
   }
 
 
@@ -42,12 +41,13 @@ export default class LowerNavLink extends ThemAble {
   public link(link: keyof typeof iconIndex, domainLevel?: number): void
   public link(link: string, domainLevel?: number): void
   public link(link?: string, domainLevel?: number): any {
-    if (this.content() === undefined) {
+    if (!this.content()) {
       this.content(lang.links[link])
     }
-    else if (this.icon() === undefined) {
+    else if (!this.icon()) {
       this.icon(link)
     }
+    this.href(link)
   }
 
   public href(): string

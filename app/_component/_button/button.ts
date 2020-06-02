@@ -92,8 +92,8 @@ export default class Button extends Component<HTMLAnchorElement> {
   private _link: string
   private linkFn: any
   public link(): string
-  public link(to: string): void
-  public link(to?: string) {
+  public link(to: string, domainLevel?: number, push?: boolean): void
+  public link(to?: string, domainLevel: number = 0, push = true) {
 
     if (to !== undefined) {
       if (to !== null) {
@@ -103,7 +103,7 @@ export default class Button extends Component<HTMLAnchorElement> {
         this.linkFn = this.addActivationCallback((e) => {
           if (link.isOnOrigin) {
             if (e) e.preventDefault()
-            domain.set(to, 0, true)
+            domain.set(to, domainLevel, push)
           }
           
         })

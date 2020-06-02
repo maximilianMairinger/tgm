@@ -143,18 +143,21 @@ export default declareComponent("landing-section", class Landing extends PageSec
   }
 
   private currentlyShowingTagesschuleHeader = false
+  private scrollProgAnimToken: Symbol
   scrollProgressCallback(e: number) {
-    if (e > 300) {
+    if (e > 200) {
       if (!this.currentlyShowingTagesschuleHeader) {
-        this.mainHeaderElem.anim({translateY: -10, opacity: 0}, 400)
-        this.tagesschuleHeaderElem.anim({opacity: 1, translateY: .1}, 400)
+        let token = this.scrollProgAnimToken = Symbol()
+        this.mainHeaderElem.anim({translateY: 20, opacity: 0, scale: .97}, 400).then(() => {if (token === this.scrollProgAnimToken) this.mainHeaderElem.hide().css({translateY: -20})})
+        delay(140).then(() => {if (token === this.scrollProgAnimToken) this.tagesschuleHeaderElem.show().anim({opacity: 1, translateY: .1, scale: 1}, 550)})
         this.currentlyShowingTagesschuleHeader = true
       }
     }
-    else if (e < 250) {
+    else if (e < 150) {
       if (this.currentlyShowingTagesschuleHeader) {
-        this.mainHeaderElem.anim({translateY: .1, opacity: 1}, 400)
-        this.tagesschuleHeaderElem.anim({opacity: 0, translateY: 10}, 400)
+        let token = this.scrollProgAnimToken = Symbol()
+        this.tagesschuleHeaderElem.anim({opacity: 0, translateY: 20, scale: .97}, 400).then(() => {if (token === this.scrollProgAnimToken) this.tagesschuleHeaderElem.hide().css({translateY: -20})})
+        delay(140).then(() => {if (token === this.scrollProgAnimToken) this.mainHeaderElem.show().anim({translateY: .1, opacity: 1, scale: 1}, 550)})
         this.currentlyShowingTagesschuleHeader = false
       }
     }

@@ -60,9 +60,12 @@ content-text{
     font-size: 15px;
 }
 
-c-link{
-    width: auto;
+link-box{
+    display: block;
     margin-top: 15px;
+}
+
+c-link{
     font-size: 15px;
 }
 

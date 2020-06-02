@@ -8,7 +8,7 @@ section-header{
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    font-size: max(27px, calc(60px + (100 - 60)*((100vw - 768px)/(1600 - 768))));
+    font-size: max(27px, calc(75px + (105 - 75)*((100vw - 768px)/(1600 - 768))));
     font-weight: bold;
     text-align: right;
     overflow: hidden;
@@ -79,7 +79,7 @@ c-selection-card{
     }
 
     section-header{
-        font-size: max(27px, calc(35px + (70 - 30)*((100vw - 300px)/(768 - 300))));
+        font-size: max(27px, calc(35px + (80 - 35)*((100vw - 300px)/(768 - 300))));
         margin: 0 10vw;
         color: #425870;
     }

@@ -1,0 +1,3 @@
+:host(.hightlight) path {
+  fill: var(--contrast-text-color) !important
+}

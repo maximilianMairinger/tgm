@@ -3,16 +3,17 @@ import declareComponent from "../../../lib/declareComponent"
 import { ElementList } from "extended-dom"
 import "./../../_button/button"
 import Button from "./../../_button/button"
-import Icon from "../_icon/icon"
+import HighlightAbleIcon from "../_icon/_highlightAbleIcon/highlightAbleIcon"
 import lang from "./../../../lib/lang"
 import { Data } from "josm"
 
 const iconIndex = {
-  abendschule: () => import("./../_icon/bioMed/bioMed"),
-  tagesschule: () => import("./../_icon/bioMed/bioMed"),
-  versuchsanstalt: () => import("./../_icon/bioMed/bioMed"),
+  abendschule: () => import("../_icon/_highlightAbleIcon/bioMed/bioMed"),
+  tagesschule: () => import("../_icon/_highlightAbleIcon/bioMed/bioMed"),
+  versuchsanstalt: () => import("../_icon/_highlightAbleIcon/bioMed/bioMed"),
 }
 
+const hightlightClassString = "highlight"
 
 export default class LowerNavLink extends ThemAble {
   private buttonElem = this.q("c-button") as Button
@@ -27,7 +28,7 @@ export default class LowerNavLink extends ThemAble {
    */
   constructor(link: keyof typeof iconIndex, domainLevel?: number, content?: keyof typeof iconIndex | Data<keyof typeof iconIndex>, icon?: keyof typeof iconIndex)
   constructor(link: string, domainLevel?: number, content?: string, icon?: keyof typeof iconIndex)
-  constructor(link: string, domainLevel?: number, content?: string | Data<string>, icon?: keyof typeof iconIndex) { 
+  constructor(link: string, domainLevel?: number, content?: string | Data<string>, icon?: keyof typeof iconIndex) {
     super()
 
     this.content(content)
@@ -67,6 +68,7 @@ export default class LowerNavLink extends ThemAble {
 
 
   private currentIconName: string
+  private activeIconElem: HighlightAbleIcon
 
   public icon(): string
   public icon(icon: string): Promise<void>
@@ -78,16 +80,23 @@ export default class LowerNavLink extends ThemAble {
         this.currentIconName = icon;
 
         (async () => {
-          this.iconContainer.html(new ((await iconIndex[icon]()).default)())
+          this.activeIconElem = new ((await iconIndex[icon]()).default)
+          this.iconContainer.html(this.activeIconElem)
         })()
       }
-      
+
     }
     else return this.currentIconName
   }
 
+  public highlight() {
+    this.addClass(hightlightClassString).activeIconElem.highlight()
+  }
 
-  
+  public downlight() {
+    this.removeClass(hightlightClassString).activeIconElem.downlight()
+  }
+
 
   stl() {
     return require("./lowerNavLink.css").toString()

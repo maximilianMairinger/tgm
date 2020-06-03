@@ -2,6 +2,8 @@
     --strong-text-color: #F8F9FF;
     --weak-text-color: #DDDEE3;
     --contrast-text-color: #27A1D4;
+    /* todo */
+    --weak-contrast-text-color: #1487B7;
     --primary-background-color: #3C4552;
     --secondary-background-color: #3f4957;
     --soft-shadow: 0 0 30px 0 rgba(0, 0, 0, .16);

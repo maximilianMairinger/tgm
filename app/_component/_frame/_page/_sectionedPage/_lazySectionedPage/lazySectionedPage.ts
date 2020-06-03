@@ -39,7 +39,7 @@ export default abstract class LazySectionedPage extends SectionedPage<Promise<an
     let init = domain.get(this.domainLevel)
     await this.resourceMap.get(init)
     
-    await super.initialActivationCallback()
+    return await super.initialActivationCallback()
   }
   // stl() {
   //   return super.stl() + require("./lazySectionedPage.css").toString()

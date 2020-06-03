@@ -6,7 +6,8 @@ import delay from "delay"
 
 
 export default declareComponent("lower-nav", class LowerNav extends ThemAble {
-  private currentLinkElems: ElementList
+  private currentLinkWrapperElems: ElementList
+  private currentLinkElems: ElementList<LowerNavLink>
   private backgroundContainer = this.q("background-container")
   private linkContainer = this.q("link-container")
   private layers = this.backgroundContainer.childs(1, true).add(this.linkContainer) as any
@@ -35,19 +36,26 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
   public linkContents: string[]
   public async updatePage(linkContents: string[], domainLevel?: number) {
     this.linkContents = linkContents
+    this.currentLinkWrapperElems = new ElementList()
     this.currentLinkElems = new ElementList()
     linkContents.ea((e) => {
-      this.currentLinkElems.add(ce("link-container").apd(new LowerNavLink(e as any, domainLevel)))
+      let link = new LowerNavLink(e as any, domainLevel)
+      this.currentLinkElems.add(link)
+      this.currentLinkWrapperElems.add(ce("link-container").apd(link))
     })
 
-    this.currentLinkElems.first.prepend(this.slidy = ce("active-slidy"))
+    this.currentLinkWrapperElems.first.prepend(this.slidy = ce("active-slidy"))
 
-    this.linkContainer.html(this.currentLinkElems)
+    this.linkContainer.html(this.currentLinkWrapperElems)
   }
 
-
+  private lastHighlightElem: LowerNavLink
   public async updateSelectedLink(activeLink: string) {
-    let x = 100 * this.linkContents.indexOf(activeLink)
+    let index = this.linkContents.indexOf(activeLink)
+    let x = 100 * index
+    if (this.lastHighlightElem) this.lastHighlightElem.downlight()
+    this.lastHighlightElem = this.currentLinkElems[index]
+    this.lastHighlightElem.highlight()
     this.slidy.anim({translateX: x + "%"}, 600)
   }
   

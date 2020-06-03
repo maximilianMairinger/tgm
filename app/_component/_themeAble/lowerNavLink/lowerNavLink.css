@@ -22,6 +22,10 @@ icon-container > * {
 
 }
 
+:host(.highlight) text-container {
+  color: var(--weak-contrast-text-color)
+}
+
 text-container {
   display: block;
   position: absolute;

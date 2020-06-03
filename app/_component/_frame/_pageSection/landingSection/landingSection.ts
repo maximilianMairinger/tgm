@@ -3,7 +3,7 @@ import PageSection from "../pageSection"
 import "./../../../_themeAble/_text/textblob/textblob"
 import TextBlob from "./../../../_themeAble/_text/textblob/textblob"
 import IconCard from "../../../_themeAble/_card/iconCard/iconCard";
-import BioMedIcon from "../../../_themeAble/_icon/bioMed/bioMed";
+import BioMedIcon from "../../../_themeAble/_icon/_highlightAbleIcon/bioMed/bioMed";
 import { ElementList } from "extended-dom";
 import scrollTo from "animated-scroll-to"
 import * as animationFrameDelta from "animation-frame-delta"

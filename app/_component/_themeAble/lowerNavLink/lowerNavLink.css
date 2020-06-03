@@ -27,6 +27,10 @@ icon-container > * {
 }
 
 text-container {
+  transition: .4s color;
+}
+
+text-container {
   display: block;
   position: absolute;
   bottom: var(--padding);

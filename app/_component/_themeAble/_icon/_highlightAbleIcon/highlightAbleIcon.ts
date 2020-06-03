@@ -11,4 +11,8 @@ export default abstract class HighlightAbleIcon extends Icon {
   public downlight() {
     this.removeClass(hightlightClassString)
   }
+
+  stl() {
+    return super.stl() + require("./highlightAbleIcon.css").toString()
+  }
 }

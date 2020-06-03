@@ -52,7 +52,9 @@ export default class LowerNavLink extends ThemAble {
   public link(link: string, domainLevel?: number): void
   public link(link?: string, domainLevel?: number): any {
     if (!this.content()) {
-      this.content(lang.links[link])
+      let language = lang.links[link]
+      if (language !== undefined) this.content(language)
+      else this.content(link)
     }
 
     if (!this.icon()) {
@@ -84,7 +86,10 @@ export default class LowerNavLink extends ThemAble {
   public icon(icon?: string): any {
     if (icon !== undefined) {
       let ic = iconIndex[icon]
-      if (ic === undefined) console.warn("Unknown Icon: \"" + icon + "\".")
+      if (ic === undefined) {
+        this.textElem.anim({top: "20%"})
+        console.warn("Unable to find icon for: \"" + icon + "\".")
+      }
       else {
         this.currentIconName = icon;
 
@@ -99,11 +104,13 @@ export default class LowerNavLink extends ThemAble {
   }
 
   public highlight() {
-    this.addClass(hightlightClassString).activeIconElem.highlight()
+    this.addClass(hightlightClassString)
+    if (this.activeIconElem) this.activeIconElem.highlight()
   }
 
   public downlight() {
-    this.removeClass(hightlightClassString).activeIconElem.downlight()
+    this.removeClass(hightlightClassString)
+    if (this.activeIconElem) this.activeIconElem.downlight()
   }
 
 

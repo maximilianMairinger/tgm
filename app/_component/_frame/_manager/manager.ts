@@ -84,7 +84,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private onScrollListener = () => {
     //@ts-ignore
-    this.onScroll(this.currentFrame.elementBody.scrollTop)
+    if (!this.currentFrame.dontPropergateScrollUpdates) this.onScroll(this.currentFrame.elementBody.scrollTop)
   }
 
 

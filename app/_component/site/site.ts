@@ -15,7 +15,9 @@ export default declareComponent("site", class extends Component {
     super()
 
 
-    let lowerNav = new LowerNav()
+    let lowerNav = new LowerNav(() => {
+      scrollTrendDownCounter = scrollTrendUpCounter = 0
+    })
     let currentlyShowingLowerNav: boolean
 
 

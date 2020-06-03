@@ -102,7 +102,7 @@ export default declareComponent("header", class Header extends ThemAble {
       this.pathDisplayElem.apd(new ArrowIcon(), new Link(lang.links[domainFragment], domainFragment, i))
 
     }
-    await this.pathDisplayElem.anim({opacity: 1, translateX: 0}, 500)
+    await this.pathDisplayElem.anim({opacity: 1, translateX: .1}, 500)
     
   }
 
@@ -197,8 +197,8 @@ export default declareComponent("header", class Header extends ThemAble {
         }
 
         return Promise.all([
-          animationWrapper.anim({translateX: 0.1}, linkFadeInDuration + (currentLength-1) * linkAnimationOffset),
-          this.currentLinkElems.anim({opacity: 1, translateX: 0}, linkFadeInDuration, linkAnimationOffset)
+          animationWrapper.anim({translateX: .1}, linkFadeInDuration + (currentLength-1) * linkAnimationOffset),
+          this.currentLinkElems.anim({opacity: 1, translateX: .1}, linkFadeInDuration, linkAnimationOffset)
         ])
       })
     ])

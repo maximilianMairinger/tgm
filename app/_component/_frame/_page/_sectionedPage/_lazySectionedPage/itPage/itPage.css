@@ -1,3 +1,7 @@
+h1 {
+  margin: 100px;
+}
+
 component-body > *:not(h1) {
   display: block;
   height: 80%;

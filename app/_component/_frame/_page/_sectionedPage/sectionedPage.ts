@@ -58,6 +58,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         let scrollAnimation = this.inScrollAnimation = Symbol()
         this.currentlyActiveSectionName = domain
         if (this.sectionChangeCallback) this.sectionChangeCallback(domain)
+        this.dontPropergateScrollUpdates = true
 
         let elem = await sectionIndex.get(domain) as HTMLElement
         if (elem !== undefined) {
@@ -70,6 +71,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             easing: new WaapiEasing("ease").function
 
           })
+          this.dontPropergateScrollUpdates = false
           if (scrollAnimation === this.inScrollAnimation) this.inScrollAnimation = undefined
         }
         else {

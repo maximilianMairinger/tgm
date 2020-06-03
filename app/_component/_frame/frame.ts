@@ -38,4 +38,5 @@ export default abstract class Frame extends Component {
   protected activationCallback?(active: boolean): boolean | void | Promise<boolean | void>
   protected initialActivationCallback?(): boolean | void | Promise<boolean | void>
   protected loadedCallback?(): boolean | void | Promise<boolean | void>
+  public dontPropergateScrollUpdates = false
 }

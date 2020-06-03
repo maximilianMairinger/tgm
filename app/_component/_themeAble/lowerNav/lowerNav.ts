@@ -13,7 +13,7 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
   private layers = this.backgroundContainer.childs(1, true).add(this.linkContainer) as any
   private slidy: Element
 
-  constructor() { 
+  constructor(public linkPressedCb?: Function) { 
     super()
 
   }
@@ -41,7 +41,8 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
     linkContents.ea((e, i) => {
       let link = new LowerNavLink(e as any, domainLevel)
       link.addActivationCallback(() => {
-        this.forceMaximize()
+        if (this.linkPressedCb) this.linkPressedCb()
+        this.maximize()
       })
       this.currentLinkElems.add(link)
       this.currentLinkWrapperElems.add(ce("link-container").apd(link))
@@ -73,31 +74,18 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
   }
 
   private minimized = false
-  private preventMization = false
   public minimize() {
     if (!this.minimized) {
       this.minimized = true
-      if (!this.preventMization) this.layers.anim({translateY: 22})
+      this.layers.anim({translateY: 22})
     }
-    
   }
 
-  private forceMaximizeToken: Symbol
-  private forceMaximize() {
-    let token = this.forceMaximizeToken = Symbol()
-    this.maximize()
-    this.preventMization = true
-    delay(500).then(() => {
-      if (token === this.forceMaximizeToken) {
-        this.preventMization = false
-      }
-    })
-  }
   
   public maximize() {
     if (this.minimized) {
       this.minimized = false
-      if (!this.preventMization) this.layers.anim({translateY: .1})
+      this.layers.anim({translateY: .1})
     }
   }
 

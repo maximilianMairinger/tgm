@@ -2,13 +2,15 @@ import ThemAble, { Theme } from "../themeAble"
 import declareComponent from "../../../lib/declareComponent"
 import { ElementList } from "extended-dom"
 import LowerNavLink from "./../lowerNavLink/lowerNavLink"
+import delay from "delay"
 
 
 export default declareComponent("lower-nav", class LowerNav extends ThemAble {
-  private currentLinkElems: ElementList<ThemAble>
+  private currentLinkElems: ElementList
   private backgroundContainer = this.q("background-container")
   private linkContainer = this.q("link-container")
   private layers = this.backgroundContainer.childs(1, true).add(this.linkContainer) as any
+  private slidy: Element
 
   constructor() { 
     super()
@@ -30,19 +32,23 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
   }
 
 
-
-  public async updatePage(linkContents: string[], domainLevel: number) {
-    console.log(linkContents, domainLevel)
+  public linkContents: string[]
+  public async updatePage(linkContents: string[], domainLevel?: number) {
+    this.linkContents = linkContents
     this.currentLinkElems = new ElementList()
     linkContents.ea((e) => {
-      this.currentLinkElems.add(new LowerNavLink(e as any))
+      this.currentLinkElems.add(ce("link-container").apd(new LowerNavLink(e as any, domainLevel)))
     })
+
+    this.currentLinkElems.first.prepend(this.slidy = ce("active-slidy"))
 
     this.linkContainer.html(this.currentLinkElems)
   }
 
+
   public async updateSelectedLink(activeLink: string) {
-    console.log(activeLink)
+    let x = 100 * this.linkContents.indexOf(activeLink)
+    this.slidy.anim({translateX: x + "%"}, 600)
   }
   
 

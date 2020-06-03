@@ -31,11 +31,20 @@ export default class LowerNavLink extends ThemAble {
   constructor(link: string, domainLevel?: number, content?: string | Data<string>, icon?: keyof typeof iconIndex) {
     super()
 
+    this.buttonElem.preventFocus = true
+
     this.content(content)
     this.icon(icon)
     this.link(link, domainLevel)
   }
 
+  public addActivationCallback<CB extends (e?: MouseEvent | KeyboardEvent) => void>(cb: CB): CB {
+    return this.buttonElem.addActivationCallback(cb)
+  }
+
+  public removeActivationCallback<CB extends (e?: MouseEvent | KeyboardEvent) => void>(cb: CB): CB {
+    return this.buttonElem.removeActivationCallback(cb)
+  }
 
 
   public link(): string

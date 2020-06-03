@@ -38,8 +38,11 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
     this.linkContents = linkContents
     this.currentLinkWrapperElems = new ElementList()
     this.currentLinkElems = new ElementList()
-    linkContents.ea((e) => {
+    linkContents.ea((e, i) => {
       let link = new LowerNavLink(e as any, domainLevel)
+      link.addActivationCallback(() => {
+        this.forceMaximize()
+      })
       this.currentLinkElems.add(link)
       this.currentLinkWrapperElems.add(ce("link-container").apd(link))
     })
@@ -50,30 +53,52 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
   }
 
   private lastHighlightElem: LowerNavLink
+  private initialUpdate = true
   public async updateSelectedLink(activeLink: string) {
     let index = this.linkContents.indexOf(activeLink)
     let x = 100 * index
     if (this.lastHighlightElem) this.lastHighlightElem.downlight()
     this.lastHighlightElem = this.currentLinkElems[index]
     this.lastHighlightElem.highlight()
-    this.slidy.anim({translateX: x + "%"}, 600)
+
+    if (this.initialUpdate) {
+      this.slidy.css({translateX: x + "%", display: "block"})
+      this.slidy.anim({opacity: 1})
+      this.initialUpdate = false
+    }
+    else this.slidy.anim({translateX: x + "%"}, 600)
+    
+
+    
   }
 
   private minimized = false
+  private preventMization = false
   public minimize() {
     if (!this.minimized) {
       this.minimized = true
-      this.layers.anim({translateY: 22})
+      if (!this.preventMization) this.layers.anim({translateY: 22})
     }
     
+  }
+
+  private forceMaximizeToken: Symbol
+  private forceMaximize() {
+    let token = this.forceMaximizeToken = Symbol()
+    this.maximize()
+    this.preventMization = true
+    delay(500).then(() => {
+      if (token === this.forceMaximizeToken) {
+        this.preventMization = false
+      }
+    })
   }
   
   public maximize() {
     if (this.minimized) {
       this.minimized = false
-      this.layers.anim({translateY: .1})
+      if (!this.preventMization) this.layers.anim({translateY: .1})
     }
-    
   }
 
   stl() {

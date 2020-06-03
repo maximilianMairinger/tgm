@@ -1,6 +1,6 @@
 :host {
   display: block;
-  --padding: 5.5%;
+  --padding: 10%;
 }
 
 icon-container {
@@ -10,7 +10,8 @@ icon-container {
   left: 0;
   right: 0;
 
-  height: calc(67% - var(--padding))
+  top: var(--padding);
+  height: calc(67% - calc(var(--padding) * 2))
 }
 
 icon-container > * {
@@ -18,7 +19,7 @@ icon-container > * {
   height: 100%;
   min-height: 20px;
   box-sizing: border-box;
-  padding-top: var(--padding);
+
 }
 
 text-container {

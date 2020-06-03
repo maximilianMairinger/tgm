@@ -31,7 +31,7 @@ export default declareComponent("site", class extends Component {
 
         lowerNav.updatePage(currentSectons, currentDomainLevel)
         await lowerNav.enable(init, func)
-        lowerNav.updateSelectedLink(currentSection)
+        if (currentSection !== undefined) lowerNav.updateSelectedLink(currentSection)
 
       }
       

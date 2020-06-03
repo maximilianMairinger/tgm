@@ -72,7 +72,6 @@ export default class LowerNavLink extends ThemAble {
   public icon(icon: string): Promise<void>
   public icon(icon?: string): any {
     if (icon !== undefined) {
-      debugger
       let ic = iconIndex[icon]
       if (ic === undefined) console.warn("Unknown Icon: \"" + icon + "\".")
       else {

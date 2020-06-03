@@ -20,7 +20,7 @@ section-header{
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    font-size: max(27px, calc(80px + (105 - 80)*((100vw - 1250px)/(1600 - 1250))));
+    font-size: max(27px, calc(75px + (115 - 75)*((100vw - 1250px)/(1600 - 1250))));
     font-weight: bold;
     text-align: right;
     overflow: hidden;

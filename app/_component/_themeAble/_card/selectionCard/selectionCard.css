@@ -112,14 +112,6 @@ icon-container{
     min-width: 40px;
 }
 
-icon-box{
-    display: block;
-    height: 100%;
-    width: 100%;
-    background: url("../../../../res/img/windmil.svg") center center no-repeat;
-    background-size: 100% 100%;
-}
-
 info-container{
     display: flex;
     align-self: stretch;
@@ -133,6 +125,16 @@ info-container{
     font-size: 15px;
     max-width: 100%;
     overflow: hidden;
+}
+
+icon-container *{
+    display: block;
+    height: 100%;
+    width: 100%;
+    /*
+    background: url("../../../../res/img/windmil.svg") center center no-repeat;
+    background-size: 100% 100%;
+     */
 }
 
 text-container{

@@ -231,6 +231,10 @@ image-box{
         margin-right: 10px;
     }
 
+    image-box{
+        background: none;
+    }
+
     content-box{
         max-width: 100%;
     }

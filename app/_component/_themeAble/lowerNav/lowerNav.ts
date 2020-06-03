@@ -58,7 +58,23 @@ export default declareComponent("lower-nav", class LowerNav extends ThemAble {
     this.lastHighlightElem.highlight()
     this.slidy.anim({translateX: x + "%"}, 600)
   }
+
+  private minimized = false
+  public minimize() {
+    if (!this.minimized) {
+      this.minimized = true
+      this.layers.anim({translateY: 22})
+    }
+    
+  }
   
+  public maximize() {
+    if (this.minimized) {
+      this.minimized = false
+      this.layers.anim({translateY: .1})
+    }
+    
+  }
 
   stl() {
     return require("./lowerNav.css").toString()

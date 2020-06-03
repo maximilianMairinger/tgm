@@ -7,6 +7,7 @@ import { ElementList } from "extended-dom";
 
 
 const topLimit = 0
+const scrollTrendActivationCount = 10
 
 export default declareComponent("site", class extends Component {
   
@@ -46,6 +47,9 @@ export default declareComponent("site", class extends Component {
     let currentSectons: string[]
     let currentSection: string
 
+    let scrollTrendUpCounter = 0
+    let scrollTrendDownCounter = 0
+
     let pageManager = new PageManager((page, sections, domainLevel) => {
       currentDomainLevel = domainLevel
       currentSectons = sections
@@ -66,6 +70,26 @@ export default declareComponent("site", class extends Component {
       else if (prog > topLimit) {
         header.notTop()
       }
+
+      if (currentlyShowingLowerNav) {
+        if (prog > lastScrollProg) {
+        
+          scrollTrendUpCounter = 0
+          scrollTrendDownCounter++
+          if (scrollTrendDownCounter >= scrollTrendActivationCount) {
+            lowerNav.minimize()
+          }
+        }
+        else {
+          scrollTrendDownCounter = 0
+          scrollTrendUpCounter++
+          if (scrollTrendUpCounter >= scrollTrendActivationCount) {
+            lowerNav.maximize()
+          }
+        }
+      }
+      
+      
 
       lastScrollProg = prog
     })

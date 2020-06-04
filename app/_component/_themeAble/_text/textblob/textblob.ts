@@ -124,7 +124,7 @@ export default class Textblob extends Text {
   }
 
   stl() {
-    return require("./textblob.css").toString()
+    return super.stl() + require("./textblob.css").toString()
   }
 
   pug() {

@@ -25,6 +25,10 @@ export default abstract class ThemeAble extends Component<false | HTMLElement> {
     else return this._theme
   }
 
+  stl() {
+    return require("./themeAble.css").toString()
+  }
+
 }
 
 const themeIndex: {[theme in Theme]: string} = {

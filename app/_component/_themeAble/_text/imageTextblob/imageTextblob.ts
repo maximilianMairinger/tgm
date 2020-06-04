@@ -129,7 +129,7 @@ export default declareComponent("image-textblob", class ImageTextblob extends Te
   }
 
   stl() {
-    return require("./imageTextblob.css").toString()
+    return super.stl() + require("./imageTextblob.css").toString()
   }
 
   pug() {

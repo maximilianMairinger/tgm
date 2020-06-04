@@ -4,6 +4,7 @@ import PageManager from "../_frame/_manager/pageManager/pageManager";
 import Header from "./../_themeAble/header/header"
 import LowerNav from "./../_themeAble/lowerNav/lowerNav"
 import { ElementList } from "extended-dom";
+import { negateTheme } from "../_themeAble/themeAble";
 
 
 const topLimit = 0
@@ -94,22 +95,12 @@ export default declareComponent("site", class extends Component {
       
 
       lastScrollProg = prog
-    }, (prog) => {
-      if (prog)
-
-
-      if (currentlyShowingLowerNav) {
-        let foot = lowerNav.getBoundingClientRect()
-      }
     })
 
 
-    pageManager.addThemeIntersectionListener(header, (q) => {
-      console.log("qweqweewqwe", q)
+    pageManager.addThemeIntersectionListener(header, (themeUnderneath) => {
+      header.theme(themeUnderneath)
     })
-
-    const headRect = header.getBoundingClientRect()
-    const headMid = (headRect.top + headRect.bottom) / 2
     
     pageManager.loadedCallback()
     this.apd(pageManager)

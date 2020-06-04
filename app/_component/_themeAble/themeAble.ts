@@ -19,6 +19,7 @@ export default abstract class ThemAble extends Component<false | HTMLElement> {
     if (to) {
       if (this._theme !== to) {
         this.themeStyleElement.html(themeIndex[to])
+        this._theme = to
       }
     }
     else return this._theme
@@ -29,4 +30,14 @@ export default abstract class ThemAble extends Component<false | HTMLElement> {
 const themeIndex: {[theme in Theme]: string} = {
   light: require("./light-theme.css").toString(),
   dark: require("./dark-theme.css").toString()
+}
+
+
+export function negateTheme(theme: Theme): Theme {
+  return (
+    theme === "dark" ?  "light" : 
+    theme === "light" ? "dark" :
+    "light"
+  )
+    
 }

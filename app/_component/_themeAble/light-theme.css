@@ -9,4 +9,5 @@
   --soft-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
   --medium-shadow: 0 0 15px 0 rgba(0, 0, 0, .15);
   --medium-shadow-highlight: 0 0 15px 0 rgba(0, 0, 0, .15);
+  --weak-darken: rgba(0, 0, 0, 0.065);
 }

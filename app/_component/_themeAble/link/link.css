@@ -32,12 +32,13 @@ slidy-underline-wrapper {
   height: 2px;
   overflow: hidden;
   width: 100%;
+  pointer-events: none;
 }
 
 slidy-underline {
   display: block;
   position: absolute;
-  top: 0;
+  bottom: 0;
   background: var(--strong-text-color);
   border-radius: 2px;
   height: 2px;

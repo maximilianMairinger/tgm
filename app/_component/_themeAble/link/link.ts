@@ -20,6 +20,9 @@ export default class Link extends ThemeAble {
 
 
     let ev = (e: Event) => {
+      this.cbs.Call(e)
+      e.preventDefault()
+      return
       let link = this.link()
       if (link) {
         if (this.isLinkOnOrigin) {
@@ -63,7 +66,7 @@ export default class Link extends ThemeAble {
 
         let handled = false
         delay(250).then(() => {
-          if (wannaCloose) {
+          if (wannaCloose && !click) {
             this.slidyWrapper.anim({width: "0%", left: "100%"}).then(() => {
               this.slidyWrapper.css({left: "0%", width: "100%"})
               this.slidy.css({width: 0})
@@ -80,47 +83,89 @@ export default class Link extends ThemeAble {
           
         })
         delay(300).then(() => {
-
-          if (wannaCloose && !handled) {
-            this.slidy.anim({width: "0%", left: "100%"}).then(() => this.slidy.css({left: "0%"})).then(() => {
-              inAnimation = false
-              if (wantToAnim) {
-                wantToAnim = false
-                mouseOver()
+          if (!click) {
+            if (!handled) {
+              if (wannaCloose) {
+                this.slidy.anim({width: "0%", left: "100%"}).then(() => this.slidy.css({left: "0%"})).then(() => {
+                  inAnimation = false
+                  if (wantToAnim) {
+                    wantToAnim = false
+                    mouseOver()
+                  }
+                })
+                wannaCloose = false
               }
-            })
-            wannaCloose = false
+              else inAnimation = false
+            }
+            
           }
           else {
-            if (!handled) inAnimation = false
+            clickF()
           }
         })
         this.slidy.anim({width: "100%"}, 300)
       }
 
       let mouseOut = () => {
-        wantToAnim = false
-        if (!inAnimation) {
-          inAnimation = true
-          this.slidy.anim({width: "0%", left: "100%"}).then(() => this.slidy.css({left: "0%"})).then(() => {
-            inAnimation = false
-            if (wantToAnim) {
-              wantToAnim = false
-              mouseOver()
-            }
-            if (wannaCloose) {
-              wannaCloose = false
-              mouseOut()
-            }
-          })
-          wannaCloose = false
-        }
-        else wannaCloose = true
+        if (!click) {
+          wantToAnim = false
         
+          if (!inAnimation) {
+            inAnimation = true
+            this.slidy.anim({width: "0%", left: "100%"}).then(() => this.slidy.css({left: "0%"})).then(() => {
+              inAnimation = false
+              if (wantToAnim) {
+                wantToAnim = false
+                mouseOver()
+              }
+              if (wannaCloose) {
+                wannaCloose = false
+                mouseOut()
+              }
+            })
+            wannaCloose = false
+          }
+          else wannaCloose = true
+        }
       }
 
       this.aElem.on("mouseover", mouseOver)
       this.aElem.on("mouseleave", mouseOut)
+      let click = false
+
+      let clickF = (async () => {
+        let oldSlidy = this.slidy
+        if (oldSlidy.width() === 0) oldSlidy.css({width: "100%", height: 0})
+        //@ts-ignore
+        this.aElem.css({mixBlendMode: "exclusion"})
+        this.slidyWrapper.css({height: "calc(100% + .2em)", top: 0, bottom: "unset"})
+        await Promise.all([
+          oldSlidy.anim({height: "100%"}, 300),
+          oldSlidy.anim({borderRadius: 0}, 100),
+          this.slidyWrapper.anim({borderRadius: 0}, 100),
+          delay(200).then(() => this.slidyWrapper.anim({height: 0, }, 200))
+        ])
+
+        this.slidyWrapper.css({height: 2, bottom: "-.2em", top: "unset"})
+        //@ts-ignore
+        this.aElem.css({mixBlendMode: "normal"})
+
+        this.slidy = ce("slidy-underline")
+        this.slidyWrapper.html(this.slidy)
+
+        inAnimation = false
+        wannaCloose = false
+        wannaCloose = false
+        click = false
+      })
+
+      this.addActivationListener(() => {
+        click = true
+        if (!inAnimation) {
+          inAnimation = true
+          clickF()
+        }
+      })
     }
 
   }

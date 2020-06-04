@@ -1,0 +1,6 @@
+/* There is a bug in chrome which staggers transitions if declared in differnet shadowrrots... 04/06/2020 */
+
+/* * {
+  transition: background-color 1s, color 1s, fill 1s;
+} */
+

@@ -2,6 +2,7 @@ import declareComponent from "../../../lib/declareComponent"
 import ThemeAble from "../themeAble";
 import { Data } from "josm"
 import * as domain from "./../../../lib/domain"
+import clone from "fast-copy"
 
 
 
@@ -27,6 +28,11 @@ export default class Link extends ThemeAble {
       
       this.cbs.Call(e)
     }
+
+    this.aElem.on("mouseenter", () => {
+      let meta = domain.linkMeta(this.link())
+      console.log(meta.isOnOrigin)
+    })
 
     this.aElem.on("click", ev)
     this.aElem.on("keydown", (e) => {

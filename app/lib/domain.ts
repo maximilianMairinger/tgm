@@ -73,6 +73,10 @@ function updateTitle() {
   return title + originalSubtitle
 }
 
+export function parseDomainIndexToDomain(domainIndex: Readonly<string[]>) {
+  return domainIndex.join(dirString)
+}
+
 
 export function parseDomainToDomainIndex(domainIndex: string[], domain: string, level: number) {
 
@@ -125,7 +129,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
 
 
 
-  let endDomain = dirString + domIndex.join(dirString)
+  let endDomain = dirString + parseDomainIndexToDomain(domIndex)
   if (!endDomain.endsWith(dirString)) endDomain += dirString
 
   
@@ -193,7 +197,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         myDomainIndex.shift() 
       }
   
-      let joined = myDomainIndex.join(dirString)
+      let joined = parseDomainIndexToDomain(myDomainIndex)
       return joined === "" ? defaultDomain : joined
     }
     else {
@@ -203,7 +207,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
   let currentDomain = calcCurrentDomain();
   (() => {
     if (!initialGet) return
-    let joined = domIndex.join(dirString)
+    let joined = parseDomainIndexToDomain(domIndex)
     let domain = joined === "" ? defaultDomain : joined
 
     if (joined !== domain) {
@@ -224,7 +228,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         for (let i = 0; i < domainLevel; i++) {
           myDomainIndex.shift() 
         }
-        let joined = myDomainIndex.join(dirString)
+        let joined = parseDomainIndexToDomain(myDomainIndex)
         let domain = joined === "" ? defaultDomain : joined
         if (lastDomain !== domain) {
           let res = await subscription(domain)
@@ -315,16 +319,13 @@ window.domain = {set, get}
 
 
 
-export function linkMeta(link: string) {
-  while (link.startsWith(dirString)) {
-    link = link.substr(dirString.length)
-  }
-  let domainIndexClone = domIndex.clone()  
-  domainIndexClone.splice(this.domainLevel)
-  domainIndexClone.add(...link.split(dirString))
+export function linkMeta(link: string, domainLevel: number = 0) {
+  let myDomainIndex = domIndex.clone()
+  parseDomainToDomainIndex(myDomainIndex, link, domainLevel)
+  let isOnOrigin = getBaseUrl(link) === getBaseUrl()
   return {
     link,
-    isOnOrigin: getBaseUrl(link) === getBaseUrl(),
-    href: dirString + domainIndexClone.join(dirString)
+    isOnOrigin,
+    href: isOnOrigin ? dirString + parseDomainIndexToDomain(myDomainIndex) : link.startsWith("https://") || link.startsWith("http://") ? link : "https://" + link
   }
 }

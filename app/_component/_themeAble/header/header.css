@@ -36,8 +36,13 @@ blurry-background.blurry {
   }
 }
 
-c-link, slidy-underline, c-tgm-logo {
-  transition: .2s;
+c-tgm-logo {
+  transition: .25s;
+}
+
+
+slidy-underline, c-link {
+  transition: background-color .25s, color .25s;
 }
 
 

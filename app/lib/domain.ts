@@ -17,10 +17,6 @@ const titleElement = document.querySelector("title")
 export const dirString = "/";
 export let domainIndex: string[] = [];
 
-//First capital
-function fc(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
 
 function getCurrentSubDomainPath() {
   return decodeUri(document.location.pathname) as string
@@ -28,7 +24,7 @@ function getCurrentSubDomainPath() {
 
 function parseUrlToDomainIndex() {
   let currentDomain = getCurrentSubDomainPath()
-  domainIndex = getCurrentSubDomainPath().split(dirString)
+  domainIndex.set(getCurrentSubDomainPath().split(dirString))
   domainIndex.remove("");
 
   let endDomain = !currentDomain.endsWith("/") ? currentDomain + dirString : currentDomain

@@ -28,7 +28,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private managedElementMap: ResourcesMap
 
-  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, onUserScroll?: (scrollProgress: number) => void, onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, private onUserScroll?: (scrollProgress: number) => void, private onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
     this.firstFrameLoaded = new Promise((res) => {
       this.resLoaded = res
@@ -209,6 +209,24 @@ export default abstract class Manager<ManagementElementName extends string> exte
     }
     
     this.scrollEventListener.target((to as any).elementBody).activate()
+
+
+    if (this.onUserScroll && this.onScroll) {
+      //@ts-ignore
+      let y = this.currentFrame.elementBody.scrollTop
+      if (!this.currentFrame.dontPropergateScrollUpdates) this.onUserScroll(y)
+      this.onScroll(y)
+    }
+    else {
+      if (this.onUserScroll) this.scrollEventListener = new EventListener(this, "scroll", () => {
+        //@ts-ignore
+        if (!this.currentFrame.dontPropergateScrollUpdates) this.onUserScroll(this.currentFrame.elementBody.scrollTop)
+      }, false)
+      else if (this.onScroll) this.scrollEventListener = new EventListener(this, "scroll", () => {
+        //@ts-ignore
+        this.onScroll(this.currentFrame.elementBody.scrollTop)
+      }, false)
+    }
 
     if (from !== undefined) if (from.removeIntersectionListener) {
       this.intersectionListenerIndex.forEach((q, elem) => {

@@ -151,7 +151,8 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     let lastHit: PageSection
     let sectionIndex = await this.sectionIndex as any
-    this.customIntersectionObserver.set(obsElem, new EventListener(this.elementBody, "scroll", async (e) => {
+
+    let f = async () => {
       let obs = obsElem.getBoundingClientRect();
       let ajustedHeight = obs.height * threshold
       let upperHit = obs.top + ajustedHeight
@@ -168,8 +169,9 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
           }
         }
       })
-    }, this.active))
-
+    }
+    this.customIntersectionObserver.set(obsElem, new EventListener(this.elementBody, "scroll", f, this.active))
+    f()
   }
 
   public removeIntersectionListener(obsElem: HTMLElement) {

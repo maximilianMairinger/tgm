@@ -6,6 +6,7 @@ import SectionedPage from "../_page/_sectionedPage/sectionedPage";
 import delay from "delay";
 import { Theme } from "../../_themeAble/themeAble";
 import PageSection from "../_pageSection/pageSection";
+import { EventListener } from "extended-dom";
 
 
 export default abstract class Manager<ManagementElementName extends string> extends Frame {
@@ -27,7 +28,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private managedElementMap: ResourcesMap
 
-  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, public onUserScroll?: (scrollProgress: number) => void, public onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, onUserScroll?: (scrollProgress: number) => void, onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
     this.firstFrameLoaded = new Promise((res) => {
       this.resLoaded = res
@@ -46,8 +47,28 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
     });
 
-    
+
+    if (onUserScroll && onScroll) {
+      this.scrollEventListener = new EventListener(this, "scroll", () => {
+        //@ts-ignore
+        let y = this.currentFrame.elementBody.scrollTop
+        if (!this.currentFrame.dontPropergateScrollUpdates) onUserScroll(y)
+        onScroll(y)
+      }, false)
+    }
+    else {
+      if (onUserScroll) this.scrollEventListener = new EventListener(this, "scroll", () => {
+        //@ts-ignore
+        if (!this.currentFrame.dontPropergateScrollUpdates) onUserScroll(this.currentFrame.elementBody.scrollTop)
+      }, false)
+      else if (onScroll) this.scrollEventListener = new EventListener(this, "scroll", () => {
+        //@ts-ignore
+        onScroll(this.currentFrame.elementBody.scrollTop)
+      }, false)
+    }
   }
+
+  private scrollEventListener: EventListener
 
   private domainSubscription: domain.DomainSubscription
   async loadedCallback() {
@@ -84,22 +105,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private lastScrollbarWidth: number
 
-  private dualScrollListener = () => {
-    //@ts-ignore
-    let y = this.currentFrame.elementBody.scrollTop
-    if (!this.currentFrame.dontPropergateScrollUpdates) this.onUserScroll(y)
-    this.onScroll(y)
-  }
-
-  private userScrollListener = () => {
-    //@ts-ignore
-    if (!this.currentFrame.dontPropergateScrollUpdates) this.onUserScroll(this.currentFrame.elementBody.scrollTop)
-  }
-
-  private normalScrollListener = () => {
-    //@ts-ignore
-    this.onScroll(this.currentFrame.elementBody.scrollTop)
-  }
 
   private intersectionListenerIndex: Map<HTMLElement, {cb: (elem: Frame) => void, threshold?: number}> = new Map
 
@@ -192,7 +197,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
     }
     
-    
+
     if (this.onScrollBarWidthChange) {
       //@ts-ignore
       let scrollBarWidth = this.elementBody.clientWidth - to.elementBody.clientWidth
@@ -202,6 +207,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
         this.lastScrollbarWidth = scrollBarWidth
       }
     }
+    
+    this.scrollEventListener.target((to as any).elementBody).activate()
 
     if (from !== undefined) if (from.removeIntersectionListener) {
       this.intersectionListenerIndex.forEach((q, elem) => {
@@ -214,15 +221,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
       })
     }
 
-    //@ts-ignore
-    if (this.onUserScroll && this.onScroll) to.elementBody.on("scroll", this.dualScrollListener)
-    else {
-      //@ts-ignore
-      if (this.onUserScroll) to.elementBody.on("scroll", this.userScrollListener)
-      //@ts-ignore
-      else if (this.onScroll) to.elementBody.on("scroll", this.normalScrollListener)
-    }
-
     let showAnim = from !== undefined ? to.anim([{zIndex: 100, opacity: 0, translateX: -5, scale: 1.005, offset: 0}, {opacity: 1, translateX: 0, scale: 1}], 400) : to.anim([{offset: 0, opacity: 0}, {opacity: 1}], 400)
 
     this.currentFrame = to;
@@ -232,8 +230,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
         await showAnim
       }
       else {
-        //@ts-ignore
-        from.elementBody.off("scroll", this.onScrollListener)
 
         // let fromAnim = from.anim([{offset: 0, translateX: 0}, {translateX: 10}], 3000)
         await Promise.all([showAnim])

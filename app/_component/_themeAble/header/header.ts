@@ -9,6 +9,7 @@ import delay from "delay"
 import { domainIndex } from "./../../../lib/domain"
 import "./../_icon/arrow/arrow"
 import ArrowIcon from "./../_icon/arrow/arrow"
+import Icon from "../_icon/icon"
 
 
 const linkAnimationOffset = 170
@@ -27,7 +28,7 @@ export default declareComponent("header", class Header extends ThemeAble {
   private leftContent = this.q("left-content")
   private underlineElem = this.q("slidy-underline")
   private background = this.q("blurry-background")
-  // private tgmLogoIcon = this.q("c-tgm-logo")
+  private tgmLogoIcon = this.q("c-tgm-logo") as Icon
   // private backLinkComponents: ElementList<ThemAble> = new ElementList()
 
   constructor(public linksShownChangeCallback?: (linksShown: boolean, init: boolean, func: any) => void) { 
@@ -214,6 +215,7 @@ export default declareComponent("header", class Header extends ThemeAble {
   public theme(to: Theme): void
   public theme(to?: Theme): any {
     this.currentLinkElems.Inner("theme", [to])
+    this.tgmLogoIcon.theme(to)
     return super.theme(to)
   }
 

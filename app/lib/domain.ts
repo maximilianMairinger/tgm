@@ -15,7 +15,8 @@ const argData = "internal";
 const titleElement = document.querySelector("title")
 
 export const dirString = "/";
-export let domainIndex: string[] = [];
+const domIndex = [] as string[];
+export const domainIndex = domIndex as Readonly<typeof domIndex>
 
 
 function getCurrentSubDomainPath() {
@@ -24,8 +25,8 @@ function getCurrentSubDomainPath() {
 
 function parseUrlToDomainIndex() {
   let currentDomain = getCurrentSubDomainPath()
-  domainIndex.set(getCurrentSubDomainPath().split(dirString))
-  domainIndex.remove("");
+  domIndex.set(getCurrentSubDomainPath().split(dirString))
+  domIndex.remove("");
 
   let endDomain = !currentDomain.endsWith("/") ? currentDomain + dirString : currentDomain
   
@@ -34,7 +35,7 @@ function parseUrlToDomainIndex() {
 parseUrlToDomainIndex()
 
 
-function renderSubtitle(myDomainIndex = domainIndex) {
+function renderSubtitle(myDomainIndex = domIndex) {
   return myDomainIndex.Replace((k) => {
     try {
       return lang.links[k].get()
@@ -52,7 +53,7 @@ function updateTitle() {
   let originalSubtitle: string, subtitle: string
   originalSubtitle = subtitle = renderSubtitle()
 
-  let myDomainIndex = domainIndex.clone()
+  let myDomainIndex = domIndex.clone()
   let tooMuchToTitles = false
   while(subtitle.length > maxCharactersInTitle && myDomainIndex.length > 1) {
     myDomainIndex.rmI(0)
@@ -75,7 +76,7 @@ function updateTitle() {
 
 function parseDomainToDomainIndex(domain: string, level: number) {
 
-  let originalLength = domainIndex.length;
+  let originalLength = domIndex.length;
   if (originalLength < level || level < 0) {
     console.warn("Unexpected index: " + level + ". Replacing it with " + originalLength + ".")
     level = originalLength
@@ -84,16 +85,16 @@ function parseDomainToDomainIndex(domain: string, level: number) {
   let anyChange = false
   let subdomains = domain.split(dirString).replace(e => slugify(e))
   
-  domainIndex.splice(level + subdomains.length)
-  if (domainIndex.length !== originalLength) anyChange = true
+  domIndex.splice(level + subdomains.length)
+  if (domIndex.length !== originalLength) anyChange = true
   
   subdomains.ea((sub, i) => {
     if (sub === "") sub = undefined
     let ind = i + level
-    if (domainIndex[ind] !== sub) {
+    if (domIndex[ind] !== sub) {
       anyChange = true
-      if (sub === undefined) domainIndex.rmI(ind)
-      else domainIndex[ind] = sub
+      if (sub === undefined) domIndex.rmI(ind)
+      else domIndex[ind] = sub
     }
   })
   return anyChange
@@ -107,7 +108,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     await currentDomainSet
   }
 
-  let domainIndexRollback = domainIndex.clone()
+  let domainIndexRollback = domIndex.clone()
 
   let res: Function
   inDomainSet = true
@@ -124,7 +125,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
 
 
 
-  let endDomain = dirString + domainIndex.join(dirString)
+  let endDomain = dirString + domIndex.join(dirString)
   if (!endDomain.endsWith(dirString)) endDomain += dirString
 
   
@@ -138,9 +139,9 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     if (recall) {
       let { domain, domainLevel } = recall
       parseDomainToDomainIndex(domain, domainLevel)
-      let endDomain = domainIndex.join(dirString)
+      let endDomain = domIndex.join(dirString)
 
-      domainIndex.set(domainIndexRollback)
+      domIndex.set(domainIndexRollback)
       set(endDomain, 0, true)
     }
     else {
@@ -187,7 +188,7 @@ export function get(domainLevel: number, subscription?: undefined, onlyIntereste
 export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => (boolean |  Promise<void> | Promise<boolean> | void), onlyInterestedInLevel: boolean = false, defaultDomain = ""): DomainFragment | DomainSubscription {
   let calcCurrentDomain = (() => {
     if (!onlyInterestedInLevel) {
-      let myDomainIndex = domainIndex.clone()
+      let myDomainIndex = domIndex.clone()
       for (let i = 0; i < domainLevel; i++) {
         myDomainIndex.shift() 
       }
@@ -196,13 +197,13 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
       return joined === "" ? defaultDomain : joined
     }
     else {
-      return domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
+      return domIndex[domainLevel] === undefined ? defaultDomain : domIndex[domainLevel]
     }
   })
   let currentDomain = calcCurrentDomain();
   (() => {
     if (!initialGet) return
-    let joined = domainIndex.join(dirString)
+    let joined = domIndex.join(dirString)
     let domain = joined === "" ? defaultDomain : joined
 
     if (joined !== domain) {
@@ -219,7 +220,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
     let f = async () => {
       
       if (!onlyInterestedInLevel) {
-        let myDomainIndex = domainIndex.clone()
+        let myDomainIndex = domIndex.clone()
         for (let i = 0; i < domainLevel; i++) {
           myDomainIndex.shift() 
         }
@@ -237,14 +238,14 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
 
       }
       else {
-        let domain = domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
+        let domain = domIndex[domainLevel] === undefined ? defaultDomain : domIndex[domainLevel]
         if (domain !== lastDomain) {
           let res = await subscription(domain)
           if (res === undefined) res = true
           if (res) lastDomain = domain
 
         }
-        if (domainIndex[domainLevel] !== domain) {
+        if (domIndex[domainLevel] !== domain) {
           return {domain, domainLevel}
         }
 
@@ -318,7 +319,7 @@ export function linkMeta(link: string) {
   while (link.startsWith(dirString)) {
     link = link.substr(dirString.length)
   }
-  let domainIndexClone = domainIndex.clone()  
+  let domainIndexClone = domIndex.clone()  
   domainIndexClone.splice(this.domainLevel)
   domainIndexClone.add(...link.split(dirString))
   return {

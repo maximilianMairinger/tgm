@@ -29,10 +29,14 @@ export default class Link extends ThemeAble {
       this.cbs.Call(e)
     }
 
-    this.aElem.on("mouseenter", () => {
-      let meta = domain.linkMeta(this.link())
-      console.log(meta.isOnOrigin)
-    })
+
+    let updateLinkF = () => {
+      let meta = domain.linkMeta(this.link(), this.domainLevel)
+      this.aElem.href = meta.href
+    }
+
+    this.aElem.on("mouseenter", updateLinkF)
+    this.aElem.on("focus", updateLinkF)
 
     this.aElem.on("click", ev)
     this.aElem.on("keydown", (e) => {
@@ -49,7 +53,7 @@ export default class Link extends ThemeAble {
   link(to?: string): void
   link(to?: string): any {
     if (to) {
-      let link = domain.linkMeta(to)
+      let link = domain.linkMeta(to, this.domainLevel)
       this._link = link.link
       this.aElem.href = link.href
       this.isLinkOnOrigin = link.isOnOrigin

@@ -2,7 +2,7 @@ import Component from "../component";
 
 export type Theme = "dark" | "light"
 
-export default abstract class ThemAble extends Component<false | HTMLElement> {
+export default abstract class ThemeAble extends Component<false | HTMLElement> {
   private themeStyleElement = ce("style")
   constructor(elementBodyExtention?: HTMLElement | false) {
     super(elementBodyExtention)

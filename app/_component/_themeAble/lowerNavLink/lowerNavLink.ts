@@ -1,4 +1,4 @@
-import ThemAble, { Theme } from "../themeAble"
+import ThemeAble, { Theme } from "../themeAble"
 import declareComponent from "../../../lib/declareComponent"
 import { ElementList } from "extended-dom"
 import "./../../_button/button"
@@ -15,7 +15,7 @@ const iconIndex = {
 
 const hightlightClassString = "highlight"
 
-export default class LowerNavLink extends ThemAble {
+export default class LowerNavLink extends ThemeAble {
   private buttonElem = this.q("c-button") as Button
   private textElem = this.q("text-container")
   private iconContainer = this.q("icon-container")

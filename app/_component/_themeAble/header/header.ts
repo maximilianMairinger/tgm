@@ -1,4 +1,4 @@
-import ThemAble, { Theme } from "../themeAble"
+import ThemeAble, { Theme } from "../themeAble"
 import declareComponent from "../../../lib/declareComponent"
 import "../_icon/tgmLogo/tgmLogo"
 import "../../_button/button"
@@ -21,7 +21,7 @@ const slidyLineStretchOffset = slidyLineStretchFactor / 2
 const slidyLineStretchDuration = slidyLineStretchFactor * 1000
 
 
-export default declareComponent("header", class Header extends ThemAble {
+export default declareComponent("header", class Header extends ThemeAble {
   private pathDisplayElem = this.q("path-display")
   private linkContainerElem = this.q("right-content")
   private leftContent = this.q("left-content")

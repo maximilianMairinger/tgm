@@ -1,12 +1,12 @@
 import declareComponent from "../../../lib/declareComponent"
-import ThemAble from "../themeAble";
+import ThemeAble from "../themeAble";
 import { Data } from "josm"
 import * as domain from "./../../../lib/domain"
 
 
 
 
-export default class Link extends ThemAble {
+export default class Link extends ThemeAble {
   private aElem = this.q("a") as unknown as HTMLAnchorElement
   private slotElem = this.sr.querySelector("slot")
   constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0, public push: boolean = true) {

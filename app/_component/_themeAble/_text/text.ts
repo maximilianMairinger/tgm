@@ -1,7 +1,7 @@
 import Component from "../../component";
-import ThemAble from "../themeAble";
+import ThemeAble from "../themeAble";
 
-export default abstract class Text extends ThemAble {
+export default abstract class Text extends ThemeAble {
 
     constructor() {
         super(false);

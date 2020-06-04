@@ -1,11 +1,11 @@
-import ThemAble, { Theme } from "../themeAble"
+import ThemeAble, { Theme } from "../themeAble"
 import declareComponent from "../../../lib/declareComponent"
 import { ElementList } from "extended-dom"
 import LowerNavLink from "./../lowerNavLink/lowerNavLink"
 import delay from "delay"
 
 
-export default declareComponent("lower-nav", class LowerNav extends ThemAble {
+export default declareComponent("lower-nav", class LowerNav extends ThemeAble {
   private currentLinkWrapperElems: ElementList
   private currentLinkElems: ElementList<LowerNavLink>
   private backgroundContainer = this.q("background-container")

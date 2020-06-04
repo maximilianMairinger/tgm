@@ -68,7 +68,6 @@ export default class Link extends ThemeAble {
               this.slidyWrapper.css({left: "0%", width: "100%"})
               this.slidy.css({width: 0})
             }).then(() => {
-              console.log("no more anim")
               inAnimation = false
               if (wantToAnim) {
                 wantToAnim = false

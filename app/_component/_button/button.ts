@@ -91,13 +91,14 @@ export default class Button extends Component<HTMLAnchorElement> {
 
   private _link: string
   private linkFn: any
+  private hrefUpdateEventListener = [] as EventListener[]
   public link(): string
   public link(to: string, domainLevel?: number, push?: boolean): void
   public link(to?: string, domainLevel: number = 0, push = true) {
 
     if (to !== undefined) {
       if (to !== null) {
-        let link = domain.linkMeta(to)
+        let link = domain.linkMeta(to, domainLevel)
         this.elementBody.href = link.href
         this._link = link.link
         this.linkFn = this.addActivationCallback((e) => {
@@ -105,8 +106,13 @@ export default class Button extends Component<HTMLAnchorElement> {
             if (e) e.preventDefault()
             domain.set(to, domainLevel, push)
           }
-          
         })
+        let updateF = () => {
+          let link = domain.linkMeta(to, domainLevel)
+          this.elementBody.href = link.href
+        }
+        this.elementBody.on("mouseover", updateF)
+        this.elementBody.on("focus", updateF)
       }
       else {
         this.removeActivationCallback(this.linkFn)

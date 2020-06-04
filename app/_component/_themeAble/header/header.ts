@@ -34,6 +34,7 @@ export default declareComponent("header", class Header extends ThemeAble {
   constructor(public linksShownChangeCallback?: (linksShown: boolean, init: boolean, func: any) => void) { 
     super()
     
+    this.tgmLogoIcon.passiveTheme()
     window.on("resize", this.resizeHandler.bind(this))
   }
 
@@ -100,7 +101,7 @@ export default declareComponent("header", class Header extends ThemeAble {
     for (let i = 0; i < domainLevel; i++) {
       const domainFragment = domainIndex[i]
 
-      this.pathDisplayElem.apd(new ArrowIcon(), new Link(lang.links[domainFragment], domainFragment, i))
+      this.pathDisplayElem.apd(new ArrowIcon().passiveTheme(), new Link(lang.links[domainFragment], domainFragment, i).passiveTheme())
 
     }
     await this.pathDisplayElem.anim({opacity: 1, translateX: .1}, 500)
@@ -182,6 +183,9 @@ export default declareComponent("header", class Header extends ThemeAble {
 
     let currentLength = this.currentLinkElems.length
     
+    this.currentLinkElems.ea((e) => {
+      e.passiveTheme()
+    })
     animationWrapper.apd(...this.currentLinkElems)
     
     this.resizeHandler({width: this.clientWidth})
@@ -209,14 +213,6 @@ export default declareComponent("header", class Header extends ThemeAble {
 
 
     
-  }
-
-  public theme(): Theme
-  public theme(to: Theme): void
-  public theme(to?: Theme): any {
-    this.currentLinkElems.Inner("theme", [to])
-    this.tgmLogoIcon.theme(to)
-    return super.theme(to)
   }
 
   private resizeFn = () => {

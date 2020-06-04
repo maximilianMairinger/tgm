@@ -115,13 +115,13 @@ export default class LowerNavLink extends ThemeAble {
   }
 
   public passiveTheme() {
-    super.passiveTheme()
     if (this.activeIconElem) this.activeIconElem.passiveTheme()
+    return super.passiveTheme()
   }
 
   public activeTheme() {
-    super.activeTheme()
     if (this.activeIconElem) this.activeIconElem.activeTheme()
+    return super.activeTheme()
   }
 
 

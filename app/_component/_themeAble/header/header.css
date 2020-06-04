@@ -36,7 +36,9 @@ blurry-background.blurry {
   }
 }
 
-
+c-link, slidy-underline, c-tgm-logo {
+  transition: .2s;
+}
 
 
 left-content {

@@ -30,6 +30,7 @@ export default abstract class ThemeAble extends Component<false | HTMLElement> {
       this.currentlyActiveTheme = false
       this.themeStyleElement.html("")
     }
+    return this
   }
   protected currentlyActiveTheme = true
 
@@ -38,6 +39,7 @@ export default abstract class ThemeAble extends Component<false | HTMLElement> {
       this.currentlyActiveTheme = true
       this.themeStyleElement.html(themeIndex[this._theme])
     }
+    return this
   }
 
   stl() {

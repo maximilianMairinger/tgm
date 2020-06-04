@@ -1,9 +1,10 @@
 import { declareComponent } from "../../../../lib/declareComponent"
 import PageSection from "../pageSection"
+import { Theme } from "../../../_themeAble/themeAble";
 
 
 export default declareComponent("test-section-1", class extends PageSection {
-  
+  public theme: Theme = "dark"
   constructor() {
     super()
     

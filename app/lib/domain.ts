@@ -12,8 +12,11 @@ const maxCharactersInTitle = 20
 const toMuchSubtitlesTruncate = "..."
 const argData = "internal";
 
+
 const titleElement = document.querySelector("title")
 
+const httpString = "http://"
+const httpsString = "https://"
 export const dirString = "/";
 const domIndex = [] as string[];
 export const domainIndex = domIndex as Readonly<typeof domIndex>
@@ -323,9 +326,16 @@ export function linkMeta(link: string, domainLevel: number = 0) {
   let myDomainIndex = domIndex.clone()
   parseDomainToDomainIndex(myDomainIndex, link, domainLevel)
   let isOnOrigin = getBaseUrl(link) === getBaseUrl()
+  let href: string
+  if (isOnOrigin) href = dirString + parseDomainIndexToDomain(myDomainIndex) + dirString
+  else {
+    href = link.startsWith(httpsString) || link.startsWith(httpString) ? link : httpsString + link
+    if (!href.endsWith(dirString)) href += dirString
+  }
+
   return {
     link,
     isOnOrigin,
-    href: isOnOrigin ? dirString + parseDomainIndexToDomain(myDomainIndex) : link.startsWith("https://") || link.startsWith("http://") ? link : "https://" + link
+    href
   }
 }

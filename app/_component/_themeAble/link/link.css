@@ -8,7 +8,7 @@
   font-weight: bold;
 }
 
-:host(.active) > a {
+:host a {
   cursor: pointer;
 }
 
@@ -39,7 +39,13 @@ slidy-underline {
   position: absolute;
   top: 0;
   background: var(--strong-text-color);
-  background: red;
   border-radius: 2px;
   height: 2px;
+}
+
+link-body {
+  width: fit-content;
+  display: block;
+  height: fit-content;
+  position: relative;
 }

@@ -101,7 +101,7 @@ export default declareComponent("header", class Header extends ThemeAble {
     for (let i = 0; i < domainLevel; i++) {
       const domainFragment = domainIndex[i]
 
-      this.pathDisplayElem.apd(new ArrowIcon().passiveTheme(), new Link(lang.links[domainFragment], domainFragment, i).passiveTheme())
+      this.pathDisplayElem.apd(new ArrowIcon().passiveTheme(), new Link(lang.links[domainFragment], domainFragment, i, true, false).passiveTheme())
 
     }
     await this.pathDisplayElem.anim({opacity: 1, translateX: .1}, 500)
@@ -125,7 +125,7 @@ export default declareComponent("header", class Header extends ThemeAble {
     this.currentLinkContents = linkContents.clone()
     this.currentLinkElems = new ElementList()
     linkContents.ea((s) => {
-      this.currentLinkElems.add(new Link(lang.links[s], s, domainLevel))
+      this.currentLinkElems.add(new Link(lang.links[s], s, domainLevel, true, false))
     })
 
     let fadeReq = this.latestFadeRequest = Symbol()

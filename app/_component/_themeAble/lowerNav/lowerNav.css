@@ -9,12 +9,11 @@ background-blur, background-color, background-container {
 
 background-color {
   border-top: 1px solid rgba(0,0,0,0.16);
-  background-color: rgba(255, 255, 255, 0.2);
 }
 
 
 background-blur {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(var(--primary-background-color-raw), .9);
 }
 
 
@@ -70,8 +69,8 @@ link-container > c-lower-nav-link:last-of-type {
 /* if backdrop support: very transparent and blurred */
 @supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
   background-blur {
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
 
     background-color: unset;
   }

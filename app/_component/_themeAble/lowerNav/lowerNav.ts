@@ -44,6 +44,7 @@ export default declareComponent("lower-nav", class LowerNav extends ThemeAble {
         if (this.linkPressedCb) this.linkPressedCb()
         this.maximize()
       })
+      link.passiveTheme()
       this.currentLinkElems.add(link)
       this.currentLinkWrapperElems.add(ce("link-container").apd(link))
     })

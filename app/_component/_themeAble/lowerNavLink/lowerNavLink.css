@@ -28,6 +28,7 @@ icon-container > * {
 
 text-container {
   transition: .4s color;
+  color: var(--weak-text-color)
 }
 
 text-container {

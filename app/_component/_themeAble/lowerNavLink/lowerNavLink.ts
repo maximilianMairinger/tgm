@@ -95,6 +95,7 @@ export default class LowerNavLink extends ThemeAble {
 
         (async () => {
           this.activeIconElem = new ((await iconIndex[icon]()).default)
+          if (!this.currentlyActiveTheme) this.activeIconElem.passiveTheme()
           this.iconContainer.html(this.activeIconElem)
         })()
       }
@@ -111,6 +112,16 @@ export default class LowerNavLink extends ThemeAble {
   public downlight() {
     this.removeClass(hightlightClassString)
     if (this.activeIconElem) this.activeIconElem.downlight()
+  }
+
+  public passiveTheme() {
+    super.passiveTheme()
+    if (this.activeIconElem) this.activeIconElem.passiveTheme()
+  }
+
+  public activeTheme() {
+    super.activeTheme()
+    if (this.activeIconElem) this.activeIconElem.activeTheme()
   }
 
 

@@ -4,6 +4,7 @@
   --contrast-text-color: #1FA7E0;
   --weak-contrast-text-color: #1487B7;
   --primary-background-color: #F9FAFE;
+  --primary-background-color-raw: 249, 250, 254;
   --secondary-background-color: #fefefe;
   --soft-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
   --medium-shadow: 0 0 15px 0 rgba(0, 0, 0, .15);

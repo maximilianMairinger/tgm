@@ -8,7 +8,7 @@ import { negateTheme } from "../_themeAble/themeAble";
 
 
 const topLimit = 0
-const scrollTrendActivationCount = 10
+const scrollTrendActivationCount = 20
 
 export default declareComponent("site", class extends Component {
   
@@ -100,6 +100,10 @@ export default declareComponent("site", class extends Component {
 
     pageManager.addThemeIntersectionListener(header, (themeUnderneath) => {
       header.theme(themeUnderneath)
+    })
+
+    pageManager.addThemeIntersectionListener(lowerNav, (themeUnderneath) => {
+      lowerNav.theme(themeUnderneath)
     })
     
     pageManager.loadedCallback()

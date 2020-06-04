@@ -61,7 +61,7 @@ export default class LowerNavLink extends ThemeAble {
       this.icon(link)
     }
 
-    this.href(link)
+    this.href(link, domainLevel)
   }
 
   public href(): string

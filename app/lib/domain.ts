@@ -23,7 +23,7 @@ function getCurrentSubDomainPath() {
   return decodeUri(document.location.pathname) as string
 }
 
-function parseUrlToDomainIndex() {
+function parselocalUrlToDomainIndex() {
   let currentDomain = getCurrentSubDomainPath()
   domIndex.set(getCurrentSubDomainPath().split(dirString))
   domIndex.remove("");
@@ -32,7 +32,7 @@ function parseUrlToDomainIndex() {
   
   history.replaceState(argData, updateTitle(), endDomain)
 }
-parseUrlToDomainIndex()
+parselocalUrlToDomainIndex()
 
 
 function renderSubtitle(myDomainIndex = domIndex) {
@@ -74,9 +74,9 @@ function updateTitle() {
 }
 
 
-function parseDomainToDomainIndex(domain: string, level: number) {
+export function parseDomainToDomainIndex(domainIndex: string[], domain: string, level: number) {
 
-  let originalLength = domIndex.length;
+  let originalLength = domainIndex.length;
   if (originalLength < level || level < 0) {
     console.warn("Unexpected index: " + level + ". Replacing it with " + originalLength + ".")
     level = originalLength
@@ -85,16 +85,16 @@ function parseDomainToDomainIndex(domain: string, level: number) {
   let anyChange = false
   let subdomains = domain.split(dirString).replace(e => slugify(e))
   
-  domIndex.splice(level + subdomains.length)
-  if (domIndex.length !== originalLength) anyChange = true
+  domainIndex.splice(level + subdomains.length)
+  if (domainIndex.length !== originalLength) anyChange = true
   
   subdomains.ea((sub, i) => {
     if (sub === "") sub = undefined
     let ind = i + level
-    if (domIndex[ind] !== sub) {
+    if (domainIndex[ind] !== sub) {
       anyChange = true
-      if (sub === undefined) domIndex.rmI(ind)
-      else domIndex[ind] = sub
+      if (sub === undefined) domainIndex.rmI(ind)
+      else domainIndex[ind] = sub
     }
   })
   return anyChange
@@ -116,7 +116,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     res = r
   })
 
-  let anyChange = parseDomainToDomainIndex(subdomain, level)
+  let anyChange = parseDomainToDomainIndex(domIndex, subdomain, level)
   if (!anyChange) {
     inDomainSet = false
     res()
@@ -138,7 +138,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     
     if (recall) {
       let { domain, domainLevel } = recall
-      parseDomainToDomainIndex(domain, domainLevel)
+      parseDomainToDomainIndex(domIndex, domain, domainLevel)
       let endDomain = domIndex.join(dirString)
 
       domIndex.set(domainIndexRollback)
@@ -294,7 +294,7 @@ window.onpopstate = async function(e) {
 
 
 
-  parseUrlToDomainIndex()
+  parselocalUrlToDomainIndex()
 
 
 

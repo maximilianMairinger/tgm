@@ -50,6 +50,9 @@ export default declareComponent("lower-nav", class LowerNav extends ThemeAble {
     })
 
     this.currentLinkWrapperElems.first.prepend(this.slidy = ce("active-slidy"))
+    if (!this.initialUpdate) {
+      this.slidy.css({display: "block", opacity: 1})
+    }
 
     this.linkContainer.html(this.currentLinkWrapperElems)
   }

@@ -1,4 +1,5 @@
 import Component from "./../component";
+import { Theme } from "../_themeAble/themeAble";
 
 export default abstract class Frame extends Component {
   public readonly active: boolean = false;
@@ -39,4 +40,7 @@ export default abstract class Frame extends Component {
   protected initialActivationCallback?(): boolean | void | Promise<boolean | void>
   protected loadedCallback?(): boolean | void | Promise<boolean | void>
   public dontPropergateScrollUpdates = false
+  public addIntersectionListener?(root: HTMLElement, cb: Function, threshold?: number, rootMargin?: string): void
+  public removeIntersectionListener?(root: HTMLElement): void
+  public theme: Theme
 }

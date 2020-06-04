@@ -94,7 +94,22 @@ export default declareComponent("site", class extends Component {
       
 
       lastScrollProg = prog
+    }, (prog) => {
+      if (prog)
+
+
+      if (currentlyShowingLowerNav) {
+        let foot = lowerNav.getBoundingClientRect()
+      }
     })
+
+
+    pageManager.addThemeIntersectionListener(header, (q) => {
+      console.log("qweqweewqwe", q)
+    })
+
+    const headRect = header.getBoundingClientRect()
+    const headMid = (headRect.top + headRect.bottom) / 2
     
     pageManager.loadedCallback()
     this.apd(pageManager)

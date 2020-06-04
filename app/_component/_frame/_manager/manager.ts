@@ -4,6 +4,8 @@ import * as domain from "../../../lib/domain";
 import lazyLoad, { ImportanceMap, Import, ResourcesMap } from "../../../lib/lazyLoad";
 import SectionedPage from "../_page/_sectionedPage/sectionedPage";
 import delay from "delay";
+import { Theme } from "../../_themeAble/themeAble";
+import PageSection from "../_pageSection/pageSection";
 
 
 export default abstract class Manager<ManagementElementName extends string> extends Frame {
@@ -25,7 +27,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private managedElementMap: ResourcesMap
 
-  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, public onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, public onUserScroll?: (scrollProgress: number) => void, public onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
     this.firstFrameLoaded = new Promise((res) => {
       this.resLoaded = res
@@ -82,11 +84,55 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private lastScrollbarWidth: number
 
-  private onScrollListener = () => {
+  private dualScrollListener = () => {
     //@ts-ignore
-    if (!this.currentFrame.dontPropergateScrollUpdates) this.onScroll(this.currentFrame.elementBody.scrollTop)
+    let y = this.currentFrame.elementBody.scrollTop
+    if (!this.currentFrame.dontPropergateScrollUpdates) this.onUserScroll(y)
+    this.onScroll(y)
   }
 
+  private userScrollListener = () => {
+    //@ts-ignore
+    if (!this.currentFrame.dontPropergateScrollUpdates) this.onUserScroll(this.currentFrame.elementBody.scrollTop)
+  }
+
+  private normalScrollListener = () => {
+    //@ts-ignore
+    this.onScroll(this.currentFrame.elementBody.scrollTop)
+  }
+
+  private intersectionListenerIndex: Map<HTMLElement, {cb: (elem: Frame) => void, threshold?: number}> = new Map
+
+  public addIntersectionListener(root: HTMLElement, cb: (elem: Frame) => void, threshold?: number) {
+    this.intersectionListenerIndex.set(root, {cb, threshold})
+    if (this.currentFrame) {
+      if (this.currentFrame.addIntersectionListener) this.currentFrame.addIntersectionListener(root, cb, threshold)
+      else {
+        cb(this.currentFrame)
+      }
+    }
+  }
+  public removeIntersectionListener(root: HTMLElement) {
+    this.intersectionListenerIndex.delete(root)
+    if (this.currentFrame) {
+      if (this.currentFrame.removeIntersectionListener) this.currentFrame.removeIntersectionListener(root)
+    }
+  }
+
+  private lastThemeIntersection: Map<HTMLElement, Theme> = new Map
+  public addThemeIntersectionListener(root: HTMLElement, cb: (theme: Theme) => void) {
+    this.addIntersectionListener(root, (q) => {
+      let theme: Theme = q.theme ? q.theme : "light"
+      if (theme !== this.lastThemeIntersection.get(root)) {
+        cb(theme)
+        this.lastThemeIntersection.set(root, theme)
+      }
+    })
+  }
+
+  public removeThemeIntersectionListener(root: Frame) {
+    this.removeIntersectionListener(root)
+  }
 
 
   /**
@@ -157,8 +203,25 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
     }
 
+    if (from !== undefined) if (from.removeIntersectionListener) {
+      this.intersectionListenerIndex.forEach((q, elem) => {
+        from.removeIntersectionListener(elem)
+      })
+    }
+    if (to.addIntersectionListener) {
+      this.intersectionListenerIndex.forEach(({cb, threshold}, elem) => {
+        to.addIntersectionListener(elem, cb, threshold)
+      })
+    }
+
     //@ts-ignore
-    if (this.onScroll) to.elementBody.on("scroll", this.onScrollListener)
+    if (this.onUserScroll && this.onScroll) to.elementBody.on("scroll", this.dualScrollListener)
+    else {
+      //@ts-ignore
+      if (this.onUserScroll) to.elementBody.on("scroll", this.userScrollListener)
+      //@ts-ignore
+      else if (this.onScroll) to.elementBody.on("scroll", this.normalScrollListener)
+    }
 
     let showAnim = from !== undefined ? to.anim([{zIndex: 100, opacity: 0, translateX: -5, scale: 1.005, offset: 0}, {opacity: 1, translateX: 0, scale: 1}], 400) : to.anim([{offset: 0, opacity: 0}, {opacity: 1}], 400)
 

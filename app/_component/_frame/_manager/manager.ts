@@ -198,6 +198,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
     }
     
 
+    this.currentFrame = to;
+
     if (this.onScrollBarWidthChange) {
       //@ts-ignore
       let scrollBarWidth = this.elementBody.clientWidth - to.elementBody.clientWidth
@@ -210,22 +212,18 @@ export default abstract class Manager<ManagementElementName extends string> exte
     
     this.scrollEventListener.target((to as any).elementBody).activate()
 
-
     if (this.onUserScroll && this.onScroll) {
-      //@ts-ignore
-      let y = this.currentFrame.elementBody.scrollTop
+      
+      let y = (this.currentFrame as any).elementBody.scrollTop
       if (!this.currentFrame.dontPropergateScrollUpdates) this.onUserScroll(y)
       this.onScroll(y)
     }
     else {
-      if (this.onUserScroll) this.scrollEventListener = new EventListener(this, "scroll", () => {
-        //@ts-ignore
-        if (!this.currentFrame.dontPropergateScrollUpdates) this.onUserScroll(this.currentFrame.elementBody.scrollTop)
-      }, false)
-      else if (this.onScroll) this.scrollEventListener = new EventListener(this, "scroll", () => {
-        //@ts-ignore
-        this.onScroll(this.currentFrame.elementBody.scrollTop)
-      }, false)
+
+      if (this.onUserScroll) {
+        if (!this.currentFrame.dontPropergateScrollUpdates) this.onUserScroll((this.currentFrame as any).elementBody.scrollTop)
+      }
+      else if (this.onScroll) this.onScroll((this.currentFrame as any).elementBody.scrollTop)
     }
 
     if (from !== undefined) if (from.removeIntersectionListener) {
@@ -239,9 +237,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
       })
     }
 
-    let showAnim = from !== undefined ? to.anim([{zIndex: 100, opacity: 0, translateX: -5, scale: 1.005, offset: 0}, {opacity: 1, translateX: 0, scale: 1}], 400) : to.anim([{offset: 0, opacity: 0}, {opacity: 1}], 400)
+    let showAnim = from !== undefined ? to.anim([{zIndex: 100, opacity: 0, translateX: -5, scale: 1.005, offset: 0}, {opacity: 1, translateX: 0, scale: 1}], 400) : to.anim([{offset: 0, opacity: 0}, {opacity: 1}], 400);
 
-    this.currentFrame = to;
 
     (async () => {
       if (from === undefined) {

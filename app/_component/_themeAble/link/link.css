@@ -6,6 +6,9 @@
 
 :host(.active) {
   font-weight: bold;
+}
+
+:host(.active) > a {
   cursor: pointer;
 }
 
@@ -13,12 +16,30 @@ slot {
   font-weight: inherit;
   cursor: inherit;
   display: inline-block;
-  text-decoration: inherit;
 }
 
 a {
   color: inherit;
-  text-decoration: inherit;
   font-weight: inherit;
   cursor: inherit;
+}
+
+slidy-underline-wrapper {
+  display: block;
+  position: absolute;
+  bottom: -.2em;
+  border-radius: 2px;
+  height: 2px;
+  overflow: hidden;
+  width: 100%;
+}
+
+slidy-underline {
+  display: block;
+  position: absolute;
+  top: 0;
+  background: var(--strong-text-color);
+  background: red;
+  border-radius: 2px;
+  height: 2px;
 }

@@ -2,7 +2,7 @@ import declareComponent from "../../../lib/declareComponent"
 import ThemeAble from "../themeAble";
 import { Data } from "josm"
 import * as domain from "./../../../lib/domain"
-import clone from "fast-copy"
+import delay from "delay"
 
 
 
@@ -10,7 +10,9 @@ import clone from "fast-copy"
 export default class Link extends ThemeAble {
   private aElem = this.q("a") as unknown as HTMLAnchorElement
   private slotElem = this.sr.querySelector("slot")
-  constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0, public push: boolean = true) {
+  private slidyWrapper = this.q("slidy-underline-wrapper")
+  private slidy = this.slidyWrapper.childs()
+  constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0, public push: boolean = true, underline: boolean = true) {
     super(false)
     
     this.content(content)
@@ -43,6 +45,84 @@ export default class Link extends ThemeAble {
       // enter is covered with click
       if (e.key === " ") ev(e)
     })
+
+
+    if (underline) {
+      let inAnimation = false
+      let wannaCloose = false
+      let wantToAnim = false
+
+
+      let mouseOver = () => {
+        if (inAnimation) {
+          wantToAnim = true
+          wannaCloose = false
+          return
+        }
+        inAnimation = true
+
+        let handled = false
+        delay(250).then(() => {
+          if (wannaCloose) {
+            this.slidyWrapper.anim({width: "0%", left: "100%"}).then(() => {
+              this.slidyWrapper.css({left: "0%", width: "100%"})
+              this.slidy.css({width: 0})
+            }).then(() => {
+              console.log("no more anim")
+              inAnimation = false
+              if (wantToAnim) {
+                wantToAnim = false
+                mouseOver()
+              }
+            })
+            wannaCloose = false
+            handled = true
+          }
+          
+        })
+        delay(300).then(() => {
+
+          if (wannaCloose && !handled) {
+            this.slidy.anim({width: "0%", left: "100%"}).then(() => this.slidy.css({left: "0%"})).then(() => {
+              inAnimation = false
+              if (wantToAnim) {
+                wantToAnim = false
+                mouseOver()
+              }
+            })
+            wannaCloose = false
+          }
+          else {
+            if (!handled) inAnimation = false
+          }
+        })
+        this.slidy.anim({width: "100%"}, 300)
+      }
+
+      let mouseOut = () => {
+        wantToAnim = false
+        if (!inAnimation) {
+          inAnimation = true
+          this.slidy.anim({width: "0%", left: "100%"}).then(() => this.slidy.css({left: "0%"})).then(() => {
+            inAnimation = false
+            if (wantToAnim) {
+              wantToAnim = false
+              mouseOver()
+            }
+            if (wannaCloose) {
+              wannaCloose = false
+              mouseOut()
+            }
+          })
+          wannaCloose = false
+        }
+        else wannaCloose = true
+        
+      }
+
+      this.aElem.on("mouseover", mouseOver)
+      this.aElem.on("mouseleave", mouseOut)
+    }
 
   }
 

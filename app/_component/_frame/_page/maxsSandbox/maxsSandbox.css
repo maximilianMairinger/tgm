@@ -2,10 +2,16 @@ scroll-ly {
   display: block;
   position: relative;
   height: 5000px;
+  width: 0px;
 }
 
-svg {
+
+
+wid-wid {
+  display: flex;
+  align-items: center;
   position: fixed;
-  top: 30px;
-  left: 30px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }

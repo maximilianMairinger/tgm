@@ -14,6 +14,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
   private path2: SVGPathElement
   constructor() {
     super()
+    this.svgPathElems.css({fillOpacity: 1})
     this.path1 = this.svgPathElems[0]
     this.path2 = this.svgPathElems[1]
 
@@ -23,8 +24,8 @@ export default declareComponent("maxs-sandbox", class extends Page {
     })
 
     setTimeout(() => {
-      this.path1.anim({d: pathA, translateY, translateX}, {start: 100, end: 1000}, guide)
-      this.path2.anim({d: pathB, translateY, translateX}, {start: 100, end: 1000}, guide)
+      this.path1.anim({d: pathA, translateY, translateX}, {start: 100, end: 800}, guide)
+      this.path2.anim({d: pathB, translateY, translateX}, {start: 100, end: 800}, guide)
     }, 1000)
     
 

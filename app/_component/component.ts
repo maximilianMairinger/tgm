@@ -1,6 +1,7 @@
 import "../global"
 import lang from "./../lib/lang"
 import { DataBase, Data } from "josm";
+import { ElementList, ElementListOrElement } from "extended-dom";
 
 type PrimElem = string | number | boolean | Element
 type Token = string | string[]
@@ -52,8 +53,21 @@ export default abstract class Component<T extends HTMLElement | HTMLAnchorElemen
     });
   }
 
-  public q(qs?: string) {
-    return this.elementBody.childs(qs)
+
+  /**
+   * Gets children matching given css-selector
+   * @param selector css-selector filter childs similar to document.querySelector
+   * @param alwaysReturnElementList when true, always return a ELementList instead of defaulting to a single instance when the query does only math once (defaults to false)
+   */
+  public q(selector: string, alwaysReturnElementList: true): ElementList<Element>
+  /**
+   * Gets children matching given css-selector
+   * @param selector css-selector filter childs similar to document.querySelector
+   * @param alwaysReturnElementList when true, always return a ELementList instead of defaulting to a single instance when the query does only math once (defaults to false)
+   */
+  public q(selector: string, alwaysReturnElementList?: boolean): ElementListOrElement
+  public q(qs?: string, alwaysReturnElementList?: boolean) {
+    return this.elementBody.childs(qs, alwaysReturnElementList)
   }
 //   apd(to: PrimElem | PrimElem[], library?: {
 //     [key in string]: string | Data<string>;

@@ -12,44 +12,58 @@ export default class Link extends ThemeAble {
   private slotElem = this.sr.querySelector("slot")
   private slidyWrapper = this.q("slidy-underline-wrapper")
   private slidy = this.slidyWrapper.childs()
+
+
   constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0, public push: boolean = true, underline: boolean = true) {
     super(false)
+
+
+
     
     this.content(content)
     if (link) this.link(link)
 
 
     let ev = (e: Event) => {
-      this.cbs.Call(e)
-      e.preventDefault()
-      return
+      if (this.link()) this.cbs.Call(e)
+    }
+
+    this.aElem.on("mouseup", ev)
+    this.aElem.on("click", (e) => {
       let link = this.link()
       if (link) {
-        if (this.isLinkOnOrigin) {
+        let meta = domain.linkMeta(link, this.domainLevel)
+        if (meta.isOnOrigin) {
           e.preventDefault()
           domain.set(link, this.domainLevel, this.push)
         }
       }
-      
-      this.cbs.Call(e)
-    }
+    })
 
-
-    let updateLinkF = () => {
-      let meta = domain.linkMeta(this.link(), this.domainLevel)
-      this.aElem.href = meta.href
-    }
-
-    this.aElem.on("mouseenter", updateLinkF)
-    this.aElem.on("focus", updateLinkF)
-
-    this.aElem.on("click", ev)
     this.aElem.on("keydown", (e) => {
-      // enter is covered with click
-      if (e.key === " ") ev(e)
+      if (e.key === " " || e.key === "Enter") ev(e)
+    })
+    
+
+    this.aElem.on("mousedown", () => {
+      this.addClass("pressed")
+    })
+    this.aElem.on("mouseleave", () => {
+      if (click) return
+      this.removeClass("pressed")
+    })
+    this.aElem.on("mouseup", () => {
+      if (click) return
+      this.removeClass("pressed")
     })
 
 
+    this.aElem.on("mouseenter", this.updateHref.bind(this))
+    this.aElem.on("focus", this.updateHref.bind(this))
+
+    
+    let click = false
+    
     if (underline) {
       let inAnimation = false
       let wannaCloose = false
@@ -131,27 +145,28 @@ export default class Link extends ThemeAble {
 
       this.aElem.on("mouseover", mouseOver)
       this.aElem.on("mouseleave", mouseOut)
-      let click = false
+      
 
       let clickF = (async () => {
         let oldSlidy = this.slidy
         if (oldSlidy.width() === 0) oldSlidy.css({width: "100%", height: 0})
         //@ts-ignore
-        this.aElem.css({mixBlendMode: "exclusion"})
+        // this.aElem.css({mixBlendMode: "exclusion"})
         this.slidyWrapper.css({height: "calc(100% + .2em)", top: 0, bottom: "unset"})
         await Promise.all([
-          oldSlidy.anim({height: "100%"}, 300),
+          oldSlidy.anim({height: "100%"}, 350),
           oldSlidy.anim({borderRadius: 0}, 100),
           this.slidyWrapper.anim({borderRadius: 0}, 100),
-          delay(200).then(() => this.slidyWrapper.anim({height: 0, }, 200))
+          delay(150).then(() => this.slidyWrapper.anim({height: 0}, 450))
         ])
 
         this.slidyWrapper.css({height: 2, bottom: "-.2em", top: "unset"})
         //@ts-ignore
-        this.aElem.css({mixBlendMode: "normal"})
+        // this.aElem.css({mixBlendMode: "normal"})
 
         this.slidy = ce("slidy-underline")
         this.slidyWrapper.html(this.slidy)
+        this.removeClass("pressed")
 
         inAnimation = false
         wannaCloose = false
@@ -170,24 +185,25 @@ export default class Link extends ThemeAble {
 
   }
 
-  private isLinkOnOrigin: boolean
+  private updateHref() {
+    if (!this.link()) return
+    let meta = domain.linkMeta(this.link(), this.domainLevel)
+    this.aElem.href = meta.href
+  }
+
   private _link: string
 
   link(): string
   link(to?: string): void
   link(to?: string): any {
     if (to) {
-      let link = domain.linkMeta(to, this.domainLevel)
-      this._link = link.link
-      this.aElem.href = link.href
-      this.isLinkOnOrigin = link.isOnOrigin
+      this._link = to
+      this.updateHref()
       this.addClass("active")
     }
     else if (to === null) {
+      this._link = null
       this.removeClass("active")
-      delete this._link
-      delete this.aElem.href
-      delete this.isLinkOnOrigin
     }
     else return this._link
   }

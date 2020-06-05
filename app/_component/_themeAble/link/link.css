@@ -1,11 +1,14 @@
 :host {
-  
   color: var(--strong-text-color);
   user-select: none;
 }
 
 :host(.active) {
   font-weight: bold;
+}
+
+:host(.pressed) a {
+  color: var(--weaker-text-color);
 }
 
 :host a {
@@ -22,6 +25,8 @@ a {
   color: inherit;
   font-weight: inherit;
   cursor: inherit;
+  position: relative;
+  transition: color .15s;
 }
 
 slidy-underline-wrapper {

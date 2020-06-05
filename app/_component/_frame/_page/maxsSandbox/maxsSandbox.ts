@@ -8,8 +8,8 @@ const translateX = 257
 const translateY = 285
 
 export default declareComponent("maxs-sandbox", class extends Page {
-  private svgElem = this.q("svg")
-  private svgPathElems = this.svgElem.childs()
+  private mainSvg = this.q("svg g")
+  private svgPathElems = this.mainSvg.childs()
   private path1: SVGPathElement
   private path2: SVGPathElement
   constructor() {

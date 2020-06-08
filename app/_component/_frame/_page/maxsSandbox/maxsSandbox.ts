@@ -13,11 +13,15 @@ const start = 100
 
 
 export default declareComponent("maxs-sandbox", class extends Page {
-  private mainSvg = this.q("svg g")
+  private svgGroups = this.q("svg g")
+  private mainSvg = this.svgGroups[1] as SVGElement
+  private secondSvg = this.svgGroups[0]
   private svgPathElems = this.mainSvg.childs()
   private path1: SVGPathElement
   private path2: SVGPathElement
-  private mapPointer = this.q("map-pointer")
+  private mapPointerCenter = this.q("map-pointer-center")
+  private mapPointerWrapper = this.q("map-pointer-wrapper")
+  private mapPointer = this.q("map-pointer") as HTMLElement
 
   constructor() {
     super()
@@ -26,7 +30,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
     this.path2 = this.svgPathElems[1]
 
     setTimeout(() => {
-      this.elementBody.scrollTop = 800
+      this.elementBody.scrollTop = 900
     }, 100)
 
     let guide = this.elementBody.scrollData()
@@ -37,6 +41,64 @@ export default declareComponent("maxs-sandbox", class extends Page {
     this.path2.anim({d: pathB, translateY, translateX}, mapOptions, guide)
 
     this.mapPointer.anim({opacity: 1, translateY: .1}, {start: start + 650, end: start + 770}, guide)
+
+
+    let scale = 1.5
+    let ajustedScale = scale - 1
+    let trans = 50 * ajustedScale
+    let transStr = "-" + trans + "%"
+    console.log(trans)
+
+
+    const xOffset = .01
+    const yOffset = -.03
+    const aspectRatio = 0.7777777777777778
+    console.log((yOffset * 100 * aspectRatio) + "vw")
+
+    const yPx = 105
+    const xPx = -15
+    this.mapPointerWrapper.css({translateX: (xOffset * 100) + "vw", translateY: (yOffset * 100 * aspectRatio) + "vw"})
+    this.mapPointerCenter.css({translateY: yPx, translateX: xPx})
+
+    let mobile: boolean
+    window.on("resize", (q) => {
+      if (q.width < 978) {
+        if (!mobile) {
+          mobile = true
+          
+          this.mapPointerWrapper.anim({translateX: (xOffset * 100 * scale) + "vw", translateY: (yOffset * 100 * aspectRatio * scale) + "vw"})
+          this.mainSvg.anim({scale: scale, translateX: transStr, translateY: transStr})
+          console.log("mob")
+        }
+      }
+      else {
+        if (mobile || mobile === undefined) {
+          mobile = false
+
+          this.mapPointerWrapper.anim({translateX: (xOffset * 100) + "vw", translateY: (yOffset * 100 * aspectRatio) + "vw"})
+          this.mainSvg.anim({scale: 1, translateX: 0.1, translateY: 0.1})
+          console.log("des")
+        }
+      }
+    })
+
+    let midDesk: boolean
+    window.on("resize", (q) => {
+      if (q.width < 1300) {
+        if (!midDesk) {
+          midDesk = true
+          this.mapPointerWrapper.anim({marginLeft: "-12%"})
+          this.secondSvg.anim({translateX: -120})
+        }
+      }
+      else {
+        if (midDesk || midDesk === undefined) {
+          midDesk = false
+          this.mapPointerWrapper.anim({marginLeft: 0})
+          this.secondSvg.anim({translateX: .1})
+        }
+      }
+    })
 
     
 

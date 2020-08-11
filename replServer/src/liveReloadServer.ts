@@ -1,33 +1,17 @@
 import express from "express"
+
 import SSE from "express-sse"
 import chokidar from "chokidar"
 import yargs from "yargs"
 //@ts-ignore
 const args = yargs.argv
 import pth from "path"
+
 import bodyParser from "body-parser"
 import fs from "fs"
+import xtring from "xtring"
+xtring()
 
-
-
-
-
-//@ts-ignore
-if (String.prototype.splice === undefined) {
-  /**
-   * Splices text within a string.
-   * @param {int} offset The position to insert the text at (before)
-   * @param {string} text The text to insert
-   * @param {int} [removeCount=0] An optional number of characters to overwrite
-   * @returns {string} A modified string containing the spliced text.
-   */
-  //@ts-ignore
-  String.prototype.splice = function(offset, text, removeCount=0) {
-    let calculatedOffset = offset < 0 ? this.length + offset : offset;
-    return this.substring(0, calculatedOffset) +
-      text + this.substring(calculatedOffset + removeCount);
-  };
-}
 
 declare global {
   interface String {
@@ -78,7 +62,7 @@ ${swInjection}
 
     console.log("Change at: \"" + path + "\"; Restaring app.")
 
-    sse.send("reloadPlease");
+    sse.send("reloadPlease", "event", 2);
   })
 
 

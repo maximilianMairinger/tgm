@@ -69,11 +69,12 @@
     "webpack-cli": "^3.3.9",
     "webpack-inject-plugin": "^1.5.3",
     "webpack-merge": "^4.2.2",
-    "yargs": "^15.3.1"
+    "xtring": "^1.2.0",
+    "yargs": "15.3.1"
   },
   "dependencies": {
     "animated-scroll-to": "^2.0.8",
-    "extended-dom": "^3.4.1",
+    "extended-dom": "^3.4.2",
     "fast-decode-uri-component": "^1.0.1",
     "get-base-url": "^2.0.0",
     "josm": "^1.1.6",

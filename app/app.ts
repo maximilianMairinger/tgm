@@ -1,5 +1,6 @@
 import featureRequirementsMet from "./featureDetection"
 
+console.log("test2")
 
 
 document.addEventListener("DOMContentLoaded", async () => {

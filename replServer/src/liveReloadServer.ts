@@ -13,13 +13,6 @@ import xtring from "xtring"
 xtring()
 
 
-declare global {
-  interface String {
-    splice(offset: number, text: string, removeCount?: number): string
-  }
-}
-
-
 
 
 function formatPath (path: string) {
@@ -93,7 +86,7 @@ ${swInjection}
         if (ext === ".html" || ext === ".htm") {
           let file = fs.readFileSync(path).toString()
           let injectAt = file.lastIndexOf("</body>") - 1
-          res.send(file.splice(injectAt, swInjUrl))
+          res.send(file.splice(injectAt, 0, swInjUrl))
         }
         else res.old_sendFile(pth.join(pth.resolve(""), path))
       }

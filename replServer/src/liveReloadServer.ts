@@ -30,7 +30,7 @@ const swInjection = fs.readFileSync(pth.join(__dirname, "./../res/live-reload-in
 
 
 
-export default function init(indexUrl: string = "/", publicPath: string = "./public", wsUrl: string = "wsReplServer") {
+export default function init(indexUrl: string = "/", publicPath: string = "./public", wsUrl: string = "/") {
 
   if (!wsUrl.startsWith("/")) wsUrl = "/" + wsUrl
 

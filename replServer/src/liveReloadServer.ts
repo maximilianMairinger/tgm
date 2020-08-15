@@ -33,7 +33,6 @@ const swInjection = fs.readFileSync(pth.join(__dirname, "./../res/live-reload-in
 export default function init(indexUrl: string = "/", publicPath: string = "./public", wsUrl: string = "wsReplServer") {
 
   if (!wsUrl.startsWith("/")) wsUrl = "/" + wsUrl
-  console.log("url", wsUrl)
 
   
 
@@ -42,22 +41,24 @@ export default function init(indexUrl: string = "/", publicPath: string = "./pub
   
 
   let ex = express()
-  expressWs(ex)
+  let appWss = expressWs(ex)
   let app = ex as typeof ex & { ws: (route: string, fn: (ws: WebSocket & {on: WebSocket["addEventListener"], off: WebSocket["removeEventListener"]}, req: any) => void) => void }
 
   app.use(bodyParser.urlencoded({extended: false}));
   app.use(bodyParser.json());
 
 
-
+  let clients: Set<WebSocket> = new Set()
 
   chokidar.watch(publicPath, { ignoreInitial: true }).on("all", (event, path) => {
     path = formatPath(path)
 
     console.log("Change at: \"" + path + "\"; Restaring app.")
 
-    //@ts-ignore
-    clients.Inner("send", ["reload please"])
+
+    clients.forEach((c) => {
+      c.send("reload please")
+    })
   })
 
 
@@ -66,19 +67,17 @@ export default function init(indexUrl: string = "/", publicPath: string = "./pub
   
   if (port === undefined) {
     (detectPort(defaultPortStart) as any).then((port) => {
-      app.listen(port)
+      go(port)
       console.log("Serving on http://127.0.0.1:" + port)
     })
     
   }
-  else app.listen(port)
+  else go(port)
   
 
-  
+  function go(port: number) {
 
-
-
-  // inject
+    // inject
   const swInjUrl = `
 <!-- Code Injected By the live server -->
 <script>
@@ -87,69 +86,59 @@ let url = "ws://127.0.0.1:${port}${wsUrl}";
 ${swInjection}
 })()
 </script>`
-
-
-
-
-  //@ts-ignore
-  app.old_get = app.get
-  //@ts-ignore
-  app.get = (url: string, cb: (req: any, res: any) => void) => {
+  
+  
+  
+  
     //@ts-ignore
-    app.old_get(url, (req, res) => {
-      res.old_sendFile = res.sendFile
-      res.sendFile = (path: string) => {
-        let ext = pth.extname(path)
-        if (ext === ".html" || ext === ".htm") {
-          let file = fs.readFileSync(path).toString()
-          let injectAt = file.lastIndexOf("</body>")
-          res.send(file.splice(injectAt, 0, swInjUrl))
+    app.old_get = app.get
+    //@ts-ignore
+    app.get = (url: string, cb: (req: any, res: any) => void) => {
+      //@ts-ignore
+      app.old_get(url, (req, res) => {
+        res.old_sendFile = res.sendFile
+        res.sendFile = (path: string) => {
+          let ext = pth.extname(path)
+          if (ext === ".html" || ext === ".htm") {
+            let file = fs.readFileSync(path).toString()
+            let injectAt = file.lastIndexOf("</body>")
+            res.send(file.splice(injectAt, 0, swInjUrl))
+          }
+          else res.old_sendFile(pth.join(pth.resolve(""), path))
         }
-        else res.old_sendFile(pth.join(pth.resolve(""), path))
-      }
-      cb(req, res)
+        cb(req, res)
+      })
+    }
+
+
+    app.ws(wsUrl, (ws) => {
     })
+
+    //@ts-ignore
+    clients = appWss.getWss(wsUrl).clients
+  
+  
+    
+  
+  
+
+    
+    app.use(express.static(pth.join(pth.resolve(""), publicPath)))
+
+    app.get(indexUrl, (req, res) => {
+      res.sendFile("./public/index.html")
+    })
+    
+
+
+    app.listen(port)
   }
 
-  let clients: WebSocket[] = []
-  app.ws(wsUrl, (ws) => {
-    console.log("await open")
-    ws.on("message", (e) => {
-      console.log("mess", e)
-
-    })
-    
-
-
-    ws.on("open", () => {
-      console.log("wsssss")
-
-
-      setInterval(() => {
-        ws.send("any")
-        console.log("rel")
-  
-  
-      }, 2000)
-      clients.add(ws)
-      ws.on("close", () => {
-        clients.rmV(ws)
-      })
-    })
-
-
-  })
-
-
-  app.get(indexUrl, (req, res) => {
-    console.log("send")
-    
-    res.sendFile("./public/index.html")
-  })
 
 
   
-  app.use(express.static(pth.join(pth.resolve(""), publicPath)))
+
+  
 
 
   
@@ -163,4 +152,3 @@ ${swInjection}
   return app
 
 }
-

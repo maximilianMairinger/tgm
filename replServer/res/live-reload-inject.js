@@ -1,8 +1,12 @@
-let stream = new EventSource(url);
+const ws = new WebSocket(url);
+ws.addEventListener("open", () => {
+  console.log("hello sind client")
 
+  ws.send("hello")
+})
 
-stream.addEventListener("message", reload)
-stream.addEventListener("error", reload)
+ws.addEventListener("message", reload)
+ws.addEventListener("error", reload)
 
 
 async function reload() {

@@ -18,8 +18,8 @@ const vienna = {
 const scrollPositionAnimationStart = 100
 
 const tgmPosition = {
-  x: -280,
-  y: 0,
+  x: -30,
+  y: -65,
 }
 
 
@@ -60,17 +60,22 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
     const posUnscaled = {
       x: tgmPosition.x,
-      y: tgmPosition.y
+      y: Math.sign(tgmPosition.y) * (Math.abs(tgmPosition.y) + arrowHeightHalf)
     }
 
+
+    // const posScaled = {
+    //   x: (tgmPosition.x + arrowWidthHalf) * scale,
+    //   y: (tgmPosition.y + arrowHeightHalf) * scale
+    // }
 
     const posScaled = {
-      x: (tgmPosition.x + arrowWidthHalf) * scale,
-      y: (tgmPosition.y + arrowHeightHalf) * scale
+      x: tgmPosition.x * scale,
+      y: (Math.sign(tgmPosition.y) * (Math.abs(tgmPosition.y * scale) + arrowHeightHalf)) 
     }
 
     
-    
+    const aspectRatioMap = 0.7777777777777778
 
     
     this.mapPointer.css({translateX: tgmPosition.x, translateY: tgmPosition.y})
@@ -81,8 +86,13 @@ export default declareComponent("maxs-sandbox", class extends Page {
     window.on("resize", (q) => {
       if (q.width < 1300) {
         if (q.width < 978) {
-          let ddX = (q.width / 978)
+          let dX = (q.width) / 978
+          let ddX = 1.02 * dX
           let x = (posScaled.x * ddX)
+
+          let dY = ddX * aspectRatioMap
+          let scaledWithout = Math.sign(tgmPosition.y) * (Math.abs(tgmPosition.y * scale * dY) + arrowHeightHalf)
+          let y = (scaledWithout * dY)
 
           if (!mobile) {
             mobile = true
@@ -96,27 +106,32 @@ export default declareComponent("maxs-sandbox", class extends Page {
                 lastWidth = nowWidth
 
 
-                let ddX = nowWidth / 978
+                let dX = (q.width) / 978
+                let ddX = 1.02 * dX
                 let x = (posScaled.x * ddX)
-                await mapPointerAnim({translateX: x, translateY: posScaled.y}, true)
+
+                let dY = ddX * aspectRatioMap
+                let scaledWithout = Math.sign(tgmPosition.y) * (Math.abs(tgmPosition.y * scale * dY) + arrowHeightHalf)
+                let y = (scaledWithout * dY)
+                await mapPointerAnim({translateX: x, translateY: y}, true)
               }
 
               
             }
             inMapPointerAnim = true
-            mapPointerAnim({translateX: x, translateY: posScaled.y}, ).then(() => {
+            mapPointerAnim({translateX: x, translateY: y}).then(() => {
               inMapPointerAnim = false
             })
 
 
 
-            this.mapPointerCenter.anim({left: 120, width: "100%"})
+            this.mapPointerCenter.anim({left: "calc(120px + 2%)", width: "96%"})
             this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
             console.log("mob")
           }
           else {
             if (!inMapPointerAnim) {
-              this.mapPointer.css({translateX: x})
+              this.mapPointer.css({translateX: x, translateY: y})
             }
           }
 

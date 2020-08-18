@@ -80,7 +80,7 @@ selection-content{
     flex-direction: row;
     align-items: center;
     padding: 15px 0;
-    max-width: 100%;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -125,6 +125,7 @@ info-container{
     font-size: 15px;
     max-width: 100%;
     overflow: hidden;
+    flex-grow: 1;
 }
 
 icon-container *{
@@ -143,6 +144,7 @@ text-container{
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
+    flex-grow: 1;
 }
 
 heading-text{

@@ -18,8 +18,8 @@ const vienna = {
 const scrollPositionAnimationStart = 100
 
 const tgmPosition = {
-  x: -234,
-  y: -71,
+  x: -270,
+  y: -90,
 }
 
 
@@ -27,7 +27,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
   private mapElem = this.q("svg g#map")
   private allSvg = this.q("svg g#all")
   private mapPointer = this.q("map-pointer")
-  private mapPointerFadinWrapper = this.q("map-pointer-fadin-wrapper")
+  private mapPointerWrapper = this.q("map-pointer-wrapper")
   private mapPointerCenter = this.q("map-pointer-center")
   private mapPaths = this.mapElem.childs()
 
@@ -46,31 +46,31 @@ export default declareComponent("maxs-sandbox", class extends Page {
     this.mapPaths[0].anim({d: vienna.path.a, translateY: vienna.offset.y, translateX: vienna.offset.x}, mapOptions, guide)
     this.mapPaths[1].anim({d: vienna.path.b, translateY: vienna.offset.y, translateX: vienna.offset.x}, mapOptions, guide)
 
-    this.mapPointerFadinWrapper.anim({opacity: 1, translateY: .1}, {start: scrollPositionAnimationStart + 650, end: scrollPositionAnimationStart + 770}, guide)
+    this.mapPointerWrapper.anim({opacity: 1, translateY: .1}, {start: scrollPositionAnimationStart + 650, end: scrollPositionAnimationStart + 770}, guide)
 
 
     let scale = 1.5
+    
     let ajustedScale = scale - 1
     let trans = 50 * ajustedScale
     let transStr = "-" + trans + "%"
-    console.log(trans)
 
+    const arrowWidthHalf = 38.025 / 2
+    const arrowHeightHalf = 39.6 / 2
 
-    const tgmScaledPosition = {
-      x: tgmPosition.x * scale,
-      y: tgmPosition.y * scale,
+    const posUnscaled = {
+      x: tgmPosition.x,
+      y: tgmPosition.y
     }
 
 
-    const xOffset = .01
-    const yOffset = -.03
-    const aspectRatio = 0.7777777777777778
-    console.log((yOffset * 100 * aspectRatio) + "vw")
+    const posScaled = {
+      x: (tgmPosition.x + arrowWidthHalf) * scale,
+      y: (tgmPosition.y + arrowHeightHalf) * scale
+    }
 
-    const yPx = 105
-    const xPx = -15
-    // this.mapPointerWrapper.css({translateX: (xOffset * 100) + "vw", translateY: (yOffset * 100 * aspectRatio) + "vw"})
-    // this.mapPointerCenter.css({translateY: yPx, translateX: xPx})
+    
+    
 
     
     this.mapPointer.css({translateX: tgmPosition.x, translateY: tgmPosition.y})
@@ -85,11 +85,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
 
 
-            // this.mapPointer.anim({translateX: tgmScaledPosition.x, translateY: tgmScaledPosition.y})
-            // pointerElem
-
-            // this.mapPointerWrapper.anim({tr anslateX: (xOffset * 100 * scale) + "vw", translateY: (yOffset * 100 * aspectRatio * scale) + "vw"})
-            this.mapPointerCenter.anim({scale})
+            this.mapPointer.anim({translateX: posScaled.x, translateY: posScaled.y})
             this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
             console.log("mob")
           }
@@ -98,9 +94,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
           if (mobile || mobile === undefined) {
             mobile = false
   
-            this.mapPointer.anim({translateX: tgmPosition.x, translateY: tgmPosition.y})
-
-            // this.mapPointerWrapper.anim({translateX: (xOffset * 100) + "vw", translateY: (yOffset * 100 * aspectRatio) + "vw"})
+            this.mapPointer.anim({translateX: posUnscaled.x, translateY: posUnscaled.y})
             this.mapElem.anim({scale: 1, translateX: 0.1, translateY: 0.1})
             console.log("des")
           }

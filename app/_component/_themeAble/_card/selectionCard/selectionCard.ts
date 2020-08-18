@@ -28,12 +28,21 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
         return super.theme(to);
     }
 
+    note():String
+    note(note:String):void
+    note(note?:String){
+        if(note){
+
+        }else {
+
+        }
+    }
+
     selection():SelectionOptions
     selection(options:SelectionOptions | JSON):void
     selection(options?:SelectionOptions | JSON){
         if(options){
             this._options = this.parseJSONProp(options);
-            console.log(this._options);
             let container = this.q("selection-container");
             for(let i = 0; i < this._options.length; i++){
                 let box = ce("selection-box");

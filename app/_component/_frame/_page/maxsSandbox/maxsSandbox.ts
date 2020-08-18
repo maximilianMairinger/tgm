@@ -18,8 +18,8 @@ const vienna = {
 const scrollPositionAnimationStart = 100
 
 const tgmPosition = {
-  x: -270,
-  y: -90,
+  x: -280,
+  y: 0,
 }
 
 
@@ -83,11 +83,27 @@ export default declareComponent("maxs-sandbox", class extends Page {
           if (!mobile) {
             mobile = true
 
+            console.log(q.width - 978)
 
 
             this.mapPointer.anim({translateX: posScaled.x, translateY: posScaled.y})
             this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
             console.log("mob")
+          }
+          else {
+            // let dX = (q.width - 978) / 2
+            let ddX = (q.width / 978)
+
+            // console.log(dX, posScaled.x * dX + ddX)
+            let x = (posScaled.x * ddX)
+            console.log(ddX, x)
+
+            // let signY = Math.sign(posScaled.y)
+            // let betrY = Math.abs(posScaled.y);
+            // let y = (betrY - dY) * signY
+
+            this.mapPointer.css({translateX: x})
+
           }
         }
         else {
@@ -116,6 +132,8 @@ export default declareComponent("maxs-sandbox", class extends Page {
       }
       
     })
+
+
 
     
 

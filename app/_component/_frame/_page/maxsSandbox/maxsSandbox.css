@@ -23,6 +23,7 @@ map-pointer-center {
   left: 257px;
   height: 478.66px;
   width: 623.41px;
+  max-width: 100%;
   position: absolute;
 }
 

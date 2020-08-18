@@ -77,39 +77,56 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
     let mobile: boolean
     let midDesk: boolean
+    let inMapPointerAnim = false
     window.on("resize", (q) => {
       if (q.width < 1300) {
         if (q.width < 978) {
+          let ddX = (q.width / 978)
+          let x = (posScaled.x * ddX)
+
           if (!mobile) {
             mobile = true
+            
+            
+            let lastWidth = q.width
+            const mapPointerAnim = async (o: {translateX: number, translateY: number}, short: boolean = false) => {
+              await this.mapPointer.anim(o, short ? 50 : undefined)
+              let nowWidth = window.innerWidth
+              if (nowWidth !== lastWidth) {
+                lastWidth = nowWidth
 
-            console.log(q.width - 978)
+
+                let ddX = nowWidth / 978
+                let x = (posScaled.x * ddX)
+                await mapPointerAnim({translateX: x, translateY: posScaled.y}, true)
+              }
+
+              
+            }
+            inMapPointerAnim = true
+            mapPointerAnim({translateX: x, translateY: posScaled.y}, ).then(() => {
+              inMapPointerAnim = false
+            })
 
 
-            this.mapPointer.anim({translateX: posScaled.x, translateY: posScaled.y})
+
+            this.mapPointerCenter.anim({left: 120, width: "100%"})
             this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
             console.log("mob")
           }
           else {
-            // let dX = (q.width - 978) / 2
-            let ddX = (q.width / 978)
-
-            // console.log(dX, posScaled.x * dX + ddX)
-            let x = (posScaled.x * ddX)
-            console.log(ddX, x)
-
-            // let signY = Math.sign(posScaled.y)
-            // let betrY = Math.abs(posScaled.y);
-            // let y = (betrY - dY) * signY
-
-            this.mapPointer.css({translateX: x})
-
+            if (!inMapPointerAnim) {
+              this.mapPointer.css({translateX: x})
+            }
           }
+
+          
         }
         else {
           if (mobile || mobile === undefined) {
             mobile = false
   
+            this.mapPointerCenter.anim({left: 257, width: 623.41})
             this.mapPointer.anim({translateX: posUnscaled.x, translateY: posUnscaled.y})
             this.mapElem.anim({scale: 1, translateX: 0.1, translateY: 0.1})
             console.log("des")

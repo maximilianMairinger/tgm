@@ -28,13 +28,19 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
         return super.theme(to);
     }
 
-    note():String
-    note(note:String):void
-    note(note?:String){
+    heading():string
+    heading(heading:string):void
+    heading(heading?:string){
+        return this.textblob.heading(heading);
+    }
+
+    note():string
+    note(note:string):void
+    note(note?:string):any{
         if(note){
-
+            this.q('note-text').text(note);
         }else {
-
+            return this.q('note-text').text();
         }
     }
 

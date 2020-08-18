@@ -30,7 +30,7 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
 
     heading():string
     heading(heading:string):void
-    heading(heading?:string){
+    heading(heading?:string):any{
         return this.textblob.heading(heading);
     }
 

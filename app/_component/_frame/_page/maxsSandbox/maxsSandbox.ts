@@ -27,15 +27,17 @@ const tgmPosition = {
 export default declareComponent("maxs-sandbox", class extends Page {
   private mapElem = this.q("svg g#map")
   private allSvg = this.q("svg g#all")
-  private mapPointer = this.q("map-pointer")
   private mapPointerAnimation = this.q("map-pointer-animation")
   private mapPointerWrapper = this.q("map-pointer-wrapper")
   private mapPointerCenter = this.q("map-pointer-center")
-  private mapPaths = this.mapElem.childs()
+  private mapPointer = this.q("map-pointer")
+  private pointerHeading = this.mapPointer.childs("pointer-text")
+  private pointerArrow = this.mapPointer.childs("c-filled-arrow-icon")
+  private mapSvgPaths = this.mapElem.childs()
 
   constructor() {
     super()
-    this.mapPaths.css({fillOpacity: 1, fill: "unset"})
+    this.mapSvgPaths.css({fillOpacity: 1, fill: "unset"})
 
     setTimeout(() => {
       this.elementBody.scrollTop = 900
@@ -45,8 +47,8 @@ export default declareComponent("maxs-sandbox", class extends Page {
     let mapOptions = {start: new Data(scrollPositionAnimationStart), end: new Data(scrollPositionAnimationStart + 700)}
 
 
-    this.mapPaths[0].anim({d: vienna.path.a, translateY: vienna.offset.y, translateX: vienna.offset.x}, mapOptions, guide)
-    this.mapPaths[1].anim({d: vienna.path.b, translateY: vienna.offset.y, translateX: vienna.offset.x}, mapOptions, guide)
+    this.mapSvgPaths[0].anim({d: vienna.path.a, translateY: vienna.offset.y, translateX: vienna.offset.x}, mapOptions, guide)
+    this.mapSvgPaths[1].anim({d: vienna.path.b, translateY: vienna.offset.y, translateX: vienna.offset.x}, mapOptions, guide)
 
     this.mapPointerWrapper.anim({opacity: 1, translateY: .1}, {start: scrollPositionAnimationStart + 650, end: scrollPositionAnimationStart + 770}, guide)
 
@@ -169,7 +171,6 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
     this.mapPointerCenter.on("mouseenter", () => {
       isHoveringMap = true
-      console.log("now")
       pointerJump()
     })
 
@@ -182,21 +183,43 @@ export default declareComponent("maxs-sandbox", class extends Page {
     const pointerJump = async () => {
       if (inPointerJump) return
       inPointerJump = true
-      
-        await this.mapPointerAnimation.anim([
+
+
+      await Promise.all([
+        delay(100).then(() => this.pointerHeading.anim([
+          {translateY: 0, offset: 0},
+          {translateY: -2, offset: .5},
+          {translateY: 0},
+        ], 900)),
+        this.mapPointerAnimation.anim([
           {translateY: 0, offset: 0},
           {translateY: -6, offset: .3},
           {translateY: -5.5, offset: .6},
           {translateY: 0}
         ], 1350)
+      ])
 
-      inPointerJump = false
-      
-      
+      inPointerJump = false      
     }
 
+
+    const displayTgmInfo = async () => {
+      this.pointerArrow.anim({translateY: -8}, 100)
+      this.pointerHeading.anim({translateY: -40}, 500)
+    }
+
+    this.mapPointer.on("mouseenter", () => {
+
+      this.mapPointer.anim({scale: 1.1})
+    })
+
+    this.mapPointer.on("mouseleave", () => {
+
+      this.mapPointer.anim({scale: 1})
+    })
+
     this.mapPointer.on("click", () => {
-      console.log("pointer")
+      displayTgmInfo()
     })
 
     

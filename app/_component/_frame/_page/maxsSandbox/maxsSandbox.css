@@ -32,10 +32,17 @@ map-pointer-wrapper {
   transform: translateY(-5px);
 }
 
+map-pointer-animation {
+  display: block;
+  position: absolute;
+}
+
 map-pointer {
   display: flex;
   align-items: center;
   flex-direction: column;
+  pointer-events: all;
+  user-select: none;
   /* tgm posotion is declared on top of ts file */
 }
 

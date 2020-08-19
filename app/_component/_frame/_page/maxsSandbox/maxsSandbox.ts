@@ -2,6 +2,7 @@ import { declareComponent } from "../../../../lib/declareComponent"
 import Page from "../page"
 import { Data } from "josm"
 import "./../../../_themeAble/_icon/filledArrow/filledArrow"
+import delay from "delay"
 
 const vienna = {
   path: {
@@ -27,6 +28,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
   private mapElem = this.q("svg g#map")
   private allSvg = this.q("svg g#all")
   private mapPointer = this.q("map-pointer")
+  private mapPointerAnimation = this.q("map-pointer-animation")
   private mapPointerWrapper = this.q("map-pointer-wrapper")
   private mapPointerCenter = this.q("map-pointer-center")
   private mapPaths = this.mapElem.childs()
@@ -120,7 +122,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
 
 
-            this.mapPointerCenter.anim({left: "calc(120px + 2%)", width: "96%"})
+            this.mapPointerCenter.anim({left: "calc(120px + 2%)", width: "96%", height: "100%"})
             this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
             console.log("mob")
           }
@@ -136,7 +138,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
           if (mobile || mobile === undefined) {
             mobile = false
   
-            this.mapPointerCenter.anim({left: 257, width: 623.41})
+            this.mapPointerCenter.anim({left: 257, width: 623.41, height: 478.66})
             this.mapPointer.anim({translateX: posUnscaled.x, translateY: posUnscaled.y})
             this.mapElem.anim({scale: 1, translateX: 0.1, translateY: 0.1})
             console.log("des")
@@ -162,11 +164,39 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
 
 
-    
+    let isHoveringMap = false
 
 
-    this.mapElem.on("click", () => {
-      console.log("qq")
+    this.mapPointerCenter.on("mouseenter", () => {
+      isHoveringMap = true
+      console.log("now")
+      pointerJump()
+    })
+
+    this.mapPointerCenter.on("mouseleave", () => {
+      isHoveringMap = false
+      console.log("leave")
+    })
+
+    let inPointerJump = false
+    const pointerJump = async () => {
+      if (inPointerJump) return
+      inPointerJump = true
+      
+        await this.mapPointerAnimation.anim([
+          {translateY: 0, offset: 0},
+          {translateY: -6, offset: .3},
+          {translateY: -5.5, offset: .6},
+          {translateY: 0}
+        ], 1350)
+
+      inPointerJump = false
+      
+      
+    }
+
+    this.mapPointer.on("click", () => {
+      console.log("pointer")
     })
 
     

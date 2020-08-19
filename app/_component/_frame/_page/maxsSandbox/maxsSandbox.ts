@@ -18,8 +18,8 @@ const vienna = {
 const scrollPositionAnimationStart = 100
 
 const tgmPosition = {
-  x: -30,
-  y: -65,
+  x: 260,
+  y: 85
 }
 
 
@@ -75,10 +75,20 @@ export default declareComponent("maxs-sandbox", class extends Page {
     }
 
     
-    const aspectRatioMap = 0.7777777777777778
+
+    let relativeMargin = 0.98
 
     
     this.mapPointer.css({translateX: tgmPosition.x, translateY: tgmPosition.y})
+
+    function getScaledXY(width: number) {
+      //@ts-ignore
+      let o: {translateX: number, translateY: number} = {}
+      let d = (width / 978) * relativeMargin
+      o.translateX = (posScaled.x * d)
+      o.translateY = Math.sign(tgmPosition.y) * (Math.abs(tgmPosition.y * scale * d) + arrowHeightHalf)
+      return o
+    }
 
     let mobile: boolean
     let midDesk: boolean
@@ -87,12 +97,11 @@ export default declareComponent("maxs-sandbox", class extends Page {
       if (q.width < 1300) {
         if (q.width < 978) {
           let dX = (q.width) / 978
-          let ddX = 1.02 * dX
+          let ddX = relativeMargin * dX
           let x = (posScaled.x * ddX)
 
-          let dY = ddX * aspectRatioMap
-          let scaledWithout = Math.sign(tgmPosition.y) * (Math.abs(tgmPosition.y * scale * dY) + arrowHeightHalf)
-          let y = (scaledWithout * dY)
+          let dY = ddX
+          let y = (tgmPosition.y * scale * dY) + arrowHeightHalf
 
           if (!mobile) {
             mobile = true
@@ -106,13 +115,12 @@ export default declareComponent("maxs-sandbox", class extends Page {
                 lastWidth = nowWidth
 
 
-                let dX = (q.width) / 978
-                let ddX = 1.02 * dX
+                let dX = (nowWidth) / 978
+                let ddX = relativeMargin * dX
                 let x = (posScaled.x * ddX)
 
-                let dY = ddX * aspectRatioMap
-                let scaledWithout = Math.sign(tgmPosition.y) * (Math.abs(tgmPosition.y * scale * dY) + arrowHeightHalf)
-                let y = (scaledWithout * dY)
+                let dY = ddX
+                let y = Math.sign(tgmPosition.y) * (Math.abs(tgmPosition.y * scale * dY) + arrowHeightHalf)
                 await mapPointerAnim({translateX: x, translateY: y}, true)
               }
 

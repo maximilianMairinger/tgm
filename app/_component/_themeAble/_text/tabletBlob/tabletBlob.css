@@ -16,7 +16,7 @@ tablet-frame{
 project-left, project-right{
     display: flex;
     justify-content: space-between;
-    flex-direction: column;
+    flex-direction: column-reverse;
     padding: 25px 0 25px 0;
     width: 200px;
     overflow: hidden;
@@ -39,8 +39,21 @@ project-left *, project-right *{
 }
 
 project-next, project-previous{
+    display: none;
     font-size: 25px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+project-next:hover {
+    transition: 0.5s;
+    transform: scale(1.1);
+}
+
+
+project-previous:hover{
+    transition: 0.5s;
+    transform: rotate(180deg) scale(1.1);
 }
 
 project-next{
@@ -142,20 +155,40 @@ button-3{
     height: 25px;
 }
 
+tablet-slider{
+    position: relative;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+}
+
+tablet-content.previous{
+    right: 100%;
+}
+
+tablet-content.next{
+    left: 100%;
+}
+
+tablet-content.current{
+    overflow-y: scroll;
+    right: 0;
+}
+
 tablet-content{
+    position: absolute;
+    top:0;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    height: calc(100% - 10px);
+    max-height: calc(100% - 10px);
     width: 100%;
-    margin: 5px 0;
     padding: 40px 50px 0 50px;
+    margin: 5px 0;
     text-align: left;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
     scrollbar-width: thin;
 }
-
 
 table-content::-webkit-scrollbar{
     z-index: -1;
@@ -207,18 +240,16 @@ tablet-info{
 }
 
 info-title{
+    display: block;
     font-size: 20px;
     font-weight: bold;
     color: #3F454F;
+    margin-bottom: 0.5em;
 }
 
 info-text{
     font-size: 15px;
     color: #3F454F;
-}
-
-info-text *:first-child{
-    margin-block-start: 0.7em;
 }
 
 @media only screen and (max-width: 900px) {

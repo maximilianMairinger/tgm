@@ -3,6 +3,7 @@ import Page from "../page"
 import { Data } from "josm"
 import "./../../../_themeAble/_icon/filledArrow/filledArrow"
 import delay from "delay"
+import "./../../../_themeAble/link/link"
 
 const vienna = {
   path: {
@@ -34,6 +35,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
   private pointerHeading = this.mapPointer.childs("pointer-text")
   private pointerArrow = this.mapPointer.childs("c-filled-arrow-icon")
   private pointerInfoBox = this.mapPointer.childs("pointer-info-box")
+  private pointerInfoBoxChilds = this.pointerInfoBox.childs("info-box-text, c-link", true).reverse()
   private overlay = this.q("over-layer")
   private mapSvgPaths = this.mapElem.childs()
 
@@ -201,16 +203,20 @@ export default declareComponent("maxs-sandbox", class extends Page {
     const openLocationInfo = async () => {
       if (isOpen) return
       isOpen = true
+
+      this.pointerHeading.css({cursor: "auto"})
       await Promise.all([
         this.mapPointerAnimation.anim({translateY: -8}, 200),
-        delay(50).then(() => this.pointerHeading.anim({translateY: -40}, 500)),
+        delay(50).then(() => this.pointerHeading.anim({translateY: -82, scale: 1.15, translateX: 2}, 500)),
         delay(50).then(() => this.pointerInfoBox.show().anim({translateY: -5, opacity: 1})),
+        //@ts-ignore
+        delay(250).then(() => this.pointerInfoBoxChilds.anim({opacity: 1}, undefined, 32)),
         delay(400).then(() => this.overlay.show().anim({opacity: 1}))
       ])
     }
 
     const closeLocationInfo = async () => {
-      
+      if (!isOpen) return
 
 
       isOpen = false
@@ -235,6 +241,10 @@ export default declareComponent("maxs-sandbox", class extends Page {
     this.overlay.on("click", () => {
       closeLocationInfo()
     })
+
+    // this.elementBody.on("scroll", () => {
+    //   closeLocationInfo()
+    // })
 
     
 

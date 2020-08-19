@@ -68,14 +68,16 @@ pointer-info-box {
   display: block;
   position: absolute;
   background: white;
-  border-radius: 10px;
-  width: 200px;
-  height: 75px;
-  bottom: 10px;
+  border-radius: 15px;
+  width: 250px;
+  height: 115px;
+  bottom: 12px;
   left: -15px;
   display: none;
   opacity: 0;
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
+  cursor: auto;
+  overflow: hidden;
 }
 
 over-layer {
@@ -87,7 +89,7 @@ over-layer {
   opacity: 0;
   display: none;
 
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 
@@ -98,7 +100,7 @@ over-layer {
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
 
-    background-color: unset;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -111,3 +113,39 @@ stay-in-frame {
   left: 0;
 }
 
+pointer-info-box > * {
+  opacity: 0;
+}
+
+pointer-info-box c-link {
+  position: absolute;
+  display: block;
+  bottom: 10px;
+  left: 15px;
+  font-size: 14px;
+}
+
+pointer-info-box info-box-text {
+  position: absolute;
+  display: block;
+  bottom: 38px;
+  left: 15px;
+  user-select: text;
+
+  font-size: 14px;
+}
+
+tgm-img {
+  background-image: url("./../../../../res/img/tgmOutside.png");
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  opacity: 1;
+  border-radius: inherit;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

@@ -164,6 +164,11 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
     
 
+
+    this.mapElem.on("click", () => {
+      console.log("qq")
+    })
+
     
 
 

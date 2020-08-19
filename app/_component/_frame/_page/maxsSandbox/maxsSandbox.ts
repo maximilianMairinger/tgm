@@ -19,8 +19,8 @@ const vienna = {
 const scrollPositionAnimationStart = 100
 
 const tgmPosition = {
-  x: -30,
-  y: -40
+  x: 80,
+  y: -230
 }
 
 
@@ -61,9 +61,12 @@ export default declareComponent("maxs-sandbox", class extends Page {
     let trans = 50 * ajustedScale
     let transStr = "-" + trans + "%"
 
+    let pointerHeight = 40
+    let pointerWidthHalf = 38 / 2
+
     const posUnscaled = {
-      x: tgmPosition.x,
-      y: tgmPosition.y
+      x: tgmPosition.x - pointerWidthHalf,
+      y: tgmPosition.y - pointerHeight
     }
 
 
@@ -73,22 +76,22 @@ export default declareComponent("maxs-sandbox", class extends Page {
     // }
 
     const posScaled = {
-      x: tgmPosition.x * scale,
-      y: tgmPosition.y * scale
+      x: (tgmPosition.x * scale) - pointerWidthHalf,
+      y: (tgmPosition.y * scale) - pointerHeight
     }
 
     
 
 
     
-    this.mapPointer.css({translateX: tgmPosition.x, translateY: tgmPosition.y})
+    this.mapPointer.css({translateX: posUnscaled.x, translateY: posUnscaled.y})
 
     function getScaledXY(width: number) {
       //@ts-ignore
       let o: {translateX: number, translateY: number} = {}
       let d = (width / 978)
-      o.translateX = (posScaled.x * d)
-      o.translateY = (posScaled.y * d)
+      o.translateX = (tgmPosition.x * scale * d) - pointerWidthHalf
+      o.translateY = (tgmPosition.y * scale * d) - pointerHeight
       return o
     }
 

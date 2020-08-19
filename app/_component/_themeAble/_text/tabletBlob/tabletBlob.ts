@@ -13,6 +13,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     private index = 0;
     private previousArrow = this.q("project-previous");
     private previousAvailable = false;
+    private animations:Animation[] = [null, null];
     private nextArrow = this.q("project-next");
     private nextAvailable = false;
     private projectData = [{
@@ -76,15 +77,25 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
             content: ""
         }] as Project[];
 
+    private animationQueue(){
+        if(this.animations)
+            this.animations.forEach(animation => animation && !animation.finished ? animation.cancel() : null);
+    }
+
     private next(){
         console.log("next");
         if(this.nextAvailable) {
             this.index++;
-            let cache = this.q("tablet-content.previous").removeClass("previous");
-            this.q("tablet-content.current").removeClass("current").addClass("previous");
-            this.q("tablet-content.next").removeClass("next").addClass("current");
-            cache.addClass("next")
-            this.update(true, cache as HTMLElement);
+            this.animationQueue()
+            let previous = this.q("tablet-content.previous").removeClass("previous");
+            let current = this.q("tablet-content.current").removeClass("current");
+            this.animations[1] = current.animate([{'transform': 'scale(1)', right:0}, {'transform': 'scale(0.95)', right:0}, {transform:'scale(0.95)', right:'100%'} ,{transform:'scale(1)', right:'100%'}], {delay:0, duration:750});
+            current.addClass("previous");
+            let next = this.q("tablet-content.next").removeClass("next");
+            this.animations[0] = next.animate([{'transform': 'scale(1)', left:'100%'}, {'transform': 'scale(0.95)', left:'100%'}, {transform:'scale(0.95)', left:0} ,{transform:'scale(1)', left:0}], {delay:0, duration:750});
+            next.addClass("current");
+            previous.addClass("next")
+            this.update(true, previous as HTMLElement);
         }
     }
 
@@ -92,11 +103,16 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         console.log("previous");
         if(this.previousAvailable) {
             this.index--;
-            let cache = this.q("tablet-content.next").removeClass("next");
-            this.q("tablet-content.current").removeClass("current").addClass("next");
-            this.q("tablet-content.previous").removeClass("previous").addClass("current");
-            cache.addClass("previous");
-            this.update(false, cache as HTMLElement)
+            this.animationQueue()
+            let next = this.q("tablet-content.next").removeClass("next");
+            let current = this.q("tablet-content.current").removeClass("current");
+            this.animations[0] = current.animate([{'transform': 'scale(1)', left:0}, {'transform': 'scale(0.95)', left:0}, {transform:'scale(0.95)', left:'100%'} ,{transform:'scale(1)', left:'100%'}], {delay:0, duration:750});
+            current.addClass("next");
+            let previous = this.q("tablet-content.previous").removeClass("previous");
+            this.animations[1] = previous.animate([{'transform': 'scale(1)', right:'100%'}, {'transform': 'scale(0.95)', right:'100%'}, {transform:'scale(0.95)', right:0} ,{transform:'scale(1)', right:0}], {delay:0, duration:750});
+            previous.addClass("current");
+            next.addClass("previous");
+            this.update(false, next as HTMLElement)
         }
     }
 

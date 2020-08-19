@@ -78,8 +78,12 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         }] as Project[];
 
     private animationQueue(){
-        if(this.animations)
-            this.animations.forEach(animation => animation && !animation.finished ? animation.cancel() : null);
+        this.animations.forEach(animation => animation && animation.playState ==  'running' ? this.cancel(animation) : console.log(animation));
+    }
+
+    private cancel(animation: Animation){
+       animation.cancel()
+       console.log("canceled")
     }
 
     private next(){

@@ -2,11 +2,29 @@
     display: block;
 }
 
+tablet-frame{
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+}
+
+project-left, project-right{
+    justify-content: space-between;
+}
+
+project-right{
+    order: 3;
+}
+
+project-left *, project-right *{
+    display: block;
+}
+
 tablet-blob{
     position: relative;
     display: block;
-    width: 550px;
-    height: 700px;
+    width: 600px;
+    height: 750px;
     border-radius: 17px;
     border: #222934 solid 8px;
 }
@@ -43,9 +61,72 @@ tablet-content{
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    height: 100%;
+    height: calc(100% - 10px);
     width: 100%;
-    padding: 45px 50px 50px 50px;
+    margin: 5px 0;
+    padding: 40px 50px 45px 50px;
     text-align: left;
     overflow-y: scroll;
+    scrollbar-width: thin;
+}
+
+table-content::-webkit-scrollbar{
+    z-index: -1;
+    background: green;
+}
+
+note-box{
+    border-bottom: #C2C2C2 solid 1.5px;
+    padding: 20px 0;
+}
+
+note-text{
+    color: #82858A;
+    font-size: 15px;
+}
+
+thumbnail-container{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 325px;
+    z-index: 1;
+    margin: 30px 0;
+}
+
+thumbnail-background {
+    position: absolute;
+    background: #EEEEEE;
+    height: 100%;
+    width: calc(100% + 100px);
+    left: -50px;
+    right: -50px;
+    z-index: -1;
+}
+
+thumbnail-pic{
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: url("/res/img/projektBeispiel.png") center center no-repeat;
+    background-size: contain;
+}
+
+tablet-info{
+    display: block;
+}
+
+info-title{
+    font-size: 20px;
+    font-weight: bold;
+    color: #3F454F;
+}
+
+info-text{
+    font-size: 15px;
+    color: #3F454F;
+}
+
+info-text *:first-child{
+    margin-block-start: 0.7em;
 }

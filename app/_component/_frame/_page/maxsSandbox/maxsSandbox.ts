@@ -18,8 +18,8 @@ const vienna = {
 const scrollPositionAnimationStart = 100
 
 const tgmPosition = {
-  x: 260,
-  y: 85
+  x: -240,
+  y: -75
 }
 
 
@@ -55,12 +55,9 @@ export default declareComponent("maxs-sandbox", class extends Page {
     let trans = 50 * ajustedScale
     let transStr = "-" + trans + "%"
 
-    const arrowWidthHalf = 38.025 / 2
-    const arrowHeightHalf = 39.6 / 2
-
     const posUnscaled = {
       x: tgmPosition.x,
-      y: Math.sign(tgmPosition.y) * (Math.abs(tgmPosition.y) + arrowHeightHalf)
+      y: tgmPosition.y
     }
 
 
@@ -71,12 +68,11 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
     const posScaled = {
       x: tgmPosition.x * scale,
-      y: (Math.sign(tgmPosition.y) * (Math.abs(tgmPosition.y * scale) + arrowHeightHalf)) 
+      y: tgmPosition.y * scale
     }
 
     
 
-    let relativeMargin = 0.98
 
     
     this.mapPointer.css({translateX: tgmPosition.x, translateY: tgmPosition.y})
@@ -84,9 +80,9 @@ export default declareComponent("maxs-sandbox", class extends Page {
     function getScaledXY(width: number) {
       //@ts-ignore
       let o: {translateX: number, translateY: number} = {}
-      let d = (width / 978) * relativeMargin
+      let d = (width / 978)
       o.translateX = (posScaled.x * d)
-      o.translateY = Math.sign(tgmPosition.y) * (Math.abs(tgmPosition.y * scale * d) + arrowHeightHalf)
+      o.translateY = (posScaled.y * d)
       return o
     }
 
@@ -96,12 +92,8 @@ export default declareComponent("maxs-sandbox", class extends Page {
     window.on("resize", (q) => {
       if (q.width < 1300) {
         if (q.width < 978) {
-          let dX = (q.width) / 978
-          let ddX = relativeMargin * dX
-          let x = (posScaled.x * ddX)
 
-          let dY = ddX
-          let y = (tgmPosition.y * scale * dY) + arrowHeightHalf
+          let translate = getScaledXY(q.width)
 
           if (!mobile) {
             mobile = true
@@ -115,19 +107,14 @@ export default declareComponent("maxs-sandbox", class extends Page {
                 lastWidth = nowWidth
 
 
-                let dX = (nowWidth) / 978
-                let ddX = relativeMargin * dX
-                let x = (posScaled.x * ddX)
-
-                let dY = ddX
-                let y = Math.sign(tgmPosition.y) * (Math.abs(tgmPosition.y * scale * dY) + arrowHeightHalf)
-                await mapPointerAnim({translateX: x, translateY: y}, true)
+                let translate = getScaledXY(nowWidth)
+                await mapPointerAnim(translate, true)
               }
 
               
             }
             inMapPointerAnim = true
-            mapPointerAnim({translateX: x, translateY: y}).then(() => {
+            mapPointerAnim(translate).then(() => {
               inMapPointerAnim = false
             })
 
@@ -139,7 +126,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
           }
           else {
             if (!inMapPointerAnim) {
-              this.mapPointer.css({translateX: x, translateY: y})
+              this.mapPointer.css(translate)
             }
           }
 

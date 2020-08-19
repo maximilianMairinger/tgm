@@ -7,7 +7,7 @@ tablet-frame{
     align-items: stretch;
     flex-direction: row;
     justify-content: center;
-    padding: 25px 25px 125px 25px;
+    padding: 60px 0 50px 0;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -125,6 +125,7 @@ tablet-blob{
     margin: 0 25px;
     border-radius: 17px;
     border: #222934 solid 8px;
+    background: white;
 }
 
 tablet-buttons * {

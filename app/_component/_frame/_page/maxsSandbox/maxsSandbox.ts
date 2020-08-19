@@ -33,6 +33,8 @@ export default declareComponent("maxs-sandbox", class extends Page {
   private mapPointer = this.q("map-pointer")
   private pointerHeading = this.mapPointer.childs("pointer-text")
   private pointerArrow = this.mapPointer.childs("c-filled-arrow-icon")
+  private pointerInfoBox = this.mapPointer.childs("pointer-info-box")
+  private overlay = this.q("over-layer")
   private mapSvgPaths = this.mapElem.childs()
 
   constructor() {
@@ -166,22 +168,12 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
 
 
-    let isHoveringMap = false
-
-
-    this.mapPointerCenter.on("mouseenter", () => {
-      isHoveringMap = true
-      pointerJump()
-    })
-
-    this.mapPointerCenter.on("mouseleave", () => {
-      isHoveringMap = false
-      console.log("leave")
-    })
 
     let inPointerJump = false
-    const pointerJump = async () => {
-      if (inPointerJump) return
+  
+    this.mapPointerCenter.on("mouseenter", async () => {
+        
+      if (inPointerJump || isOpen) return
       inPointerJump = true
 
 
@@ -199,27 +191,46 @@ export default declareComponent("maxs-sandbox", class extends Page {
         ], 1350)
       ])
 
-      inPointerJump = false      
-    }
+      inPointerJump = false  
+    })
 
 
-    const displayTgmInfo = async () => {
-      this.pointerArrow.anim({translateY: -8}, 100)
-      this.pointerHeading.anim({translateY: -40}, 500)
+    const openLocationInfo = async () => {
+      if (isOpen) return
+      isOpen = true
+      await Promise.all([
+        this.mapPointerAnimation.anim({translateY: -8}, 200),
+        delay(50).then(() => this.pointerHeading.anim({translateY: -40}, 500)),
+        delay(50).then(() => this.pointerInfoBox.show().anim({translateY: -5, opacity: 1})),
+        delay(400).then(() => this.overlay.show().anim({opacity: 1}))
+      ])
     }
+
+    const closeLocationInfo = async () => {
+      
+
+
+      isOpen = false
+    }
+
+    let isOpen = false
 
     this.mapPointer.on("mouseenter", () => {
-
+      if (isOpen) return
       this.mapPointer.anim({scale: 1.1})
     })
 
     this.mapPointer.on("mouseleave", () => {
-
+      if (isOpen) return
       this.mapPointer.anim({scale: 1})
     })
 
     this.mapPointer.on("click", () => {
-      displayTgmInfo()
+      openLocationInfo()
+    })
+
+    this.overlay.on("click", () => {
+      closeLocationInfo()
     })
 
     

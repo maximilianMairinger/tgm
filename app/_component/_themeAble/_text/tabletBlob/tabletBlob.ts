@@ -1,8 +1,9 @@
 import declareComponent from "../../../../lib/declareComponent";
 import Text from "../text";
-import "../../link/link"
+import "../../../_button/button"
 import {Theme} from "../../themeAble";
 import Textblob from "../textblob/textblob";
+import "../../_icon/arrow/arrow"
 
 export default declareComponent("tablet-blob", class TableBlob extends Text {
 

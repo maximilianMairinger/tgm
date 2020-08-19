@@ -6,18 +6,95 @@ tablet-frame{
     display: flex;
     align-items: stretch;
     flex-direction: row;
+    justify-content: center;
+    padding: 25px 25px 125px 25px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 project-left, project-right{
+    display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    padding: 25px 0 25px 0;
+    width: 200px;
+}
+
+project-left{
+    text-align: right;
+    align-items: flex-end;
 }
 
 project-right{
-    order: 3;
+    text-align: left;
+    order: 2;
+    align-items: flex-start;
 }
 
+
 project-left *, project-right *{
-    display: block;
+    display: flex;
+}
+
+project-next, project-previous{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+project-next{
+    writing-mode: vertical-lr;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+project-previous{
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+
+c-arrow-icon{
+    height: 25px;
+}
+
+c-arrow-icon.next{
+    margin-top: 5px;
+}
+
+c-arrow-icon.previous{
+    margin-bottom: 5px;
+}
+
+project-icon{
+    width: 125px;
+    height: 125px;
+    margin-right: 25px;
+}
+
+.project-icon-pic{
+    height: 100%;
+    width: 100%;
+    box-shadow: var(--medium-shadow);
+    border-radius: 10px;
+}
+
+project-team{
+    margin-left: 25px;
+    flex-direction: column;
+    font-size: 17px;
+    font-weight: bold;
+    white-space:nowrap;
+}
+
+project-team * {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+project-team *:first-child{
+    margin-top: 0.5em;
 }
 
 tablet-blob{
@@ -25,6 +102,7 @@ tablet-blob{
     display: block;
     width: 600px;
     height: 750px;
+    margin: 0 25px;
     border-radius: 17px;
     border: #222934 solid 8px;
 }
@@ -64,11 +142,13 @@ tablet-content{
     height: calc(100% - 10px);
     width: 100%;
     margin: 5px 0;
-    padding: 40px 50px 45px 50px;
+    padding: 40px 50px 0 50px;
     text-align: left;
     overflow-y: scroll;
+    overflow-x: hidden;
     scrollbar-width: thin;
 }
+
 
 table-content::-webkit-scrollbar{
     z-index: -1;
@@ -86,10 +166,10 @@ note-text{
 }
 
 thumbnail-container{
+    flex: 1;
     position: relative;
-    display: block;
+    display: flex;
     width: 100%;
-    height: 325px;
     z-index: 1;
     margin: 30px 0;
 }
@@ -104,16 +184,19 @@ thumbnail-background {
     z-index: -1;
 }
 
-thumbnail-pic{
+
+.thumbnail-pic {
     display: block;
-    height: 100%;
-    width: 100%;
-    background: url("/res/img/projektBeispiel.png") center center no-repeat;
-    background-size: contain;
+    height: auto;
+    max-width: 100%;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: var(--medium-shadow);
 }
 
 tablet-info{
     display: block;
+    padding-bottom: 10px;
 }
 
 info-title{
@@ -130,3 +213,16 @@ info-text{
 info-text *:first-child{
     margin-block-start: 0.7em;
 }
+
+@media only screen and (max-width: 900px) {
+
+    tablet-content {
+        padding: 40px 4vw 0 4vw;
+    }
+
+    thumbnail-container {
+        width: calc(100% + 7vw);
+        margin: 30px -3.5vw;
+    }
+}
+

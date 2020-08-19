@@ -19,8 +19,8 @@ const vienna = {
 const scrollPositionAnimationStart = 100
 
 const tgmPosition = {
-  x: 80,
-  y: -230
+  x: -35,
+  y: -25
 }
 
 

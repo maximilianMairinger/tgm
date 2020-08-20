@@ -78,7 +78,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         }] as Project[];
 
     private animationQueue(){
-        this.animations.forEach(animation => animation && animation.playState ==  'running' ? this.cancel(animation) : console.log(animation));
+        this.animations.forEach(animation => animation && animation.playState ==  'running' ? this.cancel(animation) : null);
     }
 
     private cancel(animation: Animation){
@@ -93,10 +93,10 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
             this.animationQueue()
             let previous = this.q("tablet-content.previous").removeClass("previous");
             let current = this.q("tablet-content.current").removeClass("current");
-            this.animations[1] = current.animate([{'transform': 'scale(1)', right:0}, {'transform': 'scale(0.95)', right:0}, {transform:'scale(0.95)', right:'100%'} ,{transform:'scale(1)', right:'100%'}], {delay:0, duration:750});
+            this.animations[0] = current.animate([{'transform': 'scale(1)', right:0}, {'transform': 'scale(0.95)', right:0}, {transform:'scale(0.95)', right:'100%'} ,{transform:'scale(1)', right:'100%'}], {delay:0, duration:750});
             current.addClass("previous");
             let next = this.q("tablet-content.next").removeClass("next");
-            this.animations[0] = next.animate([{'transform': 'scale(1)', left:'100%'}, {'transform': 'scale(0.95)', left:'100%'}, {transform:'scale(0.95)', left:0} ,{transform:'scale(1)', left:0}], {delay:0, duration:750});
+            this.animations[1] = next.animate([{'transform': 'scale(1)', left:'100%'}, {'transform': 'scale(0.95)', left:'100%'}, {transform:'scale(0.95)', left:0} ,{transform:'scale(1)', left:0}], {delay:0, duration:750});
             next.addClass("current");
             previous.addClass("next")
             this.update(true, previous as HTMLElement);

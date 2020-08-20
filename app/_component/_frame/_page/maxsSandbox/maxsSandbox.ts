@@ -4,6 +4,7 @@ import { Data } from "josm"
 import "./../../../_themeAble/_icon/filledArrow/filledArrow"
 import delay from "delay"
 import "./../../../_themeAble/link/link"
+import { ElementList } from "extended-dom"
 
 const vienna = {
   path: {
@@ -35,7 +36,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
   private pointerHeading = this.mapPointer.childs("pointer-text")
   private pointerArrow = this.mapPointer.childs("c-filled-arrow-icon")
   private pointerInfoBox = this.mapPointer.childs("pointer-info-box")
-  private pointerInfoBoxChilds = this.pointerInfoBox.childs("info-box-text, c-link", true).reverse()
+  private pointerInfoBoxChilds = this.pointerInfoBox.childs("info-box-text, c-link", true).reverse() as ElementList
   private overlay = this.q("over-layer")
   private mapSvgPaths = this.mapElem.childs()
 
@@ -205,7 +206,8 @@ export default declareComponent("maxs-sandbox", class extends Page {
       if (isOpen || inOpenOrCloseAnimation) return
       inOpenOrCloseAnimation = isOpen = true
 
-
+      
+      delay(400).then(() => this.overlay.show().anim({opacity: 1}))
       this.pointerHeading.css({cursor: "auto"})
       await Promise.all([
         this.mapPointerAnimation.anim({translateY: -8}, 200),
@@ -213,8 +215,9 @@ export default declareComponent("maxs-sandbox", class extends Page {
         delay(50).then(() => this.pointerInfoBox.show().anim({translateY: -5, opacity: 1})),
         //@ts-ignore
         delay(250).then(() => this.pointerInfoBoxChilds.anim({opacity: 1}, undefined, 32)),
-        delay(400).then(() => this.overlay.show().anim({opacity: 1}))
       ])
+
+      
 
       inOpenOrCloseAnimation = false
     }
@@ -225,7 +228,13 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
       console.log("qqq")
 
-      await this.pointerInfoBox.anim({opacity: 0}).then(() => this.pointerInfoBox.hide())
+      this.pointerHeading.css({cursor: "unset"})
+      await Promise.all([
+        this.pointerInfoBox.anim({opacity: 0, translateY: 0}).then(() => {this.pointerInfoBox.hide(); this.pointerInfoBoxChilds.css({opacity: 0})}),
+        delay(50).then(() => this.pointerHeading.anim({translateY: 0})),
+        this.mapPointerAnimation.anim({translateY: 0}, 200),
+        this.overlay.anim({opacity: 0}).then(() => this.overlay.hide())
+      ])
 
 
       inOpenOrCloseAnimation = isOpen = false
@@ -252,9 +261,9 @@ export default declareComponent("maxs-sandbox", class extends Page {
       closeLocationInfo()
     })
 
-    // this.elementBody.on("scroll", () => {
-    //   closeLocationInfo()
-    // })
+    this.elementBody.on("scroll", () => {
+      closeLocationInfo()
+    })
 
     
 

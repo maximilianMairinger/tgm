@@ -44,6 +44,7 @@ map-pointer {
   pointer-events: all;
   user-select: none;
   cursor: pointer;
+  pointer-events: all;
 
   /* tgm position is declared on top of ts file */
 }
@@ -148,4 +149,8 @@ tgm-img {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+map-frame#pointer {
+  pointer-events: none;
 }

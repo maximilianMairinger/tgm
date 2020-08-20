@@ -200,9 +200,11 @@ export default declareComponent("maxs-sandbox", class extends Page {
     })
 
 
+    let inOpenOrCloseAnimation = false
     const openLocationInfo = async () => {
-      if (isOpen) return
-      isOpen = true
+      if (isOpen || inOpenOrCloseAnimation) return
+      inOpenOrCloseAnimation = isOpen = true
+
 
       this.pointerHeading.css({cursor: "auto"})
       await Promise.all([
@@ -213,13 +215,20 @@ export default declareComponent("maxs-sandbox", class extends Page {
         delay(250).then(() => this.pointerInfoBoxChilds.anim({opacity: 1}, undefined, 32)),
         delay(400).then(() => this.overlay.show().anim({opacity: 1}))
       ])
+
+      inOpenOrCloseAnimation = false
     }
 
     const closeLocationInfo = async () => {
-      if (!isOpen) return
+      if (!isOpen || inOpenOrCloseAnimation) return
+      inOpenOrCloseAnimation = true
+
+      console.log("qqq")
+
+      await this.pointerInfoBox.anim({opacity: 0}).then(() => this.pointerInfoBox.hide())
 
 
-      isOpen = false
+      inOpenOrCloseAnimation = isOpen = false
     }
 
     let isOpen = false
@@ -239,6 +248,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
     })
 
     this.overlay.on("click", () => {
+      console.log("qwer")
       closeLocationInfo()
     })
 

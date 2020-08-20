@@ -154,3 +154,10 @@ tgm-img {
 map-frame#pointer {
   pointer-events: none;
 }
+
+@media (max-width: 1440px) { 
+  svg#mapSvg {
+    transform: translateX(-150px)
+  }
+}
+

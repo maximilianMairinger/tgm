@@ -11,6 +11,7 @@ import "../../../_themeAble/_text/_sectionTextblob/informationenSection/informat
 import "../../../_themeAble/_text/_sectionTextblob/ausbildungSection/ausbildungSection"
 import "../../../_themeAble/_card/selectionCard/selectionCard"
 import "../../../_themeAble/_card/anmeldenCard/anmeldenCard"
+import "../../../_themeAble/_card/unterrichtSystemeCard/unterrichtSystemeCard"
 import "../../../_themeAble/_text/tabletBlob/tabletBlob"
 import "../../_pageSection/schuelerprojekteSection/schuelerprojekteSection"
 

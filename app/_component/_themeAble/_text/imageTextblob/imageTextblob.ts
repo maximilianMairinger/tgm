@@ -68,7 +68,7 @@ export default declareComponent("image-textblob", class ImageTextblob extends Te
   stellvertreter(stellvertreter?: JSON | Stellvertreter) {
     let infoGrid = this.q("info-grid");
     if (stellvertreter) {
-      this._stellverterter = this.parseJSONProp(stellvertreter)
+      this._stellverterter = this.parseJSONProp(stellvertreter);
 
       infoGrid.append(ce("stellvertreter-text").addClass("bold").text("Stellverteter"));
       for (let i = 0; i < this._stellverterter.length; i++) {

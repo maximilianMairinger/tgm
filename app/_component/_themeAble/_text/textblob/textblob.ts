@@ -1,6 +1,5 @@
 import Text from "../text";
 import declareComponent from "../../../../lib/declareComponent";
-import {Theme} from "../../themeAble";
 
 
 export type MediaQuerySize = { min: number, max: number }
@@ -10,6 +9,7 @@ export default class Textblob extends Text {
   private hmobileScale = { max: 45, min: 30 };
   private mediaQuery: MediaQueryList;
   private textbox = this.q("text-box");
+  private minSize = 27;
 
 
   private mediaQueryMatches: boolean;
@@ -17,18 +17,18 @@ export default class Textblob extends Text {
     if (!mediaQuery.matches) {
       if (this.mediaQueryMatches || this.mediaQueryMatches === undefined) {
         this.mediaQueryMatches = false;
-        this.textbox.css({ "fontSize": `max(27px, calc(${this.hsizeScale.min}px + (${this.hsizeScale.max} - ${this.hsizeScale.min}) * ((100vw - 768px) / (1600 - 768))))` });
+        this.textbox.css({ "fontSize": `max(${this.minSize}px, calc(${this.hsizeScale.min}px + (${this.hsizeScale.max} - ${this.hsizeScale.min}) * ((100vw - 768px) / (1600 - 768))))` });
       }
-      
+
     }
-      
+
     else {
       if (!this.mediaQueryMatches) {
         this.mediaQueryMatches = true;
-        this.textbox.css({ "fontSize": `max(27px, calc(${this.hmobileScale.min}px + (${this.hmobileScale.max} - ${this.hmobileScale.min}) * ((100vw - 300px) / (768 - 300))))` });
+        this.textbox.css({ "fontSize": `max(${this.minSize}px, calc(${this.hmobileScale.min}px + (${this.hmobileScale.max} - ${this.hmobileScale.min}) * ((100vw - 300px) / (768 - 300))))` });
       }
     }
-      
+
   }
 
   constructor() {
@@ -56,11 +56,21 @@ export default class Textblob extends Text {
   hsize(hsize: JSON | MediaQuerySize): void
   hsize(hsize?: JSON | MediaQuerySize) {
     if (hsize) {
-      this.hsizeScale = this.parseJSONProp(hsize)
+      this.hsizeScale = this.parseJSONProp(hsize);
       this.mediaQueryMatches = undefined;
       this.mobileQueryFunc(this.mediaQuery);
-    } 
+    }
     else return this.hsizeScale;
+  }
+
+  hminsize(): number
+  hminsize(minSize:number):void
+  hminsize(minSize?:number){
+    if(minSize){
+      this.minSize = minSize;
+      this.mediaQueryMatches = undefined;
+      this.mobileQueryFunc(this.mediaQuery);
+    }else return this.minSize;
   }
 
   hmobile(): MediaQuerySize
@@ -85,20 +95,27 @@ export default class Textblob extends Text {
     else return this._hscale
   }
 
+  private created:boolean = false;
+
   note(): string
   note(note: string): void
   note(note?: string) {
     if (note !== undefined) {
-      let notebox = ce("note-box");
-      let notetext = ce("note-text");
-      notetext.text(note);
-      let connector = ce("connector-box");
-      let hr = ce("HR");
-      connector.append(hr);
-      notebox.append(notetext);
-      notebox.append(connector);
-      notebox.append(ce("spacing-box"));
-      this.q("text-blob").prepend(notebox)
+      if(!this.created) {
+        let notebox = ce("note-box");
+        let notetext = ce("note-text");
+        notetext.text(note);
+        let connector = ce("connector-box");
+        let hr = ce("HR");
+        connector.append(hr);
+        notebox.append(notetext);
+        notebox.append(connector);
+        notebox.append(ce("spacing-box"));
+        this.q("text-blob").prepend(notebox)
+        this.created = true;
+      }else{
+        this.q("note-text").text(note);
+      }
     } else return this.q("note-text").text();
   }
 

@@ -1,0 +1,267 @@
+:host {
+    display: block;
+}
+
+tablet-frame{
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    justify-content: center;
+    padding: 60px 0 50px 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+project-left, project-right{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+    padding: 25px 0 25px 0;
+    width: 200px;
+    overflow: hidden;
+}
+
+project-left{
+    text-align: right;
+    align-items: flex-end;
+}
+
+project-right{
+    text-align: left;
+    order: 2;
+    align-items: flex-start;
+}
+
+
+project-left *, project-right *{
+    display: flex;
+}
+
+project-next, project-previous{
+    display: none;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+project-next:hover {
+    transition: 0.5s;
+    transform: scale(1.1);
+}
+
+
+project-previous:hover{
+    transition: 0.5s;
+    transform: rotate(180deg) scale(1.1);
+}
+
+project-next{
+    writing-mode: vertical-lr;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+project-previous{
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+
+c-arrow-icon{
+    height: 25px;
+}
+
+c-arrow-icon.next{
+    margin-top: 5px;
+}
+
+c-arrow-icon.previous{
+    margin-bottom: 5px;
+}
+
+project-icon{
+    width: 125px;
+    height: 125px;
+    margin-right: 25px;
+}
+
+.project-icon-pic{
+    height: 100%;
+    width: 100%;
+    box-shadow: var(--medium-shadow);
+    border-radius: 10px;
+}
+
+project-team{
+    display: block;
+    max-width: calc(100% - 25px);
+    margin-left: 25px;
+    font-size: 17px;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+project-team * {
+    display: block;
+    font-size: 15px;
+    font-weight: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+project-team *:first-child{
+    margin-top: 0.5em;
+}
+
+tablet-blob{
+    position: relative;
+    display: block;
+    width: 600px;
+    height: 750px;
+    margin: 0 25px;
+    border-radius: 17px;
+    border: #222934 solid 8px;
+    background: white;
+}
+
+tablet-buttons * {
+    z-index: 2;
+    display: block;
+    position: absolute;
+    height: 0;
+    width: 0;
+    border: #222934 solid 4px;
+    border-radius: 5px;
+}
+
+button-1{
+    top: -11px;
+    left: 50px;
+    width: 35px;
+}
+
+button-2{
+    top: 50px;
+    left: -11px;
+    height: 25px;
+}
+
+button-3{
+    top: 90px;
+    left: -11px;
+    height: 25px;
+}
+
+tablet-slider{
+    position: relative;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+}
+
+tablet-content.previous{
+    right: 100%;
+}
+
+tablet-content.next{
+    left: 100%;
+}
+
+tablet-content.current{
+    overflow-y: scroll;
+    right: 0;
+}
+
+tablet-content{
+    position: absolute;
+    top:0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-height: calc(100% - 10px);
+    width: 100%;
+    padding: 40px 50px 0 50px;
+    margin: 5px 0;
+    text-align: left;
+    overflow: hidden;
+    scrollbar-width: thin;
+}
+
+table-content::-webkit-scrollbar{
+    z-index: -1;
+    background: green;
+}
+
+note-box{
+    border-bottom: #C2C2C2 solid 1.5px;
+    padding: 20px 0;
+}
+
+note-text{
+    color: #82858A;
+    font-size: 15px;
+}
+
+thumbnail-container{
+    flex: 1;
+    position: relative;
+    display: flex;
+    width: 100%;
+    z-index: 1;
+    margin: 30px 0;
+}
+
+thumbnail-background {
+    position: absolute;
+    background: #EEEEEE;
+    height: 100%;
+    width: calc(100% + 100px);
+    left: -50px;
+    right: -50px;
+    z-index: -1;
+}
+
+
+.thumbnail-pic {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: var(--medium-shadow);
+}
+
+tablet-info{
+    display: block;
+    padding-bottom: 10px;
+}
+
+info-title{
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3F454F;
+    margin-bottom: 0.5em;
+}
+
+info-text{
+    font-size: 15px;
+    color: #3F454F;
+}
+
+@media only screen and (max-width: 900px) {
+
+    tablet-content {
+        padding: 40px 4vw 0 4vw;
+    }
+
+    thumbnail-container {
+        width: calc(100% + 5vw);
+        margin: 30px -2.5vw;
+    }
+}
+

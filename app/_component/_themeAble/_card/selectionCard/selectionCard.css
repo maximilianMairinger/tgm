@@ -1,9 +1,10 @@
 :host {
     display: block;
     max-width: 860px;
-    min-width: 500px;
+    min-width: 445px;
     width: auto;
     user-select: auto;
+    box-sizing: border-box;
 }
 
 @media only screen and (max-width: 768px) {
@@ -79,7 +80,7 @@ selection-content{
     flex-direction: row;
     align-items: center;
     padding: 15px 0;
-    max-width: 100%;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -111,14 +112,6 @@ icon-container{
     min-width: 40px;
 }
 
-icon-box{
-    display: block;
-    height: 100%;
-    width: 100%;
-    background: url("../../../../res/img/windmil.svg") center center no-repeat;
-    background-size: 100% 100%;
-}
-
 info-container{
     display: flex;
     align-self: stretch;
@@ -132,6 +125,17 @@ info-container{
     font-size: 15px;
     max-width: 100%;
     overflow: hidden;
+    flex-grow: 1;
+}
+
+icon-container *{
+    display: block;
+    height: 100%;
+    width: 100%;
+    /*
+    background: url("../../../../res/img/windmil.svg") center center no-repeat;
+    background-size: 100% 100%;
+     */
 }
 
 text-container{
@@ -140,6 +144,7 @@ text-container{
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
+    flex-grow: 1;
 }
 
 heading-text{
@@ -198,7 +203,23 @@ image-container{
     backface-visibility: hidden;
 }
 
+image-box{
+    position: absolute;
+    width: 400px;
+    left: -100px;
+    height: 100%;
+    display: block;
+    transform: skewX(10deg);
+    background: url("../../../../res/img/abendschule_background.svg") 51% 32% no-repeat;
+    background-size: 2300px 1275px;
+    backface-visibility: hidden;
+}
+
 @media only screen and (max-width: 1450px) {
+
+    :host{
+        max-width: 580px;
+    }
 
     selection-card{
         flex-direction: row;
@@ -214,25 +235,26 @@ image-container{
         margin-right: 10px;
     }
 
+    image-box{
+        background: none;
+    }
+
     content-box{
         max-width: 100%;
     }
 }
 
-
-image-box{
-    position: absolute;
-    width: 400px;
-    left: -100px;
-    height: 100%;
-    display: block;
-    transform: skewX(10deg);
-    background: url("../../../../res/img/abendschule_background.svg") 51% 32% no-repeat;
-    background-size: 2300px 1275px;
-    backface-visibility: hidden;
+@media only screen and (max-width: 1250px) {
+    :host{
+        max-width: 100%;
+    }
 }
 
 @media only screen and (max-width: 768px) {
+
+    :host{
+        max-width: 515px;
+    }
 
     selection-card{
         padding: 0 35px;
@@ -243,7 +265,7 @@ image-box{
     }
 
     selection-box link-container{
-        opacity: 1;
+        display: none;
     }
 
     image-container{

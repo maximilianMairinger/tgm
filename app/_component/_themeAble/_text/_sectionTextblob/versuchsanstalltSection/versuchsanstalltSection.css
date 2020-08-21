@@ -1,3 +1,7 @@
+section-textblob {
+    padding: 175px 100px 200px 100px;
+}
+
 section-textblob-image{
     background-image: url(./../../../../../res/img/versuchsanstallt_document.svg);
 }
@@ -5,9 +9,9 @@ section-textblob-image{
 section-textblob-extra-container {
     position: absolute;
     left: 100px;
-    bottom: -135px;
-    height: 175px;
-    width: 75px;
+    bottom: -215px;
+    height: 260px;
+    width: 117px;
 }
 
 section-textblob-extra {
@@ -19,4 +23,20 @@ section-textblob-extra {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: left bottom;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    section-textblob{
+        padding-top: 100px;
+        padding-left: 10vw;
+        padding-right: 10vw;
+    }
+
+    section-textblob-extra-container {
+        left: 0;
+        height: 175px;
+        width: 75px;
+    }
 }

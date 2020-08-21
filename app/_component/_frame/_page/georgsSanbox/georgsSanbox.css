@@ -1,31 +1,82 @@
 
+c-schulerprojekte-section{
+    opacity: 1;
+}
+
+/*
+section-header{
+    display: block;
+    max-width: 100%;
+    margin: 0 180px 100px 180px;
+    background: url("../../../../res/img/abendschule_background.svg") 80% 35% no-repeat;
+    background-size: 2300px 1275px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: max(27px, calc(75px + (105 - 75)*((100vw - 768px)/(1600 - 768))));
+    font-weight: bold;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+*/
+
+c-ausmacht-section{
+    opacity: 1;
+}
+
+c-textblob.heading{
+    display: inline-block;
+    width: auto;
+    min-width: unset;
+}
+
 test-container{
     display: flex;
-    margin: 100px 230px 100px 230px;
+    margin: 0 205px 100px 205px;
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
-test-card{
-    display: block;
-    width: 25%;
-    align-self: stretch;
-    background: rgb(245, 245, 245);
-    border-radius: 15px;
-    box-shadow: 7px 7px 15px 0px rgba(0,0,0,.07);
+test-container * {
+    margin: 0 25px 50px 25px;
 }
 
+c-unterricht-systeme-card{
+    min-height:440px;
+}
+
+
 c-selection-card{
-    max-width: 65%;
-    margin-right: 10%;
+    width: 37%;
+    flex-grow: 1;
+}
+
+@media only screen and (max-width: 1250px) {
+    card-container{
+        margin: 0 100px 100px 100px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    c-selection-card{
+        width: auto;
+    }
+
+    c-unterricht-systeme-card{
+        width: auto;
+    }
 }
 
 @media only screen and (max-width: 768px) {
     test-container{
         margin-right: 10vw;
         margin-left: 10vw;
-        flex-direction: column;
+    }
+
+    test-container *{
+        margin: 50px 0 0 0;
     }
 
     c-selection-card{
@@ -34,6 +85,15 @@ c-selection-card{
         margin-right: 0;
     }
 
+    c-unterricht-systeme-card{
+        width: unset;
+    }
+
+    section-header{
+        font-size: max(27px, calc(35px + (80 - 35)*((100vw - 300px)/(768 - 300))));
+        margin: 0 10vw;
+        color: #425870;
+    }
 
 }
 

@@ -8,6 +8,7 @@ import DanielsSandbox from "../../_page/danielsSandbox/danielsSandbox";
 import ItPage from "../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage";
 import HomePage from "../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage";
 import { declareComponent } from "../../../../lib/declareComponent"
+import RaumfahrtPage from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage";
 
 export type PageName = string
 
@@ -19,7 +20,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
 
     super(new ImportanceMap<() => Promise<any>, any>(
       {
-        key: new Import("homepage", 20, (homepage: typeof HomePage) =>
+        key: new Import("home", 20, (homepage: typeof HomePage) =>
             new homepage(setPage, sectionChangeCallback, 1)
         ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
       },
@@ -29,12 +30,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
       },
       {
-        key: new Import("test", 10, (testPage: typeof TestPage) => 
-          new testPage(setPage, sectionChangeCallback, 1)
-        ), val: () => import(/* webpackChunkName: "testPage" */"../../_page/_sectionedPage/testPage/testPage")
-      },
-      {
-        key: new Import("404", 0, (__404Page: typeof _404Page) => 
+        key: new Import("404", 1, (__404Page: typeof _404Page) => 
           new __404Page(setPage)
         ), val: () => import(/* webpackChunkName: "404Page" */"../../_page/404/404")
       },
@@ -59,14 +55,9 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
       },
       {
-        key: new Import("tagesschule/elektrotechnik", 20, (itPage: typeof ItPage) => 
-          new itPage(setPage, 2, sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
-      },
-      {
-        key: new Import("abendschule/elektrotechnik", 20, (itPage: typeof ItPage) => 
-          new itPage(setPage, 2, sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
+        key: new Import("tagesschule/raumfahrt", 20, (raumfahrtPage: typeof RaumfahrtPage) => 
+          new raumfahrtPage(setPage, 2, sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "raumfahrt" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage")
       }
       
     ), 0, pageChangeCallback, "404")

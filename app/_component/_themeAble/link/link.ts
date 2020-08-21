@@ -24,20 +24,30 @@ export default class Link extends ThemeAble {
     if (link) this.link(link)
 
 
-    let ev = (e: Event) => {
-      if (this.link()) this.cbs.Call(e)
+    let ev = async (e: Event) => {
+
+      (async () => {
+        if (this.link()) this.cbs.Call(e)
+        if (onClickAnimationInit) {
+          onClickAnimationInit()
+          await delay(250)
+        }
+
+        // click event Handle
+        let link = this.link()
+        if (link) {
+          let meta = domain.linkMeta(link, this.domainLevel)
+          console.log(meta)
+          if (meta.isOnOrigin) domain.set(link, this.domainLevel, this.push)
+          else location.href = link
+        }
+
+      })()
     }
 
     this.aElem.on("mouseup", ev)
     this.aElem.on("click", (e) => {
-      let link = this.link()
-      if (link) {
-        let meta = domain.linkMeta(link, this.domainLevel)
-        if (meta.isOnOrigin) {
-          e.preventDefault()
-          domain.set(link, this.domainLevel, this.push)
-        }
-      }
+      e.preventDefault()
     })
 
     this.aElem.on("keydown", (e) => {
@@ -62,7 +72,9 @@ export default class Link extends ThemeAble {
     this.aElem.on("focus", this.updateHref.bind(this))
 
     
-    let click = false
+    let click: () => void
+
+    let onClickAnimationInit: Function
     
     if (underline) {
       let inAnimation = false
@@ -114,7 +126,7 @@ export default class Link extends ThemeAble {
             
           }
           else {
-            clickF()
+            clickF().then(click)
           }
         })
         this.slidy.anim({width: "100%"}, 300)
@@ -171,16 +183,23 @@ export default class Link extends ThemeAble {
         inAnimation = false
         wannaCloose = false
         wannaCloose = false
-        click = false
+        click = undefined
       })
 
-      this.addActivationListener(() => {
-        click = true
+
+      onClickAnimationInit = () => {
+        
         if (!inAnimation) {
           inAnimation = true
-          clickF()
+          return clickF()
         }
-      })
+        else {
+          return new Promise((res) => {
+            click = res
+          })
+          
+        }
+      }
     }
 
   }

@@ -14,6 +14,7 @@ import "../../../_themeAble/_card/anmeldenCard/anmeldenCard"
 import "../../../_themeAble/_card/unterrichtSystemeCard/unterrichtSystemeCard"
 import "../../../_themeAble/_text/tabletBlob/tabletBlob"
 import "../../_pageSection/schuelerprojekteSection/schuelerprojekteSection"
+import "../../_pageSection/ausmachtSection/ausmachtSection"
 
 
 export default declareComponent("georgs-sandbox", class extends Page {

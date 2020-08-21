@@ -21,6 +21,10 @@ section-header{
 }
 */
 
+c-ausmacht-section{
+    opacity: 1;
+}
+
 c-textblob.heading{
     display: inline-block;
     width: auto;
@@ -39,23 +43,18 @@ test-container * {
     margin: 0 25px 50px 25px;
 }
 
-c-anmelden-card{
-    width: 25%;
+c-unterricht-systeme-card{
+    min-height:440px;
 }
 
 
 c-selection-card{
-    width: 50%;
+    width: 37%;
     flex-grow: 1;
 }
 
 @media only screen and (max-width: 1250px) {
-    section-header{
-        margin: 50px 100px 100px 100px;
-        text-align: center;
-    }
-
-    test-container{
+    card-container{
         margin: 0 100px 100px 100px;
         flex-direction: column;
         align-items: center;
@@ -65,7 +64,7 @@ c-selection-card{
         width: auto;
     }
 
-    c-anmelden-card{
+    c-unterricht-systeme-card{
         width: auto;
     }
 }
@@ -86,7 +85,7 @@ c-selection-card{
         margin-right: 0;
     }
 
-    c-anmelden-card{
+    c-unterricht-systeme-card{
         width: unset;
     }
 

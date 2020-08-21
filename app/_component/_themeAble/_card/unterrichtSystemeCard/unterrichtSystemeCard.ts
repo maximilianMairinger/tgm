@@ -40,13 +40,23 @@ export default declareComponent("unterricht-systeme-card", class UnterrichtSyste
     thumbnail(url:string):void
     thumbnail(url?:string){
         if(url)
+            //@ts-ignore
             this.q("thumbnail-pic").css({'background-image': url});
+        //@ts-ignore
         else return this.q("thumbnail-pic").css('background-image');
     }
 
-    contentTitle():string
-    contentTitle(title:string):void
-    contentTitle(title?:string){
+    headingbackground():string
+    headingbackground(color:string):void
+    headingbackground(color?:string){
+        if(color)
+            this.q("heading-background").css({'background':color});
+        else return this.q("heading-background").css('background');
+    }
+
+    contenttitle():string
+    contenttitle(title:string):void
+    contenttitle(title?:string){
         if(title)
             this.q("content-title").text(title);
         else return this.q("content-title").text();

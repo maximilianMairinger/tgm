@@ -1,6 +1,6 @@
 :host {
     display: block;
-    max-width: min(400px, 100%);
+    max-width: min(380px, 100%);
     min-width: 290px;
     width: auto;
     user-select: auto;
@@ -20,7 +20,7 @@
     box-shadow: 7px 7px 15px 0px rgba(0, 0, 0, .07);
 }
 
-anmelden-card{
+unterricht-system-card{
     display: flex;
     height: 100%;
     max-width: 100%;
@@ -61,7 +61,6 @@ heading-background{
     width: calc(100% + 14px);
     left: -7px;
     bottom: -7px;
-    background: #98AAB6;
     z-index: -1;
     transform: skewY(-2deg);
 }
@@ -107,7 +106,14 @@ content-title{
 }
 
 content-text{
+    display: block;
+    display: -webkit-box;
+    height: 5.6em;
+    -webkit-line-clamp: 4;
     font-size: 15px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
 }
 
 link-box{
@@ -120,14 +126,14 @@ c-link{
 }
 
 @media only screen and (max-width: 1450px) {
-    anmelden-card {
+    unterricht-system-card{
         padding: 40px;
     }
 }
 
 @media only screen and (max-width: 1250px) {
     thumbnail-box{
-        height: 200px;
+        height: 170px;
     }
 }
 
@@ -138,7 +144,7 @@ c-link{
         min-width: unset;
     }
 
-    anmelden-card{
+    unterricht-system-card{
         padding: 35px;
     }
 

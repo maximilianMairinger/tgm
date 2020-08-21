@@ -79,6 +79,18 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
         }else return this._options
     }
 
+    //quick-fix
+    background():string
+    background(has:string):void
+    background(has?:string){
+        console.log("test");
+        if(has == 'none') {
+            console.log("no background");
+            this.q("image-container").css({'display': 'none'});
+            this.q("content-box").css({'maxWidth':'100%'});
+        }else return this.q("image-container").css('display');
+    }
+
     stl(){
         return super.stl() + require('./selectionCard.css').toString();
     }

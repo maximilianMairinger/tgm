@@ -29,6 +29,7 @@ const tgmPosition = {
 export default declareComponent("maxs-sandbox", class extends Page {
   private mapElem = this.q("svg g#map")
   private allSvg = this.q("svg g#all")
+  private svgElem = this.q("svg#mapSvg")
   private mapPointerAnimation = this.q("map-pointer-animation")
   private mapPointerWrapper = this.q("map-pointer-wrapper")
   private mapPointerCenter = this.q("map-pointer-center")
@@ -86,8 +87,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
     
 
 
-    
-    this.mapPointer.css({translateX: posUnscaled.x, translateY: posUnscaled.y})
+  
 
     function getScaledXY(width: number) {
       //@ts-ignore
@@ -100,77 +100,96 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
     let mobile: boolean
     let midDesk: boolean
+    let smallDesk: boolean
+    let verySmallDesk: boolean
     let inMapPointerAnim = false
-    window.on("resize", (q) => {
-      if (q.width < 1300) {
-        if (q.width < 978) {
+    setTimeout(() => {
+      window.on("resize", (q) => {
+        if (q.width < 1550) {
+          if (q.width < 1250) {
+            if (q.width < 1100) {
+              if (q.width < 978) {
+  
 
-          let translate = getScaledXY(q.width)
+  
+                if (!mobile) {
+                  mobile = true
 
-          if (!mobile) {
-            mobile = true
-            
-            
-            let lastWidth = q.width
-            const mapPointerAnim = async (o: {translateX: number, translateY: number}, short: boolean = false) => {
-              await this.mapPointer.anim(o, short ? 50 : undefined)
-              let nowWidth = window.innerWidth
-              if (nowWidth !== lastWidth) {
-                lastWidth = nowWidth
-
-
-                let translate = getScaledXY(nowWidth)
-                await mapPointerAnim(translate, true)
+                  
+                  let lastWidth = q.width
+                  const mapPointerAnim = async (o: {translateX: number, translateY: number}, short: boolean = false) => {
+                    await this.mapPointer.anim(o, short ? 50 : undefined)
+                    let nowWidth = window.innerWidth
+                    if (nowWidth !== lastWidth) {
+                      lastWidth = nowWidth
+  
+  
+                      let translate = getScaledXY(nowWidth)
+                      await mapPointerAnim(translate, true)
+                    }
+  
+                    
+                  }
+                  inMapPointerAnim = true
+                  mapPointerAnim(getScaledXY(q.width)).then(() => {
+                    inMapPointerAnim = false
+                  })
+  
+                  debugger
+                  this.allSvg.anim({translateX: -120})
+                  this.mapPointerCenter.anim({translateX: -120, left: "calc(120px + 2%)", width: "96%", height: "100%"})
+                  this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
+                  console.log("mob")
+                }
+                else {
+                  if (!inMapPointerAnim) {
+                    this.mapPointer.css(getScaledXY(q.width))
+                  }
+                }
+  
+                
               }
-
-              
+              else {
+                if (mobile || mobile === undefined || !verySmallDesk) {
+                  mobile = false
+        
+                  this.mapPointer.anim({translateX: posUnscaled.x, translateY: posUnscaled.y})
+                  this.mapElem.anim({scale: 1, translateX: 0.1, translateY: 0.1})
+  
+                  this.mapPointerCenter.anim({left: 257, width: 623.41, height: 478.66, translateX: "17vw"})
+                  this.allSvg.anim({translateX: "17vw"})
+                }
+              }
             }
-            inMapPointerAnim = true
-            mapPointerAnim(translate).then(() => {
-              inMapPointerAnim = false
-            })
-
-
-
-            this.mapPointerCenter.anim({left: "calc(120px + 2%)", width: "96%", height: "100%"})
-            this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
-            console.log("mob")
+            else {
+              if (verySmallDesk || verySmallDesk === undefined || !smallDesk) {
+                verySmallDesk = false
+  
+                this.mapPointerCenter.anim({translateX: -240})
+                this.allSvg.anim({translateX: -240})
+              }
+            }
           }
           else {
-            if (!inMapPointerAnim) {
-              this.mapPointer.css(translate)
+            if (smallDesk || smallDesk === undefined || !midDesk) {
+              smallDesk = false
+              this.mapPointerCenter.anim({translateX: -150})
+              this.allSvg.anim({translateX: -150})
             }
-          }
-
-          
+          } 
         }
         else {
-          if (mobile || mobile === undefined) {
-            mobile = false
-  
-            this.mapPointerCenter.anim({left: 257, width: 623.41, height: 478.66})
-            this.mapPointer.anim({translateX: posUnscaled.x, translateY: posUnscaled.y})
-            this.mapElem.anim({scale: 1, translateX: 0.1, translateY: 0.1})
-            console.log("des")
+          if (midDesk || midDesk === undefined) {
+            midDesk = false
+            this.mapPointerCenter.anim({translateX: .1})
+            this.allSvg.anim({translateX: .1})
           }
         }
+        
+        
+      })
+    }, 1000)
 
-
-        if (!midDesk) {
-          midDesk = true
-          this.mapPointerCenter.anim({translateX: -120})
-          this.allSvg.anim({translateX: -120})
-        }
-      }
-      else {
-        if (midDesk || midDesk === undefined) {
-          midDesk = false
-          this.mapPointerCenter.anim({translateX: .1})
-          this.allSvg.anim({translateX: .1})
-        }
-      }
-      
-    })
 
 
 
@@ -226,7 +245,6 @@ export default declareComponent("maxs-sandbox", class extends Page {
       if (!isOpen || inOpenOrCloseAnimation) return
       inOpenOrCloseAnimation = true
 
-      console.log("qqq")
 
       this.pointerHeading.css({cursor: "unset"})
       await Promise.all([

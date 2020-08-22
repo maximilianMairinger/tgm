@@ -20,5 +20,5 @@ c-textblob{
 
 c-tablet-blob{
     background: url("../../../../res/img/schuelerprojekteBackground.svg") center center no-repeat;
-    background-size: contain;
+    background-size: min(90%, 900px) 100%;
 }

@@ -29,6 +29,7 @@ const tgmPosition = {
 export default declareComponent("maxs-sandbox", class extends Page {
   private mapElem = this.q("svg g#map")
   private allSvg = this.q("svg g#all")
+  private allSvg2 = this.q("svg g#all2")
   private svgElem = this.q("svg#mapSvg")
   private mapPointerAnimation = this.q("map-pointer-animation")
   private mapPointerWrapper = this.q("map-pointer-wrapper")
@@ -98,6 +99,8 @@ export default declareComponent("maxs-sandbox", class extends Page {
       return o
     }
 
+    this.mapPointer.css({translateX: posUnscaled.x, translateY: posUnscaled.y})
+
     let mobile: boolean
     let midDesk: boolean
     let smallDesk: boolean
@@ -105,9 +108,10 @@ export default declareComponent("maxs-sandbox", class extends Page {
     let inMapPointerAnim = false
     setTimeout(() => {
       window.on("resize", (q) => {
+        // debugger
         if (q.width < 1550) {
-          if (q.width < 1250) {
-            if (q.width < 1100) {
+          if (q.width < 1350) {
+            if (q.width < 1200) {
               if (q.width < 978) {
   
 
@@ -135,10 +139,11 @@ export default declareComponent("maxs-sandbox", class extends Page {
                     inMapPointerAnim = false
                   })
   
-                  debugger
+                  // debugger
                   this.allSvg.anim({translateX: -120})
-                  this.mapPointerCenter.anim({translateX: -120, left: "calc(120px + 2%)", width: "96%", height: "100%"})
+                  this.mapPointerCenter.anim({translateX: -120, left: "calc(120px + 2%)", width: "96%", height: "100%", marginLeft: .1})
                   this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
+                  this.allSvg2.anim({translateX: .1})
                   console.log("mob")
                 }
                 else {
@@ -150,33 +155,55 @@ export default declareComponent("maxs-sandbox", class extends Page {
                 
               }
               else {
-                if (mobile || mobile === undefined || !verySmallDesk) {
+                if (mobile || mobile === undefined) {
                   mobile = false
         
                   this.mapPointer.anim({translateX: posUnscaled.x, translateY: posUnscaled.y})
                   this.mapElem.anim({scale: 1, translateX: 0.1, translateY: 0.1})
-  
-                  this.mapPointerCenter.anim({left: 257, width: 623.41, height: 478.66, translateX: "17vw"})
+
+                  this.allSvg2.anim({translateX: -240})
+                  this.mapPointerCenter.anim({left: 257, width: 623.41, height: 478.66, translateX: "17vw", marginLeft: -240})
                   this.allSvg.anim({translateX: "17vw"})
                 }
               }
+
+              if (!verySmallDesk) {
+                verySmallDesk = true
+
+                this.allSvg2.anim({translateX: -240})
+                this.mapPointerCenter.anim({translateX: "17vw", marginLeft: -240})
+                this.allSvg.anim({translateX: "17vw"})
+              }
             }
             else {
-              if (verySmallDesk || verySmallDesk === undefined || !smallDesk) {
+              if (verySmallDesk || verySmallDesk === undefined) {
                 verySmallDesk = false
   
-                this.mapPointerCenter.anim({translateX: -240})
+                this.allSvg2.anim({translateX: .1})
+                this.mapPointerCenter.anim({translateX: -240, marginLeft: .1})
                 this.allSvg.anim({translateX: -240})
               }
             }
+
+            if (!smallDesk) {
+              smallDesk = true
+              this.mapPointerCenter.anim({translateX: -240})
+              this.allSvg.anim({translateX: -240})
+            }
           }
           else {
-            if (smallDesk || smallDesk === undefined || !midDesk) {
+            if (smallDesk || smallDesk === undefined) {
               smallDesk = false
               this.mapPointerCenter.anim({translateX: -150})
               this.allSvg.anim({translateX: -150})
             }
-          } 
+          }
+
+          if (!midDesk) {
+            midDesk = true
+            this.mapPointerCenter.anim({translateX: -150})
+            this.allSvg.anim({translateX: -150})
+          }
         }
         else {
           if (midDesk || midDesk === undefined) {

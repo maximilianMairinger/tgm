@@ -35,7 +35,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
   private mapPointerAnimation = this.q("map-pointer-animation")
   private mapPointerWrapper = this.q("map-pointer-wrapper")
   private mapPointerCenter = this.q("map-pointer-center")
-  private mapPointer = this.q("map-pointer")
+  private mapPointer = this.q("map-pointer") as HTMLElement
   private pointerHeading = this.mapPointer.childs("pointer-text")
   // private pointerArrow = this.mapPointer.childs("c-filled-arrow-icon")
   private pointerInfoBox = this.mapPointer.childs("pointer-info-box")
@@ -64,7 +64,8 @@ export default declareComponent("maxs-sandbox", class extends Page {
     this.textBlob.subheading("zum TGM")
     this.textBlob.note("hello")
     this.textBlob.content("Content content content content content content content content content content content content content content content content content content content.")
-
+    this.textBlob.hsize({"max": 60, "min": 40})
+    this.textBlob.hmobile({"max": 55, "min": 35})
 
     this.stayInFrameElem.insertBefore(this.textBlobFadin, this.overlay)
 
@@ -353,7 +354,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
       ])
 
       
-
+      this.mapPointer.focus()
       inOpenOrCloseAnimation = false
     }
 
@@ -376,27 +377,38 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
     let isOpen = false
 
-    this.mapPointer.on("mouseenter", () => {
+    const hoverFunc = () => {
       if (isOpen) return
       this.mapPointer.anim({scale: 1.1})
-    })
+    }
 
-    this.mapPointer.on("mouseleave", () => {
+    this.mapPointer.on("mouseenter", hoverFunc)
+    this.mapPointer.on("focus", hoverFunc)
+    this.mapPointer.tabIndex = 1
+
+    const hoverOutFunc = () => {
       if (isOpen) return
       this.mapPointer.anim({scale: 1})
+    }
+
+    this.mapPointer.on("mouseleave", hoverOutFunc)
+    this.mapPointer.on("blur", hoverOutFunc)
+
+    this.mapPointer.on("keydown", (e) => {
+      let { key } = e
+      if (key === "Escape") {
+        closeLocationInfo()
+        e.preventDefault()
+      }
+      else if (key === " " || key === "Enter") {
+        openLocationInfo()
+        
+      }
     })
 
-    this.mapPointer.on("click", () => {
-      openLocationInfo()
-    })
-
-    this.overlay.on("click", () => {
-      closeLocationInfo()
-    })
-
-    this.elementBody.on("scroll", () => {
-      closeLocationInfo()
-    })
+    this.mapPointer.on("click", openLocationInfo)
+    this.overlay.on("click", closeLocationInfo)
+    this.elementBody.on("scroll", closeLocationInfo)
 
 
 

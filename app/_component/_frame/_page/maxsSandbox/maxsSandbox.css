@@ -154,3 +154,16 @@ tgm-img {
 map-frame#pointer {
   pointer-events: none;
 }
+
+c-textblob {
+  display: block;
+  margin: auto;
+}
+
+textblob-wrapper {
+  display: flex;
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  right: 0;
+}

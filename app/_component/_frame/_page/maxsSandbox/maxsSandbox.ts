@@ -42,10 +42,39 @@ export default declareComponent("maxs-sandbox", class extends Page {
   private pointerInfoBoxChilds = this.pointerInfoBox.childs("info-box-text, c-link", true).reverse() as ElementList
   private overlay = this.q("over-layer")
   private mapSvgPaths = this.mapElem.childs()
+  private mapFrame = this.q("map-frame")
+
+
+  
+  private stayInFrameElem = this.q("stay-in-frame")
+  private textBlob = new TextBlob()
 
   constructor() {
     super()
     this.mapSvgPaths.css({fillOpacity: 1, fill: "unset"})
+
+
+
+
+
+
+    this.textBlob.heading("Kontakt")
+    this.textBlob.subheading("zum TGM")
+    this.textBlob.note("hello")
+    this.textBlob.content("Content content content content content content content content content content content content content content content content content content content.")
+
+
+    this.stayInFrameElem.insertBefore(ce("textblob-wrapper").apd(this.textBlob), this.overlay)
+
+
+
+
+
+
+
+
+
+
 
     setTimeout(() => {
       this.elementBody.scrollTop = 900
@@ -86,8 +115,6 @@ export default declareComponent("maxs-sandbox", class extends Page {
       y: (tgmPosition.y * scale) - pointerHeight
     }
 
-    
-
 
   
 
@@ -109,7 +136,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
     let inMapPointerAnim = false
     window.on("resize", (q) => {
       // debugger
-      if (q.width < 1550) {
+      if (q.width < 1600) {
 
         if (!midDesk) {
           midDesk = true
@@ -117,7 +144,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
           this.allSvg.anim({translateX: -150})
         }
 
-        if (q.width < 1350) {
+        if (q.width < 1400) {
 
           if (!smallDesk) {
             smallDesk = true
@@ -229,7 +256,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
     let inPointerJump = false
   
-    this.mapPointerCenter.on("mouseenter", async () => {
+    this.mapFrame.on("mouseenter", async () => {
         
       if (inPointerJump || isOpen) return
       inPointerJump = true
@@ -281,8 +308,8 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
       this.pointerHeading.css({cursor: "unset"})
       await Promise.all([
-        this.pointerInfoBox.anim({opacity: 0, translateY: 0}).then(() => {this.pointerInfoBox.hide(); this.pointerInfoBoxChilds.css({opacity: 0})}),
-        delay(50).then(() => this.pointerHeading.anim({translateY: 0})),
+        this.pointerInfoBox.anim({opacity: 0, translateY: .1}).then(() => {this.pointerInfoBox.hide(); this.pointerInfoBoxChilds.css({opacity: 0})}),
+        delay(50).then(() => this.pointerHeading.anim({translateY: .1, translateX: .1, scale: 1})),
         this.mapPointerAnimation.anim({translateY: 0}, 200),
         this.overlay.anim({opacity: 0}).then(() => this.overlay.hide())
       ])
@@ -308,7 +335,6 @@ export default declareComponent("maxs-sandbox", class extends Page {
     })
 
     this.overlay.on("click", () => {
-      console.log("qwer")
       closeLocationInfo()
     })
 

@@ -53,6 +53,14 @@ left-content {
   align-items: center;
 }
 
+left-content > * {
+  pointer-events: all;
+}
+
+right-content > * {
+  pointer-events: all;
+}
+
 
 
 left-content > c-tgm-logo {

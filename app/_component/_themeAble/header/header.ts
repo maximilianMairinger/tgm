@@ -73,10 +73,12 @@ export default declareComponent("header", class Header extends ThemeAble {
 
 
   public onTop() {
+    this.css("pointerEvents", "none")
     this.background.removeClass(notTopClassName)
   }
 
   public notTop() {
+    this.css("pointerEvents", "all")
     this.background.addClass(notTopClassName)
   }
 

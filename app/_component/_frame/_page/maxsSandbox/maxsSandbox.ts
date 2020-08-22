@@ -110,8 +110,34 @@ export default declareComponent("maxs-sandbox", class extends Page {
       window.on("resize", (q) => {
         // debugger
         if (q.width < 1550) {
+
+          if (!midDesk) {
+            midDesk = true
+            this.mapPointerCenter.anim({translateX: -150})
+            this.allSvg.anim({translateX: -150})
+          }
+
           if (q.width < 1350) {
+
+            if (!smallDesk) {
+              smallDesk = true
+              this.mapPointerCenter.anim({translateX: -240})
+              this.allSvg.anim({translateX: -240})
+            }
+
+
+
             if (q.width < 1200) {
+
+
+              if (!verySmallDesk) {
+                verySmallDesk = true
+
+                this.allSvg2.anim({translateX: -240})
+                this.mapPointerCenter.anim({translateX: "17vw", marginLeft: -240})
+                this.allSvg.anim({translateX: "17vw"})
+              }
+
               if (q.width < 978) {
   
 
@@ -152,7 +178,6 @@ export default declareComponent("maxs-sandbox", class extends Page {
                   }
                 }
   
-                
               }
               else {
                 if (mobile || mobile === undefined) {
@@ -166,14 +191,6 @@ export default declareComponent("maxs-sandbox", class extends Page {
                   this.allSvg.anim({translateX: "17vw"})
                 }
               }
-
-              if (!verySmallDesk) {
-                verySmallDesk = true
-
-                this.allSvg2.anim({translateX: -240})
-                this.mapPointerCenter.anim({translateX: "17vw", marginLeft: -240})
-                this.allSvg.anim({translateX: "17vw"})
-              }
             }
             else {
               if (verySmallDesk || verySmallDesk === undefined) {
@@ -184,12 +201,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
                 this.allSvg.anim({translateX: -240})
               }
             }
-
-            if (!smallDesk) {
-              smallDesk = true
-              this.mapPointerCenter.anim({translateX: -240})
-              this.allSvg.anim({translateX: -240})
-            }
+ 
           }
           else {
             if (smallDesk || smallDesk === undefined) {
@@ -198,12 +210,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
               this.allSvg.anim({translateX: -150})
             }
           }
-
-          if (!midDesk) {
-            midDesk = true
-            this.mapPointerCenter.anim({translateX: -150})
-            this.allSvg.anim({translateX: -150})
-          }
+          
         }
         else {
           if (midDesk || midDesk === undefined) {

@@ -5,6 +5,7 @@ import "./../../../_themeAble/_icon/filledArrow/filledArrow"
 import delay from "delay"
 import "./../../../_themeAble/link/link"
 import { ElementList } from "extended-dom"
+import TextBlob from "./../../../_themeAble/_text/textblob/textblob"
 
 const vienna = {
   path: {
@@ -36,7 +37,7 @@ export default declareComponent("maxs-sandbox", class extends Page {
   private mapPointerCenter = this.q("map-pointer-center")
   private mapPointer = this.q("map-pointer")
   private pointerHeading = this.mapPointer.childs("pointer-text")
-  private pointerArrow = this.mapPointer.childs("c-filled-arrow-icon")
+  // private pointerArrow = this.mapPointer.childs("c-filled-arrow-icon")
   private pointerInfoBox = this.mapPointer.childs("pointer-info-box")
   private pointerInfoBoxChilds = this.pointerInfoBox.childs("info-box-text, c-link", true).reverse() as ElementList
   private overlay = this.q("over-layer")
@@ -106,123 +107,121 @@ export default declareComponent("maxs-sandbox", class extends Page {
     let smallDesk: boolean
     let verySmallDesk: boolean
     let inMapPointerAnim = false
-    setTimeout(() => {
-      window.on("resize", (q) => {
-        // debugger
-        if (q.width < 1550) {
+    window.on("resize", (q) => {
+      // debugger
+      if (q.width < 1550) {
 
-          if (!midDesk) {
-            midDesk = true
+        if (!midDesk) {
+          midDesk = true
+          this.mapPointerCenter.anim({translateX: -150})
+          this.allSvg.anim({translateX: -150})
+        }
+
+        if (q.width < 1350) {
+
+          if (!smallDesk) {
+            smallDesk = true
+            this.mapPointerCenter.anim({translateX: -240})
+            this.allSvg.anim({translateX: -240})
+          }
+
+
+
+          if (q.width < 1200) {
+
+
+            if (!verySmallDesk) {
+              verySmallDesk = true
+
+              this.allSvg2.anim({translateX: -240})
+              this.mapPointerCenter.anim({translateX: "17vw", marginLeft: -240})
+              this.allSvg.anim({translateX: "17vw"})
+            }
+
+            if (q.width < 978) {
+
+
+
+              if (!mobile) {
+                mobile = true
+
+                
+                let lastWidth = q.width
+                const mapPointerAnim = async (o: {translateX: number, translateY: number}, short: boolean = false) => {
+                  await this.mapPointer.anim(o, short ? 50 : undefined)
+                  let nowWidth = window.innerWidth
+                  if (nowWidth !== lastWidth) {
+                    lastWidth = nowWidth
+
+
+                    let translate = getScaledXY(nowWidth)
+                    await mapPointerAnim(translate, true)
+                  }
+
+                  
+                }
+                inMapPointerAnim = true
+                mapPointerAnim(getScaledXY(q.width)).then(() => {
+                  inMapPointerAnim = false
+                })
+
+                // debugger
+                this.allSvg.anim({translateX: -120})
+                this.mapPointerCenter.anim({translateX: -120, left: "calc(120px + 2%)", width: "96%", height: "100%", marginLeft: .1})
+                this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
+                this.allSvg2.anim({translateX: .1})
+                console.log("mob")
+              }
+              else {
+                if (!inMapPointerAnim) {
+                  this.mapPointer.css(getScaledXY(q.width))
+                }
+              }
+
+            }
+            else {
+              if (mobile || mobile === undefined) {
+                mobile = false
+      
+                this.mapPointer.anim({translateX: posUnscaled.x, translateY: posUnscaled.y})
+                this.mapElem.anim({scale: 1, translateX: 0.1, translateY: 0.1})
+
+                this.allSvg2.anim({translateX: -240})
+                this.mapPointerCenter.anim({left: 257, width: 623.41, height: 478.66, translateX: "17vw", marginLeft: -240})
+                this.allSvg.anim({translateX: "17vw"})
+              }
+            }
+          }
+          else {
+            if (verySmallDesk || verySmallDesk === undefined) {
+              verySmallDesk = false
+
+              this.allSvg2.anim({translateX: .1})
+              this.mapPointerCenter.anim({translateX: -240, marginLeft: .1})
+              this.allSvg.anim({translateX: -240})
+            }
+          }
+
+        }
+        else {
+          if (smallDesk || smallDesk === undefined) {
+            smallDesk = false
             this.mapPointerCenter.anim({translateX: -150})
             this.allSvg.anim({translateX: -150})
           }
-
-          if (q.width < 1350) {
-
-            if (!smallDesk) {
-              smallDesk = true
-              this.mapPointerCenter.anim({translateX: -240})
-              this.allSvg.anim({translateX: -240})
-            }
-
-
-
-            if (q.width < 1200) {
-
-
-              if (!verySmallDesk) {
-                verySmallDesk = true
-
-                this.allSvg2.anim({translateX: -240})
-                this.mapPointerCenter.anim({translateX: "17vw", marginLeft: -240})
-                this.allSvg.anim({translateX: "17vw"})
-              }
-
-              if (q.width < 978) {
-  
-
-  
-                if (!mobile) {
-                  mobile = true
-
-                  
-                  let lastWidth = q.width
-                  const mapPointerAnim = async (o: {translateX: number, translateY: number}, short: boolean = false) => {
-                    await this.mapPointer.anim(o, short ? 50 : undefined)
-                    let nowWidth = window.innerWidth
-                    if (nowWidth !== lastWidth) {
-                      lastWidth = nowWidth
-  
-  
-                      let translate = getScaledXY(nowWidth)
-                      await mapPointerAnim(translate, true)
-                    }
-  
-                    
-                  }
-                  inMapPointerAnim = true
-                  mapPointerAnim(getScaledXY(q.width)).then(() => {
-                    inMapPointerAnim = false
-                  })
-  
-                  // debugger
-                  this.allSvg.anim({translateX: -120})
-                  this.mapPointerCenter.anim({translateX: -120, left: "calc(120px + 2%)", width: "96%", height: "100%", marginLeft: .1})
-                  this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
-                  this.allSvg2.anim({translateX: .1})
-                  console.log("mob")
-                }
-                else {
-                  if (!inMapPointerAnim) {
-                    this.mapPointer.css(getScaledXY(q.width))
-                  }
-                }
-  
-              }
-              else {
-                if (mobile || mobile === undefined) {
-                  mobile = false
-        
-                  this.mapPointer.anim({translateX: posUnscaled.x, translateY: posUnscaled.y})
-                  this.mapElem.anim({scale: 1, translateX: 0.1, translateY: 0.1})
-
-                  this.allSvg2.anim({translateX: -240})
-                  this.mapPointerCenter.anim({left: 257, width: 623.41, height: 478.66, translateX: "17vw", marginLeft: -240})
-                  this.allSvg.anim({translateX: "17vw"})
-                }
-              }
-            }
-            else {
-              if (verySmallDesk || verySmallDesk === undefined) {
-                verySmallDesk = false
-  
-                this.allSvg2.anim({translateX: .1})
-                this.mapPointerCenter.anim({translateX: -240, marginLeft: .1})
-                this.allSvg.anim({translateX: -240})
-              }
-            }
- 
-          }
-          else {
-            if (smallDesk || smallDesk === undefined) {
-              smallDesk = false
-              this.mapPointerCenter.anim({translateX: -150})
-              this.allSvg.anim({translateX: -150})
-            }
-          }
-          
-        }
-        else {
-          if (midDesk || midDesk === undefined) {
-            midDesk = false
-            this.mapPointerCenter.anim({translateX: .1})
-            this.allSvg.anim({translateX: .1})
-          }
         }
         
-        
-      })
-    }, 1000)
+      }
+      else {
+        if (midDesk || midDesk === undefined) {
+          midDesk = false
+          this.mapPointerCenter.anim({translateX: .1})
+          this.allSvg.anim({translateX: .1})
+        }
+      }
+      
+      
+    })
 
 
 

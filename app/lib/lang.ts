@@ -12,6 +12,7 @@ interface Lang {
     "Neuigkeiten": "Neuigkeiten",
     "it": "IT",
     "elektrotechnik": "Elektrotechnik",
+    "raumfahrt": "Raumfahrt", 
     "news": "Neues",
 
 

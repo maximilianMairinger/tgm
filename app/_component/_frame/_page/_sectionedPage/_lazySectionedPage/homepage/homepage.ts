@@ -4,6 +4,7 @@ import { ImportanceMap, Import } from "../../../../../../lib/lazyLoad"
 import VersuchanstaltSection from "../../../../_pageSection/versuchsanstaltSection/versuchsanstaltSection"
 import AbendschuleSection from "../../../../_pageSection/abendschuleSection/abendschuleSection"
 import LandingSection from "../../../../_pageSection/landingSection/landingSection"
+import NewsContactSection from "../../../../_pageSection/newsContactSection/newsContactSection"
 
 
 export default declareComponent("home-page", class Homepage extends LazySectionedPage {
@@ -24,6 +25,11 @@ export default declareComponent("home-page", class Homepage extends LazySectione
         key: new Import("abendschule", 1, (_AbendschuleSection: typeof AbendschuleSection) =>
             new _AbendschuleSection()
         ), val: () => import(/* webpackChunkName: "AbendschuleSection" */"../../../../_pageSection/abendschuleSection/abendschuleSection")
+      },
+      {
+        key: new Import("news", 1, (_NewsContactSection: typeof NewsContactSection) =>
+            new _NewsContactSection()
+        ), val: () => import(/* webpackChunkName: "newsContactSection" */"../../../../_pageSection/newsContactSection/newsContactSection")
       }
     ), domainLevel, setPage, sectionChangeCallback)
   }

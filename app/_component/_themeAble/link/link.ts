@@ -24,28 +24,28 @@ export default class Link extends ThemeAble {
     if (link) this.link(link)
 
 
-    let ev = async (e: Event) => {
+    let ev = async (e: Event, dontSetLocation = false) => {
+      if (this.link()) this.cbs.Call(e)
+      if (onClickAnimationInit) {
+        onClickAnimationInit()
+        await delay(250)
+      }
 
-      (async () => {
-        if (this.link()) this.cbs.Call(e)
-        if (onClickAnimationInit) {
-          onClickAnimationInit()
-          await delay(250)
-        }
-
-        // click event Handle
-        let link = this.link()
-        if (link) {
-          let meta = domain.linkMeta(link, this.domainLevel)
-          console.log(meta)
+      // click event Handle
+      let link = this.link()
+      if (link) {
+        let meta = domain.linkMeta(link, this.domainLevel)
+        if (!dontSetLocation) {
           if (meta.isOnOrigin) domain.set(link, this.domainLevel, this.push)
           else location.href = link
         }
-
-      })()
+      }
     }
 
-    this.aElem.on("mouseup", ev)
+    this.aElem.on("mouseup", (e) => {
+      if (e.button === 0) ev(e)
+      else if (e.button === 1 || e.button === 2) ev(e, true)
+    })
     this.aElem.on("click", (e) => {
       e.preventDefault()
     })

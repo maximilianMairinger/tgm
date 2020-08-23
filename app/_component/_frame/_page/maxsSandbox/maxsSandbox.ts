@@ -47,9 +47,13 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
   
   private stayInFrameElem = this.q("stay-in-frame")
-  private textBlob = new TextBlob()
-  private textBlobWrapper = ce("textblob-wrapper").apd(this.textBlob)
-  private textBlobFadin = ce("textblob-fadin").apd(this.textBlobWrapper)
+  private mapTextBlob = new TextBlob().addClass("map")
+  private mapTextBlobWrapper = ce("map-textblob-wrapper").apd(this.mapTextBlob)
+  private mapTextBlobFadin = ce("map-textblob-fadin").apd(this.mapTextBlobWrapper)
+
+  private newsTextBlob = new TextBlob().addClass("news")
+  private newsTextBlobWrapper = ce("news-textblob-wrapper").apd(this.mapTextBlob)
+  private newsTextBlobFadin = ce("news-textblob-fadin").apd(this.mapTextBlobWrapper)
 
   constructor() {
     super()
@@ -60,14 +64,15 @@ export default declareComponent("maxs-sandbox", class extends Page {
 
 
 
-    this.textBlob.heading("Kontakt")
-    this.textBlob.subheading("zum TGM")
-    this.textBlob.note("hello")
-    this.textBlob.content("Content content content content content content content content content content content content content content content content content content content.")
-    this.textBlob.hsize({"max": 60, "min": 40})
-    this.textBlob.hmobile({"max": 55, "min": 35})
 
-    this.stayInFrameElem.insertBefore(this.textBlobFadin, this.overlay)
+    this.mapTextBlob.heading("Kontakt")
+    this.mapTextBlob.subheading("zum TGM")
+    this.mapTextBlob.note("hello")
+    this.mapTextBlob.content("Content content content content content content content content content content content content content content content content content content content.")
+    this.mapTextBlob.hsize({"max": 60, "min": 40})
+    this.mapTextBlob.hmobile({"max": 55, "min": 35})
+
+    this.stayInFrameElem.insertBefore(this.mapTextBlobFadin, this.overlay)
 
 
 
@@ -96,13 +101,13 @@ export default declareComponent("maxs-sandbox", class extends Page {
       () => {
         return [
           this.mapPointerWrapper.show().anim({opacity: 1, translateY: .1}),
-          this.textBlobFadin.show().anim({opacity: 1, translateY: .1})
+          this.mapTextBlobFadin.show().anim({opacity: 1, translateY: .1})
         ]
       }, 
       () => {
         return [
           this.mapPointerWrapper.anim({opacity: 0, translateY: -5}).then(() => this.mapPointerWrapper.hide()),
-          this.textBlobFadin.anim({opacity: 0, translateY: -10}).then(() => this.textBlobFadin.hide())
+          this.mapTextBlobFadin.anim({opacity: 0, translateY: -10}).then(() => this.mapTextBlobFadin.hide())
         ]
       }
     )
@@ -210,11 +215,11 @@ export default declareComponent("maxs-sandbox", class extends Page {
               this.mapPointerCenter.anim({translateX: "17vw", marginLeft: -240})
               this.allSvg.anim({translateX: "17vw"})
 
-              this.textBlobWrapper.anim({width: "80%", right: "10%", left: "10%"})
+              this.mapTextBlobWrapper.anim({width: "80%", right: "10%", left: "10%"})
               // must be seperated, because this animation will maybe be cancelled by mobile. We do need the rest to fire however
-              this.textBlobWrapper.anim({translateY: 500})
+              this.mapTextBlobWrapper.anim({translateY: 500})
               // debugger
-              this.textBlob.anim({marginLeft: .1})
+              this.mapTextBlob.anim({marginLeft: .1})
             }
 
             if (q.width < 978) {
@@ -249,8 +254,8 @@ export default declareComponent("maxs-sandbox", class extends Page {
                 this.mapPointerCenter.anim({translateX: -120, left: "calc(120px + 2%)", width: "96%", height: "100%", marginLeft: .1})
                 this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
                 this.allSvg2.anim({translateX: .1})
-                this.textBlobWrapper.anim({translateY: "45vw"})
-                this.textBlob.anim({translateY: 200})
+                this.mapTextBlobWrapper.anim({translateY: "45vw"})
+                this.mapTextBlob.anim({translateY: 200})
               }
               else {
                 if (!inMapPointerAnim) {
@@ -269,8 +274,8 @@ export default declareComponent("maxs-sandbox", class extends Page {
                 this.allSvg2.anim({translateX: -240})
                 this.mapPointerCenter.anim({left: 257, width: 623.41, height: 478.66, translateX: "17vw", marginLeft: -240})
                 this.allSvg.anim({translateX: "17vw"})
-                this.textBlobWrapper.anim({translateY: 500})
-                this.textBlob.anim({translateY: .1})
+                this.mapTextBlobWrapper.anim({translateY: 500})
+                this.mapTextBlob.anim({translateY: .1})
               }
             }
           }
@@ -281,8 +286,8 @@ export default declareComponent("maxs-sandbox", class extends Page {
               this.allSvg2.anim({translateX: .1})
               this.mapPointerCenter.anim({translateX: -240, marginLeft: .1})
               this.allSvg.anim({translateX: -240})
-              this.textBlobWrapper.anim({translateY: .1, width: "50%", left: "50%", right: 0})
-              this.textBlob.anim({marginLeft: "auto"})
+              this.mapTextBlobWrapper.anim({translateY: .1, width: "50%", left: "50%", right: 0})
+              this.mapTextBlob.anim({marginLeft: "auto"})
             }
           }
 

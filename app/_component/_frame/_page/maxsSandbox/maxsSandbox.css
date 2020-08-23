@@ -155,13 +155,13 @@ map-frame#pointer {
   pointer-events: none;
 }
 
-c-textblob {
+c-textblob.map {
   display: block;
   margin: auto;
   pointer-events: all;
 }
 
-textblob-wrapper {
+map-textblob-wrapper {
   display: flex;
   position: absolute;
   width: 50%;
@@ -170,7 +170,7 @@ textblob-wrapper {
   left: 50%;
 }
 
-textblob-fadin {
+map-textblob-fadin {
   opacity: 0;
   transform: translateY(-10);
   display: none;

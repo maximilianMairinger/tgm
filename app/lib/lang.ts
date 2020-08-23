@@ -12,7 +12,7 @@ interface Lang {
     "Neuigkeiten": "Neuigkeiten",
     "it": "IT",
     "elektrotechnik": "Elektrotechnik",
-    "neues": "Neues",
+    "news": "Neues",
 
 
     "section1": "Section1",

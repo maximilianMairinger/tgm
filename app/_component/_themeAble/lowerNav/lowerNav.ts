@@ -22,14 +22,15 @@ export default declareComponent("lower-nav", class LowerNav extends ThemeAble {
   private enableToken: Symbol
   public async enable(init: boolean, func: "css" | "anim" = init ? "css" : "anim") {
     this.enableToken = Symbol()
-    this.layers.show()
+    this.elementBody.show()
     this.linkContainer.css({display: "flex"})
     await this.layers[func]({opacity: 1})
   }
   public async disable(init: boolean, func: "css" | "anim" = init ? "css" : "anim") {
+    console.log("disable")
     let token = this.enableToken = Symbol()
     let r = this.layers[func]({opacity: 0})
-    if (!init) await r.then(() => {if (token === this.enableToken) this.layers.hide()})
+    if (!init) await r.then(() => {if (token === this.enableToken) this.elementBody.hide()})
   }
 
 

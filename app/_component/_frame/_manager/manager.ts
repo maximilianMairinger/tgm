@@ -28,7 +28,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private managedElementMap: ResourcesMap
 
-  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, private onUserScroll?: (scrollProgress: number) => void, private onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, private onUserScroll?: (scrollProgress: number, userInited: boolean) => void, private onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
     super();
     this.firstFrameLoaded = new Promise((res) => {
       this.resLoaded = res
@@ -52,14 +52,14 @@ export default abstract class Manager<ManagementElementName extends string> exte
       this.scrollEventListener = new EventListener(this, "scroll", () => {
         //@ts-ignore
         let y = this.currentFrame.elementBody.scrollTop
-        if (!this.currentFrame.dontPropergateScrollUpdates) onUserScroll(y)
+        onUserScroll(y, this.currentFrame.userInitedScrollEvent)
         onScroll(y)
       }, false)
     }
     else {
       if (onUserScroll) this.scrollEventListener = new EventListener(this, "scroll", () => {
         //@ts-ignore
-        if (!this.currentFrame.dontPropergateScrollUpdates) onUserScroll(this.currentFrame.elementBody.scrollTop)
+        onUserScroll(this.currentFrame.elementBody.scrollTop, this.currentFrame.userInitedScrollEvent)
       }, false)
       else if (onScroll) this.scrollEventListener = new EventListener(this, "scroll", () => {
         //@ts-ignore
@@ -215,13 +215,13 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (this.onUserScroll && this.onScroll) {
       
       let y = (this.currentFrame as any).elementBody.scrollTop
-      if (!this.currentFrame.dontPropergateScrollUpdates) this.onUserScroll(y)
+      this.onUserScroll(y, this.currentFrame.userInitedScrollEvent)
       this.onScroll(y)
     }
     else {
 
       if (this.onUserScroll) {
-        if (!this.currentFrame.dontPropergateScrollUpdates) this.onUserScroll((this.currentFrame as any).elementBody.scrollTop)
+        this.onUserScroll((this.currentFrame as any).elementBody.scrollTop, this.currentFrame.userInitedScrollEvent)
       }
       else if (this.onScroll) this.onScroll((this.currentFrame as any).elementBody.scrollTop)
     }

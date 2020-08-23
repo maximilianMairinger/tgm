@@ -13,7 +13,7 @@ import RaumfahrtPage from "../../_page/_sectionedPage/_lazySectionedPage/raumfah
 export type PageName = string
 
 export default declareComponent("page-manager", class PageManager extends Manager<PageName> {
-  constructor(pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, sectionChangeCallback?: (section: string) => void, onScrollBarWidthChange?: (scrollBarWidth: number) => void, onUserScroll?: (scrollProgress: number) => void, onScroll?: (scrollProgress: number) => void) {
+  constructor(pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, sectionChangeCallback?: (section: string) => void, onScrollBarWidthChange?: (scrollBarWidth: number) => void, onUserScroll?: (scrollProgress: number, userInited: boolean) => void, onScroll?: (scrollProgress: number) => void) {
     let setPage = (a: PageName | null) => {
       this.element(a)
     }

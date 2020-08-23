@@ -64,7 +64,7 @@ export default declareComponent("site", class extends Component {
       header.updateSelectedLink(section)
     }, (scrollBarWidth) => {
       navs.css({width: `calc(100% - ${scrollBarWidth}px)`})
-    }, (prog) => {
+    }, (prog, userInited) => {
       if (lastScrollProg > topLimit) {
         if (prog <= topLimit) {
           header.onTop()
@@ -74,25 +74,27 @@ export default declareComponent("site", class extends Component {
         header.notTop()
       }
 
-      if (currentlyShowingLowerNav) {
-        if (prog > lastScrollProg) {
-        
-          scrollTrendUpCounter = 0
-          scrollTrendDownCounter++
-          if (scrollTrendDownCounter >= scrollTrendActivationCount) {
-            lowerNav.minimize()
+
+      console.log(userInited)
+      if (userInited) {
+        if (currentlyShowingLowerNav) {
+          if (prog > lastScrollProg) {
+          
+            scrollTrendUpCounter = 0
+            scrollTrendDownCounter++
+            if (scrollTrendDownCounter >= scrollTrendActivationCount) {
+              lowerNav.minimize()
+            }
           }
-        }
-        else {
-          scrollTrendDownCounter = 0
-          scrollTrendUpCounter++
-          if (scrollTrendUpCounter >= scrollTrendActivationCount) {
-            lowerNav.maximize()
+          else {
+            scrollTrendDownCounter = 0
+            scrollTrendUpCounter++
+            if (scrollTrendUpCounter >= scrollTrendActivationCount) {
+              lowerNav.maximize()
+            }
           }
         }
       }
-      
-      
 
       lastScrollProg = prog
     })

@@ -21,7 +21,6 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     super()
     //@ts-ignore
     this.sectionIndex = sectionIndex instanceof Promise ? sectionIndex.then((sectionIndex) => this.prepSectionIndex(sectionIndex)) : this.prepSectionIndex(sectionIndex)
-
   }
 
   private prepSectionIndex(sectionIndex: any): ResourcesMap {
@@ -59,7 +58,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         let scrollAnimation = this.inScrollAnimation = Symbol()
         this.currentlyActiveSectionName = domain
         if (this.sectionChangeCallback) this.sectionChangeCallback(domain)
-        this.dontPropergateScrollUpdates = true
+        this.userInitedScrollEvent = false
 
         let elem = await sectionIndex.get(domain) as HTMLElement
         if (elem !== undefined) {
@@ -72,8 +71,11 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             easing: new WaapiEasing("ease").function
 
           })
-          this.dontPropergateScrollUpdates = false
-          if (scrollAnimation === this.inScrollAnimation) this.inScrollAnimation = undefined
+          
+          if (scrollAnimation === this.inScrollAnimation) {
+            this.inScrollAnimation = undefined
+            this.userInitedScrollEvent = true
+          }
         }
         else {
           this.setPage(null)
@@ -123,7 +125,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             if (this.currentlyActiveSectionName !== undefined) domain.set(name, this.domainLevel, false)
             this.currentlyActiveSectionName = name
             if (currentlyActiveSectionElem !== elem) {
-              currentlyActiveSectionElem.deactivate();
+              currentlyActiveSectionElem.deactivate()
               elem.activate()
               currentlyActiveSectionElem = elem
             }

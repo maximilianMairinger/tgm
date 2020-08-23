@@ -3,7 +3,9 @@ import * as domain from "./../../../../lib/domain"
 import scrollTo from "animated-scroll-to";
 import WaapiEasing from "waapi-easing";
 import { ResourcesMap } from "../../../../lib/lazyLoad";
-import PageSection from "./_lazySectionedPage/lazySectionedPage";
+import LazySectionedPage from "./_lazySectionedPage/lazySectionedPage";
+import PageSection from "../../_pageSection/pageSection";
+import { EventListener } from "extended-dom";
 
 const padding = -70
 
@@ -41,12 +43,14 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     return map
   }
 
-  private observer: IntersectionObserver
+  private mainIntersectionObserver: IntersectionObserver
   private currentlyActiveSectionName: string
   private intersectingIndex: Element[] = []
   async initialActivationCallback() {
     //@ts-ignore
     let sectionIndex: ResourcesMap = await this.sectionIndex
+
+
     this.domainSubscription = domain.get(this.domainLevel, (domain: string) => {
       return new Promise<boolean>(async (res) => {
         //@ts-ignore
@@ -55,6 +59,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         let scrollAnimation = this.inScrollAnimation = Symbol()
         this.currentlyActiveSectionName = domain
         if (this.sectionChangeCallback) this.sectionChangeCallback(domain)
+        this.dontPropergateScrollUpdates = true
 
         let elem = await sectionIndex.get(domain) as HTMLElement
         if (elem !== undefined) {
@@ -67,6 +72,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             easing: new WaapiEasing("ease").function
 
           })
+          this.dontPropergateScrollUpdates = false
           if (scrollAnimation === this.inScrollAnimation) this.inScrollAnimation = undefined
         }
         else {
@@ -78,10 +84,11 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
      
     }, false, sectionIndex.entries().next().value[0])
 
-
+    
+    let currentlyActiveSectionElem = await sectionIndex.get(this.domainSubscription.domain) as any as PageSection
 
     let globalToken: Symbol
-    this.observer = new IntersectionObserver(async (c) => {
+    this.mainIntersectionObserver = new IntersectionObserver(async (c) => {
       
       c.ea((q) => {
         if (q.isIntersecting) { 
@@ -103,7 +110,8 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         }
       })
 
-      let elem = this.intersectingIndex.first as PageSection
+      let elem = this.intersectingIndex.first as LazySectionedPage
+
   
       if (!this.inScrollAnimation) {
         let myToken = Symbol("Token")
@@ -114,6 +122,11 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             if (this.sectionChangeCallback) this.sectionChangeCallback(name)
             if (this.currentlyActiveSectionName !== undefined) domain.set(name, this.domainLevel, false)
             this.currentlyActiveSectionName = name
+            if (currentlyActiveSectionElem !== elem) {
+              currentlyActiveSectionElem.deactivate();
+              elem.activate()
+              currentlyActiveSectionElem = elem
+            }
           }
         })
       }
@@ -121,7 +134,52 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       threshold: 0,
       rootMargin: "-33.333%"
     })
+
+
+
+    this.elementBody.on("scroll", () => {
+      if (currentlyActiveSectionElem.scrollProgressCallback) currentlyActiveSectionElem.scrollProgressCallback(this.elementBody.scrollTop - currentlyActiveSectionElem.offsetTop)
+    })
+
+    if (currentlyActiveSectionElem === undefined) return false
+    currentlyActiveSectionElem.activate()
   }
+
+  private customIntersectionObserver: Map<HTMLElement, EventListener> = new Map
+
+  public async addIntersectionListener(obsElem: HTMLElement, cb: (section: PageSection) => void, threshold: number = .5) {
+
+    let lastHit: PageSection
+    let sectionIndex = await this.sectionIndex as any
+
+    let f = async () => {
+      let obs = obsElem.getBoundingClientRect();
+      let ajustedHeight = obs.height * threshold
+      let upperHit = obs.top + ajustedHeight
+      let lowerHit = obs.bottom - ajustedHeight
+      sectionIndex.forEach(async (e: any) => {
+        let elem = await e as PageSection
+        let el = elem.getBoundingClientRect()
+
+        
+        if (el.top <= upperHit && el.bottom >= lowerHit) {
+          if (lastHit !== elem) {
+            cb(elem)
+            lastHit = elem
+          }
+        }
+      })
+    }
+    this.customIntersectionObserver.set(obsElem, new EventListener(this.elementBody, "scroll", f, this.active))
+    f()
+  }
+
+  public removeIntersectionListener(obsElem: HTMLElement) {
+    this.customIntersectionObserver.get(obsElem).deactivate()
+    this.customIntersectionObserver.delete(obsElem)
+  }
+
+  
 
 
   private domainSubscription: domain.DomainSubscription
@@ -145,14 +203,16 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
           
 
       }
-      sectionIndex.forEach(async (elem) => {
-        this.observer.observe(await elem)
+      sectionIndex.forEach(async (elem: any) => {
+        elem = await elem
+        this.mainIntersectionObserver.observe(elem)
       })
     }
     else {
       this.intersectingIndex.clear()
-      sectionIndex.forEach(async (elem) => {
-        this.observer.unobserve(await elem)
+      sectionIndex.forEach(async (elem: any) => {
+        elem = await elem
+        this.mainIntersectionObserver.unobserve(elem)
       })
       delete this.currentlyActiveSectionName
     }

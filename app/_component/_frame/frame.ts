@@ -1,11 +1,12 @@
 import Component from "./../component";
+import { Theme } from "../_themeAble/themeAble";
 
 export default abstract class Frame extends Component {
   public readonly active: boolean = false;
   public readonly initiallyActivated = false
   public domainLevel?: number
-  constructor(body?: HTMLElement) {
-    super(body);
+  constructor() {
+    super()
   }
   public activate(): Promise<boolean> {
     return this.vate(true)
@@ -38,4 +39,8 @@ export default abstract class Frame extends Component {
   protected activationCallback?(active: boolean): boolean | void | Promise<boolean | void>
   protected initialActivationCallback?(): boolean | void | Promise<boolean | void>
   protected loadedCallback?(): boolean | void | Promise<boolean | void>
+  public dontPropergateScrollUpdates = false
+  public addIntersectionListener?(root: HTMLElement, cb: Function, threshold?: number, rootMargin?: string): void
+  public removeIntersectionListener?(root: HTMLElement): void
+  public theme: Theme
 }

@@ -36,13 +36,14 @@ text-container {
   position: absolute;
   top: 0;
   transition: .5s;
+  min-height: 650px;
 }
 
-c-textblob {
+text-container > c-textblob {
   display: block;
   position: absolute;
   left: 100px;
-  transition: .5s;
+  transition: top .5s;
 }
 
 card-wrapper {
@@ -59,17 +60,19 @@ card-container {
   margin-top: max(calc(100vh - 145px), 600px);
   /* This padding quickfix is needed because otherwise the shadow would be cut out from the top */
   padding-top: 20px;
-  margin-bottom: 50px;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
   flex-wrap: wrap;
   justify-content: center;
 
   /* Only important on mobile */
   overflow-x: auto;
   overflow-y: visible;
+/* 
+  scroll-snap-type: x proximity; */
 }
 
 card-container {
-  overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
@@ -78,9 +81,19 @@ card-container::-webkit-scrollbar { /* WebKit */
   height: 0;
 }
 
+icon-card-wrapper {
+  display: block;
+  transform: translateY(7px);
 
+  margin: 0 28px 56px 28px;
+  width: calc(6% + 180px);
+  min-width: 230px;
+  height: calc(4vw + 110px);
+  min-height: 160px;
+}
 
 c-icon-card {
+  display: block;
   margin: 0 28px 56px 28px;
   width: calc(6% + 180px);
   min-width: 230px;
@@ -88,7 +101,34 @@ c-icon-card {
   min-height: 160px;
 
   background: #FEFBF9;
+
+  /* scroll-snap-align: start;
+  scroll-margin-left: 40px; */
 }
+
+icon-card-wrapper > c-icon-card {
+  margin: 0 !important;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+tagesschule-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: absolute;
+  top: max(67vh, 450px);
+}
+
+tagesschule-container > c-textblob {
+  opacity: 0;
+  transform: translateY(-20px);
+  max-width: 100%;
+  display: none;
+}
+
 
 
 
@@ -104,6 +144,10 @@ c-icon-card {
     margin-left: 40px;
   }
 
+  c-icon-card {
+    margin-bottom: 0;
+  }
+
   
   card-container {
     flex-wrap: nowrap;
@@ -111,10 +155,9 @@ c-icon-card {
     margin-left: 0;
     margin-right: 0;
     width: 100%;
-    padding-right: 40px;
   }
 
-  c-icon-card:last-of-type:after {
+  /* c-icon-card:last-of-type:after {
     content: "";
     display: block;
     width: 40px;
@@ -122,14 +165,14 @@ c-icon-card {
     left: 100%;
     position: relative;
     float: left;
-  }
+  } */
 }
 
 
 
 
 @media only screen and (max-width: 900px) {
-  c-textblob {
+  text-container > c-textblob {
     left: unset;
   }
   text-container {
@@ -170,7 +213,6 @@ c-icon-card {
   }
 }
 
-/* todo */
 
 @media only screen and (max-width: 400px) {
 
@@ -183,9 +225,9 @@ c-icon-card {
     justify-content: left;
   }
 
-  c-textblob {
-    left: 40px;
-    max-width: calc(100% - 40px);
+  text-container > c-textblob {
+    left: 8vw;
+    max-width: calc(100% - 8vw);
   }
 
 

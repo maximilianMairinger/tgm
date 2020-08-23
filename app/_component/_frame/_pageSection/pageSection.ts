@@ -6,6 +6,9 @@ export default abstract class PageSection extends Frame {
     super()
 
   }
+
+  public scrollProgressCallback?(relativeProgress: number): void
+
   stl() {
     return super.stl() + require("./pageSection.css").toString()
   }

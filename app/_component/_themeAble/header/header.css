@@ -4,12 +4,64 @@ component-body {
   user-select: none;
 }
 
+blurry-background {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: opacity .3s;
+  border-bottom: 1px solid rgba(0,0,0,0.16);
+  opacity: 0;
+
+  /* Only when browser does not support blur */
+  background-color: rgba(var(--primary-background-color-raw), .9);
+
+  
+}
+
+
+blurry-background.blurry {
+  opacity: 1;
+}
+
+/* if backdrop support: very transparent and blurred */
+@supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
+  blurry-background {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+
+    background-color: unset;
+  }
+}
+
+c-tgm-logo {
+  transition: .25s;
+}
+
+
+slidy-underline, c-link {
+  transition: background-color .25s, color .25s;
+}
+
+
 left-content {
   position: absolute;
   left: 100px;
   display: flex;
   align-items: center;
 }
+
+left-content > * {
+  pointer-events: all;
+}
+
+right-content > * {
+  pointer-events: all;
+}
+
+
 
 left-content > c-tgm-logo {
   height: 36px;
@@ -33,8 +85,9 @@ right-content {
   display: flex;
   align-items: center;
   height: 100%;
-  width: calc(100% - 100px)
+  width: calc(100% - 100px);
 }
+
 
 link-animation-wrapper {
   display: inline-block;  
@@ -67,7 +120,7 @@ slidy-underline {
   background: var(--strong-text-color);
   width: 70px;
   height: 2px;
-  transform: translateY(15px);
+  transform: translateY(13px);
   border-radius: 2px;
   opacity: 0;
 }

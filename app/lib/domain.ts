@@ -12,33 +12,33 @@ const maxCharactersInTitle = 20
 const toMuchSubtitlesTruncate = "..."
 const argData = "internal";
 
+
 const titleElement = document.querySelector("title")
 
+const httpString = "http://"
+const httpsString = "https://"
 export const dirString = "/";
-export let domainIndex: string[] = [];
+const domIndex = [] as string[];
+export const domainIndex = domIndex as Readonly<typeof domIndex>
 
-//First capital
-function fc(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
 
 function getCurrentSubDomainPath() {
   return decodeUri(document.location.pathname) as string
 }
 
-function parseUrlToDomainIndex() {
+function parselocalUrlToDomainIndex() {
   let currentDomain = getCurrentSubDomainPath()
-  domainIndex = getCurrentSubDomainPath().split(dirString)
-  domainIndex.remove("");
+  domIndex.set(getCurrentSubDomainPath().split(dirString))
+  domIndex.remove("");
 
   let endDomain = !currentDomain.endsWith("/") ? currentDomain + dirString : currentDomain
   
   history.replaceState(argData, updateTitle(), endDomain)
 }
-parseUrlToDomainIndex()
+parselocalUrlToDomainIndex()
 
 
-function renderSubtitle(myDomainIndex = domainIndex) {
+function renderSubtitle(myDomainIndex = domIndex) {
   return myDomainIndex.Replace((k) => {
     try {
       return lang.links[k].get()
@@ -56,7 +56,7 @@ function updateTitle() {
   let originalSubtitle: string, subtitle: string
   originalSubtitle = subtitle = renderSubtitle()
 
-  let myDomainIndex = domainIndex.clone()
+  let myDomainIndex = domIndex.clone()
   let tooMuchToTitles = false
   while(subtitle.length > maxCharactersInTitle && myDomainIndex.length > 1) {
     myDomainIndex.rmI(0)
@@ -76,8 +76,12 @@ function updateTitle() {
   return title + originalSubtitle
 }
 
+export function parseDomainIndexToDomain(domainIndex: Readonly<string[]>) {
+  return domainIndex.join(dirString)
+}
 
-function parseDomainToDomainIndex(domain: string, level: number) {
+
+export function parseDomainToDomainIndex(domainIndex: string[], domain: string, level: number) {
 
   let originalLength = domainIndex.length;
   if (originalLength < level || level < 0) {
@@ -106,11 +110,12 @@ function parseDomainToDomainIndex(domain: string, level: number) {
 let currentDomainSet: Promise<void>
 let inDomainSet = false
 export async function set(subdomain: string, level: number = 0, push: boolean = true) {
+  initialGet = false
   while (inDomainSet) {
     await currentDomainSet
   }
 
-  let domainIndexRollback = domainIndex.clone()
+  let domainIndexRollback = domIndex.clone()
 
   let res: Function
   inDomainSet = true
@@ -118,7 +123,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     res = r
   })
 
-  let anyChange = parseDomainToDomainIndex(subdomain, level)
+  let anyChange = parseDomainToDomainIndex(domIndex, subdomain, level)
   if (!anyChange) {
     inDomainSet = false
     res()
@@ -127,7 +132,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
 
 
 
-  let endDomain = dirString + domainIndex.join(dirString)
+  let endDomain = dirString + parseDomainIndexToDomain(domIndex)
   if (!endDomain.endsWith(dirString)) endDomain += dirString
 
   
@@ -140,11 +145,11 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     
     if (recall) {
       let { domain, domainLevel } = recall
-      parseDomainToDomainIndex(domain, domainLevel)
-      let endDomain = domainIndex.join(dirString)
+      parseDomainToDomainIndex(domIndex, domain, domainLevel)
+      let endDomain = domIndex.join(dirString)
 
-      domainIndex.set(domainIndexRollback)
-      set(endDomain, 0)
+      domIndex.set(domainIndexRollback)
+      set(endDomain, 0, true)
     }
     else {
       history.pushState(argData, updateTitle(), endDomain)
@@ -182,7 +187,7 @@ export class DomainSubscription {
 
 }
 
-
+let initialGet = true
 type DomainFragment = string
 export function get(domainLevel: number, subscription: (domainFragment: DomainFragment) => (boolean | Promise<void> | Promise<boolean> | void), onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainSubscription
 export function get(domainLevel: number, subscription: undefined | null, onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainFragment
@@ -190,21 +195,22 @@ export function get(domainLevel: number, subscription?: undefined, onlyIntereste
 export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => (boolean |  Promise<void> | Promise<boolean> | void), onlyInterestedInLevel: boolean = false, defaultDomain = ""): DomainFragment | DomainSubscription {
   let calcCurrentDomain = (() => {
     if (!onlyInterestedInLevel) {
-      let myDomainIndex = domainIndex.clone()
+      let myDomainIndex = domIndex.clone()
       for (let i = 0; i < domainLevel; i++) {
         myDomainIndex.shift() 
       }
   
-      let joined = myDomainIndex.join(dirString)
+      let joined = parseDomainIndexToDomain(myDomainIndex)
       return joined === "" ? defaultDomain : joined
     }
     else {
-      return domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
+      return domIndex[domainLevel] === undefined ? defaultDomain : domIndex[domainLevel]
     }
   })
   let currentDomain = calcCurrentDomain();
   (() => {
-    let joined = domainIndex.join(dirString)
+    if (!initialGet) return
+    let joined = parseDomainIndexToDomain(domIndex)
     let domain = joined === "" ? defaultDomain : joined
 
     if (joined !== domain) {
@@ -221,11 +227,11 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
     let f = async () => {
       
       if (!onlyInterestedInLevel) {
-        let myDomainIndex = domainIndex.clone()
+        let myDomainIndex = domIndex.clone()
         for (let i = 0; i < domainLevel; i++) {
           myDomainIndex.shift() 
         }
-        let joined = myDomainIndex.join(dirString)
+        let joined = parseDomainIndexToDomain(myDomainIndex)
         let domain = joined === "" ? defaultDomain : joined
         if (lastDomain !== domain) {
           let res = await subscription(domain)
@@ -239,14 +245,14 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
 
       }
       else {
-        let domain = domainIndex[domainLevel] === undefined ? defaultDomain : domainIndex[domainLevel]
+        let domain = domIndex[domainLevel] === undefined ? defaultDomain : domIndex[domainLevel]
         if (domain !== lastDomain) {
           let res = await subscription(domain)
           if (res === undefined) res = true
           if (res) lastDomain = domain
 
         }
-        if (domainIndex[domainLevel] !== domain) {
+        if (domIndex[domainLevel] !== domain) {
           return {domain, domainLevel}
         }
 
@@ -295,7 +301,7 @@ window.onpopstate = async function(e) {
 
 
 
-  parseUrlToDomainIndex()
+  parselocalUrlToDomainIndex()
 
 
 
@@ -316,16 +322,20 @@ window.domain = {set, get}
 
 
 
-export function linkMeta(link: string) {
-  while (link.startsWith(dirString)) {
-    link = link.substr(dirString.length)
+export function linkMeta(link: string, domainLevel: number = 0) {
+  let myDomainIndex = domIndex.clone()
+  parseDomainToDomainIndex(myDomainIndex, link, domainLevel)
+  let isOnOrigin = getBaseUrl(link) === getBaseUrl()
+  let href: string
+  if (isOnOrigin) href = dirString + parseDomainIndexToDomain(myDomainIndex) + dirString
+  else {
+    href = link.startsWith(httpsString) || link.startsWith(httpString) ? link : httpsString + link
+    if (!href.endsWith(dirString)) href += dirString
   }
-  let domainIndexClone = domainIndex.clone()  
-  domainIndexClone.splice(this.domainLevel)
-  domainIndexClone.add(...link.split(dirString))
+
   return {
     link,
-    isOnOrigin: getBaseUrl(link) === getBaseUrl(),
-    href: dirString + domainIndexClone.join(dirString)
+    isOnOrigin,
+    href
   }
 }

@@ -75,7 +75,7 @@ export default abstract class SectionTextblob extends Text {
     }
 
     stl() {
-        return require("./sectionTextblob.css").toString()
+        return super.stl() + require("./sectionTextblob.css").toString()
     }
 
     pug() {

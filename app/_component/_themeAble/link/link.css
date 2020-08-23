@@ -1,11 +1,17 @@
 :host {
-  
   color: var(--strong-text-color);
   user-select: none;
 }
 
 :host(.active) {
   font-weight: bold;
+}
+
+:host(.pressed) a {
+  color: var(--weaker-text-color);
+}
+
+:host a {
   cursor: pointer;
 }
 
@@ -13,12 +19,39 @@ slot {
   font-weight: inherit;
   cursor: inherit;
   display: inline-block;
-  text-decoration: inherit;
 }
 
 a {
   color: inherit;
-  text-decoration: inherit;
   font-weight: inherit;
   cursor: inherit;
+  position: relative;
+  transition: color .15s;
+}
+
+slidy-underline-wrapper {
+  display: block;
+  position: absolute;
+  bottom: -.2em;
+  border-radius: 2px;
+  height: 2px;
+  overflow: hidden;
+  width: 100%;
+  pointer-events: none;
+}
+
+slidy-underline {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  background: var(--strong-text-color);
+  border-radius: 2px;
+  height: 2px;
+}
+
+link-body {
+  width: fit-content;
+  display: block;
+  height: fit-content;
+  position: relative;
 }

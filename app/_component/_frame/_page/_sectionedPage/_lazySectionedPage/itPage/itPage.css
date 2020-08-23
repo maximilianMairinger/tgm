@@ -1,3 +1,12 @@
+h1 {
+  margin: 100px;
+  color: white;
+}
+
+component-body {
+  background-color: black;
+}
+
 component-body > *:not(h1) {
   display: block;
   height: 80%;

@@ -1,0 +1,3 @@
+:host > svg path {
+  transition: .4s fill;
+}

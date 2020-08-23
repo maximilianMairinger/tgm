@@ -1,4 +1,4 @@
-import ThemAble, { Theme } from "../themeAble"
+import ThemeAble, { Theme } from "../themeAble"
 import declareComponent from "../../../lib/declareComponent"
 import "../_icon/tgmLogo/tgmLogo"
 import "../../_button/button"
@@ -9,23 +9,77 @@ import delay from "delay"
 import { domainIndex } from "./../../../lib/domain"
 import "./../_icon/arrow/arrow"
 import ArrowIcon from "./../_icon/arrow/arrow"
+import Icon from "../_icon/icon"
 
 
 const linkAnimationOffset = 170
 const linkFadeInDuration = 800
 
+const notTopClassName = "blurry"
 
-export default declareComponent("header", class Header extends ThemAble {
+const slidyLineStretchFactor = .7
+const slidyLineStretchOffset = slidyLineStretchFactor / 2
+const slidyLineStretchDuration = slidyLineStretchFactor * 1000
+
+
+export default declareComponent("header", class Header extends ThemeAble {
   private pathDisplayElem = this.q("path-display")
   private linkContainerElem = this.q("right-content")
+  private leftContent = this.q("left-content")
   private underlineElem = this.q("slidy-underline")
-  private tgmLogoIcon = this.q("c-tgm-logo")
-  private backLinkComponents: ElementList<ThemAble> = new ElementList()
+  private background = this.q("blurry-background")
+  private tgmLogoIcon = this.q("c-tgm-logo") as Icon
+  // private backLinkComponents: ElementList<ThemAble> = new ElementList()
 
-  constructor() { 
+  constructor(public linksShownChangeCallback?: (linksShown: boolean, init: boolean, func: any) => void) { 
     super()
     
-    
+    this.tgmLogoIcon.passiveTheme()
+    window.on("resize", this.resizeHandler.bind(this))
+  }
+
+
+  private isLinkContainerCurrentlyHidden: boolean
+  private initialResize = true
+  private resizeHandler(q: {width: number}) {
+    if (this.currentLinkElems) {
+      
+      let linksLeft: number = !this.currentLinkElems.empty ? this.currentLinkElems.first.getBoundingClientRect().left : q.width - 200
+      let logo = this.pathDisplayElem.getBoundingClientRect()
+
+      let margin = 100 + (this.isLinkContainerCurrentlyHidden ? 80 : 0)
+      if (linksLeft < logo.right + margin) {
+        if (!this.isLinkContainerCurrentlyHidden) {
+          this.isLinkContainerCurrentlyHidden = true
+          let func: "css" | "anim" = this.initialResize ? "css" : "anim"
+          this.linkContainerElem[func as any]({opacity: 0})
+          this.leftContent[func as any]({left: "8vw"})
+          if (this.linksShownChangeCallback) this.linksShownChangeCallback(false, this.initialResize, func)
+          this.initialResize = false
+        }
+      }
+      else {
+        if (this.isLinkContainerCurrentlyHidden || this.isLinkContainerCurrentlyHidden === undefined) {
+          this.isLinkContainerCurrentlyHidden = false
+          let func: "css" | "anim" = this.initialResize ? "css" : "anim"
+          this.linkContainerElem[func as any]({opacity: 1})
+          this.leftContent[func as any]({left: 100})
+          if (this.linksShownChangeCallback) this.linksShownChangeCallback(true, this.initialResize, func)
+          this.initialResize = false
+        }
+      }
+    }
+  }
+
+
+  public onTop() {
+    this.css("pointerEvents", "none")
+    this.background.removeClass(notTopClassName)
+  }
+
+  public notTop() {
+    this.css("pointerEvents", "all")
+    this.background.addClass(notTopClassName)
   }
 
 
@@ -49,7 +103,7 @@ export default declareComponent("header", class Header extends ThemAble {
     for (let i = 0; i < domainLevel; i++) {
       const domainFragment = domainIndex[i]
 
-      this.pathDisplayElem.apd(new ArrowIcon(), new Link(lang.links[domainFragment], domainFragment, i))
+      this.pathDisplayElem.apd(new ArrowIcon().passiveTheme(), new Link(lang.links[domainFragment], domainFragment, i, true, false).passiveTheme())
 
     }
     await this.pathDisplayElem.anim({opacity: 1, translateX: .1}, 500)
@@ -73,7 +127,7 @@ export default declareComponent("header", class Header extends ThemAble {
     this.currentLinkContents = linkContents.clone()
     this.currentLinkElems = new ElementList()
     linkContents.ea((s) => {
-      this.currentLinkElems.add(new Link(lang.links[s], s, domainLevel))
+      this.currentLinkElems.add(new Link(lang.links[s], s, domainLevel, true, false))
     })
 
     let fadeReq = this.latestFadeRequest = Symbol()
@@ -130,7 +184,15 @@ export default declareComponent("header", class Header extends ThemAble {
 
 
     let currentLength = this.currentLinkElems.length
+    
+    this.currentLinkElems.ea((e) => {
+      e.passiveTheme()
+    })
     animationWrapper.apd(...this.currentLinkElems)
+    
+    this.resizeHandler({width: this.clientWidth})
+    if (this.currentLinkElems.empty) return
+    
     
     await Promise.all([
       underlineFadeAnim,
@@ -142,22 +204,17 @@ export default declareComponent("header", class Header extends ThemAble {
         }
 
         return Promise.all([
-          animationWrapper.anim({translateX: 0.1}, linkFadeInDuration + (currentLength-1) * linkAnimationOffset),
+          animationWrapper.anim({translateX: .1}, linkFadeInDuration + (currentLength-1) * linkAnimationOffset),
           this.currentLinkElems.anim({opacity: 1, translateX: .1}, linkFadeInDuration, linkAnimationOffset)
         ])
       })
     ])
 
-    
     this.inFadeInAnim = false
     res()
-  }
 
-  public theme(): Theme
-  public theme(to: Theme): void
-  public theme(to?: Theme): any {
-    this.currentLinkElems.Inner("theme", [to])
-    return super.theme(to)
+
+    
   }
 
   private resizeFn = () => {
@@ -200,13 +257,28 @@ export default declareComponent("header", class Header extends ThemAble {
     else {
       let index = this.currentLinkContents.indexOf(newSelected)
       let elem = this.currentLinkElems[index]
-      let bounds = elem.getBoundingClientRect()
+      let thisBounds = elem.getBoundingClientRect()
+      let lastBounds = this.lastSelectedElem.getBoundingClientRect()
       
       if (this.lastSelectedElem) this.lastSelectedElem.css({fontWeight: "normal"})
 
       this.lastSelectedElem = elem
       elem.css({fontWeight: "bold"})
-      await this.underlineElem.anim({translateX: bounds.left, width: bounds.width}, 500)
+
+      if (thisBounds.left < lastBounds.left) {
+        let width = (lastBounds.right - thisBounds.left) * slidyLineStretchFactor
+        await this.underlineElem.anim([
+          {translateX: thisBounds.left, width, offset: 1 - slidyLineStretchOffset}, 
+          {translateX: thisBounds.left, width: thisBounds.width}
+        ], slidyLineStretchDuration)  
+      }
+      else {
+        let width = (thisBounds.right - lastBounds.left) * slidyLineStretchFactor
+        await this.underlineElem.anim([
+          {translateX: lastBounds.left, width, offset: slidyLineStretchOffset}, 
+          {translateX: thisBounds.left, width: thisBounds.width}
+        ], slidyLineStretchDuration)
+      }
     }
   
   }
@@ -214,11 +286,10 @@ export default declareComponent("header", class Header extends ThemAble {
   
 
   stl() {
-    return require("./header.css").toString()
+    return super.stl() + require("./header.css").toString()
   }
   pug() {
     return require("./header.pug").default
   }
 })
 
-// const totalUnderlineOverflow = 5

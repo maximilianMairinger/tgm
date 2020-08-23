@@ -1,6 +1,6 @@
 :host {
     display: inline-block;
-    width: 100%;
+    width: fit-content;
 }
 
 text-blob {
@@ -94,15 +94,12 @@ text-box content-text:not(:empty){
     margin-top: 14px;
 }
 
-text-box a.link {
+text-box c-link.link {
     font-weight: bold;
     color: var(--strong-text-color);
     text-decoration: none;
 }
 
-text-box a.link:not(:empty){
-    margin-top: 14px;
-}
 
 @media only screen and (max-width: 768px) {
     text-blob {

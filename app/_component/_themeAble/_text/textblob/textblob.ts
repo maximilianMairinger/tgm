@@ -1,5 +1,8 @@
 import Text from "../text";
 import declareComponent from "../../../../lib/declareComponent";
+import {Theme} from "../../themeAble";
+import "./../../link/link"
+import Link from "./../../link/link"
 
 
 export type MediaQuerySize = { min: number, max: number }
@@ -128,20 +131,26 @@ export default class Textblob extends Text {
   linktext(): string
   linktext(linktext: string): void
   linktext(linktext?: string): any {
-    return this.link.html(linktext)
+    if (linktext) {
+      this.link.css({marginTop: 14})
+    }
+    return this.link.content(linktext)
   }
 
-  private link = this.q("a.link") as unknown as HTMLAnchorElement
+  private link = (this.q("c-link.link") as unknown as Link).passiveTheme()
   private linkHref: string
   linkhref(): string
   linkhref(linkhref: string): void
   linkhref(linkhref?: string) {
-    if (linkhref) this.linkHref = this.link.href = linkhref;
+    if (linkhref) {
+      this.linkHref = linkhref;
+      this.link.link(linkhref)
+    }
     else return this.linkHref
   }
 
   stl() {
-    return require("./textblob.css").toString()
+    return super.stl() + require("./textblob.css").toString()
   }
 
   pug() {

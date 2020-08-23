@@ -4,6 +4,8 @@ component-body {
 }
 
 component-body > * {
-  display: inline-block;
+  display: block;
   width: 100%;
+  position: relative;
+  float: left;
 }

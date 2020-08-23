@@ -75,7 +75,6 @@ export default declareComponent("site", class extends Component {
       }
 
 
-      console.log(userInited)
       if (userInited) {
         if (currentlyShowingLowerNav) {
           if (prog > lastScrollProg) {

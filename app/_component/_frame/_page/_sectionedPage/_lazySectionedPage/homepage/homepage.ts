@@ -5,11 +5,17 @@ import VersuchanstaltSection from "../../../../_pageSection/versuchsanstaltSecti
 import AbendschuleSection from "../../../../_pageSection/abendschuleSection/abendschuleSection"
 import LandingSection from "../../../../_pageSection/landingSection/landingSection"
 import NewsContactSection from "../../../../_pageSection/newsContactSection/newsContactSection"
+import { ScrollProgressAlias } from "../../sectionedPage"
 
 
 export default declareComponent("home-page", class Homepage extends LazySectionedPage {
   constructor(setPage: (domain: string) => void, sectionChangeCallback?: (section: string) => void, domainLevel = 1) {
     
+    let newsToContactScrollProgressIndex = new ScrollProgressAlias({
+      0: "news",
+      900: "kontakt"
+    })
+
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("tagesschule", 1, (landingSection: typeof LandingSection) =>
@@ -23,15 +29,17 @@ export default declareComponent("home-page", class Homepage extends LazySectione
       },
       {
         key: new Import("abendschule", 1, (_AbendschuleSection: typeof AbendschuleSection) =>
-            new _AbendschuleSection()
+          new _AbendschuleSection()
         ), val: () => import(/* webpackChunkName: "AbendschuleSection" */"../../../../_pageSection/abendschuleSection/abendschuleSection")
       },
       {
-        key: new Import("news", 1, (_NewsContactSection: typeof NewsContactSection) =>
-            new _NewsContactSection()
+        key: new Import("newsKontakt", 1, (_NewsContactSection: typeof NewsContactSection) =>
+          new _NewsContactSection()
         ), val: () => import(/* webpackChunkName: "newsContactSection" */"../../../../_pageSection/newsContactSection/newsContactSection")
       }
-    ), domainLevel, setPage, sectionChangeCallback)
+    ), domainLevel, setPage, sectionChangeCallback, {
+      newsKontakt: newsToContactScrollProgressIndex
+    })
   }
 
   stl() {

@@ -6,8 +6,111 @@ import { ResourcesMap } from "../../../../lib/lazyLoad";
 import LazySectionedPage from "./_lazySectionedPage/lazySectionedPage";
 import PageSection from "../../_pageSection/pageSection";
 import { EventListener } from "extended-dom";
+import { Data, DataCollection } from "josm";
 
 const padding = -70
+
+
+
+export type SingleAlias = AliasData | string | string[]
+
+
+export class AliasData extends Data<string[]> {
+  constructor(alias: string | string[]) {
+    super(alias instanceof Array ? alias : [alias])
+  }
+
+  public set(alias: string | string[]) {
+    return super.set(alias instanceof Array ? alias : [alias])
+  }
+}
+
+
+export class ScrollProgressAlias {
+  public readonly progress: Data<number>
+  public readonly aliases: AliasData
+  constructor(progress: number | Data<number>, alias: SingleAlias) {
+    this.progress = progress instanceof Data ? progress : new Data(progress)
+    this.aliases = alias instanceof AliasData ? alias : new AliasData(alias)
+  }
+}
+
+
+
+
+
+export class ScrollProgressAliasIndex<Root extends string = string> {
+  public readonly root: Data<Root>
+  public readonly scrollPorgressAliases: Readonly<ScrollProgressAlias[]>
+
+  constructor(root: Root | Data<Root>, scrollProgressAlias: ScrollProgressAlias | Readonly<ScrollProgressAlias[]>) {
+    this.root = root instanceof Data ? root : new Data(root)
+    this.scrollPorgressAliases = scrollProgressAlias instanceof Array ? scrollProgressAlias : [scrollProgressAlias]
+  }
+
+  private buildReverseAlias(aliasReverses: ReverseAliasIndex) {
+    for (let alias of this.scrollPorgressAliases) {
+      
+      let aliasesLength = 0
+
+      new DataCollection(alias.progress, alias.aliases, this.root).get((progress, aliases: string[], root) => {
+        if (aliasesLength !== aliases.length)  {
+          aliases.ea((alias) => {
+            aliasReverses[alias] = new ScrollProgressAliasIndex.Reverse(progress, root)
+          })
+        }
+        else {
+          aliases.ea((alias) => {
+            (aliasReverses[alias] as any).atScrollProgress = progress;
+            (aliasReverses[alias] as any).root = root;
+          })
+        }
+      })
+      
+    }
+  }
+
+  public static Reverse = class {
+    constructor(public readonly atScrollProgress: number, public readonly root: string) {}
+  }
+}
+
+export class SimpleAlias<Root extends string = string> {
+  public readonly root: Data<Root>
+
+  constructor(root: Root | Data<Root>, public readonly aliases: AliasData) {
+    this.root = root instanceof Data ? root : new Data(root)
+  }
+
+
+  private buildReverseAlias(aliasReverses: ReverseAliasIndex) {
+
+    let aliasesLength = 0
+
+    new DataCollection(this.aliases, this.root).get((aliases: string[], root) => {
+      if (aliasesLength !== aliases.length) {
+        aliases.ea((alias) => {
+          aliasReverses[alias] = new SimpleAlias.Reverse(root)
+        })
+      }
+      else {
+        aliases.ea((alias) => {
+          (aliasReverses[alias] as any).root = root
+        })
+      }
+    })
+  }
+
+  
+  public static Reverse = class {
+    constructor(public readonly alias: string) {}
+  }
+}
+
+type ReverseAliasUnion = (InstanceType<(typeof ScrollProgressAliasIndex)["Reverse"]> | InstanceType<(typeof SimpleAlias)["Reverse"]>)
+type ReverseAliasIndex = {[root: string]: ReverseAliasUnion}
+
+export type Alias = ScrollProgressAliasIndex | SimpleAlias
 
 
 type SectionIndex = {[name in Name]: HTMLElement | QuerySelector}
@@ -15,31 +118,74 @@ type Name = string
 type FullSectionIndex = ResourcesMap | SectionIndex | Promise<ResourcesMap | SectionIndex>
 export type QuerySelector = string
 export default abstract class SectionedPage<T extends FullSectionIndex> extends Page {
-  public readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
+  protected readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
+  public readonly sectionList: T extends Promise<any> ? Promise<DataCollection<string[][]>> : DataCollection<string[][]>
   private inScrollAnimation: Symbol
-  constructor(sectionIndex: T, public domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void) {
+  private reverseAliasIndex: ReverseAliasIndex = {}
+
+  constructor(sectionIndex: T, public domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void, private sectionTranslationIndex: any = {}) {
     super()
     //@ts-ignore
-    this.sectionIndex = sectionIndex instanceof Promise ? sectionIndex.then((sectionIndex) => this.prepSectionIndex(sectionIndex)) : this.prepSectionIndex(sectionIndex)
+
+    if (sectionIndex instanceof Promise) {
+      let resSectionIndex: Function
+      this.sectionIndex = new Promise((r) => {resSectionIndex = r}) as any
+
+      let resSectionList: Function
+      this.sectionList = new Promise((r) => {resSectionList = r}) as any
+
+      sectionIndex.then((sectionIndex) => {
+        let r = this.prepSectionIndex(sectionIndex)
+        resSectionIndex(r.sectionIndex)
+        resSectionList(r.sectionList)
+      })
+      
+    }
+    else {
+      let r = this.prepSectionIndex(sectionIndex)
+      this.sectionIndex = r.sectionIndex as any
+      this.sectionList = r.sectionList as any
+    }
   }
 
-  private prepSectionIndex(sectionIndex: any): ResourcesMap {
-    if (sectionIndex instanceof ResourcesMap) return sectionIndex
+  private prepSectionIndex(sectionIndex: any) {
+    let map: ResourcesMap
 
-    let map = new ResourcesMap()
-    for (let name in sectionIndex) {
-      let elem: any
-      if (!(sectionIndex[name] instanceof HTMLElement)) elem = this.q(sectionIndex[name] as any)
-      else elem = sectionIndex[name]
-
-      let prom = Promise.resolve(elem)
-      //@ts-ignore
-      prom.priorityThen = prom.then
-      //@ts-ignore
-      map.set(name, prom)
+    if (sectionIndex instanceof ResourcesMap) map = sectionIndex
+    else {
+      map = new ResourcesMap()
+      for (let name in sectionIndex) {
+        let elem: any
+        if (!(sectionIndex[name] instanceof HTMLElement)) elem = this.q(sectionIndex[name] as any)
+        else elem = sectionIndex[name]
+  
+        let prom = Promise.resolve(elem)
+        //@ts-ignore
+        prom.priorityThen = prom.then
+        //@ts-ignore
+        map.set(name, prom)
+      }
     }
 
-    return map
+    
+    let dataList: Data<string[]>[] = []
+    map.forEach((val, key) => {
+      if (this.sectionTranslationIndex[key]) {
+        let alias = this.sectionTranslationIndex[key] as Alias
+        if (alias instanceof SimpleAlias) {
+          dataList.add(alias.aliases)
+        }
+        else if (alias instanceof ScrollProgressAlias) {
+          dataList.add(alias.aliases)
+        }
+      }
+      else dataList.add(new Data([key]))
+    })
+
+    
+
+
+    return {sectionList: new DataCollection<string[][]>(...dataList), sectionIndex}
   }
 
   private mainIntersectionObserver: IntersectionObserver
@@ -52,6 +198,11 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     this.domainSubscription = domain.get(this.domainLevel, (domain: string) => {
       return new Promise<boolean>(async (res) => {
+        console.log("domain", domain)
+
+
+
+
         //@ts-ignore
         let sectionIndex: ResourcesMap = await this.sectionIndex
               
@@ -84,7 +235,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         }
       })
      
-    }, false, sectionIndex.entries().next().value[0])
+    }, true, sectionIndex.entries().next().value[0])
 
     
     let currentlyActiveSectionElem = await sectionIndex.get(this.domainSubscription.domain) as any as PageSection

@@ -30,6 +30,7 @@ export default abstract class Frame extends Component {
       if (acRes === undefined) acRes = true
       if (!acRes) res = false
     }
+    debugger
     return res
   }
   stl() {

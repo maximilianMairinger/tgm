@@ -36,7 +36,8 @@ export default abstract class LazySectionedPage extends SectionedPage<Promise<an
   }
 
   async initialActivationCallback() {
-    let init = domain.get(this.domainLevel)
+    debugger
+    let init = this.sectionAliasList.getRootOfAlias(domain.get(this.domainLevel))
     await this.resourceMap.get(init)
     
     return await super.initialActivationCallback()

@@ -79,7 +79,7 @@
     "extended-dom": "^3.4.2",
     "fast-decode-uri-component": "^1.0.1",
     "get-base-url": "^2.0.0",
-    "josm": "^1.1.6",
+    "josm": "^1.1.10",
     "slugify": "^1.4.0",
     "waapi-easing": "^1.0.1"
   }

@@ -61,7 +61,7 @@ export class ScrollProgressAliasIndex<Root extends string = string> {
         }
         else {
           aliases.ea((alias) => {
-            (aliasReverses[alias] as any).atScrollProgress = progress;
+            (aliasReverses[alias] as any).progress = progress;
             (aliasReverses[alias] as any).root = root;
           })
         }
@@ -71,7 +71,7 @@ export class ScrollProgressAliasIndex<Root extends string = string> {
   }
 
   public static Reverse = class {
-    constructor(public readonly atScrollProgress: number, public readonly root: string) {}
+    constructor(public readonly progress: number, public readonly root: string) {}
   }
 }
 
@@ -103,7 +103,7 @@ export class SimpleAlias<Root extends string = string> {
 
   
   public static Reverse = class {
-    constructor(public readonly alias: string) {}
+    constructor(public readonly root: string) {}
   }
 }
 
@@ -134,10 +134,12 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   protected readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
   public readonly sectionList: T extends Promise<any> ? Promise<DataCollection<string[][]>> : DataCollection<string[][]>
   private inScrollAnimation: Symbol
+  private reverseAliasIndex: ReverseAliasIndex = {}
 
   constructor(sectionIndex: T, public domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void, private sectionAliasList: AliasList = new AliasList()) {
-    super()
-    //@ts-ignore
+    super();
+
+    (sectionAliasList as any).Inner("buildReverseAlias", [this.reverseAliasIndex])
 
     if (sectionIndex instanceof Promise) {
       let resSectionIndex: Function
@@ -203,18 +205,26 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   private currentlyActiveSectionName: string
   private intersectingIndex: Element[] = []
   async initialActivationCallback() {
-    //@ts-ignore
-    let sectionIndex: ResourcesMap = await this.sectionIndex
+    let sectionIndex = await this.sectionIndex as ResourcesMap
 
 
     this.domainSubscription = domain.get(this.domainLevel, (domain: string) => {
       return new Promise<boolean>(async (res) => {
-        // todo
+
+        let verticalOffset = padding
+
+        if (this.reverseAliasIndex[domain] !== undefined) {
+          let reverseAlias = this.reverseAliasIndex[domain]
+          if (reverseAlias instanceof SimpleAlias.Reverse) {
+            domain = reverseAlias.root
+          }
+          else if (reverseAlias instanceof ScrollProgressAliasIndex.Reverse) {
+            domain = reverseAlias.root
+            verticalOffset += reverseAlias.progress
+          }
+        }
 
 
-
-        //@ts-ignore
-        let sectionIndex: ResourcesMap = await this.sectionIndex
               
         let scrollAnimation = this.inScrollAnimation = Symbol()
         this.currentlyActiveSectionName = domain
@@ -226,7 +236,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
           res(true)
           await scrollTo(elem, {
             cancelOnUserAction: true,
-            verticalOffset: padding,
+            verticalOffset,
             speed: 1150,
             elementToScroll: this.elementBody,
             easing: new WaapiEasing("ease").function
@@ -299,9 +309,15 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     })
 
 
+    sectionIndex.forEach(async (section: Promise<PageSection>, name) => {
+      let sec = await section
 
-    this.elementBody.on("scroll", () => {
-      if (currentlyActiveSectionElem.scrollProgressCallback) currentlyActiveSectionElem.scrollProgressCallback(this.elementBody.scrollTop - currentlyActiveSectionElem.offsetTop)
+      let temp: number
+      if (sec.scrollProgressCallback) this.elementBody.on("scroll", () => {
+        temp = this.elementBody.scrollTop - sec.offsetTop
+        sec.scrollProgressCallback(temp, temp + window.innerHeight)  
+      })
+
     })
 
     if (currentlyActiveSectionElem === undefined) return false

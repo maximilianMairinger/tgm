@@ -11,8 +11,8 @@ export default declareComponent("news-contact-section", class extends PageSectio
         super()
     }
 
-    scrollProgressCallback(localProgress: number) {
-        console.log("localProgress = ", localProgress)
+    scrollProgressCallback(top: number, bot: number) {
+        console.log(`top (${top}); bot (${bot})`)
     }
 
     stl() {

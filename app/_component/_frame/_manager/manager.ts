@@ -302,15 +302,14 @@ export default abstract class Manager<ManagementElementName extends string> exte
           this.currentManagedElementName = to;
           (async () => {
             if (this.pageChangeCallback) {
+              let domainLevel = frame.domainLevel || this.domainLevel
               try {
                 if ((frame as SectionedPage<any>).sectionList) {
-                  let q = (await (frame as SectionedPage<any>).sectionList)
-                  q.get(() => {
-                    // todo
+                  (await (frame as SectionedPage<any>).sectionList).get((...sectionListNested) => {
+                    this.pageChangeCallback(to, (sectionListNested as any).flat(), domainLevel)
                   })
-                  this.pageChangeCallback(to, [...(await (frame as SectionedPage<any>).sectionList)], frame.domainLevel || this.domainLevel)
                 }
-                else this.pageChangeCallback(to, [], frame.domainLevel || this.domainLevel)
+                else this.pageChangeCallback(to, [], domainLevel)
               }
               catch(e) {}
             }

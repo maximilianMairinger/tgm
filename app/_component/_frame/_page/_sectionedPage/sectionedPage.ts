@@ -48,7 +48,7 @@ export class ScrollProgressAliasIndex<Root extends string = string> {
     this.scrollPorgressAliases = scrollProgressAlias instanceof Array ? scrollProgressAlias : [scrollProgressAlias]
   }
 
-  private buildReverseAlias(aliasReverses: ReverseAliasIndex) {
+  protected buildReverseAlias(aliasReverses: ReverseAliasIndex) {
     for (let alias of this.scrollPorgressAliases) {
       
       let aliasesLength = 0
@@ -83,7 +83,7 @@ export class SimpleAlias<Root extends string = string> {
   }
 
 
-  private buildReverseAlias(aliasReverses: ReverseAliasIndex) {
+  protected buildReverseAlias(aliasReverses: ReverseAliasIndex) {
 
     let aliasesLength = 0
 
@@ -107,6 +107,19 @@ export class SimpleAlias<Root extends string = string> {
   }
 }
 
+
+export class AliasList extends Array<Alias> {
+  constructor(...aliases: Alias[]) {
+    super(...aliases)
+  }
+  public hasRoot(root: string) {
+    return this.ea((alias) => {
+      if (alias.root.get() === root) return alias
+    })
+  }
+
+}
+
 type ReverseAliasUnion = (InstanceType<(typeof ScrollProgressAliasIndex)["Reverse"]> | InstanceType<(typeof SimpleAlias)["Reverse"]>)
 type ReverseAliasIndex = {[root: string]: ReverseAliasUnion}
 
@@ -121,9 +134,8 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   protected readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
   public readonly sectionList: T extends Promise<any> ? Promise<DataCollection<string[][]>> : DataCollection<string[][]>
   private inScrollAnimation: Symbol
-  private reverseAliasIndex: ReverseAliasIndex = {}
 
-  constructor(sectionIndex: T, public domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void, private sectionTranslationIndex: any = {}) {
+  constructor(sectionIndex: T, public domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void, private sectionAliasList: AliasList = new AliasList()) {
     super()
     //@ts-ignore
 
@@ -167,16 +179,15 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       }
     }
 
-    
     let dataList: Data<string[]>[] = []
     map.forEach((val, key) => {
-      if (this.sectionTranslationIndex[key]) {
-        let alias = this.sectionTranslationIndex[key] as Alias
+      let alias = this.sectionAliasList.hasRoot(key)
+      if (alias) {
         if (alias instanceof SimpleAlias) {
           dataList.add(alias.aliases)
         }
-        else if (alias instanceof ScrollProgressAlias) {
-          dataList.add(alias.aliases)
+        else if (alias instanceof ScrollProgressAliasIndex) {
+          dataList.add(...(alias.scrollPorgressAliases as ScrollProgressAlias[]).Inner("aliases"))
         }
       }
       else dataList.add(new Data([key]))
@@ -198,8 +209,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     this.domainSubscription = domain.get(this.domainLevel, (domain: string) => {
       return new Promise<boolean>(async (res) => {
-        console.log("domain", domain)
-
+        // todo
 
 
 

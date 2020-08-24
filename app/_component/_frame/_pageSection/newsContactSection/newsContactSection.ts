@@ -7,18 +7,18 @@ import "../../../_themeAble/_card/anmeldenCard/anmeldenCard"
 
 export default declareComponent("news-contact-section", class extends PageSection {
 
-    constructor() {
-        super()
-    }
+  constructor() {
+    super()
+  }
 
-    scrollProgressCallback(top: number, bot: number) {
-        console.log(`top (${top}); bot (${bot})`)
-    }
+  scrollProgressCallback(top: number, bot: number) {
+    // console.log(`top (${top}); bot (${bot})`)
+  }
 
-    stl() {
-        return super.stl() + require("./newsContactSection.css").toString()
-    }
-    pug() {
-        return require("./newsContactSection.pug").default
-    }
+  stl() {
+    return super.stl() + require("./newsContactSection.css").toString()
+  }
+  pug() {
+    return require("./newsContactSection.pug").default
+  }
 });

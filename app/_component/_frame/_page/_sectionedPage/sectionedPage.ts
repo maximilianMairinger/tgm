@@ -210,6 +210,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     this.domainSubscription = domain.get(this.domainLevel, (domain: string) => {
       return new Promise<boolean>(async (res) => {
+        // debugger
 
         let verticalOffset = padding
 

@@ -157,7 +157,7 @@ export type QuerySelector = string
 export default abstract class SectionedPage<T extends FullSectionIndex> extends Page {
   protected readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
   public readonly sectionList: T extends Promise<any> ? Promise<DataCollection<string[][]>> : DataCollection<string[][]>
-  private inScrollAnimation: Symbol
+  private inScrollAnimation: Data<Symbol> = new Data()
 
   constructor(sectionIndex: T, public domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void, protected readonly sectionAliasList: AliasList = new AliasList()) {
     super()
@@ -219,12 +219,12 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     
     this.domainSubscription = domain.get(this.domainLevel, (domain: string) => {
       return new Promise<boolean>(async (res) => {
-        // debugger
 
         let verticalOffset = padding
 
         if (this.sectionAliasList.reverseIndex[domain] !== undefined) {
           let reverseAlias = this.sectionAliasList.reverseIndex[domain]
+          let originalDomain = domain
           if (reverseAlias instanceof SimpleAlias.Reverse) {
             domain = reverseAlias.root
           }
@@ -232,12 +232,13 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             domain = reverseAlias.root
             verticalOffset += reverseAlias.progress
           }
+          if (this.sectionChangeCallback) this.sectionChangeCallback(originalDomain)
         }
+        else if (this.sectionChangeCallback) this.sectionChangeCallback(this.currentlyActiveSectionName = this.sectionAliasList.aliasify(domain).get().first)
 
 
-              
-        let scrollAnimation = this.inScrollAnimation = Symbol()
-        if (this.sectionChangeCallback) this.sectionChangeCallback(this.currentlyActiveSectionName = this.sectionAliasList.aliasify(domain).get().first)
+        let scrollAnimation
+        this.inScrollAnimation.set(scrollAnimation = Symbol())
         this.userInitedScrollEvent = false
 
         let elem = await sectionIndex.get(domain) as HTMLElement
@@ -252,14 +253,14 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
           })
           
-          if (scrollAnimation === this.inScrollAnimation) {
-            this.inScrollAnimation = undefined
+          if (scrollAnimation === this.inScrollAnimation.get()) {
+            this.inScrollAnimation.set(undefined)
             this.userInitedScrollEvent = true
           }
         }
         else {
           this.setPage(null)
-          this.inScrollAnimation = undefined
+          this.inScrollAnimation.set(undefined)
           res(false)
         }
       })
@@ -303,7 +304,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       let elem = this.intersectingIndex.first as LazySectionedPage
 
   
-      if (!this.inScrollAnimation) {
+      if (!this.inScrollAnimation.get()) {
         let myToken = globalToken = Symbol("Token")
 
         sectionIndex.forEach(async (val, root) => {
@@ -326,25 +327,65 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             if (alias) {
 
               if (alias instanceof SimpleAlias) {
-                aliasSubscriptions.add(alias.aliases.tunnel(aliases => aliases.first).get(activateSectionName))
+                let sub = new DataSubscription(alias.aliases.tunnel(aliases => aliases.first).get(activateSectionName) as any, activateSectionName, false)
+                aliasSubscriptions.add(this.inScrollAnimation.get((is) => {
+                  if (is) sub.activate()
+                  else sub.deactivate()
+                }))
+                aliasSubscriptions.add(sub)
               }
               else if (alias instanceof ScrollProgressAliasIndex) {
-                let currentlyTheSmallestWantedProgress = Infinity
-                let currentlyTheSmallestWantedProgressQ
+                let currentlyTheSmallestWantedProgressTemp = Infinity
+                let currentlyTheSmallestWantedProgress = new Data(currentlyTheSmallestWantedProgressTemp)
+                
+                aliasSubscriptions.add(new DataCollection(...(alias.scrollPorgressAliases as ScrollProgressAlias[]).Inner("progress")).get((...wantedProgresses) => {
+                  currentlyTheSmallestWantedProgressTemp = Infinity
 
-                alias.scrollPorgressAliases.forEach((q) => {
-                  let scrollData = localSegmentScrollDataIndex(elem)
-                  q.progress.get((prog) => {
-                    if (prog < currentlyTheSmallestWantedProgress) {
-                      currentlyTheSmallestWantedProgress = prog
-                    }
+                  wantedProgresses.ea((wantedProgress) => {
+                    if (wantedProgress < currentlyTheSmallestWantedProgressTemp) currentlyTheSmallestWantedProgressTemp = wantedProgress
                   })
-                  aliasSubscriptions.add(new DataCollection(q.aliases.tunnel(aliases => aliases.first), q.progress, scrollData).get((name, wantedProgress, currentProgress) => {
-                    if (wantedProgress <= currentProgress) {
+
+                  currentlyTheSmallestWantedProgress.set(currentlyTheSmallestWantedProgressTemp)
+                }))
+
+                let lastActiveName: Data<string> = new Data()
+
+                for (let i = 0; i < alias.scrollPorgressAliases.length; i++) {
+                  const q = alias.scrollPorgressAliases[i] as ScrollProgressAlias
+                  let nextProg: Data<number> = alias.scrollPorgressAliases[i + 1] as any
+                  if (nextProg === undefined) nextProg = new Data(Infinity)
+                  else nextProg = (nextProg as any).progress
+
+                  let isSmallest = false
+                  
+                  aliasSubscriptions.add(new DataCollection(currentlyTheSmallestWantedProgress, q.progress).get((smallestProg, thisProg) => {
+                    isSmallest = smallestProg === thisProg
+                  }))
+
+                  
+                  let nameData = q.aliases.tunnel(aliases => aliases.first)
+
+                  let sub = new DataSubscription(new DataCollection(nameData, q.progress, nextProg, localSegmentScrollDataIndex(elem)) as any, (name: string, wantedProgress, nextProg, currentProgress) => {
+                    if (isSmallest) {
+                      wantedProgress = -Infinity
+                    }
+                    
+                    if (wantedProgress <= currentProgress && nextProg > currentProgress) {
+                      lastActiveName.set(name)
                       activateSectionName(name)
                     }
+                  })
+                  
+                  
+                  aliasSubscriptions.add(sub)
+
+                  aliasSubscriptions.add(new DataCollection(lastActiveName, nameData, this.inScrollAnimation).get((currentName, name, inScrollAnimation) => {
+                    let deactivate = currentName === name || inScrollAnimation
+                    if (deactivate) sub.deactivate()
+                    else sub.activate()
                   }))
-                })
+                }
+
               }
 
             }
@@ -421,9 +462,12 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       let sec = sectionIndex.get(init)
       if (sec === undefined) return false
     
-      sec.priorityThen((e) => {
+      sec.priorityThen((e: PageSection) => {
         e.scrollIntoView(true)
-        this.elementBody.scrollBy(0, padding)
+        let verticalOffset = padding
+        let ali = this.sectionAliasList.reverseIndex[this.domainSubscription.domain]
+        if (ali) if (ali instanceof ScrollProgressAliasIndex.Reverse) verticalOffset += ali.progress
+        this.elementBody.scrollBy(0, verticalOffset)
       })
           
 

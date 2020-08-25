@@ -82,9 +82,11 @@ export class ScrollProgressAliasIndex<Root extends string = string> {
 
 export class SimpleAlias<Root extends string = string> {
   public readonly root: Data<Root>
+  public readonly aliases: AliasData
 
-  constructor(root: Root | Data<Root>, public readonly aliases: AliasData) {
+  constructor(root: Root | Data<Root>, aliases: AliasData | string | string[]) {
     this.root = root instanceof Data ? root : new Data(root)
+    this.aliases = aliases instanceof AliasData ? aliases : new AliasData(aliases)
   }
 
 
@@ -158,10 +160,10 @@ type FullSectionIndex = ResourcesMap | SectionIndex | Promise<ResourcesMap | Sec
 export type QuerySelector = string
 export default abstract class SectionedPage<T extends FullSectionIndex> extends Page {
   protected readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
-  public readonly sectionList: T extends Promise<any> ? Promise<DataCollection<string[][]>> : DataCollection<string[][]>
+  public readonly sectionList: T extends Promise<any> ? Promise<Data<string[]>> : Data<string[]>
   private inScrollAnimation: Data<Symbol> = new Data()
 
-  constructor(sectionIndex: T, public domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void, protected readonly sectionAliasList: AliasList = new AliasList()) {
+  constructor(sectionIndex: T, public domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void, protected readonly sectionAliasList: AliasList = new AliasList(), protected readonly mergeIndex: {[part in string]: string} = {}) {
     super()
 
     if (sectionIndex instanceof Promise) {
@@ -206,10 +208,26 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     let dataList: Data<string[]>[] = []
     map.forEach((val, key) => {
-      dataList.add(this.sectionAliasList.aliasify(key))
+      dataList.add(this.sectionAliasList.aliasify(this.mergeIndex[key] ? this.mergeIndex[key] : key))
     })
 
-    return {sectionList: new DataCollection<string[][]>(...dataList), sectionIndex}
+    let sectionList: Data<string[]> = new Data()
+    new DataCollection(...dataList).get((...dataList) => {
+      sectionList.set((dataList as any).flat().distinct())
+    })
+
+    return {sectionList, sectionIndex}
+  }
+
+  private lastSectionName: string
+  private activateSectionName(name: string) {
+    if (this.sectionChangeCallback && this.lastSectionName !== name) this.sectionChangeCallback(name)
+    this.lastSectionName = name
+  }
+  
+  private activateSectionNameWithDomain(name: string) {
+    this.activateSectionName(name)
+    domain.set(name, this.domainLevel, false)
   }
 
   private mainIntersectionObserver: IntersectionObserver
@@ -218,11 +236,12 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   async initialActivationCallback() {
     let sectionIndex = await this.sectionIndex as ResourcesMap
 
-    
+
     this.domainSubscription = domain.get(this.domainLevel, (domain: string) => {
       return new Promise<boolean>(async (res) => {
 
         let verticalOffset = padding
+        
 
         if (this.sectionAliasList.reverseIndex[domain] !== undefined) {
           let reverseAlias = this.sectionAliasList.reverseIndex[domain]
@@ -234,9 +253,9 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             domain = reverseAlias.root
             verticalOffset += reverseAlias.progress - (windowMargin * window.innerHeight)
           }
-          if (this.sectionChangeCallback) this.sectionChangeCallback(originalDomain)
+          this.activateSectionName(originalDomain)
         }
-        else if (this.sectionChangeCallback) this.sectionChangeCallback(this.currentlyActiveSectionName = this.sectionAliasList.aliasify(domain).get().first)
+        else this.activateSectionName(this.currentlyActiveSectionName = this.sectionAliasList.aliasify(domain).get().first)
 
 
         let scrollAnimation
@@ -252,7 +271,6 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             speed: 1150,
             elementToScroll: this.elementBody,
             easing: new WaapiEasing("ease").function
-
           })
           
           if (scrollAnimation === this.inScrollAnimation.get()) {
@@ -267,16 +285,12 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         }
       })
      
-    }, true, sectionIndex.entries().next().value[0])
+    }, true, this.sectionAliasList.aliasify(sectionIndex.entries().next().value[0]).get().first)
 
     
     let currentlyActiveSectionElem = await sectionIndex.get(this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)) as any as PageSection
     let globalToken: Symbol
     let aliasSubscriptions: DataSubscription<unknown[]>[] = []
-    const activateSectionName = (name: string) => {
-      if (this.sectionChangeCallback) this.sectionChangeCallback(name)
-      domain.set(name, this.domainLevel, false)
-    }
     let localSegmentScrollDataIndex = constructIndex((pageSectionElement: PageSection) => this.elementBody.scrollData().tunnel(prog => prog - pageSectionElement.offsetTop))
 
     // ----------->
@@ -325,11 +339,13 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             aliasSubscriptions.clear()
 
 
+            root = this.mergeIndex[root] ? this.mergeIndex[root] : root
+
             let alias = this.sectionAliasList.getAllAliasesByRoot(root)
             if (alias) {
 
               if (alias instanceof SimpleAlias) {
-                let sub = new DataSubscription(alias.aliases.tunnel(aliases => aliases.first).get(activateSectionName) as any, activateSectionName, false)
+                let sub = new DataSubscription(alias.aliases.tunnel(aliases => aliases.first), this.activateSectionNameWithDomain.bind(this), false)
                 aliasSubscriptions.add(this.inScrollAnimation.get((is) => {
                   if (is) sub.activate()
                   else sub.deactivate()
@@ -374,7 +390,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
                     
                     if (wantedProgress <= currentProgress && nextProg > currentProgress) {
                       lastActiveName.set(name)
-                      activateSectionName(name)
+                      this.activateSectionNameWithDomain(name)
                     }
                   })
                   
@@ -391,7 +407,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
               }
 
             }
-            else activateSectionName(root)
+            else this.activateSectionNameWithDomain(root)
 
             
             

@@ -305,8 +305,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
               let domainLevel = frame.domainLevel || this.domainLevel
               try {
                 if ((frame as SectionedPage<any>).sectionList) {
-                  (await (frame as SectionedPage<any>).sectionList).get((...sectionListNested) => {
-                    this.pageChangeCallback(to, (sectionListNested as any).flat(), domainLevel)
+                  (await (frame as SectionedPage<any>).sectionList).get((sectionListNested) => {
+                    this.pageChangeCallback(to, sectionListNested, domainLevel)
                   })
                 }
                 else this.pageChangeCallback(to, [], domainLevel)

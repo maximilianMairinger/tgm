@@ -81,6 +81,7 @@
     "get-base-url": "^2.0.0",
     "josm": "^1.1.10",
     "slugify": "^1.4.0",
-    "waapi-easing": "^1.0.1"
+    "waapi-easing": "^1.0.1",
+    "xrray": "^4.7.0"
   }
 }

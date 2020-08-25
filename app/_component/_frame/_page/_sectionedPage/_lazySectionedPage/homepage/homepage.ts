@@ -5,7 +5,7 @@ import VersuchanstaltSection from "../../../../_pageSection/versuchsanstaltSecti
 import AbendschuleSection from "../../../../_pageSection/abendschuleSection/abendschuleSection"
 import LandingSection from "../../../../_pageSection/landingSection/landingSection"
 import NewsContactSection from "../../../../_pageSection/newsContactSection/newsContactSection"
-import { ScrollProgressAlias, ScrollProgressAliasIndex, AliasList } from "../../sectionedPage"
+import { ScrollProgressAlias, ScrollProgressAliasIndex, AliasList, SimpleAlias } from "../../sectionedPage"
 
 
 export default declareComponent("home-page", class Homepage extends LazySectionedPage {
@@ -39,7 +39,9 @@ export default declareComponent("home-page", class Homepage extends LazySectione
       }
     ), domainLevel, setPage, sectionChangeCallback, new AliasList(
       newsToContactScrollProgressIndex
-    ))
+    ), {
+      versuchsanstalt: "tagesschule"
+    })
   }
 
   stl() {

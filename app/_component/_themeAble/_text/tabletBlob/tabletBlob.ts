@@ -190,11 +190,12 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     project(project:Project, tablet:HTMLElement):void
     project(project?:Project, tablet = this.q("tablet-content.current")){
         if(project){
-            (tablet.querySelector("c-textblob") as Textblob).heading(project.heading)
-            tablet.querySelector("note-box").text(project.note);
-            tablet.querySelector(".thumbnail-pic").setAttribute("src", project.thumbnail);
-            tablet.querySelector("info-title").text(project.title);
-            tablet.querySelector("info-text").text(project.content);
+            let projectJson = this.parseJSONProp(project);
+            (tablet.querySelector("c-textblob") as Textblob).heading(projectJson.heading)
+            tablet.querySelector("note-box").text(projectJson.note);
+            tablet.querySelector(".thumbnail-pic").setAttribute("src", projectJson.thumbnail);
+            tablet.querySelector("info-title").text(projectJson.title);
+            tablet.querySelector("info-text").text(projectJson.content);
         }else
             return this.projectData[this.index];
     }

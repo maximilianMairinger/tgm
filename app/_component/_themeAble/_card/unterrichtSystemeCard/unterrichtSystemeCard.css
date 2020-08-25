@@ -108,7 +108,8 @@ content-title{
 content-text{
     display: block;
     display: -webkit-box;
-    height: 5.6em;
+    height: 5.2em;
+    line-height: 1.3em;
     -webkit-line-clamp: 4;
     font-size: 15px;
     overflow: hidden;

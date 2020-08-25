@@ -74,10 +74,10 @@ c-textblob{
 thumbnail-box{
     position: relative;
     display: block;
-    width: calc(100% + 80px);
+    width: calc(100% + 90px);
     transform: skewY(-1deg);
     flex-grow: 1;
-    margin: 0 -40px;
+    margin: 0 -45px;
     overflow: hidden;
     backface-visibility: hidden;
 }
@@ -129,6 +129,11 @@ c-link{
 @media only screen and (max-width: 1450px) {
     unterricht-system-card{
         padding: 40px;
+    }
+
+    thumbnail-box {
+        width: calc(100% + 80px);
+        margin: 0 -40px;
     }
 }
 

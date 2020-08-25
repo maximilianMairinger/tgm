@@ -1,11 +1,12 @@
 :host{
+    position: relative;
     display: block;
-    height: calc(100% - 150px);
+    height: calc(100vh - 150px);
     min-height: 550px;
 }
 
 landing-textblob{
-    position: relative;
+    position: absolute;
     display: flex;
     height: 100%;
     width: 100%;

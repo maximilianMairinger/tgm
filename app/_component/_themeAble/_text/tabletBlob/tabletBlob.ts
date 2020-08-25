@@ -17,6 +17,23 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     private nextArrow = this.q("project-next");
     private nextAvailable = false;
     private projectData = [{
+        heading:"Delta-3 Launch Vehicle",
+        note:"Rakete zum ökonomischen Starten von Satelliten in den niedrigen Orbit",
+        logo:"/res/img/projektLogoBeispiel3.png",
+        team:[
+            "Sabine Vollfrau",
+            "Maximillian Meiringer",
+            "Saphael Rschlage",
+            "Feorg Gelber",
+            "Moritz Meier"
+        ],
+        thumbnail:"/res/img/projektBeispiel3.jpg",
+        title: "Das Problem",
+        content: "Große Aerospace Unternehmen bieten keine ökonomischen Lösungen für kleinere wissenschaftliche Projekte, die eine Notwendigkeit für Satelliten im niedrigen Orbit haben. So kann zwar bei Missionen ein kleiner Satellit relativ billig mitgeschickt werden, Priorität ist aber jedenfalls die eigentliche Mission und eine individuelle Positionierung des Satelliten kann nicht garantiert werden.\n" +
+            "\n" +
+            "Schüler der 5. Klasse RT haben ein ökonomisches Launch Vehicle mit einer Kapazität von bis zu 500kg konzeptioniert, welches in Einzelausführung durch einen vergleichbar niedrigen Kostenpunkt, ein individuelles Deployment von Satelliten für kleinere wissenschaftliche Unternehmungen, als auch kommerzielle Applikationen bietet.",
+    },
+    {
         heading:"LabAuth",
         note:"Educard basierte Anwesenheitserfassung im Labor & Lernbüro.",
         logo:"/res/img/projektLogoBeispiel.png",
@@ -46,36 +63,8 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
             thumbnail:"/res/img/projektBeispiel2.png",
             title: "Das Problem",
             content: "Zu dem jetzigen Zeitpunkt gibt es einige Produkte auf dem Markt, welche ein kabellose Datenübertragung zwischen zwei Geräten ermöglichen. Für so gut wie alle benötigt man aber eine konstante Internetverbindung. Darüber hinaus leiden einige dieser Programme an geringer Übertragungsgeschwindigkeit und mangelnder Sicherheit. Aus diesem Grund wird eine Smartphone App als auch eine Desktop-Version der Applikation benötigt. Das Programm soll für eine kabellose und Internet unabhängige Datenübertragung verwendet werden."
-        },
-        {
-            heading:"LabAuth 2",
-            note:"Educard basierte Anwesenheitserfassung im Labor & Lernbüro.",
-            logo:"/res/img/projektLogoBeispiel.png",
-            team:[
-                "Sabine Vollfrau",
-                "Maximillian Meiringer",
-                "Saphael Rschlage",
-                "Garid Foldmann",
-                "Feorg Gelber",
-                "Moritz Meier"
-            ],
-            thumbnail:"/res/img/projektBeispiel.png",
-            title: "Das Problem",
-            content: "",
-        },
-        {
-            heading:"Phobos 2",
-            note:"Eine neue Art der Datenübertragung",
-            logo:"/res/img/projektLogoBeispiel2.png",
-            team:[
-                "Feorg Gelber",
-                "Johann Mandel",
-                "Rlorian Fitter"
-            ],
-            thumbnail:"/res/img/projektBeispiel2.png",
-            title: "Das Problem",
-            content: ""
-        }] as Project[];
+        }
+        ] as Project[];
 
     private animationQueue(){
         this.animations.forEach(animation => animation && animation.playState ==  'running' ? this.cancel(animation) : null);

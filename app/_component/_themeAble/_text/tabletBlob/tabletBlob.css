@@ -92,6 +92,7 @@ project-icon{
     width: 100%;
     box-shadow: var(--medium-shadow);
     border-radius: 10px;
+    background: white;
 }
 
 project-team{

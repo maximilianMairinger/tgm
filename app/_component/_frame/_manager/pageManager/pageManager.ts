@@ -9,6 +9,8 @@ import ItPage from "../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage"
 import HomePage from "../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage";
 import { declareComponent } from "../../../../lib/declareComponent"
 import RaumfahrtPage from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage";
+import RaumfahrtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte";
+import raumfahrtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte";
 
 export type PageName = string
 
@@ -58,8 +60,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
         key: new Import("tagesschule/raumfahrt", 20, (raumfahrtPage: typeof RaumfahrtPage) => 
           new raumfahrtPage(setPage, 2, sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "raumfahrt" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage")
+      },
+      {
+        key: new Import("tagesschule/raumfahrt/projekte", 20, (raumfahrtProjekte: typeof RaumfahrtProjekte) =>
+            new raumfahrtProjekte(setPage, 3, sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "raumfahrtProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte")
       }
-      
     ), 0, pageChangeCallback, "404", true, onScrollBarWidthChange, onUserScroll, onScroll)
 
 

@@ -84,7 +84,7 @@ c-arrow-icon.previous{
 project-icon{
     width: 125px;
     height: 125px;
-    margin-right: 25px;
+    margin-right: 0.5vw;
 }
 
 .project-icon-pic{
@@ -97,7 +97,7 @@ project-icon{
 project-team{
     display: block;
     max-width: calc(100% - 25px);
-    margin-left: 25px;
+    margin-left: 0.5vw;
     font-size: 17px;
     font-weight: bold;
     overflow: hidden;
@@ -122,6 +122,7 @@ tablet-blob{
     display: block;
     width: 600px;
     height: 750px;
+    max-height: 85vh;
     margin: 0 25px;
     border-radius: 17px;
     border: #222934 solid 8px;
@@ -265,3 +266,21 @@ info-text{
     }
 }
 
+@media only screen and (max-width: 768px) {
+    tablet-blob{
+        margin: 0;
+    }
+
+    project-left, project-right{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    tablet-blob {
+        border-width: 8px 0;
+    }
+    button-2, button-3{
+        display: none;
+    }
+}

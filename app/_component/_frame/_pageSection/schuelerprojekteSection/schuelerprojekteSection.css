@@ -7,10 +7,8 @@
 
 schuelerprojekte-section{
     display: block;
-    margin: 0 5vw 125px 5vw;
+    margin-bottom: 125px;
 }
-
-
 
 c-textblob{
     text-align: center;
@@ -21,4 +19,10 @@ c-textblob{
 c-tablet-blob{
     background: url("../../../../res/img/schuelerprojekteBackground.svg") center center no-repeat;
     background-size: min(90%, 900px) 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    c-tablet-blob{
+        background: none;
+    }
 }

@@ -11,6 +11,8 @@ import { constructIndex } from "key-index"
 
 const padding = -70
 
+const windowMargin = -0.33334
+const windowParginStr = (windowMargin * 100) + "%"
 
 
 export type SingleAlias = AliasData | string | string[]
@@ -230,7 +232,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
           }
           else if (reverseAlias instanceof ScrollProgressAliasIndex.Reverse) {
             domain = reverseAlias.root
-            verticalOffset += reverseAlias.progress
+            verticalOffset += reverseAlias.progress - (windowMargin * window.innerHeight)
           }
           if (this.sectionChangeCallback) this.sectionChangeCallback(originalDomain)
         }
@@ -398,7 +400,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       }
     }, {
       threshold: 0,
-      rootMargin: "-33.333%"
+      rootMargin: windowParginStr
     })
 
     sectionIndex.forEach(async (section: Promise<PageSection>) => {
@@ -466,7 +468,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         e.scrollIntoView(true)
         let verticalOffset = padding
         let ali = this.sectionAliasList.reverseIndex[this.domainSubscription.domain]
-        if (ali) if (ali instanceof ScrollProgressAliasIndex.Reverse) verticalOffset += ali.progress
+        if (ali) if (ali instanceof ScrollProgressAliasIndex.Reverse) verticalOffset += ali.progress - (windowMargin * window.innerHeight)
         this.elementBody.scrollBy(0, verticalOffset)
       })
           

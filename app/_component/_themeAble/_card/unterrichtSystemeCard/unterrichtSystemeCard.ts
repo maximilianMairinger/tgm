@@ -40,10 +40,8 @@ export default declareComponent("unterricht-systeme-card", class UnterrichtSyste
     thumbnail(url:string):void
     thumbnail(url?:string){
         if(url)
-            //@ts-ignore
-            this.q("thumbnail-pic").css({'background-image': url});
-        //@ts-ignore
-        else return this.q("thumbnail-pic").css('background-image');
+            this.q("thumbnail-pic").css({'backgroundImage': url});
+        else return this.q("thumbnail-pic").css('backgroundImage');
     }
 
     headingbackground():string

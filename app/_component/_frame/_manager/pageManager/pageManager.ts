@@ -10,7 +10,8 @@ import HomePage from "../../_page/_sectionedPage/_lazySectionedPage/homepage/hom
 import { declareComponent } from "../../../../lib/declareComponent"
 import RaumfahrtPage from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage";
 import RaumfahrtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte";
-import raumfahrtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte";
+import RaumfahrtTeam from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtTeam/raumfahrtTeam";
+import Schularzt from "../../_page/_sectionedPage/_lazySectionedPage/schularzt/schularzt";
 
 export type PageName = string
 
@@ -60,14 +61,18 @@ export default declareComponent("page-manager", class PageManager extends Manage
         key: new Import("tagesschule/raumfahrt/projekte", 20, (raumfahrtProjekte: typeof RaumfahrtProjekte) =>
             new raumfahrtProjekte(setPage, 3, sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "raumfahrtProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte")
+      },
+      {
+        key: new Import("tagesschule/raumfahrt/team", 20, (raumfahrtTeam: typeof RaumfahrtTeam) =>
+            new raumfahrtTeam(setPage, 3, sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "raumfahrtTeam" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtTeam/raumfahrtTeam")
+      },
+      {
+        key: new Import("schularzt", 20, (raumfahrtTeam: typeof Schularzt) =>
+            new raumfahrtTeam(setPage, 1, sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "raumfahrtTeam" */"../../_page/_sectionedPage/_lazySectionedPage/schularzt/schularzt")
       }
     ), 0, pageChangeCallback, "404", true, onScrollBarWidthChange, onUserScroll, onScroll)
-
-
-
-  
-
-
   }
 
 
@@ -75,7 +80,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
     return super.stl() + require("./pageManager.css").toString()
   }
   pug() {
-    return ""
+    return "";
   }
 })
  

@@ -37,8 +37,8 @@ export default declareComponent("image-textblob", class ImageTextblob extends Te
   image(): string
   image(image: string): void
   image(image?: string) {
-    if (image) this.q("image-box").css({ background: image + " no-repeat" });
-    else return this.q("image-box").css("background");
+    if (image) this.q("image-box").css({ backgroundImage: image});
+    else return this.q("image-box").css("backgroundImage");
   }
 
   addresse(): string

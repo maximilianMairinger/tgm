@@ -7,14 +7,13 @@ import component from "../../../component";
 
 
 export default declareComponent("wrapper-section", class WrapperSection extends PageSection {
-    public theme: Theme = "light"
 
     constructor()
     constructor(component:Element)
     constructor(component:Element, theme: Theme)
     constructor(component?:Element, theme?:Theme) {
         super()
-        if(component) this.q("wrapper-container").append(component);
+        if(component) this.elementBody.append(component);
         if(theme) this.theme = theme;
     }
 
@@ -23,6 +22,6 @@ export default declareComponent("wrapper-section", class WrapperSection extends 
     }
 
     pug(){
-        return require("./wrapperSection.pug").default;
+        return "";
     }
 });

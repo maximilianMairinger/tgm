@@ -13,25 +13,25 @@ export default declareComponent("raumfahrt-projekte", class RaumfahrtProjekte ex
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
-        key: new Import("thumbnail", 1, (wrapper: typeof WrapperSection) =>
+        key: new Import("thumbnail", 1, (Thumbnail: typeof Element) =>
         {
-          let thumbnail = new ParameterThumbnail();
+          let thumbnail = new (Thumbnail as typeof ParameterThumbnail)();
           thumbnail.note("Bemerkenswerte")
           thumbnail.heading("Diplomprojekte");
           thumbnail.subheading("der RT Abteilung");
           thumbnail.background('url(/res/img/Raumfahrt_Project.jpg)');
-          return new wrapper(thumbnail, 'dark');
+          return new WrapperSection(thumbnail, 'dark');
         }
-        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../_pageSection/wrapperSection/wrapperSection")
+        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_themeAble/_text/_thumbnail/parameterThumbnail/parameterThumbnail")
       },
       {
-        key: new Import("info", 1, (wrapper: typeof WrapperSection) =>
+        key: new Import("info", 1, (Information: typeof Element) =>
         {
-          let info = new InformationenSection();
+          let info = new (Information as typeof InformationenSection)();
           info.content("Schüler und Schülerinnen arbeiten in Kooperation mit internationalen Aerospace Unternehmen um nachhaltige Projekte in den Bereichen der Weltraumforschung, Robotik und Biologie umzusetzen. So sammeln sie wertvolle Erfahrungen und entwickeln ein Resume, ")
-          return new wrapper(info);
+          return new WrapperSection(info);
         }
-        ), val: () => import(/* webpackChunkName: "info" */"../../../../_pageSection/wrapperSection/wrapperSection")
+        ), val: () => import(/* webpackChunkName: "info" */"../../../../../_themeAble/_text/_sectionTextblob/informationenSection/informationenSection")
       },
       {
         key: new Import("projekte", 1, (projekte: typeof ProjekteSection) =>

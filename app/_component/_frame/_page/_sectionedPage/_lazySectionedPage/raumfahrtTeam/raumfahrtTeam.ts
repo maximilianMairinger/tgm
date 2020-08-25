@@ -18,9 +18,6 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
           thumbnail.note("mit");
           thumbnail.heading("Teamgeist");
           thumbnail.subheading("in die Zukunft");
-          thumbnail.content("We are a bunch of talented and passionate people who hate beige walls and dull parties. If this is your case you can always send us your information!\n" +
-              "\n" +
-              "Derzeit suchen wir nach einem LehrerInnen im bereich Softwareentwicklung, Fotographie, Graphic Design und Web-Entwicklung bestmöglichst mit Praxiserfahrung.")
           return new WrapperSection(thumbnail, 'dark');
         }
         ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_themeAble/_text/_thumbnail/teamLeitungThumbnail/teamLeitungThumbnail")
@@ -30,6 +27,9 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
                 {
                     let teamJobs = new (TeamJobs as typeof TeamJobsSection)();
                     teamJobs.subheading("der RT Abteilung");
+                    teamJobs.content("We are a bunch of talented and passionate people who hate beige walls and dull parties. If this is your case you can always send us your information!\n" +
+                        "\n" +
+                        "Derzeit suchen wir nach einem LehrerInnen im bereich Softwareentwicklung, Fotographie, Graphic Design und Web-Entwicklung bestmöglichst mit Praxiserfahrung.")
                     return new WrapperSection(teamJobs);
                 }
             ), val: () => import(/* webpackChunkName: "teamJobs" */"../../../../../_themeAble/_text/_sectionTextblob/teamJobsSection/teamJobsSection")

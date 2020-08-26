@@ -18,7 +18,18 @@ const windowParginStr = (windowMargin * 100) + "%"
 export type SingleAlias = AliasData | string | string[]
 
 
-export class AliasData extends Data<string[]> {
+class DomainData<T extends string | string[]> extends Data<T> {
+  set(set: T): T {
+    if (set instanceof Array) {
+      set.replace((s) => slugify(s))
+    }
+    else slugify(set as any)
+    return super.set(set)
+  }
+}
+
+
+export class AliasData extends DomainData<string[]> {
   constructor(alias: string | string[]) {
     super(alias instanceof Array ? alias : [alias])
   }
@@ -43,12 +54,12 @@ export class ScrollProgressAlias {
 
 
 export class ScrollProgressAliasIndex<Root extends string = string> {
-  public readonly root: Data<Root>
+  public readonly root: DomainData<Root>
   public readonly scrollProgressAliases: Readonly<ScrollProgressAlias[]>
   public readonly aliases: DataCollection<string[][]>
 
-  constructor(root: Root | Data<Root>, scrollProgressAlias: ScrollProgressAlias | Readonly<ScrollProgressAlias[]>) {
-    this.root = root instanceof Data ? root : new Data(root)
+  constructor(root: Root | DomainData<Root>, scrollProgressAlias: ScrollProgressAlias | Readonly<ScrollProgressAlias[]>) {
+    this.root = root instanceof DomainData ? root : new DomainData(root)
     this.scrollProgressAliases = scrollProgressAlias instanceof Array ? scrollProgressAlias : [scrollProgressAlias]
     this.aliases = new DataCollection(...(this.scrollProgressAliases as ScrollProgressAlias[]).Inner("aliases")) as DataCollection<string[][]>
   }
@@ -81,11 +92,11 @@ export class ScrollProgressAliasIndex<Root extends string = string> {
 }
 
 export class SimpleAlias<Root extends string = string> {
-  public readonly root: Data<Root>
+  public readonly root: DomainData<Root>
   public readonly aliases: AliasData
 
-  constructor(root: Root | Data<Root>, aliases: AliasData | string | string[]) {
-    this.root = root instanceof Data ? root : new Data(root)
+  constructor(root: Root | DomainData<Root>, aliases: AliasData | string | string[]) {
+    this.root = root instanceof Data ? root : new DomainData(root)
     this.aliases = aliases instanceof AliasData ? aliases : new AliasData(aliases)
   }
 
@@ -115,6 +126,8 @@ export class SimpleAlias<Root extends string = string> {
 }
 
 
+import slugify from "slugify"
+
 export class AliasList {
   public readonly reverseIndex: ReverseAliasIndex = {}
   public aliases: Readonly<Alias[]>
@@ -126,11 +139,13 @@ export class AliasList {
     })
   }
   public getAllAliasesByRoot(root: string) {
+    root = slugify(root)
     return (this.aliases as Alias[]).ea((alias) => {
       if (alias.root.get() === root) return alias
     })
   }
   public aliasify(root: string) {
+    root = slugify(root)
     let data: Data<string[]> = new Data([root])
     let al = this.getAllAliasesByRoot(root)
     if (al !== undefined) al.aliases.get((...a) => {
@@ -144,6 +159,7 @@ export class AliasList {
   }
 
   public getRootOfAlias(alias: string) {
+    alias = slugify(alias)
     return this.reverseIndex[alias] ? this.reverseIndex[alias].root : alias
   }
 }

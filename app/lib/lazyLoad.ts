@@ -65,6 +65,8 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
   }
 }
 
+import slugify from "slugify"
+
 export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb: (a: any) => void) => void}> {
   public fullyLoaded: Promise<any>
   public anyLoaded: Promise<any>
@@ -74,11 +76,19 @@ export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb:
   private reloadStatusPromises() {
     let proms = []
     this.forEach((e) => {
-      proms.add(e)
+      (proms as any).add(e)
     })
     
     this.fullyLoaded = Promise.all(proms)
     this.anyLoaded = Promise.race(proms)
+  }
+  set(key: string, val: Promise<any> & {priorityThen: (cb: (a: any) => void) => void}) {
+    key = slugify(key)
+    return super.set(key, val)
+  }
+  delete(key: string) {
+    key = slugify(key)
+    return super.delete(key)
   }
   public get(key: string): Promise<any> & {priorityThen: (cb: (a: any) => void) => void} {
     let val = super.get(key);

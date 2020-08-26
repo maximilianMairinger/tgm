@@ -69,7 +69,9 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
                 }
             ), val: () => import(/* webpackChunkName: "schueler" */"../../../../../_themeAble/_text/imageTextblob/imageTextblob")
         }
-    ), domainLevel, setPage, sectionChangeCallback)
+    ), domainLevel, setPage, sectionChangeCallback, undefined, {
+        thumbnail: "teamJobs",
+      })
 
   }
 

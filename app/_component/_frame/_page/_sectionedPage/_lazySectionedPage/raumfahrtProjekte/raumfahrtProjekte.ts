@@ -39,7 +39,9 @@ export default declareComponent("raumfahrt-projekte", class RaumfahrtProjekte ex
         ), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
       },
 
-    ), domainLevel, setPage, sectionChangeCallback)
+    ), domainLevel, setPage, sectionChangeCallback, undefined, {
+      thumbnail:"info"
+    })
 
   }
 

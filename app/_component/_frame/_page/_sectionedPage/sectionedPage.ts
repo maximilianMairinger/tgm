@@ -251,8 +251,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
         let verticalOffset = padding
         
-        let hasReverseIndex = this.sectionAliasList.reverseIndex[domainFragment] !== undefined
-        if (hasReverseIndex) {
+        if (this.sectionAliasList.reverseIndex[domainFragment] !== undefined) {
           let reverseAlias = this.sectionAliasList.reverseIndex[domainFragment]
           let originalDomain = domainFragment
           if (reverseAlias instanceof SimpleAlias.Reverse) {
@@ -265,13 +264,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
           this.activateSectionName(originalDomain)
         }
 
-        if (domainFragment === "") {
-          domainFragment = this.defaultDomain
-          this.currentlyActiveSectionRootName = this.sectionAliasList.getRootOfAlias(domainFragment)
-          let q = this.sectionAliasList.aliasify(this.merge(domainFragment)).get().first
-          this.activateSectionName(q)
-        }
-        else if (!hasReverseIndex) {
+        else {
           this.currentlyActiveSectionRootName = this.sectionAliasList.getRootOfAlias(domainFragment)
           this.activateSectionName(this.sectionAliasList.aliasify(this.merge(domainFragment)).get().first)
         }

@@ -151,6 +151,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
         domIndex.set(domainIndexRollback)
         set(endDomain, 0, true)
       }
+      else history.pushState(argData, updateTitle(), endDomain)
     }
     else {
       history.pushState(argData, updateTitle(), endDomain)

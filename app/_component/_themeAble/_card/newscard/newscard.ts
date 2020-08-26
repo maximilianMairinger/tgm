@@ -1,19 +1,10 @@
 
-import Card from "./../card";
-import declareComponent from "../../../lib/declareComponent";
+import Card from "./../card"
+import declareComponent from "../../../../lib/declareComponent";
 
 export default declareComponent("newscard", class extends Card {
     constructor() {
       super()      
-    }
-
-    setLightTheme() {
-        super.setLightTheme()
-        //..
-    }
-
-    setDarkTheme() {
-        super.setDarkTheme();
     }
 
     subheading(): string
@@ -69,7 +60,7 @@ export default declareComponent("newscard", class extends Card {
       return super.stl() + require("./newscard.css").toString()
     }
     pug() {
-      return super.pug() + require("./newscard.pug").default
+      return /*super.pug() +*/ require("./newscard.pug").default
     }
   }
 )

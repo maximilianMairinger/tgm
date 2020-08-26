@@ -57,8 +57,8 @@ export default declareComponent("news-contact-section", class extends PageSectio
   private mapTextBlobFadin = ce("map-textblob-fadin").apd(this.mapTextBlobWrapper)
 
   private newsTextBlob = new TextBlob().addClass("news")
-  private newsTextBlobWrapper = ce("news-textblob-wrapper").apd(this.mapTextBlob)
-  private newsTextBlobFadin = ce("news-textblob-fadin").apd(this.mapTextBlobWrapper)
+  private newsTextBlobWrapper = ce("news-textblob-wrapper").apd(this.newsTextBlob)
+  private newsTextBlobFadin = ce("news-textblob-fadin").apd(this.newsTextBlobWrapper)
 
   
   constructor() {
@@ -79,9 +79,8 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.mapTextBlob.content("Content content content content content content content content content content content content content content content content content content content.")
     this.mapTextBlob.hsize({"max": 60, "min": 40})
     this.mapTextBlob.hmobile({"max": 55, "min": 35})
-
     this.allFrame.insertBefore(this.mapTextBlobFadin, this.overlay)
-
+    console.log(this.mapTextBlobFadin.childs())
 
 
 

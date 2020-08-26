@@ -414,11 +414,8 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.overlay.on("click", closeLocationInfo)
     this.elementBody.on("scroll", closeLocationInfo)
   }
-  private scrollPosData = new Data(0)
-  scrollProgressCallback(top: number, bot: number) {
-    this.scrollPosData.set(top)
-    console.log(top)
-  }
+  private scrollPosData = this.getLocalScrollProgressData()
+
 
   stl() {
     return super.stl() + require("./newsContactSection.css").toString()

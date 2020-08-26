@@ -5,7 +5,7 @@ import WaapiEasing from "waapi-easing";
 import { ResourcesMap } from "../../../../lib/lazyLoad";
 import LazySectionedPage from "./_lazySectionedPage/lazySectionedPage";
 import PageSection from "../../_pageSection/pageSection";
-import { EventListener } from "extended-dom";
+import { EventListener, ScrollData } from "extended-dom";
 import { Data, DataCollection, DataSubscription } from "josm";
 import { constructIndex } from "key-index"
 
@@ -333,7 +333,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         }
       })
 
-      let elem = this.intersectingIndex.first as LazySectionedPage
+      let elem = this.intersectingIndex.first as PageSection
 
 
       if (!this.inScrollAnimation.get()) {
@@ -438,9 +438,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     sectionIndex.forEach(async (section: Promise<PageSection>) => {
       let sec = await section
 
-      if (sec.scrollProgressCallback) localSegmentScrollDataIndex(sec).get((top) => {
-        sec.scrollProgressCallback(top, top + window.innerHeight)
-      }, false)
+      if (sec) sec.getLocalScrollProgressData = () => localSegmentScrollDataIndex(sec) as ScrollData
     })
 
     if (currentlyActiveSectionElem === undefined) return false

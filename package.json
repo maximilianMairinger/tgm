@@ -76,7 +76,7 @@
   "dependencies": {
     "animated-scroll-to": "^2.0.8",
     "express-ws": "^4.0.0",
-    "extended-dom": "^3.4.2",
+    "extended-dom": "^3.4.7",
     "fast-decode-uri-component": "^1.0.1",
     "get-base-url": "^2.0.0",
     "josm": "^1.1.10",

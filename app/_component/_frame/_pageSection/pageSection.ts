@@ -1,4 +1,5 @@
 import Frame from "../frame";
+import { ScrollData } from "extended-dom"
 
 
 export default abstract class PageSection extends Frame {
@@ -7,7 +8,10 @@ export default abstract class PageSection extends Frame {
     
   }
 
-  public scrollProgressCallback?(relativeProgressTopScreen: number, relativeProgressBottomScreen: number): void
+  public getLocalScrollProgressData(): ScrollData {
+    console.warn("getLocalScrollProgress is not implemented by wrapper.")
+    return new ScrollData
+  }
 
   stl() {
     return super.stl() + require("./pageSection.css").toString()

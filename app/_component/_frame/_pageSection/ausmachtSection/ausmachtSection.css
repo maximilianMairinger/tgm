@@ -54,12 +54,12 @@ c-selection-card{
 }
 
 @media only screen and (max-width: 768px) {
-    test-container{
+    card-container{
         margin-right: 10vw;
         margin-left: 10vw;
     }
 
-    test-container *{
+    card-container *{
         margin: 50px 0 0 0;
     }
 

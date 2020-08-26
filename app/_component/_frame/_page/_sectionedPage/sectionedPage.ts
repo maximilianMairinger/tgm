@@ -18,18 +18,8 @@ const windowParginStr = (windowMargin * 100) + "%"
 export type SingleAlias = AliasData | string | string[]
 
 
-class DomainData<T extends string | string[]> extends Data<T> {
-  set(set: T): T {
-    if (set instanceof Array) {
-      set.replace((s) => slugify(s))
-    }
-    else slugify(set as any)
-    return super.set(set)
-  }
-}
 
-
-export class AliasData extends DomainData<string[]> {
+export class AliasData extends Data<string[]> {
   constructor(alias: string | string[]) {
     super(alias instanceof Array ? alias : [alias])
   }
@@ -54,12 +44,12 @@ export class ScrollProgressAlias {
 
 
 export class ScrollProgressAliasIndex<Root extends string = string> {
-  public readonly root: DomainData<Root>
+  public readonly root: Data<Root>
   public readonly scrollProgressAliases: Readonly<ScrollProgressAlias[]>
   public readonly aliases: DataCollection<string[][]>
 
-  constructor(root: Root | DomainData<Root>, scrollProgressAlias: ScrollProgressAlias | Readonly<ScrollProgressAlias[]>) {
-    this.root = root instanceof DomainData ? root : new DomainData(root)
+  constructor(root: Root | Data<Root>, scrollProgressAlias: ScrollProgressAlias | Readonly<ScrollProgressAlias[]>) {
+    this.root = root instanceof Data ? root : new Data(root)
     this.scrollProgressAliases = scrollProgressAlias instanceof Array ? scrollProgressAlias : [scrollProgressAlias]
     this.aliases = new DataCollection(...(this.scrollProgressAliases as ScrollProgressAlias[]).Inner("aliases")) as DataCollection<string[][]>
   }
@@ -92,11 +82,11 @@ export class ScrollProgressAliasIndex<Root extends string = string> {
 }
 
 export class SimpleAlias<Root extends string = string> {
-  public readonly root: DomainData<Root>
+  public readonly root: Data<Root>
   public readonly aliases: AliasData
 
-  constructor(root: Root | DomainData<Root>, aliases: AliasData | string | string[]) {
-    this.root = root instanceof Data ? root : new DomainData(root)
+  constructor(root: Root | Data<Root>, aliases: AliasData | string | string[]) {
+    this.root = root instanceof Data ? root : new Data(root)
     this.aliases = aliases instanceof AliasData ? aliases : new AliasData(aliases)
   }
 
@@ -125,9 +115,6 @@ export class SimpleAlias<Root extends string = string> {
   }
 }
 
-
-import slugify from "slugify"
-
 export class AliasList {
   public readonly reverseIndex: ReverseAliasIndex = {}
   public aliases: Readonly<Alias[]>
@@ -139,13 +126,11 @@ export class AliasList {
     })
   }
   public getAllAliasesByRoot(root: string) {
-    root = slugify(root)
     return (this.aliases as Alias[]).ea((alias) => {
       if (alias.root.get() === root) return alias
     })
   }
   public aliasify(root: string) {
-    root = slugify(root)
     let data: Data<string[]> = new Data([root])
     let al = this.getAllAliasesByRoot(root)
     if (al !== undefined) al.aliases.get((...a) => {
@@ -159,7 +144,6 @@ export class AliasList {
   }
 
   public getRootOfAlias(alias: string) {
-    alias = slugify(alias)
     return this.reverseIndex[alias] ? this.reverseIndex[alias].root : alias
   }
 }
@@ -319,8 +303,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     }, true, this.firstDomain)
 
 
-    
-    let currentlyActiveSectionElem = await sectionIndex.get(this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)) as any as PageSection
+    let currentlyActiveSectionElem = await sectionIndex.getSlugifyed(this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)) as any as PageSection
     let globalToken: Symbol
     let aliasSubscriptions: DataSubscription<unknown[]>[] = []
     let localSegmentScrollDataIndex = constructIndex((pageSectionElement: PageSection) => this.elementBody.scrollData().tunnel(prog => prog - pageSectionElement.offsetTop))
@@ -519,7 +502,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     if (active) {
       let init = this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)
-      let sec = sectionIndex.get(init)
+      let sec = sectionIndex.getSlugifyed(init)
       if (sec === undefined) return false
     
       sec.priorityThen((e: PageSection) => {

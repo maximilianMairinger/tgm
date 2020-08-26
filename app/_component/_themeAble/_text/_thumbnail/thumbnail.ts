@@ -7,7 +7,7 @@ import {Theme} from "../../themeAble";
 
 
 
-export default abstract class Thumbnail extends Text {
+export default class Thumbnail extends Text {
   private textBlob = this.q("c-textblob") as TextBlob;
 
   constructor() {

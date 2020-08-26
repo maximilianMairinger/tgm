@@ -4,6 +4,7 @@ import { set } from "../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../lib/lazyLoad"
 import TestSection1 from "../../../../_pageSection/testSection1/testSection1"
 import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
+import Thumbnail from "../../../../../_themeAble/_text/_thumbnail/thumbnail"
 
 
 export default declareComponent("raumfahrt-page", class RaumfahrtPage extends LazySectionedPage {
@@ -11,8 +12,8 @@ export default declareComponent("raumfahrt-page", class RaumfahrtPage extends La
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
-        key: new Import("section1", 1, (Section1: typeof TestSection1) => 
-          new Section1()
+        key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => 
+          new _Thumbnail()
         ), val: () => import(/* webpackChunkName: "testSection1" */"../../../../_pageSection/testSection1/testSection1")
       },
       {

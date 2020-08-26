@@ -285,14 +285,15 @@ export default abstract class Manager<ManagementElementName extends string> exte
     let nextPageToken = Symbol("nextPageToken")
     this.nextPageToken = nextPageToken;
 
-    let pageProm = this.managedElementMap.get(to)
+    
+    let pageProm = this.managedElementMap.getSlugifyed(to)
     while(pageProm === undefined) {
       if (to === "") {
         to = this.notFoundElementName
         break
       }
       to = to.substr(0, to.lastIndexOf("/")) as any
-      pageProm = this.managedElementMap.get(to)
+      pageProm = this.managedElementMap.getSlugifyed(to)
     } 
 
     let ensureLoad: {wrapped: Promise<void>} | void | boolean

@@ -13,7 +13,7 @@ export default declareComponent("home-page", class Homepage extends LazySectione
     
     let newsToContactScrollProgressIndex = new ScrollProgressAliasIndex("newsKontakt", [
       new ScrollProgressAlias(0, "news"),
-      new ScrollProgressAlias(900, "kontakt")
+      new ScrollProgressAlias(700, "kontakt")
     ])
 
     super(new ImportanceMap<() => Promise<any>, any>(

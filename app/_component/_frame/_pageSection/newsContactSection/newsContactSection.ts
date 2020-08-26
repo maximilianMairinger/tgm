@@ -23,6 +23,8 @@ const vienna = {
 
 const scrollPositionAnimationStart = 100
 
+
+
 const tgmPosition = {
   x: -35,
   y: -25
@@ -34,6 +36,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
   private allSvg = this.q("svg g#all")
   private allSvg2 = this.q("svg g#all2")
   // private svgElem = this.q("svg#mapSvg")
+  private allFrame = this.q("all-frame")
   private mapPointerAnimation = this.q("map-pointer-animation")
   private mapPointerWrapper = this.q("map-pointer-wrapper")
   private mapPointerCenter = this.q("map-pointer-center")
@@ -77,23 +80,14 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.mapTextBlob.hsize({"max": 60, "min": 40})
     this.mapTextBlob.hmobile({"max": 55, "min": 35})
 
-    this.stayInFrameElem.insertBefore(this.mapTextBlobFadin, this.overlay)
+    this.allFrame.insertBefore(this.mapTextBlobFadin, this.overlay)
 
 
 
 
 
 
-
-
-
-
-
-    setTimeout(() => {
-      this.elementBody.scrollTop = 900
-    }, 100)
-
-    let guide = this.elementBody.scrollData()
+    let guide = this.scrollPosData
     let mapOptions = {start: new Data(scrollPositionAnimationStart), end: new Data(scrollPositionAnimationStart + 700)}
 
 
@@ -420,9 +414,10 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.overlay.on("click", closeLocationInfo)
     this.elementBody.on("scroll", closeLocationInfo)
   }
-
+  private scrollPosData = new Data(0)
   scrollProgressCallback(top: number, bot: number) {
-    // console.log(`top (${top}); bot (${bot})`)
+    this.scrollPosData.set(top)
+    console.log(top)
   }
 
   stl() {

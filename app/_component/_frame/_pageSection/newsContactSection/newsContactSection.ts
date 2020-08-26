@@ -111,13 +111,13 @@ export default declareComponent("news-contact-section", class extends PageSectio
       })
 
 
-    let doneProgress = scrollPositionAnimationStart + 800
+    let doneProgress = scrollPositionAnimationStart + 750
     let done: boolean
     this.scrollPosData.get((progress) => {
       if (progress > doneProgress) {
         if (!done) {
           done = true
-          this.stayInFrameElem.css({position: "absolute", top: doneProgress})
+          this.stayInFrameElem.css({position: "relative", top: doneProgress})
         }
       }
       else {

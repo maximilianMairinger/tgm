@@ -208,7 +208,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     let dataList: Data<string[]>[] = []
     map.forEach((val, key) => {
-      dataList.add(this.sectionAliasList.aliasify(this.mergeIndex[key] ? this.mergeIndex[key] : key))
+      dataList.add(this.sectionAliasList.aliasify(this.merge(key)))
     })
 
     let sectionList: Data<string[]> = new Data()
@@ -217,6 +217,10 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     })
 
     return {sectionList, sectionIndex}
+  }
+
+  private merge(name: string) {
+    return this.mergeIndex[name] ? this.mergeIndex[name] : name
   }
 
   private lastSectionName: string
@@ -230,39 +234,53 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     domain.set(name, this.domainLevel, false)
   }
 
+  private defaultDomain: string
   private mainIntersectionObserver: IntersectionObserver
-  private currentlyActiveSectionName: string
+  private currentlyActiveSectionRootName: string
   private intersectingIndex: Element[] = []
   async initialActivationCallback() {
     let sectionIndex = await this.sectionIndex as ResourcesMap
 
-
-    this.domainSubscription = domain.get(this.domainLevel, (domain: string) => {
+    this.defaultDomain = sectionIndex.entries().next().value[0]
+    this.domainSubscription = domain.get(this.domainLevel, (domainFragment: string) => {
       return new Promise<boolean>(async (res) => {
 
         let verticalOffset = padding
         
-
-        if (this.sectionAliasList.reverseIndex[domain] !== undefined) {
-          let reverseAlias = this.sectionAliasList.reverseIndex[domain]
-          let originalDomain = domain
+        let hasReverseIndex = this.sectionAliasList.reverseIndex[domainFragment] !== undefined
+        if (hasReverseIndex) {
+          let reverseAlias = this.sectionAliasList.reverseIndex[domainFragment]
+          let originalDomain = domainFragment
           if (reverseAlias instanceof SimpleAlias.Reverse) {
-            domain = reverseAlias.root
+            domainFragment = reverseAlias.root
           }
           else if (reverseAlias instanceof ScrollProgressAliasIndex.Reverse) {
-            domain = reverseAlias.root
+            domainFragment = reverseAlias.root
             verticalOffset += reverseAlias.progress - (windowMargin * window.innerHeight)
           }
           this.activateSectionName(originalDomain)
         }
-        else this.activateSectionName(this.currentlyActiveSectionName = this.sectionAliasList.aliasify(domain).get().first)
+
+        if (domainFragment === "") {
+          domainFragment = this.defaultDomain
+          this.currentlyActiveSectionRootName = this.sectionAliasList.getRootOfAlias(domainFragment)
+          let q = this.sectionAliasList.aliasify(this.merge(domainFragment)).get().first
+          this.activateSectionName(q)
+          domain.set(q, this.domainLevel, false)
+        }
+        else if (!hasReverseIndex) {
+          this.currentlyActiveSectionRootName = this.sectionAliasList.getRootOfAlias(domainFragment)
+          this.activateSectionName(this.sectionAliasList.aliasify(this.merge(domainFragment)).get().first)
+        }
+
+        
 
 
         let scrollAnimation
         this.inScrollAnimation.set(scrollAnimation = Symbol())
         this.userInitedScrollEvent = false
 
-        let elem = await sectionIndex.get(domain) as HTMLElement
+        let elem = await sectionIndex.get(domainFragment) as HTMLElement
         if (elem !== undefined) {
           res(true)
           await scrollTo(elem, {
@@ -285,10 +303,13 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         }
       })
      
-    }, true, this.sectionAliasList.aliasify(sectionIndex.entries().next().value[0]).get().first)
+    }, true)
 
+
+    let dom = this.domainSubscription.domain
+    if (dom === "") dom = this.defaultDomain
     
-    let currentlyActiveSectionElem = await sectionIndex.get(this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)) as any as PageSection
+    let currentlyActiveSectionElem = await sectionIndex.get(this.sectionAliasList.getRootOfAlias(dom)) as any as PageSection
     let globalToken: Symbol
     let aliasSubscriptions: DataSubscription<unknown[]>[] = []
     let localSegmentScrollDataIndex = constructIndex((pageSectionElement: PageSection) => this.elementBody.scrollData().tunnel(prog => prog - pageSectionElement.offsetTop))
@@ -325,8 +346,8 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
         sectionIndex.forEach(async (val, root) => {
           if ((await val) === elem) {
-            if (myToken !== globalToken || this.currentlyActiveSectionName === root) return
-            this.currentlyActiveSectionName = root
+            if (myToken !== globalToken || this.currentlyActiveSectionRootName === root) return
+            this.currentlyActiveSectionRootName = root
 
 
             if (currentlyActiveSectionElem !== elem) {
@@ -339,7 +360,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             aliasSubscriptions.clear()
 
 
-            root = this.mergeIndex[root] ? this.mergeIndex[root] : root
+            root = this.merge(root)
 
             let alias = this.sectionAliasList.getAllAliasesByRoot(root)
             if (alias) {
@@ -475,15 +496,18 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     let sectionIndex: ResourcesMap = await this.sectionIndex
     this.domainSubscription.vate(active)
 
+    let dom = this.domainSubscription.domain
+    if (dom === "") dom = this.defaultDomain
+
     if (active) {
-      let init = this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)
+      let init = this.sectionAliasList.getRootOfAlias(dom)
       let sec = sectionIndex.get(init)
       if (sec === undefined) return false
     
       sec.priorityThen((e: PageSection) => {
         e.scrollIntoView(true)
         let verticalOffset = padding
-        let ali = this.sectionAliasList.reverseIndex[this.domainSubscription.domain]
+        let ali = this.sectionAliasList.reverseIndex[dom]
         if (ali) if (ali instanceof ScrollProgressAliasIndex.Reverse) verticalOffset += ali.progress - (windowMargin * window.innerHeight)
         this.elementBody.scrollBy(0, verticalOffset)
       })
@@ -500,7 +524,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         elem = await elem
         this.mainIntersectionObserver.unobserve(elem)
       })
-      delete this.currentlyActiveSectionName
+      delete this.currentlyActiveSectionRootName
     }
   }
 

@@ -260,7 +260,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
           }
           else if (reverseAlias instanceof ScrollProgressAliasIndex.Reverse) {
             domainFragment = reverseAlias.root
-            verticalOffset += reverseAlias.progress - padding
+            verticalOffset += reverseAlias.progress - padding + .5
           }
           this.activateSectionName(originalDomain)
         }
@@ -510,7 +510,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         e.scrollIntoView(true)
         let verticalOffset = padding
         let ali = this.sectionAliasList.reverseIndex[this.domainSubscription.domain]
-        if (ali) if (ali instanceof ScrollProgressAliasIndex.Reverse) verticalOffset += ali.progress - padding
+        if (ali) if (ali instanceof ScrollProgressAliasIndex.Reverse) verticalOffset += ali.progress - padding + .5
         this.elementBody.scrollBy(0, verticalOffset)
       })
           

@@ -12,7 +12,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
     
     super(new ImportanceMap<() => Promise<any>, any>(
         {
-        key: new Import("thumbnail", 1, (Thumbnail: typeof Element) =>
+        key: new Import("", 1, (Thumbnail: typeof Element) =>
         {
           let thumbnail = new (Thumbnail as typeof ParameterThumbnail)();
           thumbnail.note("Gesundheit");
@@ -75,8 +75,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../_themeAble/_text/imageTextblob/imageTextblob")
         },
     ), domainLevel, setPage, sectionChangeCallback, undefined, {
-        schularzt2: "schularzt",
-        thumbnail: "tasks"
+        schularzt2: "schularzt"
     })
 
   }

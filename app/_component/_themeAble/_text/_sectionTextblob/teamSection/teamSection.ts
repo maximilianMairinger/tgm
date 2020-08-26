@@ -1,13 +1,13 @@
 import declareComponent from "../../../../../lib/declareComponent";
 import sectionTextblob from "../sectionTextblob";
 
-export default declareComponent("team-jobs-section", class TeamJobsSection extends sectionTextblob{
+export default declareComponent("team-section", class TeamJobsSection extends sectionTextblob{
 
     constructor(){
         super();
         this.theme('light');
-        this.heading("Team & Jobs");
-        this.subheading("der IT Abteilung.");
+        this.heading("Team");
+        this.subheading("der RT Abteilung.");
         this.note("Unser/e");
         this.hsize({max:68, min:40});
         this.hmobile({max:40, min:30});
@@ -17,6 +17,6 @@ export default declareComponent("team-jobs-section", class TeamJobsSection exten
     }
 
     stl() {
-        return super.stl() + require("./teamJobsSection.css").toString();
+        return super.stl() + require("./teamSection.css").toString();
     }
 })

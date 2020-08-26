@@ -4,7 +4,7 @@ import { set } from "../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../lib/lazyLoad"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import TeamLeitungThumbnail from "../../../../../_themeAble/_text/_thumbnail/teamLeitungThumbnail/teamLeitungThumbnail";
-import TeamJobsSection from "../../../../../_themeAble/_text/_sectionTextblob/teamJobsSection/teamJobsSection";
+import TeamJobsSection from "../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../_themeAble/_text/imageTextblob/imageTextblob"
 
 export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends LazySectionedPage {
@@ -12,7 +12,7 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
     
     super(new ImportanceMap<() => Promise<any>, any>(
         {
-        key: new Import("thumbnail", 1, (Thumbnail: typeof Element) =>
+        key: new Import("", 1, (Thumbnail: typeof Element) =>
         {
           let thumbnail = new (Thumbnail as typeof TeamLeitungThumbnail)();
           thumbnail.note("mit");
@@ -23,7 +23,7 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
         ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_themeAble/_text/_thumbnail/teamLeitungThumbnail/teamLeitungThumbnail")
         },
         {
-            key: new Import("teamJobs", 1, (TeamJobs: typeof Element) =>
+            key: new Import("team", 1, (TeamJobs: typeof Element) =>
                 {
                     let teamJobs = new (TeamJobs as typeof TeamJobsSection)();
                     teamJobs.subheading("der RT Abteilung");
@@ -32,7 +32,7 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
                         "Derzeit suchen wir nach einem LehrerInnen im bereich Softwareentwicklung, Fotographie, Graphic Design und Web-Entwicklung bestmöglichst mit Praxiserfahrung.")
                     return new WrapperSection(teamJobs);
                 }
-            ), val: () => import(/* webpackChunkName: "teamJobs" */"../../../../../_themeAble/_text/_sectionTextblob/teamJobsSection/teamJobsSection")
+            ), val: () => import(/* webpackChunkName: "teamSection" */"../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection")
         },
         {
             key: new Import("leitung", 1, (leitung: typeof Element) =>
@@ -69,9 +69,7 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
                 }
             ), val: () => import(/* webpackChunkName: "schueler" */"../../../../../_themeAble/_text/imageTextblob/imageTextblob")
         }
-    ), domainLevel, setPage, sectionChangeCallback, undefined, {
-        thumbnail: "teamJobs",
-      })
+    ), domainLevel, setPage, sectionChangeCallback, undefined)
 
   }
 

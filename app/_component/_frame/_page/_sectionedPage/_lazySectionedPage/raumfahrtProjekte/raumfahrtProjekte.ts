@@ -13,7 +13,7 @@ export default declareComponent("raumfahrt-projekte", class RaumfahrtProjekte ex
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
-        key: new Import("thumbnail", 1, (Thumbnail: typeof Element) =>
+        key: new Import("", 1, (Thumbnail: typeof Element) =>
         {
           let thumbnail = new (Thumbnail as typeof ParameterThumbnail)();
           thumbnail.note("Bemerkenswerte")
@@ -39,9 +39,7 @@ export default declareComponent("raumfahrt-projekte", class RaumfahrtProjekte ex
         ), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
       },
 
-    ), domainLevel, setPage, sectionChangeCallback, undefined, {
-      thumbnail:"info"
-    })
+    ), domainLevel, setPage, sectionChangeCallback, undefined)
 
   }
 

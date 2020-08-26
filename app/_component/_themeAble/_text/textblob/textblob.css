@@ -95,6 +95,7 @@ text-box content-text:not(:empty){
 }
 
 text-box c-link.link {
+    display: none;
     font-weight: bold;
     color: var(--strong-text-color);
     text-decoration: none;

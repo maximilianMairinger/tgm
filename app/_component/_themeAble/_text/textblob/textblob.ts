@@ -132,7 +132,7 @@ export default class Textblob extends Text {
   linktext(linktext: string): void
   linktext(linktext?: string): any {
     if (linktext) {
-      this.link.css({marginTop: 14})
+      this.link.css({marginTop: 14, display:"block"});
     }
     return this.link.content(linktext)
   }

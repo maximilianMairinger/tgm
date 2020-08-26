@@ -50,6 +50,7 @@ slidy-underline {
 }
 
 link-body {
+  width: -moz-fit-content;
   width: fit-content;
   display: block;
   height: fit-content;

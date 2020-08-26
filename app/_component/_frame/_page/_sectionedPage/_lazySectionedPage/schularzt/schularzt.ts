@@ -7,7 +7,7 @@ import ParameterThumbnail from "../../../../../_themeAble/_text/_thumbnail/param
 import TeamJobsSection from "../../../../../_themeAble/_text/_sectionTextblob/teamJobsSection/teamJobsSection";
 import ImageTextblob from "../../../../../_themeAble/_text/imageTextblob/imageTextblob"
 
-export default declareComponent("raumfahrt-team", class Schularzt extends LazySectionedPage {
+export default declareComponent("schularzt", class Schularzt extends LazySectionedPage {
   constructor(setPage: (domain: string) => void, domainLevel: number, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(

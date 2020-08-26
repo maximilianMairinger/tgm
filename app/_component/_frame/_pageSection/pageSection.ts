@@ -7,10 +7,10 @@ export default abstract class PageSection extends Frame {
     super()
     
   }
-
+  public localScrollProgressData?: ScrollData
   public getLocalScrollProgressData(): ScrollData {
-    console.warn("getLocalScrollProgress is not implemented by wrapper.")
-    return new ScrollData
+    if (this.localScrollProgressData) return this.localScrollProgressData
+    return this.localScrollProgressData = new ScrollData
   }
 
   stl() {

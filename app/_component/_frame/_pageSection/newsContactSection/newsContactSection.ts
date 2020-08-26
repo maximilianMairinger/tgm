@@ -96,25 +96,24 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
 
     let startInitAnim = scrollPositionAnimationStart + 650
-    this.elementBody.scrollEvent(startInitAnim, 
-      () => {
+    this.scrollPosData.scrollTrigger(startInitAnim)
+      .on("forward", () => {
         return [
           this.mapPointerWrapper.show().anim({opacity: 1, translateY: .1}),
           this.mapTextBlobFadin.show().anim({opacity: 1, translateY: .1})
         ]
-      }, 
-      () => {
+      })
+      .on("backward", () => {
         return [
           this.mapPointerWrapper.anim({opacity: 0, translateY: -5}).then(() => this.mapPointerWrapper.hide()),
           this.mapTextBlobFadin.anim({opacity: 0, translateY: -10}).then(() => this.mapTextBlobFadin.hide())
         ]
-      }
-    )
+      })
 
 
     let doneProgress = scrollPositionAnimationStart + 800
     let done: boolean
-    this.elementBody.scrollData().get((progress) => {
+    this.scrollPosData.get((progress) => {
       if (progress > doneProgress) {
         if (!done) {
           done = true
@@ -412,7 +411,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
     this.mapPointer.on("click", openLocationInfo)
     this.overlay.on("click", closeLocationInfo)
-    this.elementBody.on("scroll", closeLocationInfo)
+    this.scrollPosData.get(closeLocationInfo)
   }
   private scrollPosData = this.getLocalScrollProgressData()
 

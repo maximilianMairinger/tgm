@@ -237,6 +237,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   }
 
   private defaultDomain: string
+  private firstDomain: string
   private mainIntersectionObserver: IntersectionObserver
   private currentlyActiveSectionRootName: string
   private intersectingIndex: Element[] = []
@@ -244,7 +245,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     let sectionIndex = await this.sectionIndex as ResourcesMap
 
     let entries = sectionIndex.entries()
-    this.defaultDomain = entries.next().value[0]
+    this.firstDomain = this.defaultDomain = entries.next().value[0]
     if (this.defaultDomain === "") this.defaultDomain = entries.next().value[0]
     this.domainSubscription = domain.get(this.domainLevel, (domainFragment: string) => {
       return new Promise<boolean>(async (res) => {
@@ -299,7 +300,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         }
       })
      
-    }, true)
+    }, true, this.firstDomain)
 
 
     

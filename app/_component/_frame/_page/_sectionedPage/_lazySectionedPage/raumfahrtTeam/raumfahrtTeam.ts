@@ -4,7 +4,7 @@ import { set } from "../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../lib/lazyLoad"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import TeamLeitungThumbnail from "../../../../../_themeAble/_text/_thumbnail/teamLeitungThumbnail/teamLeitungThumbnail";
-import TeamJobsSection from "../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection";
+import TeamSection from "../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../_themeAble/_text/imageTextblob/imageTextblob"
 
 export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends LazySectionedPage {
@@ -25,12 +25,12 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
         {
             key: new Import("info", 1, (Team: typeof Element) =>
                 {
-                    let teamJobs = new (Team as typeof TeamJobsSection)();
-                    teamJobs.subheading("der RT Abteilung");
-                    teamJobs.content("We are a bunch of talented and passionate people who hate beige walls and dull parties. If this is your case you can always send us your information!\n" +
+                    let teamSection = new (Team as typeof TeamSection)();
+                    teamSection.subheading("der RT Abteilung");
+                    teamSection.content("We are a bunch of talented and passionate people who hate beige walls and dull parties. If this is your case you can always send us your information!\n" +
                         "\n" +
                         "Derzeit suchen wir nach einem LehrerInnen im bereich Softwareentwicklung, Fotographie, Graphic Design und Web-Entwicklung bestmöglichst mit Praxiserfahrung.")
-                    return new WrapperSection(teamJobs);
+                    return new WrapperSection(teamSection);
                 }
             ), val: () => import(/* webpackChunkName: "teamSection" */"../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection")
         },

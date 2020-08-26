@@ -4,7 +4,7 @@ import { set } from "../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../lib/lazyLoad"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import ParameterThumbnail from "../../../../../_themeAble/_text/_thumbnail/parameterThumbnail/parameterThumbnail";
-import TeamJobsSection from "../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection";
+import TeamSection from "../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../_themeAble/_text/imageTextblob/imageTextblob"
 
 export default declareComponent("schularzt", class Schularzt extends LazySectionedPage {
@@ -24,12 +24,12 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
         ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_themeAble/_text/_thumbnail/parameterThumbnail/parameterThumbnail")
         },
         {
-            key: new Import("tätigkeiten", 1, (TeamJobs: typeof Element) =>
+            key: new Import("tätigkeiten", 1, (_TeamSection: typeof Element) =>
                 {
-                    let teamJobs = new (TeamJobs as typeof TeamJobsSection)();
-                    teamJobs.heading("Unsere Tätigkeiten");
-                    teamJobs.subheading("umfasst");
-                    teamJobs.content("\n" +
+                    let teamSection = new (_TeamSection as typeof TeamSection)();
+                    teamSection.heading("Unsere Tätigkeiten");
+                    teamSection.subheading("umfasst");
+                    teamSection.content("\n" +
                         "    die Versorgung der Schüler und Schülerinnen bei akuten Zwischenfällen oder Erkrankungen\n" +
                         "    (auch psychische Ausnahmesituationen),\n" +
                         "    Versorgung bei chronischen Krankheiten\n" +
@@ -37,9 +37,9 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
                         "    Entscheidung, inwiefern einem Schüler oder einer Schülerin die Belastungen der Ausbildung am TGM zuzumuten sind (zB BSP, Werkstätten),\n" +
                         "    \"Routineuntersuchungen\" insbesondere für die Schulveranstaltungen,\n" +
                         "    in besonderen Situationen (Diabetes mellitus, Epilepsie, körperliche Behinderung oder schwereren Anpassungsstörungen) wird gemeinsam mit der Leitung der Schulveranstaltung entschieden, wie und ob man ein Teilnahme ermöglichen könnte.\n")
-                    return new WrapperSection(teamJobs);
+                    return new WrapperSection(teamSection);
                 }
-            ), val: () => import(/* webpackChunkName: "teamJobs" */"../../../../../_themeAble/_text/_sectionTextblob/teamJobsSection/teamJobsSection")
+            ), val: () => import(/* webpackChunkName: "teamSection" */"../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection")
         },
         {
             key: new Import("schularzt", 1, (Schularzt: typeof Element) =>

@@ -1,7 +1,7 @@
 import declareComponent from "../../../../../lib/declareComponent";
 import sectionTextblob from "../sectionTextblob";
 
-export default declareComponent("team-section", class TeamJobsSection extends sectionTextblob{
+export default declareComponent("team-section", class TeamSection extends sectionTextblob{
 
     constructor(){
         super();

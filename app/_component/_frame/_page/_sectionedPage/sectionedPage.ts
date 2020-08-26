@@ -262,12 +262,12 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             domainFragment = reverseAlias.root
             verticalOffset += reverseAlias.progress - padding + .5
           }
-          this.activateSectionName(originalDomain)
+          this.activateSectionName(sectionIndex.deslugify(originalDomain))
         }
 
         else {
           this.currentlyActiveSectionRootName = this.sectionAliasList.getRootOfAlias(domainFragment)
-          this.activateSectionName(this.sectionAliasList.aliasify(this.merge(domainFragment)).get().first)
+          this.activateSectionName(this.sectionAliasList.aliasify(this.merge(sectionIndex.deslugify(domainFragment))).get().first)
         }
 
         
@@ -277,7 +277,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         this.inScrollAnimation.set(scrollAnimation = Symbol())
         this.userInitedScrollEvent = false
 
-        let elem = await sectionIndex.get(domainFragment) as HTMLElement
+        let elem = await sectionIndex.getSlugifyed(domainFragment) as HTMLElement
         if (elem !== undefined) {
           res(true)
           await scrollTo(elem, {

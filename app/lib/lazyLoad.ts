@@ -66,6 +66,9 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
 }
 
 import slugify from "slugify"
+export function slugifyUrl(url: string) {
+  return url.split("/").replace((s) => slugify(s)).join("/")
+}
 
 export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb: (a: any) => void) => void}> {
   public fullyLoaded: Promise<any>
@@ -82,10 +85,22 @@ export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb:
     this.fullyLoaded = Promise.all(proms)
     this.anyLoaded = Promise.race(proms)
   }
+  public readonly slugifiedIndex = {}
+  public set(key: string, val: Promise<any> & {priorityThen: (cb: (a: any) => void) => void}) {
+    this.slugifiedIndex[slugifyUrl(key)] = key
+    return super.set(key, val)
+  }
+  public delete(key: string) {
+    this.slugifiedIndex[slugifyUrl(key)] = key
+    return super.delete(key)
+  }
   public getSlugifyed(wantedKey: string): Promise<any> & {priorityThen: (cb: (a: any) => void) => void} {
-    for (let key of this.keys()) {
-      if (wantedKey === slugify(key)) return this.get(key)
+    for (let slug in this.slugifiedIndex) {
+      if (wantedKey === slug) return this.get(this.slugifiedIndex[slug])
     }
+  }
+  public deslugify(key: string) {
+    return this.slugifiedIndex[key] !== undefined ? this.slugifiedIndex[key] : key
   }
   public get(key: string): Promise<any> & {priorityThen: (cb: (a: any) => void) => void} {
     let val = super.get(key);

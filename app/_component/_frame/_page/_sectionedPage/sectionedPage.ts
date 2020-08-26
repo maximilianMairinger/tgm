@@ -5,7 +5,7 @@ import WaapiEasing from "waapi-easing";
 import { ResourcesMap } from "../../../../lib/lazyLoad";
 import LazySectionedPage from "./_lazySectionedPage/lazySectionedPage";
 import PageSection from "../../_pageSection/pageSection";
-import { EventListener } from "extended-dom";
+import { EventListener, ScrollData } from "extended-dom";
 import { Data, DataCollection, DataSubscription } from "josm";
 import { constructIndex } from "key-index"
 
@@ -44,17 +44,17 @@ export class ScrollProgressAlias {
 
 export class ScrollProgressAliasIndex<Root extends string = string> {
   public readonly root: Data<Root>
-  public readonly scrollPorgressAliases: Readonly<ScrollProgressAlias[]>
+  public readonly scrollProgressAliases: Readonly<ScrollProgressAlias[]>
   public readonly aliases: DataCollection<string[][]>
 
   constructor(root: Root | Data<Root>, scrollProgressAlias: ScrollProgressAlias | Readonly<ScrollProgressAlias[]>) {
     this.root = root instanceof Data ? root : new Data(root)
-    this.scrollPorgressAliases = scrollProgressAlias instanceof Array ? scrollProgressAlias : [scrollProgressAlias]
-    this.aliases = new DataCollection(...(this.scrollPorgressAliases as ScrollProgressAlias[]).Inner("aliases")) as DataCollection<string[][]>
+    this.scrollProgressAliases = scrollProgressAlias instanceof Array ? scrollProgressAlias : [scrollProgressAlias]
+    this.aliases = new DataCollection(...(this.scrollProgressAliases as ScrollProgressAlias[]).Inner("aliases")) as DataCollection<string[][]>
   }
 
   protected buildReverseAlias(aliasReverses: ReverseAliasIndex) {
-    for (let alias of this.scrollPorgressAliases) {
+    for (let alias of this.scrollProgressAliases) {
       
       let aliasesLength = 0
 
@@ -260,7 +260,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
           }
           else if (reverseAlias instanceof ScrollProgressAliasIndex.Reverse) {
             domainFragment = reverseAlias.root
-            verticalOffset += reverseAlias.progress - (windowMargin * window.innerHeight)
+            verticalOffset += reverseAlias.progress - padding + .5
           }
           this.activateSectionName(originalDomain)
         }
@@ -333,7 +333,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         }
       })
 
-      let elem = this.intersectingIndex.first as LazySectionedPage
+      let elem = this.intersectingIndex.first as PageSection
 
 
       if (!this.inScrollAnimation.get()) {
@@ -372,7 +372,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
                 let currentlyTheSmallestWantedProgressTemp = Infinity
                 let currentlyTheSmallestWantedProgress = new Data(currentlyTheSmallestWantedProgressTemp)
                 
-                aliasSubscriptions.add(new DataCollection(...(alias.scrollPorgressAliases as ScrollProgressAlias[]).Inner("progress")).get((...wantedProgresses) => {
+                aliasSubscriptions.add(new DataCollection(...(alias.scrollProgressAliases as ScrollProgressAlias[]).Inner("progress")).get((...wantedProgresses) => {
                   currentlyTheSmallestWantedProgressTemp = Infinity
 
                   wantedProgresses.ea((wantedProgress) => {
@@ -384,9 +384,9 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
                 let lastActiveName: Data<string> = new Data()
 
-                for (let i = 0; i < alias.scrollPorgressAliases.length; i++) {
-                  const q = alias.scrollPorgressAliases[i] as ScrollProgressAlias
-                  let nextProg: Data<number> = alias.scrollPorgressAliases[i + 1] as any
+                for (let i = 0; i < alias.scrollProgressAliases.length; i++) {
+                  const q = alias.scrollProgressAliases[i] as ScrollProgressAlias
+                  let nextProg: Data<number> = alias.scrollProgressAliases[i + 1] as any
                   if (nextProg === undefined) nextProg = new Data(Infinity)
                   else nextProg = (nextProg as any).progress
 
@@ -399,7 +399,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
                   
                   let nameData = q.aliases.tunnel(aliases => aliases.first)
 
-                  let sub = new DataSubscription(new DataCollection(nameData, q.progress, nextProg, localSegmentScrollDataIndex(elem)) as any, (name: string, wantedProgress, nextProg, currentProgress) => {
+                  let sub = new DataSubscription(new DataCollection(nameData, q.progress, nextProg, localSegmentScrollDataIndex(elem) as Data<number>) as any, (name: string, wantedProgress, nextProg, currentProgress) => {
                     if (isSmallest) {
                       wantedProgress = -Infinity
                     }
@@ -438,9 +438,18 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     sectionIndex.forEach(async (section: Promise<PageSection>) => {
       let sec = await section
 
-      if (sec.scrollProgressCallback) localSegmentScrollDataIndex(sec).get((top) => {
-        sec.scrollProgressCallback(top, top + window.innerHeight)
-      })
+      
+      if (sec.localScrollProgressData) {
+        sec.getLocalScrollProgressData = () => sec.localScrollProgressData
+        localSegmentScrollDataIndex(sec).get(sec.localScrollProgressData.set.bind(sec.localScrollProgressData))
+      }
+      else {
+        sec.getLocalScrollProgressData = () => {
+          sec.getLocalScrollProgressData = () => sec.localScrollProgressData
+          return sec.localScrollProgressData = localSegmentScrollDataIndex(sec)
+        }
+
+      }
     })
 
     if (currentlyActiveSectionElem === undefined) return false
@@ -501,7 +510,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         e.scrollIntoView(true)
         let verticalOffset = padding
         let ali = this.sectionAliasList.reverseIndex[this.domainSubscription.domain]
-        if (ali) if (ali instanceof ScrollProgressAliasIndex.Reverse) verticalOffset += ali.progress - (windowMargin * window.innerHeight)
+        if (ali) if (ali instanceof ScrollProgressAliasIndex.Reverse) verticalOffset += ali.progress - padding + .5
         this.elementBody.scrollBy(0, verticalOffset)
       })
           

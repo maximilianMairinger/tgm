@@ -6,6 +6,7 @@ import AbendschuleSection from "../../../../_pageSection/abendschuleSection/aben
 import LandingSection from "../../../../_pageSection/landingSection/landingSection"
 import NewsContactSection from "../../../../_pageSection/newsContactSection/newsContactSection"
 import { ScrollProgressAlias, ScrollProgressAliasIndex, AliasList, SimpleAlias } from "../../sectionedPage"
+import Footer from "../../../../_pageSection/footer/footer"
 
 
 export default declareComponent("home-page", class Homepage extends LazySectionedPage {
@@ -13,7 +14,7 @@ export default declareComponent("home-page", class Homepage extends LazySectione
     
     let newsToContactScrollProgressIndex = new ScrollProgressAliasIndex("newsKontakt", [
       new ScrollProgressAlias(0, "news"),
-      new ScrollProgressAlias(900, "kontakt")
+      new ScrollProgressAlias(760, "kontakt")
     ])
 
     super(new ImportanceMap<() => Promise<any>, any>(
@@ -36,10 +37,17 @@ export default declareComponent("home-page", class Homepage extends LazySectione
         key: new Import("newsKontakt", 1, (_NewsContactSection: typeof NewsContactSection) =>
           new _NewsContactSection()
         ), val: () => import(/* webpackChunkName: "newsContactSection" */"../../../../_pageSection/newsContactSection/newsContactSection")
+      },
+      {
+        key: new Import("footer", 1, (_Footer: typeof Footer) =>
+          new _Footer()
+        ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
       }
     ), domainLevel, setPage, sectionChangeCallback, new AliasList(
       newsToContactScrollProgressIndex
-    ))
+    ), {
+      footer: "kontakt"
+    })
   }
 
   stl() {

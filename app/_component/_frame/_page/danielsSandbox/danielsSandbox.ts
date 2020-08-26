@@ -1,6 +1,6 @@
 import { declareComponent } from "../../../../lib/declareComponent"
 import Page from "../page"
-import "../../../_card/newscard/newscard";
+import Nc from "../../../_themeAble/_card/newscard/newscard"
 import "../../../footleiste/footleiste"
 import "../../../cardContainer/cardcontainer"
 

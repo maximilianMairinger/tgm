@@ -23,6 +23,8 @@ const vienna = {
 
 const scrollPositionAnimationStart = 100
 
+
+
 const tgmPosition = {
   x: -35,
   y: -25
@@ -34,6 +36,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
   private allSvg = this.q("svg g#all")
   private allSvg2 = this.q("svg g#all2")
   // private svgElem = this.q("svg#mapSvg")
+  private allFrame = this.q("all-frame")
   private mapPointerAnimation = this.q("map-pointer-animation")
   private mapPointerWrapper = this.q("map-pointer-wrapper")
   private mapPointerCenter = this.q("map-pointer-center")
@@ -54,8 +57,8 @@ export default declareComponent("news-contact-section", class extends PageSectio
   private mapTextBlobFadin = ce("map-textblob-fadin").apd(this.mapTextBlobWrapper)
 
   private newsTextBlob = new TextBlob().addClass("news")
-  private newsTextBlobWrapper = ce("news-textblob-wrapper").apd(this.mapTextBlob)
-  private newsTextBlobFadin = ce("news-textblob-fadin").apd(this.mapTextBlobWrapper)
+  private newsTextBlobWrapper = ce("news-textblob-wrapper").apd(this.newsTextBlob)
+  private newsTextBlobFadin = ce("news-textblob-fadin").apd(this.newsTextBlobWrapper)
 
   
   constructor() {
@@ -76,24 +79,14 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.mapTextBlob.content("Content content content content content content content content content content content content content content content content content content content.")
     this.mapTextBlob.hsize({"max": 60, "min": 40})
     this.mapTextBlob.hmobile({"max": 55, "min": 35})
-
-    this.stayInFrameElem.insertBefore(this.mapTextBlobFadin, this.overlay)
-
-
+    this.allFrame.insertBefore(this.mapTextBlobFadin, this.overlay)
+    console.log(this.mapTextBlobFadin.childs())
 
 
 
 
 
-
-
-
-
-    setTimeout(() => {
-      this.elementBody.scrollTop = 900
-    }, 100)
-
-    let guide = this.elementBody.scrollData()
+    let guide = this.scrollPosData
     let mapOptions = {start: new Data(scrollPositionAnimationStart), end: new Data(scrollPositionAnimationStart + 700)}
 
 
@@ -101,30 +94,29 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.mapSvgPaths[1].anim({d: vienna.path.b, translateY: vienna.offset.y, translateX: vienna.offset.x}, mapOptions, guide)
 
 
-    let startInitAnim = scrollPositionAnimationStart + 650
-    this.elementBody.scrollEvent(startInitAnim, 
-      () => {
+    let startInitAnim = scrollPositionAnimationStart + 660
+    this.scrollPosData.scrollTrigger(startInitAnim)
+      .on("forward", () => {
         return [
           this.mapPointerWrapper.show().anim({opacity: 1, translateY: .1}),
           this.mapTextBlobFadin.show().anim({opacity: 1, translateY: .1})
         ]
-      }, 
-      () => {
+      })
+      .on("backward", () => {
         return [
           this.mapPointerWrapper.anim({opacity: 0, translateY: -5}).then(() => this.mapPointerWrapper.hide()),
           this.mapTextBlobFadin.anim({opacity: 0, translateY: -10}).then(() => this.mapTextBlobFadin.hide())
         ]
-      }
-    )
+      })
 
 
-    let doneProgress = scrollPositionAnimationStart + 800
+    let doneProgress = scrollPositionAnimationStart + 700
     let done: boolean
-    this.elementBody.scrollData().get((progress) => {
+    this.scrollPosData.get((progress) => {
       if (progress > doneProgress) {
         if (!done) {
           done = true
-          this.stayInFrameElem.css({position: "absolute", top: doneProgress})
+          this.stayInFrameElem.css({position: "relative", top: doneProgress})
         }
       }
       else {
@@ -418,12 +410,10 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
     this.mapPointer.on("click", openLocationInfo)
     this.overlay.on("click", closeLocationInfo)
-    this.elementBody.on("scroll", closeLocationInfo)
+    this.scrollPosData.get(closeLocationInfo)
   }
+  private scrollPosData = this.getLocalScrollProgressData()
 
-  scrollProgressCallback(top: number, bot: number) {
-    // console.log(`top (${top}); bot (${bot})`)
-  }
 
   stl() {
     return super.stl() + require("./newsContactSection.css").toString()

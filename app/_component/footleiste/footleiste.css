@@ -26,14 +26,14 @@ inner-wrapper {
     grid-column-gap: 40px;
 }
 
-logo {
+my-logo {
     margin-top: 13px;
     background-image: url("./logo.svg");
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-items {
+my-items {
     font-size: 13.5px;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
@@ -42,7 +42,7 @@ items {
     align-items: center;
 }
 
-hbar {
+my-hbar {
     display: block;
     background:#C2BFBC;
     height: .5px;
@@ -52,23 +52,23 @@ hbar {
     grid-column-end: 5;
 }
 
-item {
+my-item {
     margin-top: 5px;
     color: #585e66;
     grid-row-start: 3;
     transition-duration: 0.3s;
 }
 
-item {
+my-item {
     display: none;
 }
 
-something {
+my-something {
     margin-top: 5px;
     color: #585e66;
 }
 
-max-du-tard {
+my-qfix {
     width: 100%;
     justify-content: space-around;
     display: flex;
@@ -77,7 +77,7 @@ max-du-tard {
     grid-column-end: 6;
 }
 
-item:after {
+my-item:after {
     content: '';
     width: 0px;
     height: 1px;
@@ -86,14 +86,34 @@ item:after {
     transition: 300ms;
 }
 
-item:hover {
+my-item:hover {
     cursor: pointer;
     font-weight: bold;
 }
-  
-item:hover:after {
+
+my-item:hover:after {
     width: 100%;
 }
+
+my-something:after {
+    content: '';
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: #585e66;
+    transition: 300ms;
+}
+
+my-something:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+my-something:hover:after {
+    width: 100%;
+}
+  
+
 
 mobile-logo {
     display: none;
@@ -110,14 +130,14 @@ mobile-logo {
 
 @media only screen and (max-width: 1000px) {  
 
-    max-du-tard {
+    my-qfix {
         display: none;
     }
 
-    item {
+    my-item {
         display: block;
     }
-    wrapper {
+    my-wrapper {
       padding: 0px;
       margin: 0px;
       width: 100%;
@@ -135,7 +155,7 @@ mobile-logo {
         grid-template-columns: 1fr;
     }
 
-    items {
+    my-items {
         font-size: 13.5px;
         display: grid;
         grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -148,7 +168,7 @@ mobile-logo {
         grid-template-rows: 1fr 1fr 1fr 1fr; 
     }
 
-    item {
+    my-item {
         margin-top: 5px;
         margin-bottom: 5px;
         color: #585e66;
@@ -157,7 +177,7 @@ mobile-logo {
         grid-column-end:4;
     }
 
-    hbar {
+    my-hbar {
         grid-row-start: 2;
         grid-column-start:2;
         grid-column-end:4;
@@ -196,7 +216,7 @@ mobile-logo {
         grid-row-end: 4;
     }
 
-    logo {
+    my-logo {
         display: none;
     }
 

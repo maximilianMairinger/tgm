@@ -1,18 +1,26 @@
 scroll-ly {
   display: block;
   position: relative;
-  height: 5000px;
+  height: calc(800px);
   width: 0px;
 }
 
 map-frame {
   display: flex;
   align-items: center;
-  position: absolute;
   max-width: 980px;
   width: 100%;
   height: 100%;
   top: 0;
+  left: 0;
+  position: absolute;
+  transform: translateY(30px);
+}
+
+all-frame {
+  width: 100%;
+  height: 100vh;
+  display: block;
 }
 
 map-pointer-center {

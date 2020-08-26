@@ -6,7 +6,6 @@ scroll-ly {
 }
 
 svg#mapSvg {
-  position: absolute;
   top: -9px;
 }
 

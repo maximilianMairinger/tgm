@@ -145,11 +145,12 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
     
     if (recall) {
       let { domain, domainLevel } = recall
-      parseDomainToDomainIndex(domIndex, domain, domainLevel)
-      let endDomain = domIndex.join(dirString)
+      if (parseDomainToDomainIndex(domIndex, domain, domainLevel)) {
+        let endDomain = domIndex.join(dirString)
 
-      domIndex.set(domainIndexRollback)
-      set(endDomain, 0, true)
+        domIndex.set(domainIndexRollback)
+        set(endDomain, 0, true)
+      }
     }
     else {
       history.pushState(argData, updateTitle(), endDomain)

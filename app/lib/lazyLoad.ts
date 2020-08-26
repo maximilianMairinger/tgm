@@ -83,11 +83,11 @@ export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb:
     this.anyLoaded = Promise.race(proms)
   }
   set(key: string, val: Promise<any> & {priorityThen: (cb: (a: any) => void) => void}) {
-    key = slugify(key)
+    key = key.split("/").replace((s) => slugify(s)).join("/")
     return super.set(key, val)
   }
   delete(key: string) {
-    key = slugify(key)
+    key = key.split("/").replace((s) => slugify(s)).join("/")
     return super.delete(key)
   }
   public get(key: string): Promise<any> & {priorityThen: (cb: (a: any) => void) => void} {

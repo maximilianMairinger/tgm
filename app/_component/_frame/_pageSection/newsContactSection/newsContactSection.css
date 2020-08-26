@@ -5,10 +5,6 @@ scroll-ly {
   width: 0px;
 }
 
-svg#mapSvg {
-  top: -9px;
-}
-
 map-frame {
   display: flex;
   align-items: center;
@@ -18,10 +14,10 @@ map-frame {
   top: 0;
   left: 0;
   position: absolute;
+  transform: translateY(30px);
 }
 
 all-frame {
-  
   width: 100%;
   height: 100vh;
   display: block;

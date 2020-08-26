@@ -23,9 +23,9 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
         ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_themeAble/_text/_thumbnail/teamLeitungThumbnail/teamLeitungThumbnail")
         },
         {
-            key: new Import("team", 1, (TeamJobs: typeof Element) =>
+            key: new Import("info", 1, (Team: typeof Element) =>
                 {
-                    let teamJobs = new (TeamJobs as typeof TeamJobsSection)();
+                    let teamJobs = new (Team as typeof TeamJobsSection)();
                     teamJobs.subheading("der RT Abteilung");
                     teamJobs.content("We are a bunch of talented and passionate people who hate beige walls and dull parties. If this is your case you can always send us your information!\n" +
                         "\n" +

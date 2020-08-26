@@ -4,7 +4,7 @@ import { set } from "../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../lib/lazyLoad"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import ParameterThumbnail from "../../../../../_themeAble/_text/_thumbnail/parameterThumbnail/parameterThumbnail";
-import TeamJobsSection from "../../../../../_themeAble/_text/_sectionTextblob/teamJobsSection/teamJobsSection";
+import TeamJobsSection from "../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../_themeAble/_text/imageTextblob/imageTextblob"
 
 export default declareComponent("schularzt", class Schularzt extends LazySectionedPage {
@@ -24,7 +24,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
         ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_themeAble/_text/_thumbnail/parameterThumbnail/parameterThumbnail")
         },
         {
-            key: new Import("tasks", 1, (TeamJobs: typeof Element) =>
+            key: new Import("tätigkeiten", 1, (TeamJobs: typeof Element) =>
                 {
                     let teamJobs = new (TeamJobs as typeof TeamJobsSection)();
                     teamJobs.heading("Unsere Tätigkeiten");

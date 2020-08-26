@@ -399,7 +399,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
                   
                   let nameData = q.aliases.tunnel(aliases => aliases.first)
 
-                  let sub = new DataSubscription(new DataCollection(nameData, q.progress, nextProg, localSegmentScrollDataIndex(elem)) as any, (name: string, wantedProgress, nextProg, currentProgress) => {
+                  let sub = new DataSubscription(new DataCollection(nameData, q.progress, nextProg, localSegmentScrollDataIndex(elem) as Data<number>) as any, (name: string, wantedProgress, nextProg, currentProgress) => {
                     if (isSmallest) {
                       wantedProgress = -Infinity
                     }

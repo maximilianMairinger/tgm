@@ -17,7 +17,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
           let thumbnail = new (Thumbnail as typeof ParameterThumbnail)();
           thumbnail.note("Gesundheit");
           thumbnail.heading("Schulärztliche Dienste");
-          thumbnail.subheading("Wohlwollen unserer Schüler");
+          thumbnail.subheading("Wohlwollen unserer SchülerInnen");
           thumbnail.background('url("/res/img/schularzt.png")');
           return new WrapperSection(thumbnail, 'dark');
         }

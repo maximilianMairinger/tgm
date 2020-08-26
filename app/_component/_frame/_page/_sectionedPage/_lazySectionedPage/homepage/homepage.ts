@@ -39,9 +39,7 @@ export default declareComponent("home-page", class Homepage extends LazySectione
       }
     ), domainLevel, setPage, sectionChangeCallback, new AliasList(
       newsToContactScrollProgressIndex
-    ), {
-      versuchsanstalt: "tagesschule"
-    })
+    ))
   }
 
   stl() {

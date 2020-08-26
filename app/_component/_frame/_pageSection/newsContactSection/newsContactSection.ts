@@ -94,7 +94,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.mapSvgPaths[1].anim({d: vienna.path.b, translateY: vienna.offset.y, translateX: vienna.offset.x}, mapOptions, guide)
 
 
-    let startInitAnim = scrollPositionAnimationStart + 650
+    let startInitAnim = scrollPositionAnimationStart + 660
     this.scrollPosData.scrollTrigger(startInitAnim)
       .on("forward", () => {
         return [
@@ -110,7 +110,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
       })
 
 
-    let doneProgress = scrollPositionAnimationStart + 750
+    let doneProgress = scrollPositionAnimationStart + 700
     let done: boolean
     this.scrollPosData.get((progress) => {
       if (progress > doneProgress) {

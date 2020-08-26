@@ -58,7 +58,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../_themeAble/_text/imageTextblob/imageTextblob")
         },
         {
-            key: new Import("schularzt", 1, (Schularzt: typeof Element) =>
+            key: new Import("schularzt2", 1, (Schularzt: typeof Element) =>
                 {
                     let schularzt = new (Schularzt as typeof ImageTextblob)();
                     schularzt.aligntype('left');
@@ -74,7 +74,10 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../_themeAble/_text/imageTextblob/imageTextblob")
         },
-    ), domainLevel, setPage, sectionChangeCallback)
+    ), domainLevel, setPage, sectionChangeCallback, undefined, {
+        schularzt2: "schularzt",
+        thumbnail: "tasks"
+    })
 
   }
 

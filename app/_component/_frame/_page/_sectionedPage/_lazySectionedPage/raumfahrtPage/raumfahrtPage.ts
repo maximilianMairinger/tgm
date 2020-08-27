@@ -7,6 +7,7 @@ import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
 import Thumbnail from "../../../../../_themeAble/_text/_thumbnail/thumbnail"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Info from "../../../../../_themeAble/_text/_sectionTextblob/sectionTextblob"
+import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSection"
 
 
 export default declareComponent("raumfahrt-page", class RaumfahrtPage extends LazySectionedPage {
@@ -30,7 +31,12 @@ export default declareComponent("raumfahrt-page", class RaumfahrtPage extends La
           info.content("In der Abteilung für Raumfahrttechnik erhalten SchülerInnen eine fundierte Ausbildung in den wichtigsten Aerospace-Themenbereichen. Unser rigoroser Lehrplan ermöglicht AbsolventInnen den Einstieg in die Industrie und öffnet Türen für eine tertiäre Ausbildung.")
 
           return new WrapperSection(info) as any
-        }), val: () => import(/* webpackChunkName: "teamSection" */"../../../../../_themeAble/_text/_sectionTextblob/sectionTextblob")
+        }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_themeAble/_text/_sectionTextblob/sectionTextblob")
+      },
+      {
+        key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
+          new _AusmachtSection()
+        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/ausmachtSection")
       },
     
     ), domainLevel, setPage, sectionChangeCallback)

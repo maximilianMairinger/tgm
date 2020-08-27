@@ -16,4 +16,8 @@ export default declareComponent("schuelerprojekte-thumbnail", class Schuelerproj
     stl() {
         return super.stl() + require("./schuelerprojekteThumbnail.css").toString();
     }
+
+    pug() {
+        return super.pug() + require("./schuelerprojekteThumbnail.pug").default
+    }
 })

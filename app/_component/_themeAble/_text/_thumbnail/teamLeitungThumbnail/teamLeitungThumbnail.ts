@@ -15,4 +15,8 @@ export default declareComponent("team-leitung-thumbnail", class TeamLeitungThumb
     stl() {
         return super.stl() + require("./teamLeitungThumbnail.css").toString();
     }
+
+    pug() {
+        return super.pug() + require("./teamLeitungThumbnail.pug").default
+    }
 })

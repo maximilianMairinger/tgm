@@ -42,7 +42,7 @@ module.exports = () => {
                         {
                             loader: 'url-loader',
                             options: {
-                                limit: 100000000,
+                                limit: 1000000000,
                                 encoding: "binary"
                             },
                         }

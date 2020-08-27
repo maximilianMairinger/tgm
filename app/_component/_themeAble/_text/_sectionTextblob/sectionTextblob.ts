@@ -2,10 +2,11 @@ import Text from "../text"
 import "../textblob/textblob"
 import TextBlob, {MediaQuerySize} from "../textblob/textblob";
 import {Theme} from "../../themeAble";
+import declareComponent from "../../../../lib/declareComponent";
 
 
 
-export default abstract class SectionTextblob extends Text {
+export default class SectionTextblob extends Text {
 
     private textBlob = this.q("c-textblob") as TextBlob
 
@@ -82,3 +83,5 @@ export default abstract class SectionTextblob extends Text {
         return require("./sectionTextblob.pug").default
     }
 }
+
+declareComponent("section-textblob", SectionTextblob)

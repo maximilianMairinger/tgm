@@ -15,28 +15,23 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
         key: new Import("", 1, (Thumbnail: typeof Element) =>
         {
           let thumbnail = new (Thumbnail as typeof ParameterThumbnail)();
-          thumbnail.note("Gesundheit");
-          thumbnail.heading("Schulärztliche Dienste");
-          thumbnail.subheading("Wohlwollen unserer SchülerInnen");
+          thumbnail.note("der");
+          thumbnail.heading("Schulärztliche Dienst");
+          thumbnail.subheading("für unsere Gesundheit");
           thumbnail.background('url("/res/img/schularzt.png")');
           return new WrapperSection(thumbnail, 'dark');
         }
         ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_themeAble/_text/_thumbnail/parameterThumbnail/parameterThumbnail")
         },
         {
-            key: new Import("tätigkeiten", 1, (_TeamSection: typeof Element) =>
+            key: new Import("auftrag", 1, (_TeamSection: typeof Element) =>
                 {
                     let teamSection = new (_TeamSection as typeof TeamSection)();
-                    teamSection.heading("Unsere Tätigkeiten");
-                    teamSection.subheading("umfasst");
-                    teamSection.content("\n" +
-                        "    die Versorgung der Schüler und Schülerinnen bei akuten Zwischenfällen oder Erkrankungen\n" +
-                        "    (auch psychische Ausnahmesituationen),\n" +
-                        "    Versorgung bei chronischen Krankheiten\n" +
-                        "    (auch psychische und Abhängigkeitserkrankungen),\n" +
-                        "    Entscheidung, inwiefern einem Schüler oder einer Schülerin die Belastungen der Ausbildung am TGM zuzumuten sind (zB BSP, Werkstätten),\n" +
-                        "    \"Routineuntersuchungen\" insbesondere für die Schulveranstaltungen,\n" +
-                        "    in besonderen Situationen (Diabetes mellitus, Epilepsie, körperliche Behinderung oder schwereren Anpassungsstörungen) wird gemeinsam mit der Leitung der Schulveranstaltung entschieden, wie und ob man ein Teilnahme ermöglichen könnte.\n")
+                    teamSection.heading("Auftrag");
+                    teamSection.note("unserem")
+                    teamSection.subheading("verpflichtet");
+                    teamSection.hsize({max:100, min:40});
+                    teamSection.content(`Wir kümmern uns um die Versorgung der SchülerInnen bei akuten Zwischenfällen oder Erkrankungen (auch psychische Ausnahmesituationen), sowie die Versorgung bei chronischen Krankheiten (auch psychische und Abhängigkeitserkrankungen). Wir treffen Entscheidung, inwiefern einem Schüler oder einer Schülerin die Belastungen der Ausbildung am TGM zuzumuten sind (zB BSP, Werkstätten). Außerdem führen wir ”Routine-untersuchungen" insbesondere für Schulveranstaltungen durch.`)
                     return new WrapperSection(teamSection);
                 }
             ), val: () => import(/* webpackChunkName: "teamSection" */"../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection")

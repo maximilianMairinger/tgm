@@ -67,7 +67,7 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
                     schuelerImageTextblob.stellvertreter([{"name":"Emanuel Knight", "email":"eknight@student.tgm.ac.at"}, {"name":"Thomas Engine", "email":"jborenski@student.tgm.ac.at"}])
                     return new WrapperSection(schuelerImageTextblob);
                 }
-            ), val: () => import(/* webpackChunkName: "schueler" */"../../../../../_themeAble/_text/imageTextblob/imageTextblob")
+            ), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_themeAble/_text/imageTextblob/imageTextblob")
         }
     ), domainLevel, setPage, sectionChangeCallback, undefined)
 

@@ -163,26 +163,42 @@ map-frame#pointer {
   pointer-events: none;
 }
 
-c-textblob.map {
+c-textblob {
   display: block;
   margin: auto;
   pointer-events: all;
 }
 
-map-textblob-wrapper {
+textblob-wrapper {
   display: flex;
   position: absolute;
   width: 50%;
   height: 100%;
+}
+
+textblob-wrapper.map {
   right: 0;
   left: 50%;
 }
 
-map-textblob-fadin {
+
+textblob-wrapper.news {
+  right: 50%;
+  left: 0;
+}
+
+textblob-fadin {
   opacity: 0;
   transform: translateY(-10);
   display: none;
   width: 100%;
   height: 100%;
   pointer-events: none;
+  position: absolute
+}
+
+textblob-fadin.news {
+  opacity: 1;
+  display: block;
+  transform: translateY(.1);
 }

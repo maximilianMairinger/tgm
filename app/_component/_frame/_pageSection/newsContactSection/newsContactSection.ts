@@ -6,6 +6,7 @@ import { ElementList } from "extended-dom";
 import delay from "delay";
 import TextBlob from "../../../_themeAble/_text/textblob/textblob"
 import { Data } from "josm";
+import "../../../_themeAble/link/link"
 
 
 
@@ -21,7 +22,7 @@ const vienna = {
 }
 
 
-const scrollPositionAnimationStart = 100
+const scrollPositionAnimationStart = 150
 
 
 
@@ -53,12 +54,12 @@ export default declareComponent("news-contact-section", class extends PageSectio
   
   private stayInFrameElem = this.q("stay-in-frame")
   private mapTextBlob = new TextBlob().addClass("map")
-  private mapTextBlobWrapper = ce("map-textblob-wrapper").apd(this.mapTextBlob)
-  private mapTextBlobFadin = ce("map-textblob-fadin").apd(this.mapTextBlobWrapper)
+  private mapTextBlobWrapper = ce("textblob-wrapper").addClass("map").apd(this.mapTextBlob)
+  private mapTextBlobFadin = ce("textblob-fadin").addClass("map").apd(this.mapTextBlobWrapper)
 
   private newsTextBlob = new TextBlob().addClass("news")
-  private newsTextBlobWrapper = ce("news-textblob-wrapper").apd(this.newsTextBlob)
-  private newsTextBlobFadin = ce("news-textblob-fadin").apd(this.newsTextBlobWrapper)
+  private newsTextBlobWrapper = ce("textblob-wrapper").addClass("news").apd(this.newsTextBlob)
+  private newsTextBlobFadin = ce("textblob-fadin").addClass("news").apd(this.newsTextBlobWrapper)
 
   
   constructor() {
@@ -70,6 +71,15 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
 
 
+    this.newsTextBlob.heading("Aktuelles")
+    this.newsTextBlob.subheading("aus dem TGM")
+    this.newsTextBlob.note("Termine und")
+    this.newsTextBlob.content(`Bei rund 3000 Schülern geschieht ständig etwas. Bleiben Sie informiert, indem Sie unserer <c-link link="https://instagram.com/tgmhit/">Instagram</c-link> oder <c-link link="https://facebook.com/tgmhtl/">Facebook</c-link><span> Seite folgen.</span>`)
+    this.newsTextBlob.hsize({"max": 60, "min": 40})
+    this.newsTextBlob.hmobile({"max": 55, "min": 35})
+
+
+    this.allFrame.insertBefore(this.newsTextBlobFadin, this.overlay) 
 
 
 
@@ -80,7 +90,6 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.mapTextBlob.hsize({"max": 60, "min": 40})
     this.mapTextBlob.hmobile({"max": 55, "min": 35})
     this.allFrame.insertBefore(this.mapTextBlobFadin, this.overlay)
-    console.log(this.mapTextBlobFadin.childs())
 
 
 
@@ -94,8 +103,19 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.mapSvgPaths[1].anim({d: vienna.path.b, translateY: vienna.offset.y, translateX: vienna.offset.x}, mapOptions, guide)
 
 
-    let startInitAnim = scrollPositionAnimationStart + 660
-    this.scrollPosData.scrollTrigger(startInitAnim)
+
+    this.scrollPosData.scrollTrigger(scrollPositionAnimationStart)
+      .on("forward", () => {
+        return this.newsTextBlob.anim({opacity: 0, translateY: 10}).then(() => this.newsTextBlob.hide())
+      })
+      .on("backward", () => {
+        return this.newsTextBlob.show().anim({opacity: 1, translateY: .1})
+      })
+
+
+
+    let startMapInitAnim = scrollPositionAnimationStart + 660
+    this.scrollPosData.scrollTrigger(startMapInitAnim)
       .on("forward", () => {
         return [
           this.mapPointerWrapper.show().anim({opacity: 1, translateY: .1}),

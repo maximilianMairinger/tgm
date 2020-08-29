@@ -44,7 +44,7 @@ export default class Link extends ThemeAble {
 
     this.aElem.on("mouseup", (e) => {
       if (e.button === 0) ev(e)
-      else if (e.button === 1 || e.button === 2) ev(e, true)
+      else if (e.button === 1) ev(e, true)
     })
     this.aElem.on("click", (e) => {
       e.preventDefault()

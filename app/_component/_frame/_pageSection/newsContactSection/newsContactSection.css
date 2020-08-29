@@ -14,7 +14,7 @@ map-frame {
   top: 0;
   left: 0;
   position: absolute;
-  transform: translateY(30px);
+  overflow: hidden;
 }
 
 all-frame {

@@ -3,8 +3,14 @@ import ThemeAble from "../themeAble";
 import { Data } from "josm"
 import * as domain from "./../../../lib/domain"
 import delay from "delay"
+import "../../_themeAble/_icon/externalLink/externalLink"
 
-
+function openInNewTab(href) {
+  Object.assign(document.createElement('a'), {
+    target: '_blank',
+    href,
+  }).click();
+}
 
 
 export default class Link extends ThemeAble {
@@ -12,6 +18,7 @@ export default class Link extends ThemeAble {
   private slotElem = this.sr.querySelector("slot")
   private slidyWrapper = this.q("slidy-underline-wrapper")
   private slidy = this.slidyWrapper.childs()
+  private externalIcon = ce("c-external-link-icon")
 
 
   constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0, public push: boolean = true, underline: boolean = true) {
@@ -37,7 +44,7 @@ export default class Link extends ThemeAble {
         let meta = domain.linkMeta(link, this.domainLevel)
         if (!dontSetLocation) {
           if (meta.isOnOrigin) domain.set(link, this.domainLevel, this.push)
-          else location.href = link
+          else openInNewTab(link)
         }
       }
     }
@@ -207,6 +214,8 @@ export default class Link extends ThemeAble {
   private updateHref() {
     if (!this.link()) return
     let meta = domain.linkMeta(this.link(), this.domainLevel)
+    if (!meta.isOnOrigin) this.aElem.apd(this.externalIcon)
+    else this.externalIcon.remove()
     this.aElem.href = meta.href
   }
 

@@ -125,7 +125,7 @@ export default class Textblob extends Text {
   content(): string
   content(content: string): void
   content(content?: string): any {
-    return this.q("content-text").text(content)
+    return this.q("content-text").html(content)
   }
 
   linktext(): string

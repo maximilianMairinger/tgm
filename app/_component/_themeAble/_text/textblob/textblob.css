@@ -58,7 +58,7 @@ text-box {
     font-size: calc(30px + (45 - 30) * ((100vw - 768px) / (1600 - 768)));
 }
 
-text-box *:nth-child(-n+2){
+text-box > heading-text, text-box > subheading-text {
     font-weight: bold;
     overflow: hidden;
     text-overflow: ellipsis;

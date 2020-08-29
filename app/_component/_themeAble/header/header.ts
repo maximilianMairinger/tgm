@@ -34,7 +34,6 @@ export default declareComponent("header", class Header extends ThemeAble {
   constructor(public linksShownChangeCallback?: (linksShown: boolean, init: boolean, func: any) => void) { 
     super()
     
-    // this.tgmLogoIcon.passiveTheme()
     window.on("resize", this.resizeHandler.bind(this))
   }
 
@@ -43,6 +42,7 @@ export default declareComponent("header", class Header extends ThemeAble {
   theme(to?: Theme): any {
     this.tgmLogoIcon.theme(to)
     this.currentLinkElems.Inner("theme", [to])
+    this.currentPathDisplayElems.Inner("theme", [to])
 
     return super.theme(to)
   }
@@ -100,6 +100,7 @@ export default declareComponent("header", class Header extends ThemeAble {
     ])
   }
 
+  private currentPathDisplayElems = []
   public async updatePathDisplay (domainLevel: number) {
     if (!this.pathDisplayElem.childs(1, true).empty) {
       await this.pathDisplayElem.anim({opacity: 0, translateX: 5}, 500)
@@ -111,10 +112,13 @@ export default declareComponent("header", class Header extends ThemeAble {
     this.pathDisplayElem.css({translateX: -5})
     for (let i = 0; i < domainLevel; i++) {
       const domainFragment = domainIndex[i]
-
-      this.pathDisplayElem.apd(new ArrowIcon(), new Link(lang.links[domainFragment], domainFragment, i, true, false))
-
+      let link = new Link(lang.links[domainFragment], domainFragment, i, true, false)
+      let arrow = new ArrowIcon()
+      this.currentPathDisplayElems.add(arrow, link)
+      this.pathDisplayElem.apd(arrow, link)
+      
     }
+    this.currentPathDisplayElems.Inner("theme", [this.theme()])
     await this.pathDisplayElem.anim({opacity: 1, translateX: .1}, 500)
     
   }

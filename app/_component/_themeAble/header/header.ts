@@ -43,6 +43,7 @@ export default declareComponent("header", class Header extends ThemeAble {
   theme(to?: Theme): any {
     this.tgmLogoIcon.theme(to)
     this.currentLinkElems.Inner("theme", [to])
+
     return super.theme(to)
   }
 

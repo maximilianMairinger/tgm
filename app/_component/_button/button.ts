@@ -91,7 +91,6 @@ export default class Button extends Component<HTMLAnchorElement> {
 
   private _link: string
   private linkFn: any
-  private hrefUpdateEventListener = [] as EventListener[]
   public link(): string
   public link(to: string, domainLevel?: number, push?: boolean): void
   public link(to?: string, domainLevel: number = 0, push = true) {

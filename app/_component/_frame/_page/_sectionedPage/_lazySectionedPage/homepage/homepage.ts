@@ -7,6 +7,8 @@ import LandingSection from "../../../../_pageSection/landingSection/landingSecti
 import NewsContactSection from "../../../../_pageSection/newsContactSection/newsContactSection"
 import { ScrollProgressAlias, ScrollProgressAliasIndex, AliasList, SimpleAlias } from "../../sectionedPage"
 import Footer from "../../../../_pageSection/footer/footer"
+import { scrollAnimationEnd } from "../../../../_pageSection/newsContactSection/newsContactSection"
+
 
 
 export default declareComponent("home-page", class Homepage extends LazySectionedPage {
@@ -14,7 +16,7 @@ export default declareComponent("home-page", class Homepage extends LazySectione
     
     let newsToContactScrollProgressIndex = new ScrollProgressAliasIndex("newsKontakt", [
       new ScrollProgressAlias(0, "news"),
-      new ScrollProgressAlias(760, "kontakt")
+      new ScrollProgressAlias(scrollAnimationEnd, "kontakt")
     ])
 
     super(new ImportanceMap<() => Promise<any>, any>(

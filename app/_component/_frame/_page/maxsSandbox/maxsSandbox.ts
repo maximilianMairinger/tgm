@@ -1,7 +1,7 @@
 import { declareComponent } from "../../../../lib/declareComponent"
 import Page from "../page"
 import { Data } from "josm"
-import "./../../../_themeAble/_icon/filledArrow/filledArrow"
+import "./../../../_themeAble/_icon/_highlightAbleIcon/filledArrow/filledArrow"
 import delay from "delay"
 import "./../../../_themeAble/link/link"
 import { ElementList } from "extended-dom"

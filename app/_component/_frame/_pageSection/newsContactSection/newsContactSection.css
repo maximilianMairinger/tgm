@@ -1,7 +1,8 @@
 scroll-ly {
   display: block;
   position: relative;
-  height: calc(800px);
+  /* Height gets dynamicly set by js */
+  /* height: 850px; */
   width: 0px;
 }
 

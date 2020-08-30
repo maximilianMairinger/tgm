@@ -7,6 +7,8 @@ import delay from "delay";
 import TextBlob from "../../../_themeAble/_text/textblob/textblob"
 import { Data } from "josm";
 import "../../../_themeAble/link/link"
+import "../../../_themeAble/_icon/_highlightAbleIcon/filledArrow/filledArrow"
+import HighlightAbleIcon from "../../../_themeAble/_icon/_highlightAbleIcon/highlightAbleIcon";
 
 
 
@@ -22,7 +24,11 @@ const vienna = {
 }
 
 
-const scrollPositionAnimationStart = 150
+const scrollAnimationStart = 150
+const scrollAnimationDurartion = 700
+export const scrollAnimationEnd = scrollAnimationStart + scrollAnimationDurartion
+const pointerFadinPos = scrollAnimationEnd - 40
+const scrollAnimationEndWithMargin = scrollAnimationEnd + 100
 
 
 
@@ -43,7 +49,6 @@ export default declareComponent("news-contact-section", class extends PageSectio
   private mapPointerCenter = this.q("map-pointer-center")
   private mapPointer = this.q("map-pointer") as HTMLElement
   private pointerHeading = this.mapPointer.childs("pointer-text")
-  // private pointerArrow = this.mapPointer.childs("c-filled-arrow-icon")
   private pointerInfoBox = this.mapPointer.childs("pointer-info-box")
   private pointerInfoBoxChilds = this.pointerInfoBox.childs("info-box-text, c-link", true).reverse() as ElementList
   private overlay = this.q("over-layer")
@@ -61,9 +66,13 @@ export default declareComponent("news-contact-section", class extends PageSectio
   private newsTextBlobWrapper = ce("textblob-wrapper").addClass("news").apd(this.newsTextBlob)
   private newsTextBlobFadin = ce("textblob-fadin").addClass("news").apd(this.newsTextBlobWrapper)
 
+
   
   constructor() {
     super()
+
+    this.q("scroll-ly").css("height", scrollAnimationEndWithMargin);
+    (this.mapPointer.childs("c-filled-arrow-icon") as HighlightAbleIcon).highlight()
 
 
     this.mapSvgPaths.css({fillOpacity: 1, fill: "unset"})
@@ -96,7 +105,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
 
     let guide = this.scrollPosData
-    let mapOptions = {start: new Data(scrollPositionAnimationStart), end: new Data(scrollPositionAnimationStart + 700)}
+    let mapOptions = {start: new Data(scrollAnimationStart), end: new Data(scrollAnimationEnd)}
 
 
     this.mapSvgPaths[0].anim({d: vienna.path.a, translateY: vienna.offset.y, translateX: vienna.offset.x}, mapOptions, guide)
@@ -104,7 +113,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
 
 
-    this.scrollPosData.scrollTrigger(scrollPositionAnimationStart)
+    this.scrollPosData.scrollTrigger(scrollAnimationStart)
       .on("forward", () => {
         return this.newsTextBlob.anim({opacity: 0, translateY: 10}).then(() => this.newsTextBlob.hide())
       })
@@ -114,8 +123,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
 
 
-    let startMapInitAnim = scrollPositionAnimationStart + 660
-    this.scrollPosData.scrollTrigger(startMapInitAnim)
+    this.scrollPosData.scrollTrigger(pointerFadinPos)
       .on("forward", () => {
         return [
           this.mapPointerWrapper.show().anim({opacity: 1, translateY: .1}),
@@ -130,22 +138,15 @@ export default declareComponent("news-contact-section", class extends PageSectio
       })
 
 
-    let doneProgress = scrollPositionAnimationStart + 700
-    let done: boolean
-    this.scrollPosData.get((progress) => {
-      if (progress > doneProgress) {
-        if (!done) {
-          done = true
-          this.stayInFrameElem.css({position: "relative", top: doneProgress})
-        }
+    this.scrollPosData.scrollTrigger(scrollAnimationEndWithMargin)
+      .on("forward", () => {
+        this.stayInFrameElem.css({position: "relative", top: scrollAnimationEndWithMargin})
+      })
+      .on("backward", () => {
+        this.stayInFrameElem.css({position: "sticky", top: 0})
       }
-      else {
-        if (done) {
-          done = false
-          this.stayInFrameElem.css({position: "sticky", top: 0})
-        }
-      }
-    })
+    )
+
 
 
 

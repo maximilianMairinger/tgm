@@ -26,7 +26,7 @@ const vienna = {
 
 
 const scrollAnimationStart = 150
-const scrollAnimationDurartion = 700
+const scrollAnimationDurartion = 600
 export const scrollAnimationEnd = scrollAnimationStart + scrollAnimationDurartion
 const pointerFadinPos = scrollAnimationEnd - 40
 const scrollAnimationEndWithMargin = scrollAnimationEnd + 100
@@ -67,6 +67,9 @@ export default declareComponent("news-contact-section", class extends PageSectio
   private newsTextBlobWrapper = ce("textblob-wrapper").addClass("news").apd(this.newsTextBlob)
   private newsTextBlobFadin = ce("textblob-fadin").addClass("news").apd(this.newsTextBlobWrapper)
 
+
+
+  private cardContainer = this.q("card-container")
 
   
   constructor() {
@@ -116,10 +119,16 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
     this.scrollPosData.scrollTrigger(scrollAnimationStart)
       .on("forward", () => {
-        return this.newsTextBlob.anim({opacity: 0, translateY: 10}).then(() => this.newsTextBlob.hide())
+        return [
+          this.newsTextBlob.anim({opacity: 0, translateY: 10}).then(() => this.newsTextBlob.hide()),
+          this.cardContainer.anim({opacity: 0, translateY: 10}).then(() => this.cardContainer.hide())
+        ]
       })
       .on("backward", () => {
-        return this.newsTextBlob.show().anim({opacity: 1, translateY: .1})
+        return [
+          this.newsTextBlob.show().anim({opacity: 1, translateY: .1}),
+          this.cardContainer.css("display", "flex").anim({opacity: 1, translateY: .1})
+        ]
       })
 
 

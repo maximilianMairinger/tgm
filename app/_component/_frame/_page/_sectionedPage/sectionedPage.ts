@@ -3,7 +3,6 @@ import * as domain from "./../../../../lib/domain"
 import scrollTo from "animated-scroll-to";
 import WaapiEasing from "waapi-easing";
 import { ResourcesMap } from "../../../../lib/lazyLoad";
-import LazySectionedPage from "./_lazySectionedPage/lazySectionedPage";
 import PageSection from "../../_pageSection/pageSection";
 import { EventListener, ScrollData } from "extended-dom";
 import { Data, DataCollection, DataSubscription } from "josm";
@@ -185,6 +184,10 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       this.sectionIndex = r.sectionIndex as any
       this.sectionList = r.sectionList as any
     }
+
+    window.on("resize", () => {
+
+    })
   }
 
   private prepSectionIndex(sectionIndex: any) {
@@ -480,7 +483,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         }
       })
     }
-    this.customIntersectionObserver.set(obsElem, new EventListener(this.elementBody, "scroll", f, this.active))
+    this.customIntersectionObserver.set(obsElem, new EventListener(this.elementBody, ["scroll", "resize"], f, this.active))
     f()
   }
 

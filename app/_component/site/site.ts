@@ -119,7 +119,7 @@ export default declareComponent("site", class extends Component {
   
 
   stl() {
-    return require("./site.css").toString()
+    return require("./site.css").toString() + require("./font.css").toString()
   }
   pug() {
     return require("./site.pug").default

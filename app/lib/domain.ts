@@ -329,11 +329,11 @@ export function linkMeta(link: string, domainLevel: number = 0) {
   parseDomainToDomainIndex(myDomainIndex, link, domainLevel)
   let isOnOrigin = getBaseUrl(link) === getBaseUrl()
   let href: string
-  if (isOnOrigin) href = dirString + parseDomainIndexToDomain(myDomainIndex) + dirString
+  if (isOnOrigin) href = dirString + parseDomainIndexToDomain(myDomainIndex)
   else {
     href = link.startsWith(httpsString) || link.startsWith(httpString) ? link : httpsString + link
-    if (!href.endsWith(dirString)) href += dirString
   }
+  if (!href.endsWith(dirString)) href += dirString
 
   return {
     link,

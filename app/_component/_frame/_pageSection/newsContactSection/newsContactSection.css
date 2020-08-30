@@ -6,6 +6,37 @@ scroll-ly {
   width: 0px;
 }
 
+card-container {
+  position: absolute;
+  width: 80%;
+  height: 100%;
+  top: 0;
+  left: 20%;
+  display: flex;
+  overflow-y: auto;
+}
+
+
+card-container > * {
+  position: relative;
+  float: left;
+  margin: auto 25px;
+  flex: 0 0 350px;
+  height: 450px;
+}
+
+card-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+card-container::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+
+
+
 map-frame {
   display: flex;
   align-items: center;

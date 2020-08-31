@@ -89,9 +89,9 @@ export default class ImageTextblob extends Text {
 
   private hrLower = this.q("hr.lower")
 
-  addresse(): string
-  addresse(addresse: string): this
-  addresse(addresse?: string): any {
+  address(): string
+  address(addresse: string): this
+  address(addresse?: string): any {
     return this.info("Adresse", addresse)
   }
 

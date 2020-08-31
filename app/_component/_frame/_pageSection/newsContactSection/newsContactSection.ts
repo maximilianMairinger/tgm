@@ -61,7 +61,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
   
   private stayInFrameElem = this.q("stay-in-frame")
-  private mapTextBlob = new TextBlob().addClass("map")
+  private mapTextBlob = new ImageTextBlob().addClass("map")
   private mapTextBlobWrapper = ce("textblob-wrapper").addClass("map").apd(this.mapTextBlob)
   private mapTextBlobFadin = ce("textblob-fadin").addClass("map").apd(this.mapTextBlobWrapper)
 
@@ -101,10 +101,15 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
     this.mapTextBlob.heading("Kontakt")
     this.mapTextBlob.subheading("zum TGM")
-    this.mapTextBlob.note("hello")
-    this.mapTextBlob.content("Content content content content content content content content content content content content content content content content content content content.")
+    this.mapTextBlob.note("Direktion")
+    this.mapTextBlob.content("Außerhalb der Ferien ist die Direktion am Mo, Mi & Do von 7:30 bis 15:30; am Di von 7:30 bis 17:30; am Fr von 7:30 bis 14:30")
     this.mapTextBlob.hsize({"max": 60, "min": 40})
     this.mapTextBlob.hmobile({"max": 55, "min": 35})
+    this.mapTextBlob.address("Wexstraße 19-23, 1200 Wien")
+    this.mapTextBlob.email("direktion@tgm.ac.at")
+    this.mapTextBlob.tel("33126 0")
+
+
     this.allFrame.insertBefore(this.mapTextBlobFadin, this.overlay)
 
 

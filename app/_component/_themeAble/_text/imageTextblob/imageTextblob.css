@@ -102,6 +102,7 @@ info-grid {
 info-box .heading{
     font-weight: bold;
     color: var(--strong-text-color);
+    user-select: none;
 }
 
 stellvertreter-text{

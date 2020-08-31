@@ -55,7 +55,7 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
             key: new Import("schueler", 1, (schueler: typeof Element) =>
                 {
                     let schuelerImageTextblob = new (schueler as typeof ImageTextblob)();
-                    schuelerImageTextblob.aligntype('left');
+                    schuelerImageTextblob.alignment('left');
                     schuelerImageTextblob.note("schülervertretung");
                     schuelerImageTextblob.heading("Jones");
                     schuelerImageTextblob.subheading("Lucas");

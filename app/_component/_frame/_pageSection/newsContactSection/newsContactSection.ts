@@ -5,11 +5,13 @@ import "../../../_themeAble/_card/anmeldenCard/anmeldenCard"
 import { ElementList } from "extended-dom";
 import delay from "delay";
 import TextBlob from "../../../_themeAble/_text/textblob/textblob"
+import ImageTextBlob from "../../../_themeAble/_text/imageTextblob/imageTextblob"
 import { Data } from "josm";
 import "../../../_themeAble/link/link"
 import "../../../_themeAble/_icon/_highlightAbleIcon/filledArrow/filledArrow"
 import HighlightAbleIcon from "../../../_themeAble/_icon/_highlightAbleIcon/highlightAbleIcon";
 import "../../../_themeAble/_card/unterrichtSystemeCard/unterrichtSystemeCard"
+
 
 
 
@@ -63,7 +65,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
   private mapTextBlobWrapper = ce("textblob-wrapper").addClass("map").apd(this.mapTextBlob)
   private mapTextBlobFadin = ce("textblob-fadin").addClass("map").apd(this.mapTextBlobWrapper)
 
-  private newsTextBlob = new TextBlob().addClass("news")
+  private newsTextBlob = new ImageTextBlob().addClass("news")
   private newsTextBlobWrapper = ce("textblob-wrapper").addClass("news").apd(this.newsTextBlob)
   private newsTextBlobFadin = ce("textblob-fadin").addClass("news").apd(this.newsTextBlobWrapper)
 

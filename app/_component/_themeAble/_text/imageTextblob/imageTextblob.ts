@@ -8,58 +8,68 @@ import {Theme} from "../../themeAble";
 
 type Stellvertreter = {name: string, email: string}[]
 
-export default declareComponent("image-textblob", class ImageTextblob extends Text {
-  private textBlob = this.q("c-textblob") as TextBlob
-  private type = "right";
+type Alignment = "left" | "right"
 
-  constructor() {
-    super();
+export default class ImageTextblob extends Text {
+  private textBlob = this.q("c-textblob") as TextBlob
+  private _alignment: Alignment;
+  private imageTextBlob = this.q("image-text-blob")
+
+  constructor(aligment: Alignment = "right") {
+    super()
+    this.alignment(aligment)
   }
 
-  aligntype(): string
-  aligntype(aligntype: string): void
-  aligntype(aligntype?: string) {
-    if (aligntype) {
-      let imageTextBlob = this.q("image-text-blob");
-      imageTextBlob.removeClass(this.type);
-      this.type = aligntype;
-      imageTextBlob.addClass(this.type);
-    } else return this.type;
+  alignment(): Alignment
+  alignment(alignment: Alignment): this
+  alignment(alignment?: Alignment) {
+    if (alignment) {
+      if (this._alignment !== alignment) {
+        this.imageTextBlob.removeClass(this._alignment).addClass(alignment)
+        this._alignment = alignment
+      }
+      
+      return this
+    } else return this._alignment
   }
 
   note(): string
-  note(note: string): void
+  note(note: string): this
   note(note?: string) {
-    if (note) this.q("note-text").text(note);
-    else return this.q("note-text").text();
+    return this.q("note-text").text(note)
   }
 
+  private imgElem: HTMLElement
   image(): string
-  image(image: string): void
-  image(image?: string) {
-    if (image) this.q("image-box").css({ backgroundImage: image});
-    else return this.q("image-box").css("backgroundImage");
+  image(image: null): this
+  image(image: string): this
+  image(image?: string | null): any {
+    if (image === null) {
+      if (this.imgElem) this.q("image-container").remove()
+      return this
+    }
+    else {
+      if (!this.imgElem) this.imageTextBlob.apd(ce("image-container").apd(this.imgElem = ce("image-box")))
+      return this.imgElem.css("backgroundImage", image)
+    }
   }
 
   addresse(): string
-  addresse(addresse: string): void
+  addresse(addresse: string): this
   addresse(addresse?: string) {
-    if (addresse) this.q(".addresse").text(addresse);
-    else return this.q(".addresse").text();
+    return this.q(".addresse").text(addresse);
   }
 
   email(): string
-  email(email: string): void
+  email(email: string): this
   email(email?: string) {
-    if (email) this.q(".email").text(email);
-    else return this.q(".email").text();
+    return this.q(".email").text(email)
   }
 
   tel(): string
-  tel(tel: string): void
+  tel(tel: string): this
   tel(tel?: string) {
-    if (tel) this.q(".tel").text(tel);
-    else return this.q(".tel").text();
+    return this.q(".tel").text(tel);
   }
 
   private _stellverterter: Stellvertreter
@@ -137,4 +147,6 @@ export default declareComponent("image-textblob", class ImageTextblob extends Te
   }
 
 }
-)
+
+
+declareComponent("image-textblob", ImageTextblob)

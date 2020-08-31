@@ -42,8 +42,7 @@ export default declareComponent("raumfahrt-page", class RaumfahrtPage extends La
       },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
-          let imageTextBlob = new _ImageTextblob();
-          imageTextBlob.aligntype('right');
+          let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
           imageTextBlob.subheading("zur Raumfahrttechnik");

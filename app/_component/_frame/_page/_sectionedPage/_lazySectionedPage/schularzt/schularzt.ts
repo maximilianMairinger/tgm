@@ -56,7 +56,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
             key: new Import("schularzt2", 1, (Schularzt: typeof Element) =>
                 {
                     let schularzt = new (Schularzt as typeof ImageTextblob)();
-                    schularzt.aligntype('left');
+                    schularzt.alignment('left');
                     schularzt.note("Schularzt");
                     schularzt.heading("Dr. Kripser");
                     schularzt.subheading("Florian");

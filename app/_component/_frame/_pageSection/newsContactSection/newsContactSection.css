@@ -15,7 +15,7 @@ card-container {
   display: flex;
   overflow-y: auto;
   transform: translateY(.1px);
-  scroll-snap-type: x proximity;
+  scroll-snap-type: x mandatory;
 }
 
 
@@ -50,6 +50,7 @@ map-frame {
   left: 0;
   position: absolute;
   overflow: hidden;
+  pointer-events: none;
 }
 
 all-frame {

@@ -92,6 +92,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.newsTextBlob.content(`Bei rund 3000 Schülern geschieht ständig etwas. Bleiben Sie informiert, indem Sie unserer <c-link link="https://instagram.com/tgmhit/">Instagram</c-link> oder <c-link link="https://facebook.com/tgmhtl/">Facebook</c-link><span> Seite folgen.</span>`)
     this.newsTextBlob.hsize({"max": 60, "min": 40})
     this.newsTextBlob.hmobile({"max": 55, "min": 35})
+    
 
 
     this.allFrame.insertBefore(this.newsTextBlobFadin, this.overlay) 

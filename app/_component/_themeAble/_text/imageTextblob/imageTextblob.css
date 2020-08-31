@@ -56,6 +56,11 @@ connector-box hr{
     margin-left: 0;
 }
 
+hr.lower {
+    display: none; 
+    opacity: 0;
+}
+
 connector-box.top{
     width: 50px;
 }
@@ -86,7 +91,7 @@ info-box{
     color: var(--weak-text-color);
 }
 
-info-grid{
+info-grid {
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 20px;
@@ -94,7 +99,8 @@ info-grid{
     font-size: 14px;
 }
 
-info-box .bold{
+
+info-box .heading{
     font-weight: bold;
     color: var(--strong-text-color);
 }

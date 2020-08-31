@@ -4,6 +4,8 @@ import "../textblob/textblob"
 import TextBlob, { MediaQuerySize } from "./../textblob/textblob"
 import { ElementList } from "extended-dom";
 import {Theme} from "../../themeAble";
+import { Data } from "josm";
+import delay from "delay";
 
 
 type Stellvertreter = {name: string, email: string}[]
@@ -14,6 +16,7 @@ export default class ImageTextblob extends Text {
   private textBlob = this.q("c-textblob") as TextBlob
   private _alignment: Alignment;
   private imageTextBlob = this.q("image-text-blob")
+  private infoGrid = this.q("info-grid");
 
   constructor(aligment: Alignment = "right") {
     super()
@@ -54,37 +57,69 @@ export default class ImageTextblob extends Text {
     }
   }
 
+
+
+  private infoIndex: {[infoName in string]: HTMLElement} = {}
+  public info(infoName: string, info: string | Data<string> | null): this
+  public info(infoName: string): string
+  public info(infoName: string, info?: string | Data<string>): any {
+    if (info !== undefined) {
+      if (this.infoIndex[infoName]) {
+        if (info === null) {
+          let hideElems = new ElementList(this.infoIndex[infoName], this.infoIndex[infoName].previousSibling as HTMLElement)
+          hideElems.anim({opacity: 0}).then(() => hideElems.remove());
+          delete this.infoIndex[infoName];
+
+        }
+        else {
+          this.infoIndex[infoName].text(info)
+        }
+      }
+      else {
+        if (info !== null) this.infoGrid.apd(ce("info-text").addClass("heading").text(infoName), this.infoIndex[infoName] = ce("info-text").text(info))
+      }
+
+      if (Object.keys(this.infoIndex).length > 0) this.hrLower.show().anim({opacity: 1})
+      else this.hrLower.anim({opacity: 0}).then(() => this.hrLower.hide())
+
+      return this
+    }
+    else return this.infoIndex[infoName] ? this.infoIndex[infoName].text() : ""
+  }
+
+  private hrLower = this.q("hr.lower")
+
   addresse(): string
   addresse(addresse: string): this
-  addresse(addresse?: string) {
-    return this.q(".addresse").text(addresse);
+  addresse(addresse?: string): any {
+    return this.info("Adresse", addresse)
   }
 
   email(): string
   email(email: string): this
-  email(email?: string) {
-    return this.q(".email").text(email)
+  email(email?: string): any {
+    return this.info("Email", email)
   }
 
   tel(): string
   tel(tel: string): this
-  tel(tel?: string) {
-    return this.q(".tel").text(tel);
+  tel(tel?: string): any {
+    return this.info("Tel", tel)
   }
 
   private _stellverterter: Stellvertreter
   stellvertreter(): Stellvertreter
   stellvertreter(stellvertreter: JSON | Stellvertreter): void
   stellvertreter(stellvertreter?: JSON | Stellvertreter) {
-    let infoGrid = this.q("info-grid");
+    
     if (stellvertreter) {
       this._stellverterter = this.parseJSONProp(stellvertreter);
 
-      infoGrid.append(ce("stellvertreter-text").addClass("bold").text("Stellverteter"));
+      this.infoGrid.append(ce("stellvertreter-text").addClass("bold").text("Stellverteter"));
       for (let i = 0; i < this._stellverterter.length; i++) {
         let stellvertreterData = this._stellverterter[i];
-        infoGrid.append(ce("info-text").text(stellvertreterData.name));
-        infoGrid.append(ce("info-text").text(stellvertreterData.email));
+        this.infoGrid.append(ce("info-text").text(stellvertreterData.name));
+        this.infoGrid.append(ce("info-text").text(stellvertreterData.email));
       }
     } else return this._stellverterter
   }

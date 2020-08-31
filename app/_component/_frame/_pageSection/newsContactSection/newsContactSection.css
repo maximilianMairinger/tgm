@@ -15,6 +15,7 @@ card-container {
   display: flex;
   overflow-y: auto;
   transform: translateY(.1px);
+  scroll-snap-type: x proximity;
 }
 
 
@@ -24,6 +25,7 @@ card-container > * {
   margin: auto 25px;
   flex: 0 0 350px;
   height: 450px;
+  scroll-snap-align: start;
 }
 
 card-container {

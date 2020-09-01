@@ -11,8 +11,14 @@ export type Project = { heading: string, note: string, logo: string, team: strin
 export default declareComponent("tablet-blob", class TableBlob extends Text {
 
     private index = 0;
+    private scrollFree = true;
+    private previousArrow = this.q("project-previous");
+    private previousAvailable = false;
+    private nextArrow = this.q("project-next");
+    private nextAvailable = false;
+    private slider = this.q("tablet-slider");
     private projectData = [{
-        heading:"Delta-3 Launch Vehicle",
+        heading:"Delta-1 Launch Vehicle",
         note:"Rakete zum ökonomischen Starten von Satelliten in den niedrigen Orbit",
         logo:"/res/img/projektLogoBeispiel3.png",
         team:[
@@ -60,7 +66,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
             content: "Zu dem jetzigen Zeitpunkt gibt es einige Produkte auf dem Markt, welche ein kabellose Datenübertragung zwischen zwei Geräten ermöglichen. Für so gut wie alle benötigt man aber eine konstante Internetverbindung. Darüber hinaus leiden einige dieser Programme an geringer Übertragungsgeschwindigkeit und mangelnder Sicherheit. Aus diesem Grund wird eine Smartphone App als auch eine Desktop-Version der Applikation benötigt. Das Programm soll für eine kabellose und Internet unabhängige Datenübertragung verwendet werden."
         },
         {
-            heading:"Delta-3 Launch Vehicle",
+            heading:"Delta-2 Launch Vehicle",
             note:"Rakete zum ökonomischen Starten von Satelliten in den niedrigen Orbit",
             logo:"/res/img/projektLogoBeispiel3.png",
             team:[
@@ -77,7 +83,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 "Schüler der 5. Klasse RT haben ein ökonomisches Launch Vehicle mit einer Kapazität von bis zu 500kg konzeptioniert, welches in Einzelausführung durch einen vergleichbar niedrigen Kostenpunkt, ein individuelles Deployment von Satelliten für kleinere wissenschaftliche Unternehmungen, als auch kommerzielle Applikationen bietet.",
         },
         {
-            heading:"LabAuth",
+            heading:"LabAuth 2",
             note:"Educard basierte Anwesenheitserfassung im Labor & Lernbüro.",
             logo:"/res/img/projektLogoBeispiel.png",
             team:[
@@ -95,7 +101,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 "Das war nicht nur Unpraktisch, sondern auch Unverlässlich, da man ohne es zu wissen ausgelassen wurde wenn man zum Zeitpunkt der Answesenheitserfassung gerade nicht im Raum war. Zusätzlich kam es vor, dass Lehrer die Erfassung gar vergaßen und diese dan in Retrospektive oder garnicht Nachtrugen.",
         },
         {
-            heading:"Phobos",
+            heading:"Phobos 2",
             note:"Eine neue Art der Datenübertragung",
             logo:"/res/img/projektLogoBeispiel2.png",
             team:[
@@ -125,7 +131,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 "Schüler der 5. Klasse RT haben ein ökonomisches Launch Vehicle mit einer Kapazität von bis zu 500kg konzeptioniert, welches in Einzelausführung durch einen vergleichbar niedrigen Kostenpunkt, ein individuelles Deployment von Satelliten für kleinere wissenschaftliche Unternehmungen, als auch kommerzielle Applikationen bietet.",
         },
         {
-            heading:"LabAuth",
+            heading:"LabAuth 3",
             note:"Educard basierte Anwesenheitserfassung im Labor & Lernbüro.",
             logo:"/res/img/projektLogoBeispiel.png",
             team:[
@@ -143,7 +149,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 "Das war nicht nur Unpraktisch, sondern auch Unverlässlich, da man ohne es zu wissen ausgelassen wurde wenn man zum Zeitpunkt der Answesenheitserfassung gerade nicht im Raum war. Zusätzlich kam es vor, dass Lehrer die Erfassung gar vergaßen und diese dan in Retrospektive oder garnicht Nachtrugen.",
         },
         {
-            heading:"Phobos",
+            heading:"Phobos 3",
             note:"Eine neue Art der Datenübertragung",
             logo:"/res/img/projektLogoBeispiel2.png",
             team:[
@@ -157,13 +163,92 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         }
         ] as Project[];
 
+    //broken
+    private updateIndex(){
+        this.index = Math.floor((this.slider.scrollLeft / this.slider.width()) + 0.5);
+    }
+
+    private next() {
+        this.updateIndex()
+        if (this.nextAvailable) {
+            this.index++;
+            this.slider.scrollTo(this.index * this.slider.width(), 0);
+            this.update(true);
+        }
+    }
+
+    private previous(){
+        this.updateIndex()
+        if(this.previousAvailable) {
+            this.index--;
+            this.slider.scrollTo(this.index * this.slider.width(), 0);
+            this.update(false);
+        }
+    }
+
+    //broken
+    private scrollUpdate(){
+        if(this.scrollFree){
+            this.scrollFree = false;
+            let index = this.index;
+            this.updateIndex()
+            if(this.index > index)
+                this.update(true);
+            else if (this.index < index)
+                this.update(false);
+            setTimeout(() => this.scrollFree = true, 250);
+        }
+    }
+
+    private update(shift = null){
+        this.team(this.projectData[this.index].team);
+        this.logo(this.projectData[this.index].logo);
+        if(shift != null)
+            if(shift){
+                this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading)
+                if(!this.previousAvailable) {
+                    this.previousArrow.css({"display": "flex"});
+                    this.previousAvailable = true;
+                }
+                this.nextAvailable = this.index < this.projectData.length - 1;
+                if(!this.nextAvailable)
+                    this.nextArrow.css({"display":"none"});
+                else {
+                    this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading);
+                    //broken
+                    this.project(this.projectData[this.index + 1])
+                }
+
+            }else {
+                this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading)
+                if(!this.nextAvailable) {
+                    this.nextArrow.css({"display": "flex"});
+                    this.nextAvailable = true
+                }
+                this.previousAvailable = this.index > 0;
+                if(!this.previousAvailable)
+                    this.previousArrow.css({"display":"none"});
+                else {
+                    this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading);
+                }
+
+            }
+        else {
+            this.nextAvailable = this.index < this.projectData.length - 1;
+            this.project(this.projectData[this.index + 1])
+            this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading)
+            this.nextArrow.css({"display":"flex"});
+        }
+    }
 
     constructor(){
         super()
+        this.nextArrow.addEventListener("click", this.next.bind(this));
+        this.previousArrow.addEventListener("click", this.previous.bind(this));
+        this.slider.addEventListener("scroll", this.scrollUpdate.bind(this))
         if(this.projectData.length) {
             this.project(this.projectData[this.index]);
-            this.team(this.projectData[this.index].team);
-            this.logo(this.projectData[this.index].logo);
+            this.update();
         }
     }
 
@@ -177,7 +262,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     project():Project
     project(project:Project):void
     project(project:Project, tablet:HTMLElement):void
-    project(project?:Project, tablet = this.q("tablet-content.current")){
+    project(project?:Project, tablet= this.createProject()){
         if(project){
             let projectJson = this.parseJSONProp(project);
             (tablet.querySelector("c-textblob") as Textblob).heading(projectJson.heading)
@@ -187,6 +272,33 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
             tablet.querySelector("info-text").text(projectJson.content);
         }else
             return this.projectData[this.index];
+    }
+
+    private createProject():Element{
+        let tablet = ce("tablet-content");
+
+        let textblob = new Textblob();
+        textblob.hsize({max:42, min:42});
+        tablet.append(textblob);
+
+        let notebox = ce("note-box");
+        notebox.append(ce("note-text"));
+        tablet.append(notebox);
+
+        let thumbnail = ce("thumbnail-container");
+        //Why does it work that way?!?!?!?
+        thumbnail.append(ce("IMG").addClass("thumbnail-pic"));
+        thumbnail.append(ce("thumbnail-background"));
+        tablet.append(thumbnail);
+
+        let info = ce("tablet-info");
+        info.append(ce("info-title"));
+        info.append(ce("info-text"));
+        tablet.append(info);
+
+        this.slider.append(tablet);
+
+        return tablet;
     }
 
     private team(members:string[]){

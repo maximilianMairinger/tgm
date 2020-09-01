@@ -1,0 +1,16 @@
+:host {
+  width: inherit;
+  height: inherit;
+}
+
+component-body {
+  background: var(--primary-background-color);
+  width: inherit;
+  height: inherit;
+}
+
+c-big-news-triangle-icon {
+  height: 100%;
+  height: inherit;
+  transform: scale(1.087) translateX(-550px)
+}

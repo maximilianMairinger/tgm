@@ -1,12 +1,12 @@
 import { declareComponent } from "../../../../lib/declareComponent"
 import PageSection from "../pageSection"
 import { Theme } from "../../../_themeAble/themeAble"
-import NewsSectionBackground from "../../../_themeAble/newsSectionBackground/newsSectionBackground"
+import TriangleNews from "../../../_themeAble/triangleNews/triangleNews"
 
 
 export default declareComponent("dark-news-section", class extends PageSection {
   public theme: Theme = "dark"
-  private newsSectionBackground = new NewsSectionBackground().theme("dark")
+  private newsSectionBackground = new TriangleNews().theme("dark")
 
   constructor() {
     super()

@@ -4,12 +4,12 @@ import declareComponent from "../../../lib/declareComponent"
 import "../_icon/bigNewsTriangle/bigNewsTriangle"
 import BigNewsTriangle from "../_icon/bigNewsTriangle/bigNewsTriangle"
 
-export default class NewsSectionBackground extends ThemeAble {
+export default class TriangleNews extends ThemeAble {
 
   private bigNewsTriangle = new BigNewsTriangle()
   constructor() {
     super() 
-    // this.elementBody.apd(this.bigNewsTriangle)
+    this.elementBody.apd(this.bigNewsTriangle)
     
   }
   theme(): Theme
@@ -20,11 +20,11 @@ export default class NewsSectionBackground extends ThemeAble {
   }
 
   public pug(): string {
-    return require("./newsSectionBackground.pug").default
+    return require("./triangleNews.pug").default
   }
   public stl(): string {
-    return super.stl() + require("./newsSectionBackground.css").toString()
+    return super.stl() + require("./triangleNews.css").toString()
   }
 }
 
-declareComponent("news-section-background", NewsSectionBackground)
+declareComponent("triangle-news", TriangleNews)

@@ -69,7 +69,7 @@ export default class SectionTextblob extends Text {
     }
 
     theme():Theme
-    theme(to:Theme):void
+    theme(to:Theme):this
     theme(to?:Theme):any{
         this.textBlob.theme(to)
         return super.theme(to);

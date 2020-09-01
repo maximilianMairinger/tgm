@@ -266,7 +266,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     }
 
     theme():Theme
-    theme(to:Theme):void
+    theme(to:Theme):this
     theme(to?:Theme):any{
         (this.q("c-textblob") as ElementList<Textblob>).forEach(textblob => textblob.theme(to))
         return super.theme(to);

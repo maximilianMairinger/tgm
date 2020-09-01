@@ -6,7 +6,8 @@ import Textblob from "../../_text/textblob/textblob";
 import "../../../_themeAble/_icon/zertificateMan/zertificateMan"
 import ZertificateMan from "../../_icon/zertificateMan/zertificateMan"
 
-export default declareComponent("unterricht-systeme-card", class UnterrichtSystemeCard extends Card {
+
+export default class UnterrichtSystemeCard extends Card {
 
     private textblob = this.q("c-textblob") as Textblob;
     private link = this.q("c-link") as Link;
@@ -16,7 +17,7 @@ export default declareComponent("unterricht-systeme-card", class UnterrichtSyste
     }
 
     theme():Theme
-    theme(to:Theme):void
+    theme(to:Theme):this
     theme(to?:Theme):any{
         this.textblob.theme(to);
         return super.theme(to);
@@ -81,4 +82,6 @@ export default declareComponent("unterricht-systeme-card", class UnterrichtSyste
     pug(){
         return require('./unterrichtSystemeCard.pug').default;
     }
-})
+}
+
+declareComponent("unterricht-systeme-card", UnterrichtSystemeCard)

@@ -26,7 +26,7 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
     }
 
     theme():Theme
-    theme(to:Theme):void
+    theme(to:Theme):this
     theme(to?:Theme):any{
         this.textblob.theme(to);
         return super.theme(to);

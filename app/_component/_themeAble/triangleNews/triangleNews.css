@@ -28,3 +28,25 @@ text-center {
 c-image-textblob {
   margin: auto;
 }
+
+card-container {
+  position: absolute;
+  width: 80%;
+  height: 100%;
+  top: 0;
+  left: 35%;
+  display: flex;
+  overflow-y: auto;
+  transform: translateY(.1px);
+  scroll-snap-type: x mandatory;
+}
+
+
+card-container > * {
+  position: relative;
+  float: left;
+  margin: auto 25px;
+  flex: 0 0 350px;
+  height: 450px;
+  scroll-snap-align: start;
+}

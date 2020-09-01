@@ -5,11 +5,15 @@ import "../_icon/bigNewsTriangle/bigNewsTriangle"
 import BigNewsTriangle from "../_icon/bigNewsTriangle/bigNewsTriangle"
 import "../_text/imageTextblob/imageTextblob"
 import ImageTextblob from "../_text/imageTextblob/imageTextblob"
+import "../_card/unterrichtSystemeCard/unterrichtSystemeCard"
+import Card from "../_card/unterrichtSystemeCard/unterrichtSystemeCard"
+import { ElementList } from "extended-dom"
 
 export default class TriangleNews extends ThemeAble {
 
   private bigNewsTriangle = this.q("c-big-news-triangle-icon") as BigNewsTriangle
   private imageTextblob = this.q("c-image-textblob") as ImageTextblob
+  private cards = this.q("c-unterricht-systeme-card") as ElementList<Card>
   
   constructor() {
     super() 
@@ -21,6 +25,7 @@ export default class TriangleNews extends ThemeAble {
   theme(to?: Theme): any {
     this.bigNewsTriangle.theme(to)
     this.imageTextblob.theme(to)
+    this.cards.Inner("theme", [to])
     return super.theme(to)
   }
 

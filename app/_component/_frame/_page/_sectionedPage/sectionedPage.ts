@@ -10,8 +10,8 @@ import { constructIndex } from "key-index"
 
 const padding = -70
 
-const windowMargin = -0.33334
-const windowParginStr = (windowMargin * 100) + "%"
+const windowMargi = -0.33334
+const windowMargin = (windowMargi * 100) + "%"
 
 const scrollAnimationSpeed = 1150
 
@@ -442,7 +442,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       }
     }, {
       threshold: 0,
-      rootMargin: windowParginStr
+      rootMargin: windowMargin
     })
 
     sectionIndex.forEach(async (section: Promise<PageSection>) => {
@@ -585,9 +585,9 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       let sec = sectionIndex.getSlugifyed(init)
       if (sec === undefined) return false
     
-      sec.priorityThen((e: PageSection) => {
-        e.scrollIntoView(true)
-        let verticalOffset = padding
+      sec.priorityThen()
+      sec.then((e: PageSection) => {
+        let verticalOffset = padding + e.offsetTop
         let ali = this.sectionAliasList.reverseIndex[this.domainSubscription.domain]
         if (ali) if (ali instanceof ScrollProgressAliasIndex.Reverse) verticalOffset += ali.progress - padding + .5
         this.elementBody.scrollBy(0, verticalOffset)

@@ -1,9 +1,11 @@
+const superImportant = 1000000
+
 export default function init<Func extends () => Promise<any>>(resources: ImportanceMap<any, any>, globalInitFunc?: (instance: any) => void | Promise<void>) {
   const resolvements = new Map<string, Function>();
   const indexMap = new ResourcesMap();
   return function load(initalKey?: string): ResourcesMap {
     try {
-      if (initalKey !== undefined) resources.getByString(initalKey).key.importance = 1000000;
+      if (initalKey !== undefined) resources.getByString(initalKey).key.importance = superImportant;
     }
     catch (e) {
       console.warn("Unexpected initalKey");
@@ -29,15 +31,17 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
             thenRes = r
           }))
           if (!resources.loadedImports.includes(imp)) {
-            imp.importance += 1000000
+            imp.importance += superImportant
             resources.changedImportance = true
           }
           
           return prom.then((a) => {
-            let res = cb(a)
-            if (res instanceof Promise) res.then(thenRes)
-            else thenRes()
-            return res
+            if (cb) {
+              let res = cb(a)
+              if (res instanceof Promise) res.then(thenRes)
+              else thenRes()
+              return res
+            }
           })
         }
         //@ts-ignore
@@ -71,6 +75,8 @@ export function slugifyUrl(url: string) {
   return url.split(dirString).replace((s) => slugify(s)).join(dirString)
 }
 
+type PriorityPromise = Promise<any> & {priorityThen: (cb?: (a: any) => void) => void}
+
 export class BidirectionalMap<K, V> extends Map<K, V> {
   public reverse: Map<V, K> = new Map
 
@@ -84,7 +90,7 @@ export class BidirectionalMap<K, V> extends Map<K, V> {
   }
 }
 
-export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb: (a: any) => void) => void}> {
+export class ResourcesMap extends Map<string, PriorityPromise> {
   public fullyLoaded: Promise<any>
   public anyLoaded: Promise<any>
   public loadedIndex: BidirectionalMap<string, any> = new BidirectionalMap
@@ -106,7 +112,7 @@ export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb:
     this.anyLoaded = Promise.race(proms)
   }
   public readonly slugifiedIndex = {}
-  public set(key: string, val: Promise<any> & {priorityThen: (cb: (a: any) => void) => void}) {
+  public set(key: string, val: PriorityPromise) {
     this.slugifiedIndex[slugifyUrl(key)] = key
     val.then((v) => {
       if (val === this.get(key)) this.loadedIndex.set(key, v)
@@ -118,7 +124,7 @@ export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb:
     this.loadedIndex.delete(key)
     return super.delete(key)
   }
-  public getSlugifyed(wantedKey: string): Promise<any> & {priorityThen: (cb: (a: any) => void) => void} {
+  public getSlugifyed(wantedKey: string): PriorityPromise {
     for (let slug in this.slugifiedIndex) {
       if (wantedKey === slug) return this.get(this.slugifiedIndex[slug])
     }
@@ -126,7 +132,7 @@ export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb:
   public deslugify(key: string) {
     return this.slugifiedIndex[key] !== undefined ? this.slugifiedIndex[key] : key
   }
-  public get(key: string): Promise<any> & {priorityThen: (cb: (a: any) => void) => void} {
+  public get(key: string): PriorityPromise {
     let val = super.get(key);
     if (val instanceof Function) {
       let v = val()

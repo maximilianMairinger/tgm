@@ -6,18 +6,20 @@ import Textblob from "../textblob/textblob";
 import "../../_icon/arrow/arrow"
 import {ElementList} from "extended-dom";
 
-export type Project = { heading: string, note: string, logo: string, team: string[], thumbnail: string, title: string, content: string}
+export type Project = { heading: string, note: string, logo: string, team: string[], thumbnail: string, title: string, content: string, loaded:boolean}
 
 export default declareComponent("tablet-blob", class TableBlob extends Text {
 
     private index = 0;
+    private scrollFree = true;
     private previousArrow = this.q("project-previous");
     private previousAvailable = false;
-    private animations:Animation[] = [null, null];
     private nextArrow = this.q("project-next");
     private nextAvailable = false;
+    private slider = this.q("tablet-slider");
+    private tutorial = this.q("mobile-tutorial");
     private projectData = [{
-        heading:"Delta-3 Launch Vehicle",
+        heading:"Delta-1 Launch Vehicle",
         note:"Rakete zum ökonomischen Starten von Satelliten in den niedrigen Orbit",
         logo:"/res/img/projektLogoBeispiel3.png",
         team:[
@@ -63,58 +65,137 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
             thumbnail:"/res/img/projektBeispiel2.png",
             title: "Das Problem",
             content: "Zu dem jetzigen Zeitpunkt gibt es einige Produkte auf dem Markt, welche ein kabellose Datenübertragung zwischen zwei Geräten ermöglichen. Für so gut wie alle benötigt man aber eine konstante Internetverbindung. Darüber hinaus leiden einige dieser Programme an geringer Übertragungsgeschwindigkeit und mangelnder Sicherheit. Aus diesem Grund wird eine Smartphone App als auch eine Desktop-Version der Applikation benötigt. Das Programm soll für eine kabellose und Internet unabhängige Datenübertragung verwendet werden."
+        },
+        {
+            heading:"Delta-2 Launch Vehicle",
+            note:"Rakete zum ökonomischen Starten von Satelliten in den niedrigen Orbit",
+            logo:"/res/img/projektLogoBeispiel3.png",
+            team:[
+                "Sabine Vollfrau",
+                "Maximillian Meiringer",
+                "Saphael Rschlage",
+                "Feorg Gelber",
+                "Moritz Meier"
+            ],
+            thumbnail:"/res/img/projektBeispiel3.jpg",
+            title: "Das Problem",
+            content: "Große Aerospace Unternehmen bieten keine ökonomischen Lösungen für kleinere wissenschaftliche Projekte, die eine Notwendigkeit für Satelliten im niedrigen Orbit haben. So kann zwar bei Missionen ein kleiner Satellit relativ billig mitgeschickt werden, Priorität ist aber jedenfalls die eigentliche Mission und eine individuelle Positionierung des Satelliten kann nicht garantiert werden.\n" +
+                "\n" +
+                "Schüler der 5. Klasse RT haben ein ökonomisches Launch Vehicle mit einer Kapazität von bis zu 500kg konzeptioniert, welches in Einzelausführung durch einen vergleichbar niedrigen Kostenpunkt, ein individuelles Deployment von Satelliten für kleinere wissenschaftliche Unternehmungen, als auch kommerzielle Applikationen bietet.",
+        },
+        {
+            heading:"LabAuth 2",
+            note:"Educard basierte Anwesenheitserfassung im Labor & Lernbüro.",
+            logo:"/res/img/projektLogoBeispiel.png",
+            team:[
+                "Sabine Vollfrau",
+                "Maximillian Meiringer",
+                "Saphael Rschlage",
+                "Garid Foldmann",
+                "Feorg Gelber",
+                "Moritz Meier"
+            ],
+            thumbnail:"/res/img/projektBeispiel.png",
+            title: "Das Problem",
+            content: "Die Anwesenheitserfassung im Labor oder Lernbüro hat sich im Laufe der Jahre als ein bescheiden herausgestellt. Manche Lehrer haben eine leere Liste durch die Klasse gegeben in welche die Schüler (nach Unterbrechen ihrer Arbeit) sich eingetragen hatten, welche anschließend vom Lehrer händisch in eine zentrale digitale Liste übertragen würde. Andere riefen schlicht jeden der ca. 100 Namen der Schüler die sich in dem Raum befinden könnten auf nur um die 20 ebenfalls in besagte liste zu schrieben.\n" +
+                "\n" +
+                "Das war nicht nur Unpraktisch, sondern auch Unverlässlich, da man ohne es zu wissen ausgelassen wurde wenn man zum Zeitpunkt der Answesenheitserfassung gerade nicht im Raum war. Zusätzlich kam es vor, dass Lehrer die Erfassung gar vergaßen und diese dan in Retrospektive oder garnicht Nachtrugen.",
+        },
+        {
+            heading:"Phobos 2",
+            note:"Eine neue Art der Datenübertragung",
+            logo:"/res/img/projektLogoBeispiel2.png",
+            team:[
+                "Feorg Gelber",
+                "Johann Mandel",
+                "Rlorian Fitter"
+            ],
+            thumbnail:"/res/img/projektBeispiel2.png",
+            title: "Das Problem",
+            content: "Zu dem jetzigen Zeitpunkt gibt es einige Produkte auf dem Markt, welche ein kabellose Datenübertragung zwischen zwei Geräten ermöglichen. Für so gut wie alle benötigt man aber eine konstante Internetverbindung. Darüber hinaus leiden einige dieser Programme an geringer Übertragungsgeschwindigkeit und mangelnder Sicherheit. Aus diesem Grund wird eine Smartphone App als auch eine Desktop-Version der Applikation benötigt. Das Programm soll für eine kabellose und Internet unabhängige Datenübertragung verwendet werden."
+        },
+        {
+            heading:"Delta-3 Launch Vehicle",
+            note:"Rakete zum ökonomischen Starten von Satelliten in den niedrigen Orbit",
+            logo:"/res/img/projektLogoBeispiel3.png",
+            team:[
+                "Sabine Vollfrau",
+                "Maximillian Meiringer",
+                "Saphael Rschlage",
+                "Feorg Gelber",
+                "Moritz Meier"
+            ],
+            thumbnail:"/res/img/projektBeispiel3.jpg",
+            title: "Das Problem",
+            content: "Große Aerospace Unternehmen bieten keine ökonomischen Lösungen für kleinere wissenschaftliche Projekte, die eine Notwendigkeit für Satelliten im niedrigen Orbit haben. So kann zwar bei Missionen ein kleiner Satellit relativ billig mitgeschickt werden, Priorität ist aber jedenfalls die eigentliche Mission und eine individuelle Positionierung des Satelliten kann nicht garantiert werden.\n" +
+                "\n" +
+                "Schüler der 5. Klasse RT haben ein ökonomisches Launch Vehicle mit einer Kapazität von bis zu 500kg konzeptioniert, welches in Einzelausführung durch einen vergleichbar niedrigen Kostenpunkt, ein individuelles Deployment von Satelliten für kleinere wissenschaftliche Unternehmungen, als auch kommerzielle Applikationen bietet.",
+        },
+        {
+            heading:"LabAuth 3",
+            note:"Educard basierte Anwesenheitserfassung im Labor & Lernbüro.",
+            logo:"/res/img/projektLogoBeispiel.png",
+            team:[
+                "Sabine Vollfrau",
+                "Maximillian Meiringer",
+                "Saphael Rschlage",
+                "Garid Foldmann",
+                "Feorg Gelber",
+                "Moritz Meier"
+            ],
+            thumbnail:"/res/img/projektBeispiel.png",
+            title: "Das Problem",
+            content: "Die Anwesenheitserfassung im Labor oder Lernbüro hat sich im Laufe der Jahre als ein bescheiden herausgestellt. Manche Lehrer haben eine leere Liste durch die Klasse gegeben in welche die Schüler (nach Unterbrechen ihrer Arbeit) sich eingetragen hatten, welche anschließend vom Lehrer händisch in eine zentrale digitale Liste übertragen würde. Andere riefen schlicht jeden der ca. 100 Namen der Schüler die sich in dem Raum befinden könnten auf nur um die 20 ebenfalls in besagte liste zu schrieben.\n" +
+                "\n" +
+                "Das war nicht nur Unpraktisch, sondern auch Unverlässlich, da man ohne es zu wissen ausgelassen wurde wenn man zum Zeitpunkt der Answesenheitserfassung gerade nicht im Raum war. Zusätzlich kam es vor, dass Lehrer die Erfassung gar vergaßen und diese dan in Retrospektive oder garnicht Nachtrugen.",
+        },
+        {
+            heading:"Phobos 3",
+            note:"Eine neue Art der Datenübertragung",
+            logo:"/res/img/projektLogoBeispiel2.png",
+            team:[
+                "Feorg Gelber",
+                "Johann Mandel",
+                "Rlorian Fitter"
+            ],
+            thumbnail:"/res/img/projektBeispiel2.png",
+            title: "Das Problem",
+            content: "Zu dem jetzigen Zeitpunkt gibt es einige Produkte auf dem Markt, welche ein kabellose Datenübertragung zwischen zwei Geräten ermöglichen. Für so gut wie alle benötigt man aber eine konstante Internetverbindung. Darüber hinaus leiden einige dieser Programme an geringer Übertragungsgeschwindigkeit und mangelnder Sicherheit. Aus diesem Grund wird eine Smartphone App als auch eine Desktop-Version der Applikation benötigt. Das Programm soll für eine kabellose und Internet unabhängige Datenübertragung verwendet werden."
         }
         ] as Project[];
 
-    private animationQueue(){
-        this.animations.forEach(animation => animation && animation.playState ==  'running' ? this.cancel(animation) : null);
+    private updateIndex(){
+        this.index = Math.floor((this.slider.scrollLeft / this.slider.width()) + 0.5);
     }
 
-    private cancel(animation: Animation){
-       animation.cancel()
-       console.log("canceled")
-    }
-
-    private next(){
-        console.log("next");
-        if(this.nextAvailable) {
+    private next() {
+        this.updateIndex()
+        if (this.nextAvailable) {
             this.index++;
-            this.animationQueue()
-            let previous = this.q("tablet-content.previous").removeClass("previous");
-            let current = this.q("tablet-content.current").removeClass("current");
-            this.animations[0] = current.animate([{'transform': 'scale(1)', right:0}, {'transform': 'scale(0.95)', right:0}, {transform:'scale(0.95)', right:'100%'} ,{transform:'scale(1)', right:'100%'}], {delay:0, duration:750});
-            current.addClass("previous");
-            let next = this.q("tablet-content.next").removeClass("next");
-            this.animations[1] = next.animate([{'transform': 'scale(1)', left:'100%'}, {'transform': 'scale(0.95)', left:'100%'}, {transform:'scale(0.95)', left:0} ,{transform:'scale(1)', left:0}], {delay:0, duration:750});
-            next.addClass("current");
-            previous.addClass("next")
-            this.update(true, previous as HTMLElement);
+            this.slider.scrollTo(this.index * this.slider.width(), 0);
+            this.update(true);
         }
     }
 
     private previous(){
-        console.log("previous");
+        this.updateIndex()
         if(this.previousAvailable) {
             this.index--;
-            this.animationQueue()
-            let next = this.q("tablet-content.next").removeClass("next");
-            let current = this.q("tablet-content.current").removeClass("current");
-            this.animations[0] = current.animate([{'transform': 'scale(1)', left:0}, {'transform': 'scale(0.95)', left:0}, {transform:'scale(0.95)', left:'100%'} ,{transform:'scale(1)', left:'100%'}], {delay:0, duration:750});
-            current.addClass("next");
-            let previous = this.q("tablet-content.previous").removeClass("previous");
-            this.animations[1] = previous.animate([{'transform': 'scale(1)', right:'100%'}, {'transform': 'scale(0.95)', right:'100%'}, {transform:'scale(0.95)', right:0} ,{transform:'scale(1)', right:0}], {delay:0, duration:750});
-            previous.addClass("current");
-            next.addClass("previous");
-            this.update(false, next as HTMLElement)
+            this.slider.scrollTo(this.index * this.slider.width(), 0);
+            this.update(false);
         }
     }
 
-    /**
-     * @param shift true -> shift forwards
-     *              false -> shift backwards
-     *              null -> no shift
-     */
-    private update(shift:boolean, tablet:HTMLElement){
+    private scrollUpdate() {
+        let index = this.index;
+        this.updateIndex()
+        if (this.index > index)
+            this.update(true);
+        else if (this.index < index)
+            this.update(false);
+    }
+
+    private update(shift = null){
         this.team(this.projectData[this.index].team);
         this.logo(this.projectData[this.index].logo);
         if(shift != null)
@@ -129,7 +210,9 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                     this.nextArrow.css({"display":"none"});
                 else {
                     this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading);
-                    this.project(this.projectData[this.index + 1], this.q("tablet-content.next") as HTMLElement)
+                    //broken
+                    if(!this.projectData[this.index + 1].loaded)
+                        this.project(this.projectData[this.index + 1])
                 }
 
             }else {
@@ -143,27 +226,42 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                     this.previousArrow.css({"display":"none"});
                 else {
                     this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading);
-                    this.project(this.projectData[this.index - 1], this.q("tablet-content.previous") as HTMLElement)
                 }
 
             }
         else {
             this.nextAvailable = this.index < this.projectData.length - 1;
-            this.project(this.projectData[this.index + 1], this.q("tablet-content.next") as HTMLElement)
+            this.project(this.projectData[this.index + 1])
             this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading)
             this.nextArrow.css({"display":"flex"});
         }
+    }
+
+    private tutorialHandler(){
+        this.tutorial.removeEventListener("scroll", this.tutorialHandler.bind(this))
+        this.wait4scroll(this.tutorial, this.tutorial.width(), () => this.tutorial.css({display: "none"}));
+    }
+
+    private wait4scroll(scroller:Element, wantedPx:number, func:()=>any){
+        console.log("scroll waiter")
+        let pid = setInterval(() => {
+            if(scroller.scrollLeft < wantedPx + 10 && scroller.scrollLeft > wantedPx - 10){
+                console.log("scroll finished")
+                func();
+                clearInterval(pid);
+            }
+        }, 25)
     }
 
     constructor(){
         super()
         this.nextArrow.addEventListener("click", this.next.bind(this));
         this.previousArrow.addEventListener("click", this.previous.bind(this));
+        this.slider.addEventListener("scroll", this.scrollUpdate.bind(this))
+        this.tutorial.addEventListener("scroll", this.tutorialHandler.bind(this));
         if(this.projectData.length) {
             this.project(this.projectData[this.index]);
-            this.team(this.projectData[this.index].team);
-            this.logo(this.projectData[this.index].logo);
-            this.update(null, this.q("tablet-content.next") as HTMLElement)
+            this.update();
         }
     }
 
@@ -177,7 +275,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     project():Project
     project(project:Project):void
     project(project:Project, tablet:HTMLElement):void
-    project(project?:Project, tablet = this.q("tablet-content.current")){
+    project(project?:Project, tablet= this.createProject()){
         if(project){
             let projectJson = this.parseJSONProp(project);
             (tablet.querySelector("c-textblob") as Textblob).heading(projectJson.heading)
@@ -185,8 +283,38 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
             tablet.querySelector(".thumbnail-pic").setAttribute("src", projectJson.thumbnail);
             tablet.querySelector("info-title").text(projectJson.title);
             tablet.querySelector("info-text").text(projectJson.content);
+            console.log(project.heading);
+            console.log("Index:", this.index);
+            project.loaded = true;
         }else
             return this.projectData[this.index];
+    }
+
+    private createProject():Element{
+        let tablet = ce("tablet-content");
+
+        let textblob = new Textblob();
+        textblob.hsize({max:42, min:42});
+        tablet.append(textblob);
+
+        let notebox = ce("note-box");
+        notebox.append(ce("note-text"));
+        tablet.append(notebox);
+
+        let thumbnail = ce("thumbnail-container");
+        //Why does it work that way?!?!?!?
+        thumbnail.append(ce("IMG").addClass("thumbnail-pic"));
+        thumbnail.append(ce("thumbnail-background"));
+        tablet.append(thumbnail);
+
+        let info = ce("tablet-info");
+        info.append(ce("info-title"));
+        info.append(ce("info-text"));
+        tablet.append(info);
+
+        this.slider.append(tablet);
+
+        return tablet;
     }
 
     private team(members:string[]){

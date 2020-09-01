@@ -526,14 +526,6 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       this.inScrollAnimation.set(scrollAnimation = Symbol())
       this.userInitedScrollEvent = false
 
-      await scrollTo(section, {
-        cancelOnUserAction: true,
-        verticalOffset,
-        speed,
-        elementToScroll: this.elementBody,
-        easing
-      })
-
       let al = this.sectionAliasList.getAllAliasesByRoot(sectionRootName)
       let sectionName = sectionRootName
       if (al instanceof ScrollProgressAliasIndex) {
@@ -546,6 +538,16 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       else sectionName = al.aliases.get().first
 
       this.activateSectionName(sectionName)
+
+      await scrollTo(section, {
+        cancelOnUserAction: true,
+        verticalOffset,
+        speed,
+        elementToScroll: this.elementBody,
+        easing
+      })
+
+      
       
 
       if (scrollAnimation === this.inScrollAnimation.get()) {

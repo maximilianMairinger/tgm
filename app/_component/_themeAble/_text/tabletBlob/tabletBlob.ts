@@ -17,6 +17,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     private nextArrow = this.q("project-next");
     private nextAvailable = false;
     private slider = this.q("tablet-slider");
+    private tutorial = this.q("mobile-tutorial");
     private projectData = [{
         heading:"Delta-1 Launch Vehicle",
         note:"Rakete zum ökonomischen Starten von Satelliten in den niedrigen Orbit",
@@ -163,7 +164,6 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         }
         ] as Project[];
 
-    //broken
     private updateIndex(){
         this.index = Math.floor((this.slider.scrollLeft / this.slider.width()) + 0.5);
     }
@@ -186,11 +186,10 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         }
     }
 
-    //broken
-    private scrollUpdate(){
+    private scrollUpdate() {
         let index = this.index;
         this.updateIndex()
-        if(this.index > index)
+        if (this.index > index)
             this.update(true);
         else if (this.index < index)
             this.update(false);
@@ -238,11 +237,28 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         }
     }
 
+    private tutorialHandler(){
+        this.tutorial.removeEventListener("scroll", this.tutorialHandler.bind(this))
+        this.wait4scroll(this.tutorial, this.tutorial.width(), () => this.tutorial.css({display: "none"}));
+    }
+
+    private wait4scroll(scroller:Element, wantedPx:number, func:()=>any){
+        console.log("scroll waiter")
+        let pid = setInterval(() => {
+            if(scroller.scrollLeft < wantedPx + 10 && scroller.scrollLeft > wantedPx - 10){
+                console.log("scroll finished")
+                func();
+                clearInterval(pid);
+            }
+        }, 25)
+    }
+
     constructor(){
         super()
         this.nextArrow.addEventListener("click", this.next.bind(this));
         this.previousArrow.addEventListener("click", this.previous.bind(this));
         this.slider.addEventListener("scroll", this.scrollUpdate.bind(this))
+        this.tutorial.addEventListener("scroll", this.tutorialHandler.bind(this));
         if(this.projectData.length) {
             this.project(this.projectData[this.index]);
             this.update();

@@ -141,6 +141,10 @@ tablet-buttons * {
     border-radius: 5px;
 }
 
+mobile-tutorial{
+    display: none;
+}
+
 button-1{
     top: -11px;
     left: 50px;
@@ -276,6 +280,55 @@ info-text{
         /* i hate this but i is needed for usabillity */
         max-height: calc(100vh - 150px);
         max-width: 100%;
+    }
+
+    mobile-tutorial{
+        position: absolute;
+        display: block;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+        z-index: 3;
+        color: white;
+        overflow-x: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+    }
+
+    mobile-tutorial::before, mobile-tutorial::after{
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        scroll-snap-align: center;
+    }
+
+    mobile-tutorial::before{
+        left: 0;
+        background: black;
+    }
+
+    mobile-tutorial::after{
+        left: 100%;
+    }
+
+    mobile-tutorial::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    mobile-tutorial::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    mobile-tutorial::-webkit-scrollbar-thumb {
+        background: transparent;
+        border: none;
     }
 
     project-left, project-right{

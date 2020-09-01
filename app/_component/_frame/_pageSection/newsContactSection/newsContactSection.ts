@@ -11,6 +11,7 @@ import "../../../_themeAble/link/link"
 import "../../../_themeAble/_icon/_highlightAbleIcon/filledArrow/filledArrow"
 import HighlightAbleIcon from "../../../_themeAble/_icon/_highlightAbleIcon/highlightAbleIcon";
 import "../../../_themeAble/_card/unterrichtSystemeCard/unterrichtSystemeCard"
+import { scrollAnimationEndWithMargin, scrollAnimationStart, scrollAnimationEnd, pointerFadinPos, tgmPosition } from "./conf";
 
 
 
@@ -26,19 +27,7 @@ const vienna = {
   }
 }
 
-export const begin = 0
-const scrollAnimationStart = begin + 150
-const scrollAnimationDurartion = 600
-export const scrollAnimationEnd = scrollAnimationStart + scrollAnimationDurartion
-const pointerFadinPos = scrollAnimationEnd - 40
-const scrollAnimationEndWithMargin = scrollAnimationEnd + 100
 
-
-
-const tgmPosition = {
-  x: -35,
-  y: -25
-}
 
 
 export default declareComponent("news-contact-section", class extends PageSection {

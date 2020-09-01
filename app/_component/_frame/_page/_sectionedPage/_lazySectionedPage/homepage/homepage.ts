@@ -1,5 +1,5 @@
 import { declareComponent } from "../../../../../../lib/declareComponent"
-import { scrollAnimationEnd, begin } from "../../../../_pageSection/newsContactSection/newsContactSection"
+import { scrollAnimationEnd, begin } from "../../../../_pageSection/newsContactSection/conf"
 import LazySectionedPage from "../lazySectionedPage"
 import { ImportanceMap, Import } from "../../../../../../lib/lazyLoad"
 import VersuchanstaltSection from "../../../../_pageSection/versuchsanstaltSection/versuchsanstaltSection"

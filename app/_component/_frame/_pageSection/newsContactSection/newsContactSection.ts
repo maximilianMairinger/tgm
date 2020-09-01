@@ -26,8 +26,8 @@ const vienna = {
   }
 }
 
-
-const scrollAnimationStart = 150
+export const begin = 0
+const scrollAnimationStart = begin + 150
 const scrollAnimationDurartion = 600
 export const scrollAnimationEnd = scrollAnimationStart + scrollAnimationDurartion
 const pointerFadinPos = scrollAnimationEnd - 40
@@ -74,7 +74,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
   private cardContainer = this.q("card-container")
 
   
-  constructor() {
+  constructor(private scrollToPos: (to?: number, speed?: number) => void) {
     super()
 
     this.q("scroll-ly").css("height", scrollAnimationEndWithMargin);
@@ -167,7 +167,19 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
 
 
-
+    let timeout = setTimeout(() => {}, 0)
+    this.scrollPosData.get((pos) => {
+      clearTimeout(timeout)
+      if (pos > scrollAnimationStart && pos < scrollAnimationEnd) {
+        timeout = setTimeout(() => {
+          let scrollTo: number
+          if (Math.abs(pos - scrollAnimationStart) < Math.abs(pos - scrollAnimationEnd)) scrollTo = scrollAnimationStart
+          else scrollTo = scrollAnimationEnd
+          this.scrollToPos(scrollTo, 3000)
+          
+        }, 400)
+      }
+    })
 
 
 

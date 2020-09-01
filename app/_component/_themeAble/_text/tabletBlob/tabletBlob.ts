@@ -6,7 +6,7 @@ import Textblob from "../textblob/textblob";
 import "../../_icon/arrow/arrow"
 import {ElementList} from "extended-dom";
 
-export type Project = { heading: string, note: string, logo: string, team: string[], thumbnail: string, title: string, content: string}
+export type Project = { heading: string, note: string, logo: string, team: string[], thumbnail: string, title: string, content: string, loaded:boolean}
 
 export default declareComponent("tablet-blob", class TableBlob extends Text {
 
@@ -188,16 +188,12 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
 
     //broken
     private scrollUpdate(){
-        if(this.scrollFree){
-            this.scrollFree = false;
-            let index = this.index;
-            this.updateIndex()
-            if(this.index > index)
-                this.update(true);
-            else if (this.index < index)
-                this.update(false);
-            setTimeout(() => this.scrollFree = true, 250);
-        }
+        let index = this.index;
+        this.updateIndex()
+        if(this.index > index)
+            this.update(true);
+        else if (this.index < index)
+            this.update(false);
     }
 
     private update(shift = null){
@@ -216,7 +212,8 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 else {
                     this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading);
                     //broken
-                    this.project(this.projectData[this.index + 1])
+                    if(!this.projectData[this.index + 1].loaded)
+                        this.project(this.projectData[this.index + 1])
                 }
 
             }else {
@@ -270,6 +267,9 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
             tablet.querySelector(".thumbnail-pic").setAttribute("src", projectJson.thumbnail);
             tablet.querySelector("info-title").text(projectJson.title);
             tablet.querySelector("info-text").text(projectJson.content);
+            console.log(project.heading);
+            console.log("Index:", this.index);
+            project.loaded = true;
         }else
             return this.projectData[this.index];
     }

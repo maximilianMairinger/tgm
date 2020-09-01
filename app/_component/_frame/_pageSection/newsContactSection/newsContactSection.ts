@@ -173,7 +173,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
       if (pos > scrollAnimationStart && pos < scrollAnimationEnd) {
         timeout = setTimeout(() => {
           let scrollTo: number
-          if (Math.abs(pos - scrollAnimationStart) < Math.abs(pos - scrollAnimationEnd)) scrollTo = scrollAnimationStart
+          if (Math.abs(pos - scrollAnimationStart) < Math.abs(pos - scrollAnimationEnd)) scrollTo = scrollAnimationStart - 1
           else scrollTo = scrollAnimationEnd
           this.scrollToPos(scrollTo, 3000)
           

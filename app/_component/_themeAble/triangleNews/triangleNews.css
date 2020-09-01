@@ -12,5 +12,19 @@ component-body {
 c-big-news-triangle-icon {
   height: 100%;
   height: inherit;
-  transform: scale(1.087) translateX(-550px)
+  transform: scale(1.087) translateX(-550px);
+  position: absolute;
+  top: 0;
+}
+
+text-center {
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 35%;
+  height: 100%;
+}
+
+c-image-textblob {
+  margin: auto;
 }

@@ -1,29 +1,48 @@
 import Card from "../card"
 import declareComponent from "../../../../lib/declareComponent"
 import Icon from "./../../_icon/icon"
-import { Data } from "josm"
+import { Data, DataSubscription } from "josm"
 import Button from "./../../../_button/button"
 import "./../../../_button/button"
 
 
-
+const descAvailCls = "description-available"
 
 export default class IconCard extends Card {
   private iconContainer = this.q("icon-container")
-  private contentContainer = this.q("content-container")
+  private contentContainer = this.q("heading-container")
   private button = this.q("c-button") as Button
-  constructor(icon: Icon, content: string | Data<string>, link: string = "versuchsanstalt") {
+  private descContainer = this.q("desc-container")
+  constructor(icon: Icon, heading: string | Data<string>, description: string | Data<string> = "", link: string = "") {
     super()
     this.icon(icon)
-    this.content(content)
+    this.heading(heading)
+    this.description(description)
     this.button.link(link)
 
   }
 
-  content(): string
-  content(to: string | Data<string>): void
-  content(to?: string | Data<string>): any {
+  heading(): string
+  heading(to: string | Data<string>): void
+  heading(to?: string | Data<string>): any {
     return this.contentContainer.text(to)
+  }
+
+  private updateDescAnim(desc: string) {
+    if (desc !== "") this.addClass(descAvailCls)
+    else this.removeClass(descAvailCls)
+  }
+
+  private subs = new DataSubscription(new Data(""), this.updateDescAnim.bind(this), false)
+  description(): string
+  description(to: string | Data<string>): void
+  description(to?: string | Data<string>): any {
+    if (to instanceof Data) this.subs.data(to).activate(true)
+    else {
+      this.subs.deactivate()
+      this.updateDescAnim(to)
+    }
+    return this.descContainer.text(to)
   }
 
   icon(): Icon

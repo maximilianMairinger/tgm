@@ -1,6 +1,7 @@
 :host {
   width: 250px;
   height: 150px;
+  overflow: hidden;
 }
 
 icon-container {
@@ -9,7 +10,9 @@ icon-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: absolute;
+  transition: .75s;
+  top: 0;
 }
 
 icon-container > * {
@@ -17,16 +20,49 @@ icon-container > * {
   width: 100%;
 }
 
-content-container {
+heading-container {
   width: 100%;
-  position: relative;
-  height: 26%;
+  position: absolute;
+  height: 42%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   text-align: center;
   font-size: 1.26em;
   font-weight: bold;
+  bottom: 0;
+  padding: 0 10px;
+  box-sizing: border-box;
+  transition: .75s;
+}
+
+desc-container {
+  top: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  position: absolute;
+  transform: translateY(0px);
+  opacity: 0;
+  display: -webkit-box;
+  line-clamp: 4;
+  -webkit-line-clamp: 4;
+  font-size: 15px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  transition: .75s;
+}
+
+:host(.description-available:hover) icon-container {
+  top: -61%;
+}
+
+:host(.description-available:hover) heading-container {
+  bottom: 57%
+}
+
+:host(.description-available:hover) desc-container {
+  top: 40%;
+  opacity: 1;
 }
 
 c-button {
@@ -35,3 +71,4 @@ c-button {
   position: absolute;
   top: 0;
 }
+

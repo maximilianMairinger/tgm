@@ -3,11 +3,17 @@ import PageSection from "../pageSection"
 import "./../../../_themeAble/_text/textblob/textblob"
 import TextBlob from "./../../../_themeAble/_text/textblob/textblob"
 import IconCard from "../../../_themeAble/_card/iconCard/iconCard";
-import BioMedIcon from "../../../_themeAble/_icon/_highlightAbleIcon/bioMed/bioMed";
+import BioMedIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/bioMed/bioMed";
+import ElektronikIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/elektronik/elektronik";
+import ElektrotechnikIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/elektrotechnik/elektrotechnik";
+import ItIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/it/it";
+import KunststofftechnikIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/kunststofftechnik/kunststofftechnik";
+import MaschinenbauIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/maschinenbau/maschinenbau";
+import WirtschaftsingenieureIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/wirtschaftsingenieure/wirtschaftsingenieure";
 import { ElementList } from "extended-dom";
-import scrollTo from "animated-scroll-to"
 import * as animationFrameDelta from "animation-frame-delta"
 import delay from "delay";
+import lang from "../../../../lib/lang";
 animationFrameDelta.ignoreUnsubscriptionError()
 
 // TODO pagemanager propergate scroll position, so that the header underline can fade in / out in site
@@ -21,14 +27,16 @@ export default declareComponent("landing-section", class Landing extends PageSec
   constructor() {
     super()
 
+    let abt = lang.abteilungen
+
     let initerLs = [
-      () => new IconCard(new BioMedIcon, "Biomedizin1"), 
-      () => new IconCard(new BioMedIcon, "Biomedizin2"), 
-      () => new IconCard(new BioMedIcon, "Biomedizin3"), 
-      () => new IconCard(new BioMedIcon, "Biomedizin4"), 
-      () => new IconCard(new BioMedIcon, "Biomedizin5"), 
-      () => new IconCard(new BioMedIcon, "Biomedizin6"), 
-      () => new IconCard(new BioMedIcon, "Biomedizin7")
+      () => new IconCard(new BioMedIcon, abt.Biomedizien, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget justo eu velit iaculis venenatis faucibus ac quam. Etiam est nunc, eleifend luctus diam eget, sollicitudin rutrum leo. Proin vel imperdiet est, eget molestie risus."), 
+      () => new IconCard(new ElektronikIcon, abt.Elektronik),
+      () => new IconCard(new ElektrotechnikIcon, abt.Elektrotechnik), 
+      () => new IconCard(new ItIcon, abt.Informationstechnologie), 
+      () => new IconCard(new KunststofftechnikIcon, abt.Kunststofftechnik), 
+      () => new IconCard(new MaschinenbauIcon, abt.Maschinenbau), 
+      () => new IconCard(new WirtschaftsingenieureIcon, abt.Wirtschaftsingenieure)
     ]
 
     let elems = this.iconCards = new ElementList(...initerLs.Call().replace((card) => ce("icon-card-wrapper").apd(card)))

@@ -29,6 +29,16 @@
   },
 
   "tgm": "TGM",
+
+  "abteilungen": {
+    "Biomedizien": "Biomedizin und Gesundheitstechnik",
+    "Elektrotechnik": "Elektrotechnik",
+    "Elektronik": "Elektronik und Technische Informatik",
+    "Informationstechnologie": "Informationstechnologie",
+    "Kunststofftechnik": "Kunststofftechnik",
+    "Maschinenbau": "Maschinenbau",
+    "Wirtschaftsingenieure": "Wirtschaftsingenieure"
+  },
   
   "page": {
     "landing": {

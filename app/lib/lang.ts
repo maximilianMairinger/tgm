@@ -12,10 +12,20 @@ interface Lang {
     "Neuigkeiten": "Neuigkeiten",
     "it": "IT",
     "elektrotechnik": "Elektrotechnik",
-    "raumfahrt": "Raumfahrt", 
+    "raumfahrt": "Raumfahrt",
+    "projekte": "Projekte",
     "news": "Neues",
+    "team": "Team",
+    "leitung": "Leitung",
+    "schueler": "Schülervertretung",
+    "schularzt": "Schularzt",
+    "tasks": "Tätigkeiten",
+    "auftrag": "Auftrag",
+    "tätigkeiten": "Tätigkeiten",
+    "highlights": "Highlights",
 
 
+    "info": "Informationen",
     "section1": "Section1",
     "section2": "Section2",
     "section3": "Section3",
@@ -24,12 +34,22 @@ interface Lang {
   },
 
   "tgm": "TGM",
+
+  "abteilungen": {
+    "Informationstechnologie": "Informationstechnologie",
+    "Elektrotechnik": "Elektrotechnik",
+    "Elektronik": "Elektrotechnik",
+    "Biomedizien": "Biomedizien",
+    "Kunststofftechnik": "Kunststofftechnik",
+    "Maschinenbau": "Maschinenbau",
+    "Wirtschaftsingenieure": "Wirtschaftsingenieure"
+  },
   
   "page": {
     "landing": {
       "main": {
         "note": "wir sind",
-        "head": "Technik",
+        "head": "Technologie",
         "sub": "von Herzen"
       },
       "veruchsanstalt": {

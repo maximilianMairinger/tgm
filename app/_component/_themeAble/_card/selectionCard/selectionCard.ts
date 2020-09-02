@@ -6,7 +6,7 @@ import {Theme} from "../../themeAble";
 import Textblob from "../../_text/textblob/textblob";
 import "../../../_button/button"
 import Button from "../../../_button/button"
-import "../../../_themeAble/_icon/tie/tie"
+import "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/wirtschaftsingenieure/wirtschaftsingenieure"
 import "../../../_themeAble/_icon/cpu/cpu"
 import "../../../_themeAble/_icon/tools/tools"
 import "../../../_themeAble/_icon/windmill/windmill"
@@ -14,6 +14,7 @@ import "../../../_themeAble/_icon/rocket/rocket"
 import "../../../_themeAble/_icon/satellite/satellite"
 import "../../../_themeAble/_icon/rover/rover"
 import "../../../_themeAble/_icon/space-aids/space-aids"
+
 
 type SelectionOptions = {icon: string, title: string, content: string, link: string}[]
 export default declareComponent("selection-card", class SelectionCard extends Card {

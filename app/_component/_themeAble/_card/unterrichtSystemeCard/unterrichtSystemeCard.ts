@@ -20,6 +20,7 @@ export default class UnterrichtSystemeCard extends Card {
     theme(to:Theme):this
     theme(to?:Theme):any{
         this.textblob.theme(to);
+        this.link.theme(to)
         return super.theme(to);
     }
 

@@ -4,6 +4,7 @@ import Icon from "./../../_icon/icon"
 import { Data, DataSubscription } from "josm"
 import Button from "./../../../_button/button"
 import "./../../../_button/button"
+import HighlightAbleIcon from "../../_icon/_highlightAbleIcon/highlightAbleIcon"
 
 
 const descAvailCls = "description-available"
@@ -19,6 +20,16 @@ export default class IconCard extends Card {
     this.heading(heading)
     this.description(description)
     this.button.link(link)
+
+    // if (icon instanceof HighlightAbleIcon) {
+    //   this.on("mouseover", () => {
+    //     icon.highlight()
+    //   })
+    //   this.on("mouseout", () => {
+    //     icon.downlight()
+    //   })
+    // }
+    
 
   }
 

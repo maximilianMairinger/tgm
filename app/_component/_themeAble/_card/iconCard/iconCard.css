@@ -52,13 +52,19 @@ desc-container {
   transition: .75s;
 }
 
+:host(:hover) heading-container {
+  color: var(--strong-contrast-text-color)
+}
+
 :host(.description-available:hover) icon-container {
   top: -61%;
 }
 
 :host(.description-available:hover) heading-container {
-  bottom: 57%
+  bottom: 57%;
 }
+
+
 
 :host(.description-available:hover) desc-container {
   top: 40%;

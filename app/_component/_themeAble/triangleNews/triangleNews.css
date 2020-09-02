@@ -15,6 +15,7 @@ c-big-news-triangle-icon {
   transform: scale(1.087) translateX(-550px);
   position: absolute;
   top: 0;
+  pointer-events: none;
 }
 
 text-center {

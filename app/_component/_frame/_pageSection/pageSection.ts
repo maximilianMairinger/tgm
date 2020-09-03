@@ -7,7 +7,7 @@ export default abstract class PageSection extends Frame {
     super()
     
   }
-  public localScrollProgressData?: ScrollData
+  private localScrollProgressData?: ScrollData
   public getLocalScrollProgressData(): ScrollData {
     if (this.localScrollProgressData) return this.localScrollProgressData
     return this.localScrollProgressData = new ScrollData

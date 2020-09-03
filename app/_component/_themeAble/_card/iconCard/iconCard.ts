@@ -11,7 +11,7 @@ const descAvailCls = "description-available"
 
 export default class IconCard extends Card {
   private iconContainer = this.q("icon-container")
-  private contentContainer = this.q("heading-container")
+  private contentContainer = this.q("heading-container > span")
   private button = this.q("c-button") as Button
   private descContainer = this.q("desc-container")
   constructor(icon: Icon, heading: string | Data<string>, description: string | Data<string> = "", link: string = "") {

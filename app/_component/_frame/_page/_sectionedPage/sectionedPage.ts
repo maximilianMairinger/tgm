@@ -447,16 +447,17 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     sectionIndex.forEach(async (section: Promise<PageSection>) => {
       let sec = await section
+      let localScrollProgressData = sec.getLocalScrollProgressData()
 
       
-      if (sec.localScrollProgressData) {
-        sec.getLocalScrollProgressData = () => sec.localScrollProgressData
-        localSegmentScrollDataIndex(sec).get(sec.localScrollProgressData.set.bind(sec.localScrollProgressData))
+      if (localScrollProgressData) {
+        sec.getLocalScrollProgressData = () => localScrollProgressData
+        localSegmentScrollDataIndex(sec).get(localScrollProgressData.set.bind(localScrollProgressData))
       }
       else {
         sec.getLocalScrollProgressData = () => {
-          sec.getLocalScrollProgressData = () => sec.localScrollProgressData
-          return sec.localScrollProgressData = localSegmentScrollDataIndex(sec)
+          sec.getLocalScrollProgressData = () => localScrollProgressData
+          return localScrollProgressData = localSegmentScrollDataIndex(sec)
         }
 
       }

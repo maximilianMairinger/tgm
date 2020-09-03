@@ -30,13 +30,13 @@ export default declareComponent("landing-section", class Landing extends PageSec
     let abt = lang.abteilungen
 
     let initerLs = [
-      () => new IconCard(new BioMedIcon, abt.Biomedizien, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget justo eu velit iaculis venenatis faucibus ac quam. Etiam est nunc, eleifend luctus diam eget, sollicitudin rutrum leo. Proin vel imperdiet est, eget molestie risus."), 
-      () => new IconCard(new ElektronikIcon, abt.Elektronik),
-      () => new IconCard(new ElektrotechnikIcon, abt.Elektrotechnik), 
-      () => new IconCard(new ItIcon, abt.Informationstechnologie), 
-      () => new IconCard(new KunststofftechnikIcon, abt.Kunststofftechnik), 
-      () => new IconCard(new MaschinenbauIcon, abt.Maschinenbau), 
-      () => new IconCard(new WirtschaftsingenieureIcon, abt.Wirtschaftsingenieure)
+      () => new IconCard(new BioMedIcon, abt.Biomedizien, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
+      () => new IconCard(new ElektronikIcon, abt.Elektronik, lang.loremIpsum.mid, "tagesschule/raumfahrt"),
+      () => new IconCard(new ElektrotechnikIcon, abt.Elektrotechnik, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
+      () => new IconCard(new ItIcon, abt.Informationstechnologie, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
+      () => new IconCard(new KunststofftechnikIcon, abt.Kunststofftechnik, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
+      () => new IconCard(new MaschinenbauIcon, abt.Maschinenbau, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
+      () => new IconCard(new WirtschaftsingenieureIcon, abt.Wirtschaftsingenieure, lang.loremIpsum.mid, "tagesschule/raumfahrt")
     ]
 
     let elems = this.iconCards = new ElementList(...initerLs.Call().replace((card) => ce("icon-card-wrapper").apd(card)))

@@ -5,6 +5,8 @@ import { Data, DataSubscription } from "josm"
 import Button from "./../../../_button/button"
 import "./../../../_button/button"
 import HighlightAbleIcon from "../../_icon/_highlightAbleIcon/highlightAbleIcon"
+import * as domain from "../../../../lib/domain"
+import delay from "delay"
 
 
 const descAvailCls = "description-available"
@@ -20,7 +22,18 @@ export default class IconCard extends Card {
     this.icon(icon)
     this.heading(heading)
     this.description(description)
-    this.button.link(link)
+    this.button.click(async () => {
+      this.addClass("clicked")
+      this.anim({opacity: 0, scale: 1.2}, 400).then(() => {this.css({opacity: 1, scale: 1})})
+
+      domain.set(link)      
+      
+      
+      delay(400).then(() => {
+        this.removeClass("clicked")
+        
+      })
+    })
 
     // if (icon instanceof HighlightAbleIcon) {
     //   this.on("mouseover", () => {

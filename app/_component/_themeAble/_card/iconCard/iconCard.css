@@ -62,21 +62,21 @@ desc-container {
   font-size: 15px;
 }
 
-:host(:hover) heading-container {
+:host(:hover) heading-container, :host(.clicked) heading-container {
   color: var(--strong-contrast-text-color)
 }
 
-:host(.description-available:hover) icon-container {
+:host(.description-available:hover) icon-container, :host(.clicked) icon-container {
   top: -61%;
 }
 
-:host(.description-available:hover) heading-container {
+:host(.description-available:hover) heading-container, :host(.clicked) heading-container {
   bottom: 57%;
 }
 
 
 
-:host(.description-available:hover) desc-container {
+:host(.description-available:hover) desc-container, :host(.clicked) desc-container {
   top: 40%;
   opacity: 1;
 }

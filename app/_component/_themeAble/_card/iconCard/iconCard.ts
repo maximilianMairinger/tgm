@@ -16,6 +16,7 @@ export default class IconCard extends Card {
   private descContainer = this.q("desc-container")
   constructor(icon: Icon, heading: string | Data<string>, description: string | Data<string> = "", link: string = "") {
     super()
+    this.button.preventFocus = true
     this.icon(icon)
     this.heading(heading)
     this.description(description)

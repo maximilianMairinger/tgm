@@ -59,6 +59,7 @@ desc-container {
   overflow: hidden;
   -webkit-box-orient: vertical;
   transition: .75s;
+  font-size: 15px;
 }
 
 :host(:hover) heading-container {

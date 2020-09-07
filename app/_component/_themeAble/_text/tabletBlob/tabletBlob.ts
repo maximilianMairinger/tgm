@@ -18,6 +18,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     private nextAvailable = false;
     private slider = this.q("tablet-slider");
     private tutorial = this.q("mobile-tutorial");
+    private tutorialBind;
     private projectData = [{
         heading:"Delta-1 Launch Vehicle",
         note:"Rakete zum ökonomischen Starten von Satelliten in den niedrigen Orbit",
@@ -238,7 +239,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     }
 
     private tutorialHandler(){
-        this.tutorial.removeEventListener("scroll", this.tutorialHandler.bind(this))
+        this.tutorial.removeEventListener("scroll", this.tutorialBind);
         this.wait4scroll(this.tutorial, this.tutorial.width(), () => this.tutorial.css({display: "none"}));
     }
 
@@ -250,7 +251,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 func();
                 clearInterval(pid);
             }
-        }, 25)
+        }, 32)
     }
 
     constructor(){
@@ -258,7 +259,8 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         this.nextArrow.addEventListener("click", this.next.bind(this));
         this.previousArrow.addEventListener("click", this.previous.bind(this));
         this.slider.addEventListener("scroll", this.scrollUpdate.bind(this))
-        this.tutorial.addEventListener("scroll", this.tutorialHandler.bind(this));
+        this.tutorialBind = this.tutorialHandler.bind(this);
+        this.tutorial.addEventListener("scroll", this.tutorialBind);
         if(this.projectData.length) {
             this.project(this.projectData[this.index]);
             this.update();

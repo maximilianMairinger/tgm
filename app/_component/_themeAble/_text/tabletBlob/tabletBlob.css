@@ -310,7 +310,7 @@ info-text{
     }
 
     mobile-tutorial::before{
-        content: "scroll to use";
+        content: "swipe to use";
         left: 0;
         padding-top: 50%;
         font-size: 36px;

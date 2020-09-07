@@ -11,7 +11,6 @@ export type Project = { heading: string, note: string, logo: string, team: strin
 export default declareComponent("tablet-blob", class TableBlob extends Text {
 
     private index = 0;
-    private scrollFree = true;
     private previousArrow = this.q("project-previous");
     private previousAvailable = false;
     private nextArrow = this.q("project-next");
@@ -199,6 +198,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     private update(shift = null){
         this.team(this.projectData[this.index].team);
         this.logo(this.projectData[this.index].logo);
+        let preload:number = 8;
         if(shift != null)
             if(shift){
                 this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading)
@@ -211,9 +211,8 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                     this.nextArrow.css({"display":"none"});
                 else {
                     this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading);
-                    //broken
-                    if(!this.projectData[this.index + 1].loaded)
-                        this.project(this.projectData[this.index + 1])
+                    if(this.index + preload < this.projectData.length && !this.projectData[this.index + preload].loaded)
+                        this.project(this.projectData[this.index + preload])
                 }
 
             }else {
@@ -231,8 +230,11 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
 
             }
         else {
-            this.nextAvailable = this.index < this.projectData.length - 1;
+            this.nextAvailable = true;
             this.project(this.projectData[this.index + 1])
+            for(let index = this.index + 2; index < this.projectData.length && index <= preload; index ++)
+                this.project(this.projectData[index])
+
             this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading)
             this.nextArrow.css({"display":"flex"});
         }

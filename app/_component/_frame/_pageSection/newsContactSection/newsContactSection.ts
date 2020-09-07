@@ -11,6 +11,7 @@ import "../../../_themeAble/link/link"
 import "../../../_themeAble/_icon/_highlightAbleIcon/filledArrow/filledArrow"
 import HighlightAbleIcon from "../../../_themeAble/_icon/_highlightAbleIcon/highlightAbleIcon";
 import "../../../_themeAble/_card/unterrichtSystemeCard/unterrichtSystemeCard"
+import { scrollAnimationEndWithMargin, scrollAnimationStart, scrollAnimationEnd, pointerFadinPos, tgmPosition } from "./conf";
 
 
 
@@ -27,18 +28,6 @@ const vienna = {
 }
 
 
-const scrollAnimationStart = 150
-const scrollAnimationDurartion = 600
-export const scrollAnimationEnd = scrollAnimationStart + scrollAnimationDurartion
-const pointerFadinPos = scrollAnimationEnd - 40
-const scrollAnimationEndWithMargin = scrollAnimationEnd + 100
-
-
-
-const tgmPosition = {
-  x: -35,
-  y: -25
-}
 
 
 export default declareComponent("news-contact-section", class extends PageSection {
@@ -74,7 +63,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
   private cardContainer = this.q("card-container")
 
   
-  constructor() {
+  constructor(private scrollToPos: (to?: number, speed?: number) => void) {
     super()
 
     this.q("scroll-ly").css("height", scrollAnimationEndWithMargin);
@@ -89,7 +78,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.newsTextBlob.heading("Aktuelles")
     this.newsTextBlob.subheading("aus dem TGM")
     this.newsTextBlob.note("Termine und")
-    this.newsTextBlob.content(`Bei rund 3000 Schülern geschieht ständig etwas. Bleiben Sie informiert, indem Sie unserer <c-link link="https://instagram.com/tgmhit/">Instagram</c-link> oder <c-link link="https://facebook.com/tgmhtl/">Facebook</c-link><span> Seite folgen.</span>`)
+    this.newsTextBlob.content(`Bei rund 3000 Schülern geschieht ständig etwas. Bleiben Sie informiert, indem Sie unserer <c-link link="https://instagram.com/tgmhit/">Instagram</c-link> oder <c-link link="https://facebook.com/tgmhtl/">Facebook</c-link> Seite folgen.`)
     this.newsTextBlob.hsize({"max": 60, "min": 40})
     this.newsTextBlob.hmobile({"max": 55, "min": 35})
     
@@ -167,7 +156,19 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
 
 
-
+    let timeout = setTimeout(() => {}, 0)
+    this.scrollPosData.get((pos) => {
+      clearTimeout(timeout)
+      if (pos > scrollAnimationStart && pos < scrollAnimationEnd) {
+        timeout = setTimeout(() => {
+          let scrollTo: number
+          if (Math.abs(pos - scrollAnimationStart) < Math.abs(pos - scrollAnimationEnd)) scrollTo = scrollAnimationStart - 1
+          else scrollTo = scrollAnimationEnd
+          this.scrollToPos(scrollTo, 3000)
+          
+        }, 400)
+      }
+    })
 
 
 

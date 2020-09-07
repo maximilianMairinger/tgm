@@ -1,9 +1,9 @@
 import declareComponent from "../../../lib/declareComponent"
-import ThemeAble from "../themeAble";
+import ThemeAble, { Theme } from "../themeAble";
 import { Data } from "josm"
 import * as domain from "./../../../lib/domain"
 import delay from "delay"
-import "../../_themeAble/_icon/externalLink/externalLink"
+import ExternalLinkIcon from "../../_themeAble/_icon/externalLink/externalLink"
 
 function openInNewTab(href) {
   Object.assign(document.createElement('a'), {
@@ -18,8 +18,7 @@ export default class Link extends ThemeAble {
   private slotElem = this.sr.querySelector("slot")
   private slidyWrapper = this.q("slidy-underline-wrapper")
   private slidy = this.slidyWrapper.childs()
-  private externalIcon = ce("c-external-link-icon")
-
+  private externalIcon = new ExternalLinkIcon()
 
   constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0, public push: boolean = true, underline: boolean = true) {
     super(false)
@@ -32,16 +31,23 @@ export default class Link extends ThemeAble {
 
 
     let ev = async (e: Event, dontSetLocation = false) => {
-      if (this.link()) this.cbs.Call(e)
+      let link = this.link()
+      let meta = domain.linkMeta(link, this.domainLevel)
+      if (link) this.cbs.Call(e)
+
       if (onClickAnimationInit) {
         onClickAnimationInit()
-        await delay(250)
+        if (meta.isOnOrigin) await delay(300)
+        else {
+          fetch(meta.href)
+          await delay(500)
+        }
       }
 
       // click event Handle
-      let link = this.link()
+      
       if (link) {
-        let meta = domain.linkMeta(link, this.domainLevel)
+        
         if (!dontSetLocation) {
           if (meta.isOnOrigin) domain.set(link, this.domainLevel, this.push)
           else openInNewTab(link)
@@ -209,6 +215,13 @@ export default class Link extends ThemeAble {
       }
     }
 
+  }
+
+  theme(): Theme
+  theme(to: Theme): this
+  theme(to?: Theme): any {
+    this.externalIcon.theme(to)
+    return super.theme(to)
   }
 
   private updateHref() {

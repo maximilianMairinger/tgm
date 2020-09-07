@@ -16,7 +16,7 @@ export default declareComponent("anmelden-card", class AnmeldenCard extends Card
     }
 
     theme():Theme
-    theme(to:Theme):void
+    theme(to:Theme):this
     theme(to?:Theme):any{
         this.zertificateMan.theme(to);
         this.textblob.theme(to);

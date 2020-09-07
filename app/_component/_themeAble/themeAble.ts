@@ -8,19 +8,21 @@ export default abstract class ThemeAble extends Component<false | HTMLElement> {
     super(elementBodyExtention)
 
     this.themeStyleElement.html(themeIndex[this._theme])
-    this.apd(this.themeStyleElement)
+    if (!(this.elementBody instanceof ShadowRoot)) this.shadowRoot.insertBefore(this.themeStyleElement, this.elementBody)
+    else this.shadowRoot.append(this.themeStyleElement)
   }
 
   private _theme: Theme = "light"
   
   theme(): Theme
-  theme(to: Theme): void
+  theme(to: Theme): this
   theme(to?: Theme): any {
     if (to) {
       if (this._theme !== to) {
         if (this.currentlyActiveTheme) this.themeStyleElement.html(themeIndex[to])
         this._theme = to
       }
+      return this
     }
     else return this._theme
   }

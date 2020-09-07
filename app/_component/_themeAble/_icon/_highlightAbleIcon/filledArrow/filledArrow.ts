@@ -13,7 +13,4 @@ export default declareComponent("filled-arrow-icon", class FilledArrowIcon exten
   pug() {
     return require("./filledArrow.pug").default
   }
-  stl() {
-    return super.stl() + require("./filledArrow.css").toString()
-  }
 })

@@ -1,0 +1,53 @@
+:host {
+  width: inherit;
+  height: inherit;
+}
+
+component-body {
+  background: var(--primary-background-color);
+  width: inherit;
+  height: inherit;
+}
+
+c-big-news-triangle-icon {
+  height: 100%;
+  height: inherit;
+  transform: scale(1.087) translateX(-550px);
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+}
+
+text-center {
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 35%;
+  height: 100%;
+}
+
+c-image-textblob {
+  margin: auto;
+}
+
+card-container {
+  position: absolute;
+  width: 80%;
+  height: 100%;
+  top: 0;
+  left: 35%;
+  display: flex;
+  overflow-y: auto;
+  transform: translateY(.1px);
+  scroll-snap-type: x mandatory;
+}
+
+
+card-container > * {
+  position: relative;
+  float: left;
+  margin: auto 25px;
+  flex: 0 0 350px;
+  height: 450px;
+  scroll-snap-align: start;
+}

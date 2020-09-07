@@ -152,12 +152,21 @@ export default class Button extends Component<HTMLAnchorElement> {
     else return this.doesFocusOnHover;
   }
 
-  public click(e?: MouseEvent | KeyboardEvent) {
-    if (e !== undefined && !this.obtainDefault) e.preventDefault();
-    if (this.enabled) {
-      if (!this.preventFocus) this.focus();
-      this.callbacks.forEach(f => {f.call(this, e);});
+  
+  public click<CB extends (e?: MouseEvent | KeyboardEvent) => void>(f: CB): CB
+  public click(e?: MouseEvent | KeyboardEvent)
+  public click(e_f?: MouseEvent | KeyboardEvent | ((e?: MouseEvent | KeyboardEvent) => void)) {
+    if (e_f instanceof Function) {
+      this.addActivationCallback(e_f)
     }
+    else {
+      if (e_f !== undefined && !this.obtainDefault) e_f.preventDefault();
+      if (this.enabled) {
+        if (!this.preventFocus) this.focus();
+        this.callbacks.forEach(f => {f.call(this, e_f);});
+      }
+    }
+    
   }
   private hotKeyListener: (e: KeyboardEvent) => void
 

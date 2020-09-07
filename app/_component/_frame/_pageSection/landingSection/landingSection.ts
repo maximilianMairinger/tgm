@@ -3,14 +3,19 @@ import PageSection from "../pageSection"
 import "./../../../_themeAble/_text/textblob/textblob"
 import TextBlob from "./../../../_themeAble/_text/textblob/textblob"
 import IconCard from "../../../_themeAble/_card/iconCard/iconCard";
-import BioMedIcon from "../../../_themeAble/_icon/_highlightAbleIcon/bioMed/bioMed";
+import BioMedIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/bioMed/bioMed";
+import ElektronikIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/elektronik/elektronik";
+import ElektrotechnikIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/elektrotechnik/elektrotechnik";
+import ItIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/it/it";
+import KunststofftechnikIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/kunststofftechnik/kunststofftechnik";
+import MaschinenbauIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/maschinenbau/maschinenbau";
+import WirtschaftsingenieureIcon from "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/wirtschaftsingenieure/wirtschaftsingenieure";
 import { ElementList } from "extended-dom";
-import scrollTo from "animated-scroll-to"
 import * as animationFrameDelta from "animation-frame-delta"
 import delay from "delay";
+import lang from "../../../../lib/lang";
 animationFrameDelta.ignoreUnsubscriptionError()
 
-// TODO pagemanager propergate scroll position, so that the header underline can fade in / out in site
 
 export default declareComponent("landing-section", class Landing extends PageSection {
   private cardContainer = this.q("card-container")
@@ -21,14 +26,16 @@ export default declareComponent("landing-section", class Landing extends PageSec
   constructor() {
     super()
 
+    let abt = lang.abteilungen
+
     let initerLs = [
-      () => new IconCard(new BioMedIcon, "Biomedizin1"), 
-      () => new IconCard(new BioMedIcon, "Biomedizin2"), 
-      () => new IconCard(new BioMedIcon, "Biomedizin3"), 
-      () => new IconCard(new BioMedIcon, "Biomedizin4"), 
-      () => new IconCard(new BioMedIcon, "Biomedizin5"), 
-      () => new IconCard(new BioMedIcon, "Biomedizin6"), 
-      () => new IconCard(new BioMedIcon, "Biomedizin7")
+      () => new IconCard(new BioMedIcon, abt.Biomedizien, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
+      () => new IconCard(new ElektronikIcon, abt.Elektronik, lang.loremIpsum.mid, "tagesschule/raumfahrt"),
+      () => new IconCard(new ElektrotechnikIcon, abt.Elektrotechnik, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
+      () => new IconCard(new ItIcon, abt.Informationstechnologie, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
+      () => new IconCard(new KunststofftechnikIcon, abt.Kunststofftechnik, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
+      () => new IconCard(new MaschinenbauIcon, abt.Maschinenbau, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
+      () => new IconCard(new WirtschaftsingenieureIcon, abt.Wirtschaftsingenieure, lang.loremIpsum.mid, "tagesschule/raumfahrt")
     ]
 
     let elems = this.iconCards = new ElementList(...initerLs.Call().replace((card) => ce("icon-card-wrapper").apd(card)))
@@ -130,38 +137,30 @@ export default declareComponent("landing-section", class Landing extends PageSec
 
 
 
-
+    this.getLocalScrollProgressData().scrollTrigger(175, 25)
+      .on("forward", () => {
+        let token = this.scrollProgAnimToken = Symbol()
+        this.mainHeaderElem.anim({translateY: 20, opacity: 0, scale: .97}, 400).then(() => {if (token === this.scrollProgAnimToken) this.mainHeaderElem.hide().css({translateY: -20})})
+        delay(140).then(() => {if (token === this.scrollProgAnimToken) this.tagesschuleHeaderElem.show().anim({opacity: 1, translateY: .1, scale: 1}, 550)})
+      })
+      .on("backward", () => {
+        let token = this.scrollProgAnimToken = Symbol()
+        this.tagesschuleHeaderElem.anim({opacity: 0, translateY: 20, scale: .97}, 400).then(() => {if (token === this.scrollProgAnimToken) this.tagesschuleHeaderElem.hide().css({translateY: -20})})
+        delay(140).then(() => {if (token === this.scrollProgAnimToken) this.mainHeaderElem.show().anim({translateY: .1, opacity: 1, scale: 1}, 550)})
+      })
 
 
 
 
     
   }
+  private scrollProgAnimToken: Symbol
 
   initialActivationCallback() {
-    delay(170).then(() => this.iconCards.anim({opacity: 1, translateY: .1}, 500, 60))
+    delay(250).then(() => this.iconCards.anim({opacity: 1, translateY: .1}, 500, 60))
   }
+  
 
-  private currentlyShowingTagesschuleHeader = false
-  private scrollProgAnimToken: Symbol
-  scrollProgressCallback(e: number) {
-    if (e > 200) {
-      if (!this.currentlyShowingTagesschuleHeader) {
-        let token = this.scrollProgAnimToken = Symbol()
-        this.mainHeaderElem.anim({translateY: 20, opacity: 0, scale: .97}, 400).then(() => {if (token === this.scrollProgAnimToken) this.mainHeaderElem.hide().css({translateY: -20})})
-        delay(140).then(() => {if (token === this.scrollProgAnimToken) this.tagesschuleHeaderElem.show().anim({opacity: 1, translateY: .1, scale: 1}, 550)})
-        this.currentlyShowingTagesschuleHeader = true
-      }
-    }
-    else if (e < 150) {
-      if (this.currentlyShowingTagesschuleHeader) {
-        let token = this.scrollProgAnimToken = Symbol()
-        this.tagesschuleHeaderElem.anim({opacity: 0, translateY: 20, scale: .97}, 400).then(() => {if (token === this.scrollProgAnimToken) this.tagesschuleHeaderElem.hide().css({translateY: -20})})
-        delay(140).then(() => {if (token === this.scrollProgAnimToken) this.mainHeaderElem.show().anim({translateY: .1, opacity: 1, scale: 1}, 550)})
-        this.currentlyShowingTagesschuleHeader = false
-      }
-    }
-  }
 
   protected activationCallback(active: boolean) {
 

@@ -8,9 +8,14 @@ import lang from "./../../../lib/lang"
 import { Data } from "josm"
 
 const iconIndex = {
-  abendschule: () => import("../_icon/_highlightAbleIcon/bioMed/bioMed"),
-  tagesschule: () => import("../_icon/_highlightAbleIcon/bioMed/bioMed"),
-  versuchsanstalt: () => import("../_icon/_highlightAbleIcon/bioMed/bioMed"),
+  tagesschule: () => import("../_icon/_highlightAbleIcon/navigationIcon/tagesschule/tagesschule"),
+  versuchsanstalt: () => import("../_icon/_highlightAbleIcon/navigationIcon/versuchsanstalt/versuchsanstalt"),
+  abendschule: () => import("../_icon/_highlightAbleIcon/navigationIcon/abendschule/abendschule"),
+  news: () => import("../_icon/_highlightAbleIcon/navigationIcon/news/news"),
+  kontakt: () => import("../_icon/_highlightAbleIcon/navigationIcon/kontakt/kontakt"),
+  
+  
+  
 }
 
 const hightlightClassString = "highlight"

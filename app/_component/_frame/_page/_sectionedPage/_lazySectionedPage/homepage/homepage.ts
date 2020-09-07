@@ -1,4 +1,5 @@
 import { declareComponent } from "../../../../../../lib/declareComponent"
+import { scrollAnimationEnd, begin } from "../../../../_pageSection/newsContactSection/conf"
 import LazySectionedPage from "../lazySectionedPage"
 import { ImportanceMap, Import } from "../../../../../../lib/lazyLoad"
 import VersuchanstaltSection from "../../../../_pageSection/versuchsanstaltSection/versuchsanstaltSection"
@@ -7,17 +8,12 @@ import LandingSection from "../../../../_pageSection/landingSection/landingSecti
 import NewsContactSection from "../../../../_pageSection/newsContactSection/newsContactSection"
 import { ScrollProgressAlias, ScrollProgressAliasIndex, AliasList, SimpleAlias } from "../../sectionedPage"
 import Footer from "../../../../_pageSection/footer/footer"
-import { scrollAnimationEnd } from "../../../../_pageSection/newsContactSection/newsContactSection"
+
 
 
 
 export default declareComponent("home-page", class Homepage extends LazySectionedPage {
   constructor(setPage: (domain: string) => void, sectionChangeCallback?: (section: string) => void, domainLevel = 1) {
-    
-    let newsToContactScrollProgressIndex = new ScrollProgressAliasIndex("newsKontakt", [
-      new ScrollProgressAlias(0, "news"),
-      new ScrollProgressAlias(scrollAnimationEnd, "kontakt")
-    ])
 
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -37,7 +33,7 @@ export default declareComponent("home-page", class Homepage extends LazySectione
       },
       {
         key: new Import("newsKontakt", 1, (_NewsContactSection: typeof NewsContactSection) =>
-          new _NewsContactSection()
+          new _NewsContactSection(this.scrollToSection)
         ), val: () => import(/* webpackChunkName: "newsContactSection" */"../../../../_pageSection/newsContactSection/newsContactSection")
       },
       {
@@ -46,7 +42,10 @@ export default declareComponent("home-page", class Homepage extends LazySectione
         ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
       }
     ), domainLevel, setPage, sectionChangeCallback, new AliasList(
-      newsToContactScrollProgressIndex
+      new ScrollProgressAliasIndex("newsKontakt", [
+        new ScrollProgressAlias(begin, "news"),
+        new ScrollProgressAlias(scrollAnimationEnd, "kontakt")
+      ])
     ), {
       footer: "kontakt"
     })

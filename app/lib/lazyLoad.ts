@@ -1,9 +1,11 @@
+const superImportant = 1000000
+
 export default function init<Func extends () => Promise<any>>(resources: ImportanceMap<any, any>, globalInitFunc?: (instance: any) => void | Promise<void>) {
   const resolvements = new Map<string, Function>();
   const indexMap = new ResourcesMap();
   return function load(initalKey?: string): ResourcesMap {
     try {
-      if (initalKey !== undefined) resources.getByString(initalKey).key.importance = 1000000;
+      if (initalKey !== undefined) resources.getByString(initalKey).key.importance = superImportant;
     }
     catch (e) {
       console.warn("Unexpected initalKey");
@@ -29,15 +31,17 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
             thenRes = r
           }))
           if (!resources.loadedImports.includes(imp)) {
-            imp.importance += 1000000
+            imp.importance += superImportant
             resources.changedImportance = true
           }
           
           return prom.then((a) => {
-            let res = cb(a)
-            if (res instanceof Promise) res.then(thenRes)
-            else thenRes()
-            return res
+            if (cb) {
+              let res = cb(a)
+              if (res instanceof Promise) res.then(thenRes)
+              else thenRes()
+              return res
+            }
           })
         }
         //@ts-ignore
@@ -66,16 +70,38 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
 }
 
 import slugify from "slugify"
+import { dirString } from "./domain";
 export function slugifyUrl(url: string) {
-  return url.split("/").replace((s) => slugify(s)).join("/")
+  return url.split(dirString).replace((s) => slugify(s)).join(dirString)
 }
 
-export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb: (a: any) => void) => void}> {
+type PriorityPromise = Promise<any> & {priorityThen: (cb?: (a: any) => void) => void}
+
+export class BidirectionalMap<K, V> extends Map<K, V> {
+  public reverse: Map<V, K> = new Map
+
+  set(k: K, v: V) {
+    this.reverse.set(v, k)
+    return super.set(k, v)
+  }
+  delete(k: K) {
+    this.reverse.delete(this.get(k))
+    return super.delete(k)
+  }
+}
+
+export class ResourcesMap extends Map<string, PriorityPromise> {
   public fullyLoaded: Promise<any>
   public anyLoaded: Promise<any>
-  constructor(a?: any) {
-    super(a)
+  public loadedIndex: BidirectionalMap<string, any> = new BidirectionalMap
+
+  public getLoadedKeyOfResource(resource: any) {
+    return this.loadedIndex.reverse.get(resource)
   }
+  public getLoaded(resource: any) {
+    return this.loadedIndex.get(resource)
+  }
+
   private reloadStatusPromises() {
     let proms = []
     this.forEach((e) => {
@@ -86,15 +112,19 @@ export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb:
     this.anyLoaded = Promise.race(proms)
   }
   public readonly slugifiedIndex = {}
-  public set(key: string, val: Promise<any> & {priorityThen: (cb: (a: any) => void) => void}) {
+  public set(key: string, val: PriorityPromise) {
     this.slugifiedIndex[slugifyUrl(key)] = key
+    val.then((v) => {
+      if (val === this.get(key)) this.loadedIndex.set(key, v)
+    })
     return super.set(key, val)
   }
   public delete(key: string) {
     this.slugifiedIndex[slugifyUrl(key)] = key
+    this.loadedIndex.delete(key)
     return super.delete(key)
   }
-  public getSlugifyed(wantedKey: string): Promise<any> & {priorityThen: (cb: (a: any) => void) => void} {
+  public getSlugifyed(wantedKey: string): PriorityPromise {
     for (let slug in this.slugifiedIndex) {
       if (wantedKey === slug) return this.get(this.slugifiedIndex[slug])
     }
@@ -102,11 +132,12 @@ export class ResourcesMap extends Map<string, Promise<any> & {priorityThen: (cb:
   public deslugify(key: string) {
     return this.slugifiedIndex[key] !== undefined ? this.slugifiedIndex[key] : key
   }
-  public get(key: string): Promise<any> & {priorityThen: (cb: (a: any) => void) => void} {
+  public get(key: string): PriorityPromise {
     let val = super.get(key);
-    if (typeof val === "function") {
-      //@ts-ignore
-      return val();
+    if (val instanceof Function) {
+      let v = val()
+      this.set(key, v)
+      return v
     }
     else return val;
   }

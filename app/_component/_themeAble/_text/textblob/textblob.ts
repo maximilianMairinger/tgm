@@ -1,6 +1,6 @@
 import Text from "../text";
 import declareComponent from "../../../../lib/declareComponent";
-import {Theme} from "../../themeAble";
+import ThemeAble, {Theme} from "../../themeAble";
 import "./../../link/link"
 import Link from "./../../link/link"
 
@@ -38,6 +38,14 @@ export default class Textblob extends Text {
     super();
     this.mediaQuery = window.matchMedia('(max-width: 768px)');
     this.mediaQuery.addListener(this.mobileQueryFunc.bind(this));
+  }
+
+  theme(): Theme
+  theme(to: Theme): this
+  theme(to?: Theme): any {
+    this.linkElem.theme(to)
+    this.themeAblesInContent.Inner("theme", [to])
+    return super.theme(to)
   }
 
   heading(): string
@@ -122,29 +130,43 @@ export default class Textblob extends Text {
     } else return this.q("note-text").text();
   }
 
+  private contentElem = this.q("content-text")
+  private themeAblesInContent: ThemeAble[] = []
   content(): string
-  content(content: string): void
+  content(content: string): this
   content(content?: string): any {
-    return this.q("content-text").html(content)
+    if (content !== undefined) {
+      this.contentElem.html(content)
+      this.themeAblesInContent.clear()
+      this.contentElem.childs(1, true).ea((e) => {
+        if (e instanceof ThemeAble) {
+          e.theme(this.theme())
+          this.themeAblesInContent.add(e)
+        }
+      })
+      return this
+    }
+    else return this.contentElem.html()
+    
   }
 
   linktext(): string
   linktext(linktext: string): void
   linktext(linktext?: string): any {
     if (linktext) {
-      this.link.css({marginTop: 14, display:"block"});
+      this.linkElem.css({marginTop: 14, display:"block"});
     }
-    return this.link.content(linktext)
+    return this.linkElem.content(linktext)
   }
 
-  private link = (this.q("c-link.link") as unknown as Link).passiveTheme()
+  private linkElem = this.q("c-link.link") as unknown as Link
   private linkHref: string
   linkhref(): string
   linkhref(linkhref: string): void
   linkhref(linkhref?: string) {
     if (linkhref) {
       this.linkHref = linkhref;
-      this.link.link(linkhref)
+      this.linkElem.link(linkhref)
     }
     else return this.linkHref
   }

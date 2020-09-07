@@ -172,7 +172,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         this.updateIndex()
         if (this.nextAvailable) {
             this.index++;
-            this.slider.scrollTo(this.index * this.slider.width(), 0);
+            this.slider.scrollTo({left: this.index * this.slider.width(), top:0, behavior: 'smooth'});
             this.update(true);
         }
     }
@@ -181,7 +181,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         this.updateIndex()
         if(this.previousAvailable) {
             this.index--;
-            this.slider.scrollTo(this.index * this.slider.width(), 0);
+            this.slider.scrollTo({left: this.index * this.slider.width(), top:0, behavior: 'smooth'});
             this.update(false);
         }
     }

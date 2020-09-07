@@ -201,6 +201,7 @@ tablet-content{
     text-align: left;
     scrollbar-width: thin;
     scroll-snap-align: center;
+    scroll-snap-stop: always;
     overflow-x: hidden;
     overflow-y: scroll;
 }

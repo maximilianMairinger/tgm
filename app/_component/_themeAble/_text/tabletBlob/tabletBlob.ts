@@ -29,7 +29,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
             "Feorg Gelber",
             "Moritz Meier"
         ],
-        thumbnail:"/res/img/projektBeispiel3.jpg",
+        thumbnail:"/res/img/projektBeispiel3.png",
         title: "Das Problem",
         content: "Große Aerospace Unternehmen bieten keine ökonomischen Lösungen für kleinere wissenschaftliche Projekte, die eine Notwendigkeit für Satelliten im niedrigen Orbit haben. So kann zwar bei Missionen ein kleiner Satellit relativ billig mitgeschickt werden, Priorität ist aber jedenfalls die eigentliche Mission und eine individuelle Positionierung des Satelliten kann nicht garantiert werden.\n" +
             "\n" +
@@ -77,7 +77,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 "Feorg Gelber",
                 "Moritz Meier"
             ],
-            thumbnail:"/res/img/projektBeispiel3.jpg",
+            thumbnail:"/res/img/projektBeispiel3.png",
             title: "Das Problem",
             content: "Große Aerospace Unternehmen bieten keine ökonomischen Lösungen für kleinere wissenschaftliche Projekte, die eine Notwendigkeit für Satelliten im niedrigen Orbit haben. So kann zwar bei Missionen ein kleiner Satellit relativ billig mitgeschickt werden, Priorität ist aber jedenfalls die eigentliche Mission und eine individuelle Positionierung des Satelliten kann nicht garantiert werden.\n" +
                 "\n" +
@@ -125,7 +125,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 "Feorg Gelber",
                 "Moritz Meier"
             ],
-            thumbnail:"/res/img/projektBeispiel3.jpg",
+            thumbnail:"/res/img/projektBeispiel3.png",
             title: "Das Problem",
             content: "Große Aerospace Unternehmen bieten keine ökonomischen Lösungen für kleinere wissenschaftliche Projekte, die eine Notwendigkeit für Satelliten im niedrigen Orbit haben. So kann zwar bei Missionen ein kleiner Satellit relativ billig mitgeschickt werden, Priorität ist aber jedenfalls die eigentliche Mission und eine individuelle Positionierung des Satelliten kann nicht garantiert werden.\n" +
                 "\n" +

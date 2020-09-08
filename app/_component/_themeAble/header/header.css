@@ -1,0 +1,142 @@
+component-body {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+blurry-background {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: opacity .3s;
+  border-bottom: 1px solid rgba(0,0,0,0.16);
+  opacity: 0;
+
+  /* Only when browser does not support blur */
+  background-color: rgba(var(--primary-background-color-raw), .9);
+
+  
+}
+
+
+blurry-background.blurry {
+  opacity: 1;
+}
+
+/* if backdrop support: very transparent and blurred */
+@supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
+  blurry-background {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+
+    background-color: unset;
+  }
+}
+
+c-tgm-logo {
+  transition: .25s;
+}
+
+
+slidy-underline, c-link {
+  transition: background-color .25s, color .25s;
+}
+
+
+left-content {
+  position: absolute;
+  left: 100px;
+  display: flex;
+  align-items: center;
+}
+
+left-content > * {
+  pointer-events: all;
+}
+
+right-content > * {
+  pointer-events: all;
+}
+
+
+
+left-content > c-tgm-logo {
+  height: 36px;
+  width: 58px;
+  position: relative;
+  float: left;
+}
+
+c-button#homeButton {
+  position: absolute;
+  left: 0;
+  height: 36px;
+  width: 58px;
+  opacity: .2;
+}
+
+right-content {
+  display: inline-block;
+  position: absolute;
+  right: 100px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: calc(100% - 100px);
+}
+
+
+link-animation-wrapper {
+  display: inline-block;  
+  transform: translateX(-17px);
+  position: absolute;
+  right: 0;
+
+}
+
+right-content > link-animation-wrapper > c-link {
+  margin: 0 18px;
+  font-weight: normal;
+  opacity: 0;
+  transform: translateX(-3px);
+  
+  position: relative;
+  float: left;
+}
+
+right-content > link-animation-wrapper >  c-link:first-of-type {
+  padding-left: 0;
+}
+
+right-content > link-animation-wrapper >  c-link:last-of-type {
+  padding-right: 0;
+}
+
+slidy-underline {
+  position: absolute;
+  background: var(--strong-text-color);
+  width: 70px;
+  height: 2px;
+  transform: translateY(13px);
+  border-radius: 2px;
+  opacity: 0;
+}
+
+path-display {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+
+}
+
+path-display c-arrow-icon {
+  margin: 0 16px;
+  height: 17px;
+  width: 6.5px;
+}
+
+

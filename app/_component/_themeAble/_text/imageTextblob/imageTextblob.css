@@ -1,0 +1,230 @@
+:host{
+    display: block;
+}
+
+image-text-blob{
+    display: flex;
+    position: relative;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    padding: 150px 100px 150px 100px;
+    overflow: hidden;
+}
+
+content-box {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    height: auto;
+    width: max(30%, auto);
+}
+
+note-box {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-content: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+note-text {
+    display: flex;
+    max-width: 100%;
+    margin-left: 10px;
+    line-height: 1.2em;
+    font-size: 14px;
+    font-family: 'PT Mono', monospace;
+    text-transform: uppercase;
+    white-space: nowrap;
+    align-items: center;
+    color: var(--weak-text-color);
+}
+
+connector-box{
+    display: block;
+    height: auto;
+    margin-bottom: 5px;
+}
+
+connector-box hr{
+    border: none;
+    background: var(--strong-text-color);
+    width: 90%;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+hr.lower {
+    display: none; 
+    opacity: 0;
+}
+
+connector-box.top{
+    width: 50px;
+}
+
+connector-box.top hr{
+    height: 6px;
+}
+
+connector-box.bottom{
+    width: 40px;
+}
+
+connector-box.bottom hr{
+    height: 5px;
+}
+
+text-box{
+    width: 100%;
+}
+
+info-box{
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    flex-grow: 1;
+    color: var(--weak-text-color);
+}
+
+info-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 20px;
+    row-gap: 5px;
+    font-size: 14px;
+}
+
+
+info-box .heading{
+    font-weight: bold;
+    color: var(--strong-text-color);
+    user-select: none;
+}
+
+stellvertreter-text{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    font-size: 16px;
+    margin-top: 30px;
+    margin-bottom: 7px;
+}
+
+image-container{
+    display: flex;
+    position: relative;
+    max-width: min(1100px, 70%);
+    flex-grow: 1;
+    overflow: hidden;
+    box-shadow: var(--medium-shadow);
+    justify-content: stretch;
+}
+
+image-box{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-image: grey;
+}
+
+image-text-blob.right{
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    margin-right: 5vw;
+}
+
+image-text-blob.right image-container{
+    margin: -100px 75px -100px -200px;
+    border-radius: 0 10px 10px 0;
+}
+
+image-text-blob.left{
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 10vw;
+}
+
+image-text-blob.left image-container{
+    margin: -100px -200px -100px 50px;
+    border-radius: 10px 0 0 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    image-text-blob{
+        height: 100%;
+        min-height: unset;
+        margin: 0!important;
+        padding: 100px 10vw 100px 10vw;
+        flex-direction: column!important;
+        justify-content: space-around!important;
+    }
+
+    info-grid{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    info-text{
+        width: 30%;
+        min-width: min(140px, 100%);
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-grow: 1;
+    }
+
+    info-text:nth-child(2n),
+    stellvertreter-text ~ info-text:nth-child(2n-1){
+        margin-bottom: 9px;
+        width: 60%;
+    }
+
+    stellvertreter-text ~ info-text:nth-child(2n-1){
+        margin-bottom: 11px;
+    }
+
+    stellvertreter-text ~ info-text:nth-child(2n){
+        margin-bottom: 0;
+        width: 30%;
+    }
+
+    stellvertreter-text{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    content-box{
+        align-self: center;
+        width: unset;
+        max-width: 100%;
+    }
+
+    image-container{
+        width: calc(100% + 10vw);
+        max-width: unset;
+        min-width: 85vw;
+        height: calc(200px + 30vw);
+        min-height: 300px;
+    }
+
+    image-text-blob.right image-container{
+        align-self: flex-start;
+        margin: 50px 0 0 -10vw;
+    }
+
+
+    image-text-blob.left image-container{
+        align-self: flex-end;
+        margin: 50px -10vw 0 0;
+    }
+}

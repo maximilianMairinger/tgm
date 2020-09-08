@@ -1,4 +1,4 @@
-# Tgm
+# [Tgm](https://tgm.lbplaner.xyz/)
 
 The public facing website for the TGM.
 

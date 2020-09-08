@@ -1,0 +1,44 @@
+section-textblob{
+    height: auto;
+}
+
+section-textblob-container c-textblob {
+    margin-top: 50px;
+    min-width: 550px;
+}
+
+section-textblob-image-container {
+    position: relative;
+    display: block;
+    flex-grow: 1;
+    min-width: 500px;
+    margin-top: -125px;
+    margin-left: 25px;
+}
+
+section-textblob-image{
+    background-image: url(./../../../../../res/img/Informationen_Grafik.svg);
+}
+
+@media only screen and (max-width: 768px) {
+
+    section-textblob-image-container {
+        margin-top: 25px;
+        margin-left: 0;
+        margin-bottom: 0;
+        min-width: unset;
+    }
+
+    section-textblob-container c-textblob {
+        min-width: unset;
+        margin-top: 0;
+    }
+
+    section-textblob-circle {
+        top: min(-100vw, -450px);
+        height: 190vw;
+        min-height: 1070px;
+        width: unset;
+    }
+}
+

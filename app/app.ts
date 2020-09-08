@@ -1,5 +1,8 @@
 import featureRequirementsMet from "./featureDetection"
 
+console.log("test1")
+
+
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -9,4 +12,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.body.innerHTML = ""
 
   await (await import(/* webpackChunkName: "init" */"./init")).init()
-});
+})

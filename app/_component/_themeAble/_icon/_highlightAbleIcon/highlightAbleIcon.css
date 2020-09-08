@@ -1,0 +1,20 @@
+:host > svg path {
+  transition: .4s fill;
+}
+
+:host(.highlight-strong) path.highlight, :host(.highlight-strong) g.highlight {
+  fill: var(--strong-text-color) !important
+}
+
+:host(.highlight-weak) path.highlight, :host(.highlight-weak) g.highlight {
+  fill: var(--weak-text-color) !important
+}
+
+:host(.highlight-strong.highlight) g.highlight, :host(.highlight-strong.highlight) path.highlight {
+  fill: var(--strong-contrast-text-color) !important
+}
+
+:host(.highlight-weak.highlight) g.highlight, :host(.highlight-weak.highlight) path.highlight {
+  fill: var(--weak-contrast-text-color) !important
+}
+

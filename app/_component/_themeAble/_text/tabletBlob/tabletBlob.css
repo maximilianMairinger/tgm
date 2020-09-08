@@ -1,0 +1,354 @@
+:host {
+    display: block;
+}
+
+tablet-frame{
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    justify-content: center;
+    padding: 60px 0 50px 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+project-left, project-right{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+    padding: 25px 0 25px 0;
+    width: 200px;
+    overflow: hidden;
+}
+
+project-left{
+    text-align: right;
+    align-items: flex-end;
+}
+
+project-right{
+    text-align: left;
+    order: 2;
+    align-items: flex-start;
+}
+
+
+project-left *, project-right *{
+    display: flex;
+}
+
+project-next, project-previous{
+    display: none;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+project-next:hover {
+    transition: 0.5s;
+    transform: scale(1.1);
+}
+
+
+project-previous:hover{
+    transition: 0.5s;
+    transform: rotate(180deg) scale(1.1);
+}
+
+project-next{
+    writing-mode: vertical-lr;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+project-previous{
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+
+c-arrow-icon{
+    height: 25px;
+}
+
+c-arrow-icon.next{
+    margin-top: 5px;
+}
+
+c-arrow-icon.previous{
+    margin-bottom: 5px;
+}
+
+project-icon{
+    width: 125px;
+    height: 125px;
+    margin-right: 0.5vw;
+}
+
+.project-icon-pic{
+    height: 100%;
+    width: 100%;
+    box-shadow: var(--medium-shadow);
+    border-radius: 10px;
+    background: white;
+}
+
+project-team{
+    display: block;
+    max-width: calc(100% - 25px);
+    margin-left: 0.5vw;
+    font-size: 17px;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+project-team * {
+    display: block;
+    font-size: 15px;
+    font-weight: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+project-team *:first-child{
+    margin-top: 0.5em;
+}
+
+tablet-blob{
+    position: relative;
+    display: block;
+    width: 600px;
+    max-width: calc(100% - 350px);
+    height: 750px;
+    max-height: 85vh;
+    margin: 0 25px;
+    border-radius: 17px;
+    border: #222934 solid 8px;
+    background: white;
+}
+
+tablet-buttons * {
+    z-index: 2;
+    display: block;
+    position: absolute;
+    height: 0;
+    width: 0;
+    border: #222934 solid 4px;
+    border-radius: 5px;
+}
+
+mobile-tutorial{
+    display: none;
+}
+
+button-1{
+    top: -11px;
+    left: 50px;
+    width: 35px;
+}
+
+button-2{
+    top: 50px;
+    left: -11px;
+    height: 25px;
+}
+
+button-3{
+    top: 90px;
+    left: -11px;
+    height: 25px;
+}
+
+tablet-slider{
+    position: relative;
+    display: flex;
+    height: 100%;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    box-sizing: border-box;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+}
+
+tablet-slider::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+}
+
+tablet-slider::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+tablet-slider::-webkit-scrollbar-thumb {
+    background: transparent;
+    border: none;
+}
+
+tablet-content{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-height: calc(100% - 10px);
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 40px 50px 0 50px;
+    margin: 5px 0;
+    text-align: left;
+    scrollbar-width: thin;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+note-box{
+    border-bottom: #C2C2C2 solid 1.5px;
+    padding: 20px 0;
+}
+
+note-text{
+    color: #82858A;
+    font-size: 15px;
+}
+
+thumbnail-container{
+    flex: 1;
+    position: relative;
+    display: flex;
+    width: 100%;
+    z-index: 1;
+    margin: 30px 0;
+}
+
+thumbnail-background {
+    position: absolute;
+    background: #EEEEEE;
+    height: 100%;
+    width: calc(100% + 100px);
+    left: -50px;
+    right: -50px;
+    z-index: -1;
+}
+
+
+.thumbnail-pic {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: var(--medium-shadow);
+}
+
+tablet-info{
+    display: block;
+    padding-bottom: 10px;
+}
+
+info-title{
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3F454F;
+    margin-bottom: 0.5em;
+}
+
+info-text{
+    font-size: 15px;
+    color: #3F454F;
+}
+
+@media only screen and (max-width: 900px) {
+
+    tablet-content {
+        padding: 40px 4vw 0 4vw;
+    }
+
+    thumbnail-container {
+        width: calc(100% + 5vw);
+        margin: 30px -2.5vw;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    tablet-blob{
+        margin: 0;
+        /* i hate this but i is needed for usabillity */
+        max-height: calc(100vh - 150px);
+        max-width: 100%;
+    }
+
+    mobile-tutorial{
+        position: absolute;
+        display: block;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+        z-index: 3;
+        color: white;
+        overflow-x: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+    }
+
+    mobile-tutorial::before, mobile-tutorial::after{
+        position: absolute;
+        display: block;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        scroll-snap-align: center;
+        border-radius: 10px;
+    }
+
+    mobile-tutorial::before{
+        content: "swipe to use";
+        left: 0;
+        padding-top: 50%;
+        font-size: 36px;
+        text-align: center;
+        box-sizing: border-box;
+        background: black;
+    }
+
+    mobile-tutorial::after{
+        content: "";
+        left: 100%;
+    }
+
+    mobile-tutorial::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    mobile-tutorial::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    mobile-tutorial::-webkit-scrollbar-thumb {
+        background: transparent;
+        border: none;
+    }
+
+    project-left, project-right{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    tablet-blob {
+        border-width: 8px 0;
+    }
+
+    button-2, button-3{
+        display: none;
+    }
+}

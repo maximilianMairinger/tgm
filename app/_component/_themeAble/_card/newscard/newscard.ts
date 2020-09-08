@@ -10,8 +10,8 @@ export default declareComponent("newscard", class extends Card {
     subheading(): string
     subheading(to: string): void
     subheading(to?: string) {
-      if (to) this.q("subheading").text(to)
-      else return this.q("subheading").text()
+      if (to) this.q("sub-heading").text(to)
+      else return this.q("sub-heading").text()
     }
 
     cardtitle(): string

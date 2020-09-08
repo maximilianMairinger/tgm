@@ -1,0 +1,118 @@
+:host{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    z-index: 420;
+}
+
+cookie-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 8px 32px;
+    background: white;
+    box-shadow: var(--soft-shadow);
+    border-radius: 5px 5px 0 0;
+    box-sizing: border-box;
+}
+
+cookie-container *:not(:last-child){
+    margin: 8px;
+}
+
+cookie-header{
+    font-weight: bold;
+    font-size: 17px;
+    white-space: nowrap;
+    color: #101010;
+}
+
+cookie-note {
+    font-size: 16px;
+    color: #3F454F;
+}
+
+cookie-selection{
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+}
+
+
+c-button{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: 0.5em 2em;
+    margin: 8px;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+c-button:after{
+    text-align: center;
+    white-space: nowrap;
+}
+
+c-button.yes{
+    font-size: 15px;
+    background: rgba(0, 158, 224, 0.79);
+    border: rgba(0, 158, 224, 0.79) solid 2px;
+    color: white;
+    font-weight: bold;
+}
+
+c-button.yes:after{
+    content: "Allow Cookies";
+}
+
+c-button.no{
+    font-size: 14px;
+    background: white;
+    border: rgba(0, 158, 224, 0.3) solid 2px;
+    color: rgba(0, 158, 224, 0.3);
+}
+
+c-button:hover{
+    border: rgba(0, 158, 224, 1) solid 2px;
+    color: rgba(0, 158, 224, 1);
+    background: white;
+    font-weight: normal;
+}
+
+c-button.no:after{
+    content: "Rather not";
+}
+
+@media only screen and (max-width: 768px) {
+    cookie-container{
+        flex-direction: column;
+    }
+
+    cookie-header{
+        margin-bottom: 0 !important;
+    }
+
+    cookie-note{
+        text-align: center;
+    }
+
+    c-button{
+        max-width: calc(50% - 16px);
+    }
+
+    c-button:after{
+        white-space: unset;
+    }
+}

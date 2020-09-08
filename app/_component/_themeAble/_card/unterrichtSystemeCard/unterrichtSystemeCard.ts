@@ -13,7 +13,7 @@ export default class UnterrichtSystemeCard extends Card {
     private link = this.q("c-link") as Link;
 
     constructor(){
-        super(false);
+        super(false, false);
     }
 
     theme():Theme

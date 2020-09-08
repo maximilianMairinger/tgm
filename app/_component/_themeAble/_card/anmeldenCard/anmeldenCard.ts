@@ -12,7 +12,7 @@ export default declareComponent("anmelden-card", class AnmeldenCard extends Card
     private zertificateMan = this.q("c-zertificate-man") as ZertificateMan;
 
     constructor(){
-        super(false);
+        super(false, false);
     }
 
     theme():Theme

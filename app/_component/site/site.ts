@@ -3,6 +3,7 @@ import declareComponent from "./../../lib/declareComponent"
 import PageManager from "../_frame/_manager/pageManager/pageManager";
 import Header from "./../_themeAble/header/header"
 import LowerNav from "./../_themeAble/lowerNav/lowerNav"
+import CookieNote from "./../_themeAble/cookieNote/cookieNote"
 import { ElementList } from "extended-dom";
 import { negateTheme } from "../_themeAble/themeAble";
 
@@ -112,8 +113,8 @@ export default declareComponent("site", class extends Component {
     pageManager.activate()
 
 
-    
-    this.apd(header, lowerNav)
+    let cookieNote = new CookieNote();
+    this.apd(header, lowerNav, cookieNote)
   }
 
   

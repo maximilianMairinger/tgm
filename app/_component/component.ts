@@ -11,19 +11,19 @@ export default abstract class Component<T extends HTMLElement | HTMLAnchorElemen
   protected elementBody: T extends (HTMLElement | HTMLAnchorElement) ? T : T extends false ? ShadowRoot : HTMLElement
 
 
-  constructor(elementBodyExtention?: T) {
+  constructor(componentBodyExtention?: T) {
     super();
     this.sr = this.attachShadow({mode: "open"});
 
     
-    if (elementBodyExtention !== false) {
+    if (componentBodyExtention !== false) {
       //@ts-ignore
       let realElementBody = this.elementBody = ce("component-body")
-      if (elementBodyExtention !== undefined) {
+      if (componentBodyExtention !== undefined) {
         //@ts-ignore
-        this.elementBody = elementBodyExtention
+        this.elementBody = componentBodyExtention
         //@ts-ignore
-        realElementBody.apd(elementBodyExtention)
+        realElementBody.apd(componentBodyExtention)
       }
 
 

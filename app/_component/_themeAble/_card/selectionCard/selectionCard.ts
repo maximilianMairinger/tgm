@@ -22,8 +22,8 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
     private textblob = this.q("c-textblob") as Textblob;
     private _options:SelectionOptions;
 
-    constructor(){
-        super(false);
+    constructor() {
+        super(false, false)
     }
 
     theme():Theme

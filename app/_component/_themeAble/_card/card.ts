@@ -2,8 +2,8 @@ import ThemeAble from "../themeAble"
 
 export default abstract class Card extends ThemeAble {
 
-  constructor(enableCardHoverEffect = true) {
-    super()
+  constructor(enableCardHoverEffect = true, componentBodyExtention?: HTMLElement | false) {
+    super(componentBodyExtention)
     if (enableCardHoverEffect) this.elementBody.addClass("card-hover-effect-enabled")
   }
 

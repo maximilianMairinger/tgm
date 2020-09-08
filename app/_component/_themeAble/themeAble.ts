@@ -4,8 +4,8 @@ export type Theme = "dark" | "light"
 
 export default abstract class ThemeAble extends Component<false | HTMLElement> {
   private themeStyleElement = ce("style")
-  constructor(elementBodyExtention?: HTMLElement | false) {
-    super(elementBodyExtention)
+  constructor(componentBodyExtention?: HTMLElement | false) {
+    super(componentBodyExtention)
 
     this.themeStyleElement.html(themeIndex[this._theme])
     if (!(this.elementBody instanceof ShadowRoot)) this.shadowRoot.insertBefore(this.themeStyleElement, this.elementBody)

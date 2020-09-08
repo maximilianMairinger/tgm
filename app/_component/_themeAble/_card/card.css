@@ -1,7 +1,6 @@
 :host {
   position: relative;
   display: block;
-  background: var(--secondary-background-color);
   border-radius: 15px;
 
   /* min-width: 200px;
@@ -13,15 +12,20 @@
 }
 
 component-body {
+  border-radius: 15px;
+
+
   transition: .25s;
 
   box-shadow: 7px 7px 15px 0px rgba(0,0,0,.07);
+  background-color: var(--secondary-background-color);
+  transform: scale(1);
   user-select: none;
 }
 
 component-body.card-hover-effect-enabled:hover {
   box-shadow: 0px 0px 12px 2px rgba(122,120,122,1);
   transform: scale(1.02);
-  background: var(--primary-background-color);
+  background-color: var(--strong-background-color);
   box-shadow: 8px 8px 20px 0px rgba(0,0,0,.07);
 }

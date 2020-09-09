@@ -1,5 +1,17 @@
-import { DataBase } from "josm"
-import ger from "./../res/lang/ger.json"
+import { DataBase, Data } from "josm"
+import _de from "./../res/lang/ger.json"
+const de = _de as Lang
+
+
+
+
+export const currentLang = new Data("de")
+export const languageIndex = new DataBase<{de: Lang}>({de})
+
+
+export const lang = languageIndex(currentLang) as DataBase<Lang>
+export default lang
+
 
 
 
@@ -66,9 +78,3 @@ interface Lang {
     }
   }
 }
-
-
-
-export const lang = new DataBase<Lang>(ger as Lang)
-export default lang
-

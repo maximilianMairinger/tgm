@@ -17,6 +17,7 @@ import "../../../_themeAble/_text/tabletBlob/tabletBlob"
 import "../../_pageSection/schuelerprojekteSection/schuelerprojekteSection"
 import "../../_pageSection/ausmachtSection/ausmachtSection"
 import "../../../_themeAble/cookieNote/cookieNote"
+import "../../../_themeAble/_text/blogPost/blogPost"
 
 
 export default declareComponent("georgs-sandbox", class extends Page {

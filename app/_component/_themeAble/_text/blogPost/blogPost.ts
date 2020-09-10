@@ -18,7 +18,6 @@ export default class BlogPost extends Text {
   theme():Theme
   theme(to:Theme):this
   theme(to?:Theme):any{
-    this.textBlob.theme(to)
     return super.theme(to);
   }
 

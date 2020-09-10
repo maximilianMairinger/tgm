@@ -1,3 +1,57 @@
 blog-post{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 650px;
+    margin: 0 auto;
+}
 
+blog-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: flex-start;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+blog-title{
+    display: block;
+    font-size: 50px;
+}
+
+blog-date{
+    display: flex;
+    align-self: stretch;
+    font-family: 'PT Mono', monospace;
+    font-size: 12px;
+}
+
+blog-date hr{
+    flex-grow: 1;
+    align-self: stretch;
+    height: 2px;
+    margin-left: 10px;
+    border: none;
+    background: var(--strong-text-color);
+}
+
+blog-image{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+h2{
+    font-size: 35px;
+}
+
+p + p{
+    margin-top: 40px;
+}
+
+blog-image img{
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
 }

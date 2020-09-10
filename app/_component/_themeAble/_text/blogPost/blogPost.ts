@@ -10,6 +10,8 @@ import DateTimeFormat = Intl.DateTimeFormat;
 
 export default class BlogPost extends Text {
 
+  private textblob = this.q("c-textblob") as TextBlob;
+
   constructor() {
     super()
   }
@@ -22,9 +24,8 @@ export default class BlogPost extends Text {
 
   blogtitle():string
   blogtitle(title:string):void
-  blogtitle(title?:string) {
-    if (title) this.q("blog-title").text(title);
-    else return this.q("blog-title").text();
+  blogtitle(title?:string):any {
+    return this.textblob.heading(title);
   }
 
   date():string

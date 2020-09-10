@@ -15,11 +15,6 @@ blog-header{
     margin-bottom: 40px;
 }
 
-blog-title{
-    display: block;
-    font-size: 50px;
-}
-
 blog-extra{
     display: flex;
     flex-direction: row;
@@ -58,4 +53,14 @@ blog-image img{
     width: 100%;
     height: auto;
     border-radius: 8px;
+}
+
+@media only screen and (max-width: 768px) {
+
+    blog-post{
+        min-width: unset;
+        width: 100%;
+        padding: 0 10vw;
+        box-sizing: border-box;
+    }
 }

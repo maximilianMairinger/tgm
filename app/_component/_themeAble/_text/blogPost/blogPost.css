@@ -20,14 +20,18 @@ blog-title{
     font-size: 50px;
 }
 
-blog-date{
+blog-extra{
     display: flex;
+    flex-direction: row;
     align-self: stretch;
+}
+
+blog-date{
     font-family: 'PT Mono', monospace;
     font-size: 12px;
 }
 
-blog-date hr{
+blog-extra hr{
     flex-grow: 1;
     align-self: stretch;
     height: 2px;

@@ -52,6 +52,7 @@ heading-container > span {
   -webkit-box-orient: vertical;
   overflow: hidden;
   width: max-content;
+  hyphens: auto;
 }
 
 

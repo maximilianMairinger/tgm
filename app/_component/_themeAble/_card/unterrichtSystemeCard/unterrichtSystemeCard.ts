@@ -9,7 +9,7 @@ import ZertificateMan from "../../_icon/zertificateMan/zertificateMan"
 
 export default class UnterrichtSystemeCard extends Card {
 
-    private textblob = this.q("c-textblob") as Textblob;
+    protected textblob = this.q("c-textblob") as Textblob;
     private link = this.q("c-link") as Link;
 
     constructor(){

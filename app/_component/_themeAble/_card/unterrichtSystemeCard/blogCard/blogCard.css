@@ -1,0 +1,35 @@
+
+:host {
+    display: block;
+    height: 300px;
+    width: 200px;
+    min-width: unset;
+    max-width: unset;
+}
+
+unterricht-system-card{
+    padding: 20px;
+}
+
+thumbnail-box{
+    width: calc(100% + 40px);
+    margin: 0 -20px;
+}
+
+
+content-box{
+    margin-top: 7px;
+}
+
+content-text{
+    -webkit-line-clamp: 3;
+    font-size: 12px;
+}
+
+link-box{
+    margin-top: 7px;
+}
+
+c-link{
+    font-size: 13px;
+}

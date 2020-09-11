@@ -1,0 +1,72 @@
+:host{
+    position: relative;
+    display: block;
+    height: auto;
+}
+
+blog-suggestions-box{
+    display: block;
+    width: 650px;
+    margin: 0 auto;
+}
+
+suggestions-note {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+}
+
+suggestion-note-text{
+    font-size: 12px;
+    font-family: 'PT Mono', monospace;
+    text-transform: uppercase;
+}
+
+suggestions-note hr{
+    flex-grow: 1;
+    align-self: stretch;
+    height: 2px;
+    margin-left: 10px;
+    border: none;
+    background: var(--strong-text-color);
+}
+
+blog-suggestions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 768px) {
+
+    blog-suggestions-box{
+        width: 100%;
+        padding: 0 10vw;
+        box-sizing: border-box;
+    }
+
+
+    blog-suggestions{
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    blog-suggestions::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    blog-suggestions::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    blog-suggestions::-webkit-scrollbar-thumb {
+        background: transparent;
+        border: none;
+    }
+
+    blog-suggestions *:not(:first-child):not(:last-child){
+        margin: 0 25px;
+    }
+}

@@ -18,6 +18,8 @@ import "../../_pageSection/schuelerprojekteSection/schuelerprojekteSection"
 import "../../_pageSection/ausmachtSection/ausmachtSection"
 import "../../../_themeAble/cookieNote/cookieNote"
 import "../../../_themeAble/_text/blogPost/blogPost"
+import "../../../_themeAble/blogSuggestions/blogSuggestions"
+import "../../../_themeAble/_card/unterrichtSystemeCard/blogCard/blogCard"
 
 
 export default declareComponent("georgs-sandbox", class extends Page {

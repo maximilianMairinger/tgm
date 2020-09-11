@@ -3,7 +3,7 @@
     display: block;
     height: 300px;
     width: 200px;
-    min-width: unset;
+    min-width: 200px;
     max-width: unset;
 }
 
@@ -27,4 +27,8 @@ content-text{
 
 link-box{
     margin-top: 7px;
+}
+
+@media only screen and (max-width:  768px) {
+
 }

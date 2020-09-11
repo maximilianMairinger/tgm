@@ -5,11 +5,11 @@ import BlogCard from "../_card/unterrichtSystemeCard/blogCard/blogCard"
 import {ElementList} from "extended-dom";
 
 
-export type blogCardInfo = {heading:string, date:Date, content:string, link:string}
+export type blogCardInfo = {heading:string, thumbnail:string, date:Date, content:string, link:string}
 
 export default declareComponent("blog-suggestions", class CookieNote extends ThemeAble {
 
-    private blogCards = this.q("c-blog-card") as BlogCard;
+    private blogCardInfos:blogCardInfo[];
 
     constructor() {
         super(false)
@@ -19,6 +19,31 @@ export default declareComponent("blog-suggestions", class CookieNote extends The
     theme(to: Theme): this
     theme(to?: Theme): any {
         return super.theme(to)
+    }
+
+    blogs():blogCardInfo[]
+    blogs(blogCardInfos:blogCardInfo[]):void
+    blogs(blogCardInfos?:blogCardInfo[]){
+        if(blogCardInfos){
+            blogCardInfos = this.parseJSONProp(blogCardInfos);
+            console.log(blogCardInfos);
+            this.blogCardInfos = blogCardInfos;
+            let suggestions = ce("blog-suggestions");
+            blogCardInfos.forEach(blogCardInfo => suggestions.append(this.createBlogCard(blogCardInfo)));
+            this.q("blog-suggestions-box").append(suggestions);
+
+        }else return this.blogCardInfos;
+    }
+
+    createBlogCard(blogCardInfo:blogCardInfo):BlogCard{
+        let blogcard = new BlogCard();
+        blogcard.heading(blogCardInfo.heading);
+        blogcard.note(blogCardInfo.date);
+        blogcard.headingbackground("#F5B3AD");
+        blogcard.thumbnail(blogCardInfo.thumbnail);
+        blogcard.content(blogCardInfo.content)
+        blogcard.href(blogCardInfo.link)
+        return blogcard
     }
 
     stl() {

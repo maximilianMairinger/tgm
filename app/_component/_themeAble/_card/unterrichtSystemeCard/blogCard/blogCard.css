@@ -23,13 +23,8 @@ content-box{
 
 content-text{
     -webkit-line-clamp: 3;
-    font-size: 12px;
 }
 
 link-box{
     margin-top: 7px;
-}
-
-c-link{
-    font-size: 13px;
 }

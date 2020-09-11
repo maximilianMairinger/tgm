@@ -8,7 +8,8 @@ export default class BlogCard extends UnterrichtSystemeCard {
 
     constructor() {
         super();
-        this.textblob.hsize({max:18, min:18})
+        this.textblob.hsize({max:25, min:25})
+        this.textblob.hmobile({max:25, min:25})
     }
 
     stl(){

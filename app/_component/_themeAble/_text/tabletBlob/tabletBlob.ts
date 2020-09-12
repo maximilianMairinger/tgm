@@ -16,6 +16,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     private nextArrow = this.q("project-next");
     private nextAvailable = false;
     private slider = this.q("tablet-slider");
+    private updating:boolean;
     private tutorial = this.q("mobile-tutorial");
     private tutorialBind;
     private projectData = [{
@@ -169,20 +170,28 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     }
 
     private next() {
-        this.updateIndex()
-        if (this.nextAvailable) {
-            this.index++;
-            this.slider.scrollTo({left: this.index * this.slider.width(), top:0, behavior: 'smooth'});
-            this.update(true);
+        if(!this.updating) {
+            this.updating = true;
+            this.updateIndex()
+            if (this.nextAvailable) {
+                this.index++;
+                let scrollLeft = this.index * this.slider.width();
+                this.slider.scrollTo({left: scrollLeft, top: 0, behavior: 'smooth'});
+                this.wait4scroll(this.slider, scrollLeft, () => this.update(true));
+            }
         }
     }
 
     private previous(){
-        this.updateIndex()
-        if(this.previousAvailable) {
-            this.index--;
-            this.slider.scrollTo({left: this.index * this.slider.width(), top:0, behavior: 'smooth'});
-            this.update(false);
+        if(!this.updating) {
+            this.updating = true;
+            this.updateIndex()
+            if(this.previousAvailable) {
+                this.index--;
+                let scrollLeft = this.index * this.slider.width();
+                this.slider.scrollTo({left: scrollLeft, top: 0, behavior: 'smooth'});
+                this.wait4scroll(this.slider, scrollLeft, () => this.update(false));
+            }
         }
     }
 
@@ -198,7 +207,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     private update(shift = null){
         this.team(this.projectData[this.index].team);
         this.logo(this.projectData[this.index].logo);
-        let preload:number = 8;
+        let preload:number = 1;
         if(shift != null)
             if(shift){
                 this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading)
@@ -238,6 +247,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
             this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading)
             this.nextArrow.css({"display":"flex"});
         }
+        this.updating=false;
     }
 
     private tutorialHandler(){

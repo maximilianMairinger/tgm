@@ -41,6 +41,7 @@ blog-suggestions{
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    padding-bottom: 50px;
 }
 
 blog-suggestions::-webkit-scrollbar {

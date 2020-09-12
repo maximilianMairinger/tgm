@@ -16,6 +16,7 @@ blog-header{
 }
 
 blog-extra{
+    margin-top: 1px;
     display: flex;
     flex-direction: row;
     align-self: stretch;
@@ -52,7 +53,10 @@ p + p{
 blog-image img{
     width: 100%;
     height: auto;
+    pointer-events: none;
+    user-select: none;
     border-radius: 8px;
+    box-shadow: var(--medium-shadow);
 }
 
 @media only screen and (max-width: 768px) {

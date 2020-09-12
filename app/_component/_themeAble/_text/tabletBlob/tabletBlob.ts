@@ -208,7 +208,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     private update(shift = null){
         this.team(this.projectData[this.index].team);
         this.logo(this.projectData[this.index].logo);
-        let preload:number = 1;
+        let preload:number = this.projectData.length -1 ;
         if(shift != null)
             if(shift){
                 this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading)
@@ -328,6 +328,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         info.append(ce("info-title"));
         info.append(ce("info-text"));
         tablet.append(info);
+
 
         this.slider.append(tablet);
 

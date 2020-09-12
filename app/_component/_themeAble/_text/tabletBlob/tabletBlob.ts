@@ -196,6 +196,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     }
 
     private scrollUpdate() {
+        console.log("scrolling")
         let index = this.index;
         this.updateIndex()
         if (this.index > index)
@@ -255,13 +256,15 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         this.wait4scroll(this.tutorial, this.tutorial.width(), () => this.tutorial.css({display: "none"}));
     }
 
+    private pid;
     private wait4scroll(scroller:Element, wantedPx:number, func:()=>any){
-        console.log("scroll waiter")
-        let pid = setInterval(() => {
+        console.log("scroll waiter");
+        clearInterval(this.pid);
+        this.pid = setInterval(() => {
             if(scroller.scrollLeft < wantedPx + 10 && scroller.scrollLeft > wantedPx - 10){
                 console.log("scroll finished")
                 func();
-                clearInterval(pid);
+                clearInterval(this.pid);
             }
         }, 32)
     }

@@ -128,6 +128,7 @@ tablet-blob{
     margin: 0 25px;
     border-radius: 17px;
     border: #222934 solid 8px;
+    overflow: hidden;
     background: white;
 }
 
@@ -193,11 +194,10 @@ tablet-content{
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    max-height: calc(100% - 10px);
+    max-height: 100%;
     flex: 0 0 100%;
     width: 100%;
     padding: 40px 50px 0 50px;
-    margin: 5px 0;
     text-align: left;
     scrollbar-width: thin;
     scroll-snap-align: center;

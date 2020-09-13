@@ -58,8 +58,8 @@ blog-suggestions::-webkit-scrollbar-thumb {
     border: none;
 }
 
-blog-suggestions *:not(:first-child):not(:last-child){
-    margin: 0 25px;
+blog-suggestions *:not(:last-child){
+    margin-right: 30px;
 }
 
 @media only screen and (max-width: 768px) {

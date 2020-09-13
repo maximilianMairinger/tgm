@@ -1,7 +1,7 @@
 import { declareComponent } from "../../../../lib/declareComponent"
 import PageSection from "../pageSection"
 import "../../../_themeAble/_card/selectionCard/selectionCard"
-import "../../../_themeAble/_card/anmeldenCard/anmeldenCard"
+import "../../../_themeAble/_card/_infoCard/unterrichtSystemeCard/unterrichtSystemeCard"
 
 
 

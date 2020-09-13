@@ -12,14 +12,16 @@ import "../../../_themeAble/_text/_sectionTextblob/informationenSection/informat
 import "../../../_themeAble/_text/_sectionTextblob/ausbildungSection/ausbildungSection"
 import "../../../_themeAble/_card/selectionCard/selectionCard"
 import "../../../_themeAble/_card/anmeldenCard/anmeldenCard"
-import "../../../_themeAble/_card/unterrichtSystemeCard/unterrichtSystemeCard"
+import "../../../_themeAble/_card/_infoCard/infoCard"
 import "../../../_themeAble/_text/tabletBlob/tabletBlob"
 import "../../_pageSection/schuelerprojekteSection/schuelerprojekteSection"
 import "../../_pageSection/ausmachtSection/ausmachtSection"
 import "../../../_themeAble/cookieNote/cookieNote"
 import "../../../_themeAble/_text/blogPost/blogPost"
 import "../../../_themeAble/blogSuggestions/blogSuggestions"
-import "../../../_themeAble/_card/unterrichtSystemeCard/blogCard/blogCard"
+import "../../../_themeAble/_card/_infoCard/blogCard/blogCard"
+import "../../../_themeAble/_card/_infoCard/newsCard/newsCard"
+import "../../../_themeAble/_card/_infoCard/unterrichtSystemeCard/unterrichtSystemeCard"
 
 
 export default declareComponent("georgs-sandbox", class extends Page {

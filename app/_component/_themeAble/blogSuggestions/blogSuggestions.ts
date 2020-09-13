@@ -1,7 +1,7 @@
 import ThemeAble, { Theme } from "../themeAble"
 import declareComponent from "../../../lib/declareComponent"
 import "../../_button/button"
-import BlogCard from "../_card/unterrichtSystemeCard/blogCard/blogCard"
+import BlogCard from "../_card/_infoCard/blogCard/blogCard"
 import {ElementList} from "extended-dom";
 
 

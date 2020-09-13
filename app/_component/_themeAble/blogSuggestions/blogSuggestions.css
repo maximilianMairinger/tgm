@@ -35,13 +35,15 @@ blog-suggestions{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-blog-suggestions{
+    width: 100%;
+    margin-left: -15%;
+    margin-right: -15%;
+    padding: 0 15% 50px 15%;
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    padding-bottom: 50px;
+    mask-image: linear-gradient(to right, transparent, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%,transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, transparent);
 }
 
 blog-suggestions::-webkit-scrollbar {
@@ -58,8 +60,14 @@ blog-suggestions::-webkit-scrollbar-thumb {
     border: none;
 }
 
-blog-suggestions *:not(:last-child){
+blog-suggestions *:not(:nth-last-child(2)):not(:last-child){
     margin-right: 30px;
+}
+
+suggestions-filler{
+    display: block;
+    flex: 0 0 15%;
+    align-self: stretch;
 }
 
 @media only screen and (max-width: 768px) {

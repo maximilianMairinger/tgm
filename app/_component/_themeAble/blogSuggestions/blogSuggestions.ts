@@ -30,6 +30,7 @@ export default declareComponent("blog-suggestions", class CookieNote extends The
             this.blogCardInfos = blogCardInfos;
             let suggestions = ce("blog-suggestions");
             blogCardInfos.forEach(blogCardInfo => suggestions.append(this.createBlogCard(blogCardInfo)));
+            suggestions.append(ce("suggestions-filler"))
             this.q("blog-suggestions-box").append(suggestions);
 
         }else return this.blogCardInfos;

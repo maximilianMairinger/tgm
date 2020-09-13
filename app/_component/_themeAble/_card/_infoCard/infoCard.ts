@@ -4,10 +4,9 @@ import Link from "../../link/link"
 import {Theme} from "../../themeAble";
 import Textblob from "../../_text/textblob/textblob";
 import "../../../_themeAble/_icon/zertificateMan/zertificateMan"
-import ZertificateMan from "../../_icon/zertificateMan/zertificateMan"
 
 
-export default class UnterrichtSystemeCard extends Card {
+export default abstract class InfoCard extends Card {
 
     protected textblob = this.q("c-textblob") as Textblob;
     private link = this.q("c-link") as Link;
@@ -77,12 +76,12 @@ export default class UnterrichtSystemeCard extends Card {
     }
 
     stl(){
-        return super.stl() + require('./unterrichtSystemeCard.css').toString();
+        return super.stl() + require('./infoCard.css').toString();
     }
 
     pug(){
-        return require('./unterrichtSystemeCard.pug').default;
+        return require('./infoCard.pug').default;
     }
 }
 
-declareComponent("unterricht-systeme-card", UnterrichtSystemeCard)
+declareComponent("info-card", InfoCard)

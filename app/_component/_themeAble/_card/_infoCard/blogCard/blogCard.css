@@ -7,7 +7,7 @@
     max-width: unset;
 }
 
-unterricht-system-card{
+info-card{
     padding: 20px;
 }
 
@@ -29,6 +29,3 @@ link-box{
     margin-top: 7px;
 }
 
-@media only screen and (max-width:  768px) {
-
-}

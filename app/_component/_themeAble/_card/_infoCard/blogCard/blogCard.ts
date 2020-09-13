@@ -1,8 +1,8 @@
 import declareComponent from "../../../../../lib/declareComponent";
-import ThemeAble, {Theme} from "../../../themeAble";
-import UnterrichtSystemeCard from "../unterrichtSystemeCard";
+import InfoCard from "../infoCard";
+import Textblob from "../../../_text/textblob/textblob";
 
-export default class BlogCard extends UnterrichtSystemeCard {
+export default class BlogCard extends InfoCard {
 
     constructor() {
         super();

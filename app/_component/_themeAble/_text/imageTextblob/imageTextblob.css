@@ -115,8 +115,10 @@ stellvertreter-text{
 
 image-container{
     display: flex;
+    align-self: center;
     position: relative;
-    max-width: min(1100px, 70%);
+    max-width: min(1100px, 70vw);
+    height: min(600px, 40vw);
     flex-grow: 1;
     overflow: hidden;
     box-shadow: var(--medium-shadow);
@@ -154,6 +156,10 @@ image-text-blob.left{
 image-text-blob.left image-container{
     margin: -100px -200px -100px 50px;
     border-radius: 10px 0 0 10px;
+}
+
+@media only screen and (max-width: 1250px) {
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -211,10 +217,10 @@ image-text-blob.left image-container{
 
     image-container{
         width: calc(100% + 10vw);
+        align-self: unset;
         max-width: unset;
         min-width: 85vw;
-        height: calc(200px + 30vw);
-        min-height: 300px;
+        height: 50vw;
     }
 
     image-text-blob.right image-container{

@@ -169,7 +169,7 @@ image-text-blob.left image-container{
         height: 100%;
         min-height: unset;
         margin: 0!important;
-        padding: 100px 10vw 100px 10vw;
+        padding: 100px 10vw 100px 10vw !important;
         flex-direction: column!important;
         justify-content: space-around!important;
     }

@@ -140,6 +140,7 @@ image-text-blob.right{
     flex-direction: row-reverse;
     justify-content: flex-end;
     margin-right: 5vw;
+    padding: 150px 0 150px 100px;
 }
 
 image-text-blob.right image-container{
@@ -149,17 +150,18 @@ image-text-blob.right image-container{
 
 image-text-blob.left{
     flex-direction: row;
-    justify-content: space-between;
-    margin-left: 10vw;
+    justify-content: flex-end;
+    margin-left: 5vw;
+    padding: 150px 100px 150px 0;
+}
+
+image-text-blob.left content-box{
+    margin: 0 auto
 }
 
 image-text-blob.left image-container{
     margin: -100px -200px -100px 50px;
     border-radius: 10px 0 0 10px;
-}
-
-@media only screen and (max-width: 1250px) {
-
 }
 
 @media only screen and (max-width: 768px) {

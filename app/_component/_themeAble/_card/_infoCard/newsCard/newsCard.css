@@ -4,3 +4,8 @@
     min-width: 225px;
     max-width: unset;
 }
+
+content-text{
+    -webkit-line-clamp: 3;
+}
+

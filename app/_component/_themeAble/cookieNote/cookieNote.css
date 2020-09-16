@@ -74,7 +74,7 @@ c-button.yes{
 }
 
 c-button.yes:after{
-    content: "Allow Cookies";
+    content: "Cookies zulassen";
 }
 
 c-button.no{
@@ -92,7 +92,7 @@ c-button:hover{
 }
 
 c-button.no:after{
-    content: "Rather not";
+    content: "Cookies ablehnen";
 }
 
 @media only screen and (max-width: 768px) {

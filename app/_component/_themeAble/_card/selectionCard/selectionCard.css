@@ -11,13 +11,6 @@
     :host {
         min-width: unset;
     }
-
-
-}
-:host(:hover) {
-    transform: unset;
-    background: rgb(245, 245, 245);
-    box-shadow: 7px 7px 15px 0px rgba(0,0,0,.07);
 }
 
 selection-card{
@@ -63,7 +56,7 @@ selection-container{
 }
 
 selection-container selection-box:not(:last-child) info-container{
-    border-bottom: 1px solid #c5c5c5;
+    border-bottom: 1px solid var(--strong-background-color);
 }
 
 selection-box{

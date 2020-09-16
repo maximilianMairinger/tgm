@@ -52,6 +52,7 @@ heading-container > span {
   -webkit-box-orient: vertical;
   overflow: hidden;
   width: max-content;
+  hyphens: auto;
 }
 
 
@@ -75,17 +76,17 @@ desc-container {
   color: var(--strong-contrast-text-color)
 }
 
-:host(.description-available:hover) icon-container, :host(.clicked) icon-container {
+:host(.description-available:hover) icon-container, :host(.description-available.clicked) icon-container {
   top: -61%;
 }
 
-:host(.description-available:hover) heading-container, :host(.clicked) heading-container {
+:host(.description-available:hover) heading-container, :host(.description-available.clicked) heading-container {
   bottom: 57%;
 }
 
 
 
-:host(.description-available:hover) desc-container, :host(.clicked) desc-container {
+:host(.description-available:hover) desc-container, :host(.description-available.clicked) desc-container {
   top: 40%;
   opacity: 1;
 }

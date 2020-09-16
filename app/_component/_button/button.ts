@@ -97,6 +97,7 @@ export default class Button extends Component<HTMLAnchorElement> {
 
     if (to !== undefined) {
       if (to !== null) {
+        this.obtainDefault = true
         let link = domain.linkMeta(to, domainLevel)
         this.elementBody.href = link.href
         this._link = link.link

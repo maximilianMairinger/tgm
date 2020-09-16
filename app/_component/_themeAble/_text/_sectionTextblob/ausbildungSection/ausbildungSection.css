@@ -1,4 +1,8 @@
 
+section-textblob-container {
+    justify-content: flex-start;
+}
+
 section-textblob-container c-textblob{
     width: 100%;
 }

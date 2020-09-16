@@ -1,0 +1,39 @@
+
+:host {
+    display: block;
+    height: 300px;
+    width: 225px;
+    min-width: 225px;
+    max-width: unset;
+}
+
+info-card{
+    padding: 20px;
+}
+
+thumbnail-box{
+    width: calc(100% + 40px);
+    margin: 0 -20px;
+}
+
+
+content-box{
+    margin-top: 7px;
+}
+
+content-text{
+    -webkit-line-clamp: 3;
+}
+
+link-box{
+    margin-top: 7px;
+}
+
+c-button{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+

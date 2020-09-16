@@ -7,16 +7,7 @@ import HighlightAbleIcon from "../_icon/_highlightAbleIcon/highlightAbleIcon"
 import lang from "./../../../lib/lang"
 import { Data } from "josm"
 
-const iconIndex = {
-  tagesschule: () => import("../_icon/_highlightAbleIcon/navigationIcon/tagesschule/tagesschule"),
-  versuchsanstalt: () => import("../_icon/_highlightAbleIcon/navigationIcon/versuchsanstalt/versuchsanstalt"),
-  abendschule: () => import("../_icon/_highlightAbleIcon/navigationIcon/abendschule/abendschule"),
-  news: () => import("../_icon/_highlightAbleIcon/navigationIcon/news/news"),
-  kontakt: () => import("../_icon/_highlightAbleIcon/navigationIcon/kontakt/kontakt"),
-  
-  
-  
-}
+import { iconIndex } from "../_icon/icon"
 
 const hightlightClassString = "highlight"
 
@@ -31,7 +22,7 @@ export default class LowerNavLink extends ThemeAble {
    * @param content override language interpolation from link
    * @param icon override icon interpolation from link
    */
-  constructor(link: keyof typeof iconIndex, domainLevel?: number, content?: keyof typeof iconIndex | Data<keyof typeof iconIndex>, icon?: keyof typeof iconIndex)
+  constructor(link: keyof typeof iconIndex["navigation"], domainLevel?: number, content?: keyof typeof iconIndex | Data<keyof typeof iconIndex>, icon?: keyof typeof iconIndex)
   constructor(link: string, domainLevel?: number, content?: string, icon?: keyof typeof iconIndex)
   constructor(link: string, domainLevel?: number, content?: string | Data<string>, icon?: keyof typeof iconIndex) {
     super()
@@ -90,7 +81,7 @@ export default class LowerNavLink extends ThemeAble {
   public icon(icon: string): Promise<void>
   public icon(icon?: string): any {
     if (icon !== undefined) {
-      let ic = iconIndex[icon]
+      let ic = iconIndex.navigation[icon]
       if (ic === undefined) {
         this.textElem.anim({top: "20%"})
         console.warn("Unable to find icon for: \"" + icon + "\".")
@@ -99,7 +90,7 @@ export default class LowerNavLink extends ThemeAble {
         this.currentIconName = icon;
 
         (async () => {
-          this.activeIconElem = new ((await iconIndex[icon]()).default)
+          this.activeIconElem = new ((await iconIndex.navigation[icon]()).default)
           if (!this.currentlyActiveTheme) this.activeIconElem.passiveTheme()
           this.iconContainer.html(this.activeIconElem)
         })()

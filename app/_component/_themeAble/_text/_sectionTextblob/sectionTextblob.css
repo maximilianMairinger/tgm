@@ -23,6 +23,11 @@ section-textblob-container {
     justify-content: space-between;
 }
 
+section-textblob-container content-container{
+    position: relative;
+    display: block;
+}
+
 section-textblob-container c-textblob {
     position: relative;
     display: flex;
@@ -78,7 +83,6 @@ section-textblob-circle {
     section-textblob-container c-textblob {
         align-self: center;
         margin: 0;
-        min-height: 550px;
         width: min(100%,  26.5em);
     }
 
@@ -98,13 +102,25 @@ section-textblob-circle {
         background-size: 100% 90%;
     }
 
-    section-textblob-circle {
-        top: min(-90vw, -450px);
-        left: min(-30vw, -300px);
-        right: min(-60vw, -600px);
-        height: 170vw;
-        min-height: 1050px;
-        width: unset;
+    section-textblob-circle{
+        display: none;
+    }
+
+    section-textblob-container content-container{
+        margin-bottom: min(30vw, 150px);
+    }
+
+    section-textblob-circle-mobile {
+        position: absolute;
+        display: block;
+        top: -100vw;
+        left: -60vw;
+        right: -100vw;
+        bottom: calc(max(-30vw, -100px) - 25px);
+        height: auto;
+        border-radius: 100%;
+        background: var(--secondary-background-color);
+        box-shadow: var(--soft-shadow);
     }
 
     section-textblob-L-container {

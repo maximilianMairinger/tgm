@@ -28,9 +28,11 @@ inner-wrapper {
 
 my-logo {
     margin-top: 13px;
-    background-image: url("./logo.svg");
-    background-size: contain;
-    background-repeat: no-repeat;
+}
+
+c-tgm-logo{
+    width: 100%;
+    height: auto;
 }
 
 my-items {
@@ -206,12 +208,12 @@ mobile-logo {
     }
 
     mobile-container {
-        background: url("./logo.svg") no-repeat left center;
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         margin: auto;
         height: 100%;
         width: 100%;
-        background-size: contain;
         grid-row-start: 1;
         grid-row-end: 4;
     }

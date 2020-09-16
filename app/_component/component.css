@@ -1,24 +1,31 @@
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+
+
+@media only screen and (min-width: 768px) {
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track{
+    background: rgba(0, 0, 0, 0);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+
+  ::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,0);
+  }
 }
-
-
-::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  background: rgba(0, 0, 0, 0.4);
-}
-
 
 :host(:focus){
   outline: none;
 }
 *:focus{
   outline:none;
-}
-
-::-webkit-scrollbar-corner {
-  background: rgba(0,0,0,0);
 }
 
 ::selection {

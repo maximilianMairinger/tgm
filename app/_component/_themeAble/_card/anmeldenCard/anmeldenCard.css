@@ -13,11 +13,6 @@
 
 
 }
-:host(:hover) {
-    transform: unset;
-    background: rgb(245, 245, 245);
-    box-shadow: 7px 7px 15px 0px rgba(0, 0, 0, .07);
-}
 
 anmelden-card{
     display: flex;

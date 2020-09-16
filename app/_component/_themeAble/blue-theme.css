@@ -1,0 +1,17 @@
+* {
+  --strong-text-color: #222934;
+  --weak-text-color: #3F454F;
+  --weaker-text-color: #76797e;
+  --strong-contrast-text-color: #222934;
+  --weak-contrast-text-color: #3F454F;
+  /* --primary-background-color: #F9FAFE; */
+  --primary-background-color: rgb(0, 144, 204);
+  --primary-background-color-raw: 0, 144, 204;
+  /* todo */
+  --secondary-background-color: rgb(0, 151, 216);
+  --strong-background-color: rgb(10, 112, 156);
+  --soft-shadow: 0 0 30px 0 rgba(0, 0, 0, .1);
+  --medium-shadow: 0 0 15px 0 rgba(0, 0, 0, .15);
+  --medium-shadow-highlight: 0 0 15px 0 rgba(0, 0, 0, .15);
+  --weak-darken: rgba(0, 0, 0, 0.065);
+}

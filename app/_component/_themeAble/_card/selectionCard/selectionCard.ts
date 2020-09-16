@@ -8,6 +8,7 @@ import "../../../_button/button"
 import Button from "../../../_button/button"
 import "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/wirtschaftsingenieure/wirtschaftsingenieure"
 import "../../../_themeAble/_icon/cpu/cpu"
+import "../../../_themeAble/_icon/tie/tie"
 import "../../../_themeAble/_icon/tools/tools"
 import "../../../_themeAble/_icon/windmill/windmill"
 import "../../../_themeAble/_icon/rocket/rocket"
@@ -20,7 +21,7 @@ type SelectionOptions = {icon: string, title: string, content: string, link: str
 export default declareComponent("selection-card", class SelectionCard extends Card {
 
     private textblob = this.q("c-textblob") as Textblob;
-    private _options:SelectionOptions;
+    private _options: SelectionOptions;
 
     constructor() {
         super(false, false)

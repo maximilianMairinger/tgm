@@ -1,0 +1,270 @@
+component-body {
+  min-height: 130vh;
+  background: #fffbfa;
+  background: linear-gradient(#eceef1 40vh, #fffbfa 60vh);
+}
+
+h2 {
+  display: block;
+  height: 100%;
+  margin: 0;
+  color: rgb(151, 151, 151);
+  position: relative;
+  float: left;
+  width: 100%;
+  margin: 100px;
+}
+
+big-image {
+  background-image: url("./../../../../../res/img/landingAeroplane.jpg");
+  background-position: right top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  height: 1200px;
+  transition: background-position .6s;
+}
+
+text-container {
+  width: 100%;
+  height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  transition: .5s;
+  min-height: 650px;
+}
+
+text-container > c-textblob {
+  display: block;
+  position: absolute;
+  left: 100px;
+  transition: top .5s;
+}
+
+card-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+
+card-container {
+  width: calc(100% - 13%);
+  position: relative;
+  display: flex;
+  margin-top: max(calc(100vh - 145px), 600px);
+  /* This padding quickfix is needed because otherwise the shadow would be cut out from the top */
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  /* Only important on mobile */
+  overflow-x: auto;
+  overflow-y: visible;
+/* 
+  scroll-snap-type: x proximity; */
+}
+
+card-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+card-container::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+icon-card-wrapper {
+  display: block;
+  transform: translateY(7px);
+
+  margin: 0 28px 56px 28px;
+  width: calc(6% + 180px);
+  min-width: 230px;
+  height: calc(4vw + 110px);
+  min-height: 160px;
+}
+
+c-icon-card {
+  display: block;
+  margin: 0 28px 56px 28px;
+  width: calc(6% + 180px);
+  min-width: 240px;
+  height: calc(4vw + 110px);
+  min-height: 160px;
+
+  background: #FEFBF9;
+
+  /* scroll-snap-align: start;
+  scroll-margin-left: 40px; */
+}
+
+icon-card-wrapper > c-icon-card {
+  margin: 0 !important;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+tagesschule-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: absolute;
+  top: max(67vh, 450px);
+}
+
+tagesschule-container > c-textblob {
+  opacity: 0;
+  transform: translateY(-20px);
+  max-width: 100%;
+  display: none;
+}
+
+
+
+
+@media only screen and (max-width: 1200px) {
+  big-image {
+    background-position: 60% top;
+    
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  c-icon-card:first-of-type {
+    margin-left: 40px;
+  }
+
+  c-icon-card {
+    margin-bottom: 0;
+  }
+
+  
+  card-container {
+    flex-wrap: nowrap;
+    justify-content: left;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  /* c-icon-card:last-of-type:after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 100%;
+    left: 100%;
+    position: relative;
+    float: left;
+  } */
+}
+
+
+
+
+@media only screen and (max-width: 900px) {
+  text-container > c-textblob {
+    left: unset;
+  }
+  text-container {
+    justify-content: center;
+    top: 200px;
+  }
+  big-image {
+    background-position: 98% top;
+    
+  }
+
+  
+}
+
+
+
+@media only screen and (max-width: 700px) {
+
+  big-image {
+    background-position: 95% top;
+    
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  big-image {
+    background-position: 90% top;
+    
+  }
+}
+
+@media only screen and (max-width: 500px) {
+
+  big-image {
+    background-position: 85% top;
+    
+  }
+}
+
+
+@media only screen and (max-width: 400px) {
+
+  big-image {
+    background-position: 84% top;
+    
+  }
+
+  text-container {
+    justify-content: left;
+  }
+
+  text-container > c-textblob {
+    left: 8vw;
+    max-width: calc(100% - 8vw);
+  }
+
+
+
+}
+
+
+@media only screen and (max-width: 350px) {
+
+  big-image {
+    background-position: 83% top;
+    
+  }
+}
+
+@media only screen and (max-width: 320px) {
+
+  big-image {
+    background-position: 81% top;
+    
+  }
+}
+
+@media only screen and (max-width: 300px) {
+
+  big-image {
+    background-position: 80% top;
+    
+  }
+}
+
+
+
+@media only screen and (max-height: 500px) {
+
+  big-image {
+    background-position: 85% top;
+    
+  }
+}

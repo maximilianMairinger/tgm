@@ -1,0 +1,132 @@
+:host{
+    display: block;
+}
+
+abendschule-section{
+    display: block;
+    height: 100%;
+    padding-top: 75px;
+    padding-bottom: 25px;
+    background: #0090cc;
+    position: relative;
+}
+
+section-header{
+    display: block;
+    max-width: 100%;
+    margin: calc(220px - 12vw + 0.1em) 180px 100px 180px;
+    background: url("../../../../../res/img/abendschule_background.svg") 80% 35% no-repeat;
+    background-size: 2300px 1275px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: max(27px, calc(75px + (115 - 75)*((100vw - 1250px)/(1600 - 1250))));
+    font-weight: bold;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+card-box{
+    display: flex;
+    margin: 0 205px 100px 205px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+card-box * {
+    margin: 0 25px 50px 25px;
+}
+
+c-anmelden-card{
+    width: 25%;
+}
+
+
+c-selection-card{
+    width: 50%;
+    flex-grow: 1;
+}
+
+image-container {
+    position: absolute;
+    left: 200px;
+    top: -14px;
+    height: 250px;
+    width: 300px;
+}
+
+image-box {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: url("./../../../../../res/img/L_two.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: left bottom;
+}
+
+@media only screen and (max-width: 1250px) {
+    abendschule-section{
+        padding-top: 225px;
+    }
+
+    section-header{
+        margin: 50px 100px 25px 100px;
+        text-align: center;
+        font-size: max(27px, calc(80px + (125 - 80)*((100vw - 769px)/(1259 - 768))));
+    }
+
+    card-box{
+        margin: 0 100px 100px 100px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    card-box *{
+        margin: 50px 0 0 0;
+    }
+
+    c-selection-card{
+        width: auto;
+    }
+
+    c-anmelden-card{
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    card-box{
+        margin-right: 10vw;
+        margin-left: 10vw;
+    }
+
+    c-selection-card{
+        max-width: 100%;
+        min-width: unset;
+        margin-right: 0;
+    }
+
+    c-anmelden-card{
+        width: unset;
+    }
+
+    section-header{
+        font-size: max(27px, calc(35px + (80 - 35)*((100vw - 300px)/(768 - 300))));
+        margin: 0 10vw;
+        color: #425870;
+    }
+
+    image-container {
+        position: absolute;
+        left: 10vw;
+        top: -10px;
+        height: 175px;
+        width: 200px;
+    }
+
+}
+

@@ -1,0 +1,28 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+}
+
+schuelerprojekte-section{
+    display: block;
+    margin-bottom: 125px;
+}
+
+c-textblob{
+    text-align: center;
+    width: auto;
+    margin-bottom: 35px;
+}
+
+c-tablet-blob{
+    background: url("../../../../../res/img/schuelerprojekteBackground.svg") center center no-repeat;
+    background-size: min(90%, 900px) 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    c-tablet-blob{
+        background: none;
+    }
+}

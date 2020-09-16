@@ -4,13 +4,13 @@ import declareComponent from "../../../../../../lib/declareComponent";
 
 
 
-export default declareComponent("bio-med-icon", class BioMedIcon extends HighlightAbleIcon {
+export default declareComponent("tagesschule-anmelden-icon", class TagesschuleAnmaeldenIcon extends HighlightAbleIcon {
   constructor() {
     super()
 
   }
 
   pug() {
-    return require("./bioMed.pug").default
+    return require("./anmelden.pug").default
   }
 })

@@ -4,7 +4,6 @@ import Icon, { iconIndex } from "./../../_icon/icon"
 import { Data, DataSubscription } from "josm"
 import Button from "./../../../_button/button"
 import "./../../../_button/button"
-import HighlightAbleIcon from "../../_icon/_highlightAbleIcon/highlightAbleIcon"
 import * as domain from "../../../../lib/domain"
 import delay from "delay"
 import { currentLang } from "./../../../../lib/lang"
@@ -17,7 +16,7 @@ export default class IconCard extends Card {
   private headingContainer = this.q("heading-container > span") as HTMLElement
   private button = this.q("c-button") as Button
   private descContainer = this.q("desc-container")
-  constructor(icon: Icon | keyof typeof iconIndex, heading: string | Data<string>, description: string | Data<string> = "", link: string = "") {
+  constructor(icon: Icon | keyof typeof iconIndex["tagesschule"], heading: string | Data<string>, description: string | Data<string> = "", link?: string) {
     super()
     this.button.preventFocus = true
     this.icon(icon)
@@ -28,12 +27,11 @@ export default class IconCard extends Card {
       this.headingContainer.lang = lang
     })
     
+    if (link !== undefined) this.button.link(link)
+    
     this.button.click(async () => {
       this.addClass("clicked")
-      this.anim({opacity: 0, scale: 1.2}, 400).then(() => {this.css({opacity: 1, scale: 1})})
-
-      domain.set(link)      
-      
+      this.anim({opacity: 0, scale: 1.2}, 400).then(() => {this.css({opacity: 1, scale: 1})})      
       
       delay(400).then(() => {
         this.removeClass("clicked")
@@ -99,11 +97,11 @@ export default class IconCard extends Card {
   }
 
   icon(): Icon
-  icon(to: Icon | keyof typeof iconIndex): Promise<void>
-  icon(to?: Icon | keyof typeof iconIndex): any {
+  icon(to: Icon | keyof typeof iconIndex["tagesschule"]): Promise<void>
+  icon(to?: Icon | keyof typeof iconIndex["tagesschule"]): any {
     if (to) {
       return (async () => {
-        if (!(to instanceof Icon)) to = new (await iconIndex[to]() as any).default
+        if (!(to instanceof Icon)) to = new (await iconIndex.tagesschule[to]() as any).default
         let first = this.iconContainer.childs(1, true).empty
         if (!first) await this.iconContainer.anim({opacity: 0})
         this.iconContainer.removeChilds()

@@ -1,16 +1,15 @@
 import declareComponent from "../../../../../../lib/declareComponent";
 import CardThumbnail from "../cardThumbnail";
 import IconCard from "../../../../_card/iconCard/iconCard"
-import Icon from "../../../../_icon/icon";
 
 export default declareComponent("raumfahrt-thumbnail", class TeamLeitungThumbnail extends CardThumbnail{
 
     constructor(){
         super(
-            new IconCard("tagesschule", "Anmelden"),
-            new IconCard("abendschule", "Sprechstunde"),
-            new IconCard("versuchsanstalt", "Projekte"),
-            new IconCard("news", "Team")
+            new IconCard("anmelden", "Anmelden"),
+            new IconCard("sprechstunden", "Sprechstunde", undefined, "neilo.webuntis.com/WebUntis/?school=tgm#/basic/officehours"),
+            new IconCard("projekte", "Projekte", undefined, "tagesschule/raumfahrt/projekte"),
+            new IconCard("team", "Team", undefined, "tagesschule/raumfahrt/team")
         )
         this.heading("Raumfahrttechnik");
         this.subheading("der Tagesschule");

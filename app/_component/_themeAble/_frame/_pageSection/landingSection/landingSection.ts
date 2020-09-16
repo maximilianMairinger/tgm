@@ -28,13 +28,13 @@ export default declareComponent("landing-section", class Landing extends PageSec
     let abt = lang.abteilungen
 
     let initerLs = [
-      () => new IconCard(new BioMedIcon, abt.Biomedizien, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
-      () => new IconCard(new ElektronikIcon, abt.Elektronik, lang.loremIpsum.mid, "tagesschule/raumfahrt"),
-      () => new IconCard(new ElektrotechnikIcon, abt.Elektrotechnik, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
-      () => new IconCard(new ItIcon, abt.Informationstechnologie, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
-      () => new IconCard(new KunststofftechnikIcon, abt.Kunststofftechnik, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
-      () => new IconCard(new MaschinenbauIcon, abt.Maschinenbau, lang.loremIpsum.mid, "tagesschule/raumfahrt"), 
-      () => new IconCard(new WirtschaftsingenieureIcon, abt.Wirtschaftsingenieure, lang.loremIpsum.mid, "tagesschule/raumfahrt")
+      () => new IconCard(new BioMedIcon, abt.Biomedizien, lang.AbteilungsShorts.Biomedizien, "tagesschule/raumfahrt"),
+      () => new IconCard(new ElektronikIcon, abt.Elektronik, lang.AbteilungsShorts.Elektronik, "tagesschule/raumfahrt"),
+      () => new IconCard(new ElektrotechnikIcon, abt.Elektrotechnik, lang.AbteilungsShorts.Elektrotechnik, "tagesschule/raumfahrt"),
+      () => new IconCard(new ItIcon, abt.Informationstechnologie, lang.AbteilungsShorts.Informationstechnologie, "tagesschule/raumfahrt"),
+      () => new IconCard(new KunststofftechnikIcon, abt.Kunststofftechnik, lang.AbteilungsShorts.Kunststofftechnik, "tagesschule/raumfahrt"),
+      () => new IconCard(new MaschinenbauIcon, abt.Maschinenbau, lang.AbteilungsShorts.Maschinenbau, "tagesschule/raumfahrt"),
+      () => new IconCard(new WirtschaftsingenieureIcon, abt.Wirtschaftsingenieure, lang.AbteilungsShorts.Wirtschaftsingenieure, "tagesschule/raumfahrt")
     ]
 
     let elems = this.iconCards = new ElementList(...initerLs.Call().replace((card) => ce("icon-card-wrapper").apd(card)))

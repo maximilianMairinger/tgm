@@ -1,6 +1,6 @@
 import Card from "../card"
 import declareComponent from "../../../../lib/declareComponent"
-import Icon from "./../../_icon/icon"
+import Icon, { iconIndex } from "./../../_icon/icon"
 import { Data, DataSubscription } from "josm"
 import Button from "./../../../_button/button"
 import "./../../../_button/button"
@@ -17,7 +17,7 @@ export default class IconCard extends Card {
   private headingContainer = this.q("heading-container > span") as HTMLElement
   private button = this.q("c-button") as Button
   private descContainer = this.q("desc-container")
-  constructor(icon: Icon, heading: string | Data<string>, description: string | Data<string> = "", link: string = "") {
+  constructor(icon: Icon | keyof typeof iconIndex, heading: string | Data<string>, description: string | Data<string> = "", link: string = "") {
     super()
     this.button.preventFocus = true
     this.icon(icon)
@@ -99,10 +99,11 @@ export default class IconCard extends Card {
   }
 
   icon(): Icon
-  icon(to: Icon): Promise<void>
-  icon(to?: Icon): any {
+  icon(to: Icon | keyof typeof iconIndex): Promise<void>
+  icon(to?: Icon | keyof typeof iconIndex): any {
     if (to) {
       return (async () => {
+        if (!(to instanceof Icon)) to = new (await iconIndex[to]() as any).default
         let first = this.iconContainer.childs(1, true).empty
         if (!first) await this.iconContainer.anim({opacity: 0})
         this.iconContainer.removeChilds()

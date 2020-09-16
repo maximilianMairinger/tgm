@@ -7,16 +7,7 @@ import HighlightAbleIcon from "../_icon/_highlightAbleIcon/highlightAbleIcon"
 import lang from "./../../../lib/lang"
 import { Data } from "josm"
 
-const iconIndex = {
-  tagesschule: () => import("../_icon/_highlightAbleIcon/navigationIcon/tagesschule/tagesschule"),
-  versuchsanstalt: () => import("../_icon/_highlightAbleIcon/navigationIcon/versuchsanstalt/versuchsanstalt"),
-  abendschule: () => import("../_icon/_highlightAbleIcon/navigationIcon/abendschule/abendschule"),
-  news: () => import("../_icon/_highlightAbleIcon/navigationIcon/news/news"),
-  kontakt: () => import("../_icon/_highlightAbleIcon/navigationIcon/kontakt/kontakt"),
-  
-  
-  
-}
+import { iconIndex } from "../_icon/icon"
 
 const hightlightClassString = "highlight"
 

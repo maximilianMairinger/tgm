@@ -20,7 +20,7 @@ export default declareComponent("raumfahrt-page", class RaumfahrtPage extends La
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => 
           new WrapperSection(new _Thumbnail(), "dark") as any
-        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_themeAble/_text/_thumbnail/raumfahrtThumbnail/raumfahrtThumbnail")
+        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_themeAble/_text/_thumbnail/_cardThumbnail/raumfahrtThumbnail/raumfahrtThumbnail")
       },
       {
         key: new Import("info", 1, (_Info: typeof Info) => {

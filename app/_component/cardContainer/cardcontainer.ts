@@ -1,8 +1,6 @@
 import Component from "../component";
 import declareComponent from "./../../lib/declareComponent"
 import Nc from "../_themeAble/_card/_infoCard/newsCard/newsCard"
-import { json } from "body-parser";
-
 
 export default declareComponent("cardcontainer", class extends Component {
 

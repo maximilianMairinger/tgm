@@ -1,26 +1,37 @@
 import Component from "../component";
 
-export default abstract class ThemeAble extends Component<false | HTMLElement> {
-  private themeStyleElement = ce("style")
-  constructor(componentBodyExtension?: HTMLElement | false) {
-    super(componentBodyExtension)
+export default abstract class ThemeAble<T extends false | HTMLElement = false | HTMLElement> extends Component<T> {
+  private themeStyleElement: HTMLStyleElement = ce("style")
+
+  constructor(componentBodyExtension?: HTMLElement | false, theme?: Theme | null) {
+    super(componentBodyExtension as any)
+
+    if (theme === undefined) theme = "light"
+    if (theme) this.setTheme(theme)
+    
+    
+    
 
     this.themeStyleElement.html(themeIndex[this._theme])
     if (!(this.elementBody instanceof ShadowRoot)) this.shadowRoot.insertBefore(this.themeStyleElement, this.elementBody)
     else this.shadowRoot.append(this.themeStyleElement)
   }
 
-  private _theme: Theme = "light"
+  private _theme: Theme
+
+  private setTheme(to: Theme) {
+    if (this._theme !== to) {
+      if (this.currentlyActiveTheme) this.themeStyleElement.html(themeIndex[to])
+      this._theme = to
+    }
+    return this
+  }
   
   theme(): Theme
   theme(to: Theme): this
   theme(to?: Theme): any {
     if (to) {
-      if (this._theme !== to) {
-        if (this.currentlyActiveTheme) this.themeStyleElement.html(themeIndex[to])
-        this._theme = to
-      }
-      return this
+      return this.setTheme(to)
     }
     else return this._theme
   }
@@ -32,7 +43,7 @@ export default abstract class ThemeAble extends Component<false | HTMLElement> {
     }
     return this
   }
-  protected currentlyActiveTheme = true
+  protected currentlyActiveTheme: boolean = true
 
   public activeTheme() {
     if (!this.currentlyActiveTheme) {

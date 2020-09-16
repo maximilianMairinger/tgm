@@ -20,7 +20,7 @@ type SelectionOptions = {icon: string, title: string, content: string, link: str
 export default declareComponent("selection-card", class SelectionCard extends Card {
 
     private textblob = this.q("c-textblob") as Textblob;
-    private _options:SelectionOptions;
+    private _options: SelectionOptions;
 
     constructor() {
         super(false, false)

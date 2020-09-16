@@ -6,8 +6,11 @@ export default abstract class ThemeAble<T extends false | HTMLElement = false | 
   constructor(componentBodyExtension?: HTMLElement | false, theme?: Theme | null) {
     super(componentBodyExtension as any)
 
+    this._childThemeAbles = this.childThemeAbles ? this.q(this.childThemeAbles().join(","), true) as any as ThemeAble[] : []
+
     if (theme === undefined) theme = "light"
     if (theme) this.setTheme(theme)
+    this._childThemeAbles.Inner("theme", [theme])
     
     
     
@@ -26,11 +29,15 @@ export default abstract class ThemeAble<T extends false | HTMLElement = false | 
     }
     return this
   }
+
+  private _childThemeAbles: ThemeAble[]
+  protected childThemeAbles?(): string[]
   
   theme(): Theme
   theme(to: Theme): this
   theme(to?: Theme): any {
     if (to) {
+      this._childThemeAbles.Inner("theme", [to])
       return this.setTheme(to)
     }
     else return this._theme

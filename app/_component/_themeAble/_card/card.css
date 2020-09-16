@@ -11,7 +11,8 @@
   /* height: 310px; */
 }
 
-component-body {
+
+component-body, :host(.no-body) {
   border-radius: 15px;
 
 
@@ -23,7 +24,7 @@ component-body {
   user-select: none;
 }
 
-component-body.card-hover-effect-enabled:hover {
+:host(.card-hover-effect-enabled) > component-body:hover, :host(.no-body.card-hover-effect-enabled:hover) {
   transform: scale(1.05);
   background-color: var(--strong-background-color);
   box-shadow: 8px 8px 20px 0px rgba(0,0,0,.07);

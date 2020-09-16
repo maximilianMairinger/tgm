@@ -9,6 +9,9 @@ export default class UnterrichtSystemeCard extends InfoCard {
         super();
     }
 
+    stl(){
+        return super.stl() + require('./unterrichtSystemeCard.css').toString();
+    }
 }
 
 declareComponent("unterricht-systeme-card", UnterrichtSystemeCard)

@@ -1,11 +1,9 @@
 import Component from "../component";
 
-export type Theme = "dark" | "light"
-
 export default abstract class ThemeAble extends Component<false | HTMLElement> {
   private themeStyleElement = ce("style")
-  constructor(componentBodyExtention?: HTMLElement | false) {
-    super(componentBodyExtention)
+  constructor(componentBodyExtension?: HTMLElement | false) {
+    super(componentBodyExtension)
 
     this.themeStyleElement.html(themeIndex[this._theme])
     if (!(this.elementBody instanceof ShadowRoot)) this.shadowRoot.insertBefore(this.themeStyleElement, this.elementBody)
@@ -50,9 +48,12 @@ export default abstract class ThemeAble extends Component<false | HTMLElement> {
 
 }
 
-const themeIndex: {[theme in Theme]: string} = {
-  light: require("./light-theme.css").toString(),
-  dark: require("./dark-theme.css").toString()
+export type Theme = keyof typeof themeIndex
+
+const themeIndex = {
+  light: require("./light-theme.css"),
+  dark: require("./dark-theme.css"),
+  blue: require("./blue-theme.css"),
 }
 
 
@@ -60,6 +61,7 @@ export function negateTheme(theme: Theme): Theme {
   return (
     theme === "dark" ?  "light" : 
     theme === "light" ? "dark" :
+    theme === "blue" ? "light" :
     "light"
   )
     

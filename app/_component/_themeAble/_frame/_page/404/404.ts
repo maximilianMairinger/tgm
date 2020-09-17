@@ -3,7 +3,7 @@ import Page from "../page"
 
 
 export default declareComponent("404-page", class extends Page {
-  constructor(private setPageCb: (domain: string) => void) {
+  constructor() {
     super()
     
   }

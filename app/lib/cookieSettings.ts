@@ -1,7 +1,4 @@
-import { DataBase } from "josm"
+import localSettings from "./localSettings"
 
-export const cookieSettings = new DataBase({
-  allow: localStorage.cookieAllowed !== undefined ? localStorage.cookieAllowed : false
-})
-
+export const cookieSettings = localSettings("allowCookies", true)
 export default cookieSettings

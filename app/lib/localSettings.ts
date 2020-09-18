@@ -21,13 +21,13 @@ export function createLocalSettings<Settings extends {[k in Key]: DefaultVal}>(s
     dat = new DataBase(val, settingsDefault_valDefault)
     dat((v: any) => {
       localStorage[settingsName] = JSON.stringify(v)
-    })
+    }, false)
   }
   else {
     dat = new Data(val, settingsDefault_valDefault)
     dat.get((v) => {
       localStorage[settingsName] = JSON.stringify(v)
-    })
+    }, false)
   }
   return dat
 }

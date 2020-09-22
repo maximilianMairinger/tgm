@@ -1,13 +1,13 @@
-import Component from "../component";
+import ThemeAble from "../themeAble";
 import { EventListener } from "extended-dom";
-import declareComponent from "../../lib/declareComponent";
-import * as domain from "./../../lib/domain"
+import declareComponent from "../../../lib/declareComponent";
+import * as domain from "./../../../lib/domain"
 
 
 const pressedClass = "pressed";
 
 
-export default class Button extends Component<HTMLAnchorElement> {
+export default class Button extends ThemeAble<HTMLAnchorElement> {
   private doesFocusOnHover: boolean;
   private mouseOverListener: EventListener;
   private mouseOutListener: EventListener;
@@ -16,7 +16,7 @@ export default class Button extends Component<HTMLAnchorElement> {
   private preferedTabIndex: number
   private _hotKey: string
   constructor(protected readonly enabled: boolean = false, focusOnHover: boolean = false, public tabIndex: number = 0, public obtainDefault: boolean = false, public preventFocus = false, blurOnMouseOut: boolean = false, hotkey?: string) {
-    super(ce("a") as any as HTMLAnchorElement);
+    super(ce("a") as any)
 
     if (enabled) this.enableForce(true)
     else this.enableForce(true)
@@ -194,9 +194,6 @@ export default class Button extends Component<HTMLAnchorElement> {
     }
   }
 
-  stl() {
-    return require('./button.css').toString();
-  }
   pug() {
     return require("./button.pug").default
   }

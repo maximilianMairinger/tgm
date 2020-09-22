@@ -1,6 +1,6 @@
 import Component from "../component";
 
-export default abstract class ThemeAble<T extends false | HTMLElement = false | HTMLElement> extends Component<T> {
+export default abstract class ThemeAble<T extends false | HTMLElement | HTMLAnchorElement = false | HTMLElement> extends Component<T> {
   private themeStyleElement: HTMLStyleElement = ce("style")
 
   constructor(componentBodyExtension?: HTMLElement | false, theme?: Theme | null) {
@@ -16,7 +16,7 @@ export default abstract class ThemeAble<T extends false | HTMLElement = false | 
     
 
     this.themeStyleElement.html(themeIndex[this._theme])
-    if (!(this.elementBody instanceof ShadowRoot)) this.shadowRoot.insertBefore(this.themeStyleElement, this.elementBody)
+    if (!(this.elementBody instanceof ShadowRoot)) this.shadowRoot.insertBefore(this.themeStyleElement, this.elementBody as HTMLElement)
     else this.shadowRoot.append(this.themeStyleElement)
   }
 

@@ -1,6 +1,6 @@
 import ThemeAble, { Theme } from "../themeAble"
 import declareComponent from "../../../lib/declareComponent"
-import "../../_button/button"
+import "../../_themeAble/_button/button"
 import {ElementList} from "extended-dom";
 
 export default declareComponent("cookie-note", class CookieNote extends ThemeAble {

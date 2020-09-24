@@ -1,5 +1,30 @@
+component-body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
 c-blog-post{
-    padding-top: 150px;
     display: block;
-    padding-bottom: 150px
+    padding-top: 150px;
+    order: 1;
+}
+
+error-message{
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 55px 10vw 0 10vw;
+    font-size: calc(50px + (80 - 50) * ((100vw - 300px) / (1920 - 300)));
+    font-weight: bold;
+    order: 1;
+}
+
+c-blog-post ~ c-blog-suggestions{
+    padding-bottom: 500px;
+}
+
+c-blog-suggestions{
+    order: 2;
+    margin-top: auto;
 }

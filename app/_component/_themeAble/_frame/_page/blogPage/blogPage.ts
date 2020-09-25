@@ -34,7 +34,7 @@ export default class BlogPage extends Page {
   private async setBlog(blogSlug: string) {
     console.log("setBlog", blogSlug)
     if(this.blogLoaded)
-      this.q("c-blog-post").remove();
+      this.elementBody.childNodes.forEach(child => child.remove());
 
     api.posts.read({slug: blogSlug}, {formats: ['html', 'plaintext']}).then((blogData) => {
       let blog = new Blog();

@@ -70,7 +70,6 @@ heading-background{
 c-textblob{
     display: block;
     max-width: 100%;
-    overflow: hidden;
     white-space: nowrap;
     width: auto;
     margin-bottom: 5px;

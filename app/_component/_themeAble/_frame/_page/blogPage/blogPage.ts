@@ -51,9 +51,10 @@ export default class BlogPage extends Page {
       error.text("404 Not Found");
       this.elementBody.append(error);
     });
-    api.posts.browse({limit:5}).then((blogData) => {
+    api.posts.browse({limit:6}).then((blogData) => {
       let suggestions = new BlogSuggestions();
-      suggestions.blogs(blogData.map((blog) => {
+      suggestions.blogs(blogData.filter(blog => blog.slug != blogSlug)
+          .map((blog) => {
         let blogCard:blogCardInfo = {
           heading: blog.title,
           date: blog.published_at,

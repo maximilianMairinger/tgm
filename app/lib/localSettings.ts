@@ -16,7 +16,7 @@ export function createLocalSettings<Settings extends {[k in Key]: DefaultVal}>(s
   }
   catch(e) {}
 
-  if (typeof settingsDefault_valDefault === "object") {
+  if (typeof settingsDefault_valDefault === "object" && settingsDefault_valDefault !== null) {
     if (typeof val !== "object") val = undefined
     dat = new DataBase(val, settingsDefault_valDefault)
     dat((v: any) => {

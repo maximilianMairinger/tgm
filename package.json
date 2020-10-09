@@ -72,7 +72,7 @@
     "fast-decode-uri-component": "^1.0.1",
     "fast-equals": "^2.0.0",
     "get-base-url": "^2.1.0",
-    "josm": "^1.2.7",
+    "josm": "^1.2.8",
     "slugify": "^1.4.5",
     "waapi-easing": "^1.0.1",
     "xrray": "^4.7.0"

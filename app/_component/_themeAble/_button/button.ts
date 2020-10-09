@@ -197,6 +197,9 @@ export default class Button extends ThemeAble<HTMLAnchorElement> {
   pug() {
     return require("./button.pug").default
   }
+  stl() {
+    return require("./button.css")
+  }
 }
 
 declareComponent("button", Button)

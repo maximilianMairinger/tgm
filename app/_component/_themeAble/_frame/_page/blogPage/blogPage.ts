@@ -6,6 +6,7 @@ import GhostContentAPI from '@tryghost/content-api'
 
 
 // change after deployment to root url
+//@ts-ignore
 const api = new GhostContentAPI({
   url: ' https://dev.tgmrebrand.xyz',
   key: '062f128c326e0312972d41f705',

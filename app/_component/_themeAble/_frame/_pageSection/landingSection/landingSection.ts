@@ -13,7 +13,6 @@ import { ElementList } from "extended-dom";
 import * as animationFrameDelta from "animation-frame-delta"
 import delay from "delay";
 import lang from "../../../../../lib/lang";
-animationFrameDelta.ignoreUnsubscriptionError()
 
 
 export default declareComponent("landing-section", class Landing extends PageSection {

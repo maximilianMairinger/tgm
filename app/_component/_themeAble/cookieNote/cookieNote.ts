@@ -3,6 +3,13 @@ import declareComponent from "../../../lib/declareComponent"
 import "../../_themeAble/_button/button"
 import {ElementList} from "extended-dom";
 
+import cookieSettings from "../../../lib/cookieSettings"
+cookieSettings.get((allow) => {
+    console.log(allow ? "COOKIES ARE ALLOWED" : "COOKIES ARE NOT ALLOWED")
+})
+//@ts-ignore
+window.cookie = cookieSettings
+
 export default declareComponent("cookie-note", class CookieNote extends ThemeAble {
 
     private buttons = this.q("c-button") as ElementList;

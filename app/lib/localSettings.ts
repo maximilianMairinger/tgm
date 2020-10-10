@@ -1,13 +1,13 @@
 import { DataBase, Data } from "josm"
 
 type Key = string
-type DefaultVal = string | number | boolean
+type DefaultValType = string | number | boolean
 type Name = string
 
 
-export function createLocalSettings(settingsName: Name, defaultVal: DefaultVal): Data<string>
-export function createLocalSettings<Settings extends {[k in Key]: DefaultVal}>(settingsName: Name, settingsDefault: Settings): DataBase<Settings>
-export function createLocalSettings<Settings extends {[k in Key]: DefaultVal}>(settingsName: Name, settingsDefault_valDefault: DefaultVal | Settings): any {
+export function createLocalSettings<DefaultVal extends DefaultValType>(settingsName: Name, defaultVal: DefaultVal): Data<DefaultVal>
+export function createLocalSettings<Settings extends {[k in Key]: DefaultValType}>(settingsName: Name, settingsDefault: Settings): DataBase<Settings>
+export function createLocalSettings(settingsName: Name, settingsDefault_valDefault: DefaultValType | {[k in Key]: DefaultValType}): any {
   let dat: any
 
   let val: any

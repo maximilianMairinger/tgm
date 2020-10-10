@@ -116,13 +116,24 @@ export default declareComponent("site", class extends Component {
 
     let cookieNoteContainer = ce("cookie-notice-container")
 
-    cookieSettings.get((allowed) => {
-      if (allowed === null) {
-        let cookieNote = new CookieNote()
+    let showCookie = cookieSettings.tunnel((e) => e === null)
+    showCookie.get(async (show) => {
+      if (show) {
+        let cookieNote = new CookieNote((ok) => {
+          cookieSettings.set(ok)
+        })
+        cookieNote.css({opacity: 0, translateY: 10})
         cookieNoteContainer.apd(cookieNote)
+
+        cookieNote.anim({opacity: 1, translateY: .1})
+        
       }
       else {
-        cookieNoteContainer.removeChilds()
+        let cookieNote = cookieNoteContainer.childs()
+        if (cookieNote) {
+          await cookieNote.anim({opacity: 0, translateY: 10})
+          cookieNote.remove()
+        }
       }
     })
 

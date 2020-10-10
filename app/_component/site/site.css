@@ -41,7 +41,13 @@ c-lower-nav {
   z-index: 101;
 }
 
-c-cookie-note{
+cookie-noteice-container {
   bottom: 16px;
   z-index: 420;
+  display: block;
+}
+
+c-cookie-note{
+  width: 100%;
+  height: 100%;
 }

@@ -4,6 +4,10 @@ type Key = string
 type DefaultValType = string | number | boolean
 type Name = string
 
+declare let settings: {[key in string]: any}
+//@ts-ignore
+window.settings = {}
+
 
 export function createLocalSettings<DefaultVal extends DefaultValType>(settingsName: Name, defaultVal: DefaultVal): Data<DefaultVal>
 export function createLocalSettings<Settings extends {[k in Key]: DefaultValType}>(settingsName: Name, settingsDefault: Settings): DataBase<Settings>
@@ -29,7 +33,7 @@ export function createLocalSettings(settingsName: Name, settingsDefault_valDefau
       localStorage[settingsName] = JSON.stringify(v)
     }, false)
   }
-  return dat
+  return settings[settingsName] =  dat
 }
 
 export default createLocalSettings

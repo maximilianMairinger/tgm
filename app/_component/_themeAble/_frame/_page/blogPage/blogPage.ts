@@ -20,14 +20,6 @@ export default class BlogPage extends Page {
     super()
   }
 
-  protected async loadedCallback() {
-    this.domainSubscription = domain.get(this.domainLevel, async (to: string) => {
-      await this.setBlog(to)
-    }, true)
-    let initBlogId = this.domainSubscription.domain
-    await this.setBlog(initBlogId)
-  }
-
   private blogLoaded = false;
   private async setBlog(blogSlug: string) {
     console.log("setBlog", blogSlug)
@@ -38,12 +30,12 @@ export default class BlogPage extends Page {
       let blog = new Blog();
       console.log(blogData.title);
       blog.blogtitle(blogData.title);
-      blog.date(blogData['published_at']);
-      blog.image(blogData['feature_image']);
+      blog.date(blogData.published_at);
+      blog.image(blogData.feature_image);
       blog.htmlcontent(blogData.html);
       this.elementBody.append(blog);
     }).catch((err) => {
-      console.error(err);
+      console.warn("Unable to load blog", err.message);
     });
     this.blogLoaded = true;
   }
@@ -51,7 +43,17 @@ export default class BlogPage extends Page {
   
 
   protected activationCallback(active: boolean): void {
-    this.domainSubscription.vate(active)
+    if (active) {
+      this.domainSubscription = domain.get(this.domainLevel, async (to: string) => {
+        await this.setBlog(to)
+      }, true)
+      let initBlogId = this.domainSubscription.domain
+      this.setBlog(initBlogId)
+    }
+    else this.domainSubscription.deactivate()
+
+
+    
   }
   stl() {
     return super.stl() + require("./blogPage.css").toString()

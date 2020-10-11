@@ -6,6 +6,7 @@ import LowerNav from "./../_themeAble/lowerNav/lowerNav"
 import CookieNote from "./../_themeAble/cookieNote/cookieNote"
 import { ElementList } from "extended-dom";
 import { negateTheme } from "../_themeAble/themeAble";
+import cookieSettings from "../../lib/cookieSettings";
 
 
 const topLimit = 0
@@ -113,8 +114,32 @@ export default declareComponent("site", class extends Component {
     pageManager.activate()
 
 
-    let cookieNote = new CookieNote();
-    this.apd(header, lowerNav, cookieNote)
+    let cookieNoteContainer = ce("cookie-notice-container")
+
+    let showCookie = cookieSettings.tunnel((e) => e === null)
+    showCookie.get(async (show) => {
+      if (show) {
+        let cookieNote = new CookieNote((ok) => {
+          cookieSettings.set(ok)
+        })
+        cookieNote.css({opacity: 0, translateY: 10})
+        cookieNoteContainer.apd(cookieNote)
+
+        cookieNote.anim({opacity: 1, translateY: .1})
+        
+      }
+      else {
+        let cookieNote = cookieNoteContainer.childs()
+        if (cookieNote) {
+          await cookieNote.anim({opacity: 0, translateY: 10})
+          cookieNote.remove()
+        }
+      }
+    })
+
+
+    
+    this.apd(header, lowerNav, cookieNoteContainer)
   }
 
   

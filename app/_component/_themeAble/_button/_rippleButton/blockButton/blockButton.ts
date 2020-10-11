@@ -1,6 +1,6 @@
 import RippleButton from "../rippleButton";
 import delay from "delay"
-import declareComponent from "../../../../lib/declareComponent";
+import declareComponent from "../../../../../lib/declareComponent";
 
 
 
@@ -8,7 +8,8 @@ export default declareComponent("block-button", class BlockButton extends Ripple
   private textElem = ce("button-text")
   private spinner = ce("loading-spinner")
   private textContainer = ce("button-container")
-  constructor(content: string = "", activationCallback?: ((e?: MouseEvent | KeyboardEvent) => void | Promise<void>)) {
+  private _primary: boolean
+  constructor(content: string = "", activationCallback?: ((e?: MouseEvent | KeyboardEvent) => void | Promise<void>), primary: boolean = false) {
     super();
 
     if (activationCallback) this.addActivationCallback(activationCallback)
@@ -19,8 +20,21 @@ export default declareComponent("block-button", class BlockButton extends Ripple
       this.textContainer.apd(
         this.textElem
       )
-    );
+    )
+    this.primary(primary)
   }
+
+  public primary(): boolean
+  public primary(primary: boolean): this
+  public primary(primary?: boolean): any {
+    if (primary !== undefined) {
+      if (primary) this.elementBody.addClass("primary")
+      else this.elementBody.removeClass("primary")
+      return this
+    }
+    else return this._primary
+  }
+
   private activationCallbackIndex = new Map<Function, Function>()
   public addActivationCallback<CB extends (e?: MouseEvent | KeyboardEvent) => (void | Promise<void>)>(activationCallback: CB, animationDoneCb?: Function): CB {
     

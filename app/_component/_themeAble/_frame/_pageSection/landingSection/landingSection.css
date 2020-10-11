@@ -53,7 +53,7 @@ card-wrapper {
 }
 
 
-card-container {
+c-card-carousel {
   width: calc(100% - 13%);
   position: relative;
   display: flex;
@@ -62,56 +62,7 @@ card-container {
   padding-top: 20px;
   padding-bottom: 20px;
   margin-bottom: 30px;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  /* Only important on mobile */
-  overflow-x: auto;
-  overflow-y: visible;
-/* 
-  scroll-snap-type: x proximity; */
 }
-
-card-container {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-}
-card-container::-webkit-scrollbar { /* WebKit */
-  width: 0;
-  height: 0;
-}
-
-icon-card-wrapper {
-  display: block;
-  transform: translateY(7px);
-
-  margin: 0 28px 56px 28px;
-  width: calc(6% + 180px);
-  min-width: 230px;
-  height: calc(4vw + 110px);
-  min-height: 160px;
-}
-
-c-icon-card {
-  display: block;
-  margin: 0 28px 56px 28px;
-  width: calc(6% + 180px);
-  min-width: 240px;
-  height: calc(4vw + 110px);
-  min-height: 160px;
-
-  background: #FEFBF9;
-
-  /* scroll-snap-align: start;
-  scroll-margin-left: 40px; */
-}
-
-icon-card-wrapper > c-icon-card {
-  margin: 0 !important;
-  width: 100%;
-  height: 100%;
-}
-
 
 
 tagesschule-container {
@@ -139,19 +90,8 @@ tagesschule-container > c-textblob {
   }
 }
 
-@media only screen and (max-width: 1000px) {
-  c-icon-card:first-of-type {
-    margin-left: 40px;
-  }
-
-  c-icon-card {
-    margin-bottom: 0;
-  }
-
-  
-  card-container {
-    flex-wrap: nowrap;
-    justify-content: left;
+@media only screen and (max-width: 1000px) {  
+  c-card-carousel {
     margin-left: 0;
     margin-right: 0;
     width: 100%;

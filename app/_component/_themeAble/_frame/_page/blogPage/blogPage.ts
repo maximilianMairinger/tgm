@@ -22,14 +22,6 @@ export default class BlogPage extends Page {
     super()
   }
 
-  protected async loadedCallback() {
-    this.domainSubscription = domain.get(this.domainLevel, async (to: string) => {
-      await this.setBlog(to)
-    }, true)
-    let initBlogId = this.domainSubscription.domain
-    await this.setBlog(initBlogId)
-  }
-
   private blogLoaded = false;
   private async setBlog(blogSlug: string) {
     console.log("setBlog", blogSlug)
@@ -46,7 +38,7 @@ export default class BlogPage extends Page {
       blog.css({"order": 1});
       this.elementBody.append(blog);
     }).catch((err) => {
-      console.error(err);
+      console.warn("Unable to load blog", err.message);
       let error = ce("error-message");
       error.text("404 Not Found");
       this.elementBody.append(error);
@@ -75,7 +67,17 @@ export default class BlogPage extends Page {
   
 
   protected activationCallback(active: boolean): void {
-    this.domainSubscription.vate(active)
+    if (active) {
+      this.domainSubscription = domain.get(this.domainLevel, async (to: string) => {
+        await this.setBlog(to)
+      }, true)
+      let initBlogId = this.domainSubscription.domain
+      this.setBlog(initBlogId)
+    }
+    else this.domainSubscription.deactivate()
+
+
+    
   }
   stl() {
     return super.stl() + require("./blogPage.css").toString()

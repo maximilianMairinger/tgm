@@ -196,7 +196,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     }
 
     private scrollUpdate() {
-        console.log("scrolling")
+        // console.log("scrolling")
         let index = this.index;
         this.updateIndex()
         if (this.index > index)
@@ -258,11 +258,11 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
 
     private pid;
     private wait4scroll(scroller:Element, wantedPx:number, func:()=>any){
-        console.log("scroll waiter");
+        // console.log("scroll waiter");
         clearInterval(this.pid);
         this.pid = setInterval(() => {
             if(scroller.scrollLeft < wantedPx + 10 && scroller.scrollLeft > wantedPx - 10){
-                console.log("scroll finished")
+                // console.log("scroll finished")
                 func();
                 clearInterval(this.pid);
             }
@@ -300,8 +300,8 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
             tablet.querySelector(".thumbnail-pic").setAttribute("src", projectJson.thumbnail);
             tablet.querySelector("info-title").text(projectJson.title);
             tablet.querySelector("info-text").text(projectJson.content);
-            console.log(project.heading);
-            console.log("Index:", this.index);
+            // console.log(project.heading);
+            // console.log("Index:", this.index);
             project.loaded = true;
         }else
             return this.projectData[this.index];

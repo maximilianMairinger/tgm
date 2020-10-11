@@ -1,13 +1,12 @@
-import ThemeAble, { Theme } from "../themeAble"
+import ThemeAble, {Theme} from "../themeAble"
 import declareComponent from "../../../lib/declareComponent"
 import "../_button/button"
 import BlogCard from "../_card/_infoCard/blogCard/blogCard"
-import {ElementList} from "extended-dom";
 
 
 export type blogCardInfo = {heading:string, thumbnail:string, date:Date, content:string, link:string}
 
-export default declareComponent("blog-suggestions", class CookieNote extends ThemeAble {
+export default class BlogSuggestions extends ThemeAble {
 
     private blogCardInfos:blogCardInfo[];
 
@@ -33,6 +32,7 @@ export default declareComponent("blog-suggestions", class CookieNote extends The
             suggestions.append(ce("suggestions-filler"))
             this.q("blog-suggestions-box").append(suggestions);
 
+
         }else return this.blogCardInfos;
     }
 
@@ -53,5 +53,6 @@ export default declareComponent("blog-suggestions", class CookieNote extends The
     pug() {
         return require("./blogSuggestions.pug").default
     }
-})
+}
 
+declareComponent("blog-suggestions", BlogSuggestions);

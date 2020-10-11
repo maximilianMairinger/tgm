@@ -2,7 +2,9 @@ import { declareComponent } from "../../../../../lib/declareComponent"
 import Page from "../page"
 import * as domain from "./../../../../../lib/domain"
 import Blog from "../../../../_themeAble/_text/blogPost/blogPost"
+import BlogSuggestions, {blogCardInfo} from "../../../blogSuggestions/blogSuggestions";
 import GhostContentAPI from '@tryghost/content-api'
+import BlogCard from "../../../_card/_infoCard/blogCard/blogCard";
 
 
 // change after deployment to root url
@@ -24,7 +26,7 @@ export default class BlogPage extends Page {
   private async setBlog(blogSlug: string) {
     console.log("setBlog", blogSlug)
     if(this.blogLoaded)
-      this.q("c-blog-post").remove();
+      this.elementBody.childNodes.forEach(child => child.remove());
 
     api.posts.read({slug: blogSlug}, {formats: ['html', 'plaintext']}).then((blogData) => {
       let blog = new Blog();
@@ -33,10 +35,32 @@ export default class BlogPage extends Page {
       blog.date(blogData.published_at);
       blog.image(blogData.feature_image);
       blog.htmlcontent(blogData.html);
+      blog.css({"order": 1});
       this.elementBody.append(blog);
     }).catch((err) => {
       console.warn("Unable to load blog", err.message);
+      let error = ce("error-message");
+      error.text("404 Not Found");
+      this.elementBody.append(error);
     });
+    api.posts.browse({limit:6}).then((blogData) => {
+      let suggestions = new BlogSuggestions();
+      suggestions.blogs(blogData.filter(blog => blog.slug != blogSlug)
+          .map((blog) => {
+        let blogCard:blogCardInfo = {
+          heading: blog.title,
+          date: blog.published_at,
+          content: blog.excerpt,
+          thumbnail: blog.feature_image,
+          link: blog.url
+        }
+        return blogCard;
+      }));
+      suggestions.css({"order": 2});
+      this.elementBody.append(suggestions)
+    }).catch((err) => {
+      console.error(err);
+    })
     this.blogLoaded = true;
   }
 

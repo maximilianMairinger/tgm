@@ -18,8 +18,10 @@ const api = new GhostContentAPI({
 export default class BlogPage extends Page {
   private input = this.q("input") as any as HTMLInputElement
   private domainSubscription: domain.DomainSubscription
-  constructor(private setPageCb: (domain: string) => void, public domainLevel: number) {
+  private preview;
+  constructor(private setPageCb: (domain: string) => void, public domainLevel: number, preview=false) {
     super()
+    this.preview = preview;
   }
 
   protected async loadedCallback() {
@@ -31,12 +33,18 @@ export default class BlogPage extends Page {
   }
 
   private blogLoaded = false;
-  private async setBlog(blogSlug: string) {
-    console.log("setBlog", blogSlug)
+  private async setBlog(blogIdentifier: string) {
+    console.log("setBlog", blogIdentifier)
     if(this.blogLoaded)
       this.elementBody.childNodes.forEach(child => child.remove());
 
-    api.posts.read({slug: blogSlug}, {formats: ['html', 'plaintext']}).then((blogData) => {
+    let query;
+    if(!this.preview) query = {slug: blogIdentifier};
+    else query = {id: blogIdentifier}   ;
+
+    console.log(query.uuid)
+
+    api.posts.read(query, {formats: ['html', 'plaintext']}).then((blogData) => {
       let blog = new Blog();
       console.log(blogData.title);
       blog.blogtitle(blogData.title);
@@ -51,24 +59,26 @@ export default class BlogPage extends Page {
       error.text("404 Not Found");
       this.elementBody.append(error);
     });
-    api.posts.browse({limit:6}).then((blogData) => {
-      let suggestions = new BlogSuggestions();
-      suggestions.blogs(blogData.filter(blog => blog.slug != blogSlug)
-          .map((blog) => {
-        let blogCard:blogCardInfo = {
-          heading: blog.title,
-          date: blog.published_at,
-          content: blog.excerpt,
-          thumbnail: blog.feature_image,
-          link: blog.url
-        }
-        return blogCard;
-      }));
-      suggestions.css({"order": 2});
-      this.elementBody.append(suggestions)
-    }).catch((err) => {
-      console.error(err);
-    })
+    if(!this.preview) {
+      api.posts.browse({limit: 6}).then((blogData) => {
+        let suggestions = new BlogSuggestions();
+        suggestions.blogs(blogData.filter(blog => blog.slug != blogIdentifier)
+            .map((blog) => {
+              let blogCard: blogCardInfo = {
+                heading: blog.title,
+                date: blog.published_at,
+                content: blog.excerpt,
+                thumbnail: blog.feature_image,
+                link: blog.url
+              }
+              return blogCard;
+            }));
+        suggestions.css({"order": 2});
+        this.elementBody.append(suggestions)
+      }).catch((err) => {
+        console.error(err);
+      })
+    }
     this.blogLoaded = true;
   }
 

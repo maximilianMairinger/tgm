@@ -43,6 +43,9 @@ c-lower-nav {
 
 cookie-notice-container {
   bottom: 16px;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
   z-index: 420;
   display: block;
   position: absolute;

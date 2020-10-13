@@ -20,11 +20,8 @@ error-message{
     order: 1;
 }
 
-c-blog-post ~ c-blog-suggestions{
-    padding-bottom: 500px;
-}
-
 c-blog-suggestions{
     order: 2;
     margin-top: auto;
+    padding-bottom: 500px;
 }

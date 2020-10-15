@@ -7,14 +7,20 @@ component-body {
   background: var(--primary-background-color);
   width: inherit;
   height: inherit;
+  overflow: hidden;
 }
 
 c-big-news-triangle-icon {
-  height: 100%;
-  height: inherit;
-  transform: scale(1.087) translateX(-550px);
+  /* Don't know if this is important
+  height: inherit;*/
   position: absolute;
-  top: 0;
+  display: block;
+  height: calc(100% + 100px);
+  width: auto;
+  top: -50px;
+  bottom: 0;
+  left: -45%;
+  right: 50%;
   pointer-events: none;
 }
 
@@ -51,3 +57,4 @@ card-container > * {
   height: 450px;
   scroll-snap-align: start;
 }
+

@@ -89,6 +89,11 @@ card-container > * {
     height: calc(100% + 100px);
   }
 
+  card-container *{
+    flex: 0 0 300px;
+    height: 400px;
+  }
+
   c-image-textblob{
     margin: unset;
     width: unset;

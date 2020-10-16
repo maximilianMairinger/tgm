@@ -5,6 +5,7 @@ export default class NewsCard extends InfoCard {
 
     constructor() {
         super();
+        this.textblob.hsize({max:40, min:35});
     }
 
     note():string

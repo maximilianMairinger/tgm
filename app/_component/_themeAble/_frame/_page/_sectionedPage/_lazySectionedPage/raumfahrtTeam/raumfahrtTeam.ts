@@ -71,12 +71,16 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
         }
     ), domainLevel, setPage, sectionChangeCallback, undefined)
 
+      this.elementBody.append(ce("circle-feature"))
+
   }
 
-
+  stl(){
+      return super.stl() + require("./raumfahrtTeam.css").toString();
+  }
 
   pug() {
-    return ""
+    return "";
   }
 
 }) 

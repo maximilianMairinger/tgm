@@ -1,6 +1,6 @@
 import declareComponent from "../../../../../lib/declareComponent";
 import InfoCard from "../infoCard";
-import Button from "../../../../_button/button";
+import Button from "../../../_button/button";
 
 export default class BlogCard extends InfoCard {
 

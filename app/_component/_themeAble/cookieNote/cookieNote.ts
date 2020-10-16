@@ -1,22 +1,20 @@
 import ThemeAble, { Theme } from "../themeAble"
 import declareComponent from "../../../lib/declareComponent"
-import "../../_button/button"
+import "../../_themeAble/_button/button"
 import {ElementList} from "extended-dom";
+import Button from "../../_themeAble/_button/button";
+
 
 export default declareComponent("cookie-note", class CookieNote extends ThemeAble {
 
-    private buttons = this.q("c-button") as ElementList;
-    private cookieClickerRefrence;
+    private buttons = this.q("c-button") as ElementList<Button>;
 
-    private cookieClicker(){
-        this.buttons.forEach((button) => button.removeEventListener('click', this.cookieClickerRefrence));
-        this.css({display: 'none'});
-    }
 
-    constructor() {
+    constructor(public onChange?: (activate: boolean) => void) {
         super(false)
-        this.cookieClickerRefrence = this.cookieClicker.bind(this);
-        this.buttons.forEach((button) => button.addEventListener('click', this.cookieClickerRefrence));
+        this.buttons.forEach((button) => button.click(() => {
+            if (this.onChange) this.onChange(!!button.getAttribute("active"))
+        }));
     }
 
     theme(): Theme

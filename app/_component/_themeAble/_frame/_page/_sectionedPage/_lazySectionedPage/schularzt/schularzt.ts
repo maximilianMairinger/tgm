@@ -73,9 +73,13 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
         schularzt2: "schularzt"
     })
 
+      this.elementBody.append(ce("circle-feature"))
+
   }
 
-
+  stl() {
+      return super.stl() + require("./schularzt.css").toString();
+  }
 
   pug() {
     return ""

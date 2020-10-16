@@ -1,5 +1,5 @@
 
-
+/* 
 @media only screen and (min-width: 768px) {
 
   ::-webkit-scrollbar {
@@ -19,7 +19,7 @@
   ::-webkit-scrollbar-corner {
     background: rgba(0,0,0,0);
   }
-}
+} */
 
 :host(:focus){
   outline: none;

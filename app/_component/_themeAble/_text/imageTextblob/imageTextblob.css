@@ -7,7 +7,7 @@ image-text-blob{
     position: relative;
     flex-wrap: nowrap;
     justify-content: flex-end;
-    padding: 150px 100px 150px 100px;
+    padding: 10vw 7vw 10vw 7vw;
     overflow: hidden;
 }
 
@@ -144,7 +144,7 @@ image-text-blob.right{
 }
 
 image-text-blob.right image-container{
-    margin: -100px 75px -100px -200px;
+    margin: -10vw 75px -10vw -20vw;
     border-radius: 0 10px 10px 0;
 }
 
@@ -160,8 +160,19 @@ image-text-blob.left content-box{
 }
 
 image-text-blob.left image-container{
-    margin: -100px -200px -100px 50px;
+    margin: -7vw -14vw -7vw 50px;
     border-radius: 10px 0 0 10px;
+}
+
+@media only screen and (max-width: 1100px) {
+
+    image-text-blob.right{
+        padding: 10vw 0 10vw 7vw;
+    }
+
+    image-text-blob.left{
+        padding: 10vw 7vw 10vw 0;
+    }
 }
 
 @media only screen and (max-width: 768px) {

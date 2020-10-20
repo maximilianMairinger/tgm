@@ -298,6 +298,19 @@ info-text{
         scroll-snap-type: x mandatory;
     }
 
+    mobile-tutorial center-box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    mobile-tutorial c-swipe-icon{
+        height: 65%;
+        width: 65%;
+    }
+
     mobile-tutorial::before, mobile-tutorial::after{
         position: absolute;
         display: block;
@@ -309,7 +322,8 @@ info-text{
     }
 
     mobile-tutorial::before{
-        content: "swipe to use";
+        /* content: "swipe to use"; */
+        content: "";
         left: 0;
         padding-top: 50%;
         font-size: 36px;

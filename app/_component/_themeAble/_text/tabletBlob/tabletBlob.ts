@@ -3,6 +3,7 @@ import Text from "../text";
 import "../../../_themeAble/_button/button"
 import {Theme} from "../../themeAble";
 import Textblob from "../textblob/textblob";
+import "../../_icon/swipe/swipe"
 import "../../_icon/arrow/arrow"
 import {ElementList} from "extended-dom";
 

@@ -212,7 +212,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         let preload:number = this.projectData.length -1 ;
         if(shift != null)
             if(shift){
-                this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading)
+                this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading, false)
                 if(!this.previousAvailable) {
                     this.previousArrow.css({"display": "flex"});
                     this.previousAvailable = true;
@@ -221,13 +221,13 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 if(!this.nextAvailable)
                     this.nextArrow.css({"display":"none"});
                 else {
-                    this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading);
+                    this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading, false);
                     if(this.index + preload < this.projectData.length && !this.projectData[this.index + preload].loaded)
                         this.project(this.projectData[this.index + preload])
                 }
 
             }else {
-                this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading)
+                this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading, false)
                 if(!this.nextAvailable) {
                     this.nextArrow.css({"display": "flex"});
                     this.nextAvailable = true
@@ -236,7 +236,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 if(!this.previousAvailable)
                     this.previousArrow.css({"display":"none"});
                 else {
-                    this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading);
+                    this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading, false);
                 }
 
             }

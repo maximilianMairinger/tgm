@@ -43,16 +43,15 @@ project-next, project-previous{
     font-size: 25px;
     font-weight: bold;
     cursor: pointer;
+    transition: 0.5s;
 }
 
 project-next:hover {
-    transition: 0.5s;
     transform: scale(1.1);
 }
 
 
 project-previous:hover{
-    transition: 0.5s;
     transform: rotate(180deg) scale(1.1);
 }
 
@@ -85,6 +84,8 @@ project-icon{
     width: 125px;
     height: 125px;
     margin-right: 0.5vw;
+    user-select: none;
+    pointer-events: none;
 }
 
 .project-icon-pic{

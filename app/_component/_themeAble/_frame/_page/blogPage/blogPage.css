@@ -14,7 +14,8 @@ error-message{
     display: block;
     margin: auto;
     text-align: center;
-    padding: 55px 10vw 0 10vw;
+    --paddingsize: calc((100vh - 500px) / 2);
+    padding: var(--paddingsize) 10vw;
     font-size: calc(50px + (80 - 50) * ((100vw - 300px) / (1920 - 300)));
     font-weight: bold;
     order: 1;

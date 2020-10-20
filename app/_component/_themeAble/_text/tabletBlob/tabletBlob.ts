@@ -212,6 +212,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         let preload:number = this.projectData.length -1 ;
         if(shift != null)
             if(shift){
+                // @ts-ignore
                 this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading, false)
                 if(!this.previousAvailable) {
                     this.previousArrow.css({"display": "flex"});
@@ -221,12 +222,14 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 if(!this.nextAvailable)
                     this.nextArrow.css({"display":"none"});
                 else {
+                    // @ts-ignore
                     this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading, false);
                     if(this.index + preload < this.projectData.length && !this.projectData[this.index + preload].loaded)
                         this.project(this.projectData[this.index + preload])
                 }
 
             }else {
+                // @ts-ignore
                 this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading, false)
                 if(!this.nextAvailable) {
                     this.nextArrow.css({"display": "flex"});
@@ -236,6 +239,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 if(!this.previousAvailable)
                     this.previousArrow.css({"display":"none"});
                 else {
+                    // @ts-ignore
                     this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading, false);
                 }
 

@@ -21,8 +21,19 @@ error-message{
     order: 1;
 }
 
+
+error-message ~ c-blog-suggestions{
+    padding-bottom: 0;
+}
+
 c-blog-suggestions{
     order: 2;
     margin-top: auto;
     padding-bottom: 500px;
+}
+
+@media only screen and (max-width: 768px) {
+    error-message{
+        --paddingsize: calc((100vh - 500px - 2em) / 2);
+    }
 }

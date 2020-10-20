@@ -309,6 +309,7 @@ info-text{
     mobile-tutorial c-swipe-icon{
         height: 65%;
         width: 65%;
+        max-width: 225px;
     }
 
     mobile-tutorial::before, mobile-tutorial::after{

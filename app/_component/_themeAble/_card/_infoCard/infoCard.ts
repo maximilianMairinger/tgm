@@ -43,12 +43,12 @@ export default abstract class InfoCard extends Card {
     thumbnail(url:string):void
     thumbnail(url?:string){
         if(url) {
-            let thumbnailPic = this.q("thumbnail-pic").css({'backgroundImage': url});
+            this.q("thumbnail-pic").css({'backgroundImage': url});
             if(!this.customColor){
                 let averageColor = new FastAverageColor();
                 averageColor.getColorAsync(url).then(color => {
                     let rgba = "rgba(".concat(color.value[0].toString(), ",", color.value[1].toString(), ",", color.value[2].toString(), ", 0.5)");
-                    this.headingbackground(rgba);
+                    this.headingbackground(rgba, false);
                 });
             }
         }
@@ -56,10 +56,11 @@ export default abstract class InfoCard extends Card {
     }
 
     headingbackground():string
-    headingbackground(color:string):void
-    headingbackground(color?:string){
+    headingbackground(color:string, custom?:boolean):void
+    headingbackground(color?:string, custom:boolean=true){
         if(color) {
             this.q("heading-background").css({'background': color});
+            this.customColor = custom;
         }
         else return this.q("heading-background").css('background');
     }

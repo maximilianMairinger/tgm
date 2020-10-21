@@ -40,7 +40,6 @@ export default class BlogSuggestions extends ThemeAble {
         let blogcard = new BlogCard();
         blogcard.heading(blogCardInfo.heading);
         blogcard.note(blogCardInfo.date);
-        blogcard.headingbackground("#F5B3AD");
         blogcard.thumbnail(blogCardInfo.thumbnail);
         blogcard.content(blogCardInfo.content)
         blogcard.href(blogCardInfo.link)

@@ -47,7 +47,7 @@ export default abstract class InfoCard extends Card {
             if(!this.customColor){
                 let averageColor = new FastAverageColor();
                 averageColor.getColorAsync(url).then(color => {
-                    let rgba = "rgba(" + color.value[0] + "," + color.value[1] + "," + color.value[2] + "," + "0.5)"
+                    let rgba = "rgba(".concat(color.value[0], ",", color.value[1], ",", color.value[2], ",", "0.5)");
                     this.headingbackground(rgba);
                 });
             }

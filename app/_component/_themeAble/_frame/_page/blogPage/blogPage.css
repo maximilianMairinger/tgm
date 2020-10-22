@@ -1,0 +1,39 @@
+component-body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+c-blog-post{
+    display: block;
+    padding-top: 150px;
+    order: 1;
+}
+
+error-message{
+    display: block;
+    margin: auto;
+    text-align: center;
+    --paddingsize: calc((100vh - 500px) / 2);
+    padding: var(--paddingsize) 10vw;
+    font-size: calc(50px + (80 - 50) * ((100vw - 300px) / (1920 - 300)));
+    font-weight: bold;
+    order: 1;
+}
+
+
+error-message ~ c-blog-suggestions{
+    padding-bottom: 0;
+}
+
+c-blog-suggestions{
+    order: 2;
+    margin-top: auto;
+    padding-bottom: 500px;
+}
+
+@media only screen and (max-width: 768px) {
+    error-message{
+        --paddingsize: calc((100vh - 500px - 2em) / 2);
+    }
+}

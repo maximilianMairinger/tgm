@@ -2,3 +2,8 @@
   width: 1616.31px;
   height: 1030.28px;
 }
+
+svg {
+  width: 100%;
+  height: 100%;
+}

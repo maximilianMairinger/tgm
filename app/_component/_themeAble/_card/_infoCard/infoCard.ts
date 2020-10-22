@@ -4,12 +4,14 @@ import Link from "../../link/link"
 import {Theme} from "../../themeAble";
 import Textblob from "../../_text/textblob/textblob";
 import "../../../_themeAble/_icon/zertificateMan/zertificateMan"
+import FastAverageColor from 'fast-average-color';
 
 
 export default abstract class InfoCard extends Card {
 
     protected textblob = this.q("c-textblob") as Textblob;
     private link = this.q("c-link") as Link;
+    private customColor = false;
 
     constructor(){
         super(false, false);
@@ -40,16 +42,26 @@ export default abstract class InfoCard extends Card {
     thumbnail():string
     thumbnail(url:string):void
     thumbnail(url?:string){
-        if(url)
+        if(url) {
             this.q("thumbnail-pic").css({'backgroundImage': url});
+            if(!this.customColor){
+                let averageColor = new FastAverageColor();
+                averageColor.getColorAsync(url).then(color => {
+                    let rgba = "rgba(".concat(color.value[0].toString(), ",", color.value[1].toString(), ",", color.value[2].toString(), ", 0.5)");
+                    this.headingbackground(rgba, false);
+                });
+            }
+        }
         else return this.q("thumbnail-pic").css('backgroundImage');
     }
 
     headingbackground():string
-    headingbackground(color:string):void
-    headingbackground(color?:string){
-        if(color)
-            this.q("heading-background").css({'background':color});
+    headingbackground(color:string, custom?:boolean):void
+    headingbackground(color?:string, custom:boolean=true){
+        if(color) {
+            this.q("heading-background").css({'background': color});
+            this.customColor = custom;
+        }
         else return this.q("heading-background").css('background');
     }
 

@@ -29,6 +29,7 @@ info-card{
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 note-box{
@@ -50,6 +51,7 @@ heading-box{
 }
 
 heading-container{
+    max-width: 100%;
     position: relative;
     display: block;
     width: auto;
@@ -67,7 +69,9 @@ heading-background{
 }
 
 c-textblob{
-    display: inline-block;
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;
     width: auto;
     margin-bottom: 5px;
 }
@@ -77,6 +81,7 @@ thumbnail-box{
     display: block;
     width: calc(100% + 90px);
     transform: skewY(-1deg);
+    -webkit-transform: skewY(-1deg);
     flex-grow: 1;
     margin: 0 -45px;
     overflow: hidden;
@@ -86,6 +91,7 @@ thumbnail-box{
 thumbnail-pic{
     position: absolute;
     transform: skewY(1deg);
+    -webkit-transform: skewY(1deg);
     top: -5%;
     height: 110%;
     width: 100%;
@@ -144,6 +150,9 @@ c-link{
     thumbnail-box{
         height: 170px;
     }
+    thumbnail-pic{
+        top:3%;
+    }
 }
 
 
@@ -160,4 +169,9 @@ c-link{
     image-container{
         margin: 0;
     }
+
+    thumbnail-pic{
+        top: 3%;
+    }
+
 }

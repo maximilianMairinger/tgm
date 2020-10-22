@@ -1,7 +1,5 @@
 const ws = new WebSocket(url);
 ws.addEventListener("open", () => {
-  console.log("hello sind client")
-
   ws.send("hello")
 })
 

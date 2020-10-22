@@ -1,0 +1,55 @@
+
+c-icon-card {
+  display: block;
+  margin: 0 28px 56px 28px;
+  width: calc(6% + 180px);
+  min-width: 240px;
+  height: calc(4vw + 110px);
+  min-height: 160px;
+
+  background: #FEFBF9;
+
+  /* scroll-snap-align: start;
+  scroll-margin-left: 40px; */
+}
+
+@media only screen and (max-width: 1000px) {
+  component-body {
+    flex-wrap: nowrap;
+    justify-content: left;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  c-icon-card:first-of-type {
+    margin-left: 40px;
+  }
+
+  c-icon-card {
+    margin-bottom: 0;
+  }
+}
+
+component-body {
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  /* Only important on mobile */
+  overflow-x: auto;
+  overflow-y: visible;
+/* 
+  scroll-snap-type: x proximity; */
+}
+
+
+component-body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+component-body::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}

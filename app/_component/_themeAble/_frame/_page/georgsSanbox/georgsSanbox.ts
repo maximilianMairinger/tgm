@@ -20,6 +20,7 @@ import "../../../../_themeAble/blogSuggestions/blogSuggestions"
 import "../../../../_themeAble/_card/_infoCard/blogCard/blogCard"
 import "../../../../_themeAble/_card/_infoCard/newsCard/newsCard"
 import "../../../../_themeAble/_card/_infoCard/unterrichtSystemeCard/unterrichtSystemeCard"
+import "../../../_icon/swipe/swipe"
 
 import "../../_pageSection/schuelerprojekteSection/schuelerprojekteSection"
 import "../../_pageSection/ausmachtSection/ausmachtSection"

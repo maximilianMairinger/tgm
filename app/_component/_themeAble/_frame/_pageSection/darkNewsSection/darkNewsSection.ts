@@ -6,9 +6,10 @@ import TriangleNews from "../../../../_themeAble/triangleNews/triangleNews"
 
 export default declareComponent("dark-news-section", class extends PageSection {
   private newsSectionBackground = new TriangleNews().theme("dark")
+  
 
   constructor() {
-    super()
+    super("dark")
     this.elementBody.apd(this.newsSectionBackground)
     
   }

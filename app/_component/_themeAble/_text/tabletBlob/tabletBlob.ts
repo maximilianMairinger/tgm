@@ -1,8 +1,9 @@
 import declareComponent from "../../../../lib/declareComponent";
 import Text from "../text";
-import "../../../_button/button"
+import "../../../_themeAble/_button/button"
 import {Theme} from "../../themeAble";
 import Textblob from "../textblob/textblob";
+import "../../_icon/swipe/swipe"
 import "../../_icon/arrow/arrow"
 import {ElementList} from "extended-dom";
 
@@ -196,7 +197,7 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
     }
 
     private scrollUpdate() {
-        console.log("scrolling")
+        // console.log("scrolling")
         let index = this.index;
         this.updateIndex()
         if (this.index > index)
@@ -211,7 +212,8 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
         let preload:number = this.projectData.length -1 ;
         if(shift != null)
             if(shift){
-                this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading)
+                // @ts-ignore
+                this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading, false)
                 if(!this.previousAvailable) {
                     this.previousArrow.css({"display": "flex"});
                     this.previousAvailable = true;
@@ -220,13 +222,15 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 if(!this.nextAvailable)
                     this.nextArrow.css({"display":"none"});
                 else {
-                    this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading);
+                    // @ts-ignore
+                    this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading, false);
                     if(this.index + preload < this.projectData.length && !this.projectData[this.index + preload].loaded)
                         this.project(this.projectData[this.index + preload])
                 }
 
             }else {
-                this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading)
+                // @ts-ignore
+                this.nextArrow.firstChild.text(this.projectData[this.index + 1].heading, false)
                 if(!this.nextAvailable) {
                     this.nextArrow.css({"display": "flex"});
                     this.nextAvailable = true
@@ -235,7 +239,8 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
                 if(!this.previousAvailable)
                     this.previousArrow.css({"display":"none"});
                 else {
-                    this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading);
+                    // @ts-ignore
+                    this.previousArrow.firstChild.text(this.projectData[this.index - 1].heading, false);
                 }
 
             }
@@ -258,11 +263,11 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
 
     private pid;
     private wait4scroll(scroller:Element, wantedPx:number, func:()=>any){
-        console.log("scroll waiter");
+        // console.log("scroll waiter");
         clearInterval(this.pid);
         this.pid = setInterval(() => {
             if(scroller.scrollLeft < wantedPx + 10 && scroller.scrollLeft > wantedPx - 10){
-                console.log("scroll finished")
+                // console.log("scroll finished")
                 func();
                 clearInterval(this.pid);
             }
@@ -300,8 +305,8 @@ export default declareComponent("tablet-blob", class TableBlob extends Text {
             tablet.querySelector(".thumbnail-pic").setAttribute("src", projectJson.thumbnail);
             tablet.querySelector("info-title").text(projectJson.title);
             tablet.querySelector("info-text").text(projectJson.content);
-            console.log(project.heading);
-            console.log("Index:", this.index);
+            // console.log(project.heading);
+            // console.log("Index:", this.index);
             project.loaded = true;
         }else
             return this.projectData[this.index];

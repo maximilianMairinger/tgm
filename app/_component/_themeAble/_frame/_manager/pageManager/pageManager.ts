@@ -12,6 +12,7 @@ import RaumfahrtPage from "../../_page/_sectionedPage/_lazySectionedPage/raumfah
 import RaumfahrtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte";
 import RaumfahrtTeam from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtTeam/raumfahrtTeam";
 import Schularzt from "../../_page/_sectionedPage/_lazySectionedPage/schularzt/schularzt";
+import BlogPage from "../../_page/blogPage/blogPage"
 
 export type PageName = string
 
@@ -28,8 +29,13 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
       },
       {
+        key: new Import("blog", 20, (blogPage: typeof BlogPage) =>
+            new blogPage(setPage, 1)
+        ), val: () => import(/* webpackChunkName: "blogPage" */"../../_page/blogPage/blogPage")
+      },
+      {
         key: new Import("404", 1, (__404Page: typeof _404Page) => 
-          new __404Page(setPage)
+          new __404Page()
         ), val: () => import(/* webpackChunkName: "404Page" */"../../_page/404/404")
       },
       {

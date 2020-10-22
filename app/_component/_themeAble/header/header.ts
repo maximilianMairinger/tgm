@@ -1,7 +1,7 @@
 import ThemeAble, { Theme } from "../themeAble"
 import declareComponent from "../../../lib/declareComponent"
 import "../_icon/tgmLogo/tgmLogo"
-import "../../_button/button"
+import "../../_themeAble/_button/button"
 import Link from "../link/link"
 import { ElementList } from "extended-dom"
 import { lang } from "../../../lib/lang"

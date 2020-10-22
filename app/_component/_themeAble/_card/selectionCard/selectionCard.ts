@@ -4,8 +4,8 @@ import "../../link/link"
 import Link from "../../link/link"
 import {Theme} from "../../themeAble";
 import Textblob from "../../_text/textblob/textblob";
-import "../../../_button/button"
-import Button from "../../../_button/button"
+import "../../../_themeAble/_button/button"
+import Button from "../../_button/button"
 import "../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/wirtschaftsingenieure/wirtschaftsingenieure"
 import "../../../_themeAble/_icon/cpu/cpu"
 import "../../../_themeAble/_icon/tie/tie"

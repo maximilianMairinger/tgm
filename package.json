@@ -78,9 +78,9 @@
     "extended-dom": "^3.5.3",
     "fast-decode-uri-component": "^1.0.1",
     "get-base-url": "^2.1.0",
-    "josm": "^1.1.18",
+    "josm": "^1.2.10",
     "slugify": "^1.4.5",
     "waapi-easing": "^1.0.1",
-    "xrray": "^4.7.0"
+    "xrray": "^4.7.1"
   }
 }

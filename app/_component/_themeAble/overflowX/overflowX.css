@@ -1,4 +1,4 @@
-overflow-x-container{
+:host{
     --spacing: 2em;
     display: flex;
     flex-direction: row;
@@ -7,28 +7,28 @@ overflow-x-container{
     scrollbar-width: none;
 }
 
-overflow-x-container *:first-child:not(:last-child){
+:host *:first-child:not(:last-child){
     margin-right: var(--spacing);
 }
 
-overflow-x-container *:last-child:not(:first-child){
+:host *:last-child:not(:first-child){
     margin-left: var(--spacing);
 }
 
-overflow-x-container *:not(:first-child):not(:last-child) {
+:host *:not(:first-child):not(:last-child) {
     margin: 0 var(--spacing);
 }
 
-overflow-x-container::-webkit-scrollbar {
+:host::-webkit-scrollbar {
     width: 0 !important;
     height: 0 !important;
 }
 
-overflow-x-container::-webkit-scrollbar-track {
+:host::-webkit-scrollbar-track {
     background: transparent;
 }
 
-overflow-x-container::-webkit-scrollbar-thumb {
+:host::-webkit-scrollbar-thumb {
     background: transparent;
     border: none;
 }

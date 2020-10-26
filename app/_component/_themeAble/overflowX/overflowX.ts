@@ -9,6 +9,12 @@ class OverflowX extends ThemeAble {
 
     constructor(public onChange?: (activate: boolean) => void) {
         super(false)
+        let children = []
+        this.childNodes.forEach(child => {
+            children.add(child)
+        })
+        this.removeChilds();
+        children.forEach(child => this.elementBody.appendChild(child))
     }
 
     theme(): Theme
@@ -17,8 +23,13 @@ class OverflowX extends ThemeAble {
         return super.theme(to)
     }
 
+    appendChild<T extends Node>(newChild: T): T {
+        return this.elementBody.appendChild(newChild);
+    }
 
-
+    append(...nodes) {
+        this.elementBody.append(...nodes);
+    }
 
     stl() {
         return super.stl() + require("./overflowX.css").toString()

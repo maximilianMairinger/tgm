@@ -27,8 +27,9 @@ export default class BlogPage extends Page {
   private blogLoaded = false;
   private async setBlog(blogIdentifier: string) {
     console.log("setBlog", blogIdentifier)
-    if(this.blogLoaded)
-      this.elementBody.childNodes.forEach(child => child.remove());
+    if(this.blogLoaded) {
+      this.elementBody.removeChilds()
+    }
 
     let query;
     if(!this.preview) query = {slug: blogIdentifier};
@@ -61,7 +62,7 @@ export default class BlogPage extends Page {
                 date: blog.published_at,
                 content: blog.excerpt,
                 thumbnail: blog.feature_image,
-                link: blog.url
+                link: "blog/" + blog.slug
               }
               return blogCard;
             }));

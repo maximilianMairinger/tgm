@@ -3,9 +3,12 @@ import declareComponent from "../../../lib/declareComponent"
 import "../../_themeAble/_button/button"
 import {ElementList} from "extended-dom";
 import Button from "../../_themeAble/_button/button";
+import "../_icon/arrow/arrow"
 
 
 class OverflowX extends ThemeAble {
+
+    private overflowContainer = this.q("overflow-x-container");
 
     constructor(public onChange?: (activate: boolean) => void) {
         super(false)
@@ -14,7 +17,7 @@ class OverflowX extends ThemeAble {
             children.add(child)
         })
         this.removeChilds();
-        children.forEach(child => this.elementBody.appendChild(child))
+        children.forEach(child => this.overflowContainer.appendChild(child))
     }
 
     theme(): Theme

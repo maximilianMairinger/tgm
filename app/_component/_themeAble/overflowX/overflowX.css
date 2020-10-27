@@ -1,4 +1,9 @@
-:host{
+:host {
+    position: relative;
+    display: block;
+}
+
+overflow-x-container{
     --spacing: 2em;
     display: flex;
     flex-direction: row;
@@ -7,28 +12,70 @@
     scrollbar-width: none;
 }
 
-:host *:first-child:not(:last-child){
+overflow-x-container > *:first-child:not(:last-child){
     margin-right: var(--spacing);
 }
 
-:host *:last-child:not(:first-child){
+overflow-x-container > *:last-child:not(:first-child){
     margin-left: var(--spacing);
 }
 
-:host *:not(:first-child):not(:last-child) {
+overflow-x-container > *:not(:first-child):not(:last-child) {
     margin: 0 var(--spacing);
 }
 
-:host::-webkit-scrollbar {
+overflow-x-container::-webkit-scrollbar {
     width: 0 !important;
     height: 0 !important;
 }
 
-:host::-webkit-scrollbar-track {
+overflow-x-container::-webkit-scrollbar-track {
     background: transparent;
 }
 
-:host::-webkit-scrollbar-thumb {
+overflow-x-container::-webkit-scrollbar-thumb {
     background: transparent;
     border: none;
 }
+
+next-button, previous-button{
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 75px;
+    top: calc(50% - 75px);
+    z-index: 2;
+    background: white;
+    box-shadow: var(--medium-shadow);
+}
+
+overflow-x-container:hover ~ next-button, overflow-x-container:hover ~ previous-button{
+    display: flex;
+}
+
+next-button{
+    right: 0;
+    border-radius: 8px 0 0 8px;
+}
+
+previous-button{
+    left: 0;
+    border-radius: 0 8px 8px 0;
+}
+
+c-button{
+    position: absolute;
+    display: block;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+previous-button c-arrow-icon{
+    transform: rotate(180deg);
+}
+

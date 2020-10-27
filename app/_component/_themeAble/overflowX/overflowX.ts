@@ -20,14 +20,10 @@ export default class OverflowX extends ThemeAble {
 
     private next() {
         this.overflowContainer.scrollLeft += this.overflowContainer.width() * OverflowX.SCROLL_PERCENT;
-        this.lastScrollLeft = this.overflowContainer.scrollLeft;
-        this.update(true)
     }
 
     private previous() {
         this.overflowContainer.scrollLeft -= this.overflowContainer.width() * OverflowX.SCROLL_PERCENT;
-        this.lastScrollLeft = this.overflowContainer.scrollLeft
-        this.update(false)
     }
 
     private scrollUpdate() {

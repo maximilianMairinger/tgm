@@ -40,7 +40,7 @@ overflow-x-container::-webkit-scrollbar-thumb {
 
 next-button, previous-button{
     position: absolute;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 50px;
@@ -49,11 +49,10 @@ next-button, previous-button{
     z-index: 2;
     background: white;
     box-shadow: var(--medium-shadow);
+    opacity: 0;
+    transition: .5s;
 }
 
-overflow-x-container:hover ~ next-button, overflow-x-container:hover ~ previous-button{
-    display: flex;
-}
 
 next-button{
     right: 0;
@@ -63,6 +62,10 @@ next-button{
 previous-button{
     left: 0;
     border-radius: 0 8px 8px 0;
+}
+
+overflow-x-container:hover ~ next-button, next-button:hover, overflow-x-container:hover ~ previous-button, previous-button:hover {
+    opacity: 1;
 }
 
 c-button{
@@ -77,5 +80,11 @@ c-button{
 
 previous-button c-arrow-icon{
     transform: rotate(180deg);
+}
+
+@media only screen and (max-width: 768px) {
+    next-button, previous-button{
+        display: none;
+    }
 }
 

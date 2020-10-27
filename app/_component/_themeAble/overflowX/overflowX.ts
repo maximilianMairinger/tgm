@@ -65,9 +65,11 @@ class OverflowX extends ThemeAble {
             }
         else {
             this.nextAvailable = true;
-            this.lastScrollLeft = this.overflowContainer.scrollLeft;
-            this.nextArrow.css({"display":"flex"});
             this.previousArrow.css({"display":"none"});
+            if(this.overflowContainer.width() < this.overflowContainer.scrollWidth)
+                this.nextArrow.css({"display":"flex"});
+            else
+                this.nextArrow.css({"display":"none"});
         }
         this.updating=false;
     }
@@ -83,9 +85,12 @@ class OverflowX extends ThemeAble {
         this.nextButton.click(this.next.bind(this));
         this.previousButton.click(this.previous.bind(this));
         this.overflowContainer.addEventListener("scroll", this.scrollUpdate.bind(this))
-        if(this.overflowContainer.scrollWidth == this.overflowContainer.width()) {
-            this.update();
-        }
+        let pid = setInterval(() => {
+            if(this.overflowContainer.scrollWidth != undefined) {
+                this.update();
+                clearInterval(pid);
+            }
+        }, 32);
     }
 
     theme(): Theme

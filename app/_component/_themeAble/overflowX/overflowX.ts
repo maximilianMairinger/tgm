@@ -6,18 +6,18 @@ import Button from "../../_themeAble/_button/button";
 import "../_icon/arrow/arrow"
 
 
-class OverflowX extends ThemeAble {
+export default class OverflowX extends ThemeAble {
 
     private lastScrollLeft = 0;
     private nextArrow = this.q("next-button");
-    private nextButton = this.q("next-button c-button") as Button;
+    private nextButton:Button;
     private nextAvailable = false;
     private previousArrow = this.q("previous-button");
-    private previousButton = this.q("previous-button c-button") as Button;
+    private previousButton:Button;
     private previousAvailable = false;
     private updating:boolean;
     private overflowContainer = this.q("overflow-x-container");
-    private static readonly SCROLL_PERCENT= 0.33;
+    private static readonly SCROLL_PERCENT= 0.66;
 
     private next() {
         this.overflowContainer.scrollLeft += this.overflowContainer.width() * OverflowX.SCROLL_PERCENT;
@@ -60,21 +60,18 @@ class OverflowX extends ThemeAble {
                 }
                 this.previousAvailable = this.overflowContainer.scrollLeft > 0;
                 if(!this.previousAvailable)
-                    this.previousArrow.css({"display":"none"});
+                    this.previousArrow.css({"display":"none"})
 
             }
         else {
             this.nextAvailable = true;
-            this.previousArrow.css({"display":"none"});
             if(this.overflowContainer.width() < this.overflowContainer.scrollWidth)
                 this.nextArrow.css({"display":"flex"});
-            else
-                this.nextArrow.css({"display":"none"});
         }
         this.updating=false;
     }
 
-    constructor(public onChange?: (activate: boolean) => void) {
+    constructor(next:Button=null, previous:Button=null) {
         super(false)
         let children = []
         this.childNodes.forEach(child => {
@@ -82,8 +79,16 @@ class OverflowX extends ThemeAble {
         })
         this.removeChilds();
         children.forEach(child => this.overflowContainer.appendChild(child))
+        if(!next)
+            this.nextButton = this.q("next-button c-button") as Button;
+       else this.nextButton = next
         this.nextButton.click(this.next.bind(this));
+
+        if (!previous)
+            this.previousButton = this.q("previous-button c-button") as Button;
+        else this.previousButton = previous;
         this.previousButton.click(this.previous.bind(this));
+
         this.overflowContainer.addEventListener("scroll", this.scrollUpdate.bind(this))
         let pid = setInterval(() => {
             if(this.overflowContainer.scrollWidth != undefined) {
@@ -91,6 +96,24 @@ class OverflowX extends ThemeAble {
                 clearInterval(pid);
             }
         }, 32);
+    }
+
+    setNextButton(button:Button){
+        button.click(this.next.bind(this));
+        this.nextArrow.css({"display":"none"})
+        this.nextButton.disable();
+        this.nextButton = button;
+        this.nextArrow = button;
+        this.update(true)
+    }
+
+    setPreviousButton(button:Button){
+        button.click(this.previous.bind(this));
+        this.previousArrow.css({"display":"none"})
+        this.previousButton.disable();
+        this.previousButton = button;
+        this.previousArrow = button;
+        this.update(false)
     }
 
     theme(): Theme
@@ -115,4 +138,4 @@ class OverflowX extends ThemeAble {
     }
 }
 
-export default declareComponent("overflow-x", OverflowX);
+declareComponent("overflow-x", OverflowX);

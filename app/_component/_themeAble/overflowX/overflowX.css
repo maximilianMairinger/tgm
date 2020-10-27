@@ -14,15 +14,15 @@ overflow-x-container{
     padding-bottom: 20px;
 }
 
-overflow-x-container > *:first-child:not(:last-child){
+overflow-x-container > *:first-child:not(:last-child):not(filler-element){
     margin-right: var(--spacing);
 }
 
-overflow-x-container > *:last-child:not(:first-child){
+overflow-x-container > *:last-child:not(:first-child):not(filler-element){
     margin-left: var(--spacing);
 }
 
-overflow-x-container > *:not(:first-child):not(:last-child) {
+overflow-x-container > *:not(:first-child):not(:last-child):not(filler-element){
     margin: 0 var(--spacing);
 }
 

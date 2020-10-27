@@ -128,9 +128,11 @@ export default class OverflowX extends ThemeAble {
             //@ts-ignore
             this.overflowContainer.css({"WebkitMaskImage": maskimage});
             let filler = ce("filler-element");
-            filler.css({"display": "block", "flex": "0 0 calc(" + percent + "% - var(--spacing))", "alignSelf": "stretch"});
+            filler.css({"display": "block", "flex": "0 0 calc(" + percent + "% - var(--spacing))", "alignSelf": "stretch", "order": "42069"});
+            this.overflowContainer.prepend(filler)
+            filler = ce("filler-element");
+            filler.css({"display": "block", "flex": "0 0 calc(" + percent + "% - var(--spacing) * 2)", "alignSelf": "stretch"});
             this.overflowContainer.prepend(filler);
-            this.overflowContainer.append(filler.cloneNode())
         }
     }
 
@@ -145,7 +147,7 @@ export default class OverflowX extends ThemeAble {
     }
 
     append(...nodes) {
-        this.elementBody.append(...nodes);
+        this.overflowContainer.append(...nodes);
     }
 
     stl() {

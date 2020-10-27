@@ -12,6 +12,12 @@ c-blog-suggestions{
     margin-bottom: 200px;
 }
 
+c-overflow-x:not(.custom){
+
+    width: 70%;
+    margin: 0 15%;
+}
+
 navigation-container{
     position: relative;
     display: block;

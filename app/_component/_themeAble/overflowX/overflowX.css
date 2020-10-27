@@ -4,12 +4,14 @@
 }
 
 overflow-x-container{
+    position: relative;
     --spacing: 2em;
     display: flex;
     flex-direction: row;
     overflow-x: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    padding-bottom: 20px;
 }
 
 overflow-x-container > *:first-child:not(:last-child){

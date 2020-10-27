@@ -46,7 +46,7 @@ export default class OverflowX extends ThemeAble {
                     this.previousArrow.css({"display": "flex"});
                     this.previousAvailable = true;
                 }
-                this.nextAvailable = this.overflowContainer.scrollLeft < this.overflowContainer.scrollWidth - this.overflowContainer.width();
+                this.nextAvailable = this.overflowContainer.scrollLeft < this.overflowContainer.scrollWidth - this.overflowContainer.width() - 10;
                 if (!this.nextAvailable)
                     this.nextArrow.css({"display": "none"});
 
@@ -117,6 +117,21 @@ export default class OverflowX extends ThemeAble {
         else
             this.previousArrow = button;
         this.update(false)
+    }
+
+    gradient(gradient:boolean, percent=15) {
+        if(gradient) {
+            this.q("next-button").css({"borderRadius": "8px"});
+            this.q("previous-button").css({"borderRadius": "8px"});
+            let maskimage = "linear-gradient(to right, transparent, rgba(0,0,0,1) "+ percent +"%, rgba(0,0,0,1) "+ (100-percent) +"%,transparent)";
+            this.overflowContainer.css({"maskImage":maskimage});
+            //@ts-ignore
+            this.overflowContainer.css({"WebkitMaskImage": maskimage});
+            let filler = ce("filler-element");
+            filler.css({"display": "block", "flex": "0 0 calc(" + percent + "% - var(--spacing))", "alignSelf": "stretch"});
+            this.overflowContainer.prepend(filler);
+            this.overflowContainer.append(filler.cloneNode())
+        }
     }
 
     theme(): Theme

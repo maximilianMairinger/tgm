@@ -34,7 +34,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "blogPage" */"../../_page/blogPage/blogPage")
       },
       {
-        key: new Import("404", 1, (__404Page: typeof _404Page) => 
+        key: new Import("p", 20, (blogPage: typeof BlogPage) =>
+            new blogPage(setPage, 1, true)
+        ), val: () => import(/* webpackChunkName: "blogPage" */"../../_page/blogPage/blogPage")
+      },
+      {
+        key: new Import("404", 1, (__404Page: typeof _404Page) =>
           new __404Page()
         ), val: () => import(/* webpackChunkName: "404Page" */"../../_page/404/404")
       },

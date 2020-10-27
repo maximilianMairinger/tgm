@@ -68,7 +68,7 @@ export default class OverflowX extends ThemeAble {
         this.updating = false;
     }
 
-    constructor(next: Button = null, previous: Button = null) {
+    constructor(next?: Button, previous?: Button) {
         super(false)
         let children = []
         this.childNodes.forEach(child => {
@@ -95,21 +95,27 @@ export default class OverflowX extends ThemeAble {
         }, 32);
     }
 
-    setNextButton(button: Button) {
+    setNextButton(button: Button, container?:Element) {
         button.click(this.next.bind(this));
         this.nextArrow.css({"display": "none"})
         this.nextButton.disable();
         this.nextButton = button;
-        this.nextArrow = button;
+        if(container)
+            this.nextArrow = container
+        else
+            this.nextArrow = button;
         this.update(true)
     }
 
-    setPreviousButton(button: Button) {
+    setPreviousButton(button: Button, container?:Element) {
         button.click(this.previous.bind(this));
         this.previousArrow.css({"display": "none"})
         this.previousButton.disable();
         this.previousButton = button;
-        this.previousArrow = button;
+        if(container)
+            this.previousArrow = container
+        else
+            this.previousArrow = button;
         this.update(false)
     }
 

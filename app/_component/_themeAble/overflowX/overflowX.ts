@@ -138,11 +138,9 @@ export default class OverflowX extends ThemeAble {
             this.q("previous-button").css({"borderRadius": "8px", "left": "calc(" + actualPercent + "% - 25px)"});
             if(gradient == "fancy" || fancy) {
                 let windowLeft= ce("window-viewer");
-                windowLeft.css({"display":"block", "position": "absolute", "zIndex":"1","opacity":1, "width":actualPercent+"%", "height":"100%", "top": "0", "margin":0, "transition": "0.5s ease-out", "background":"var(--primary-background-color)", "pointerEvents": "none"})
                 let windowRight= ce("window-viewer");
-                windowRight.css({"display":"block", "position": "absolute", "zIndex":"1","opacity":1, "width":actualPercent+"%", "height":"100%", "top": "0", "margin":0, "transition": "0.5s ease-out", "background":"var(--primary-background-color)", "pointerEvents": "none"})
-                windowLeft.css({"left" :"0"})
-                windowRight.css({"right":"0"})
+                windowLeft.css({"width": actualPercent + "%","left" :"0"})
+                windowRight.css({"width": actualPercent + "%","right":"0"})
                 this.apd(windowLeft);
                 this.apd(windowRight);
                 this.overflowContainer.css({"maskImage": maskimageSoft});
@@ -157,11 +155,11 @@ export default class OverflowX extends ThemeAble {
                     windowRight.css({"opacity": 0})
                 });
                 let filler = ce("filler-element");
-                filler.css({"display": "block", "flex": "0 0 calc(" + actualPercent + "% + 15px)", "alignSelf": "stretch", "order": "42069"});
+                filler.css({"flex": "0 0 calc(" + actualPercent + "% + 15px)", "order": "42069"});
                 //@ts-ignore
                 this.overflowContainer.prepend(filler)
                 filler = ce("filler-element");
-                filler.css({"display": "block", "flex": "0 0 calc(" + actualPercent + "% - var(--spacing) + 1px)", "alignSelf": "stretch"});
+                filler.css({"flex": "0 0 calc(" + actualPercent + "% - var(--spacing) + 1px)"});
                 //@ts-ignore
                 this.overflowContainer.prepend(filler)
             }else{

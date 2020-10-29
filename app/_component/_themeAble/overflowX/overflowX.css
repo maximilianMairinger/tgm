@@ -88,6 +88,24 @@ previous-button c-arrow-icon{
     transform: rotate(180deg);
 }
 
+window-viewer{
+    display: block;
+    position: absolute;
+    z-index: 1;
+    opacity: 1;
+    height: 100%;
+    top: 0;
+    margin: 0;
+    background: var(--primary-background-color);
+    pointer-events: none;
+    transition: 0.5s ease-out;
+}
+
+filler-element{
+    display: block;
+    align-self: stretch;
+}
+
 @media only screen and (max-width: 768px) {
     next-button, previous-button{
         display: none;

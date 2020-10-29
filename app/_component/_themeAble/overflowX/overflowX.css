@@ -108,6 +108,22 @@ filler-element{
 
 @media only screen and (max-width: 768px) {
     next-button, previous-button{
+        display: none !important;
+    }
+
+    overflow-x-container *{
+       --spacing: min(10vw, 2em);
+    }
+
+    filler-element:first-child{
+        flex: 0 0 var(--spacing) !important;
+    }
+
+    filler-element:nth-child(2){
+        flex: 0 0 calc(var(--spacing) * 2) !important;
+    }
+
+    window-viewer{
         display: none;
     }
 }

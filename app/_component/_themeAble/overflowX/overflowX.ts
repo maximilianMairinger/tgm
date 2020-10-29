@@ -16,11 +16,11 @@ export default class OverflowX extends ThemeAble {
     private previousAvailable = false;
     private updating: boolean;
     private overflowContainer = this.q("overflow-x-container");
-    private static readonly SCROLL_PERCENT = 0.66;
+    private scrollPercent = 0.66;
 
     private next(){
-        let scrollZwi = this.overflowContainer.scrollWidth > this.overflowContainer.scrollLeft + this.overflowContainer.width() + (this.overflowContainer.width() * OverflowX.SCROLL_PERCENT) ?
-            this.overflowContainer.width() * OverflowX.SCROLL_PERCENT :
+        let scrollZwi = this.overflowContainer.scrollWidth > this.overflowContainer.scrollLeft + this.overflowContainer.width() + (this.overflowContainer.width() * this.scrollPercent) ?
+            this.overflowContainer.width() * this.scrollPercent :
             this.overflowContainer.scrollWidth - (this.overflowContainer.scrollLeft + this.overflowContainer.width());
         let scrollTo = this.overflowContainer.scrollLeft + scrollZwi;
         //@ts-ignore
@@ -29,7 +29,7 @@ export default class OverflowX extends ThemeAble {
 
     private previous() {
         let scrollZwi = this.overflowContainer.scrollLeft > this.overflowContainer.width() ?
-            this.overflowContainer.width() * OverflowX.SCROLL_PERCENT :
+            this.overflowContainer.width() * this.scrollPercent :
             this.overflowContainer.scrollLeft;
         let scrollTo = this.overflowContainer.scrollLeft - scrollZwi;
         //@ts-ignore
@@ -81,7 +81,7 @@ export default class OverflowX extends ThemeAble {
             children.add(child)
         })
         this.removeChilds();
-        children.forEach(child => this.overflowContainer.appendChild(child))
+        this.overflowContainer.apd(children);
         if (!next)
             this.nextButton = this.q("next-button c-button") as Button;
         else this.nextButton = next
@@ -125,8 +125,10 @@ export default class OverflowX extends ThemeAble {
         this.update(false)
     }
 
-    gradient(gradient:boolean, percent=15) {
+    private hasGradient = false;
+    gradient(gradient:boolean, percent=15): any{
         if(gradient) {
+            this.hasGradient = true;
             this.q("next-button").css({"borderRadius": "8px"});
             this.q("previous-button").css({"borderRadius": "8px"});
             let maskimage = "linear-gradient(to right, transparent, rgba(0,0,0,1) "+ percent +"%, rgba(0,0,0,1) "+ (100-percent) +"%,transparent)";
@@ -141,7 +143,8 @@ export default class OverflowX extends ThemeAble {
             filler.css({"display": "block", "flex": "0 0 calc(" + percent + "% - var(--spacing) * 2)", "alignSelf": "stretch"});
             //@ts-ignore
             this.overflowContainer.prepend(filler);
-        }
+        }else
+            return this.hasGradient;
     }
 
     theme(): Theme
@@ -157,6 +160,15 @@ export default class OverflowX extends ThemeAble {
     append(...nodes) {
         this.overflowContainer.append(...nodes);
     }
+
+    prepend(...nodes) {
+        if(this.hasGradient)
+            //@ts-ignore
+            nodes.reverse().forEach(node => this.overflowContainer.insertAfter(node, this.q("filler-elemen:nth-child(2)") as Node));
+        else
+            this.overflowContainer.prepend(...nodes)
+    }
+
 
     stl() {
         return super.stl() + require("./overflowX.css").toString()

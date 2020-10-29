@@ -137,6 +137,7 @@ export default class OverflowX extends ThemeAble {
             this.q("next-button").css({"borderRadius": "8px", "right": "calc(" + actualPercent + "% - 25px)"});
             this.q("previous-button").css({"borderRadius": "8px", "left": "calc(" + actualPercent + "% - 25px)"});
             if(gradient == "fancy" || fancy) {
+                this.q("navigation-container").css({"opacity": 1})
                 let windowLeft= ce("window-viewer");
                 let windowRight= ce("window-viewer");
                 windowLeft.css({"width": actualPercent + "%","left" :"0"})

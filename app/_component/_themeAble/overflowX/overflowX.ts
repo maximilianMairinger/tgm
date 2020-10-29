@@ -101,6 +101,8 @@ export default class OverflowX extends ThemeAble {
         }, 32);
     }
 
+
+
     setNextButton(button: Button, container?:Element) {
         button.click(this.next.bind(this));
         this.nextArrow.css({"display": "none"})
@@ -126,23 +128,53 @@ export default class OverflowX extends ThemeAble {
     }
 
     private hasGradient = false;
-    gradient(gradient:boolean, percent=15): any{
+    gradient(gradient:boolean | string, percent=15, fancy = false){
         if(gradient) {
             this.hasGradient = true;
-            this.q("next-button").css({"borderRadius": "8px"});
-            this.q("previous-button").css({"borderRadius": "8px"});
-            let maskimage = "linear-gradient(to right, transparent, rgba(0,0,0,1) "+ percent +"%, rgba(0,0,0,1) "+ (100-percent) +"%,transparent)";
-            this.overflowContainer.css({"maskImage":maskimage});
-            //@ts-ignore
-            this.overflowContainer.css({"WebkitMaskImage": maskimage});
-            let filler = ce("filler-element");
-            filler.css({"display": "block", "flex": "0 0 calc(" + percent + "% - var(--spacing))", "alignSelf": "stretch", "order": "42069"});
-            //@ts-ignore
-            this.overflowContainer.prepend(filler)
-            filler = ce("filler-element");
-            filler.css({"display": "block", "flex": "0 0 calc(" + percent + "% - var(--spacing) * 2)", "alignSelf": "stretch"});
-            //@ts-ignore
-            this.overflowContainer.prepend(filler);
+            let actualPercent = (percent / ((100 + (percent * 2)) / 100) );
+            //let maskimageHard = "linear-gradient(to right, transparent, transparent "+ transformedPercent +"%, rgba(0,0,0,1) "+ transformedPercent +"%, rgba(0,0,0,1) "+ (100-transformedPercent) +"%,transparent " + (100-transformedPercent) +"%)";
+            let maskimageSoft = "linear-gradient(to right, transparent, rgba(0,0,0,1) "+ actualPercent +"%, rgba(0,0,0,1) "+ (100-actualPercent) +"%,transparent)";
+            this.q("next-button").css({"borderRadius": "8px", "right": "calc(" + actualPercent + "% - 25px)"});
+            this.q("previous-button").css({"borderRadius": "8px", "left": "calc(" + actualPercent + "% - 25px)"});
+            if(gradient == "fancy" || fancy) {
+                let windowLeft= ce("window-viewer");
+                windowLeft.css({"display":"block", "position": "absolute", "zIndex":"1","opacity":1, "width":actualPercent+"%", "height":"100%", "top": "0", "margin":0, "transition": "0.5s ease-out", "background":"var(--primary-background-color)", "pointerEvents": "none"})
+                let windowRight= ce("window-viewer");
+                windowRight.css({"display":"block", "position": "absolute", "zIndex":"1","opacity":1, "width":actualPercent+"%", "height":"100%", "top": "0", "margin":0, "transition": "0.5s ease-out", "background":"var(--primary-background-color)", "pointerEvents": "none"})
+                windowLeft.css({"left" :"0"})
+                windowRight.css({"right":"0"})
+                this.apd(windowLeft);
+                this.apd(windowRight);
+                this.overflowContainer.css({"maskImage": maskimageSoft});
+                //@ts-ignore
+                this.overflowContainer.css({"WebkitMaskImage": maskimageSoft});
+                this.addEventListener("mouseout", () => {
+                    windowLeft.css({"opacity": 1})
+                    windowRight.css({"opacity": 1})
+                });
+                this.addEventListener("mouseover", () => {
+                    windowLeft.css({"opacity": 0})
+                    windowRight.css({"opacity": 0})
+                });
+                let filler = ce("filler-element");
+                filler.css({"display": "block", "flex": "0 0 calc(" + actualPercent + "% + 15px)", "alignSelf": "stretch", "order": "42069"});
+                //@ts-ignore
+                this.overflowContainer.prepend(filler)
+                filler = ce("filler-element");
+                filler.css({"display": "block", "flex": "0 0 calc(" + actualPercent + "% - var(--spacing) + 1px)", "alignSelf": "stretch"});
+                //@ts-ignore
+                this.overflowContainer.prepend(filler)
+            }else{
+                this.overflowContainer.css({"maskImage": maskimageSoft});
+                let filler = ce("filler-element");
+                filler.css({"display": "block", "flex": "0 0 calc(" + actualPercent + "%)", "alignSelf": "stretch", "order": "42069"});
+                //@ts-ignore
+                this.overflowContainer.prepend(filler)
+                filler = ce("filler-element");
+                filler.css({"display": "block", "flex": "0 0 calc(" + actualPercent + "% - var(--spacing))", "alignSelf": "stretch"});
+                //@ts-ignore
+                this.overflowContainer.prepend(filler)
+            }
         }else
             return this.hasGradient;
     }

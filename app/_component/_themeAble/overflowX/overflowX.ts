@@ -3,7 +3,7 @@ import declareComponent from "../../../lib/declareComponent"
 import "../../_themeAble/_button/button"
 import Button from "../../_themeAble/_button/button";
 import "../_icon/arrow/arrow"
-
+import {Easing} from "waapi-easing";
 
 export default class OverflowX extends ThemeAble {
 
@@ -18,12 +18,22 @@ export default class OverflowX extends ThemeAble {
     private overflowContainer = this.q("overflow-x-container");
     private static readonly SCROLL_PERCENT = 0.66;
 
-    private next() {
-        this.overflowContainer.scrollLeft += this.overflowContainer.width() * OverflowX.SCROLL_PERCENT;
+    private next(){
+        let scrollZwi = this.overflowContainer.scrollWidth > this.overflowContainer.scrollLeft + this.overflowContainer.width() + (this.overflowContainer.width() * OverflowX.SCROLL_PERCENT) ?
+            this.overflowContainer.width() * OverflowX.SCROLL_PERCENT :
+            this.overflowContainer.scrollWidth - (this.overflowContainer.scrollLeft + this.overflowContainer.width());
+        let scrollTo = this.overflowContainer.scrollLeft + scrollZwi;
+        //@ts-ignore
+        this.overflowContainer.scroll({x: scrollTo}, {easing: new Easing("easeOut").function, speed: {begin: scrollZwi * 1.5}})
     }
 
     private previous() {
-        this.overflowContainer.scrollLeft -= this.overflowContainer.width() * OverflowX.SCROLL_PERCENT;
+        let scrollZwi = this.overflowContainer.scrollLeft > this.overflowContainer.width() ?
+            this.overflowContainer.width() * OverflowX.SCROLL_PERCENT :
+            this.overflowContainer.scrollLeft;
+        let scrollTo = this.overflowContainer.scrollLeft - scrollZwi;
+        //@ts-ignore
+        this.overflowContainer.scroll({x: scrollTo}, {easing: new Easing("easeOut").function, speed: {begin: scrollZwi * 1.5}})
     }
 
     private scrollUpdate() {
@@ -99,7 +109,7 @@ export default class OverflowX extends ThemeAble {
         if(container)
             this.nextArrow = container
         else
-            this.nextArrow = button;
+            this.nextArrow = button as Element;
         this.update(true)
     }
 
@@ -111,7 +121,7 @@ export default class OverflowX extends ThemeAble {
         if(container)
             this.previousArrow = container
         else
-            this.previousArrow = button;
+            this.previousArrow = button as Element;
         this.update(false)
     }
 
@@ -125,9 +135,11 @@ export default class OverflowX extends ThemeAble {
             this.overflowContainer.css({"WebkitMaskImage": maskimage});
             let filler = ce("filler-element");
             filler.css({"display": "block", "flex": "0 0 calc(" + percent + "% - var(--spacing))", "alignSelf": "stretch", "order": "42069"});
+            //@ts-ignore
             this.overflowContainer.prepend(filler)
             filler = ce("filler-element");
             filler.css({"display": "block", "flex": "0 0 calc(" + percent + "% - var(--spacing) * 2)", "alignSelf": "stretch"});
+            //@ts-ignore
             this.overflowContainer.prepend(filler);
         }
     }

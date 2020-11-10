@@ -14,6 +14,7 @@ public/sw.*.js
 
 ecosystem.config.js
 
+debug.log
 
 deploy.zip
 .now

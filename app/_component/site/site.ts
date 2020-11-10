@@ -138,7 +138,6 @@ export default declareComponent("site", class extends Component {
     })
 
 
-    
     this.apd(header, lowerNav, cookieNoteContainer)
   }
 

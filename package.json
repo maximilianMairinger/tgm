@@ -69,7 +69,7 @@
   "dependencies": {
     "@tryghost/content-api": "^1.4.5",
     "animated-scroll-to": "^2.0.10",
-    "extended-dom": "^3.6.0",
+    "extended-dom": "^3.6.1",
     "fast-average-color": "^6.1.0",
     "fast-decode-uri-component": "^1.0.1",
     "fast-equals": "^2.0.0",

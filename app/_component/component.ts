@@ -1,9 +1,8 @@
 import "../global"
 import lang from "./../lib/lang"
 import { DataBase, Data } from "josm";
-import { ElementList, ElementListOrElement } from "extended-dom";
+import { ElementList, ElementListOrElement, PrimElem, VariableLibrary } from "extended-dom";
 
-type PrimElem = string | number | boolean | Element
 type Token = string | string[]
 
 export default abstract class Component<T extends HTMLElement | HTMLAnchorElement | false | never = HTMLElement> extends HTMLElement {
@@ -63,20 +62,8 @@ export default abstract class Component<T extends HTMLElement | HTMLAnchorElemen
   public q(qs?: string, alwaysReturnElementList?: boolean) {
     return this.elementBody.childs(qs, alwaysReturnElementList)
   }
-//   apd(to: PrimElem | PrimElem[], library?: {
-//     [key in string]: string | Data<string>;
-// } | DataBase, customTokens?: {
-//     open?: Token;
-//     close?: Token;
-//     escape?: Token;
-// }): this;
-// /**
-//  * Appends given elems
-//  */
-// apd(...elems: PrimElem[]): this;
-
   public apd(...elems: PrimElem[]): this
-  public apd(to: PrimElem | PrimElem[], library?: {[key in string]: string | Data<string>;} | DataBase, customTokens?: {open?: Token; close?: Token; escape?: Token;}): this
+  public apd(to: PrimElem | PrimElem[], library?: VariableLibrary, customTokens?: {open?: Token, close?: Token, escape?: Token}): this
   public apd(...a: any): this {
     this.elementBody.apd(...a)
     return this

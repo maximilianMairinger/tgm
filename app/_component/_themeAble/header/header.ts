@@ -22,7 +22,7 @@ const slidyLineStretchOffset = slidyLineStretchFactor / 2
 const slidyLineStretchDuration = slidyLineStretchFactor * 1000
 
 
-export default declareComponent("header", class Header extends ThemeAble {
+export default class Header extends ThemeAble {
   private pathDisplayElem = this.q("path-display")
   private linkContainerElem = this.q("right-content")
   private leftContent = this.q("left-content")
@@ -304,5 +304,5 @@ export default declareComponent("header", class Header extends ThemeAble {
   pug() {
     return require("./header.pug").default
   }
-})
-
+}
+declareComponent("header", Header)

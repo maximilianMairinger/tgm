@@ -1,7 +1,7 @@
 import "../global"
 import lang from "./../lib/lang"
 import { DataBase, Data } from "josm";
-import { ElementList, ElementListOrElement, PrimElem, L, VariableLibrary } from "extended-dom";
+import { ElementList, ElementListOrElement, PrimElem, VariableLibrary } from "extended-dom";
 
 type Token = string | string[]
 

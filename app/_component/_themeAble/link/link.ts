@@ -4,6 +4,7 @@ import { Data } from "josm"
 import * as domain from "./../../../lib/domain"
 import delay from "delay"
 import ExternalLinkIcon from "../../_themeAble/_icon/externalLink/externalLink"
+import { Prim } from "extended-dom";
 
 function openInNewTab(href) {
   Object.assign(document.createElement('a'), {
@@ -260,7 +261,7 @@ export default class Link extends ThemeAble {
 
   content(): string
   content(to?: string | Data<string>): void
-  content(to?: string | Data<string>): any {
+  content(to?: Prim | Data<Prim, Prim>): any {
     return this.slotElem.text(to)
   }
 

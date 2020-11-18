@@ -607,6 +607,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         this.mainIntersectionObserver.unobserve(elem)
       })
       delete this.currentlyActiveSectionRootName
+      delete this.lastSectionName
     }
   }
 

@@ -125,6 +125,10 @@ path-display {
 
 }
 
+path-display > * {
+  opacity: 0;
+}
+
 path-display c-arrow-icon {
   margin: 0 16px;
   height: 17px;

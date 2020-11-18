@@ -25,13 +25,7 @@ const slidyLineStretchDuration = slidyLineStretchFactor * 1000
 
 
 
-const pathDisplayLinkIndex = keyIndex((i: number) => 
-  [new ArrowIcon, new Link("", "", undefined, true, false, false)] as [arrow: ArrowIcon, link: Link]
-)
 
-const linksIndex = keyIndex((toggle: boolean) => keyIndex((i: number) => 
-  new Link("", "", undefined, true, false, false)
-))
 
 export default class Header extends ThemeAble {
   private pathDisplayElem = this.q("path-display")
@@ -40,6 +34,16 @@ export default class Header extends ThemeAble {
   private underlineElem = new SlidyUnderline
   private background = this.q("blurry-background")
   private tgmLogoIcon = this.q("c-tgm-logo") as Icon
+
+  private pathDisplayLinkIndex = keyIndex((i: number) => {
+    const ls = new ElementList<ArrowIcon | Link>(new ArrowIcon, new Link("", "", undefined, true, false))
+    this.pathDisplayElem.apd(...ls)
+    return ls
+  })
+
+  private linksIndex = keyIndex((toggle: boolean) => keyIndex((i: number) => 
+    new Link("", "", undefined, true, false)
+  ))
   // private backLinkComponents: ElementList<ThemAble> = new ElementList()
 
   constructor(public linksShownChangeCallback?: (linksShown: boolean, init: boolean, func: any) => void) { 
@@ -65,11 +69,12 @@ export default class Header extends ThemeAble {
   }
 
   private updateThemeOfPathDisplay(to: Theme) {
-    this.currentPathDisplayElems.Inner("theme", [to])
+    this.pathDisplayLinkIndex.forEach((v) => {
+      v.Inner("theme", [to])
+    })
   }
 
   private updateUnderlineTheme(to: Theme) {
-    console.log("--------------------------------", to)
     this.underlineElem.theme(to)
   }
 
@@ -131,25 +136,54 @@ export default class Header extends ThemeAble {
   }
 
   private currentPathDisplayElems = []
-  private dontChangeDisplayTheme = false 
+  private dontChangeDisplayTheme = false
+  private lastDomainIndex: string[] = []
+  private lastDomainLevel = 0
   public async updatePathDisplay (domainLevel: number) {
     this.dontChangeDisplayTheme = true
-    if (!this.currentPathDisplayElems.empty) {
-      await this.pathDisplayElem.anim({opacity: 0, translateX: 5}, 500)
+
+    let max: number
+    let toBeChanged = []
+    let lvl = Math.max(domainLevel, this.lastDomainLevel)
+    this.lastDomainLevel = domainLevel
+    let curDomainIndex = [...domainIndex]
+    curDomainIndex.splice(domainLevel)
+
+    for (max = 0; max < lvl; max++) {
+      if (this.lastDomainIndex[max] !== curDomainIndex[max]) {
+        toBeChanged.add(max)
+      }
     }
-    else {
-      this.pathDisplayElem.css({opacity: 0})
+
+    let beChangedIndex = 0
+    let fadeOutElems = new ElementList
+    let fadeInElems = new ElementList
+
+    for (let i = toBeChanged.first; i < lvl; i++) {
+      const elems = this.pathDisplayLinkIndex(i)
+      if (this.lastDomainIndex[i] !== undefined) fadeOutElems.add(...elems)
+      if (i === toBeChanged[beChangedIndex] && curDomainIndex[i] !== undefined) {
+        
+        const linkElem = elems[1] as Link
+        linkElem.domainLevel = i
+        linkElem.content(lang.links[curDomainIndex[i]])
+        linkElem.link(curDomainIndex[i])
+      }
+      if (curDomainIndex[i] !== undefined) fadeInElems.add(...elems)
+      beChangedIndex++
     }
-    this.pathDisplayElem.removeChilds()
-    this.pathDisplayElem.css({translateX: -5})
-    for (let i = 0; i < domainLevel; i++) {
-      const elems = pathDisplayLinkIndex(i)
-      const linkElem: Link = elems[1]
-      linkElem.domainLevel = i
-      linkElem.content(lang.links[domainIndex[i]])
-      linkElem.link(domainIndex[i])
-      this.currentPathDisplayElems.add(...elems)
+
+    if (!fadeOutElems.empty) {
+      new ElementList(...fadeOutElems.reverse()).anim({translateX: 5, opacity: 0}, 250, 100)
+      await delay(250)
     }
+    console.log("fadeInElems", fadeInElems)
+    if (!fadeInElems.empty) fadeInElems.css({translateX: -5}).anim({translateX: .1, opacity: 1}, 250, 100)
+
+
+
+    this.lastDomainIndex = [...curDomainIndex]
+
     this.updateThemeOfPathDisplay(super.theme())
     this.dontChangeDisplayTheme = false
     this.pathDisplayElem.apd(...this.currentPathDisplayElems)
@@ -177,7 +211,7 @@ export default class Header extends ThemeAble {
     this.currentLinkElems = new ElementList()
     this.dontChangeLinksTheme = true
 
-    const elementIndex = linksIndex(this.linkNamespaceToggleBool)
+    const elementIndex = this.linksIndex(this.linkNamespaceToggleBool)
     linkContents.ea((s, i) => {
       const elem = elementIndex(i)
       elem.content(lang.links[s])

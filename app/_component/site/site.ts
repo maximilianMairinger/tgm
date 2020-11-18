@@ -100,13 +100,9 @@ export default declareComponent("site", class extends Component {
       lastScrollProg = prog
     });
 
-    (() => {
-      let init = true
-      pageManager.addThemeIntersectionListener(header, (themeUnderneath) => {
-        header.theme(themeUnderneath, init)
-        init = false
-      })
-    })()
+    pageManager.addThemeIntersectionListener(header, (themeUnderneath) => {
+      header.theme(themeUnderneath)
+    })    
     
     
 

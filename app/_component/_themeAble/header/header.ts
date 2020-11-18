@@ -51,12 +51,12 @@ export default class Header extends ThemeAble {
 
 
   theme(): Theme
-  theme(to: Theme, force?: boolean): this
-  theme(to?: Theme, force: boolean = false): any {
+  theme(to: Theme): this
+  theme(to?: Theme): any {
     this.tgmLogoIcon.theme(to)
 
-    if (force || !this.inPathDisplayAnim) this.updateThemeOfPathDisplay(to)
-    if (force || !this.inFadeInAnim) {
+    if (!this.dontChangeDisplayTheme) this.updateThemeOfPathDisplay(to)
+    if (!this.dontChangeLinksTheme) {
       this.updateThemeOfLinks(to)
       this.updateUnderlineTheme(to)
     }
@@ -131,9 +131,9 @@ export default class Header extends ThemeAble {
   }
 
   private currentPathDisplayElems = []
-  private inPathDisplayAnim = false 
+  private dontChangeDisplayTheme = false 
   public async updatePathDisplay (domainLevel: number) {
-    this.inPathDisplayAnim = true
+    this.dontChangeDisplayTheme = true
     if (!this.currentPathDisplayElems.empty) {
       await this.pathDisplayElem.anim({opacity: 0, translateX: 5}, 500)
     }
@@ -150,11 +150,11 @@ export default class Header extends ThemeAble {
       linkElem.link(domainIndex[i])
       this.currentPathDisplayElems.add(...elems)
     }
-    this.pathDisplayElem.apd(...this.currentPathDisplayElems)
-    this.currentPathDisplayElems.Inner("theme", [super.theme()])
-    await this.pathDisplayElem.anim({opacity: 1, translateX: .1}, 500)
-    this.inPathDisplayAnim = false
     this.updateThemeOfPathDisplay(super.theme())
+    this.dontChangeDisplayTheme = false
+    this.pathDisplayElem.apd(...this.currentPathDisplayElems)
+    await this.pathDisplayElem.anim({opacity: 1, translateX: .1}, 500)
+    
   }
 
 
@@ -166,6 +166,7 @@ export default class Header extends ThemeAble {
   private lastSelectedElem: Link
   private fadeInAnim: Promise<void>
   private inFadeInAnim: boolean = false
+  private dontChangeLinksTheme = false
 
   private linkNamespaceToggleBool = false
 
@@ -174,6 +175,7 @@ export default class Header extends ThemeAble {
     let lastLinkElems = this.currentLinkElems
     this.currentLinkContents = linkContents.clone()
     this.currentLinkElems = new ElementList()
+    this.dontChangeLinksTheme = true
 
     const elementIndex = linksIndex(this.linkNamespaceToggleBool)
     linkContents.ea((s, i) => {
@@ -254,6 +256,8 @@ export default class Header extends ThemeAble {
       fadoutProm,
       delay(fadoutProm ? (400 + (((lastLength * linkAnimationOffset) / 2) - currentLength * linkAnimationOffset)) : 0).then(async () => {
         this.updateThemeOfLinks(super.theme())
+        this.dontChangeLinksTheme = false
+
         if (fadeReq !== this.latestFadeRequest) {
           animationWrapper.remove()
           return
@@ -267,8 +271,6 @@ export default class Header extends ThemeAble {
     ])
 
     this.inFadeInAnim = false
-    this.updateThemeOfLinks(super.theme())
-    this.updateUnderlineTheme(super.theme())
     res()
 
 

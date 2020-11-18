@@ -75,7 +75,7 @@
     "fast-decode-uri-component": "^1.0.1",
     "fast-equals": "^2.0.0",
     "get-base-url": "^2.1.1",
-    "josm": "^1.2.14",
+    "josm": "^1.2.15",
     "slugify": "^1.4.5",
     "xrray": "^4.7.0"
   }

@@ -49,21 +49,27 @@ export default class OverflowX extends ThemeAble {
         if (shift != null)
             if (shift) {
                 if (!this.previousAvailable) {
-                    this.previousArrow.css({"display": "flex"});
+                    this.previousArrow.css({"display": "flex", "opacity": 0});
+                    this.previousArrow.anim({opacity: 1}, 500)
                     this.previousAvailable = true;
                 }
                 this.nextAvailable = this.overflowContainer.scrollLeft < this.overflowContainer.scrollWidth - this.overflowContainer.width() - 10;
-                if (!this.nextAvailable)
-                    this.nextArrow.css({"display": "none"});
+                if (!this.nextAvailable) {
+                    this.nextArrow.css({"opacity": 1});
+                    this.nextArrow.anim({opacity:0}, 500).then(() => this.nextArrow.css({"display":"none"}));
+                }
 
             } else {
                 if (!this.nextAvailable) {
-                    this.nextArrow.css({"display": "flex"});
+                    this.nextArrow.css({"display": "flex", "opacity": 0});
+                    this.nextArrow.anim({opacity: 1}, 500)
                     this.nextAvailable = true
                 }
                 this.previousAvailable = this.overflowContainer.scrollLeft > 0;
-                if (!this.previousAvailable)
-                    this.previousArrow.css({"display": "none"})
+                if (!this.previousAvailable) {
+                    this.previousArrow.css({"opacity": 1});
+                    this.previousArrow.anim({opacity:0}, 500).then(() => this.previousArrow.css({"display":"none"}));
+                }
 
             }
         else {

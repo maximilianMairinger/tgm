@@ -4,7 +4,7 @@ import declareComponent from "../../../../lib/declareComponent";
 
 
 
-export default declareComponent("arrow-icon", class ArrowIcon extends Icon {
+export default class ArrowIcon extends Icon {
   constructor() {
     super()
 
@@ -13,4 +13,6 @@ export default declareComponent("arrow-icon", class ArrowIcon extends Icon {
   pug() {
     return require("./arrow.pug").default
   }
-})
+}
+
+declareComponent("arrow-icon", ArrowIcon)

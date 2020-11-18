@@ -41,9 +41,6 @@ c-tgm-logo {
 }
 
 
-slidy-underline, c-link {
-  transition: background-color .25s, color .25s;
-}
 
 
 left-content {
@@ -57,7 +54,7 @@ left-content > * {
   pointer-events: all;
 }
 
-right-content > * {
+link-animation-wrapper > * {
   pointer-events: all;
 }
 
@@ -102,7 +99,6 @@ right-content > link-animation-wrapper > c-link {
   font-weight: normal;
   opacity: 0;
   transform: translateX(-3px);
-  
   position: relative;
   float: left;
 }
@@ -115,13 +111,9 @@ right-content > link-animation-wrapper >  c-link:last-of-type {
   padding-right: 0;
 }
 
-slidy-underline {
+c-slidy-underline {
   position: absolute;
-  background: var(--strong-text-color);
-  width: 70px;
-  height: 2px;
   transform: translateY(13px);
-  border-radius: 2px;
   opacity: 0;
 }
 

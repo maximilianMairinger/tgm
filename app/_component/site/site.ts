@@ -98,12 +98,17 @@ export default declareComponent("site", class extends Component {
       }
 
       lastScrollProg = prog
-    })
+    });
 
-
-    pageManager.addThemeIntersectionListener(header, (themeUnderneath) => {
-      header.theme(themeUnderneath)
-    })
+    (() => {
+      let init = true
+      pageManager.addThemeIntersectionListener(header, (themeUnderneath) => {
+        header.theme(themeUnderneath, init)
+        init = false
+      })
+    })()
+    
+    
 
     pageManager.addThemeIntersectionListener(lowerNav, (themeUnderneath) => {
       lowerNav.theme(themeUnderneath)

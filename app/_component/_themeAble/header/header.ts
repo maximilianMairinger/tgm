@@ -140,7 +140,7 @@ export default class Header extends ThemeAble {
     this.currentLinkContents = linkContents.clone()
     this.currentLinkElems = new ElementList()
     linkContents.ea((s) => {
-      this.currentLinkElems.add(new Link(lang.links[s], s, domainLevel, true, false))
+      this.currentLinkElems.add(new Link(lang.links[s], s, domainLevel, true, false, false))
     })
 
     let fadeReq = this.latestFadeRequest = Symbol()

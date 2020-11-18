@@ -24,7 +24,7 @@ export default class OverflowX extends ThemeAble {
             this.overflowContainer.scrollWidth - (this.overflowContainer.scrollLeft + this.overflowContainer.width());
         let scrollTo = this.overflowContainer.scrollLeft + scrollZwi;
         //@ts-ignore
-        this.overflowContainer.scroll({x: scrollTo}, {easing: new Easing("easeOut").function, speed: {begin: scrollZwi * 1.5}})
+        this.overflowContainer.scroll({x: scrollTo}, {easing: new Easing("easeOut").function, speed: {begin: this.overflowContainer.width() * 2.5}})
     }
 
     private previous() {
@@ -33,7 +33,7 @@ export default class OverflowX extends ThemeAble {
             this.overflowContainer.scrollLeft;
         let scrollTo = this.overflowContainer.scrollLeft - scrollZwi;
         //@ts-ignore
-        this.overflowContainer.scroll({x: scrollTo}, {easing: new Easing("easeOut").function, speed: {begin: scrollZwi * 1.5}})
+        this.overflowContainer.scroll({x: scrollTo}, {easing: new Easing("easeOut").function, speed: {begin: this.overflowContainer.width() * 2.5}})
     }
 
     private scrollUpdate() {

@@ -38,17 +38,34 @@ c-image-textblob {
 
 card-container {
   position: absolute;
-  width: 80%;
+  width: 65%;
   height: 100%;
   top: 0;
   left: 35%;
   display: flex;
   overflow-y: auto;
   transform: translateY(.1px);
-  scrollbar-width: none;
+
   scroll-snap-type: x mandatory;
+  
+  
+  
+  
+  
 }
 
+
+/* Do not show a scrollbar */
+card-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+/* WebKit */
+card-container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 
 card-container > * {
   position: relative;

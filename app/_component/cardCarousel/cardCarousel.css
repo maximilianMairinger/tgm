@@ -23,6 +23,7 @@ component-body {
   /* Only important on mobile */
   overflow-x: auto;
   overflow-y: visible;
+  padding: 20px 0;
 /* 
   scroll-snap-type: x proximity; */
 }

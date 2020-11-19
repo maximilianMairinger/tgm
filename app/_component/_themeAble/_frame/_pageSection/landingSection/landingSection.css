@@ -1,5 +1,5 @@
 component-body {
-  min-height: 130vh;
+  min-height: 117vh;
   background: #fffbfa;
   background: linear-gradient(#eceef1 40vh, #fffbfa 60vh);
 }
@@ -58,11 +58,15 @@ c-card-carousel {
   position: relative;
   display: flex;
   margin-top: max(calc(100vh - 145px), 600px);
-  /* This padding quickfix is needed because otherwise the shadow would be cut out from the top */
-  padding-top: 20px;
-  padding-bottom: 20px;
   margin-bottom: 30px;
 }
+
+@media only screen and (max-width: 1000px) {
+  c-card-carousel {
+    margin-bottom: 0px;
+  }
+}
+
 
 
 tagesschule-container {

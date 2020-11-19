@@ -13,23 +13,6 @@ c-icon-card {
   scroll-margin-left: 40px; */
 }
 
-@media only screen and (max-width: 1000px) {
-  component-body {
-    flex-wrap: nowrap;
-    justify-content: left;
-    margin-left: 0;
-    margin-right: 0;
-    width: 100%;
-  }
-  c-icon-card:first-of-type {
-    margin-left: 40px;
-  }
-
-  c-icon-card {
-    margin-bottom: 0;
-  }
-}
-
 component-body {
   flex-wrap: wrap;
   justify-content: center;
@@ -52,4 +35,21 @@ component-body {
 component-body::-webkit-scrollbar { /* WebKit */
   width: 0;
   height: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+  component-body {
+    flex-wrap: nowrap;
+    justify-content: left;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  c-icon-card:first-of-type {
+    margin-left: 40px;
+  }
+
+  c-icon-card {
+    margin-bottom: 0;
+  }
 }

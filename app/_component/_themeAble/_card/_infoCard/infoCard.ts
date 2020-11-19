@@ -10,7 +10,7 @@ import FastAverageColor from 'fast-average-color';
 export default abstract class InfoCard extends Card {
 
     protected textblob = this.q("c-textblob") as Textblob;
-    private link = this.q("c-link") as Link;
+    private _link = this.q("c-link") as Link;
     private customColor = false;
 
     constructor(){
@@ -21,7 +21,7 @@ export default abstract class InfoCard extends Card {
     theme(to:Theme):this
     theme(to?:Theme):any{
         this.textblob.theme(to);
-        this.link.theme(to)
+        this._link.theme(to)
         return super.theme(to);
     }
 
@@ -34,7 +34,7 @@ export default abstract class InfoCard extends Card {
     note():string
     note(note:string):void
     note(note?:string){
-        if(note)
+        if(note !== undefined)
             this.q("note-text").text(note)
         else return this.q("note-text").text()
     }
@@ -42,7 +42,7 @@ export default abstract class InfoCard extends Card {
     thumbnail():string
     thumbnail(url:string):void
     thumbnail(url?:string){
-        if(url) {
+        if(url !== undefined) {
             this.q("thumbnail-pic").css({'backgroundImage': url});
             if(!this.customColor){
                 let averageColor = new FastAverageColor();
@@ -58,7 +58,7 @@ export default abstract class InfoCard extends Card {
     headingbackground():string
     headingbackground(color:string, custom?:boolean):void
     headingbackground(color?:string, custom:boolean=true){
-        if(color) {
+        if(color !== undefined) {
             this.q("heading-background").css({'background': color});
             this.customColor = custom;
         }
@@ -68,7 +68,7 @@ export default abstract class InfoCard extends Card {
     contenttitle():string
     contenttitle(title:string):void
     contenttitle(title?:string){
-        if(title)
+        if(title !== undefined)
             this.q("content-title").text(title);
         else return this.q("content-title").text();
     }
@@ -76,7 +76,7 @@ export default abstract class InfoCard extends Card {
     content():string
     content(content:string):void
     content(content?:string){
-        if(content)
+        if(content !== undefined)
             this.q("content-text").text(content)
         else return this.q("content-text").text();
     }
@@ -84,7 +84,17 @@ export default abstract class InfoCard extends Card {
     href():string
     href(href:string):void
     href(href?:string):any{
-        return this.link.link(href);
+        return this._link.link(href);
+    }
+
+    /**
+     * InfoCard#href(href: string) alias
+     * @param href Url
+     */
+    link():string
+    link(href:string):void
+    link(href?:string):any{
+        return this.href(href);
     }
 
     stl(){

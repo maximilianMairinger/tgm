@@ -1,4 +1,9 @@
-# [Tgm](https://tgm.lbplaner.xyz/)
+# Public facing TGM Website
+
+# CD links
+
+dev: https://dev.tgmrebrand.xyz/  (dev branch)
+uat: https://dev.tgmrebrand.xyz/  (master branch, should be stable)
 
 The public facing website for the TGM.
 

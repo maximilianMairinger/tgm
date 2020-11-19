@@ -111,9 +111,13 @@ let currentDomainSet: Promise<void>
 let inDomainSet = false
 export async function set(subdomain: string, level: number = 0, push: boolean = true) {
   initialGet = false
+  if (subdomain.startsWith("/")) subdomain = subdomain.splice(0, 1)
+  else if (subdomain.startsWith("./")) console.warn("Please use the domain level to set relative domains")
+  
   while (inDomainSet) {
     await currentDomainSet
   }
+  
 
   let domainIndexRollback = domIndex.clone()
 

@@ -4,8 +4,10 @@ import Card from "../_themeAble/_card/iconCard/iconCard"
 
 export default class CardCarousel extends Component {
 
-  constructor(...cards: Card[]) {
+  constructor(cards: Card[], wrap?: boolean) {
     super()
+    this.wrap(wrap)
+    
     this.elementBody.append(...cards)
     this.elementBody.on("scroll", (e) => {
       console.log(e)
@@ -49,6 +51,25 @@ export default class CardCarousel extends Component {
 
       }
     }
+  }
+
+  private _wrap: boolean = true
+  wrap(): boolean
+  wrap(to?: boolean): this
+  wrap(to?: boolean) {
+    if (to !== undefined) {
+      if (to !== this._wrap) {
+        this._wrap = to
+        if (to) {
+          this.elementBody.css("flexWrap", "wrap")
+        }
+        else {
+          this.elementBody.css("flexWrap", "nowrap")
+        }
+      }
+      return this
+    }
+    return this._wrap
   }
 
   stl() {

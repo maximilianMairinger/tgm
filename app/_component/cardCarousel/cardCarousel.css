@@ -19,6 +19,7 @@ component-body {
   position: relative;
   display: flex;
   justify-content: center;
+  margin-bottom: -56px;
 
   /* Only important on mobile */
   overflow-x: auto;
@@ -40,6 +41,7 @@ component-body::-webkit-scrollbar { /* WebKit */
 
 @media only screen and (max-width: 1000px) {
   component-body {
+    margin-bottom: 0;
     flex-wrap: nowrap;
     justify-content: left;
     margin-left: 0;

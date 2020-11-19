@@ -39,7 +39,7 @@ export default declareComponent("landing-section", class Landing extends PageSec
 
     
 
-    this.cardWrapper.apd(new CardCarousel(...cards))
+    this.cardWrapper.apd(new CardCarousel(cards))
 
     
 

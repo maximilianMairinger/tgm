@@ -447,8 +447,8 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     sectionIndex.forEach(async (section: Promise<PageSection>) => {
       let sec = await section
-      let localScrollProgressData = sec.getLocalScrollProgressData()
-
+      
+      let localScrollProgressData = sec.localScrollProgressData
       
       if (localScrollProgressData) {
         sec.getLocalScrollProgressData = () => localScrollProgressData
@@ -607,6 +607,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         this.mainIntersectionObserver.unobserve(elem)
       })
       delete this.currentlyActiveSectionRootName
+      delete this.lastSectionName
     }
   }
 

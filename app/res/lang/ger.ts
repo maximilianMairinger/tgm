@@ -2,7 +2,7 @@
 export default {
   "links": {
     "tagesschule": "Tagesschule",
-    "abendschule": "Abendschule",
+    "abendschule": "Erwachsenenformen",
     "versuchsanstalt": "Versuchsanstalt",
     "kontakt": "Kontakt",
     "Neuigkeiten": "Neuigkeiten",

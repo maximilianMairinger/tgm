@@ -15,6 +15,7 @@ import "../../../../_themeAble/_card/anmeldenCard/anmeldenCard"
 import "../../../../_themeAble/_card/_infoCard/infoCard"
 import "../../../../_themeAble/_text/tabletBlob/tabletBlob"
 import "../../../../_themeAble/cookieNote/cookieNote"
+import "../../../../_themeAble/overflowX/overflowX"
 import "../../../../_themeAble/_text/blogPost/blogPost"
 import "../../../../_themeAble/blogSuggestions/blogSuggestions"
 import "../../../../_themeAble/_card/_infoCard/blogCard/blogCard"
@@ -24,11 +25,18 @@ import "../../../_icon/swipe/swipe"
 
 import "../../_pageSection/schuelerprojekteSection/schuelerprojekteSection"
 import "../../_pageSection/ausmachtSection/ausmachtSection"
+import Button from "../../../_button/button";
+import OverflowX from "../../../overflowX/overflowX"
 
 
 export default declareComponent("georgs-sandbox", class extends Page {
     constructor() {
         super()
+        let next = this.q("c-button.next") as Button;
+        let previous = this.q("c-button.previous") as Button;
+        let overflowContainer = this.q("c-overflow-x.custom") as OverflowX;
+        overflowContainer.setNextButton(next);
+        overflowContainer.setPreviousButton(previous);
     }
 
     protected activationCallback(active: boolean): void {

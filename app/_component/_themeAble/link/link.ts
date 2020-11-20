@@ -4,6 +4,7 @@ import { Data } from "josm"
 import * as domain from "./../../../lib/domain"
 import delay from "delay"
 import ExternalLinkIcon from "../../_themeAble/_icon/externalLink/externalLink"
+import { Prim } from "extended-dom";
 
 function openInNewTab(href) {
   Object.assign(document.createElement('a'), {
@@ -20,13 +21,13 @@ export default class Link extends ThemeAble {
   private slidy = this.slidyWrapper.childs()
   private externalIcon = new ExternalLinkIcon()
 
-  constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0, public push: boolean = true, underline: boolean = true) {
+  constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0, public push: boolean = true, underline: boolean = true, textChangeAnim = true) {
     super(false)
 
 
 
     
-    this.content(content)
+    this.content(content, textChangeAnim)
     if (link) this.link(link)
 
 
@@ -259,9 +260,9 @@ export default class Link extends ThemeAble {
   }
 
   content(): string
-  content(to?: string | Data<string>): void
-  content(to?: string | Data<string>): any {
-    return this.slotElem.text(to)
+  content(to?: string | Data<string>, textChangeAnim?: boolean): void
+  content(to?: Prim | Data<Prim, Prim>, textChangeAnim?: boolean): any {
+    return this.slotElem.text(to, textChangeAnim)
   }
 
   stl() {

@@ -1,0 +1,130 @@
+:host {
+    position: relative;
+    display: block;
+}
+
+overflow-x-container{
+    position: relative;
+    --spacing: 2em;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding-bottom: 20px;
+}
+
+overflow-x-container > *:first-child:not(:last-child):not(filler-element){
+    margin-right: var(--spacing);
+}
+
+overflow-x-container > *:last-child:not(:first-child):not(filler-element){
+    margin-left: var(--spacing);
+}
+
+overflow-x-container > *:not(:first-child):not(:last-child):not(filler-element){
+    margin: 0 var(--spacing);
+}
+
+overflow-x-container::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+}
+
+overflow-x-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+overflow-x-container::-webkit-scrollbar-thumb {
+    background: transparent;
+    border: none;
+}
+
+navigation-container{
+    opacity: 0;
+    transition: .5s ease-out;
+}
+
+next-button, previous-button{
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 75px;
+    top: calc(50% - 75px);
+    z-index: 2;
+    background: white;
+    box-shadow: var(--medium-shadow);
+}
+
+
+next-button{
+    right: 0;
+    border-radius: 8px 0 0 8px;
+}
+
+previous-button{
+    left: 0;
+    border-radius: 0 8px 8px 0;
+}
+
+overflow-x-container:hover ~ navigation-container, navigation-container:hover{
+    opacity: 1;
+}
+
+c-button{
+    position: absolute;
+    display: block;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    cursor: pointer;
+}
+
+previous-button c-arrow-icon{
+    transform: rotate(180deg);
+}
+
+window-viewer{
+    display: block;
+    position: absolute;
+    z-index: 1;
+    opacity: 1;
+    height: 100%;
+    top: 0;
+    margin: 0;
+    background: var(--primary-background-color);
+    pointer-events: none;
+    transition: 0.5s ease-out;
+}
+
+filler-element{
+    display: block;
+    align-self: stretch;
+}
+
+@media only screen and (max-width: 768px) {
+    next-button, previous-button{
+        display: none !important;
+    }
+
+    overflow-x-container *{
+       --spacing: min(10vw, 2em);
+    }
+
+    filler-element:first-child{
+        flex: 0 0 var(--spacing) !important;
+    }
+
+    filler-element:nth-child(2){
+        flex: 0 0 calc(var(--spacing) * 2) !important;
+    }
+
+    window-viewer{
+        display: none;
+    }
+}
+

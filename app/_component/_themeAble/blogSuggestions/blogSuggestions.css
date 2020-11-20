@@ -32,64 +32,26 @@ suggestions-note hr{
     background: var(--strong-text-color);
 }
 
-blog-suggestions{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 100vw;
+c-overflow-x{
+    width: 130%;
+    display: block;
     margin-left: -15%;
     margin-right: -15%;
-    padding: 0 15% 50px 15%;
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    mask-image: linear-gradient(to right, transparent, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%,transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, transparent);
-}
-
-blog-suggestions::-webkit-scrollbar {
-    width: 0 !important;
-    height: 0 !important;
-}
-
-blog-suggestions::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-blog-suggestions::-webkit-scrollbar-thumb {
-    background: transparent;
-    border: none;
-}
-
-blog-suggestions *:not(:nth-last-child(2)):not(:last-child){
-    margin-right: 30px;
-}
-
-suggestions-filler{
-    display: block;
-    flex: 0 0 15%;
-    align-self: stretch;
 }
 
 @media only screen and (max-width: 768px) {
 
     blog-suggestions-box{
-        width: 100%;
+        width: 100vw;
+        max-width: 100vw;
         padding: 0 10vw;
         box-sizing: border-box;
     }
 
-    blog-suggestions{
+    c-overflow-x{
         margin-left: -10vw;
         margin-right: -10vw;
-        padding: 0 10vw 50px 10vw;
-    }
-
-    suggestions-filler{
-        display: block;
-        flex: 0 0 10vw;
-        align-self: stretch;
+        padding-bottom: 50px;
     }
 
 }

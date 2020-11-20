@@ -78,6 +78,7 @@
     "josm": "^1.2.15",
     "key-index": "^1.4.8",
     "slugify": "^1.4.5",
-    "xrray": "^4.7.0"
+    "waapi-easing": "^1.0.1",
+    "xrray": "^4.7.1"
   }
 }

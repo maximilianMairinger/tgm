@@ -16,7 +16,7 @@ export default declareComponent("versuchsanstalt-section", class Versuchsanstall
             "\n" +
             "Sie ist in ihrer aktuellen Organisationsform in 6 Fachbereiche untergliedert. Unten können Sie mehr erfahren.\n");
         this.linktext("Mehr erfahren");
-        this.linkhref("georgsSandbox");
+        this.linkhref("");
     }
 
     stl() {

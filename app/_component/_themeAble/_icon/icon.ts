@@ -19,6 +19,8 @@ export const iconIndex = {
     abendschule: () => import("../_icon/_highlightAbleIcon/navigationIcon/abendschule/abendschule"),
     news: () => import("../_icon/_highlightAbleIcon/navigationIcon/news/news"),
     kontakt: () => import("../_icon/_highlightAbleIcon/navigationIcon/kontakt/kontakt"),
+    info: () => import("../_icon/_highlightAbleIcon/navigationIcon/info/info"),
+    highlights: () => import("../_icon/_highlightAbleIcon/navigationIcon/highlights/highlights"),
   },
   
   tagesschule: {

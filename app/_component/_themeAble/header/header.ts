@@ -178,7 +178,7 @@ export default class Header extends ThemeAble {
       beChangedIndex++
     }
     //@ts-ignore
-    elems.last.push = false
+    if (elems) elems.last.push = false
 
     if (!fadeOutElems.empty) {
       new ElementList(...fadeOutElems.reverse()).anim({translateX: 5, opacity: 0}, 250, 100)
@@ -211,7 +211,6 @@ export default class Header extends ThemeAble {
 
   private latestFadeRequest: Symbol
   public async updateLinks(linkContents: string[], domainLevel: number) {
-    if (linkContents.empty) return
     let lastLinkElems = this.currentLinkElems
     this.currentLinkContents = linkContents.clone()
     this.currentLinkElems = new ElementList()
@@ -288,6 +287,11 @@ export default class Header extends ThemeAble {
     animationWrapper.apd(...this.currentLinkElems)
     
     this.resizeHandler({width: this.clientWidth})
+    if (this.currentLinkElems.empty) {
+      this.inFadeInAnim = false
+      res()
+      return
+    }
     
     
     await Promise.all([

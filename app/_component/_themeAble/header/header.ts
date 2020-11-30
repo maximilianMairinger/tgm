@@ -36,7 +36,7 @@ export default class Header extends ThemeAble {
   private tgmLogoIcon = this.q("c-tgm-logo") as Icon
 
   private pathDisplayLinkIndex = keyIndex((i: number) => {
-    const ls = new ElementList<ArrowIcon | Link>(new ArrowIcon, new Link("", "", undefined, false, true, false))
+    const ls = new ElementList<ArrowIcon | Link>(new ArrowIcon, new Link("", "", undefined, true, true, false))
     this.pathDisplayElem.apd(...ls)
     return ls
   })

@@ -79,7 +79,7 @@ export default class Header extends ThemeAble {
   }
 
   private updateThemeOfLinks(to: Theme) {
-    this.currentLinkElems.Inner("theme", [to])
+    if (this.currentLinkElems) this.currentLinkElems.Inner("theme", [to])
   }
 
 
@@ -206,6 +206,7 @@ export default class Header extends ThemeAble {
 
   private latestFadeRequest: Symbol
   public async updateLinks(linkContents: string[], domainLevel: number) {
+    if (linkContents.empty) return
     let lastLinkElems = this.currentLinkElems
     this.currentLinkContents = linkContents.clone()
     this.currentLinkElems = new ElementList()
@@ -282,7 +283,6 @@ export default class Header extends ThemeAble {
     animationWrapper.apd(...this.currentLinkElems)
     
     this.resizeHandler({width: this.clientWidth})
-    if (this.currentLinkElems.empty) return
     
     
     await Promise.all([

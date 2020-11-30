@@ -36,6 +36,9 @@ export default declareComponent("lower-nav", class LowerNav extends ThemeAble {
 
   public linkContents: string[]
   public async updatePage(linkContents: string[], domainLevel?: number) {
+    if (linkContents.empty) return this.hide()
+    this.show()
+    
     this.linkContents = linkContents
     this.currentLinkWrapperElems = new ElementList()
     this.currentLinkElems = new ElementList()

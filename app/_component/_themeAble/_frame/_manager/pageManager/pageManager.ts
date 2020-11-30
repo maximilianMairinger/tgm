@@ -23,8 +23,9 @@ export default declareComponent("page-manager", class PageManager extends Manage
     }
 
     super(new ImportanceMap<() => Promise<any>, any>(
+      
       {
-        key: new Import("", 20, (homepage: typeof HomePage) =>
+        key: new Import("", 22, (homepage: typeof HomePage) =>
             new homepage(setPage, sectionChangeCallback, 0)
         ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
       },

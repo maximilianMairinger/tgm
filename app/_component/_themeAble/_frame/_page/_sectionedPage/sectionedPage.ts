@@ -206,7 +206,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       map = new ResourcesMap()
       for (let name in sectionIndex) {
         let elem: any
-        if (!(sectionIndex[name] instanceof HTMLElement)) elem = this.q(sectionIndex[name] as any)
+        if (!(sectionIndex[name]   instanceof HTMLElement)) elem = this.q(sectionIndex[name] as any)
         else elem = sectionIndex[name]
   
         let prom = Promise.resolve(elem)
@@ -256,8 +256,8 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     let sectionIndex = await this.sectionIndex as ResourcesMap
 
     let entries = sectionIndex.entries()
-    this.firstDomain = this.defaultDomain = entries.next().value[0]
-    if (this.defaultDomain === "") this.defaultDomain = entries.next().value[0]
+    this.firstDomain = this.defaultDomain = entries.next().value.key
+    if (this.defaultDomain === "") this.defaultDomain = entries.next().value.key
     this.domainSubscription = domain.get(this.domainLevel, (domainFragment: string) => {
       return new Promise<boolean>(async (res) => {
         let verticalOffset = padding
@@ -272,12 +272,12 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
             domainFragment = reverseAlias.root
             verticalOffset += reverseAlias.progress - padding + .5
           }
-          this.activateSectionName(sectionIndex.deslugify(originalDomain))
+          this.activateSectionName(originalDomain)
         }
 
         else {
           this.currentlyActiveSectionRootName = this.sectionAliasList.getRootOfAlias(domainFragment)
-          this.activateSectionName(this.sectionAliasList.aliasify(this.merge(sectionIndex.deslugify(domainFragment))).get().first)
+          this.activateSectionName(this.sectionAliasList.aliasify(this.merge(domainFragment)).get().first)
         }
 
         
@@ -287,7 +287,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         this.inScrollAnimation.set(scrollAnimation = Symbol())
         this.userInitedScrollEvent = false
 
-        let elem = await sectionIndex.getSlugifyed(domainFragment) as HTMLElement
+        let elem = await sectionIndex.get(domainFragment) as HTMLElement
         if (elem !== undefined) {
           res(true)
           await scrollTo(elem, {
@@ -313,7 +313,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     }, true, this.firstDomain)
 
 
-    let currentlyActiveSectionElem = await sectionIndex.getSlugifyed(this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)) as any as PageSection
+    let currentlyActiveSectionElem = await sectionIndex.get(this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)) as any as PageSection
     let globalToken: Symbol
     let aliasSubscriptions: DataSubscription<unknown[]>[] = []
     let localSegmentScrollDataIndex = constructIndex((pageSectionElement: PageSection) => this.elementBody.scrollData().tunnel(prog => prog - pageSectionElement.offsetTop))
@@ -583,7 +583,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     if (active) {
       let init = this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)
-      let sec = sectionIndex.getSlugifyed(init)
+      let sec = sectionIndex.get(init)
       if (sec === undefined) return false
     
       sec.priorityThen()

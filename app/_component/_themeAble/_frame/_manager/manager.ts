@@ -1,7 +1,7 @@
 import Frame from "./../frame";
 import LoadingIndecator from "../../../_indecator/loadingIndecator/loadingIndecator";
 import * as domain from "../../../../lib/domain";
-import lazyLoad, { ImportanceMap, Import, ResourcesMap } from "../../../../lib/lazyLoad";
+import lazyLoad, { ImportanceMap, Import, ResourcesMap, PriorityPromise } from "../../../../lib/lazyLoad";
 import SectionedPage from "../_page/_sectionedPage/sectionedPage";
 import delay from "delay";
 import { Theme } from "../../../_themeAble/themeAble";
@@ -72,33 +72,18 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private domainSubscription: domain.DomainSubscription
   async loadedCallback() {
-    const load = lazyLoad(this.importanceMap, e => {
+    const {load, resourcesMap} = lazyLoad(this.importanceMap, e => {
       this.body.apd(e)
     })
+    this.managedElementMap = resourcesMap
 
     this.domainSubscription = domain.get(this.domainLevel, async (to: any) => {await this.setElem(to)}, false, "")
     let initElemName = this.domainSubscription.domain
-    let pageProm: any
-    
-    try {
-      pageProm = this.importanceMap.getByString(initElemName)
-    }
-    catch(e) {}
-    
-    while(pageProm === undefined) {
-      if (initElemName === "") {
-        initElemName = this.notFoundElementName
-        break
-      }
-      initElemName = initElemName.substr(0, initElemName.lastIndexOf("/")) as any
-      try {
-        pageProm = this.importanceMap.getByString(initElemName)
-      }
-      catch(e) {}
-    }
-    this.managedElementMap = load(initElemName)
-    if (this.managedElementMap.get(this.notFoundElementName) === undefined) console.error("404 elementName: \"" + this.notFoundElementName + "\" is not found in given importanceMap", this.importanceMap)
-    await this.setElem(initElemName as ManagementElementName)
+
+    // if (this.managedElementMap.get(this.notFoundElementName) === undefined) console.error("404 elementName: \"" + this.notFoundElementName + "\" is not found in given importanceMap", this.importanceMap)
+    let setFirstPageProm = this.setElem(initElemName as ManagementElementName)
+    load()
+    await setFirstPageProm
     this.resLoaded();
     await this.managedElementMap.fullyLoaded
   }
@@ -145,7 +130,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
    * Swaps to given Frame
    * @param to frame to be swaped to
    */
-  private async swapFrame(to: Frame): Promise<void | {wrapped: Promise<void>} | boolean> {
+  private async swapFrame(to: Frame): Promise<void | boolean> {
     if (to === undefined) {
       throw new Error();
     }
@@ -188,14 +173,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (!activationResult) {  
       to.hide()
       await to.deactivate()
-
-
-      return {
-        wrapped: (async () => {
-          this.busySwaping = false
-          await this.setElem(this.notFoundElementName)
-        })()
-      }
+      this.busySwaping = false
+      return false
     }
     
 
@@ -287,52 +266,64 @@ export default abstract class Manager<ManagementElementName extends string> exte
     this.nextPageToken = nextPageToken;
 
     
-    let pageProm = this.managedElementMap.getSlugifyed(to)
-    while(pageProm === undefined) {
-      if (to === "") {
-        to = this.notFoundElementName
-        break
-      }
-      to = to.substr(0, to.lastIndexOf("/")) as any
-      pageProm = this.managedElementMap.getSlugifyed(to)
-    } 
-
-    if (this.currentManagedElementName !== to) {
-      let ensureLoad: {wrapped: Promise<void>} | void | boolean = await pageProm.priorityThen(async (frame: Frame | SectionedPage<any>) => {
-        if (nextPageToken === this.nextPageToken) {
-          return await this.swapFrame(frame);
-        }
-        return false
-      });
-
-
-      
-
-      if ((ensureLoad as any) instanceof Object) await (ensureLoad as any).wrapped
-
-      let frame = this.currentFrame;
-      //@ts-ignore
-      if (ensureLoad === true) {
-        (async () => {
-          if (this.pageChangeCallback) {
-            let domainLevel = frame.domainLevel || this.domainLevel
-            try {
-              if ((frame as SectionedPage<any>).sectionList) {
-                (await (frame as SectionedPage<any>).sectionList).get((sectionListNested) => {
-                  this.pageChangeCallback(to, sectionListNested, domainLevel)
-                })
-              }
-              else this.pageChangeCallback(to, [], domainLevel)
-            }
-            catch(e) {}
-          }
-        })()
-
-        this.currentManagedElementName = to;
-      }
-      
-    }
     
+    let accepted = false
+    while(!accepted) {
+      let nthTry = 1
+      let pageProm = this.managedElementMap.get(to, nthTry)
+      while(pageProm === undefined) {
+        if (to === "") {
+          to = this.notFoundElementName
+          break
+        }
+        to = to.substr(0, to.lastIndexOf("/")) as any
+        pageProm = this.managedElementMap.get(to, nthTry)
+      } 
+
+      while(pageProm !== undefined) {
+        nthTry++
+
+        if (this.currentManagedElementName !== to) {
+          let suc: boolean = await pageProm.priorityThen(async (frame: Frame | SectionedPage<any>) => {
+            if (nextPageToken === this.nextPageToken) {
+              return await this.swapFrame(frame);
+            }
+            return false
+          });
+    
+    
+          
+    
+          if (suc) {
+            this.currentManagedElementName = to;
+            let frame = this.currentFrame;
+            (async () => {
+              if (this.pageChangeCallback) {
+                let domainLevel = frame.domainLevel || this.domainLevel
+                try {
+                  if ((frame as SectionedPage<any>).sectionList) {
+                    (await (frame as SectionedPage<any>).sectionList).get((sectionListNested) => {
+                      this.pageChangeCallback(to, sectionListNested, domainLevel)
+                    })
+                  }
+                  else this.pageChangeCallback(to, [], domainLevel)
+                }
+                catch(e) {}
+              }
+            })()
+            accepted = true
+            break
+          }
+          else {
+            pageProm = this.managedElementMap.get(to, nthTry)
+          }
+        }
+        else {
+          accepted = true
+          break
+        }
+      }
+    }
   }
 
   protected async activationCallback(active: boolean) {

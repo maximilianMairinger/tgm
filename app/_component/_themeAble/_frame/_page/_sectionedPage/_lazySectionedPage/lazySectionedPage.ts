@@ -22,10 +22,12 @@ export default abstract class LazySectionedPage extends SectionedPage<Promise<an
 
     this.elementBody.apd(this.loadingIndecator = ce("loading-indecator"))
 
-    this.loadMe = lazyLoad(sectionIndex, e => {
+    let w = lazyLoad(sectionIndex, e => {
       this.elementBody.insertBefore(e, this.loadingIndecator)
       e.anim({opacity: 1})
     })
+    this.resourceMap = w.resourcesMap
+    this.loadMe = w.load
   }
 
   

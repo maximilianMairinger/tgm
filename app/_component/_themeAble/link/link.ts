@@ -21,7 +21,7 @@ export default class Link extends ThemeAble {
   private slidy = this.slidyWrapper.childs()
   private externalIcon = new ExternalLinkIcon()
 
-  constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0, public push: boolean = true, underline: boolean = true, textChangeAnim = true) {
+  constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0, public push: boolean = true, public notify?: boolean, underline: boolean = true, textChangeAnim = true) {
     super(false)
 
 
@@ -50,7 +50,7 @@ export default class Link extends ThemeAble {
       if (link) {
         
         if (!dontSetLocation) {
-          if (meta.isOnOrigin) domain.set(link, this.domainLevel, this.push)
+          if (meta.isOnOrigin) domain.set(link, this.domainLevel, this.push, this.notify)
           else openInNewTab(link)
         }
       }

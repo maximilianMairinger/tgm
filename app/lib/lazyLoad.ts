@@ -38,9 +38,20 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
           return prom.then((a) => {
             if (cb) {
               let res = cb(a)
-              if (res instanceof Promise) res.then(thenRes)
-              else thenRes()
-              return res
+              if (res instanceof Promise) return res.then((e) => {
+                let end = e === undefined ? a : e
+                thenRes(end)
+                return end
+              })
+              else {
+                res === undefined ? a : res
+                thenRes(res)
+                return res
+              }
+            }
+            else {
+              thenRes(a)
+              return a
             }
           })
         }

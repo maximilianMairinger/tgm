@@ -263,7 +263,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
     })()
 
-    return activationResult
+    return true
   }
 
   private currentManagedElementName: ManagementElementName
@@ -297,32 +297,40 @@ export default abstract class Manager<ManagementElementName extends string> exte
       pageProm = this.managedElementMap.getSlugifyed(to)
     } 
 
-    let ensureLoad: {wrapped: Promise<void>} | void | boolean
     if (this.currentManagedElementName !== to) {
-      await pageProm.priorityThen(async (frame: Frame | SectionedPage<any>) => {
+      let ensureLoad: {wrapped: Promise<void>} | void | boolean = await pageProm.priorityThen(async (frame: Frame | SectionedPage<any>) => {
         if (nextPageToken === this.nextPageToken) {
-          this.currentManagedElementName = to;
-          (async () => {
-            if (this.pageChangeCallback) {
-              let domainLevel = frame.domainLevel || this.domainLevel
-              try {
-                if ((frame as SectionedPage<any>).sectionList) {
-                  (await (frame as SectionedPage<any>).sectionList).get((sectionListNested) => {
-                    this.pageChangeCallback(to, sectionListNested, domainLevel)
-                  })
-                }
-                else this.pageChangeCallback(to, [], domainLevel)
-              }
-              catch(e) {}
-            }
-          })()
-          ensureLoad = await this.swapFrame(frame);
-          
-          
+          return await this.swapFrame(frame);
         }
-      })
-  
-      if (ensureLoad instanceof Object) await ensureLoad.wrapped
+        return false
+      });
+
+
+      
+
+      if ((ensureLoad as any) instanceof Object) await (ensureLoad as any).wrapped
+
+      let frame = this.currentFrame;
+      //@ts-ignore
+      if (ensureLoad === true) {
+        (async () => {
+          if (this.pageChangeCallback) {
+            let domainLevel = frame.domainLevel || this.domainLevel
+            try {
+              if ((frame as SectionedPage<any>).sectionList) {
+                (await (frame as SectionedPage<any>).sectionList).get((sectionListNested) => {
+                  this.pageChangeCallback(to, sectionListNested, domainLevel)
+                })
+              }
+              else this.pageChangeCallback(to, [], domainLevel)
+            }
+            catch(e) {}
+          }
+        })()
+
+        this.currentManagedElementName = to;
+      }
+      
     }
     
   }

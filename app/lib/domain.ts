@@ -33,7 +33,7 @@ function parselocalUrlToDomainIndex() {
 
   let endDomain = !currentDomain.endsWith("/") ? currentDomain + dirString : currentDomain
   
-  history.replaceState(argData, updateTitle(), endDomain)
+  history.replaceState(argData, updateTitle(), document.location.origin + endDomain)
 }
 parselocalUrlToDomainIndex()
 
@@ -155,10 +155,10 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
         domIndex.set(domainIndexRollback)
         set(endDomain, 0, true)
       }
-      else history.pushState(argData, updateTitle(), endDomain)
+      else history.pushState(argData, updateTitle(), document.location.origin + endDomain)
     }
     else {
-      history.pushState(argData, updateTitle(), endDomain)
+      history.pushState(argData, updateTitle(), document.location.origin + endDomain)
     }
   }
   else {
@@ -174,7 +174,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
 
 const replaceStateListener = []
 function replaceState(argData: any, title: any, endDomain: any) {
-  history.replaceState(argData, title, endDomain)
+  history.replaceState(argData, title, document.location.origin + endDomain)
   replaceStateListener.Call([])
 }
 

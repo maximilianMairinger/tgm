@@ -83,7 +83,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
         key: new Import("schularzt", 20, (raumfahrtTeam: typeof Schularzt) =>
             new raumfahrtTeam(setPage, 1, sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "raumfahrtTeam" */"../../_page/_sectionedPage/_lazySectionedPage/schularzt/schularzt")
-      }
+      },
+      {
+        key: new Import("", 20, (blogPage: typeof BlogPage) =>
+            new blogPage(setPage, 1)
+        ), val: () => import(/* webpackChunkName: "blogPage" */"../../_page/blogPage/blogPage")
+      },
     ), 0, pageChangeCallback, "404", true, onScrollBarWidthChange, onUserScroll, onScroll)
   }
 

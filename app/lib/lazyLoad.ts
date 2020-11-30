@@ -1,14 +1,14 @@
-const superImportant = 1000000
+let superImportant = 1000000
 
 export default function init<Func extends () => Promise<any>>(resources: ImportanceMap<any, any>, globalInitFunc?: (instance: any) => void | Promise<void>) {
-  const resolvements = new MultiKeyMap<string, Function>();
+  const resolvements = new Map<Import<any, any>, Function>();
   const resourcesMap = new ResourcesMap();
 
   resources.forEach((e: () => Promise<object>, imp) => {
 
-    if (imp.val !== undefined) if (resourcesMap.get(imp.val) === undefined) {
+    if (imp.val !== undefined) {
       let prom = new Promise((res) => {
-        resolvements.add(imp.val, async (a: any) => {
+        resolvements.set(imp, async (a: any) => {
           let load = a.loadedCallback ? a.loadedCallback() : undefined
           res(a)
 
@@ -25,6 +25,7 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
         }))
         if (!resources.loadedImports.includes(imp)) {
           imp.importance += superImportant
+          superImportant += 1000000
           resources.changedImportance = true
         }
         
@@ -75,7 +76,7 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
           if (imp.val !== undefined) {
             let instance = imp.initer((await e()).default);
             if (globalInitFunc !== undefined) await globalInitFunc(instance);
-            await resolvements.get(imp.val)(instance)
+            await resolvements.get(imp)(instance)
             
           }
           // just load it (and preseve in webpack cache)
@@ -180,13 +181,14 @@ export class ResourcesMap extends MultiKeyMap<string, PriorityPromise> {
 
 
 
-export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, Mod> extends MultiKeyMap<Import<string, Mod>, Func> {
+export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, Mod> extends Map<Import<string, Mod>, Func> {
   private importanceList: Import<string, Mod>[] = [];
 
   constructor(...index: {key: Import<string, Mod>, val: Func}[]) {
-    super(...index)
+    super()
     for (let e of index) {
       this.importanceList.add(e.key)
+      super.set(e.key, e.val)
     }
   }
 
@@ -201,9 +203,9 @@ export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, 
     if (!kk || !vv) throw new Error("No such value found")
     return {key: kk, val: vv};
   }
-  public add(key: Import<string, Mod>, val: Func): this {
+  public set(key: Import<string, Mod>, val: Func): this {
     this.importanceList.add(key);
-    super.add(key, val);
+    super.set(key, val);
     return this;
   }
   public changedImportance = false

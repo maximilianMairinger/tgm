@@ -268,12 +268,15 @@ export default abstract class Manager<ManagementElementName extends string> exte
     
     
     let accepted = false
+    let pageProm = this.managedElementMap.get(to, 1)
     while(!accepted) {
       let nthTry = 1
-      let pageProm = this.managedElementMap.get(to, nthTry)
+      
+      
       while(pageProm === undefined) {
         if (to === "") {
           to = this.notFoundElementName
+          pageProm = this.managedElementMap.get(to, nthTry)
           break
         }
         to = to.substr(0, to.lastIndexOf("/")) as any

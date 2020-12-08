@@ -332,6 +332,7 @@ export default class Header extends ThemeAble {
 
 
     let index = this.currentLinkContents.indexOf(newSelected)
+    if (index === -1) return
     let elem = this.currentLinkElems[index]
     
     if (this.inFadeInAnim || this.linksUpdated) {
@@ -358,8 +359,6 @@ export default class Header extends ThemeAble {
 
     }
     else {
-      let index = this.currentLinkContents.indexOf(newSelected)
-      let elem = this.currentLinkElems[index]
       let thisBounds = elem.getBoundingClientRect()
       let lastBounds = this.lastSelectedElem.getBoundingClientRect()
       

@@ -65,6 +65,7 @@ export default declareComponent("lower-nav", class LowerNav extends ThemeAble {
   private initialUpdate = true
   public async updateSelectedLink(activeLink: string) {
     let index = this.linkContents.indexOf(activeLink)
+    if (index === -1) return
     let x = 100 * index
     if (this.lastHighlightElem) this.lastHighlightElem.downlight()
     this.lastHighlightElem = this.currentLinkElems[index]

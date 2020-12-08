@@ -132,20 +132,47 @@ export default abstract class Manager<ManagementElementName extends string> exte
    */
   private async swapFrame(to: Frame): Promise<void | boolean> {
     if (to === undefined) {
-      throw new Error();
+      throw new Error("Unknown frame");
     }
+
+    if (this.busySwaping) {
+      return true;
+    }
+    this.busySwaping = true;
 
     this.loadingElem.remove();
 
     this.wantedFrame = to;
     let from = this.currentFrame;
+
+    
     
 
     if (from === to) {
       //Focus even when it is already the active frame
-      if (!this.preserveFocus) to.focus();
-      this.busySwaping = false;
-      return true;
+      if (!this.preserveFocus) to.focus()
+      if (!to.activateOnlyOnce) {
+        let activationsPromises = []
+        let activationProm: any
+        if (from !== undefined) activationsPromises.add(from.deactivate())
+        if (this.active) activationsPromises.add(activationProm = to.activate())
+        await Promise.all(activationsPromises)
+    
+        let activationResult: boolean = await activationProm
+    
+        
+    
+        
+    
+        if (!activationResult) {  
+          to.hide()
+          await to.deactivate()
+          this.busySwaping = false
+          return false
+        }
+      }
+      this.busySwaping = false
+      return true
     }
     
 
@@ -162,11 +189,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
     let activationResult: boolean = await activationProm
 
-    if (this.busySwaping) {
-      
-      return activationProm;
-    }
-    this.busySwaping = true;
+    
 
     
 
@@ -286,44 +309,36 @@ export default abstract class Manager<ManagementElementName extends string> exte
       while(pageProm !== undefined) {
         nthTry++
 
-        if (this.currentManagedElementName !== to) {
-          let suc: boolean = await pageProm.priorityThen(async (frame: Frame | SectionedPage<any>) => {
-            if (nextPageToken === this.nextPageToken) {
-              return await this.swapFrame(frame);
-            }
-            return false
-          });
-    
-    
-          
-    
-          if (suc) {
-            this.currentManagedElementName = to;
-            let frame = this.currentFrame;
-            (async () => {
-              if (this.pageChangeCallback) {
-                let domainLevel = frame.domainLevel || this.domainLevel
-                try {
-                  if ((frame as SectionedPage<any>).sectionList) {
-                    (await (frame as SectionedPage<any>).sectionList).get((sectionListNested) => {
-                      this.pageChangeCallback(to, sectionListNested, domainLevel)
-                    })
-                  }
-                  else this.pageChangeCallback(to, [], domainLevel)
+        let suc: boolean = await pageProm.priorityThen(async (frame: Frame | SectionedPage<any>) => {
+          if (nextPageToken === this.nextPageToken) {
+            return await this.swapFrame(frame);
+          }
+          return false
+        });
+  
+
+        if (suc) {
+          this.currentManagedElementName = to;
+          let frame = this.currentFrame;
+          (async () => {
+            if (this.pageChangeCallback) {
+              let domainLevel = frame.domainLevel || this.domainLevel
+              try {
+                if ((frame as SectionedPage<any>).sectionList) {
+                  (await (frame as SectionedPage<any>).sectionList).get((sectionListNested) => {
+                    this.pageChangeCallback(to, sectionListNested, domainLevel)
+                  })
                 }
-                catch(e) {}
+                else this.pageChangeCallback(to, [], domainLevel)
               }
-            })()
-            accepted = true
-            break
-          }
-          else {
-            pageProm = this.managedElementMap.get(to, nthTry)
-          }
-        }
-        else {
+              catch(e) {}
+            }
+          })()
           accepted = true
           break
+        }
+        else {
+          pageProm = this.managedElementMap.get(to, nthTry)
         }
       }
     }

@@ -4,6 +4,7 @@ export default abstract class Frame extends ThemeAble<HTMLElement> {
   public readonly active: boolean = false;
   public readonly initiallyActivated = false
   public domainLevel?: number
+  public activateOnlyOnce = true
   constructor(theme?: Theme) {
     super(undefined, theme)
   }

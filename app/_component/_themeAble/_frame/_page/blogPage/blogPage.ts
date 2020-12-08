@@ -17,7 +17,7 @@ const api = new GhostContentAPI({
 
 export default class BlogPage extends Page {
   private domainSubscription: domain.DomainSubscription
-
+  activateOnlyOnce = false
 
   private blogLoaded = false;
   private async setBlog(query: string): Promise<boolean> {
@@ -43,7 +43,7 @@ export default class BlogPage extends Page {
     blog.css({"order": 1});
     this.elementBody.append(blog);
 
-    let preview = true
+    let preview = false
 
     if (preview) {
       let blogData: any
@@ -78,15 +78,11 @@ export default class BlogPage extends Page {
     return this.setBlog(id)
   }
 
-  protected async activationCallback(active: boolean) {
-    if (active) {
-      this.domainSubscription = domain.get(this.domainLevel, this.setBlogFromUrl.bind(this), false)
-      return await this.setBlogFromUrl(this.domainSubscription.domain)
-    }
-    else this.domainSubscription.deactivate()
-
-
-    
+  protected async activationCallback() {
+    console.log("activationCallback")
+    //@ts-ignore
+    this.active = false
+    return await this.setBlogFromUrl(domain.get(0))  
   }
   stl() {
     return super.stl() + require("./blogPage.css").toString()

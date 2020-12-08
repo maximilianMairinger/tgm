@@ -28,7 +28,7 @@ export default class BlogPage extends Page {
 
     let blogData: any
     try {
-      blogData = await api.posts.read(query, {formats: ['html', 'plaintext']})
+      blogData = await api.posts.read({slug: query}, {formats: ['html', 'plaintext']})
     }
     catch(e) {
       return false

@@ -310,7 +310,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         }
       })
      
-    }, true, this.firstDomain)
+    }, false, this.firstDomain)
 
 
     let currentlyActiveSectionElem = await sectionIndex.get(this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)) as any as PageSection

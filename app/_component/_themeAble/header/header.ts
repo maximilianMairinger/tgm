@@ -86,10 +86,7 @@ export default class Header extends ThemeAble {
   private isLinkContainerCurrentlyHidden: boolean
   private initialResize = true
   private resizeHandler(q: {width: number}) {
-    debugger
     if (this.currentLinkElems) {
-      
-      
       let linksLeft: number = !this.currentLinkElems.empty ? this.currentLinkElems.first.getBoundingClientRect().left : q.width - 200
       let logo = this.pathDisplayElem.getBoundingClientRect()
 

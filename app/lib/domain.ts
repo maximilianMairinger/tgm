@@ -331,7 +331,7 @@ window.onpopstate = async function(e) {
 }
 
 //@ts-ignore
-window.domain = {set, get}
+window.domain = {set, get, domainIndex}
 
 
 

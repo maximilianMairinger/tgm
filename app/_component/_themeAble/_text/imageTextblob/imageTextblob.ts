@@ -115,7 +115,7 @@ export default class ImageTextblob extends Text {
     if (stellvertreter) {
       this._stellverterter = this.parseJSONProp(stellvertreter);
 
-      this.infoGrid.append(ce("stellvertreter-text").addClass("bold").text("Stellverteter"));
+      this.infoGrid.append(ce("stellvertreter-text").addClass("heading").text("Stellverteter"));
       for (let i = 0; i < this._stellverterter.length; i++) {
         let stellvertreterData = this._stellverterter[i];
         this.infoGrid.append(ce("info-text").text(stellvertreterData.name));

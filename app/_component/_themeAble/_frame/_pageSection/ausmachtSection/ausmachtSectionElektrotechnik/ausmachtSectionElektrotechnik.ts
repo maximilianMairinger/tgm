@@ -1,0 +1,54 @@
+import { declareComponent } from "../../../../../../lib/declareComponent"
+import "../../../../_card/selectionCard/selectionCard"
+import "../../../../_card/_infoCard/unterrichtSystemeCard/unterrichtSystemeCard"
+import AusmachtSection from "../ausmachtSection";
+
+
+
+export default declareComponent("ausmacht-section-raumfahrt", class extends AusmachtSection {
+
+    constructor() {
+        super({
+            heading: {
+                heading: "Was uns Ausmacht",
+                subheading: "als Elektrotechnik"
+            },
+            selection: {
+                heading: "Vertiefungen",
+                note: "Fachspezifische",
+                selection: [
+                    {"icon":"satellite", "title":"Satellitentechnik", "content":"Satellitendesign und Konstruktion", "link":"/"},
+                    {"icon":"rocket", "title":"Raketentechnik", "content":"Raketenentwicklung, Abschussvorbereitung", "link":"/"},
+                    {"icon":"rover", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen", "link":"/"},
+                    {"icon":"rover", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen", "link":"/"},
+                    {"icon":"space-aids", "title":"Raumfahrtbiologie", "content":"Biologische Untersuchungen in der Schwerelosigkeit", "link":"/"}
+                ]
+            },
+            cards: [
+                {
+                    heading: "Labor",
+                    note: "Unterrichtssystem",
+                    thumbnail: "/res/img/unterrichtSysteme_1.jpg",
+                    href: "/",
+                    contentTitle: "Im Aufbruch",
+                    content: "Das Labor ermöglicht den SchülerInnen, ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
+                },
+                {
+                    heading: "Werkstätte",
+                    note: "Unsere",
+                    thumbnail: "/res/img/werk.jpg",
+                    href: "/",
+                    contentTitle: "Werkstätte",
+                    content: "Unser Unterricht in der Werkstätte ermöglicht es den SchülerInnen auch im fachpraktischen Bereich Erfahrung zu sammeln."
+                }
+            ]
+        })
+    }
+
+    stl() {
+        return super.stl() + require("./ausmachtSectionRaumfahrt.css").toString()
+    }
+    pug() {
+        return super.pug() + require("./ausmachtSectionRaumfahrt.pug").default
+    }
+});

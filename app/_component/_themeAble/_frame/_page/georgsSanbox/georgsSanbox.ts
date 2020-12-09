@@ -24,7 +24,7 @@ import "../../../../_themeAble/_card/_infoCard/unterrichtSystemeCard/unterrichtS
 import "../../../_icon/swipe/swipe"
 
 import "../../_pageSection/schuelerprojekteSection/schuelerprojekteSection"
-import "../../_pageSection/ausmachtSection/ausmachtSection"
+
 import Button from "../../../_button/button";
 import OverflowX from "../../../overflowX/overflowX"
 

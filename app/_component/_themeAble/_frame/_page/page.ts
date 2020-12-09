@@ -1,11 +1,12 @@
+import { Theme } from "../../themeAble";
 import Frame from "../frame";
 
 
 export default abstract class Page extends Frame {
   public domainLevel?: number
   public readonly defaultDomain: string = ""
-  constructor() {
-    super(null)
+  constructor(theme: Theme = null) {
+    super(theme)
 
   }
   public async activate(domainFragment?: string): Promise<boolean> {

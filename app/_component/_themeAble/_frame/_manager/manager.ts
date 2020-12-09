@@ -262,6 +262,11 @@ export default abstract class Manager<ManagementElementName extends string> exte
         to.addIntersectionListener(elem, cb, threshold)
       })
     }
+    else {
+      this.intersectionListenerIndex.forEach(({cb}) => {
+        cb(to)
+      })
+    }
 
     let showAnim = from !== undefined ? to.anim([{zIndex: 100, opacity: 0, translateX: -5, scale: 1.005, offset: 0}, {opacity: 1, translateX: 0, scale: 1}], 400) : to.anim([{offset: 0, opacity: 0}, {opacity: 1}], 400);
 

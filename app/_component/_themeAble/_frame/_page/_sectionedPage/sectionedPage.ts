@@ -256,7 +256,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     domain.set(name, this.domainLevel, false)
   }
 
-  navigatedCallback(domainFragment: string) {
+  navigationCallback(domainFragment: string) {
     return new Promise<boolean>(async (res) => {
       let verticalOffset = padding
       

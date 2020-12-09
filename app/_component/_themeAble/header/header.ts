@@ -134,7 +134,6 @@ export default class Header extends ThemeAble {
     ])
   }
 
-  private currentPathDisplayElems = []
   private dontChangeDisplayTheme = false
   private lastDomainIndex: string[] = []
   private lastDomainLevel = 0

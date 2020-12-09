@@ -22,8 +22,8 @@ export default abstract class Page extends Frame {
     if (acRes === undefined) acRes = true
     if (!acRes) res = false
 
-    if (this.navigatedCallback) {
-      let acRes = await this.navigatedCallback(domainFragment)
+    if (this.navigationCallback) {
+      let acRes = await this.navigationCallback(domainFragment)
       if (acRes === undefined) acRes = true
       if (!acRes) res = false
     }
@@ -32,15 +32,15 @@ export default abstract class Page extends Frame {
   }
   public async navigate(domainFragment: string) {
     let res = true
-    if (this.navigatedCallback) {
-      let acRes = await this.navigatedCallback(domainFragment)
+    if (this.navigationCallback) {
+      let acRes = await this.navigationCallback(domainFragment)
       if (acRes === undefined) acRes = true
       if (!acRes) res = false
     }
     
     return res
   }
-  protected navigatedCallback?(domainFragment: string): boolean | void | Promise<boolean | void>
+  protected navigationCallback?(domainFragment: string): boolean | void | Promise<boolean | void>
   protected initialActivationCallback?(domainFragment?: string): boolean | void | Promise<boolean | void>
   stl() {
     return super.stl() + require("./page.css").toString()

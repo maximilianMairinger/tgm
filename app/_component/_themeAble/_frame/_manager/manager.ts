@@ -359,10 +359,10 @@ export default abstract class Manager<ManagementElementName extends string> exte
               try {
                 if ((page as SectionedPage<any>).sectionList) {
                   (await (page as SectionedPage<any>).sectionList).tunnel(e => e.filter(s => s !== "")).get((sectionListNested) => {
-                    this.pageChangeCallback(to, sectionListNested, domainLevel)
+                    this.pageChangeCallback(to, sectionListNested, page.domainLevel)
                   })
                 }
-                else this.pageChangeCallback(to, [], domainLevel)
+                else this.pageChangeCallback(to, [], page.domainLevel)
               }
               catch(e) {}
             }

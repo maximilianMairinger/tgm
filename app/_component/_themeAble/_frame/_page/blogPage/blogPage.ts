@@ -77,16 +77,18 @@ export default class BlogPage extends Page {
   }
 
   private setBlogFromUrl(url: string) {
-    let id = url.split(domain.dirString).last
+    let split = url.split(domain.dirString)
+    this.domainLevel = split.length
+    let id = split.last
+    
+
     return this.setBlog(id)
   }
 
-  protected async activationCallback() {
-    console.log("activationCallback")
-    //@ts-ignore
-    this.active = false
-    return await this.setBlogFromUrl(domain.get(0))  
+  navigationCallback(domainFragment: string) {
+    return this.setBlogFromUrl(domainFragment)
   }
+
   stl() {
     return super.stl() + require("./blogPage.css").toString()
   }

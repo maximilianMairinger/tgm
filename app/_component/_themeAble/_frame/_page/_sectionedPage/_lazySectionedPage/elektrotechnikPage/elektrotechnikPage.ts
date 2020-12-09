@@ -13,8 +13,8 @@ import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/darkNewsSection/darkNewsSection"
 
 
-export default declareComponent("elektotechnik-page", class ElektotechnikPage extends LazySectionedPage {
-  constructor(domainLevel: number, sectionChangeCallback?: (section: string) => void) {
+export default declareComponent("elektrotechnik-page", class ElektrotechnikPage extends LazySectionedPage {
+  constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -28,10 +28,10 @@ export default declareComponent("elektotechnik-page", class ElektotechnikPage ex
 
           info.heading("Technische Ausbildung");
           info.subheading("am Puls der Zeit");
-          info.note("unsere");
+          info.note("bei uns");
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
-          info.content("In der Abteilung für Raumfahrttechnik erhalten SchülerInnen eine fundierte Ausbildung in den wichtigsten Aerospace-Themenbereichen. Unser rigoroser Lehrplan ermöglicht AbsolventInnen den Einstieg in die Industrie und öffnet Türen für eine tertiäre Ausbildung.")
+          info.content("Die Abteilung Elektrotechnik bietet eine besonders umfassende technische Ausbildung. Grundsätzlich beschäftigt sie sich mit allen Bereichen, die mit elektrischem Strom zu tun haben. Dadurch ergeben sich viele Berufsfelder, etwa Antriebstechnik, Automation und Informatik in denen unsere Absolventen kompetent sind.")
 
           return new WrapperSection(info) as any
         }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")
@@ -75,10 +75,10 @@ export default declareComponent("elektotechnik-page", class ElektotechnikPage ex
   }
 
   stl() {
-    return super.stl() + require("./elektotechnikPage.css")
+    return super.stl() + require("./elektrotechnikPage.css").toString()
   }
   pug() {
-    return require("./elektotechnikPage.pug")
+    return require("./elektrotechnikPage.pug").default
   }
 
 }) 

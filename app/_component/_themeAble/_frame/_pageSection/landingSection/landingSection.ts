@@ -29,7 +29,7 @@ export default declareComponent("landing-section", class Landing extends PageSec
     let cards = [
       new IconCard(new BioMedIcon, abt.Biomedizien, lang.AbteilungsShorts.Biomedizien, "tagesschule/raumfahrt"),
       new IconCard(new ElektronikIcon, abt.Elektronik, lang.AbteilungsShorts.Elektronik, "tagesschule/raumfahrt"),
-      new IconCard(new ElektrotechnikIcon, abt.Elektrotechnik, lang.AbteilungsShorts.Elektrotechnik, "tagesschule/raumfahrt"),
+      new IconCard(new ElektrotechnikIcon, abt.Elektrotechnik, lang.AbteilungsShorts.Elektrotechnik, "tagesschule/elektrotechnik"),
       new IconCard(new ItIcon, abt.Informationstechnologie, lang.AbteilungsShorts.Informationstechnologie, "tagesschule/raumfahrt"),
       new IconCard(new KunststofftechnikIcon, abt.Kunststofftechnik, lang.AbteilungsShorts.Kunststofftechnik, "tagesschule/raumfahrt"),
       new IconCard(new MaschinenbauIcon, abt.Maschinenbau, lang.AbteilungsShorts.Maschinenbau, "tagesschule/raumfahrt"),

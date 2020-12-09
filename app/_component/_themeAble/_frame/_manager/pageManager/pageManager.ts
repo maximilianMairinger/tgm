@@ -9,6 +9,7 @@ import ItPage from "../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage"
 import HomePage from "../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage";
 import { declareComponent } from "../../../../../lib/declareComponent"
 import RaumfahrtPage from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage";
+import ElektrotechnikPage from "../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikPage/elektrotechnikPage";
 import RaumfahrtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte";
 import RaumfahrtTeam from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtTeam/raumfahrtTeam";
 import Schularzt from "../../_page/_sectionedPage/_lazySectionedPage/schularzt/schularzt";
@@ -47,9 +48,9 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "danielsSandbox" */"../../_page/danielsSandbox/danielsSandbox")
       },
       {
-        key: new Import("tagesschule/elektrotechnik", 20, (raumfahrtPage: typeof RaumfahrtPage) => 
-          new raumfahrtPage(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "raumfahrt" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage")
+        key: new Import("tagesschule/elektrotechnik", 20, (elektrotechnikPage: typeof ElektrotechnikPage) => 
+          new elektrotechnikPage(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "raumfahrt" */"../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikPage/elektrotechnikPage")
       },
       {
         key: new Import("tagesschule/raumfahrt", 20, (raumfahrtPage: typeof RaumfahrtPage) => 

@@ -24,6 +24,16 @@ blog-html *{
     max-width: 650px;
 }
 
+blog-html figure{
+    margin: auto;
+    width: 575px;
+}
+
+blog-html figure img{
+    border-radius: 8px;
+    width: 100%;
+}
+
 blog-extra{
     margin-top: 1px;
     display: flex;

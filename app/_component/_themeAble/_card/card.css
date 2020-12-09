@@ -22,7 +22,7 @@ component-body, :host(.no-body) {
   box-shadow: 7px 7px 15px 0px rgba(0,0,0,.07);
   background-color: var(--secondary-background-color);
   transform: scale(1);
-  user-select: none;
+  /* user-select: none; */
 }
 
 :host(.card-hover-effect-enabled) > component-body:hover, :host(.no-body.card-hover-effect-enabled:hover) {

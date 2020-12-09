@@ -6,7 +6,7 @@ import declareComponent from "../../../../lib/declareComponent";
 
 export default declareComponent("tgm-logo", class TgmLogo extends Icon {
   constructor() {
-    super()
+    super(null)
 
   }
 

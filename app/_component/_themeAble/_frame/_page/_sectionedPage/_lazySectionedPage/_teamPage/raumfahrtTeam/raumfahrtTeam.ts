@@ -1,13 +1,12 @@
-import { declareComponent } from "../../../../../../../lib/declareComponent"
-import LazySectionedPage from "../lazySectionedPage"
-import { set } from "../../../../../../../lib/domain"
-import { ImportanceMap, Import } from "../../../../../../../lib/lazyLoad"
-import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
-import TeamLeitungThumbnail from "../../../../../../_themeAble/_text/_thumbnail/teamLeitungThumbnail/teamLeitungThumbnail";
-import TeamSection from "../../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection";
-import ImageTextblob from "../../../../../../_themeAble/_text/imageTextblob/imageTextblob"
+import { declareComponent } from "../../../../../../../../lib/declareComponent"
+import TeamPage from "../teamPage"
+import { ImportanceMap, Import } from "../../../../../../../../lib/lazyLoad"
+import WrapperSection from "../../../../../_pageSection/wrapperSection/wrapperSection"
+import TeamLeitungThumbnail from "../../../../../../_text/_thumbnail/teamLeitungThumbnail/teamLeitungThumbnail";
+import TeamSection from "../../../../../../_text/_sectionTextblob/teamSection/teamSection";
+import ImageTextblob from "../../../../../../_text/imageTextblob/imageTextblob"
 
-export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends LazySectionedPage {
+export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends TeamPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
@@ -20,7 +19,7 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
           thumbnail.subheading("in die Zukunft");
           return new WrapperSection(thumbnail, 'dark');
         }
-        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_themeAble/_text/_thumbnail/teamLeitungThumbnail/teamLeitungThumbnail")
+        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_text/_thumbnail/teamLeitungThumbnail/teamLeitungThumbnail")
         },
         {
             key: new Import("info", 1, (Team: typeof Element) =>
@@ -32,7 +31,7 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
                         "Derzeit suchen wir nach einem LehrerInnen im bereich Softwareentwicklung, Fotographie, Graphic Design und Web-Entwicklung bestmöglichst mit Praxiserfahrung.")
                     return new WrapperSection(teamSection);
                 }
-            ), val: () => import(/* webpackChunkName: "teamSection" */"../../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection")
+            ), val: () => import(/* webpackChunkName: "teamSection" */"../../../../../../_text/_sectionTextblob/teamSection/teamSection")
         },
         {
             key: new Import("leitung", 1, (leitung: typeof Element) =>
@@ -49,7 +48,7 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
                     leitungImageTextblob.stellvertreter([{"name":"Shane Kimbrough", "email":"skimbrough@tgm.ac.at"}, {"name":"Jim Outton", "email":"joutton@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
-            ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_themeAble/_text/imageTextblob/imageTextblob")
+            ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_text/imageTextblob/imageTextblob")
         },
         {
             key: new Import("schueler", 1, (schueler: typeof Element) =>
@@ -67,7 +66,7 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends La
                     schuelerImageTextblob.stellvertreter([{"name":"Emanuel Knight", "email":"eknight@student.tgm.ac.at"}, {"name":"Thomas Engine", "email":"jborenski@student.tgm.ac.at"}])
                     return new WrapperSection(schuelerImageTextblob);
                 }
-            ), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../../_themeAble/_text/imageTextblob/imageTextblob")
+            ), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../../_text/imageTextblob/imageTextblob")
         }
     ), sectionChangeCallback, undefined)
 

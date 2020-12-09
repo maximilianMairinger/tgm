@@ -46,6 +46,11 @@ export default abstract class InfoCard extends Card {
             if (url === null) url = "/res/img/blog_default.jpg"
             this.q("thumbnail-pic").css({'backgroundImage': url});
             if (!this.customColor) {
+                let quickFix = ce("img")
+                quickFix.css({position: "absolute", display: "none"})
+                quickFix.src = url
+                document.body.apd(quickFix as any)
+                quickFix.remove()
                 let averageColor = new FastAverageColor();
                 averageColor.getColorAsync(url).then(color => {
                     let rgba = "rgba(".concat(color.value[0].toString(), ",", color.value[1].toString(), ",", color.value[2].toString(), ", 0.5)");

@@ -12,6 +12,7 @@ import ArrowIcon from "./../_icon/arrow/arrow"
 import Icon from "../_icon/icon"
 import SlidyUnderline from "./../slidyUnderline/slidyUnderline"
 import keyIndex from "key-index"
+import "xtring"
 
 
 const linkAnimationOffset = 170

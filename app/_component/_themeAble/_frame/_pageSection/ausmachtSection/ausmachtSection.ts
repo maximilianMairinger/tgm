@@ -4,6 +4,7 @@ import "../../../_card/_infoCard/unterrichtSystemeCard/unterrichtSystemeCard"
 import SelectionCard from "../../../_card/selectionCard/selectionCard"
 import UnterrichtSystemeCard from "../../../_card/_infoCard/unterrichtSystemeCard/unterrichtSystemeCard"
 import declareComponent from "../../../../../lib/declareComponent"
+import "../../../vertiefungsContainer/vertiefungsContainer"
 
 
 

@@ -29,6 +29,10 @@ export const iconIndex = {
     team: () => import("../_icon/tagesschuleIcons/team/team"),
   },
   fach: {
-    energysysteme: () => import("./fachIcon/sunElectricity/sunElectricity")
+    energysysteme: () => import("./fachIcon/sunElectricity/sunElectricity"),
+    automatisierungstechnik: () => import("./fachIcon/sprintGear/sprintGear"),
+    antriebstechnik: () => import("./fachIcon/electricCar/electricCar"),
+    industrieelektronik: () => import("./fachIcon/powerPlant/powerPlant"),
+    angewandteInformatik: () => import("./fachIcon/pcsConnected/pcsConnected"),
   }
 }

@@ -17,38 +17,38 @@ export default declareComponent("ausmacht-section-raumfahrt", class extends Ausm
                 heading: "Vertiefungen",
                 note: "Fachspezifische",
                 selection: [
-                    {"icon":"satellite", "title":"Satellitentechnik", "content":"Satellitendesign und Konstruktion", "link":"/"},
-                    {"icon":"rocket", "title":"Raketentechnik", "content":"Raketenentwicklung, Abschussvorbereitung", "link":"/"},
-                    {"icon":"rover", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen", "link":"/"},
-                    {"icon":"rover", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen", "link":"/"},
-                    {"icon":"space-aids", "title":"Raumfahrtbiologie", "content":"Biologische Untersuchungen in der Schwerelosigkeit", "link":"/"}
+                    {"icon":"satellite", "title":"Energiesysteme", "content":"Energiegewinnung und -speicherung", "link":"/"},
+                    {"icon":"rocket", "title":"Automatisierungstechnik", "content":"Automatisieren in elektrotechnischen Anwendungen", "link":"/"},
+                    {"icon":"rover", "title":"Antriebstechnik", "content":"Bewegung und Elektrotechnik", "link":"/"},
+                    {"icon":"rover", "title":"Industrieelektronik", "content":"Elektrotechnik in der Industrie", "link":"/"},
+                    {"icon":"space-aids", "title":"Angewandte Informatik", "content":"Entwickeln von computerbasierten Lösungen", "link":"/"}
                 ]
             },
             cards: [
                 {
-                    heading: "Labor",
+                    heading: "Lernbüro",
                     note: "Unterrichtssystem",
                     thumbnail: "/res/img/unterrichtSysteme_1.jpg",
                     href: "/",
-                    contentTitle: "Im Aufbruch",
-                    content: "Das Labor ermöglicht den SchülerInnen, ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
+                    contentTitle: "Lernen im Aufbruch",
+                    content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
                 },
                 {
-                    heading: "Werkstätte",
-                    note: "Unsere",
+                    heading: "Werkstatt",
+                    note: "PRAXISUNTERRICHT",
                     thumbnail: "/res/img/werk.jpg",
                     href: "/",
-                    contentTitle: "Werkstätte",
-                    content: "Unser Unterricht in der Werkstätte ermöglicht es den SchülerInnen auch im fachpraktischen Bereich Erfahrung zu sammeln."
+                    contentTitle: "Praxisbasierte Erfahrungen",
+                    content: "In unseren Werkstätten erlernen SchülerInnen den Umgang mit technischen Gerätschaften und setzen das gelernte Theoriewissen selbst um."
                 }
             ]
         })
     }
 
     stl() {
-        return super.stl() + require("./ausmachtSectionRaumfahrt.css").toString()
+        return super.stl() + require("./ausmachtSectionElektrotechnik.css").toString()
     }
     pug() {
-        return super.pug() + require("./ausmachtSectionRaumfahrt.pug").default
+        return super.pug() + require("./ausmachtSectionElektrotechnik.pug").default
     }
 });

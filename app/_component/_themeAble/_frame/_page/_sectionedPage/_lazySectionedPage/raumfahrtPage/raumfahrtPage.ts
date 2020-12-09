@@ -14,7 +14,7 @@ import DarkNewsSection from "../../../../_pageSection/darkNewsSection/darkNewsSe
 
 
 export default declareComponent("raumfahrt-page", class RaumfahrtPage extends LazySectionedPage {
-  constructor(setPage: (domain: string) => void, domainLevel: number, sectionChangeCallback?: (section: string) => void) {
+  constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -68,7 +68,7 @@ export default declareComponent("raumfahrt-page", class RaumfahrtPage extends La
         ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
       }
     
-    ), domainLevel, setPage, sectionChangeCallback, undefined, {
+    ), sectionChangeCallback, undefined, {
       footer: "kontakt"
     })
 

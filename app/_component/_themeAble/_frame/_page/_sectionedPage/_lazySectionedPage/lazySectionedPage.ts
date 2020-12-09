@@ -11,11 +11,11 @@ export default abstract class LazySectionedPage extends SectionedPage<Promise<an
 
   private loadingIndecator: HTMLElement
 
-  constructor(sectionIndex: ImportanceMap<() => Promise<any>, any>, domainLevel: number, setPage: (domain: string) => void, sectionChangeCallback?: (section: string) => void, sectionAliasList?: AliasList, mergeIndex?: {[part in string]: string}) {
+  constructor(sectionIndex: ImportanceMap<() => Promise<any>, any>, sectionChangeCallback?: (section: string) => void, sectionAliasList?: AliasList, mergeIndex?: {[part in string]: string}) {
     let res: Function
     super(new Promise((r) => {
       res = r
-    }), domainLevel, setPage, sectionChangeCallback, sectionAliasList, mergeIndex)
+    }), sectionChangeCallback, sectionAliasList, mergeIndex)
     this.resResourceMap = res
 
     
@@ -43,11 +43,11 @@ export default abstract class LazySectionedPage extends SectionedPage<Promise<an
     
   }
 
-  async initialActivationCallback() {
+  async initialActivationCallback(a) {
     let init = this.sectionAliasList.getRootOfAlias(domain.get(this.domainLevel))
     await this.resourceMap.get(init)
     
-    return await super.initialActivationCallback()
+    return await super.initialActivationCallback(a)
   }
 
   stl() {

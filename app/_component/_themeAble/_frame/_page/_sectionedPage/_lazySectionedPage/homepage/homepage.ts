@@ -11,9 +11,8 @@ import Footer from "../../../../_pageSection/footer/footer"
 
 
 
-
 export default declareComponent("home-page", class Homepage extends LazySectionedPage {
-  constructor(setPage: (domain: string) => void, sectionChangeCallback?: (section: string) => void, domainLevel = 1) {
+  constructor(sectionChangeCallback?: (section: string) => void) {
 
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -41,7 +40,7 @@ export default declareComponent("home-page", class Homepage extends LazySectione
           new _Footer()
         ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
       }
-    ), domainLevel, setPage, sectionChangeCallback, new AliasList(
+    ), sectionChangeCallback, new AliasList(
       new ScrollProgressAliasIndex("newsKontakt", [
         new ScrollProgressAlias(begin, "news"),
         new ScrollProgressAlias(scrollAnimationEnd, "kontakt")

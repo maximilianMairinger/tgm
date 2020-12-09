@@ -7,17 +7,53 @@ import delay from "delay";
 import { Theme } from "../../../_themeAble/themeAble";
 import PageSection from "../_pageSection/pageSection";
 import { EventListener } from "extended-dom";
+import Page from "../_page/page";
+
+
+
+/** Function that count occurrences of a substring in a string;
+ * @param {String} string               The string
+ * @param {String} subString            The sub string to search for
+ * @param {Boolean} [allowOverlapping]  Optional. (Default:false)
+ *
+ * @author Vitim.us https://gist.github.com/victornpb/7736865
+ * @see Unit Test https://jsfiddle.net/Victornpb/5axuh96u/
+ * @see http://stackoverflow.com/questions/4009756/how-to-count-string-occurrence-in-string/7924240#7924240
+ */
+function occurrences(string: string, subString: string, allowOverlapping = false) {
+
+  string += "";
+  subString += "";
+  if (subString.length <= 0) return (string.length + 1);
+
+  var n = 0,
+      pos = 0,
+      step = allowOverlapping ? 1 : subString.length;
+
+  while (true) {
+      pos = string.indexOf(subString, pos);
+      if (pos >= 0) {
+          ++n;
+          pos += step;
+      } else break;
+  }
+  return n;
+}
+
+
+
+
 
 
 export default abstract class Manager<ManagementElementName extends string> extends Frame {
   private resLoaded: Function;
 
   protected busySwaping: boolean = false;
-  public currentFrame: Frame;
+  public currentPage: Page;
 
   protected body: HTMLElement;
 
-  private wantedFrame: Frame;
+  private wantedFrame: Page;
 
 
   private loadingElem: any;
@@ -51,19 +87,19 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (onUserScroll && onScroll) {
       this.scrollEventListener = new EventListener(this, "scroll", () => {
         //@ts-ignore
-        let y = this.currentFrame.elementBody.scrollTop
-        onUserScroll(y, this.currentFrame.userInitedScrollEvent)
+        let y = this.currentPage.elementBody.scrollTop
+        onUserScroll(y, this.currentPage.userInitedScrollEvent)
         onScroll(y)
       }, false)
     }
     else {
       if (onUserScroll) this.scrollEventListener = new EventListener(this, "scroll", () => {
         //@ts-ignore
-        onUserScroll(this.currentFrame.elementBody.scrollTop, this.currentFrame.userInitedScrollEvent)
+        onUserScroll(this.currentPage.elementBody.scrollTop, this.currentPage.userInitedScrollEvent)
       }, false)
       else if (onScroll) this.scrollEventListener = new EventListener(this, "scroll", () => {
         //@ts-ignore
-        onScroll(this.currentFrame.elementBody.scrollTop)
+        onScroll(this.currentPage.elementBody.scrollTop)
       }, false)
     }
   }
@@ -95,17 +131,17 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   public addIntersectionListener(root: HTMLElement, cb: (elem: Frame) => void, threshold?: number) {
     this.intersectionListenerIndex.set(root, {cb, threshold})
-    if (this.currentFrame) {
-      if (this.currentFrame.addIntersectionListener) this.currentFrame.addIntersectionListener(root, cb, threshold)
+    if (this.currentPage) {
+      if (this.currentPage.addIntersectionListener) this.currentPage.addIntersectionListener(root, cb, threshold)
       else {
-        cb(this.currentFrame)
+        cb(this.currentPage)
       }
     }
   }
   public removeIntersectionListener(root: HTMLElement) {
     this.intersectionListenerIndex.delete(root)
-    if (this.currentFrame) {
-      if (this.currentFrame.removeIntersectionListener) this.currentFrame.removeIntersectionListener(root)
+    if (this.currentPage) {
+      if (this.currentPage.removeIntersectionListener) this.currentPage.removeIntersectionListener(root)
     }
   }
 
@@ -130,7 +166,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
    * Swaps to given Frame
    * @param to frame to be swaped to
    */
-  private async swapFrame(to: Frame): Promise<void | boolean> {
+  private async swapFrame(to: Page, domainFragment: string): Promise<void | boolean> {
     if (to === undefined) {
       throw new Error("Unknown frame");
     }
@@ -143,7 +179,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     this.loadingElem.remove();
 
     this.wantedFrame = to;
-    let from = this.currentFrame;
+    let from = this.currentPage;
 
     
     
@@ -151,25 +187,11 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (from === to) {
       //Focus even when it is already the active frame
       if (!this.preserveFocus) to.focus()
-      if (!to.activateOnlyOnce) {
-        let activationsPromises = []
-        let activationProm: any
-        if (from !== undefined) activationsPromises.add(from.deactivate())
-        if (this.active) activationsPromises.add(activationProm = to.activate())
-        await Promise.all(activationsPromises)
-    
-        let activationResult: boolean = await activationProm
-    
-        
-    
-        
-    
-        if (!activationResult) {  
-          to.hide()
-          await to.deactivate()
-          this.busySwaping = false
-          return false
-        }
+      if (!to.navigate(domainFragment)) {  
+        to.hide()
+        await to.deactivate()
+        this.busySwaping = false
+        return false
       }
       this.busySwaping = false
       return true
@@ -184,7 +206,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (!this.preserveFocus) to.focus();
     
     if (from !== undefined) activationsPromises.add(from.deactivate())
-    if (this.active) activationsPromises.add(activationProm = to.activate())
+    if (this.active) activationsPromises.add(activationProm = to.activate(domainFragment))
     await Promise.all(activationsPromises)
 
     let activationResult: boolean = await activationProm
@@ -201,7 +223,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     }
     
 
-    this.currentFrame = to;
+    this.currentPage = to;
 
     if (this.onScrollBarWidthChange) {
       //@ts-ignore
@@ -217,16 +239,16 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
     if (this.onUserScroll && this.onScroll) {
       
-      let y = (this.currentFrame as any).elementBody.scrollTop
-      this.onUserScroll(y, this.currentFrame.userInitedScrollEvent)
+      let y = (this.currentPage as any).elementBody.scrollTop
+      this.onUserScroll(y, this.currentPage.userInitedScrollEvent)
       this.onScroll(y)
     }
     else {
 
       if (this.onUserScroll) {
-        this.onUserScroll((this.currentFrame as any).elementBody.scrollTop, this.currentFrame.userInitedScrollEvent)
+        this.onUserScroll((this.currentPage as any).elementBody.scrollTop, this.currentPage.userInitedScrollEvent)
       }
-      else if (this.onScroll) this.onScroll((this.currentFrame as any).elementBody.scrollTop)
+      else if (this.onScroll) this.onScroll((this.currentPage as any).elementBody.scrollTop)
     }
 
     if (from !== undefined) if (from.removeIntersectionListener) {
@@ -260,7 +282,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
       to.css("zIndex", 0)
       this.busySwaping = false;
       if (this.wantedFrame !== to) {
-        await this.swapFrame(this.wantedFrame);
+        await this.swapFrame(this.wantedFrame, domainFragment);
         return
       }
     })()
@@ -284,11 +306,11 @@ export default abstract class Manager<ManagementElementName extends string> exte
     }
   }
 
-  private async setElem(to: ManagementElementName) {
+  private async setElem(fullDomain: ManagementElementName) {
+    let to: any = fullDomain
     let nextPageToken = Symbol("nextPageToken")
     this.nextPageToken = nextPageToken;
 
-    
     
     let accepted = false
     let pageProm = this.managedElementMap.get(to, 1)
@@ -304,14 +326,19 @@ export default abstract class Manager<ManagementElementName extends string> exte
         }
         to = to.substr(0, to.lastIndexOf("/")) as any
         pageProm = this.managedElementMap.get(to, nthTry)
-      } 
+      }
+
+      const domainFragment = fullDomain.splice(0, to.length + 1)
+      const domainLevel = to === "" ? 0 : (occurrences(to, "/") + 1 + this.domainLevel)
 
       while(pageProm !== undefined) {
         nthTry++
 
-        let suc: boolean = await pageProm.priorityThen(async (frame: Frame | SectionedPage<any>) => {
+        let suc: boolean = await pageProm.priorityThen(async (page: Page | SectionedPage<any>) => {
           if (nextPageToken === this.nextPageToken) {
-            return await this.swapFrame(frame);
+            page.domainLevel = domainLevel
+            let domFrag = domainFragment === "" ? page.defaultDomain : domainFragment
+            return await this.swapFrame(page, domFrag);
           }
           return false
         });
@@ -319,13 +346,12 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
         if (suc) {
           this.currentManagedElementName = to;
-          let frame = this.currentFrame;
+          let page = this.currentPage;
           (async () => {
             if (this.pageChangeCallback) {
-              let domainLevel = frame.domainLevel || this.domainLevel
               try {
-                if ((frame as SectionedPage<any>).sectionList) {
-                  (await (frame as SectionedPage<any>).sectionList).get((sectionListNested) => {
+                if ((page as SectionedPage<any>).sectionList) {
+                  (await (page as SectionedPage<any>).sectionList).get((sectionListNested) => {
                     this.pageChangeCallback(to, sectionListNested, domainLevel)
                   })
                 }
@@ -346,7 +372,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   protected async activationCallback(active: boolean) {
     await this.firstFrameLoaded
-    if (this.currentFrame.active !== active) this.currentFrame.vate(active)
+    if (this.currentPage.active !== active) this.currentPage.vate(active)
   }
   stl() {
     return super.stl() + require('./manager.css').toString();

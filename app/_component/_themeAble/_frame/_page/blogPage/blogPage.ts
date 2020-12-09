@@ -17,7 +17,6 @@ const api = new GhostContentAPI({
 
 export default class BlogPage extends Page {
   private domainSubscription: domain.DomainSubscription
-  activateOnlyOnce = false
 
   private blogLoaded = false;
   private async setBlog(query: string): Promise<boolean> {

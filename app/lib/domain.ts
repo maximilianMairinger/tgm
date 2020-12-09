@@ -177,14 +177,11 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
 }
 
 
-const replaceStateListener = []
 function pushState(title: any, endDomain: any) {
   history.pushState(argData, title, document.location.origin + endDomain)
-  replaceStateListener.Call([])
 }
 function replaceState(title: any, endDomain: any) {
   history.replaceState(argData, title, document.location.origin + endDomain)
-  replaceStateListener.Call([])
 }
 
 
@@ -235,10 +232,6 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
 
 
   if (subscription) {
-    let lastDomain: string = currentDomain
-    replaceStateListener.add(() => {
-      lastDomain = calcCurrentDomain()
-    })
     let f = async () => {
       
       if (!onlyInterestedInLevel) {
@@ -248,12 +241,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         }
         let joined = parseDomainIndexToDomain(myDomainIndex)
         let domain = joined === "" ? defaultDomain : joined
-        if (lastDomain !== domain) {
-          let res = await subscription(domain)
-          if (res === undefined) res = true
-          if (res) lastDomain = domain
-
-        }
+        await subscription(domain)
         if (joined !== domain) {
           return {domain, domainLevel}
         }
@@ -261,12 +249,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
       }
       else {
         let domain = domIndex[domainLevel] === undefined ? defaultDomain : domIndex[domainLevel]
-        if (domain !== lastDomain) {
-          let res = await subscription(domain)
-          if (res === undefined) res = true
-          if (res) lastDomain = domain
-
-        }
+        await subscription(domain)
         if (domIndex[domainLevel] !== domain) {
           return {domain, domainLevel}
         }

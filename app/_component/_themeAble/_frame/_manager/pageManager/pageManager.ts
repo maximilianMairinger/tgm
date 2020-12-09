@@ -52,10 +52,16 @@ export default declareComponent("page-manager", class PageManager extends Manage
           new elektrotechnikPage(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "raumfahrt" */"../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikPage/elektrotechnikPage")
       },
+
       {
         key: new Import("tagesschule/raumfahrt", 20, (raumfahrtPage: typeof RaumfahrtPage) => 
           new raumfahrtPage(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "raumfahrt" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage")
+      },
+      {
+        key: new Import("tagesschule/elektrotechnik/projekte", 20, (raumfahrtProjekte: typeof RaumfahrtProjekte) =>
+            new raumfahrtProjekte(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "raumfahrtProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikProjekte/elektrotechnikProjekte")
       },
       {
         key: new Import("tagesschule/raumfahrt/projekte", 20, (raumfahrtProjekte: typeof RaumfahrtProjekte) =>

@@ -5,7 +5,7 @@ import AusmachtSection from "../ausmachtSection";
 
 
 
-export default declareComponent("ausmacht-section-raumfahrt", class extends AusmachtSection {
+export default declareComponent("ausmacht-section-elektrotechnik", class extends AusmachtSection {
 
     constructor() {
         super({

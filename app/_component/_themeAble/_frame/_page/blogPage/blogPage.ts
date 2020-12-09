@@ -4,7 +4,9 @@ import * as domain from "./../../../../../lib/domain"
 import Blog from "../../../../_themeAble/_text/blogPost/blogPost"
 import BlogSuggestions, {blogCardInfo} from "../../../blogSuggestions/blogSuggestions";
 import GhostContentAPI from '@tryghost/content-api'
+import { lang } from "../../../../../lib/lang"
 import BlogCard from "../../../_card/_infoCard/blogCard/blogCard";
+import { Data } from "josm";
 
 
 // change after deployment to root url
@@ -38,6 +40,9 @@ export default class BlogPage extends Page {
     }
     
 
+    lang.links[query] = new Data(blogData.title)
+
+    
     let blog = new Blog();
     blog.blogtitle(blogData.title);
     blog.date(blogData.published_at);

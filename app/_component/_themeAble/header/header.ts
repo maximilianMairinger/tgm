@@ -169,7 +169,7 @@ export default class Header extends ThemeAble {
         
         const linkElem = elems[1] as Link
         linkElem.domainLevel = i
-        linkElem.content(lang.links[curDomainIndex[i]])
+        linkElem.content(lang.links[curDomainIndex[i]] !== undefined ? lang.links[curDomainIndex[i]] : curDomainIndex[i].capitalize())
         linkElem.link(curDomainIndex[i])
       }
       if (curDomainIndex[i] !== undefined) fadeInElems.add(...elems)

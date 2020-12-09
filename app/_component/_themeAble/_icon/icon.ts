@@ -2,8 +2,9 @@ import ThemeAble from "../themeAble";
 
 
 export default abstract class Icon extends ThemeAble {
-  constructor() {
+  constructor(strength: "weak" | "strong" = "strong") {
     super(false)
+    this.addClass(strength)
 
   }
   stl() {
@@ -22,9 +23,12 @@ export const iconIndex = {
   },
   
   tagesschule: {
-    anmelden: () => import("../_icon/_highlightAbleIcon/tagesschuleIcons/anmelden/anmelden"),
-    sprechstunden: () => import("../_icon/_highlightAbleIcon/tagesschuleIcons/sprechstunden/sprechstunden"),
-    projekte: () => import("./_highlightAbleIcon/tagesschuleIcons/project/project"),
-    team: () => import("../_icon/_highlightAbleIcon/tagesschuleIcons/team/team"),
+    anmelden: () => import("../_icon/tagesschuleIcons/anmelden/anmelden"),
+    sprechstunden: () => import("../_icon/tagesschuleIcons/sprechstunden/sprechstunden"),
+    projekte: () => import("./tagesschuleIcons/project/project"),
+    team: () => import("../_icon/tagesschuleIcons/team/team"),
+  },
+  fach: {
+    energysysteme: () => import("./fachIcon/sunElectricity/sunElectricity")
   }
 }

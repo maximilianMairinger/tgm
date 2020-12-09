@@ -60,7 +60,7 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
                 let box = ce("selection-box");
                 let content = ce("selection-content");
                 let icon = ce("icon-container");
-                icon.append(ce("c-" + this._options[i].icon +"-icon"));
+                // icon.append(ce("c-" + this._options[i].icon +"-icon"));
                 let infocontainer = ce("info-container");
                 let link = ce("link-container");
                 link.append(new Link("Mehr", this._options[i].link));

@@ -4,92 +4,96 @@ import * as domain from "./../../../../../lib/domain"
 import Blog from "../../../../_themeAble/_text/blogPost/blogPost"
 import BlogSuggestions, {blogCardInfo} from "../../../blogSuggestions/blogSuggestions";
 import GhostContentAPI from '@tryghost/content-api'
+import { lang } from "../../../../../lib/lang"
 import BlogCard from "../../../_card/_infoCard/blogCard/blogCard";
+import { Data } from "josm";
 
 
 // change after deployment to root url
 //@ts-ignore
 const api = new GhostContentAPI({
-  url: ' https://dev.tgmrebrand.xyz',
+  url: 'https://dev.tgmrebrand.xyz',
   key: '062f128c326e0312972d41f705',
   version: 'v2'
 });
 
 export default class BlogPage extends Page {
-  private input = this.q("input") as any as HTMLInputElement
-  private domainSubscription: domain.DomainSubscription
-  private preview;
-  constructor(private setPageCb: (domain: string) => void, public domainLevel: number, preview=false) {
-    super()
-    this.preview = preview;
+  
+
+  constructor() {
+    super("light")
   }
 
   private blogLoaded = false;
-  private async setBlog(blogIdentifier: string) {
-    console.log("setBlog", blogIdentifier)
+  private async setBlog(query: string): Promise<boolean> {
     if(this.blogLoaded) {
       this.elementBody.removeChilds()
     }
 
-    let query;
-    if(!this.preview) query = {slug: blogIdentifier};
-    else query = {id: blogIdentifier}   ;
 
-    console.log(query.uuid)
-
-    api.posts.read(query, {formats: ['html', 'plaintext']}).then((blogData) => {
-      let blog = new Blog();
-      console.log(blogData.title);
-      blog.blogtitle(blogData.title);
-      blog.date(blogData.published_at);
-      blog.image(blogData.feature_image);
-      blog.htmlcontent(blogData.html);
-      blog.css({"order": 1});
-      this.elementBody.append(blog);
-    }).catch((err) => {
-      console.warn("Unable to load blog", err.message);
-      let error = ce("error-message");
-      error.text("404 Not Found");
-      this.elementBody.append(error);
-    });
-    if(!this.preview) {
-      api.posts.browse({limit: 6}).then((blogData) => {
-        let suggestions = new BlogSuggestions();
-        suggestions.blogs(blogData.filter(blog => blog.slug != blogIdentifier)
-            .map((blog) => {
-              let blogCard: blogCardInfo = {
-                heading: blog.title,
-                date: blog.published_at,
-                content: blog.excerpt,
-                thumbnail: blog.feature_image,
-                link: "blog/" + blog.slug
-              }
-              return blogCard;
-            }));
-        suggestions.css({"order": 2});
-        this.elementBody.append(suggestions)
-      }).catch((err) => {
-        console.error(err);
-      })
+    let blogData: any
+    try {
+      blogData = await api.posts.read({slug: query}, {formats: ['html', 'plaintext']})
     }
+    catch(e) {
+      return false
+    }
+    
+
+    lang.links[query] = new Data(blogData.title)
+
+    
+    let blog = new Blog();
+    blog.blogtitle(blogData.title);
+    blog.date(blogData.published_at);
+    blog.image(blogData.feature_image);
+    blog.htmlcontent(blogData.html);
+    blog.css({"order": 1});
+    this.elementBody.append(blog);
+
+    let preview = false
+
+    if (preview) {
+      let blogData: any
+      try {
+        blogData = await api.posts.browse({limit: 6})
+      }
+      catch(e) {
+        console.error("Unable to load recommended blogs")
+      }
+      
+      let suggestions = new BlogSuggestions();
+      const domainCommon = [...domain.domainIndex].rmI(domain.domainIndex.length - 1).join(domain.dirString) + domain.dirString
+      suggestions.blogs(blogData.filter(blog => blog.slug != query).map((blog) => {
+        let blogCard: blogCardInfo = {
+          heading: blog.title,
+          date: blog.published_at,
+          content: blog.excerpt,
+          thumbnail: blog.feature_image,
+          link: domainCommon + blog.slug
+        }
+        return blogCard;
+      }));
+      suggestions.css("order", 2);
+      this.elementBody.append(suggestions)
+    }
+
     this.blogLoaded = true;
   }
 
-  
-
-  protected activationCallback(active: boolean): void {
-    if (active) {
-      this.domainSubscription = domain.get(this.domainLevel, async (to: string) => {
-        await this.setBlog(to)
-      }, true)
-      let initBlogId = this.domainSubscription.domain
-      this.setBlog(initBlogId)
-    }
-    else this.domainSubscription.deactivate()
-
-
+  private setBlogFromUrl(url: string) {
+    let split = url.split(domain.dirString)
+    this.domainLevel = split.length
+    let id = split.last
     
+
+    return this.setBlog(id)
   }
+
+  navigationCallback(domainFragment: string) {
+    return this.setBlogFromUrl(domainFragment)
+  }
+
   stl() {
     return super.stl() + require("./blogPage.css").toString()
   }

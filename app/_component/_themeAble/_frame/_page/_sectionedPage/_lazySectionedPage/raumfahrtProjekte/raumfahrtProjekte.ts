@@ -9,7 +9,7 @@ import ProjekteSection from "../../../../_pageSection/schuelerprojekteSection/sc
 
 
 export default declareComponent("raumfahrt-projekte", class RaumfahrtProjekte extends LazySectionedPage {
-  constructor(setPage: (domain: string) => void, domainLevel: number, sectionChangeCallback?: (section: string) => void) {
+  constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -39,7 +39,7 @@ export default declareComponent("raumfahrt-projekte", class RaumfahrtProjekte ex
         ), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
       },
 
-    ), domainLevel, setPage, sectionChangeCallback, undefined)
+    ), sectionChangeCallback, undefined)
 
   }
 

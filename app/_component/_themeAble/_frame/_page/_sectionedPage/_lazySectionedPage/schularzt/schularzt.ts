@@ -8,7 +8,7 @@ import TeamSection from "../../../../../../_themeAble/_text/_sectionTextblob/tea
 import ImageTextblob from "../../../../../../_themeAble/_text/imageTextblob/imageTextblob"
 
 export default declareComponent("schularzt", class Schularzt extends LazySectionedPage {
-  constructor(setPage: (domain: string) => void, domainLevel: number, sectionChangeCallback?: (section: string) => void) {
+  constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
         {
@@ -69,7 +69,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_themeAble/_text/imageTextblob/imageTextblob")
         },
-    ), domainLevel, setPage, sectionChangeCallback, undefined, {
+    ), sectionChangeCallback, undefined, {
         schularzt2: "schularzt"
     })
 

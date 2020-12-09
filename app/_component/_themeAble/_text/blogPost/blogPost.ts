@@ -9,7 +9,7 @@ import delay from "delay";
 import DateTimeFormat = Intl.DateTimeFormat;
 
 export default class BlogPost extends Text {
-
+  
   private textblob = this.q("c-textblob") as TextBlob;
 
   constructor() {

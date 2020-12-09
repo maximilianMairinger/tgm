@@ -3,12 +3,24 @@ import ThemeAble, { Theme } from "../../_themeAble/themeAble";
 export default abstract class Frame extends ThemeAble<HTMLElement> {
   public readonly active: boolean = false;
   public readonly initiallyActivated = false
-  public domainLevel?: number
   constructor(theme?: Theme) {
     super(undefined, theme)
   }
-  public activate(): Promise<boolean> {
-    return this.vate(true)
+  public async activate(): Promise<boolean> {
+    let res = true
+
+    if (this.initialActivationCallback && !this.initiallyActivated) {
+      let acRes = await this.initialActivationCallback();
+      (this as any).initiallyActivated = true
+      if (acRes === undefined) acRes = true
+      if (!acRes) res = false
+    }
+    
+    let acRes = await this.vate(true)
+    if (!acRes) res = false
+
+
+    return res
   }
   public deactivate(): Promise<boolean> {
     return this.vate(false)
@@ -18,12 +30,7 @@ export default abstract class Frame extends ThemeAble<HTMLElement> {
     (this as any).active = activate
 
     let res = true
-    if (activate && this.initialActivationCallback && !this.initiallyActivated) {
-      let acRes = await this.initialActivationCallback();
-      (this as any).initiallyActivated = true
-      if (acRes === undefined) acRes = true
-      if (!acRes) res = false
-    }
+    
     if (this.activationCallback) {
       let acRes = await this.activationCallback(activate)
       if (acRes === undefined) acRes = true

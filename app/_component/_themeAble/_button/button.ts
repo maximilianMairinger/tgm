@@ -92,8 +92,8 @@ export default class Button extends ThemeAble<HTMLAnchorElement> {
   private _link: string
   private linkFn: any
   public link(): string
-  public link(to: string, domainLevel?: number, push?: boolean): void
-  public link(to?: string, domainLevel: number = 0, push = true) {
+  public link(to: string, domainLevel?: number, push?: boolean, notify?: boolean): void
+  public link(to?: string, domainLevel: number = 0, push = true, notify?: boolean) {
 
     if (to !== undefined) {
       if (to !== null) {
@@ -104,7 +104,7 @@ export default class Button extends ThemeAble<HTMLAnchorElement> {
         this.linkFn = this.addActivationCallback((e) => {
           if (link.isOnOrigin) {
             if (e) e.preventDefault()
-            domain.set(to, domainLevel, push)
+            domain.set(to, domainLevel, push, notify)
           }
         })
         let updateF = () => {

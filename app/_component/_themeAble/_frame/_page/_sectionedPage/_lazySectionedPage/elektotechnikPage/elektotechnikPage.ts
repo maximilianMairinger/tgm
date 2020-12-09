@@ -4,23 +4,23 @@ import { set } from "../../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../../lib/lazyLoad"
 import TestSection1 from "../../../../_pageSection/testSection1/testSection1"
 import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
-import Thumbnail from "../../../../../../_themeAble/_text/_thumbnail/thumbnail"
+import Thumbnail from "../../../../../_text/_thumbnail/thumbnail"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
-import Info from "../../../../../../_themeAble/_text/_sectionTextblob/ausbildungSection/ausbildungSection"
+import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection"
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSection"
-import ImageTextblob from "../../../../../../_themeAble/_text/imageTextblob/imageTextblob"
+import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/darkNewsSection/darkNewsSection"
 
 
-export default declareComponent("raumfahrt-page", class RaumfahrtPage extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+export default declareComponent("elektotechnik-page", class ElektotechnikPage extends LazySectionedPage {
+  constructor(domainLevel: number, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => 
           new WrapperSection(new _Thumbnail(), "dark") as any
-        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_themeAble/_text/_thumbnail/_cardThumbnail/raumfahrtThumbnail/raumfahrtThumbnail")
+        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/raumfahrtThumbnail/raumfahrtThumbnail")
       },
       {
         key: new Import("info", 1, (_Info: typeof Info) => {
@@ -34,7 +34,7 @@ export default declareComponent("raumfahrt-page", class RaumfahrtPage extends La
           info.content("In der Abteilung für Raumfahrttechnik erhalten SchülerInnen eine fundierte Ausbildung in den wichtigsten Aerospace-Themenbereichen. Unser rigoroser Lehrplan ermöglicht AbsolventInnen den Einstieg in die Industrie und öffnet Türen für eine tertiäre Ausbildung.")
 
           return new WrapperSection(info) as any
-        }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../../_themeAble/_text/_sectionTextblob/ausbildungSection/ausbildungSection")
+        }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")
       },
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
@@ -60,7 +60,7 @@ export default declareComponent("raumfahrt-page", class RaumfahrtPage extends La
           imageTextBlob.tel("+43 1 33126 291");
           imageTextBlob.image('url("/res/img/computersRaumfahrt.jpg")');
           return new WrapperSection(imageTextBlob) as any
-        }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../../_themeAble/_text/imageTextblob/imageTextblob")
+        }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },
       {
         key: new Import("footer", 1, (_Footer: typeof Footer) => 
@@ -75,10 +75,10 @@ export default declareComponent("raumfahrt-page", class RaumfahrtPage extends La
   }
 
   stl() {
-    return super.stl() + require("./raumfahrtPage.css").toString()
+    return super.stl() + require("./elektotechnikPage.css")
   }
   pug() {
-    return require("./raumfahrtPage.pug").default
+    return require("./elektotechnikPage.pug")
   }
 
 }) 

@@ -18,25 +18,13 @@ export type PageName = string
 
 export default declareComponent("page-manager", class PageManager extends Manager<PageName> {
   constructor(pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, sectionChangeCallback?: (section: string) => void, onScrollBarWidthChange?: (scrollBarWidth: number) => void, onUserScroll?: (scrollProgress: number, userInited: boolean) => void, onScroll?: (scrollProgress: number) => void) {
-    let setPage = (a: PageName | null) => {
-      this.element(a)
-    }
 
     super(new ImportanceMap<() => Promise<any>, any>(
+      
       {
-        key: new Import("", 20, (homepage: typeof HomePage) =>
-            new homepage(setPage, sectionChangeCallback, 0)
+        key: new Import("", 22, (homepage: typeof HomePage) =>
+            new homepage(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
-      },
-      {
-        key: new Import("blog", 20, (blogPage: typeof BlogPage) =>
-            new blogPage(setPage, 1)
-        ), val: () => import(/* webpackChunkName: "blogPage" */"../../_page/blogPage/blogPage")
-      },
-      {
-        key: new Import("p", 20, (blogPage: typeof BlogPage) =>
-            new blogPage(setPage, 1, true)
-        ), val: () => import(/* webpackChunkName: "blogPage" */"../../_page/blogPage/blogPage")
       },
       {
         key: new Import("404", 1, (__404Page: typeof _404Page) =>
@@ -59,30 +47,35 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "danielsSandbox" */"../../_page/danielsSandbox/danielsSandbox")
       },
       {
-        key: new Import("tagesschule/it", 20, (itPage: typeof ItPage) => 
-          new itPage(setPage, 2, sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "itPage" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
+        key: new Import("tagesschule/elektrotechnik", 20, (raumfahrtPage: typeof RaumfahrtPage) => 
+          new raumfahrtPage(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "raumfahrt" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage")
       },
       {
         key: new Import("tagesschule/raumfahrt", 20, (raumfahrtPage: typeof RaumfahrtPage) => 
-          new raumfahrtPage(setPage, 2, sectionChangeCallback)
+          new raumfahrtPage(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "raumfahrt" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage")
       },
       {
         key: new Import("tagesschule/raumfahrt/projekte", 20, (raumfahrtProjekte: typeof RaumfahrtProjekte) =>
-            new raumfahrtProjekte(setPage, 3, sectionChangeCallback)
+            new raumfahrtProjekte(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "raumfahrtProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte")
       },
       {
         key: new Import("tagesschule/raumfahrt/team", 20, (raumfahrtTeam: typeof RaumfahrtTeam) =>
-            new raumfahrtTeam(setPage, 3, sectionChangeCallback)
+            new raumfahrtTeam(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "raumfahrtTeam" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtTeam/raumfahrtTeam")
       },
       {
         key: new Import("schularzt", 20, (raumfahrtTeam: typeof Schularzt) =>
-            new raumfahrtTeam(setPage, 1, sectionChangeCallback)
+            new raumfahrtTeam(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "raumfahrtTeam" */"../../_page/_sectionedPage/_lazySectionedPage/schularzt/schularzt")
-      }
+      },
+      {
+        key: new Import("", 20, (blogPage: typeof BlogPage) =>
+            new blogPage()
+        ), val: () => import(/* webpackChunkName: "blogPage" */"../../_page/blogPage/blogPage")
+      },
     ), 0, pageChangeCallback, "404", true, onScrollBarWidthChange, onUserScroll, onScroll)
   }
 

@@ -36,13 +36,13 @@ export default class Header extends ThemeAble {
   private tgmLogoIcon = this.q("c-tgm-logo") as Icon
 
   private pathDisplayLinkIndex = keyIndex((i: number) => {
-    const ls = new ElementList<ArrowIcon | Link>(new ArrowIcon, new Link("", "", undefined, true, false))
+    const ls = new ElementList<ArrowIcon | Link>(new ArrowIcon, new Link("", "", undefined, true, true, false))
     this.pathDisplayElem.apd(...ls)
     return ls
   })
 
   private linksIndex = keyIndex((toggle: boolean) => keyIndex((i: number) => 
-    new Link("", "", undefined, true, false)
+    new Link("", "", undefined, false, true, false)
   ))
   // private backLinkComponents: ElementList<ThemAble> = new ElementList()
 
@@ -79,7 +79,7 @@ export default class Header extends ThemeAble {
   }
 
   private updateThemeOfLinks(to: Theme) {
-    this.currentLinkElems.Inner("theme", [to])
+    if (this.currentLinkElems) this.currentLinkElems.Inner("theme", [to])
   }
 
 
@@ -87,7 +87,6 @@ export default class Header extends ThemeAble {
   private initialResize = true
   private resizeHandler(q: {width: number}) {
     if (this.currentLinkElems) {
-      
       let linksLeft: number = !this.currentLinkElems.empty ? this.currentLinkElems.first.getBoundingClientRect().left : q.width - 200
       let logo = this.pathDisplayElem.getBoundingClientRect()
 
@@ -130,12 +129,11 @@ export default class Header extends ThemeAble {
 
   public updatePage(linkContents: string[], domainLevel: number) {
     return Promise.all([
-      this.updateLinks(linkContents, domainLevel),
-      this.updatePathDisplay(domainLevel)
+      this.updatePathDisplay(domainLevel),
+      this.updateLinks(linkContents, domainLevel)
     ])
   }
 
-  private currentPathDisplayElems = []
   private dontChangeDisplayTheme = false
   private lastDomainIndex: string[] = []
   private lastDomainLevel = 0
@@ -145,7 +143,6 @@ export default class Header extends ThemeAble {
     let max: number
     let toBeChanged = []
     let lvl = Math.max(domainLevel, this.lastDomainLevel)
-    this.lastDomainLevel = domainLevel
     let curDomainIndex = [...domainIndex]
     curDomainIndex.splice(domainLevel)
 
@@ -159,19 +156,27 @@ export default class Header extends ThemeAble {
     let fadeOutElems = new ElementList
     let fadeInElems = new ElementList
 
+    // debugger
+    //@ts-ignore
+    this.pathDisplayLinkIndex(this.lastDomainLevel).last.push = true
+    this.lastDomainLevel = domainLevel
+
+    let elems: ElementList
     for (let i = toBeChanged.first; i < lvl; i++) {
-      const elems = this.pathDisplayLinkIndex(i)
+      elems = this.pathDisplayLinkIndex(i)
       if (this.lastDomainIndex[i] !== undefined) fadeOutElems.add(...elems)
       if (i === toBeChanged[beChangedIndex] && curDomainIndex[i] !== undefined) {
         
         const linkElem = elems[1] as Link
         linkElem.domainLevel = i
-        linkElem.content(lang.links[curDomainIndex[i]])
+        linkElem.content(lang.links[curDomainIndex[i]] !== undefined ? lang.links[curDomainIndex[i]] : curDomainIndex[i].capitalize())
         linkElem.link(curDomainIndex[i])
       }
       if (curDomainIndex[i] !== undefined) fadeInElems.add(...elems)
       beChangedIndex++
     }
+    //@ts-ignore
+    if (elems) elems.last.push = false
 
     if (!fadeOutElems.empty) {
       new ElementList(...fadeOutElems.reverse()).anim({translateX: 5, opacity: 0}, 250, 100)
@@ -186,9 +191,7 @@ export default class Header extends ThemeAble {
 
     this.updateThemeOfPathDisplay(super.theme())
     this.dontChangeDisplayTheme = false
-    this.pathDisplayElem.apd(...this.currentPathDisplayElems)
-    await this.pathDisplayElem.anim({opacity: 1, translateX: .1}, 500)
-    
+
   }
 
 
@@ -282,7 +285,11 @@ export default class Header extends ThemeAble {
     animationWrapper.apd(...this.currentLinkElems)
     
     this.resizeHandler({width: this.clientWidth})
-    if (this.currentLinkElems.empty) return
+    if (this.currentLinkElems.empty) {
+      this.inFadeInAnim = false
+      res()
+      return
+    }
     
     
     await Promise.all([
@@ -307,7 +314,10 @@ export default class Header extends ThemeAble {
     this.inFadeInAnim = false
     res()
 
-
+    if (this.callMeMaybe !== undefined) {
+      this.updateSelectedLink(this.callMeMaybe)
+      delete this.callMeMaybe
+    }
     
   }
 
@@ -317,14 +327,18 @@ export default class Header extends ThemeAble {
   }
 
   private updateLinkAnimationToken: Symbol
+  private callMeMaybe: string
   public async updateSelectedLink(newSelected: string) {
-
 
 
     
 
-
+    if (!this.currentLinkContents) {
+      this.callMeMaybe = newSelected
+      return
+    }
     let index = this.currentLinkContents.indexOf(newSelected)
+    if (index === -1) return
     let elem = this.currentLinkElems[index]
     
     if (this.inFadeInAnim || this.linksUpdated) {
@@ -351,8 +365,6 @@ export default class Header extends ThemeAble {
 
     }
     else {
-      let index = this.currentLinkContents.indexOf(newSelected)
-      let elem = this.currentLinkElems[index]
       let thisBounds = elem.getBoundingClientRect()
       let lastBounds = this.lastSelectedElem.getBoundingClientRect()
       

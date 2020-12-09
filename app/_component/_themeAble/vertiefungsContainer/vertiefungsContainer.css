@@ -49,8 +49,8 @@ vertiefungs-container vertiefungs-item:nth-child(2n - 1) vertiefungs-extra-circl
 
 vertiefungs-extra-line-1{
     position: absolute;
-    height: 10px;
-    top: calc(50% - 10px / 2);
+    height: 7px;
+    top: calc(50% - 7px / 2);
     box-shadow: var(--medium-shadow);
 }
 
@@ -66,17 +66,17 @@ vertiefungs-container vertiefungs-item:nth-child(2n - 1) vertiefungs-extra-line-
 
 vertiefungs-extra-line-2{
     position: absolute;
-    width: 10px;
+    width: 7px;
     height: 100%;
     box-shadow: var(--medium-shadow);
 }
 
 vertiefungs-container vertiefungs-item:nth-child(2n) vertiefungs-extra-line-2{
-    bottom: calc(50% - 10px / 2);
-    right: calc(10% + 27px / 2);
+    bottom: calc(50% - 7px / 2);
+    right: calc(10% + 30px / 2);
 }
 
 vertiefungs-container vertiefungs-item:nth-child(2n - 1) vertiefungs-extra-line-2{
-    top: calc(50% - 10px / 2);
-    left: calc(10% + 27px / 2);
+    top: calc(50% - 7px / 2);
+    left: calc(10% + 30px / 2);
 }

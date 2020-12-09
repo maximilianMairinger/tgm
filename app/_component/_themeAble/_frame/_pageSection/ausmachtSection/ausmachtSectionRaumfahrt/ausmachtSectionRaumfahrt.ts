@@ -29,11 +29,11 @@ export default declareComponent("ausmacht-section-raumfahrt", class extends Ausm
                 heading: "Vertiefungen",
                 note: "Fachspezifische",
                 selection: [
-                    {"icon":"satellite", "title":"Satellitentechnik", "content":"Satellitendesign und Konstruktion", "link":"/"},
-                    {"icon":"rocket", "title":"Raketentechnik", "content":"Raketenentwicklung, Abschussvorbereitung", "link":"/"},
-                    {"icon":"rover", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen", "link":"/"},
-                    {"icon":"rover", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen", "link":"/"},
-                    {"icon":"space-aids", "title":"Raumfahrtbiologie", "content":"Biologische Untersuchungen in der Schwerelosigkeit", "link":"/"}
+                    {"icon":"energysysteme", "title":"Satellitentechnik", "content":"Satellitendesign und Konstruktion", "link":"/"},
+                    {"icon":"automatisierungstechnik", "title":"Raketentechnik", "content":"Raketenentwicklung, Abschussvorbereitung", "link":"/"},
+                    {"icon":"antriebstechnik", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen", "link":"/"},
+                    {"icon":"industrieelektronik", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen", "link":"/"},
+                    {"icon":"angewandteInformatik", "title":"Raumfahrtbiologie", "content":"Biologische Untersuchungen in der Schwerelosigkeit", "link":"/"}
                 ]
             },
             cards: [

@@ -34,5 +34,9 @@ export const iconIndex = {
     antriebstechnik: () => import("./fachIcon/electricCar/electricCar"),
     industrieelektronik: () => import("./fachIcon/powerPlant/powerPlant"),
     angewandteInformatik: () => import("./fachIcon/pcsConnected/pcsConnected"),
+  },
+  vertiefung: {
+    automatisierung: () => import("./vertiefung/automationGear/automationGear"),
+    erneuerbareEnergien: () => import("./vertiefung/windMills/windMills")
   }
 }

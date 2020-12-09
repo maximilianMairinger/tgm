@@ -17,11 +17,11 @@ export default declareComponent("ausmacht-section-elektrotechnik", class extends
                 heading: "Vertiefungen",
                 note: "Fachspezifische",
                 selection: [
-                    {"icon":"satellite", "title":"Energiesysteme", "content":"Energiegewinnung und -speicherung", "link":"/"},
-                    {"icon":"rocket", "title":"Automatisierungstechnik", "content":"Automatisieren in elektrotechnischen Anwendungen", "link":"/"},
-                    {"icon":"rover", "title":"Antriebstechnik", "content":"Bewegung und Elektrotechnik", "link":"/"},
-                    {"icon":"rover", "title":"Industrieelektronik", "content":"Elektrotechnik in der Industrie", "link":"/"},
-                    {"icon":"space-aids", "title":"Angewandte Informatik", "content":"Entwickeln von computerbasierten Lösungen", "link":"/"}
+                    {"icon":"energysysteme", "title":"Energiesysteme", "content":"Energiegewinnung und -speicherung", "link":"/"},
+                    {"icon":"automatisierungstechnik", "title":"Automatisierungstechnik", "content":"Automatisieren in elektrotechnischen Anwendungen", "link":"/"},
+                    {"icon":"antriebstechnik", "title":"Antriebstechnik", "content":"Bewegung und Elektrotechnik", "link":"/"},
+                    {"icon":"industrieelektronik", "title":"Industrieelektronik", "content":"Elektrotechnik in der Industrie", "link":"/"},
+                    {"icon":"angewandteInformatik", "title":"Angewandte Informatik", "content":"Entwickeln von computerbasierten Lösungen", "link":"/"}
                 ]
             },
             cards: [

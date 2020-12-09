@@ -15,6 +15,7 @@ import "../../../_themeAble/_icon/rocket/rocket"
 import "../../../_themeAble/_icon/satellite/satellite"
 import "../../../_themeAble/_icon/rover/rover"
 import "../../../_themeAble/_icon/space-aids/space-aids"
+import { iconIndex } from "../../_icon/icon";
 
 
 type SelectionOptions = {icon: string, title: string, content: string, link: string}[]
@@ -56,23 +57,25 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
         if(options){
             this._options = this.parseJSONProp(options);
             let container = this.q("selection-container");
-            for(let i = 0; i < this._options.length; i++){
+            for (let conf of this._options) {
                 let box = ce("selection-box");
                 let content = ce("selection-content");
                 let icon = ce("icon-container");
-                // icon.append(ce("c-" + this._options[i].icon +"-icon"));
+                (async () => {
+                    icon.append(new (await iconIndex.fach[conf.icon]() as any).default)
+                })()
                 let infocontainer = ce("info-container");
                 let link = ce("link-container");
-                link.append(new Link("Mehr", this._options[i].link));
+                link.append(new Link("Mehr", conf.link));
                 let textcontainer = ce("text-container");
-                textcontainer.append(ce("heading-text").text(this._options[i].title));
-                textcontainer.append(ce("content-text").text(this._options[i].content));
+                textcontainer.append(ce("heading-text").text(conf.title));
+                textcontainer.append(ce("content-text").text(conf.content));
                 infocontainer.append(link);
                 infocontainer.append(textcontainer);
                 content.append(icon);
                 content.append(infocontainer);
                 let button = new Button();
-                button.link(this._options[i].link);
+                button.link(conf.link);
                 box.append(ce("selection-background"));
                 box.append(content);
                 box.append(button);

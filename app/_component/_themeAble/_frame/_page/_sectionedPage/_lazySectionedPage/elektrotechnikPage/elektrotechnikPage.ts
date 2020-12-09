@@ -20,7 +20,7 @@ export default declareComponent("elektrotechnik-page", class ElektrotechnikPage 
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => 
           new WrapperSection(new _Thumbnail(), "dark") as any
-        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/raumfahrtThumbnail/raumfahrtThumbnail")
+        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/elektrotechnikThumbnail/elektrotechnikThumbnail")
       },
       {
         key: new Import("info", 1, (_Info: typeof Info) => {

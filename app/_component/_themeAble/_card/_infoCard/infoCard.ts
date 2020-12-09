@@ -66,9 +66,9 @@ export default abstract class InfoCard extends Card {
         else return this.q("heading-background").css('background');
     }
 
-    contenttitle():string
-    contenttitle(title:string):void
-    contenttitle(title?:string){
+    contentTitle():string
+    contentTitle(title:string):void
+    contentTitle(title?:string){
         if(title !== undefined)
             this.q("content-title").text(title);
         else return this.q("content-title").text();

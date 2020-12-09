@@ -18,8 +18,6 @@ export default abstract class LazySectionedPage extends SectionedPage<Promise<an
     }), sectionChangeCallback, sectionAliasList, mergeIndex)
     this.resResourceMap = res
 
-    
-
     this.elementBody.apd(this.loadingIndecator = ce("loading-indecator"))
 
     let w = lazyLoad(sectionIndex, e => {

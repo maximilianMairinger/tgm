@@ -33,6 +33,22 @@ c-selection-card{
   flex-grow: 1;
 }
 
+vertiefung-section {
+    display: flex;
+    padding: 0 100px 150px 100px;
+}
+
+vertiefung-section c-textblob{
+    margin-top: 25px;
+    margin-right: 50px;
+}
+
+@media only screen and (max-width: 1550px) {
+    vertiefung-section{
+        flex-direction: column;
+    }
+}
+
 @media only screen and (max-width: 1250px) {
   section-header{
       margin: 50px 100px 100px 100px;

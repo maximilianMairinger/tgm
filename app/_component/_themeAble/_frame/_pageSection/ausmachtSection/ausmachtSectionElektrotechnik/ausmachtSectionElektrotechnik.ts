@@ -28,7 +28,7 @@ export default declareComponent("ausmacht-section-elektrotechnik", class extends
                 {
                     heading: "Lernbüro",
                     note: "Unterrichtssystem",
-                    thumbnail: "/res/img/unterrichtSysteme_1.jpg",
+                    thumbnail: "/res/img/student_2.jpg",
                     href: "/",
                     contentTitle: "Lernen im Aufbruch",
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
@@ -36,7 +36,7 @@ export default declareComponent("ausmacht-section-elektrotechnik", class extends
                 {
                     heading: "Werkstatt",
                     note: "PRAXISUNTERRICHT",
-                    thumbnail: "/res/img/werk.jpg",
+                    thumbnail: "/res/img/werkstaetteHET.png",
                     href: "/",
                     contentTitle: "Praxisbasierte Erfahrungen",
                     content: "In unseren Werkstätten erlernen SchülerInnen den Umgang mit technischen Gerätschaften und setzen das gelernte Theoriewissen selbst um."

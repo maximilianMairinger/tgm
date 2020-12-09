@@ -2,10 +2,10 @@ import ThemeAble from "../themeAble";
 
 
 export default abstract class Icon extends ThemeAble {
-  constructor(strength: "weak" | "strong" = "strong") {
+  constructor(strength?: "weak" | "strong" | null) {
     super(false)
-    this.addClass(strength)
-
+    if (strength === undefined) strength = "strong"
+    if (strength !== null) this.addClass(strength)
   }
   stl() {
     return super.stl() + require("./icon.css").toString()

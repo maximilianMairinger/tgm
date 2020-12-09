@@ -2,7 +2,7 @@
   transition: .4s fill;
 }
 
-:host(.strong.highlight) svg > g, :host(.weak.highlight) svg > path {
+:host(.strong.highlight) svg > g, :host(.strong.highlight) svg > path {
   fill: var(--strong-contrast-text-color) !important
 }
 

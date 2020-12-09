@@ -15,7 +15,7 @@ svg {
 }
 
 
-:host(.strong) svg > g, :host(.weak) svg > path {
+:host(.strong) svg > g, :host(.strong) svg > path {
   fill: var(--strong-text-color)
 }
 

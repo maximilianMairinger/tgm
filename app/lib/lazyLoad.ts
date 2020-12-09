@@ -98,7 +98,7 @@ import { dirString } from "./domain";
 export const slugifyUrl = (url: string) => url.split(dirString).replace((s) => slugify(s)).join(dirString)
 
 
-export type PriorityPromise<T> = Promise<T> & {priorityThen: (cb?: (a: any) => void) => any}
+export type PriorityPromise<T = any> = Promise<T> & {priorityThen: (cb?: (a: any) => void) => any}
 
 export class BidirectionalMap<K, V> extends Map<K, V> {
   public reverse: Map<V, K> = new Map

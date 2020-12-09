@@ -75,10 +75,10 @@ vertiefungs-extra-line-2{
 
 vertiefungs-container vertiefungs-item:nth-child(2n) vertiefungs-extra-line-2{
     bottom: calc(50% - 10px / 2);
-    right: calc(10% + 37px / 2);
+    right: calc(10% + 27px / 2);
 }
 
 vertiefungs-container vertiefungs-item:nth-child(2n - 1) vertiefungs-extra-line-2{
     top: calc(50% - 10px / 2);
-    left: calc(10% + 37px / 2);
+    left: calc(10% + 27px / 2);
 }

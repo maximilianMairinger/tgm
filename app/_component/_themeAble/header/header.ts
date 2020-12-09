@@ -315,7 +315,10 @@ export default class Header extends ThemeAble {
     this.inFadeInAnim = false
     res()
 
-
+    if (this.callMeMaybe !== undefined) {
+      this.updateSelectedLink(this.callMeMaybe)
+      delete this.callMeMaybe
+    }
     
   }
 
@@ -325,12 +328,16 @@ export default class Header extends ThemeAble {
   }
 
   private updateLinkAnimationToken: Symbol
+  private callMeMaybe: string
   public async updateSelectedLink(newSelected: string) {
 
 
     
 
-
+    if (!this.currentLinkContents) {
+      this.callMeMaybe = newSelected
+      return
+    }
     let index = this.currentLinkContents.indexOf(newSelected)
     if (index === -1) return
     let elem = this.currentLinkElems[index]

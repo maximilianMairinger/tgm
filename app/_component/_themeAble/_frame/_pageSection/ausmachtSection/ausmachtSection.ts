@@ -43,6 +43,7 @@ export default class AusmachtSection extends PageSection {
 
     if (content.selection) {
       let selBox = new SelectionCard()
+      selBox.background("none")
       
       for (let k in content.selection) {
         selBox[k](content.selection[k])

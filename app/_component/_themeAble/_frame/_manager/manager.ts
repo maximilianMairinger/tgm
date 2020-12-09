@@ -350,23 +350,25 @@ export default abstract class Manager<ManagementElementName extends string> exte
           return false
         });
   
-
         if (suc) {
-          this.currentManagedElementName = to;
-          let page = this.currentPage;
-          (async () => {
-            if (this.pageChangeCallback) {
-              try {
-                if ((page as SectionedPage<any>).sectionList) {
-                  (await (page as SectionedPage<any>).sectionList).tunnel(e => e.filter(s => s !== "")).get((sectionListNested) => {
-                    this.pageChangeCallback(to, sectionListNested, page.domainLevel)
-                  })
+          if (this.currentManagedElementName !== to) {
+            this.currentManagedElementName = to;
+            let page = this.currentPage;
+            (async () => {
+              if (this.pageChangeCallback) {
+                try {
+                  if ((page as SectionedPage<any>).sectionList) {
+                    (await (page as SectionedPage<any>).sectionList).tunnel(e => e.filter(s => s !== "")).get((sectionListNested) => {
+                      this.pageChangeCallback(to, sectionListNested, page.domainLevel)
+                    })
+                  }
+                  else this.pageChangeCallback(to, [], page.domainLevel)
                 }
-                else this.pageChangeCallback(to, [], page.domainLevel)
+                catch(e) {}
               }
-              catch(e) {}
-            }
-          })()
+            })()
+          }
+          
           accepted = true
           break
         }

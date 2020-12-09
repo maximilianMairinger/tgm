@@ -29,7 +29,7 @@ export default class BlogSuggestions extends ThemeAble {
             console.log(blogCardInfos);
             this.blogCardInfos = blogCardInfos;
             let suggestions = new OverflowX();
-            suggestions.gradient(true, 15, true)
+            suggestions.gradient(true, 15, false)
             blogCardInfos.forEach(blogCardInfo => suggestions.append(this.createBlogCard(blogCardInfo)));
             this.q("blog-suggestions-box").apd(suggestions as HTMLElement);
 

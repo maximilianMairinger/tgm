@@ -16,6 +16,7 @@ const api = new GhostContentAPI({
 });
 
 export default class BlogPage extends Page {
+  theme: "light" = "light" 
   private domainSubscription: domain.DomainSubscription
 
   private blogLoaded = false;

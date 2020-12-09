@@ -170,6 +170,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (to === undefined) {
       throw new Error("Unknown frame");
     }
+    
 
     if (this.busySwaping) {
       return true;
@@ -187,7 +188,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (from === to) {
       //Focus even when it is already the active frame
       if (!this.preserveFocus) to.focus()
-      if (!to.navigate(domainFragment)) {  
+      if (!await to.navigate(domainFragment)) {  
         to.hide()
         await to.deactivate()
         this.busySwaping = false
@@ -328,7 +329,9 @@ export default abstract class Manager<ManagementElementName extends string> exte
         pageProm = this.managedElementMap.get(to, nthTry)
       }
 
-      const domainFragment = fullDomain.splice(0, to.length + 1)
+      let domFrag = fullDomain.splice(0, to.length)
+      if (domFrag.startsWith("/")) domFrag = domFrag.substring(1)
+      const domainFragment = domFrag
       const domainLevel = to === "" ? 0 : (occurrences(to, "/") + 1 + this.domainLevel)
 
       while(pageProm !== undefined) {
@@ -337,8 +340,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
         let suc: boolean = await pageProm.priorityThen(async (page: Page | SectionedPage<any>) => {
           if (nextPageToken === this.nextPageToken) {
             page.domainLevel = domainLevel
-            let domFrag = domainFragment === "" ? page.defaultDomain : domainFragment
-            return await this.swapFrame(page, domFrag);
+            return await this.swapFrame(page, domainFragment === "" ? page.defaultDomain : domainFragment);
           }
           return false
         });
@@ -351,7 +353,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
             if (this.pageChangeCallback) {
               try {
                 if ((page as SectionedPage<any>).sectionList) {
-                  (await (page as SectionedPage<any>).sectionList).get((sectionListNested) => {
+                  (await (page as SectionedPage<any>).sectionList).tunnel(e => e.filter(s => s !== "")).get((sectionListNested) => {
                     this.pageChangeCallback(to, sectionListNested, domainLevel)
                   })
                 }

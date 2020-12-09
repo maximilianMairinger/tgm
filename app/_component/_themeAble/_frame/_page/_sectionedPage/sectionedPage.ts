@@ -2,7 +2,7 @@ import Page from "../page";
 import * as domain from "./../../../../../lib/domain"
 import scrollTo from "animated-scroll-to";
 import WaapiEasing from "waapi-easing";
-import { ResourcesMap } from "../../../../../lib/lazyLoad";
+import { PriorityPromise, ResourcesMap } from "../../../../../lib/lazyLoad";
 import PageSection from "../../_pageSection/pageSection";
 import { EventListener, ScrollData } from "extended-dom";
 import { Data, DataCollection, DataSubscription } from "josm";
@@ -229,7 +229,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     let dataList: Data<string[]>[] = []
     map.forEach((val, key) => {
       let mer = this.merge(key)
-      if (mer !== "") dataList.add(this.sectionAliasList.aliasify(mer))
+      dataList.add(this.sectionAliasList.aliasify(mer))
     })
 
     let sectionList: Data<string[]> = new Data()
@@ -256,7 +256,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     domain.set(name, this.domainLevel, false)
   }
 
-  navigate(domainFragment: string) {
+  navigatedCallback(domainFragment: string) {
     return new Promise<boolean>(async (res) => {
       let verticalOffset = padding
       
@@ -282,30 +282,31 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
 
       let scrollAnimation: any
+      let promElem = (await (this.sectionIndex as Promise<ResourcesMap>)).get(domainFragment) as PriorityPromise<HTMLElement>
+      if (promElem === undefined) return res(false)
+
+
+      let elem = await promElem.priorityThen()
+
+
       this.inScrollAnimation.set(scrollAnimation = Symbol())
       this.userInitedScrollEvent = false
 
-      let elem = await (await (this.sectionIndex as Promise<ResourcesMap>)).get(domainFragment).priorityThen() as HTMLElement
-      if (elem !== undefined) {
-        res(true)
-        await scrollTo(elem, {
-          cancelOnUserAction: true,
-          verticalOffset,
-          speed: scrollAnimationSpeed,
-          elementToScroll: this.elementBody,
-          easing
-        })
-        
-        if (scrollAnimation === this.inScrollAnimation.get()) {
-          this.inScrollAnimation.set(undefined)
-          this.userInitedScrollEvent = true
-        }
-      }
-      else {
-        debugger
+      
+      res(true)
+      await scrollTo(elem, {
+        cancelOnUserAction: true,
+        verticalOffset,
+        speed: scrollAnimationSpeed,
+        elementToScroll: this.elementBody,
+        easing
+      })
+      
+      if (scrollAnimation === this.inScrollAnimation.get()) {
         this.inScrollAnimation.set(undefined)
-        res(false)
+        this.userInitedScrollEvent = true
       }
+
     })
   }
 
@@ -317,9 +318,6 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   async initialActivationCallback(domainFragment) {
     let sectionIndex = await this.sectionIndex as ResourcesMap
 
-    let entries = sectionIndex.entries()
-    this.firstDomain = this.childsDefaultDomain = entries.next().value.key
-    if (this.childsDefaultDomain === "") this.childsDefaultDomain = entries.next().value.key
 
 
     let currentlyActiveSectionElem = await sectionIndex.get(domainFragment) as any as PageSection

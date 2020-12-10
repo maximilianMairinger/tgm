@@ -3,11 +3,13 @@ import Card from "../card";
 import "../../link/link"
 import {Theme} from "../../themeAble";
 import { iconIndex } from "../../_icon/icon";
+import Link from "../../link/link"
 
 export default declareComponent("vertiefungs-card", class VertiefungsCard extends Card {
     private headingElem = this.q("vertiefungs-title")
     private contentElem = this.q("vertiefungs-text")
     private iconContainer = this.q("vertiefungs-img")
+    private linkElem = this.q("c-link") as Link;
     constructor(heading: string, content: string, icon: string){
         super(false, false);
         this.heading(heading)
@@ -36,6 +38,10 @@ export default declareComponent("vertiefungs-card", class VertiefungsCard extend
 
     heading(to?: string) {
         return this.headingElem.html(to)
+    }
+
+    link(link?: string){
+        return this.linkElem.link(link)
     }
 
 

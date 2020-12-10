@@ -9,6 +9,7 @@ export default declareComponent("vertiefungs-card", class VertiefungsCard extend
     private headingElem = this.q("vertiefungs-title")
     private contentElem = this.q("vertiefungs-text")
     private iconContainer = this.q("vertiefungs-img")
+    private linkElem = this.q("c-link") as Link;
     constructor(heading: string, content: string, icon: string){
         super(false, false);
         this.heading(heading)
@@ -37,6 +38,10 @@ export default declareComponent("vertiefungs-card", class VertiefungsCard extend
 
     heading(to?: string) {
         return this.headingElem.html(to)
+    }
+
+    link(link?: string){
+        return this.linkElem.link(link)
     }
 
 

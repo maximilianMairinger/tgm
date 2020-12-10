@@ -72,11 +72,30 @@ vertiefungs-extra-line-2{
 }
 
 vertiefungs-container vertiefungs-item:nth-child(2n) vertiefungs-extra-line-2{
-    bottom: calc(50% - 7px / 2);
     right: calc(10% + 30px / 2);
 }
 
-vertiefungs-container vertiefungs-item:nth-child(2n - 1) vertiefungs-extra-line-2{
-    top: calc(50% - 7px / 2);
+vertiefungs-container vertiefungs-item:nth-child(2n):last-child vertiefungs-extra-line-2{
+    bottom: calc(50% - 7px / 2);
+}
+
+vertiefungs-container vertiefungs-item:nth-child(2n):not(:last-child) vertiefungs-extra-line-2{
+    top: -125px;
+    height: 200%;
+}
+
+vertiefungs-container vertiefungs-item:nth-child(2n - 1)  vertiefungs-extra-line-2{
     left: calc(10% + 30px / 2);
+}
+
+vertiefungs-container vertiefungs-item:nth-child(2n - 1):first-child  vertiefungs-extra-line-2{
+    top: calc(50% - 7px / 2);
+}
+
+vertiefungs-container vertiefungs-item:nth-child(2n - 1):not(:first-child)  vertiefungs-extra-line-2{
+    top: -125px;
+}
+
+vertiefungs-container vertiefungs-item:nth-child(2n - 1):first-child:last-child vertiefungs-extra-line-2{
+    display: none;
 }

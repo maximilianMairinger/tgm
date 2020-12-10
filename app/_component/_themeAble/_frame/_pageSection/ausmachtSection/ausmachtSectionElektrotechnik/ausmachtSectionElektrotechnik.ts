@@ -10,7 +10,7 @@ export default declareComponent("ausmacht-section-elektrotechnik", class extends
     constructor() {
         super({
             heading: {
-                heading: "Was uns Ausmacht",
+                heading: "Was uns ausmacht",
                 subheading: "als Elektrotechnik"
             },
             selection: {

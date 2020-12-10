@@ -11,7 +11,7 @@ export default declareComponent("elektrotechnik-thumbnail", class Elektrotechnik
             new IconCard("projekte", "Projekte", undefined, "tagesschule/elektrotechnik/projekte"),
             new IconCard("team", "Team", undefined, "tagesschule/elektrotechnik/team")
         )
-        this.heading("Raumfahrttechnik");
+        this.heading("Elektrotechnik");
         this.subheading("der Tagesschule");
         this.note("abteilung");
         this.hsize({max:70, min:35});

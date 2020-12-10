@@ -5,7 +5,7 @@
     "devServer": "concurrently \"npm run buildDevServer\"     \"node devServerInit.js --dev server\"      \"npm run buildDevReplApp\"                                  -n \"serv,node,_app\"      -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold,bgCyan.bold\"",
     "dev": "concurrently \"npm run buildDevServer\"     \"node devServerInit.js --dev server\"      \"npm run buildDevApp\"      \"npm run buildDevSw\"          -n \"serv,node,_app,sewo\" -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold,bgCyan.bold\"",
     "buildAll": "concurrently \"npm run buildProdServer\"    \"npm run buildProdApp\"                    \"npm run buildProdSw\"      \"npm run buildProdReplServer\" -n \"serv,_app,sewo,rese\" -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold,bgCyan.bold\"",
-    "build": "concurrently \"npm run buildProdApp --max-old-space-size=4096\" \"npm run buildProdSw --max-old-space-size=4096\" -n \"app,sw\" -c \"bgBlue.bold,bgMagenta.bold\"",
+    "build": "concurrently \"npm run buildProdApp --max-old-space-size=2048\" \"npm run buildProdSw --max-old-space-size=2048\" -n \"app,sw\" -c \"bgBlue.bold,bgMagenta.bold\"",
     "start": "wait-on server/dist && node ./server/dist/server.js",
     "startRepl": "wait-on replServer/dist && node ./replServer/dist/server.js",
     "buildProdSw": "rollup --config rollup.sw.prod.config.js",

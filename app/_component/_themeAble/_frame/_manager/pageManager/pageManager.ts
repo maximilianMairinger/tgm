@@ -11,7 +11,7 @@ import { declareComponent } from "../../../../../lib/declareComponent"
 import RaumfahrtPage from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage";
 import ElektrotechnikPage from "../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikPage/elektrotechnikPage";
 import RaumfahrtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte";
-import RaumfahrtTeam from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtTeam/raumfahrtTeam";
+import RaumfahrtTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/raumfahrtTeam/raumfahrtTeam";
 import Schularzt from "../../_page/_sectionedPage/_lazySectionedPage/schularzt/schularzt";
 import BlogPage from "../../_page/blogPage/blogPage"
 import ElektrotechnikTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elektrotechnikTeam/elektrotechnikTeam";

@@ -23,7 +23,6 @@ vertiefungs-thumbnail{
     height: auto;
     width: 100%;
     margin-right: 25px;
-    padding: 1%;
 }
 
 vertiefungs-img{
@@ -44,7 +43,13 @@ vertiefungs-title{
     font-size: 30px;
     color: var(--strong-text-color);
     font-weight: bold;
-    line-height: 2em;
+    line-height: 1em;
+    margin-bottom: .25em;
+}
+
+vertiefungs-content c-link{
+    font-weight: bold;
+    margin-top: 0.5em;
 }
 
 @media only screen and (max-width: 1000px) {

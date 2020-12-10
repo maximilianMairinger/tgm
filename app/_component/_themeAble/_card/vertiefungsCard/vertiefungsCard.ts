@@ -3,6 +3,7 @@ import Card from "../card";
 import "../../link/link"
 import {Theme} from "../../themeAble";
 import { iconIndex } from "../../_icon/icon";
+import Link from "../../link/link"
 
 export default declareComponent("vertiefungs-card", class VertiefungsCard extends Card {
     private headingElem = this.q("vertiefungs-title")

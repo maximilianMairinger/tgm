@@ -10,11 +10,13 @@ export default declareComponent("vertiefungs-card", class VertiefungsCard extend
     private contentElem = this.q("vertiefungs-text")
     private iconContainer = this.q("vertiefungs-img")
     private linkElem = this.q("c-link") as Link;
-    constructor(heading: string, content: string, icon: string){
+
+    constructor(heading?: string, content?: string, icon?: string, link?: string){
         super(false, false);
         this.heading(heading)
         this.content(content)
         this.icon(icon)
+        this.link(link)
     }
 
     theme():Theme

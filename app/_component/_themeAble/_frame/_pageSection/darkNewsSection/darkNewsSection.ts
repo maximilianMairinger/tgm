@@ -1,19 +1,24 @@
+import { ElementList } from "extended-dom";
 import { declareComponent } from "../../../../../lib/declareComponent"
+
+import "../../../_text/imageTextblob/imageTextblob";
+import "../../../_icon/bigNewsTriangle/bigNewsTriangle"
+import "./../../../_card/_infoCard/newsCard/newsCard"
 import PageSection from "../pageSection"
-import { Theme } from "../../../../_themeAble/themeAble"
-import TriangleNews from "../../../../_themeAble/triangleNews/triangleNews"
+
 
 
 export default declareComponent("dark-news-section", class extends PageSection {
-  private newsSectionBackground = new TriangleNews().theme("dark")
   
-
   constructor() {
     super("dark")
-    this.elementBody.apd(this.newsSectionBackground)
     
   }
 
+  childThemeAbles() {
+    return ["c-big-news-triangle-icon", "c-image-textblob", "c-news-card"]
+  }
+  
   stl() {
     return super.stl() + require("./darkNewsSection.css").toString()
   }

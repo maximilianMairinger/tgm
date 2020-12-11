@@ -10,7 +10,7 @@ import Info from "../../../../../../_themeAble/_text/_sectionTextblob/ausbildung
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionRaumfahrt/ausmachtSectionRaumfahrt"
 import ImageTextblob from "../../../../../../_themeAble/_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import DarkNewsSection from "../../../../_pageSection/darkNewsSection/darkNewsSection"
+import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
 export default declareComponent("raumfahrt-page", class RaumfahrtPage extends LazySectionedPage {
@@ -44,7 +44,7 @@ export default declareComponent("raumfahrt-page", class RaumfahrtPage extends La
       {
         key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
           new _DarkNewsSection()
-        ), val: () => import(/* webpackChunkName: "darkNewsSection" */"../../../../_pageSection/darkNewsSection/darkNewsSection")
+        ), val: () => import(/* webpackChunkName: "raumfahrtNews" */"../../../../_pageSection/triangleNews/raumfahrtTriangleNews/raumfahrtTriangleNews")
       },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {

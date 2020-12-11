@@ -55,13 +55,13 @@ export default declareComponent("ausmacht-section-elektrotechnik", class extends
                 {
                     heading:"Automatisierung",
                     icon:"automatisierung",
-                    link:"",
+                    link:"tagesschule/elektrotechnik/highlights/automatisierung",
                     content:"Das reibungslose Zusammenspiel aller Einrichtungen in einer Fabrik, der U-Bahnbetrieb, der immer vorhandene Strom in unseren Steckdosen – das alles ist ohne Automatisierungstechnik unmöglich."
                 },
                 {
                     heading:"Erneuerbare Energien",
                     icon:"erneuerbareEnergien",
-                    link:"",
+                    link:"tagesschule/elektrotechnik/highlights/erneuerbare-energien",
                     content:"Die Umwandlung von Strahlungsenergie der Sonne in elektrischen Strom (Photovoltaik) bzw. in Wärme (Solarthermie) oder der Aufbau von Windkraftanlagen – das sind nur einige der nachhaltigen Technologien aus dem Bereich der Erneuerbaren Energien."
                 }
             ]

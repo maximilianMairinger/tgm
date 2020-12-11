@@ -21,7 +21,7 @@ export default class VertiefungsContainer extends ThemeAble {
 
     cards(cards: JSON[] | VertiefungsCardContent[]) {
         let vertiefungsContainer = this.q("vertiefungs-container")
-        cards = JSON.parse(cards)
+        cards = this.parseJSONProp(cards)
         console.log(cards)
         cards.forEach((card) => {
             let vertiefungItem = ce("vertiefungs-item");

@@ -5,12 +5,15 @@ import SelectionCard from "../../../_card/selectionCard/selectionCard"
 import UnterrichtSystemeCard from "../../../_card/_infoCard/unterrichtSystemeCard/unterrichtSystemeCard"
 import declareComponent from "../../../../../lib/declareComponent"
 import "../../../vertiefungsContainer/vertiefungsContainer"
+import VertiefungsContainer, {VertiefungsCardContent} from "../../../vertiefungsContainer/vertiefungsContainer";
+import Textblob, {MediaQuerySize} from "../../../_text/textblob/textblob";
 
 
 
 export default class AusmachtSection extends PageSection {
   private heading = this.q("c-textblob.heading")
   private cardContainer = this.q("card-container")
+  private vertiefungSection = this.q("vertiefung-section")
   constructor(content: {
     heading: {
       heading: string,
@@ -34,7 +37,15 @@ export default class AusmachtSection extends PageSection {
       href: string, 
       contentTitle: string,
       content: string
-    }[]
+    }[],
+    vertiefung: {
+      note: string,
+      heading: string,
+      subheading: string,
+      hsize:MediaQuerySize,
+      content: string
+    },
+    vertiefungscard:VertiefungsCardContent[]
   }) {
     super()
 
@@ -63,7 +74,17 @@ export default class AusmachtSection extends PageSection {
     }
 
     this.cardContainer.apd(...boxAr)
+    let vertiefungBlob = new Textblob();
+    for( let vertiefung in content.vertiefung){
+      vertiefungBlob[vertiefung](content.vertiefung[vertiefung])
+    }
+    this.vertiefungSection.apd(vertiefungBlob)
 
+    let vertiefungsContainer = new VertiefungsContainer();
+    vertiefungsContainer.cards(content.vertiefungscard);
+    this.vertiefungSection.apd(vertiefungsContainer)
+
+    
 
   }
 

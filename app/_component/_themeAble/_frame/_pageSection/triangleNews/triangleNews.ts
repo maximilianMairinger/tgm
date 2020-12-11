@@ -3,13 +3,13 @@ import "../../../_icon/bigNewsTriangle/bigNewsTriangle"
 import "../../../_card/_infoCard/newsCard/newsCard"
 import PageSection from "../pageSection"
 import NewsCard from "../../../_card/_infoCard/newsCard/newsCard";
+import { Theme } from "../../../themeAble";
 
 
 
 export default class extends PageSection {
   private cardContainer = this.q("card-container")
   private imageTextblob = this.q("c-image-textblob")
-  
   constructor(content: {
     text: {
       note: string,
@@ -35,6 +35,7 @@ export default class extends PageSection {
       for (const k in card) {
         cardElem[k](card[k])
       }
+      cardElem.theme(this.theme())
     }
 
     for (const k in content.text) {
@@ -46,8 +47,18 @@ export default class extends PageSection {
 
   }
 
+  theme(): Theme
+  theme(to: Theme): this
+  theme(to?: Theme): any {
+    if (to !== undefined) {
+      //@ts-ignore
+      this.imageTextblob.childs(1, true).Inner("theme", [to])
+    }
+    return super.theme()
+  }
+
   childThemeAbles() {
-    return ["c-big-news-triangle-icon", "c-image-textblob", "c-news-card"]
+    return ["c-big-news-triangle-icon", "c-image-textblob"]
   }
   
   stl() {

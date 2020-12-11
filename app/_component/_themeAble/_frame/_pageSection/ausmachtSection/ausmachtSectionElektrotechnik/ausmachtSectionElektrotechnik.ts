@@ -53,9 +53,9 @@ export default declareComponent("ausmacht-section-elektrotechnik", class extends
             },
             vertiefungscard: [
                 {
-                    heading:"Automatisierung",
+                    heading:"Mechatronik & Robotik",
                     icon:"automatisierung",
-                    link:"tagesschule/elektrotechnik/highlights/automatisierung",
+                    link:"tagesschule/elektrotechnik/highlights/mechatronik-robotik",
                     content:"Das reibungslose Zusammenspiel aller Einrichtungen in einer Fabrik, der U-Bahnbetrieb, der immer vorhandene Strom in unseren Steckdosen – das alles ist ohne Automatisierungstechnik unmöglich."
                 },
                 {

@@ -180,8 +180,7 @@ pointer-info-box info-box-text {
   font-size: 14px;
 }
 
-tgm-img {
-  background-image: url("./../../../../../res/img/tgmOutside.png");
+c-image {
   display: block;
   position: absolute;
   right: 0;

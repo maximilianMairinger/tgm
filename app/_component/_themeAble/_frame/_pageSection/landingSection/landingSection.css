@@ -16,10 +16,6 @@ h2 {
 }
 
 big-image {
-  /* background-image: url("./../../../../../res/img/landingAeroplane.jpg");
-  background-position: right top;
-  background-size: cover;
-  background-repeat: no-repeat; */
   width: 100%;
   height: 100%;
   display: block;
@@ -31,6 +27,10 @@ big-image > c-image {
   position: absolute;
   top: 0;
   right: 0;
+  max-width: unset;
+  min-width: unset;
+  width: unset;
+  height: unset;
   transform: translateX(calc(800px - 50vw));
   /* transition: .6s transform; */
 }

@@ -44,7 +44,7 @@ export default abstract class Frame extends ThemeAble<HTMLElement> {
   
   protected activationCallback?(active: boolean): boolean | void | Promise<boolean | void>
   protected initialActivationCallback?(): boolean | void | Promise<boolean | void>
-  protected loadedCallback?(): boolean | void | Promise<boolean | void>
+  protected constructionCallback?(): boolean | void | Promise<boolean | void>
   public userInitedScrollEvent = true
   public addIntersectionListener?(root: HTMLElement, cb: Function, threshold?: number, rootMargin?: string): void
   public removeIntersectionListener?(root: HTMLElement): void

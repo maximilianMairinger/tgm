@@ -4,6 +4,7 @@ blog-post{
     align-items: flex-start;
     width: 650px;
     margin: 0 auto;
+    justify-content: center;
 }
 
 blog-header{
@@ -11,6 +12,8 @@ blog-header{
     flex-direction: column;
     justify-content: stretch;
     align-items: flex-start;
+    margin-left: -5%;
+    width: 110%;
     font-weight: bold;
     margin-bottom: 40px;
 }
@@ -26,7 +29,7 @@ blog-html *{
 
 blog-html figure{
     margin: auto;
-    width: 575px;
+    width: 100%;
 }
 
 blog-html figure img{
@@ -58,7 +61,8 @@ blog-extra hr{
 blog-image{
     position: relative;
     display: block;
-    width: 100%;
+    width: 110%;
+    left: -5%;
 }
 
 h2{

@@ -3,7 +3,7 @@ import LazySectionedPage from "../lazySectionedPage"
 import { set } from "../../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../../lib/lazyLoad"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
-import ParameterThumbnail from "../../../../../_text/_thumbnail/parameterThumbnail/parameterThumbnail";
+import Thumbnail from "../../../../../_text/_thumbnail/thumbnail";
 import InformationenSection from "../../../../../_text/_sectionTextblob/informationenSection/informationenSection";
 import ProjekteSection from "../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection";
 import {Project} from "../../../../../_text/tabletBlob/tabletBlob";
@@ -14,16 +14,14 @@ export default declareComponent("elektrotechnik-projekte", class RaumfahrtProjek
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
-        key: new Import("", 1, (Thumbnail: typeof Element) =>
-        {
-          let thumbnail = new (Thumbnail as typeof ParameterThumbnail)();
-          thumbnail.note("Bemerkenswerte")
-          thumbnail.heading("Diplomprojekte");
-          thumbnail.subheading("der ET");
-          thumbnail.background('url(/res/img/elProj.jpg)');
-          return new WrapperSection(thumbnail, 'dark');
-        }
-        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/parameterThumbnail/parameterThumbnail")
+        key: new Import("", 1, (thumbnail: typeof Thumbnail) => {
+          let e = new thumbnail();
+          e.note("Bemerkenswerte")
+          e.heading("Diplomprojekte");
+          e.subheading("der ET");
+          e.background('elProj.jpg');
+          return new WrapperSection(e, 'dark') as any;
+        }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/thumbnail")
       },
       {
         key: new Import("info", 1, (Information: typeof Element) =>

@@ -14,6 +14,7 @@ import * as animationFrameDelta from "animation-frame-delta"
 import delay from "delay";
 import lang from "../../../../../lib/lang";
 import CardCarousel from "../../../../cardCarousel/cardCarousel";
+import "./../../../../image/image"
 
 
 export default declareComponent("landing-section", class Landing extends PageSection {

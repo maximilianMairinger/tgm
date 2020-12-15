@@ -136,8 +136,7 @@ pointer-info-box info-box-text {
   font-size: 14px;
 }
 
-tgm-img {
-  background-image: url("./../../../../../res/img/tgmOutside.png");
+c-image {
   display: block;
   position: absolute;
   right: 0;
@@ -146,9 +145,6 @@ tgm-img {
   width: 80px;
   opacity: 1;
   border-radius: inherit;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 map-frame#pointer {

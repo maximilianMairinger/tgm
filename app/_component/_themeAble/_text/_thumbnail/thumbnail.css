@@ -28,7 +28,7 @@ background-box{
     box-sizing: border-box;
 }
 
-background-box *{
+background-box > *{
     position: absolute;
     display: block;
     width: 100%;
@@ -54,6 +54,15 @@ background-shader{
 
 background-image{
     z-index: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+background-image > c-image {
+    position: absolute;
+    width: 100%;
 }
 
 @media only screen and (max-width: 768px) {

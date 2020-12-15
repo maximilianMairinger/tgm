@@ -2,7 +2,7 @@ import { declareComponent } from "../../../../../../../../lib/declareComponent"
 import TeamPage from "../teamPage"
 import { ImportanceMap, Import } from "../../../../../../../../lib/lazyLoad"
 import WrapperSection from "../../../../../_pageSection/wrapperSection/wrapperSection"
-import TeamLeitungThumbnail from "../../../../../../_text/_thumbnail/teamLeitungThumbnail/teamLeitungThumbnail";
+import Thumbnail from "../../../../../../_text/_thumbnail/thumbnail";
 import TeamSection from "../../../../../../_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../../_text/imageTextblob/imageTextblob"
 
@@ -11,15 +11,14 @@ export default declareComponent("raumfahrt-team", class RaumfahrtTeam extends Te
     
     super(new ImportanceMap<() => Promise<any>, any>(
         {
-        key: new Import("", 1, (Thumbnail: typeof Element) =>
-        {
-          let thumbnail = new (Thumbnail as typeof TeamLeitungThumbnail)();
-          thumbnail.note("mit");
-          thumbnail.heading("Teamgeist");
-          thumbnail.subheading("in die Zukunft");
-          return new WrapperSection(thumbnail, 'dark');
-        }
-        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_text/_thumbnail/teamLeitungThumbnail/teamLeitungThumbnail")
+            key: new Import("", 1, (thumbnail: typeof Thumbnail) => {
+                let e = new thumbnail();
+                e.note("mit");
+                e.heading("Teamgeist");
+                e.subheading("in die Zukunft");
+                e.background("landingTeamLeitung.jpg")
+                return new WrapperSection(e, 'dark') as any
+            }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_text/_thumbnail/thumbnail")
         },
         {
             key: new Import("info", 1, (Team: typeof Element) =>

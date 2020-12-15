@@ -3,7 +3,7 @@ import LazySectionedPage from "../lazySectionedPage"
 import { set } from "../../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../../lib/lazyLoad"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
-import ParameterThumbnail from "../../../../../../_themeAble/_text/_thumbnail/parameterThumbnail/parameterThumbnail";
+import ParameterThumbnail from "../../../../../../_themeAble/_text/_thumbnail/thumbnail";
 import TeamSection from "../../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../../_themeAble/_text/imageTextblob/imageTextblob"
 
@@ -21,7 +21,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
           thumbnail.background('url("/res/img/schularzt.png")');
           return new WrapperSection(thumbnail, 'dark');
         }
-        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_themeAble/_text/_thumbnail/parameterThumbnail/parameterThumbnail")
+        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_themeAble/_text/_thumbnail/thumbnail")
         },
         {
             key: new Import("auftrag", 1, (_TeamSection: typeof Element) =>

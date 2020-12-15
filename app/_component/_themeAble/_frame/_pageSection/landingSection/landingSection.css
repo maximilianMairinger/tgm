@@ -16,17 +16,24 @@ h2 {
 }
 
 big-image {
-  background-image: url("./../../../../../res/img/landingAeroplane.jpg");
-  background-position: right top;
-  background-size: cover;
-  background-repeat: no-repeat;
   width: 100%;
   height: 100%;
   display: block;
   position: absolute;
   height: 1200px;
-  transition: background-position .6s;
 }
+
+big-image > c-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: unset;
+  min-width: unset;
+  transform: translateX(calc(800px - 50vw));
+  /* transition: .6s transform; */
+}
+
+
 
 text-container {
   width: 100%;
@@ -81,13 +88,27 @@ tagesschule-container > c-textblob {
 }
 
 
-
-
-@media only screen and (max-width: 1200px) {
-  big-image {
-    background-position: 60% top;
+@media only screen and (min-width: 1580px) {
+  big-image > c-image {
+    transform: translateX(0);
     
   }
+}
+
+
+@media only screen and (max-width: 1130px) {
+  text-container > c-textblob {
+    left: unset;
+  }
+  text-container {
+    justify-content: center;
+    top: 200px;
+  }
+  big-image > c-image {
+    transform: translateX(calc(475px - 50vw)) translateY(-30px);
+  }
+
+  
 }
 
 @media only screen and (max-width: 1000px) {  
@@ -111,100 +132,11 @@ tagesschule-container > c-textblob {
 
 
 
-@media only screen and (max-width: 900px) {
-  text-container > c-textblob {
-    left: unset;
-  }
-  text-container {
-    justify-content: center;
-    top: 200px;
-  }
-  big-image {
-    background-position: 98% top;
-    
-  }
 
-  
-}
+@media only screen and (max-height: 900px) {
 
-
-
-@media only screen and (max-width: 700px) {
-
-  big-image {
-    background-position: 95% top;
-    
-  }
-}
-
-@media only screen and (max-width: 600px) {
-
-  big-image {
-    background-position: 90% top;
-    
-  }
-}
-
-@media only screen and (max-width: 500px) {
-
-  big-image {
-    background-position: 85% top;
-    
-  }
-}
-
-
-@media only screen and (max-width: 400px) {
-
-  big-image {
-    background-position: 84% top;
-    
-  }
-
-  text-container {
-    justify-content: left;
-  }
-
-  text-container > c-textblob {
-    left: 8vw;
-    max-width: calc(100% - 8vw);
-  }
-
-
-
-}
-
-
-@media only screen and (max-width: 350px) {
-
-  big-image {
-    background-position: 83% top;
-    
-  }
-}
-
-@media only screen and (max-width: 320px) {
-
-  big-image {
-    background-position: 81% top;
-    
-  }
-}
-
-@media only screen and (max-width: 300px) {
-
-  big-image {
-    background-position: 80% top;
-    
-  }
-}
-
-
-
-@media only screen and (max-height: 500px) {
-
-  big-image {
-    background-position: 85% top;
+  big-image > c-image {
+    transform: translateX(calc(475px - 50vw)) translateY(-100px);
     
   }
 }

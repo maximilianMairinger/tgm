@@ -11,6 +11,7 @@ import "../../../../_themeAble/_icon/_highlightAbleIcon/filledArrow/filledArrow"
 import HighlightAbleIcon from "../../../../_themeAble/_icon/_highlightAbleIcon/highlightAbleIcon";
 import "../../../../_themeAble/_card/_infoCard/infoCard"
 import { scrollAnimationEndWithMargin, scrollAnimationStart, scrollAnimationEnd, pointerFadinPos, tgmPosition } from "./conf";
+import "./../../../../image/image"
 
 
 

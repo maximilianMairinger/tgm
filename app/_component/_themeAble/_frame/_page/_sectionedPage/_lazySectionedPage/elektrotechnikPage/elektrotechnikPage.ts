@@ -4,7 +4,7 @@ import { set } from "../../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../../lib/lazyLoad"
 import TestSection1 from "../../../../_pageSection/testSection1/testSection1"
 import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
-import Thumbnail from "../../../../../_text/_thumbnail/thumbnail"
+import Thumbnail from "../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection"
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionRaumfahrt/ausmachtSectionRaumfahrt"
@@ -18,9 +18,15 @@ export default declareComponent("elektrotechnik-page", class ElektrotechnikPage 
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
-        key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => 
-          new WrapperSection(new _Thumbnail(), "dark") as any
-        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/elektrotechnikThumbnail/elektrotechnikThumbnail")
+        key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
+          let e = new _Thumbnail()
+          e.heading("Elektrotechnik")
+          e.subheading("der Tagesschule")
+          e.note("abteilung");
+          e.background("het_main.jpg")
+          
+          return new WrapperSection(e, "dark") as any
+        }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
       },
       {
         key: new Import("info", 1, (_Info: typeof Info) => {

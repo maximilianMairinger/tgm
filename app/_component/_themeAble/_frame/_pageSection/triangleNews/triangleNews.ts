@@ -4,10 +4,11 @@ import "../../../_card/_infoCard/newsCard/newsCard"
 import PageSection from "../pageSection"
 import NewsCard from "../../../_card/_infoCard/newsCard/newsCard";
 import { Theme } from "../../../themeAble";
+import declareComponent from "../../../../../lib/declareComponent";
 
 
 
-export default class extends PageSection {
+export default class TriangleNews extends PageSection {
   private cardContainer = this.q("card-container")
   private imageTextblob = this.q("c-image-textblob")
   constructor(content: {
@@ -68,3 +69,5 @@ export default class extends PageSection {
     return require("./triangleNews.pug").default
   }
 };
+
+declareComponent("triangle-news", TriangleNews)

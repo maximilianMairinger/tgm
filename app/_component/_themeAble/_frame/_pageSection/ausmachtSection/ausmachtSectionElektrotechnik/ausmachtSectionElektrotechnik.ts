@@ -16,7 +16,7 @@ export default declareComponent("ausmacht-section-elektrotechnik", class extends
                 subheading: "als Elektrotechnik"
             },
             selection: {
-                heading: "Vertiefungen",
+                heading: "Gegenstände",
                 note: "Fachspezifische",
                 selection: [
                     {"icon":"energysysteme", "title":"Energiesysteme", "content":"Energiegewinnung und -speicherung", "link":"tagesschule/elektrotechnik/highlights/energiesysteme"},

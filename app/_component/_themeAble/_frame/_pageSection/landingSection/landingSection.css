@@ -133,7 +133,7 @@ tagesschule-container > c-textblob {
 
 
 
-@media only screen and (max-height: 900px) {
+@media only screen and (max-height: 900px) and (max-width: 1130px) {
 
   big-image > c-image {
     transform: translateX(calc(475px - 50vw)) translateY(-100px);

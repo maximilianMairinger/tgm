@@ -15,7 +15,7 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "Fachtheoretische",
                 selection: [
                     {"icon":"energysysteme", "title":"Energiesysteme", "content":"Energiegewinnung und -speicherung", "link":"tagesschule/elektrotechnik/highlights/energiesysteme"},
                     {"icon":"automatisierungstechnik", "title":"Automatisierungstechnik", "content":"Automatisieren in elektrotechnischen Anwendungen", "link":"tagesschule/elektrotechnik/highlights/automatisierungstechnik"},
@@ -47,7 +47,7 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                 heading: "Vertiefungen",
                 subheading: "der WI",
                 hsize: {max:60, min:40},
-                content: "Entscheidest DU dich für eine Ausbildung zum Wirtschaftsingenieur bzw. zur Wirtschaftsingenieurin, dann kannst du ab dem 1. Jahrgang zwischen drei Vertiefungen wählen: Betriebsinformatik, Logistik oder Maschinenbau. Egal welche Vertiefung DU wählst, Wirtschaftsingenieure bzw. Wirtschaftsingenierinnen sind in der Arbeitswelt IMMER gefragt und besetzen nach ihrer Ausbildung Top Positionen im Unternehmen."
+                content: `Entscheidest DU dich für eine Ausbildung zum Wirtschaftsingenieur bzw. zur Wirtschaftsingenieurin, dann kannst du ab dem 1. Jahrgang zwischen drei Vertiefungen wählen: Betriebsinformatik, Logistik oder Maschinenbau. Egal welche Vertiefung DU wählst, Wirtschaftsingenieure bzw. Wirtschaftsingenierinnen sind in der Arbeitswelt IMMER gefragt und besetzen nach ihrer Ausbildung Top Positionen im Unternehmen. Auch ermöglicht dir die <c-link link="tagesschule/wirtschaftsingenieure/highlights/junior-company/">Junior Company</c-link> ein echtes Unternehmen mit deinen KollegInnen zu führen.`
             },
             vertiefungscard: [
                 {

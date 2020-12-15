@@ -11,9 +11,6 @@ export default declareComponent("informationen-section", class InformationenSect
         this.note("Vorweg");
         this.hsize({max:65, min:37});
         this.hmobile({max:40, min:30});
-        this.content("Folgende Schülerprojekte wurden im Zuge des ITP-Unterrichts entwickelt. SchülerInnen haben die Möglichkeit ihre Kreativität auszueleben und wertvolle Lektionen fürs zukünfige Berufleben zu sammeln.\n" +
-            "\n" +
-            "Unsere Abteilung arbeitet mit top Unternehmen aus der Privatwirtschaft zusammen um gemeinsam Tools zu entwickeln den SchülerInnen einen einsteig in die Industrie zu bieten.");
     }
 
     stl() {

@@ -16,6 +16,8 @@ import Schularzt from "../../_page/_sectionedPage/_lazySectionedPage/schularzt/s
 import BlogPage from "../../_page/blogPage/blogPage"
 import ElektrotechnikTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elektrotechnikTeam/elektrotechnikTeam";
 import ElektrotechnikProjekte from "../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikProjekte/elektrotechnikProjekte";
+import WiProjekte from "../../_page/_sectionedPage/_lazySectionedPage/wirtschaftsingenieureProjekte/wirtschaftsingenieureProjekte";
+import WiTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wirtschaftsingenieureTeam/wirtschaftsingenieureTeam"
 
 export type PageName = string
 
@@ -65,6 +67,11 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "raumfahrt" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage")
       },
       {
+        key: new Import("tagesschule/wirtschaftsingenieure/projekte", 30, (wiProjekte: typeof WiProjekte) =>
+            new wiProjekte(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "wiProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/wirtschaftsingenieureProjekte/wirtschaftsingenieureProjekte")
+      },
+      {
         key: new Import("tagesschule/elektrotechnik/projekte", 30, (elektrotechnikProjekte: typeof ElektrotechnikProjekte) =>
             new elektrotechnikProjekte(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "elektrotechnikProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikProjekte/elektrotechnikProjekte")
@@ -78,6 +85,11 @@ export default declareComponent("page-manager", class PageManager extends Manage
         key: new Import("tagesschule/elektrotechnik/team", 30, (elektrotechnikTeam: typeof ElektrotechnikTeam) =>
             new elektrotechnikTeam(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "elektrotechnikTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elektrotechnikTeam/elektrotechnikTeam")
+      },
+      {
+        key: new Import("tagesschule/wirtschaftsingenieure/team", 30, (wiTeam: typeof WiTeam) =>
+            new wiTeam(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "wiTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wirtschaftsingenieureTeam/wirtschaftsingenieureTeam")
       },
       {
         key: new Import("tagesschule/raumfahrt/team", 30, (raumfahrtTeam: typeof RaumfahrtTeam) =>

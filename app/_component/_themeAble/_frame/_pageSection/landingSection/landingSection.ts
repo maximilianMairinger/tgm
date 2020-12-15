@@ -34,7 +34,7 @@ export default declareComponent("landing-section", class Landing extends PageSec
       new IconCard(new ItIcon, abt.Informationstechnologie, lang.AbteilungsShorts.Informationstechnologie, "tagesschule/raumfahrt"),
       new IconCard(new KunststofftechnikIcon, abt.Kunststofftechnik, lang.AbteilungsShorts.Kunststofftechnik, "tagesschule/raumfahrt"),
       new IconCard(new MaschinenbauIcon, abt.Maschinenbau, lang.AbteilungsShorts.Maschinenbau, "tagesschule/raumfahrt"),
-      new IconCard(new WirtschaftsingenieureIcon, abt.Wirtschaftsingenieure, lang.AbteilungsShorts.Wirtschaftsingenieure, "tagesschule/raumfahrt")
+      new IconCard(new WirtschaftsingenieureIcon, abt.Wirtschaftsingenieure, lang.AbteilungsShorts.Wirtschaftsingenieure, "tagesschule/wirtschaftsingenieure")
     ]
 
 

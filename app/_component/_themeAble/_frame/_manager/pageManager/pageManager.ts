@@ -50,6 +50,11 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "danielsSandbox" */"../../_page/danielsSandbox/danielsSandbox")
       },
       {
+        key: new Import("tagesschule/wirtschaftsingenieure", 20, (elektrotechnikPage: typeof ElektrotechnikPage) => 
+          new elektrotechnikPage(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "elektrotechnik" */"../../_page/_sectionedPage/_lazySectionedPage/wi/wi")
+      },
+      {
         key: new Import("tagesschule/elektrotechnik", 20, (elektrotechnikPage: typeof ElektrotechnikPage) => 
           new elektrotechnikPage(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "elektrotechnik" */"../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikPage/elektrotechnikPage")

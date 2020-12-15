@@ -2,18 +2,16 @@ import { declareComponent } from "../../../../../../lib/declareComponent"
 import "../../../../_card/selectionCard/selectionCard"
 import "../../../../_card/_infoCard/unterrichtSystemeCard/unterrichtSystemeCard"
 import AusmachtSection from "../ausmachtSection";
-import VertiefungsContainer from "../../../../vertiefungsContainer/vertiefungsContainer";
-import {MediaQuerySize} from "../../../../_text/textblob/textblob";
 
 
 
-export default declareComponent("ausmacht-section-elektrotechnik", class extends AusmachtSection {
+export default declareComponent("ausmacht-section-wi", class extends AusmachtSection {
 
     constructor() {
         super({
             heading: {
                 heading: "Was uns ausmacht",
-                subheading: "als Elektrotechnik"
+                subheading: "als Wirtschaftsingenieure"
             },
             selection: {
                 heading: "Gegenstände",
@@ -28,20 +26,20 @@ export default declareComponent("ausmacht-section-elektrotechnik", class extends
             },
             cards: [
                 {
-                    heading: "Lernbüro",
-                    note: "Unterrichtssystem",
-                    thumbnail: "/res/img/student_2.jpg",
-                    href: "tagesschule/elektrotechnik/highlights/lernbüro-elektrotechnik",
-                    contentTitle: "Lernen im Aufbruch",
-                    content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
+                    heading: "Schuleingangsphase",
+                    note: "Individualisierung",
+                    thumbnail: "/res/img/schuleingangsphase.png",
+                    href: "tagesschule/wirtschaftsingenieure/highlights/schuleingangsphase",
+                    contentTitle: "Individuelle Betreuung und Entwicklung",
+                    content: "Die haben nur WIR! Die Schuleingangsphase ist so gestaltet, dass alle Schülerinnen und Schüler gut in der Schule ankommen und sich vom ersten Tag an wohlfühlen. Wichtig sind hier aber nicht nur offene Unterrichtsformen, wie beispielsweise KOOL, sondern ausschlaggebend ist auch eine strukturierte Lernumgebung."
                 },
-                {
+                {   
                     heading: "Werkstatt",
-                    note: "PRAXISUNTERRICHT",
-                    thumbnail: "/res/img/werkstaetteHET.png",
-                    href: "tagesschule/elektrotechnik/highlights/werkstätte-elektrotechnik",
+                    note: "Fachpraktischer Unterricht",
+                    thumbnail: "/res/img/werkstätteWi.png",
+                    href: "tagesschule/wirtschaftsingenieure/highlights/werkstatte-wirtschaftsingenieure",
                     contentTitle: "Praxisbasierte Erfahrungen",
-                    content: "In unseren Werkstätten erlernen SchülerInnen den Umgang mit technischen Gerätschaften und setzen das gelernte Theoriewissen selbst um."
+                    content: "Das Herzstück der HTL Ausbildung ist die Verknüpfung aus Theorie und Praxis. In den diversen Werkstätten kannst du die Theorieinhalte auf Projekte anwenden. Das macht die HTL Ausbildung weltweit einzigartig!"
                 }
             ],
             vertiefung: {
@@ -69,9 +67,9 @@ export default declareComponent("ausmacht-section-elektrotechnik", class extends
     }
 
     stl() {
-        return super.stl() + require("./ausmachtSectionElektrotechnik.css").toString()
+        return super.stl() + require("./ausmachtSectionWi.css").toString()
     }
     pug() {
-        return super.pug() + require("./ausmachtSectionElektrotechnik.pug").default
+        return super.pug() + require("./ausmachtSectionWi.pug").default
     }
 });

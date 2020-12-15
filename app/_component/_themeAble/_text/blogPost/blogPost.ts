@@ -48,7 +48,13 @@ export default class BlogPost extends Text {
   htmlcontent():string
   htmlcontent(html:string):void
   htmlcontent(html?:string){
-    if(html) this.q("blog-html").innerHTML = html;
+    if(html) {
+      html = html
+          .replaceAll("<a href", "<c-link link")
+          .replaceAll("<\/a>", "<\/c-link>");
+      this.q("blog-html").innerHTML = html;
+
+    }
     else return this.q("blog-html").innerHTML;
   }
 

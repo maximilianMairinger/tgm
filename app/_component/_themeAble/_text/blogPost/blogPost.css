@@ -21,6 +21,8 @@ blog-header{
 blog-html{
     display: block;
     max-width: 650px;
+    color: var(--strong-text-color);
+    font-size: 20px;
 }
 
 blog-html *{
@@ -46,7 +48,7 @@ blog-extra{
 
 blog-date{
     font-family: 'PT Mono', monospace;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 blog-extra hr{
@@ -63,6 +65,7 @@ blog-image{
     display: block;
     width: 110%;
     left: -5%;
+     margin-bottom: 50px;
 }
 
 h2{

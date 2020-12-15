@@ -40,7 +40,7 @@ blog-html figure img{
 }
 
 blog-extra{
-    margin-top: 1px;
+    margin-top: 15px;
     display: flex;
     flex-direction: row;
     align-self: stretch;

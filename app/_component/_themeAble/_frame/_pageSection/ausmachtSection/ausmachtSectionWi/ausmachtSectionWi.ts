@@ -15,7 +15,7 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "Fachtheoretische",
                 selection: [
                     {"icon":"energysysteme", "title":"Energiesysteme", "content":"Energiegewinnung und -speicherung", "link":"tagesschule/elektrotechnik/highlights/energiesysteme"},
                     {"icon":"automatisierungstechnik", "title":"Automatisierungstechnik", "content":"Automatisieren in elektrotechnischen Anwendungen", "link":"tagesschule/elektrotechnik/highlights/automatisierungstechnik"},

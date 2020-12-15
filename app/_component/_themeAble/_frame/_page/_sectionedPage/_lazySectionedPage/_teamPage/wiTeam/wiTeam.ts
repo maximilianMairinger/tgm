@@ -72,9 +72,6 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
 
   }
 
-  stl(){
-      return super.stl() + require("./wiTeam.css").toString();
-  }
 
   pug() {
     return "";

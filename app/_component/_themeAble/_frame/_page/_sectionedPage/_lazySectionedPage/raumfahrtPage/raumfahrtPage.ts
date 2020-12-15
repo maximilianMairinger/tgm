@@ -17,17 +17,17 @@ export default declareComponent("raumfahrt-page", class RaumfahrtPage extends La
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
-      {
-        key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail()
-          e.heading("Raumfahrttechnik")
-          e.subheading("der Tagesschule")
-          e.note("abteilung");
-          e.background("rocket.png")
+      // {
+      //   key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
+      //     // let e = new _Thumbnail()
+      //     // e.heading("Raumfahrttechnik")
+      //     // e.subheading("der Tagesschule")
+      //     // e.note("abteilung");
+      //     // e.background("rocket.png")
           
-          return new WrapperSection(e, "dark") as any
-        }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
-      },
+      //     return new WrapperSection(e, "dark") as any
+      //   }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
+      // },
       {
         key: new Import("info", 1, (_Info: typeof Info) => {
           let info = new _Info()

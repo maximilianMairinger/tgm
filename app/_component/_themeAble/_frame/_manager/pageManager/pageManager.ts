@@ -17,7 +17,7 @@ import BlogPage from "../../_page/blogPage/blogPage"
 import ElektrotechnikTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elektrotechnikTeam/elektrotechnikTeam";
 import ElektrotechnikProjekte from "../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikProjekte/elektrotechnikProjekte";
 import WiProjekte from "../../_page/_sectionedPage/_lazySectionedPage/wirtschaftsingenieureProjekte/wirtschaftsingenieureProjekte";
-import WiTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wirtschaftsingenieureTeam/wirtschaftsingenieureTeam"
+import WiTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wiTeam/wiTeam"
 
 export type PageName = string
 
@@ -89,7 +89,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       {
         key: new Import("tagesschule/wirtschaftsingenieure/team", 30, (wiTeam: typeof WiTeam) =>
             new wiTeam(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "wiTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wirtschaftsingenieureTeam/wirtschaftsingenieureTeam")
+        ), val: () => import(/* webpackChunkName: "wiTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wiTeam/wiTeam")
       },
       {
         key: new Import("tagesschule/raumfahrt/team", 30, (raumfahrtTeam: typeof RaumfahrtTeam) =>

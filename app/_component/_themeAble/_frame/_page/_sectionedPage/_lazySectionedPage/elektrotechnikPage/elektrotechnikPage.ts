@@ -19,7 +19,7 @@ export default declareComponent("elektrotechnik-page", class ElektrotechnikPage 
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail()
+          let e = new _Thumbnail("elektrotechnik")
           e.heading("Elektrotechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");

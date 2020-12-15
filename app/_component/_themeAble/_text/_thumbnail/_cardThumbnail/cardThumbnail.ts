@@ -5,14 +5,16 @@ import declareComponent from "../../../../../lib/declareComponent";
 
 export default class CardThumbnail extends Thumbnail {
   private cardContainer = this.q("card-container")
-  constructor(...cards: ConstructorParameters<typeof Card>[]) {
+  constructor(card: ConstructorParameters<typeof Card>, ...cards: ConstructorParameters<typeof Card>[])
+  constructor(abteilung: string)
+  constructor(card_abteilung: string | ConstructorParameters<typeof Card>, ...cards: ConstructorParameters<typeof Card>[]) {
     super()
 
-    if (cards.empty) cards.add(
+    if (typeof card_abteilung === "string") cards.add(
       ["anmelden", "Anmelden"],
       ["sprechstunden", "Sprechstunde", undefined, "neilo.webuntis.com/WebUntis/?school=tgm#/basic/officehours"],
-      ["projekte", "Projekte", undefined, "tagesschule/elektrotechnik/projekte"],
-      ["team", "Team", undefined, "tagesschule/elektrotechnik/team"]
+      ["projekte", "Projekte", undefined, "tagesschule/" + card_abteilung + "/projekte"],
+      ["team", "Team", undefined, "tagesschule/" + card_abteilung + "/team"]
     )
     
     this.cardContainer.apd(...cards.map(args => args instanceof Card ? args : new Card(...args)))

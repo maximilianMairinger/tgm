@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionRaumfahrt/ausmachtSectionRaumfahrt"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
+import News from "../../../../_pageSection/triangleNews/triangleNews"
 
 
 export default class WIPage extends LazySectionedPage {
@@ -19,7 +19,7 @@ export default class WIPage extends LazySectionedPage {
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail()
+          let e = new _Thumbnail("wirtschaftsingenieure")
           e.heading("Wirtschaftsingenieure")
           e.subheading("der Tagesschule")
           e.note("abteilung");
@@ -47,23 +47,38 @@ export default class WIPage extends LazySectionedPage {
         ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/ausmachtSectionWi/ausmachtSectionWi")
       },
       {
-        key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-          new _DarkNewsSection()
-        ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews")
+        key: new Import("news", 1, (_News: typeof News) => 
+          new _News({
+            text: {
+              note: "Termine und",
+              heading: "Aktuelles",
+              subheading: "aus der WI",
+              content: `Folge uns auf <c-link link="https://de-de.facebook.com/tgmhwi">Instagram</c-link> und <c-link link="https://www.instagram.com/tgm_wirtschaftsingenieure">Facebook</c-link>, so bist DU über unsere neuesten Aktivitäten immer up to date.`
+            },
+            cards: [
+              {heading: "Samstag", note: "18.04.20", thumbnail: "/res/img/het-blog-rad.png", href: "/", contentTitle: "Elektro-Fahrrad", content: "Das Elektrofahrrad der ET-Abteilung wurde offiziell zugelassen und ist im Handel verfügbar."},
+              {heading: "Montag", note: "20.04.20", thumbnail: "/res/img/het-blog-wind.png", href: "/", contentTitle: "Zukunft des Strom", content: "Am 20.12.2020 findet ein Vortrag zur Zukunft von erneuerbareren Energiegewinnungsmethoden statt."},
+              {heading: "Donnerstag", note: "16.04.20", thumbnail: "/res/img/ball.jpg", href: "/", contentTitle: "TGM-Ball", content: "Der 100. TGM-Ball findet kommenden Donnerstag statt, jetzt Tickets sichern!"},
+              {heading: "Samstag", note: "18.04.20", thumbnail: "/res/img/het-blog-rad.png", href: "/", contentTitle: "Elektro-Fahrrad", content: "Das Elektrofahrrad der ET-Abteilung wurde offiziell zugelassen und ist im Handel verfügbar."},
+              {heading: "Montag", note: "20.04.20", thumbnail: "/res/img/het-blog-wind.png", href: "/", contentTitle: "Zukunft des Strom", content: "Am 20.12.2020 findet ein Vortrag zur Zukunft von erneuerbareren Energiegewinnungsmethoden statt."},
+              {heading: "Donnerstag", note: "16.04.20", thumbnail: "/res/img/ball.jpg", href: "/", contentTitle: "TGM-Ball", content: "Der 100. TGM-Ball findet kommenden Donnerstag statt, jetzt Tickets sichern!"}
+            ]
+          })
+        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
       },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("zur Elektrotechnik");
-          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Elektrotechnik einzutauchen.")
+          imageTextBlob.subheading("zur WI");
+          imageTextBlob.content(`DU würdest dir gerne selbst ein Bild von unserer Abteilung machen und einen oder vielleicht sogar alle drei Schwerpunkte kennenlernen? Dann melde dich für einen Schnuppertag an – tauche ein in die Welt der Technik, Wirtschaft und Informatik! Hier findest du das Anmeldeformular`)
           imageTextBlob.linktext("Einen Besuch planen")
-          imageTextBlob.linkhref("tagesschule/elektrotechnik")
-          imageTextBlob.address("Wexstraße 19-23 / 3. Stock");
-          imageTextBlob.email("tdeininger@tgm.ac.at");
-          imageTextBlob.tel("+43 (1) 33 126 / 231");
-          imageTextBlob.image('url("/res/img/elektrotechnik_kotakt.png")');
+          imageTextBlob.linkhref("/")
+          imageTextBlob.address("Wexstraße 19-23 / 5. Stock");
+          imageTextBlob.email("georg.angerer@tgm.ac.at");
+          imageTextBlob.tel("0664 80126262");
+          imageTextBlob.image('url("/res/img/wiKontakt.png")');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

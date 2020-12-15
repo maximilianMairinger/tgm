@@ -36,8 +36,8 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
                 {
                     let leitungImageTextblob = new (leitung as typeof ImageTextblob)();
                     leitungImageTextblob.note("Abteilungvorstand");
-                    leitungImageTextblob.heading("DI Deininger");
-                    leitungImageTextblob.subheading("Thomas");
+                    leitungImageTextblob.heading("DI Angerer");
+                    leitungImageTextblob.subheading("Georg");
                     // leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")
                     leitungImageTextblob.address("Wexstraße 19-23 / 5. Stock");
                     leitungImageTextblob.email("georg.angerer@tgm.ac.at");

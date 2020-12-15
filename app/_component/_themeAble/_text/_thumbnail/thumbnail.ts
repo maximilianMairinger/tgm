@@ -20,35 +20,8 @@ export default class Thumbnail extends Text {
     this.theme('dark');
   }
 
-  background(src: string, alignX?: "left" | "right" | "center", alignY?: "top" | "bot" | "center") {
+  background(src: string) {
     this.img.src(src)
-    
-    if (alignX) this.alignImageX(alignX)
-    if (alignY) this.alignImageY(alignY)
-  }
-
-  alignImageY(to: "top" | "bot" | "center") {
-    if (to === "top") {
-      this.imgContainer.css({alignItems: "start"})
-    }
-    else if (to === "bot") {
-      this.imgContainer.css({alignItems: "end"})
-    }
-    else if (to === "center") {
-      this.imgContainer.css({alignItems: "center"})
-    }
-  }
-
-  alignImageX(to: "left" | "right" | "center") {
-    if (to === "left") {
-      this.imgContainer.css({justifyContent: "start"})
-    }
-    else if (to === "right") {
-      this.imgContainer.css({justifyContent: "end"})
-    }
-    else if (to === "center") {
-      this.imgContainer.css({justifyContent: "center"})
-    }
   }
 
   note(): string

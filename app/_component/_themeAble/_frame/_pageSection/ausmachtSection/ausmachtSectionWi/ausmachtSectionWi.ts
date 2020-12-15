@@ -45,22 +45,28 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
             vertiefung: {
                 note: "die",
                 heading: "Vertiefungen",
-                subheading: "der Elektrotechnik",
+                subheading: "der WI",
                 hsize: {max:60, min:40},
-                content: "Die Abteilung Elektrotechnik bietet einen besonders umfassende technische Ausbildung. Grundsätzlich beschäftigt sie sich mit allen Bereichen"
+                content: "Entscheidest DU dich für eine Ausbildung zum Wirtschaftsingenieur bzw. zur Wirtschaftsingenieurin, dann kannst du ab dem 1. Jahrgang zwischen drei Vertiefungen wählen: Betriebsinformatik, Logistik oder Maschinenbau. Egal welche Vertiefung DU wählst, Wirtschaftsingenieure bzw. Wirtschaftsingenierinnen sind in der Arbeitswelt IMMER gefragt und besetzen nach ihrer Ausbildung Top Positionen im Unternehmen."
             },
             vertiefungscard: [
                 {
-                    heading:"Automatisierung",
-                    icon:"automatisierung",
-                    link:"tagesschule/elektrotechnik/highlights/automatisierung",
-                    content:"Das reibungslose Zusammenspiel aller Einrichtungen in einer Fabrik, der U-Bahnbetrieb, der immer vorhandene Strom in unseren Steckdosen – das alles ist ohne Automatisierungstechnik unmöglich."
+                    heading:"Betriebsinformatik",
+                    icon:"betriebsinformatik",
+                    link:"tagesschule/wirtschaftsingenieure/highlights/betriebsinformatik",
+                    content:"Wenn du dich gerne mit Computern, Software und Programmierung beschäftigst und spannende Projekte im IT Bereich erfolgreich umsetzen willst, dann ist der Schwerpunkt Betriebsinformatik genau die richtige Entscheidung!"
                 },
                 {
-                    heading:"Erneuerbare Energien",
-                    icon:"erneuerbareEnergien",
-                    link:"tagesschule/elektrotechnik/highlights/erneuerbare-energien",
-                    content:"Die Umwandlung von Strahlungsenergie der Sonne in elektrischen Strom (Photovoltaik) bzw. in Wärme (Solarthermie) oder der Aufbau von Windkraftanlagen – das sind nur einige der nachhaltigen Technologien aus dem Bereich der Erneuerbaren Energien."
+                    heading:"Logistik",
+                    icon:"logistik",
+                    link:"tagesschule/wirtschaftsingenieure/highlights/logistik",
+                    content:"Entscheidest Du dich für den Ausbildungsschwerpunkt Logistik, dann lernst Du wie man Rohstoffe zielgerichtet einkauft, Standorte plant, Produktions- und Logistikprozesse simuliert und optimiert und wie Produkte von Hersteller effizient zum Kunden kommen. Du lernst, wie man Supply Chains aktiv gestalten kann."
+                },
+                {
+                    heading:"Maschinenbau",
+                    icon:"maschinenbau",
+                    link:"tagesschule/wirtschaftsingenieure/highlights/maschinenbau",
+                    content:"Im Maschinenbau lernst du nicht nur die technisch-wirtschaftlichen Zusammenhänge von Konstruktion, 3D-Druck und Maschinen kennen, sondern kannst aus deinen Ideen innovative Produkte gestalten und vielleicht als Highlight sogar in Deiner eigenen Junior Company produzieren und verkaufen."
                 }
             ]
         })

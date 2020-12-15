@@ -37,6 +37,10 @@ export const iconIndex = {
   },
   vertiefung: {
     automatisierung: () => import("./vertiefung/automationGear/automationGear"),
-    erneuerbareEnergien: () => import("./vertiefung/windMills/windMills")
+    erneuerbareEnergien: () => import("./vertiefung/windMills/windMills"),
+    maschinenbau: () => import("./vertiefung/maschinenbau/maschinenbau"),
+    logistik: () => import("./vertiefung/logistik/logistik"),
+    betriebsinformatik: () => import("./vertiefung/betriebsinformatik/betriebsinformatik"),
+
   }
 }

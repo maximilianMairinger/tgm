@@ -18,7 +18,7 @@ export default declareComponent("wirtschaftsingenieure-projekte", class Raumfahr
           e.note("Bemerkenswerte")
           e.heading("Diplomarbeiten");
           e.subheading("der WI");
-          e.background('elProj.jpg');
+          e.background('wiProject.png');
           return new WrapperSection(e, 'dark') as any;
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/thumbnail")
       },

@@ -89,7 +89,7 @@ text-box *:nth-child(n+3){
 }
 
 text-box content-text {
-    max-width: 21.6em;
+    max-width: calc(10vw + 450px);
     line-height: 1.5em;
     letter-spacing: 0.02em;
     color: var(--weak-text-color);

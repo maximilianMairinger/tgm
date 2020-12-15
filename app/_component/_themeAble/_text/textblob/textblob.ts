@@ -136,6 +136,8 @@ export default class Textblob extends Text {
   content(content: string): this
   content(content?: string): any {
     if (content !== undefined) {
+      this.contentElem.css({maxWidth: `calc(15vw + ${content.length / 3}px)`})
+      
       this.contentElem.html(content)
       this.themeAblesInContent.clear()
       this.contentElem.childs(1, true).ea((e) => {

@@ -20,10 +20,10 @@ export default class WIPage extends LazySectionedPage {
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
           let e = new _Thumbnail()
-          e.heading("Elektrotechnik")
+          e.heading("Wirtschaftsingenieure")
           e.subheading("der Tagesschule")
           e.note("abteilung");
-          e.background("het_main.jpg")
+          e.background("stockMan.png")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
@@ -32,12 +32,11 @@ export default class WIPage extends LazySectionedPage {
         key: new Import("info", 1, (_Info: typeof Info) => {
           let info = new _Info()
 
-          info.heading("Technische Ausbildung");
-          info.subheading("am Puls der Zeit");
-          info.note("bei uns");
-          info.hsize({max:68, min:40});
-          info.hmobile({max:40, min:30});
-          info.content("Die Abteilung Elektrotechnik bietet eine besonders umfassende technische Ausbildung. Grundsätzlich beschäftigt sie sich mit allen Bereichen, die mit elektrischem Strom zu tun haben. Dadurch ergeben sich viele Berufsfelder, etwa Antriebstechnik, Automation und Informatik in denen unsere Absolventen kompetent sind.")
+          info.content(`Wirtschaftsingenieure sind echte Allrounder, da sie durch ihre fundierte technische und wirtschaftliche Ausbildung nicht nur Spezialisten sind, sondern auch Abläufe an den wesentlichen Schnittstellen im Unternehmen gestalten. Entscheidest DU dich für unsere Abteilung dann entscheidest du dich für eine sehr breit gefächerte Ausbildung, die so vielfältig ist wie das LEBEN selbst.
+          <br><br>
+          Als Wirtschaftsingenieur bzw. Wirtschaftsingenieurin bekommst du neben Fachtheorie und Fachpraxis wichtige <c-link link="tagesschule/wirtschaftsingenieure/info/softskills">Softskills</c-link> vermittelt, die dich nach der Ausbildung für Managementposition qualifizieren. Wir unterstützen unsere Absolventen auch noch nach der bestandenen Reife- und Diplomprüfung. 
+          Aus diesem Grund arbeiten wir stets an <c-link link="tagesschule/wirtschaftsingenieure/info/kooperationen">Kooperationsvereinbarungen</c-link> mit verschiedenen Fachhochschulen. Das bedeutet für DICH, dass dir einige Inhalte deiner Ausbildung angerechnet werden, und dein Studium dadurch kürzer wird.
+          `)
 
           return new WrapperSection(info) as any
         }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")
@@ -81,10 +80,10 @@ export default class WIPage extends LazySectionedPage {
   }
 
   stl() {
-    return super.stl() + require("./wi.css").toString()
+    return super.stl() + require("./wiPage.css").toString()
   }
   pug() {
-    return require("./wi.pug").default
+    return require("./wiPage.pug").default
   }
 
 }

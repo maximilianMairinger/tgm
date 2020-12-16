@@ -3,42 +3,50 @@ import lazyLoad, { ImportanceMap, ResourcesMap } from "../../../../../../lib/laz
 import LoadingIndecator from "../../../../../_indecator/loadingIndecator/loadingIndecator";
 import * as domain from "../../../../../../lib/domain";
 
-export default abstract class LazySectionedPage extends SectionedPage<Promise<any>> {
+export default abstract class LazySectionedPage extends SectionedPage {
 
-  private loadMe: (initalKey?: string) => ResourcesMap
-  private resResourceMap: Function
   private resourceMap: ResourcesMap
 
   private loadingIndecator: HTMLElement
+  private importanceMap: ImportanceMap<any, any>
 
   constructor(sectionIndex: ImportanceMap<() => Promise<any>, any>, sectionChangeCallback?: (section: string) => void, sectionAliasList?: AliasList, mergeIndex?: {[part in string]: string}) {
-    let res: Function
-    super(new Promise((r) => {
-      res = r
-    }), sectionChangeCallback, sectionAliasList, mergeIndex)
-    this.resResourceMap = res
-
-    this.elementBody.apd(this.loadingIndecator = ce("loading-indecator"))
-
-    let w = lazyLoad(sectionIndex, e => {
+    const { resourcesMap, importanceMap } = lazyLoad(sectionIndex, e => {
       this.elementBody.insertBefore(e, this.loadingIndecator)
       e.anim({opacity: 1})
     })
-    this.resourceMap = w.resourcesMap
-    this.loadMe = w.load
+    super(resourcesMap, sectionChangeCallback, sectionAliasList, mergeIndex)
+    
+    this.elementBody.apd(this.loadingIndecator = ce("loading-indecator"))
+    resourcesMap.fullyLoaded.then(() => {
+      this.loadingIndecator.remove()
+    })
+
+    this.importanceMap = importanceMap
+    this.resourceMap = resourcesMap
   }
 
   
 
-  async loadedCallback() {
-    
-    this.resourceMap = this.loadMe()
-    this.resResourceMap(this.resourceMap)
-    this.resourceMap.fullyLoaded.then(() => {
-      this.loadingIndecator.remove()
-    })
-    await this.resourceMap.fullyLoaded
-    
+  async minimalContentFullPaint() {
+    if (this.initialDomainFragment) {
+
+    }
+    else this.importanceMap.whiteList(this.importanceMap.entries().next().value.first)
+    this.importanceMap.whiteList(this.initialDomainFragment ?  : )
+    if () this.resourceMap.
+  }
+
+  private initialDomainFragment: string
+  async navigationCallback(domainFragment: string) {
+    let e = await super.navigationCallback(domainFragment)
+    this.initialDomainFragment = domainFragment
+    return e
+  }
+
+  async fullContentFullPaint() {
+    this.importanceMap.whiteListAll()
+    await this.resourceMap.fullyLoaded  
   }
 
   async initialActivationCallback(a) {

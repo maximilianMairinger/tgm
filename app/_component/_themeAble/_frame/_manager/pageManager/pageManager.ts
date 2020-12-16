@@ -57,19 +57,19 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "elektrotechnik" */"../../_page/_sectionedPage/_lazySectionedPage/wiPage/wiPage")
       },
       {
-        key: new Import("tagesschule/elektrotechnik", 21, (elektrotechnikPage: typeof ElektrotechnikPage) => 
-          new elektrotechnikPage(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "elektrotechnik" */"../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikPage/elektrotechnikPage")
-      },
-      {
-        key: new Import("tagesschule/raumfahrt", 20, (raumfahrtPage: typeof RaumfahrtPage) => 
-          new raumfahrtPage(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "raumfahrt" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage")
-      },
-      {
         key: new Import("tagesschule/wirtschaftsingenieure/projekte", 30, (wiProjekte: typeof WiProjekte) =>
             new wiProjekte(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "wiProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/wirtschaftsingenieureProjekte/wirtschaftsingenieureProjekte")
+      },
+      {
+        key: new Import("tagesschule/wirtschaftsingenieure/team", 30, (wiTeam: typeof WiTeam) =>
+            new wiTeam(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "wiTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wiTeam/wiTeam")
+      },
+      {
+        key: new Import("tagesschule/elektrotechnik", 21, (elektrotechnikPage: typeof ElektrotechnikPage) => 
+          new elektrotechnikPage(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "elektrotechnik" */"../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikPage/elektrotechnikPage")
       },
       {
         key: new Import("tagesschule/elektrotechnik/projekte", 30, (elektrotechnikProjekte: typeof ElektrotechnikProjekte) =>
@@ -77,19 +77,19 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "elektrotechnikProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikProjekte/elektrotechnikProjekte")
       },
       {
-        key: new Import("tagesschule/raumfahrt/projekte", 30, (raumfahrtProjekte: typeof RaumfahrtProjekte) =>
-            new raumfahrtProjekte(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "raumfahrtProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte")
-      },
-      {
         key: new Import("tagesschule/elektrotechnik/team", 30, (elektrotechnikTeam: typeof ElektrotechnikTeam) =>
             new elektrotechnikTeam(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "elektrotechnikTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elektrotechnikTeam/elektrotechnikTeam")
       },
       {
-        key: new Import("tagesschule/wirtschaftsingenieure/team", 30, (wiTeam: typeof WiTeam) =>
-            new wiTeam(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "wiTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wiTeam/wiTeam")
+        key: new Import("tagesschule/raumfahrt", 20, (raumfahrtPage: typeof RaumfahrtPage) => 
+          new raumfahrtPage(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "raumfahrt" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage")
+      },
+      {
+        key: new Import("tagesschule/raumfahrt/projekte", 30, (raumfahrtProjekte: typeof RaumfahrtProjekte) =>
+            new raumfahrtProjekte(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "raumfahrtProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte")
       },
       {
         key: new Import("tagesschule/raumfahrt/team", 30, (raumfahrtTeam: typeof RaumfahrtTeam) =>

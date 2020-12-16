@@ -89,12 +89,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
       {
         key: new Import("tagesschule/biomedizin/projekte", 30, (elektrotechnikProjekte: typeof ElektrotechnikProjekte) =>
             new elektrotechnikProjekte(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "elektrotechnikProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikProjekte/elektrotechnikProjekte")
+        ), val: () => import(/* webpackChunkName: "elektrotechnikProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/biomedProjekte/biomedProjekte")
       },
       {
         key: new Import("tagesschule/biomedizin/team", 30, (elektrotechnikTeam: typeof ElektrotechnikTeam) =>
             new elektrotechnikTeam(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "elektrotechnikTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elektrotechnikTeam/elektrotechnikTeam")
+        ), val: () => import(/* webpackChunkName: "elektrotechnikTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/biomedTeam/biomedTeam")
       },
       {
         key: new Import("tagesschule/raumfahrt", 20, (raumfahrtPage: typeof RaumfahrtPage) => 

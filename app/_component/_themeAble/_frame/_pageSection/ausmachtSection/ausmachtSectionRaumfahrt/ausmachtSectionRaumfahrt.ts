@@ -55,20 +55,28 @@ export default declareComponent("ausmacht-section-raumfahrt", class extends Ausm
                 }
             ],
             vertiefung: {
-                note: "die",
-                heading: "Vertiefungen",
-                subheading: "der Raumfahrt",
-                hsize: {max:60, min:40},
-                content: "Die Abteilung Raumfahrt bietet einen besonders umfassende technische Ausbildung. Grundsätzlich beschäftigt sie sich mit allen Bereichen"
-            },
-            vertiefungscard: [
-                {
-                    heading:"Erneuerbare Energien",
-                    icon:"erneuerbareEnergien",
-                    link:"",
-                    content:"Die Umwandlung von Strahlungsenergie der Sonne in elektrischen Strom (Photovoltaik) bzw. in Wärme (Solarthermie) oder der Aufbau von Windkraftanlagen – das sind nur einige der nachhaltigen Technologien aus dem Bereich der Erneuerbaren Energien."
-                }
-            ]
+                text: {
+                    note: "die",
+                    heading: "Vertiefungen",
+                    subheading: "der Raumfahrt",
+                    hsize: {max:60, min:40},
+                    content: "Die Abteilung Raumfahrt bietet einen besonders umfassende technische Ausbildung. Grundsätzlich beschäftigt sie sich mit allen Bereichen"
+                },
+                cards: [
+                    {
+                        heading:"Erneuerbare Energien",
+                        icon:"erneuerbareEnergien",
+                        link:"",
+                        content:"Die Umwandlung von Strahlungsenergie der Sonne in elektrischen Strom (Photovoltaik) bzw. in Wärme (Solarthermie) oder der Aufbau von Windkraftanlagen – das sind nur einige der nachhaltigen Technologien aus dem Bereich der Erneuerbaren Energien."
+                    },
+                    {
+                        heading:"Erneuerbare Energien",
+                        icon:"erneuerbareEnergien",
+                        link:"",
+                        content:"Die Umwandlung von Strahlungsenergie der Sonne in elektrischen Strom (Photovoltaik) bzw. in Wärme (Solarthermie) oder der Aufbau von Windkraftanlagen – das sind nur einige der nachhaltigen Technologien aus dem Bereich der Erneuerbaren Energien."
+                    }
+                ]
+            }
         })
     }
 

@@ -17,7 +17,7 @@ export default declareComponent("elektrotechnik-projekte", class RaumfahrtProjek
         key: new Import("", 1, (thumbnail: typeof Thumbnail) => {
           let e = new thumbnail();
           e.note("Bemerkenswerte")
-          e.heading("Diplomprojekte");
+          e.heading("Diplomarbeiten");
           e.subheading("der ET");
           e.background('elProj.jpg');
           return new WrapperSection(e, 'dark') as any;

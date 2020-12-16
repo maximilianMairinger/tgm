@@ -29,15 +29,26 @@ export const iconIndex = {
     team: () => import("../_icon/tagesschuleIcons/team/team"),
   },
   fach: {
+    // HET
     energysysteme: () => import("./fachIcon/sunElectricity/sunElectricity"),
     automatisierungstechnik: () => import("./fachIcon/sprintGear/sprintGear"),
     antriebstechnik: () => import("./fachIcon/electricCar/electricCar"),
     industrieelektronik: () => import("./fachIcon/powerPlant/powerPlant"),
     angewandteInformatik: () => import("./fachIcon/pcsConnected/pcsConnected"),
+
+    // Biomed
+    biologie: () => import("./fachIcon/biology/biology"),
+    signalverarbeitung: () => import("./fachIcon/heartBeat/heartBeat"),
+    gerätetechnik: () => import("./fachIcon/microscope/microscope"),
+    gesundheitsmechatronik: () => import("./fachIcon/prosthesis/prosthesis"),
+    gesundheitsinformatik: () => import("./fachIcon/heartSmartWatch/heartSmartWatch"),
   },
   vertiefung: {
+    // HET
     automatisierung: () => import("./vertiefung/automationGear/automationGear"),
     erneuerbareEnergien: () => import("./vertiefung/windMills/windMills"),
+
+    // WI
     maschinenbau: () => import("./vertiefung/maschinenbau/maschinenbau"),
     logistik: () => import("./vertiefung/logistik/logistik"),
     betriebsinformatik: () => import("./vertiefung/betriebsinformatik/betriebsinformatik"),

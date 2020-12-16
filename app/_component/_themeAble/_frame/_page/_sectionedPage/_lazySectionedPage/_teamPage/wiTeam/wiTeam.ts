@@ -57,7 +57,7 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
                     schuelerImageTextblob.heading("Kaan");
                     schuelerImageTextblob.subheading("Yigitbilek");
                     schuelerImageTextblob.content("Ich darf euch dieses Jahr als Abteilungssprecher vertreten, bei Anliegen bitte einfach melden!")
-                    schuelerImageTextblob.address("Wexstraße 123 / 11. Stock");
+                    schuelerImageTextblob.address("Wexstraße 19-23 / 11. Stock");
                     schuelerImageTextblob.email("kyigitbilek@student.tgm.ac.at");
                     // schuelerImageTextblob.tel("+43 ‭650 7311330‬");
                     schuelerImageTextblob.image('url("/res/img/team_2.jpg")');

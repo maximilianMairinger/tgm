@@ -43,32 +43,35 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                 }
             ],
             vertiefung: {
-                note: "die",
-                heading: "Vertiefungen",
-                subheading: "der WI",
-                hsize: {max:60, min:40},
-                content: `Entscheidest DU dich für eine Ausbildung zum Wirtschaftsingenieur bzw. zur Wirtschaftsingenieurin, dann kannst du ab dem 1. Jahrgang zwischen drei Vertiefungen wählen: Betriebsinformatik, Logistik oder Maschinenbau. Egal welche Vertiefung DU wählst, Wirtschaftsingenieure bzw. Wirtschaftsingenierinnen sind in der Arbeitswelt IMMER gefragt und besetzen nach ihrer Ausbildung Top Positionen im Unternehmen. Auch ermöglicht dir die <c-link link="tagesschule/wirtschaftsingenieure/highlights/junior-company/">Junior Company</c-link> ein echtes Unternehmen mit deinen KollegInnen zu führen.`
-            },
-            vertiefungscard: [
-                {
-                    heading:"Betriebsinformatik",
-                    icon:"betriebsinformatik",
-                    link:"tagesschule/wirtschaftsingenieure/highlights/betriebsinformatik",
-                    content:"Wenn du dich gerne mit Computern, Software und Programmierung beschäftigst und spannende Projekte im IT Bereich erfolgreich umsetzen willst, dann ist der Schwerpunkt Betriebsinformatik genau die richtige Entscheidung!"
+                text: {
+                    note: "die",
+                    heading: "Vertiefungen",
+                    subheading: "der WI",
+                    hsize: {max:60, min:40},
+                    content: `Entscheidest DU dich für eine Ausbildung zum Wirtschaftsingenieur bzw. zur Wirtschaftsingenieurin, dann kannst du ab dem 1. Jahrgang zwischen drei Vertiefungen wählen: Betriebsinformatik, Logistik oder Maschinenbau. Egal welche Vertiefung DU wählst, Wirtschaftsingenieure bzw. Wirtschaftsingenierinnen sind in der Arbeitswelt IMMER gefragt und besetzen nach ihrer Ausbildung Top Positionen im Unternehmen. Auch ermöglicht dir die <c-link link="tagesschule/wirtschaftsingenieure/highlights/junior-company/">Junior Company</c-link> ein echtes Unternehmen mit deinen KollegInnen zu führen.`
                 },
-                {
-                    heading:"Logistik",
-                    icon:"logistik",
-                    link:"tagesschule/wirtschaftsingenieure/highlights/logistik",
-                    content:"Entscheidest Du dich für den Ausbildungsschwerpunkt Logistik, dann lernst Du wie man Rohstoffe zielgerichtet einkauft, Standorte plant, Produktions- und Logistikprozesse simuliert und optimiert und wie Produkte von Hersteller effizient zum Kunden kommen. Du lernst, wie man Supply Chains aktiv gestalten kann."
-                },
-                {
-                    heading:"Maschinenbau",
-                    icon:"maschinenbau",
-                    link:"tagesschule/wirtschaftsingenieure/highlights/maschinenbau",
-                    content:"Im Maschinenbau lernst du nicht nur die technisch-wirtschaftlichen Zusammenhänge von Konstruktion, 3D-Druck und Maschinen kennen, sondern kannst aus deinen Ideen innovative Produkte gestalten und vielleicht als Highlight sogar in Deiner eigenen Junior Company produzieren und verkaufen."
-                }
-            ]
+                cards: [
+                    {
+                        heading:"Betriebsinformatik",
+                        icon:"betriebsinformatik",
+                        link:"tagesschule/wirtschaftsingenieure/highlights/betriebsinformatik",
+                        content:"Wenn du dich gerne mit Computern, Software und Programmierung beschäftigst und spannende Projekte im IT Bereich erfolgreich umsetzen willst, dann ist der Schwerpunkt Betriebsinformatik genau die richtige Entscheidung!"
+                    },
+                    {
+                        heading:"Logistik",
+                        icon:"logistik",
+                        link:"tagesschule/wirtschaftsingenieure/highlights/logistik",
+                        content:"Entscheidest Du dich für den Ausbildungsschwerpunkt Logistik, dann lernst Du wie man Rohstoffe zielgerichtet einkauft, Standorte plant, Produktions- und Logistikprozesse simuliert und optimiert und wie Produkte von Hersteller effizient zum Kunden kommen. Du lernst, wie man Supply Chains aktiv gestalten kann."
+                    },
+                    {
+                        heading:"Maschinenbau",
+                        icon:"maschinenbau",
+                        link:"tagesschule/wirtschaftsingenieure/highlights/maschinenbau",
+                        content:"Im Maschinenbau lernst du nicht nur die technisch-wirtschaftlichen Zusammenhänge von Konstruktion, 3D-Druck und Maschinen kennen, sondern kannst aus deinen Ideen innovative Produkte gestalten und vielleicht als Highlight sogar in Deiner eigenen Junior Company produzieren und verkaufen."
+                    }
+                ]
+                
+            }
         })
     }
 

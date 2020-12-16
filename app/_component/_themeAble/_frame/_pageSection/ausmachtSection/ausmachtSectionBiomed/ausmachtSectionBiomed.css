@@ -1,0 +1,84 @@
+:host{
+    display: block;
+}
+
+c-textblob{
+    display: inline-block;
+    width: auto;
+    min-width: unset;
+    margin-bottom: 75px;
+}
+
+card-container{
+    display: flex;
+    margin: 0 205px 100px 205px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+card-container * {
+    margin: 0 25px 50px 25px;
+}
+
+c-unterricht-systeme-card{
+    min-height:440px;
+}
+
+
+c-selection-card{
+    width: 37%;
+    max-width: 580px;
+    flex-grow: 1;
+}
+
+@media only screen and (max-width: 1250px) {
+    section-header{
+        margin: 50px 100px 100px 100px;
+        text-align: center;
+    }
+
+    card-container{
+        margin: 0 100px 100px 100px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    c-selection-card{
+        width: auto;
+    }
+
+    c-unterricht-systeme-card{
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    card-container{
+        margin-right: 10vw;
+        margin-left: 10vw;
+    }
+
+    card-container *{
+        margin: 50px 0 0 0;
+    }
+
+    c-selection-card{
+        max-width: 100%;
+        min-width: unset;
+        margin-right: 0;
+    }
+
+    c-unterricht-systeme-card{
+        width: unset;
+    }
+
+    section-header{
+        font-size: max(27px, calc(35px + (80 - 35)*((100vw - 300px)/(768 - 300))));
+        margin: 0 10vw;
+        color: #425870;
+    }
+
+}
+

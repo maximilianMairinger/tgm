@@ -5,10 +5,7 @@ import declareComponent from "../../../../../lib/declareComponent";
 
 
 export default class ElectricCarIcon extends Icon {
-  constructor() {
-    super()
 
-  }
 
   pug() {
     return require("./electricCar.pug").default

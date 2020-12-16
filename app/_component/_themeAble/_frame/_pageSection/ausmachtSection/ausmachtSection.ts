@@ -38,14 +38,16 @@ export default class AusmachtSection extends PageSection {
       contentTitle: string,
       content: string
     }[],
-    vertiefung: {
-      note: string,
-      heading: string,
-      subheading: string,
-      hsize:MediaQuerySize,
-      content: string
-    },
-    vertiefungscard:VertiefungsCardContent[]
+    vertiefung?: {
+      text: {
+        note: string,
+        heading: string,
+        subheading: string,
+        hsize:MediaQuerySize,
+        content: string
+      }
+      cards: VertiefungsCardContent[]
+    }
   }) {
     super()
 
@@ -74,15 +76,21 @@ export default class AusmachtSection extends PageSection {
     }
 
     this.cardContainer.apd(...boxAr)
-    let vertiefungBlob = new Textblob();
-    for( let vertiefung in content.vertiefung){
-      vertiefungBlob[vertiefung](content.vertiefung[vertiefung])
+    if (content.vertiefung) {
+      let vertiefungBlob = new Textblob();
+      const txt = content.vertiefung.text
+      for(let vertiefung in txt){
+        vertiefungBlob[vertiefung](txt[vertiefung])
+      }
+      this.vertiefungSection.apd(vertiefungBlob)
+      
+      let vertiefungsContainer = new VertiefungsContainer();
+      vertiefungsContainer.cards(content.vertiefung.cards);
+      this.vertiefungSection.apd(vertiefungsContainer)
     }
-    this.vertiefungSection.apd(vertiefungBlob)
+    
 
-    let vertiefungsContainer = new VertiefungsContainer();
-    vertiefungsContainer.cards(content.vertiefungscard);
-    this.vertiefungSection.apd(vertiefungsContainer)
+    
 
     
 

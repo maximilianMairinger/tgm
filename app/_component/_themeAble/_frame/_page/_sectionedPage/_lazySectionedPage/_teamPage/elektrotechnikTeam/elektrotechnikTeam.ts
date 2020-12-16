@@ -57,7 +57,7 @@ export default declareComponent("elektrotechnik-team", class RaumfahrtTeam exten
                     schuelerImageTextblob.heading("Tacho");
                     schuelerImageTextblob.subheading("Marc-Luis");
                     schuelerImageTextblob.content("Ich darf euch dieses Jahr als Abteilungssprecher vertreten, bei Anliegen bitte einfach melden!")
-                    schuelerImageTextblob.address("Wexstraße 123 / 11. Stock");
+                    schuelerImageTextblob.address("Wexstraße 19-23 / 11. Stock");
                     schuelerImageTextblob.email("mtacho@student.tgm.ac.at");
                     schuelerImageTextblob.tel("+43 ‭650 7311330‬");
                     schuelerImageTextblob.image('url("/res/img/team_2.jpg")');
@@ -72,9 +72,6 @@ export default declareComponent("elektrotechnik-team", class RaumfahrtTeam exten
 
   }
 
-  stl(){
-      return super.stl() + require("./elektrotechnikTeam.css").toString();
-  }
 
   pug() {
     return "";

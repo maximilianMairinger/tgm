@@ -44,7 +44,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
                     schularzt.heading("Dr. Hafner");
                     schularzt.subheading("Gerhard");
                     schularzt.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 16:00 Uhr. ")
-                    schularzt.address("Wexstraße 123 / 1. Stock / T133");
+                    schularzt.address("Wexstraße 19-23 / 1. Stock / T133");
                     schularzt.email("g.hafner@ergomobil.at  ");
                     schularzt.tel("+43 1 337 69 123");
                     schularzt.image('url("/res/img/student_1.jpg")');
@@ -61,7 +61,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
                     schularzt.heading("Dr. Kripser");
                     schularzt.subheading("Florian");
                     schularzt.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 13:00 Uhr. ")
-                    schularzt.address("Wexstraße 123 / 1. Stock / T133");
+                    schularzt.address("Wexstraße 19-23 / 1. Stock / T133");
                     schularzt.email("fkrisper@tgm.ac.at");
                     schularzt.tel("+43 1 33126 291");
                     schularzt.image('url("/res/img/student_2.jpg")');

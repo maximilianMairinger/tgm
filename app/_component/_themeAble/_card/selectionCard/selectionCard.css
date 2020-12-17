@@ -196,6 +196,11 @@ image-container{
     backface-visibility: hidden;
 }
 
+c-link.stundentafel{
+    margin-top: 25px;
+    font-size: 18px;
+}
+
 image-box{
     position: absolute;
     width: 400px;

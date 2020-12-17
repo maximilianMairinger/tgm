@@ -28,20 +28,20 @@ export default declareComponent("ausmacht-section-biomed", class extends Ausmach
             },
             cards: [
                 {
-                    heading: "Zellkultur",
+                    heading: "Zellkulturlabor",
                     note: "praxisunterricht",
                     thumbnail: "/res/img/biomedPrototype.jpg",
-                    href: "tagesschule/elektrotechnik/highlights/lernbüro-elektrotechnik",
+                    href: "tagesschule/biomedizin/highlights/zellkultur",
                     contentTitle: "Zellkulturlabortechnik",
-                    content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."
+                    content: "Du lernst hier an lebenden Zellen hygienisches Arbeiten mit sterilen Werkbänken und Inkubatoren. Damit bist du bestens gerüstet für die Zukunft der Biomedizinischen Technik."
                 },
                 {
-                    heading: "Werkstatt",
+                    heading: "Prototypenbau",
                     note: "PRAXISUNTERRICHT",
                     thumbnail: "/res/img/biomedLabor.png",
-                    href: "tagesschule/elektrotechnik/highlights/werkstätte-elektrotechnik",
-                    contentTitle: "Medizinisches Labor",
-                    content: "Im praktischen Laborunterricht vermitteln unsere Lehrkräfte praktische Fachkentnisse und unterstützen die persönliche Entwicklung der"
+                    href: "tagesschule/biomedizin/highlights/prototypenbau",
+                    contentTitle: "Prototypenbau",
+                    content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."
                 }
             ]
         })

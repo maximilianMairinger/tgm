@@ -28,7 +28,8 @@ export default class AusmachtSection extends PageSection {
         title: string,
         content: string,
         link: string
-      }[]
+      }[],
+      stundentafel?: string
     },
     cards: {
       heading: string,

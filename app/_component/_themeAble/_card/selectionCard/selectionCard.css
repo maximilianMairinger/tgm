@@ -197,6 +197,7 @@ image-container{
 }
 
 c-link.stundentafel{
+    display: none;
     margin-top: 25px;
     font-size: 18px;
 }

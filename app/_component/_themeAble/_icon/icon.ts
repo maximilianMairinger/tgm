@@ -42,6 +42,13 @@ export const iconIndex = {
     gerätetechnik: () => import("./fachIcon/microscope/microscope"),
     gesundheitsmechatronik: () => import("./fachIcon/prosthesis/prosthesis"),
     gesundheitsinformatik: () => import("./fachIcon/heartSmartWatch/heartSmartWatch"),
+
+    // HEL
+    // biologie: () => import("./fachIcon/biology/biology"),
+    // signalverarbeitung: () => import("./fachIcon/heartBeat/heartBeat"),
+    // gerätetechnik: () => import("./fachIcon/microscope/microscope"),
+    // gesundheitsmechatronik: () => import("./fachIcon/prosthesis/prosthesis"),
+    // gesundheitsinformatik: () => import("./fachIcon/heartSmartWatch/heartSmartWatch"),
   },
   vertiefung: {
     // HET

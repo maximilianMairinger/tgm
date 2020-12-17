@@ -19,11 +19,11 @@ export default declareComponent("ausmacht-section-biomed", class extends Ausmach
                 heading: "Gegenstände",
                 note: "Fachspezifische",
                 selection: [
-                    {"icon":"biologie", "title":"Biologie, Medizin & Gesundheitswesen", "content":"Ärzte unterrichten medizinisches Grundwissen", "link":"tagesschule/elektrotechnik/highlights/energiesysteme"},
-                    {"icon":"signalverarbeitung", "title":"Biomedizinische Signalverarbeitung", "content":"Technische Geräte Prüfung von Vitalfunktionen", "link":"tagesschule/elektrotechnik/highlights/automatisierungstechnik"},
-                    {"icon":"gerätetechnik", "title":"Medizinische Gerätetechnik", "content":"Technische Geräte verstehen und warten", "link":"tagesschule/elektrotechnik/highlights/antriebstechnik"},
-                    {"icon":"gesundheitsmechatronik", "title":"Gesundheitsmechatronik", "content":"Entwicklung von Prothesen", "link":"tagesschule/elektrotechnik/highlights/industrieelektronik"},
-                    {"icon":"gesundheitsinformatik", "title":"Medizin & Gesundheitsinformatik", "content":"IT Anwendungen im biomedizinischen Kontext", "link":"tagesschule/elektrotechnik/highlights/angewandte-informatik"}
+                    {"icon":"biologie", "title":"Biologie, Medizin & Gesundheitswesen", "content":"Ärzte unterrichten medizinisches Grundwissen", "link":"tagesschule/biomedizin/highlights/biologie-medizin-gesundheitswesen"},
+                    {"icon":"signalverarbeitung", "title":"Biomedizinische Signalverarbeitung", "content":"Technische Geräte Prüfung von Vitalfunktionen", "link":"tagesschule/biomedizin/highlights/biomedizinische-signalverarbeitung"},
+                    {"icon":"gerätetechnik", "title":"Medizinische Gerätetechnik", "content":"Technische Geräte verstehen und warten", "link":"tagesschule/biomedizin/highlights/medizinische-geraetetechnik"},
+                    {"icon":"gesundheitsmechatronik", "title":"Gesundheitsmechatronik", "content":"Entwicklung von Prothesen", "link":"tagesschule/biomedizin/highlights/gesundheitsmechatronik"},
+                    {"icon":"gesundheitsinformatik", "title":"Medizin & Gesundheitsinformatik", "content":"IT Anwendungen im biomedizinischen Kontext", "link":"tagesschule/biomedizin/highlights/medizin-gesundheitsinformatik"}
                 ]
             },
             cards: [

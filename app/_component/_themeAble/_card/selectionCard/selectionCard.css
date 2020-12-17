@@ -19,7 +19,7 @@ selection-card{
     min-width: auto;
     flex-direction: row-reverse;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 0 45px;
     box-sizing: border-box;
 }

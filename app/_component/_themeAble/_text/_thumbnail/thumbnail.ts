@@ -7,6 +7,7 @@ import "./../../../image/image"
 import Image from "./../../../image/image";
 import declareComponent from "../../../../lib/declareComponent";
 import "./../../_icon/playButton/playButton"
+import Button from "../../_button/button";
 
 
 
@@ -71,6 +72,15 @@ export default class Thumbnail extends Text {
   hmobile(hmobile: JSON | MediaQuerySize): void
   hmobile(hmobile?: JSON | MediaQuerySize): any {
     return this.textBlob.hmobile(hmobile)
+  }
+
+  videolink(link?:string){
+    let videoButton = this.q("video-button");
+    let videoLink = videoButton.querySelector("c-button") as Button;
+    if (link){
+      videoButton.css({display:"block"});
+      videoLink.link(link)
+    }else return videoLink.link()
   }
 
   theme():Theme

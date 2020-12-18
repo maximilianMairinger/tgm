@@ -113,6 +113,10 @@ text-box c-link.link {
         flex-direction: column;
     }
 
+    content-text {
+        min-width: 100%;
+    }
+
     note-box{
         width: 100%;
     }

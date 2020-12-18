@@ -28,7 +28,8 @@ export default class AusmachtSection extends PageSection {
         title: string,
         content: string,
         link: string
-      }[]
+      }[],
+      stundentafel?: string
     },
     cards: {
       heading: string,
@@ -75,7 +76,7 @@ export default class AusmachtSection extends PageSection {
       boxAr.add(box)
     }
 
-    this.cardContainer.apd(...boxAr)
+    this.cardContainer.prepend(...boxAr.reverse())
     if (content.vertiefung) {
       let vertiefungBlob = new Textblob();
       const txt = content.vertiefung.text

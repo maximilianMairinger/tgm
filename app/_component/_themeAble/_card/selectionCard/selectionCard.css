@@ -19,7 +19,7 @@ selection-card{
     min-width: auto;
     flex-direction: row-reverse;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 0 45px;
     box-sizing: border-box;
 }
@@ -194,6 +194,12 @@ image-container{
     transform-origin: bottom left;
     overflow: hidden;
     backface-visibility: hidden;
+}
+
+c-link.stundentafel{
+    display: none;
+    margin-top: 25px;
+    font-size: 18px;
 }
 
 image-box{

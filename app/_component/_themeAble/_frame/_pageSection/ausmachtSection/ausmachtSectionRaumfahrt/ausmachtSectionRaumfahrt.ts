@@ -34,7 +34,8 @@ export default declareComponent("ausmacht-section-raumfahrt", class extends Ausm
                     {"icon":"antriebstechnik", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen", "link":"/"},
                     {"icon":"industrieelektronik", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen", "link":"/"},
                     {"icon":"angewandteInformatik", "title":"Raumfahrtbiologie", "content":"Biologische Untersuchungen in der Schwerelosigkeit", "link":"/"}
-                ]
+                ],
+                stundentafel: "/"
             },
             cards: [
                 {

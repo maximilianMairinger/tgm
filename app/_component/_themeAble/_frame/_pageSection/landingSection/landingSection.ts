@@ -9,8 +9,6 @@ import ItIcon from "../../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIc
 import KunststofftechnikIcon from "../../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/kunststofftechnik/kunststofftechnik";
 import MaschinenbauIcon from "../../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/maschinenbau/maschinenbau";
 import WirtschaftsingenieureIcon from "../../../../_themeAble/_icon/_highlightAbleIcon/abteilungsIcon/wirtschaftsingenieure/wirtschaftsingenieure";
-import { ElementList } from "extended-dom";
-import * as animationFrameDelta from "animation-frame-delta"
 import delay from "delay";
 import lang from "../../../../../lib/lang";
 import CardCarousel from "../../../../cardCarousel/cardCarousel";
@@ -29,7 +27,7 @@ export default declareComponent("landing-section", class Landing extends PageSec
 
     let cards = [
       new IconCard(new BioMedIcon, abt.Biomedizien, lang.AbteilungsShorts.Biomedizien, "tagesschule/biomedizin"),
-      new IconCard(new ElektronikIcon, abt.Elektronik, lang.AbteilungsShorts.Elektronik, "tagesschule/raumfahrt"),
+      new IconCard(new ElektronikIcon, abt.Elektronik, lang.AbteilungsShorts.Elektronik, "tagesschule/elektronik"),
       new IconCard(new ElektrotechnikIcon, abt.Elektrotechnik, lang.AbteilungsShorts.Elektrotechnik, "tagesschule/elektrotechnik"),
       new IconCard(new ItIcon, abt.Informationstechnologie, lang.AbteilungsShorts.Informationstechnologie, "tagesschule/raumfahrt"),
       new IconCard(new KunststofftechnikIcon, abt.Kunststofftechnik, lang.AbteilungsShorts.Kunststofftechnik, "tagesschule/raumfahrt"),

@@ -44,7 +44,7 @@ export const iconIndex = {
     gesundheitsinformatik: () => import("./fachIcon/heartSmartWatch/heartSmartWatch"),
 
     // HEL
-    hardwareentwicklung: () => import("./fachIcon/biology/biology"),
+    hardwareentwicklung: () => import("./fachIcon/nfcChip/nfcChip"),
     messtechnik: () => import("./fachIcon/motionSensor/motionSensor"),
     computersysteme: () => import("./fachIcon/shortWaves/shortWaves"),
     kommunikationssysteme: () => import("./fachIcon/graphNetwork/graphNetwork"),

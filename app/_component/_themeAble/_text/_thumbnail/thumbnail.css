@@ -72,6 +72,7 @@ video-button{
     height: 70px;
     margin-top: 25px;
     margin-left: 145px;
+    transition: .5s;
 }
 video-button *{
     width: 100%;
@@ -84,6 +85,11 @@ video-button c-button{
     border-radius: 100%;
     position: absolute;
     overflow: hidden;
+}
+
+video-button:hover{
+    width: 90px;
+    height: 90px;
 }
 
 @media only screen and (max-width: 768px) {

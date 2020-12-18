@@ -6,6 +6,7 @@ import {Theme} from "../../themeAble";
 import "./../../../image/image"
 import Image from "./../../../image/image";
 import declareComponent from "../../../../lib/declareComponent";
+import "./../../_icon/playButton/playButton"
 
 
 

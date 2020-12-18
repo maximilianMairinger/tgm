@@ -99,3 +99,31 @@ vertiefungs-container vertiefungs-item:nth-child(2n - 1):not(:first-child)  vert
 vertiefungs-container vertiefungs-item:nth-child(2n - 1):first-child:last-child vertiefungs-extra-line-2{
     display: none;
 }
+
+@media only screen and (max-width: 768px) {
+    c-vertiefungs-card{
+        width: 100%;
+        min-width: unset;
+        max-width: unset;
+    }
+
+    vertiefungs-extra-circle{
+        display: none;
+    }
+    vertiefungs-extra-line-1{
+        display: none;
+    }
+
+    vertiefungs-container vertiefungs-item:nth-child(2n):not(:last-child) vertiefungs-extra-line-2{
+        height: 100%;
+        top: 50%;
+    }
+
+    vertiefungs-container vertiefungs-item:nth-child(2n):last-child vertiefungs-extra-line-2{
+        display: none;
+    }
+
+    vertiefungs-container vertiefungs-item:nth-child(2n - 1):not(:first-child)  vertiefungs-extra-line-2{
+        display: none;
+    }
+}

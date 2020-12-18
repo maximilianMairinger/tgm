@@ -12,10 +12,10 @@ c-textblob{
 card-container{
   display: flex;
   margin: 0 205px 100px 205px;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-evenly;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
 }
 
 card-container * {
@@ -57,7 +57,7 @@ vertiefung-section c-textblob{
 
   card-container{
       margin: 0 100px 100px 100px;
-      flex-direction: column;
+      flex-direction: column-reverse;
       align-items: center;
   }
 
@@ -96,5 +96,9 @@ vertiefung-section c-textblob{
       color: #425870;
   }
 
+    vertiefung-section {
+        padding-left: 10vw;
+        padding-right: 10vw;
+    }
 }
 

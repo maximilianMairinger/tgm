@@ -10,7 +10,7 @@ export default class ElektrotechnikTriangleNews extends TriangleNews {
         note: "Termine und",
         heading: "Aktuelles",
         subheading: "aus der Biomedizin",
-        content: `Bleiben Sie informiert, indem Sie unserer <c-link link="https://instagram.com">Instagram</c-link> oder <c-link link="https://facebook.com">Facebook</c-link> Seite folgen.`
+        content: `In unseren Blogartikeln berichten wir über Events, Wettbewerbe und außergewöhnliche Leistungen.`
       },
       cards: [
         {heading: "Samstag", note: "18.04.20", thumbnail: "/res/img/het-blog-rad.png", href: "/", contentTitle: "Elektro-Fahrrad", content: "Das Elektrofahrrad der ET-Abteilung wurde offiziell zugelassen und ist im Handel verfügbar."},

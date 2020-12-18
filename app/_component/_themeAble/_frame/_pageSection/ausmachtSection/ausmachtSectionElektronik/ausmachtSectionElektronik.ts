@@ -2,37 +2,60 @@ import { declareComponent } from "../../../../../../lib/declareComponent"
 import "../../../../_card/selectionCard/selectionCard"
 import "../../../../_card/_infoCard/unterrichtSystemeCard/unterrichtSystemeCard"
 import AusmachtSection from "../ausmachtSection";
-import VertiefungsContainer from "../../../../vertiefungsContainer/vertiefungsContainer";
-import {MediaQuerySize} from "../../../../_text/textblob/textblob";
 
 
 
 export default declareComponent("ausmacht-section-elektronik", class extends AusmachtSection {
 
-    constructor() {
+    constructor(baseLink: string) {
         super({
             heading: {
                 heading: "Was uns ausmacht",
-                subheading: "als Biomedizin"
+                subheading: "als Elektronik"
             },
             selection: {
                 heading: "Gegenstände",
                 note: "Fachspezifische",
                 selection: [
-                    {"icon":"biologie", "title":"Biologie, Medizin & Gesundheitswesen", "content":"Ärzte unterrichten medizinisches Grundwissen", "link":"tagesschule/biomedizin/highlights/biologie-medizin-gesundheitswesen"},
-                    {"icon":"signalverarbeitung", "title":"Biomedizinische Signalverarbeitung", "content":"Technische Geräte Prüfung von Vitalfunktionen", "link":"tagesschule/biomedizin/highlights/biomedizinische-signalverarbeitung"},
-                    {"icon":"gerätetechnik", "title":"Medizinische Gerätetechnik", "content":"Technische Geräte verstehen und warten", "link":"tagesschule/biomedizin/highlights/medizinische-geraetetechnik"},
-                    {"icon":"gesundheitsmechatronik", "title":"Gesundheitsmechatronik", "content":"Entwicklung von Prothesen", "link":"tagesschule/biomedizin/highlights/gesundheitsmechatronik"},
-                    {"icon":"gesundheitsinformatik", "title":"Medizin & Gesundheitsinformatik", "content":"IT Anwendungen im biomedizinischen Kontext", "link":"tagesschule/biomedizin/highlights/medizin-gesundheitsinformatik"}
+                    {
+                        icon:"hardwareentwicklung", 
+                        title:"Hardwareentwicklung", 
+                        content:"Entwurf und Konzeptionierung von Geraeten", 
+                        link: baseLink + "biologie-medizin-gesundheitswesen"
+                    },
+                    {
+                        icon:"messtechnik", 
+                        title:"Messtechnik und Regelungssysteme", 
+                        content:"Arbeit mit komplexen Sensoren", 
+                        link: baseLink + "biomedizinische-signalverarbeitung"
+                    },
+                    {
+                        icon:"computersysteme", 
+                        title:"Digitale Systeme und Computersysteme", 
+                        content:"Signalprozesse und digitale Systeme", 
+                        link: baseLink + "medizinische-geraetetechnik"
+                    },
+                    {
+                        icon:"kommunikationssysteme", 
+                        title:"Kommunikationssysteme und -netze",
+                        content:"Kommunikationsnetze und Übertragungssysteme", 
+                        link: baseLink + "gesundheitsmechatronik"
+                    },
+                    {
+                        icon:"softwaretechnik", 
+                        title:"Fachspezifische Softwaretechnik", 
+                        content:"Mikrocontroller und Softwareentwicklung", 
+                        link: baseLink + "medizin-gesundheitsinformatik"
+                    }
                 ],
-                stundentafel: "tagesschule/biomedizin/highlights/stundentafel-bg"
+                stundentafel: "tagesschule/elektronik/highlights/stundentafel-bg"
             },
             cards: [
                 {
                     heading: "Zellkulturlabor",
                     note: "praxisunterricht",
                     thumbnail: "/res/img/biomedPrototype.jpg",
-                    href: "tagesschule/biomedizin/highlights/zellkultur",
+                    href: baseLink + "zellkultur",
                     contentTitle: "Zellkulturlabortechnik",
                     content: "Du lernst hier an lebenden Zellen hygienisches Arbeiten mit sterilen Werkbänken und Inkubatoren. Damit bist du bestens gerüstet für die Zukunft der Biomedizinischen Technik."
                 },
@@ -40,7 +63,7 @@ export default declareComponent("ausmacht-section-elektronik", class extends Aus
                     heading: "Prototypenbau",
                     note: "PRAXISUNTERRICHT",
                     thumbnail: "/res/img/biomedLabor.png",
-                    href: "tagesschule/biomedizin/highlights/prototypenbau",
+                    href: baseLink + "prototypenbau",
                     contentTitle: "Prototypenbau",
                     content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."
                 }

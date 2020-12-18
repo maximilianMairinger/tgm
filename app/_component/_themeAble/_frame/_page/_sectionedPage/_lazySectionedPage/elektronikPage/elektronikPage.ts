@@ -7,7 +7,7 @@ import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
 import Thumbnail from "../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection"
-import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionRaumfahrt/ausmachtSectionRaumfahrt"
+import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionElektronik/ausmachtSectionElektronik"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
@@ -44,7 +44,7 @@ export default class ElektronikPage extends LazySectionedPage {
       },
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
-          new _AusmachtSection()
+          new _AusmachtSection("tagesschule/elektronik/highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSectionElektonik" */"../../../../_pageSection/ausmachtSection/ausmachtSectionElektronik/ausmachtSectionElektronik")
       },
       {

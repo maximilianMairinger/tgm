@@ -25,7 +25,7 @@ export default declareComponent("ausmacht-section-biomed", class extends Ausmach
                     {"icon":"gesundheitsmechatronik", "title":"Gesundheitsmechatronik", "content":"Entwicklung von Prothesen", "link":"tagesschule/biomedizin/highlights/gesundheitsmechatronik"},
                     {"icon":"gesundheitsinformatik", "title":"Medizin & Gesundheitsinformatik", "content":"IT Anwendungen im biomedizinischen Kontext", "link":"tagesschule/biomedizin/highlights/medizin-gesundheitsinformatik"}
                 ],
-                stundentafel:"/tagesschule/biomedizin/highlights/stundentafel-hbg"
+                stundentafel: "tagesschule/biomedizin/highlights/stundentafel-bg"
             },
             cards: [
                 {
@@ -46,12 +46,5 @@ export default declareComponent("ausmacht-section-biomed", class extends Ausmach
                 }
             ]
         })
-    }
-
-    stl() {
-        return super.stl() + require("./ausmachtSectionBiomed.css").toString()
-    }
-    pug() {
-        return super.pug() + require("./ausmachtSectionBiomed.pug").default
     }
 });

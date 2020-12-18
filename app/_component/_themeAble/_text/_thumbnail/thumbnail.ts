@@ -80,6 +80,7 @@ export default class Thumbnail extends Text {
     if (link){
       videoButton.css({display:"block"});
       videoLink.link(link)
+      this.q("iframe").setAttribute("src", "https://www.youtube.com/embed/" +link.split("/watch?v=").splice(-1).pop() + "?autoplay=1")
     }else return videoLink.link()
   }
 

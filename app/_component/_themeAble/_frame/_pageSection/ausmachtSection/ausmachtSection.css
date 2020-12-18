@@ -45,7 +45,7 @@ vertiefung-section c-textblob{
 
 @media only screen and (max-width: 1550px) {
     vertiefung-section{
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 }
 
@@ -96,5 +96,9 @@ vertiefung-section c-textblob{
       color: #425870;
   }
 
+    vertiefung-section {
+        padding-left: 10vw;
+        padding-right: 10vw;
+    }
 }
 

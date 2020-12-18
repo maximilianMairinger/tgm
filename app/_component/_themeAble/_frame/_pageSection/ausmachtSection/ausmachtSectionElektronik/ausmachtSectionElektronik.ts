@@ -21,31 +21,31 @@ export default declareComponent("ausmacht-section-elektronik", class extends Aus
                         icon:"hardwareentwicklung", 
                         title:"Hardwareentwicklung", 
                         content:"Entwurf und Konzeptionierung von Geraeten", 
-                        link: baseLink + "biologie-medizin-gesundheitswesen"
+                        link: baseLink + "hardwareentwicklung"
                     },
                     {
                         icon:"messtechnik", 
                         title:"Messtechnik und Regelungssysteme", 
                         content:"Arbeit mit komplexen Sensoren", 
-                        link: baseLink + "biomedizinische-signalverarbeitung"
+                        link: baseLink + "messtechnik-regelungssysteme"
                     },
                     {
                         icon:"computersysteme", 
                         title:"Digitale Systeme und Computersysteme", 
                         content:"Signalprozesse und digitale Systeme", 
-                        link: baseLink + "medizinische-geraetetechnik"
+                        link: baseLink + "computersysteme"
                     },
                     {
                         icon:"kommunikationssysteme", 
                         title:"Kommunikationssysteme und -netze",
                         content:"Kommunikationsnetze und Übertragungssysteme", 
-                        link: baseLink + "gesundheitsmechatronik"
+                        link: baseLink + "kommunikationssysteme"
                     },
                     {
                         icon:"softwaretechnik", 
                         title:"Fachspezifische Softwaretechnik", 
                         content:"Mikrocontroller und Softwareentwicklung", 
-                        link: baseLink + "medizin-gesundheitsinformatik"
+                        link: baseLink + "softwaretechnik"
                     }
                 ],
                 stundentafel: "tagesschule/elektronik/highlights/stundentafel-bg"

@@ -74,14 +74,19 @@ export default class Thumbnail extends Text {
     return this.textBlob.hmobile(hmobile)
   }
 
+  private videohref:string;
+  private startIframe(){
+    this.q("iframe").setAttribute("src", "https://www.youtube.com/embed/" +this.videolink().split("/watch?v=").splice(-1).pop() + "?autoplay=1")
+  }
+
   videolink(link?:string){
     let videoButton = this.q("video-button");
     let videoLink = videoButton.querySelector("c-button") as Button;
     if (link){
       videoButton.css({display:"block"});
-      videoLink.link(link)
-      this.q("iframe").setAttribute("src", "https://www.youtube.com/embed/" +link.split("/watch?v=").splice(-1).pop() + "?autoplay=1")
-    }else return videoLink.link()
+      this.videohref = link;
+      videoLink.click(this.startIframe.bind(this))
+    }else return this.videohref;
   }
 
   theme():Theme

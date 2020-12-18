@@ -85,6 +85,7 @@ video-button c-button{
     border-radius: 100%;
     position: absolute;
     overflow: hidden;
+    cursor: pointer;
 }
 
 video-button:hover{

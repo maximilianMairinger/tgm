@@ -44,11 +44,11 @@ export const iconIndex = {
     gesundheitsinformatik: () => import("./fachIcon/heartSmartWatch/heartSmartWatch"),
 
     // HEL
-    // biologie: () => import("./fachIcon/biology/biology"),
-    // signalverarbeitung: () => import("./fachIcon/heartBeat/heartBeat"),
-    // gerätetechnik: () => import("./fachIcon/microscope/microscope"),
-    // gesundheitsmechatronik: () => import("./fachIcon/prosthesis/prosthesis"),
-    // gesundheitsinformatik: () => import("./fachIcon/heartSmartWatch/heartSmartWatch"),
+    hardwareentwicklung: () => import("./fachIcon/biology/biology"),
+    messtechnik: () => import("./fachIcon/motionSensor/motionSensor"),
+    computersysteme: () => import("./fachIcon/shortWaves/shortWaves"),
+    kommunikationssysteme: () => import("./fachIcon/graphNetwork/graphNetwork"),
+    softwaretechnik: () => import("./fachIcon/terminal/terminal"),
   },
   vertiefung: {
     // HET

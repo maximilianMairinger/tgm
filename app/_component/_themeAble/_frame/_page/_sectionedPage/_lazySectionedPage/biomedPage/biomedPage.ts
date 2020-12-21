@@ -24,6 +24,7 @@ export default declareComponent("biomed-page", class ElektrotechnikPage extends 
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("biomedLanding.png")
+          e.videolink("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")

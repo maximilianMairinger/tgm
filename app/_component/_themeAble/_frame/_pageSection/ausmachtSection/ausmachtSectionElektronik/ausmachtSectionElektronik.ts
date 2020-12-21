@@ -52,17 +52,17 @@ export default declareComponent("ausmacht-section-elektronik", class extends Aus
             },
             cards: [
                 {
-                    heading: "Zellkulturlabor",
+                    heading: "IoT",
                     note: "praxisunterricht",
-                    thumbnail: "/res/img/biomedPrototype.jpg",
+                    thumbnail: "/res/img/iotElektronik.jpg",
                     href: baseLink + "zellkultur",
                     contentTitle: "Zellkulturlabortechnik",
                     content: "Du lernst hier an lebenden Zellen hygienisches Arbeiten mit sterilen Werkbänken und Inkubatoren. Damit bist du bestens gerüstet für die Zukunft der Biomedizinischen Technik."
                 },
                 {
-                    heading: "Prototypenbau",
+                    heading: "Werkstatt",
                     note: "PRAXISUNTERRICHT",
-                    thumbnail: "/res/img/biomedLabor.png",
+                    thumbnail: "/res/img/elektronikWerkstatt.png",
                     href: baseLink + "prototypenbau",
                     contentTitle: "Prototypenbau",
                     content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."

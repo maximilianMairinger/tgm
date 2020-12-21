@@ -29,6 +29,10 @@ import Kt from "../../_page/_sectionedPage/_lazySectionedPage/ktPage/ktPage"
 import KtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/ktProjekte/ktProjekte";
 import KtTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/ktTeam/ktTeam"
 
+import Mb from "../../_page/_sectionedPage/_lazySectionedPage/ktPage/mbPage"
+import MbProjekte from "../../_page/_sectionedPage/_lazySectionedPage/mbProjekte/mbProjekte";
+import MbTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/mbTeam/mbTeam"
+
 export type PageName = string
 
 export default declareComponent("page-manager", class PageManager extends Manager<PageName> {
@@ -92,17 +96,17 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "ktTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/ktTeam/ktTeam")
       },
       {
-        key: new Import("tagesschule/maschinenbau", 22, (kt: typeof Kt) => 
+        key: new Import("tagesschule/maschinenbau", 22, (kt: typeof Mb) => 
           new kt(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "mb" */"../../_page/_sectionedPage/_lazySectionedPage/mbPage/mbPage")
       },
       {
-        key: new Import("tagesschule/maschinenbau/projekte", 30, (ktProjekte: typeof KtProjekte) =>
+        key: new Import("tagesschule/maschinenbau/projekte", 30, (ktProjekte: typeof MbProjekte) =>
             new ktProjekte(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "mbProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/mbProjekte/mbProjekte")
       },
       {
-        key: new Import("tagesschule/maschinenbau/team", 30, (ktTeam: typeof KtTeam) =>
+        key: new Import("tagesschule/maschinenbau/team", 30, (ktTeam: typeof MbTeam) =>
             new ktTeam(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "mbTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/mbTeam/mbTeam")
       },

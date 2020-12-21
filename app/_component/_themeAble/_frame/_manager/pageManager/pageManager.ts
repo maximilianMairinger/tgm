@@ -5,7 +5,6 @@ import _404Page from "../../_page/404/404";
 import MaxsSandbox from "../../_page/maxsSandbox/maxsSandbox";
 import GeorgsSandbox from "../../_page/georgsSanbox/georgsSanbox";
 import DanielsSandbox from "../../_page/danielsSandbox/danielsSandbox";
-import ItPage from "../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage";
 import HomePage from "../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage";
 import { declareComponent } from "../../../../../lib/declareComponent"
 import BlogPage from "../../_page/blogPage/blogPage"
@@ -40,9 +39,9 @@ import Mb from "../../_page/_sectionedPage/_lazySectionedPage/ktPage/mbPage"
 import MbProjekte from "../../_page/_sectionedPage/_lazySectionedPage/mbProjekte/mbProjekte";
 import MbTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/mbTeam/mbTeam"
 
-import Bg from "../../_page/_sectionedPage/_lazySectionedPage/bgPage/mbPage"
+import Bg from "../../_page/_sectionedPage/_lazySectionedPage/bgPage/bgPage"
 import BgProjekte from "../../_page/_sectionedPage/_lazySectionedPage/bgProjekte/bgProjekte";
-import BgTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/bgTeam/mbgTeam"
+import BgTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/bgTeam/bgTeam"
 
 export type PageName = string
 

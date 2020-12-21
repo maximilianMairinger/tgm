@@ -13,7 +13,7 @@ export default declareComponent("abendschule-section", class extends PageSection
     }
 
     protected childThemeAbles() {
-        return ["c-selection-card", "c-anmelden-card"]
+        return ["c-erwachsenen-card", "c-anmelden-card"]
     }
 
     stl() {

@@ -1,14 +1,22 @@
 abendschule-section
     section-header Erwachsene
     card-box
-        c-erwachsenen-card( heading='Neues Lernen' note='unser Versprechen'
+        c-erwachsenen-card( note='Ausbildung für Erwachsene' heading='Tagesformen'
             selection='[' +
-        '{"icon":"energysysteme", "title":"Erneurbare Energie", "content":"Bausteine der Zukunft, mit unglaublichen Portenzial", "link":"tagesschule/raumfahrt"},' +
-        '{"icon":"automatisierungstechnik", "title":"Elektronik", "content":"Die Grundlagen der Digitalisierung", "link":"tagesschule/raumfahrt"},' +
-        '{"icon":"antriebstechnik", "title":"Wirtschaft", "content":"Prozessoptimierung und Managment gelernt", "link":"tagesschule/raumfahrt"},' +
-        '{"icon":"industrieelektronik", "title":"Werkmeister", "content":"Öffnet Möglichkeiten zur Selbstständigkeit", "link":"tagesschule/raumfahrt"}' +
-        ']')
-        //-
+            '{"icon":"satellite", "title":"Satellitentechnik", "content":"Satellitendesign und Konstruktion"},' +
+            '{"icon":"rocket", "title":"Raketentechnik", "content":"Raketenentwicklung, Abschussvorbereitung"},' +
+            '{"icon":"rover", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen"},' +
+            '{"icon":"space-aids", "title":"Space AIDS", "content":"Biologische Untersuchungen in der Schwerelosigkeit"}' +
+            ']')
+
+        c-erwachsenen-card( note='Ausbildung für Erwachsene' heading='Abendformen'
+            selection='[' +
+            '{"icon":"satellite", "title":"Satellitentechnik", "content":"Satellitendesign und Konstruktion"},' +
+            '{"icon":"rocket", "title":"Raketentechnik", "content":"Raketenentwicklung, Abschussvorbereitung"},' +
+            '{"icon":"rover", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen"}' +
+            ']')
+
+    //-
             c-anmelden-card
-    image-container
+image-container
         image-box

@@ -31,8 +31,7 @@ section-header{
 card-box{
     display: flex;
     margin: 0 205px 100px 205px;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 
@@ -40,15 +39,19 @@ card-box * {
     margin: 0 25px 50px 25px;
 }
 
+card-box *:first-child{
+    align-self: flex-start;
+}
+
+card-box *:last-child{
+    align-self: flex-end;
+}
+
+
 c-anmelden-card{
     width: 25%;
 }
 
-
-c-erwachsenen-card{
-    width: 50%;
-    flex-grow: 1;
-}
 
 image-container {
     position: absolute;
@@ -69,7 +72,13 @@ image-box {
     background-position: left bottom;
 }
 
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 1450px) {
+    card-box{
+        margin: 0 50px 100px 50px;
+    }
+}
+
+@media only screen and (max-width: 950px) {
     abendschule-section{
         padding-top: 225px;
     }
@@ -88,6 +97,7 @@ image-box {
 
     card-box *{
         margin: 50px 0 0 0;
+        align-self: unset!important;
     }
 
     c-erwachsenen-card{

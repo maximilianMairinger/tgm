@@ -35,7 +35,7 @@ export default declareComponent("elektrotechnik-team", class RaumfahrtTeam exten
             key: new Import("leitung", 1, (leitung: typeof Element) =>
                 {
                     let leitungImageTextblob = new (leitung as typeof ImageTextblob)();
-                    leitungImageTextblob.note("Abteilungvorstand");
+                    leitungImageTextblob.note("Abteilungsvorstand");
                     leitungImageTextblob.heading("DI Deininger");
                     leitungImageTextblob.subheading("Thomas");
                     // leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")

@@ -34,7 +34,7 @@ export default declareComponent("biomed-team", class RaumfahrtTeam extends TeamP
             key: new Import("leitung", 1, (leitung: typeof Element) =>
                 {
                     let leitungImageTextblob = new (leitung as typeof ImageTextblob)();
-                    leitungImageTextblob.note("Abteilungvorstand");
+                    leitungImageTextblob.note("Abteilungsvorstand");
                     leitungImageTextblob.heading("DI Dr. Wess");
                     leitungImageTextblob.subheading("Bernhard");
                     leitungImageTextblob.content("Ich stehe Ihnen gerne am Dienstag von 9:50 bis 10:40 in meiner Sprechstunde zu Verfügung.")
@@ -42,7 +42,7 @@ export default declareComponent("biomed-team", class RaumfahrtTeam extends TeamP
                     leitungImageTextblob.email("bernhard.wess@tgm.ac.at");
                     leitungImageTextblob.tel("01 33 126 320");
                     leitungImageTextblob.image('url("/res/img/team_1.png")');
-                    leitungImageTextblob.stellvertreter([{"name":"Stefan Hertl", "email":"shertl@tgm.ac.at"}])
+                    leitungImageTextblob.stellvertreter([{"name":"Josef Kollmitzer", "email":"jkollmitzer@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_text/imageTextblob/imageTextblob")

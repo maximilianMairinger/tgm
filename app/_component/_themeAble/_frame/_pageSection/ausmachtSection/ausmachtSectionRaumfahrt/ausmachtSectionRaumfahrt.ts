@@ -35,7 +35,7 @@ export default declareComponent("ausmacht-section-raumfahrt", class extends Ausm
                     {"icon":"industrieelektronik", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen", "link":"/"},
                     {"icon":"angewandteInformatik", "title":"Raumfahrtbiologie", "content":"Biologische Untersuchungen in der Schwerelosigkeit", "link":"/"}
                 ],
-                stundentafel: "/"
+                stundentafel: "tagesschule/biomedizin/highlights/stundentafel-rt"
             },
             cards: [
                 {
@@ -79,12 +79,5 @@ export default declareComponent("ausmacht-section-raumfahrt", class extends Ausm
                 ]
             }
         })
-    }
-
-    stl() {
-        return super.stl() + require("./ausmachtSectionRaumfahrt.css").toString()
-    }
-    pug() {
-        return super.pug() + require("./ausmachtSectionRaumfahrt.pug").default
     }
 });

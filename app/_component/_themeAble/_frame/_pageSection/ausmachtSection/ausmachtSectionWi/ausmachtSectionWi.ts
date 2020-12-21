@@ -17,12 +17,13 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                 heading: "Gegenstände",
                 note: "Fachtheoretische",
                 selection: [
-                    {"icon":"energysysteme", "title":"Energiesysteme", "content":"Energiegewinnung und -speicherung", "link":"tagesschule/elektrotechnik/highlights/energiesysteme"},
-                    {"icon":"automatisierungstechnik", "title":"Automatisierungstechnik", "content":"Automatisieren in elektrotechnischen Anwendungen", "link":"tagesschule/elektrotechnik/highlights/automatisierungstechnik"},
-                    {"icon":"antriebstechnik", "title":"Antriebstechnik", "content":"Bewegung und Elektrotechnik", "link":"tagesschule/elektrotechnik/highlights/antriebstechnik"},
-                    {"icon":"industrieelektronik", "title":"Industrieelektronik", "content":"Elektrotechnik in der Industrie", "link":"tagesschule/elektrotechnik/highlights/industrieelektronik"},
-                    {"icon":"angewandteInformatik", "title":"Angewandte Informatik", "content":"Entwickeln von computerbasierten Lösungen", "link":"tagesschule/elektrotechnik/highlights/angewandte-informatik"}
-                ]
+                    {"icon":"energysysteme", "title":"Energiesysteme", "content":"Energiegewinnung und -speicherung", "link":"tagesschule/wirtschaftsingenieure/highlights/energiesysteme"},
+                    {"icon":"automatisierungstechnik", "title":"Automatisierungstechnik", "content":"Automatisieren in elektrotechnischen Anwendungen", "link":"tagesschule/wirtschaftsingenieure/highlights/automatisierungstechnik"},
+                    {"icon":"antriebstechnik", "title":"Antriebstechnik", "content":"Bewegung und Elektrotechnik", "link":"tagesschule/wirtschaftsingenieure/highlights/antriebstechnik"},
+                    {"icon":"industrieelektronik", "title":"Industrieelektronik", "content":"Elektrotechnik in der Industrie", "link":"tagesschule/wirtschaftsingenieure/highlights/industrieelektronik"},
+                    {"icon":"angewandteInformatik", "title":"Angewandte Informatik", "content":"Entwickeln von computerbasierten Lösungen", "link":"tagesschule/wirtschaftsingenieure/highlights/angewandte-informatik"}
+                ],
+                stundentafel: "tagesschule/wirtschaftsingeni/highlights/stundentafel-wi"
             },
             cards: [
                 {
@@ -73,12 +74,5 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                 
             }
         })
-    }
-
-    stl() {
-        return super.stl() + require("./ausmachtSectionWi.css").toString()
-    }
-    pug() {
-        return super.pug() + require("./ausmachtSectionWi.pug").default
     }
 });

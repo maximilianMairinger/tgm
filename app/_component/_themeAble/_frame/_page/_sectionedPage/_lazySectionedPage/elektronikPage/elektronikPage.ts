@@ -7,24 +7,23 @@ import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
 import Thumbnail from "../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection"
-import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionRaumfahrt/ausmachtSectionRaumfahrt"
+import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionElektronik/ausmachtSectionElektronik"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
-export default class BiomedPage extends LazySectionedPage {
+export default class ElektronikPage extends LazySectionedPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail("biomedizin")
-          e.heading("Biomedizin und Gesundheitstechnik")
+          let e = new _Thumbnail("elektronik")
+          e.heading("Elektronik & Technische Informatik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
-          e.background("biomedLanding.png")
-          e.videolink("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+          e.background("elektronikLanding.png")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
@@ -38,19 +37,15 @@ export default class BiomedPage extends LazySectionedPage {
           info.note("bei uns");
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
-          info.content(`
-          Das Ausbildungsziel an dieser Lehranstalt ist die Entwicklung eines soliden Verständnisses der Wechselwirkung von Technik und Medizin, das durch inhaltliche und organisatorische Vernetzung der Unterrichtsgegenstände „Biologie, Medizin und Gesundheitswesen“, „Biomedizinische Signal-Verarbeitung“, „Medizinische Gerätetechnik“, „Gesundheitsmechatronik“ und „Medizin- und Gesundheitsinformatik“ vermittelt wird.
-          <br><br>
-          Die Absolventen/innen der Höheren Lehranstalt für Biomedizin- und Gesundheitstechnik können ingenieurmäßige Tätigkeiten auf den Gebieten Diagnose und Therapie, Bildverarbeitung, Prothesen- und Implantattechnik sowie in Rehabilitations-, Sportgeräte- und Wellnesstechnik ausführen. Dabei steht die Planung, Entwicklung und Realisierung medizintechnischer Geräte, der Entwurf und Implementierung von Softwarelösungen auf den Gebieten der Biologie, Medizin und des Gesundheitswesens, die Auswahl, Analyse, messtechnische Überprüfung bzw. der Test  der Komponenten, Module und Systeme im Vordergrund.
-          `)
+          info.content("Ohne elektronische Geräte ist unser tägliches Leben praktisch nicht mehr vorstellbar. Die Elektronik hat in den letzten Jahrzehnten eine besonders rasante Entwicklung erfahren. Der Entwurf, die Fertigung, der Vertrieb, die Inbetriebnahme und Wartung elektronischer Schaltungen bzw. Geräte, insbesondere der angeführten Elektronikbranchen, stellen einen wesentlichen Wirtschaftsfaktor unseres Landes dar.")
 
           return new WrapperSection(info) as any
         }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")
       },
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
-          new _AusmachtSection()
-        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/ausmachtSectionBiomed/ausmachtSectionBiomed")
+          new _AusmachtSection("tagesschule/elektronik/highlights/")
+        ), val: () => import(/* webpackChunkName: "ausmachtSectionElektonik" */"../../../../_pageSection/ausmachtSection/ausmachtSectionElektronik/ausmachtSectionElektronik")
       },
       {
         key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
@@ -63,7 +58,7 @@ export default class BiomedPage extends LazySectionedPage {
 
           imageTextBlob.heading("Kontakt");
           imageTextBlob.subheading("mit der Biomedizin");
-          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Biomedizin einzutauchen.")
+          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Elektrotechnik einzutauchen.")
           imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("tagesschule/elektrotechnik")
           imageTextBlob.address("Wexstraße 19-23 / 12. Stock");
@@ -91,4 +86,4 @@ export default class BiomedPage extends LazySectionedPage {
 
 }
 
-declareComponent("biomed-page", BiomedPage)
+declareComponent("elektronik-page", ElektronikPage)

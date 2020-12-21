@@ -79,17 +79,32 @@ export default declareComponent("page-manager", class PageManager extends Manage
       {
         key: new Import("tagesschule/kunststofftechnik", 22, (kt: typeof Kt) => 
           new kt(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "elektrotechnik" */"../../_page/_sectionedPage/_lazySectionedPage/ktPage/ktPage")
+        ), val: () => import(/* webpackChunkName: "kt" */"../../_page/_sectionedPage/_lazySectionedPage/ktPage/ktPage")
       },
       {
         key: new Import("tagesschule/kunststofftechnik/projekte", 30, (ktProjekte: typeof KtProjekte) =>
             new ktProjekte(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "wiProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/ktProjekte/ktProjekte")
+        ), val: () => import(/* webpackChunkName: "ktProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/ktProjekte/ktProjekte")
       },
       {
         key: new Import("tagesschule/kunststofftechnik/team", 30, (ktTeam: typeof KtTeam) =>
             new ktTeam(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "wiTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/ktTeam/ktTeam")
+        ), val: () => import(/* webpackChunkName: "ktTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/ktTeam/ktTeam")
+      },
+      {
+        key: new Import("tagesschule/maschinenbau", 22, (kt: typeof Kt) => 
+          new kt(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "mb" */"../../_page/_sectionedPage/_lazySectionedPage/mbPage/mbPage")
+      },
+      {
+        key: new Import("tagesschule/maschinenbau/projekte", 30, (ktProjekte: typeof KtProjekte) =>
+            new ktProjekte(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "mbProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/mbProjekte/mbProjekte")
+      },
+      {
+        key: new Import("tagesschule/maschinenbau/team", 30, (ktTeam: typeof KtTeam) =>
+            new ktTeam(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "mbTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/mbTeam/mbTeam")
       },
       {
         key: new Import("tagesschule/informationstechnologie", 22, (it: typeof It) => 

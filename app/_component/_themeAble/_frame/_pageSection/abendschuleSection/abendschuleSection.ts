@@ -1,6 +1,6 @@
 import { declareComponent } from "../../../../../lib/declareComponent"
 import PageSection from "../pageSection"
-import "../../../../_themeAble/_card/selectionCard/selectionCard"
+import "../../../../_themeAble/_card/erwachsenenCard/erwachsenenCard"
 import "../../../../_themeAble/_card/anmeldenCard/anmeldenCard"
 import { ElementList } from "extended-dom";
 import ThemeAble, { Theme } from "../../../themeAble";

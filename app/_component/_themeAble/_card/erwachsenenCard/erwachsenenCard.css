@@ -1,6 +1,6 @@
 :host {
     display: block;
-    max-width: 860px;
+    max-width: 90%;
     min-width: 445px;
     width: auto;
     user-select: auto;
@@ -180,49 +180,22 @@ selection-box:hover link-container{
     transition: 0.25s;
 }
 
-image-container{
-    position: relative;
+overview-container{
     display: block;
     flex-grow: 1;
-    max-width: 200px;
+    max-width: 700px;
     width: calc(200 * ((100vw - 1300px)/(1600 - 1300)));
-    min-width: 115px;
+    min-width: 300px;
     align-self: stretch;
-    margin-right: 70px;
-    margin-left: 10px;
-    transform: skewX(-10deg);
-    transform-origin: bottom left;
+    padding: 40px 0 40px 40px;
     overflow: hidden;
-    backface-visibility: hidden;
-}
-
-c-link.stundentafel{
-    display: none;
-    margin-top: 25px;
-    font-size: 18px;
-}
-
-image-box{
-    position: absolute;
-    width: 400px;
-    left: -100px;
-    height: 100%;
-    display: block;
-    transform: skewX(10deg);
-    background: url("../../../../res/img/selection-background.svg") 0 -15px no-repeat;
-    background-size: calc(100% + 30px);
     backface-visibility: hidden;
 }
 
 @media only screen and (max-width: 1450px) {
 
-    :host{
-        max-width: 580px;
-    }
-
     selection-card{
-        flex-direction: row;
-        justify-content: flex-start;
+        flex-direction: row-reverse;
         padding: 0 40px;
     }
 

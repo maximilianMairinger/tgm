@@ -8,6 +8,7 @@ import "../../../../_themeAble/_text/_sectionTextblob/informationenSection/infor
 import "../../../../_themeAble/_text/_sectionTextblob/ausbildungSection/ausbildungSection"
 import "../../../../_themeAble/_text/_thumbnail/thumbnail"
 import "../../../../_themeAble/_card/selectionCard/selectionCard"
+import "../../../../_themeAble/_card/erwachsenenCard/erwachsenenCard"
 import "../../../../_themeAble/_card/anmeldenCard/anmeldenCard"
 import "../../../../_themeAble/_card/_infoCard/infoCard"
 import "../../../../_themeAble/_text/tabletBlob/tabletBlob"

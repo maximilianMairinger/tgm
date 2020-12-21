@@ -5,19 +5,43 @@ import _404Page from "../../_page/404/404";
 import MaxsSandbox from "../../_page/maxsSandbox/maxsSandbox";
 import GeorgsSandbox from "../../_page/georgsSanbox/georgsSanbox";
 import DanielsSandbox from "../../_page/danielsSandbox/danielsSandbox";
-import ItPage from "../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage";
 import HomePage from "../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage";
 import { declareComponent } from "../../../../../lib/declareComponent"
-import RaumfahrtPage from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage";
-import ElektrotechnikPage from "../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikPage/elektrotechnikPage";
-import RaumfahrtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte";
-import RaumfahrtTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/raumfahrtTeam/raumfahrtTeam";
-import Schularzt from "../../_page/_sectionedPage/_lazySectionedPage/schularzt/schularzt";
 import BlogPage from "../../_page/blogPage/blogPage"
-import ElektrotechnikTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elektrotechnikTeam/elektrotechnikTeam";
-import ElektrotechnikProjekte from "../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikProjekte/elektrotechnikProjekte";
-import WiProjekte from "../../_page/_sectionedPage/_lazySectionedPage/wirtschaftsingenieureProjekte/wirtschaftsingenieureProjekte";
+import Schularzt from "../../_page/_sectionedPage/_lazySectionedPage/schularzt/schularzt";
+
+
+import RtPage from "../../_page/_sectionedPage/_lazySectionedPage/rtPage/rtPage";
+import RtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/rtProjekte/rtProjekte";
+import RtTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/rtTeam/rtTeam";
+
+import Et from "../../_page/_sectionedPage/_lazySectionedPage/etPage/etPage";
+import EtTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/etTeam/etTeam";
+import EtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/etProjekte/etProjekte";
+
+import El from "../../_page/_sectionedPage/_lazySectionedPage/elektronikPage/elektronikPage";
+import ElTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elTeam/elTeam";
+import ElProjekte from "../../_page/_sectionedPage/_lazySectionedPage/elProjekte/elProjekte";
+
+import Wi from "../../_page/_sectionedPage/_lazySectionedPage/wiPage/wiPage"
+import WiProjekte from "../../_page/_sectionedPage/_lazySectionedPage/wiProjekte/wiProjekte";
 import WiTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wiTeam/wiTeam"
+
+import It from "../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage"
+import ItProjekte from "../../_page/_sectionedPage/_lazySectionedPage/itProjekte/itProjekte";
+import ItTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/itTeam/itTeam"
+
+import Kt from "../../_page/_sectionedPage/_lazySectionedPage/ktPage/ktPage"
+import KtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/ktProjekte/ktProjekte";
+import KtTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/ktTeam/ktTeam"
+
+import Mb from "../../_page/_sectionedPage/_lazySectionedPage/ktPage/mbPage"
+import MbProjekte from "../../_page/_sectionedPage/_lazySectionedPage/mbProjekte/mbProjekte";
+import MbTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/mbTeam/mbTeam"
+
+import Bg from "../../_page/_sectionedPage/_lazySectionedPage/bgPage/bgPage"
+import BgProjekte from "../../_page/_sectionedPage/_lazySectionedPage/bgProjekte/bgProjekte";
+import BgTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/bgTeam/bgTeam"
 
 export type PageName = string
 
@@ -52,14 +76,14 @@ export default declareComponent("page-manager", class PageManager extends Manage
       //   ), val: () => import(/* webpackChunkName: "danielsSandbox" */"../../_page/danielsSandbox/danielsSandbox")
       // },
       {
-        key: new Import("tagesschule/wirtschaftsingenieure", 22, (elektrotechnikPage: typeof ElektrotechnikPage) => 
-          new elektrotechnikPage(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "elektrotechnik" */"../../_page/_sectionedPage/_lazySectionedPage/wiPage/wiPage")
+        key: new Import("tagesschule/wirtschaftsingenieure", 22, (wi: typeof Wi) => 
+          new wi(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "wi" */"../../_page/_sectionedPage/_lazySectionedPage/wiPage/wiPage")
       },
       {
         key: new Import("tagesschule/wirtschaftsingenieure/projekte", 30, (wiProjekte: typeof WiProjekte) =>
             new wiProjekte(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "wiProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/wirtschaftsingenieureProjekte/wirtschaftsingenieureProjekte")
+        ), val: () => import(/* webpackChunkName: "wiProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/wiProjekte/wiProjekte")
       },
       {
         key: new Import("tagesschule/wirtschaftsingenieure/team", 30, (wiTeam: typeof WiTeam) =>
@@ -67,64 +91,109 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "wiTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wiTeam/wiTeam")
       },
       {
-        key: new Import("tagesschule/elektrotechnik", 21, (elektrotechnikPage: typeof ElektrotechnikPage) => 
+        key: new Import("tagesschule/kunststofftechnik", 22, (kt: typeof Kt) => 
+          new kt(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "kt" */"../../_page/_sectionedPage/_lazySectionedPage/ktPage/ktPage")
+      },
+      {
+        key: new Import("tagesschule/kunststofftechnik/projekte", 30, (ktProjekte: typeof KtProjekte) =>
+            new ktProjekte(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "ktProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/ktProjekte/ktProjekte")
+      },
+      {
+        key: new Import("tagesschule/kunststofftechnik/team", 30, (ktTeam: typeof KtTeam) =>
+            new ktTeam(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "ktTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/ktTeam/ktTeam")
+      },
+      {
+        key: new Import("tagesschule/maschinenbau", 22, (kt: typeof Mb) => 
+          new kt(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "mb" */"../../_page/_sectionedPage/_lazySectionedPage/mbPage/mbPage")
+      },
+      {
+        key: new Import("tagesschule/maschinenbau/projekte", 30, (ktProjekte: typeof MbProjekte) =>
+            new ktProjekte(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "mbProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/mbProjekte/mbProjekte")
+      },
+      {
+        key: new Import("tagesschule/maschinenbau/team", 30, (ktTeam: typeof MbTeam) =>
+            new ktTeam(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "mbTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/mbTeam/mbTeam")
+      },
+      {
+        key: new Import("tagesschule/informationstechnologie", 22, (it: typeof It) => 
+          new it(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "it" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
+      },
+      {
+        key: new Import("tagesschule/informationstechnologie/projekte", 30, (itProjekte: typeof ItProjekte) =>
+            new itProjekte(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "itProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/itProjekte/itProjekte")
+      },
+      {
+        key: new Import("tagesschule/informationstechnologie/team", 30, (itTeam: typeof ItTeam) =>
+            new itTeam(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "itTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/itTeam/itTeam")
+      },
+      {
+        key: new Import("tagesschule/elektrotechnik", 21, (et: typeof Et) => 
+          new et(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "et" */"../../_page/_sectionedPage/_lazySectionedPage/etPage/etPage")
+      },
+      {
+        key: new Import("tagesschule/elektrotechnik/projekte", 30, (etProj: typeof EtProjekte) =>
+            new etProj(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "etProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/etProjekte/etProjekte")
+      },
+      {
+        key: new Import("tagesschule/elektrotechnik/team", 30, (etTeam: typeof EtTeam) =>
+            new etTeam(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "etTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/etTeam/etTeam")
+      },
+      {
+        key: new Import("tagesschule/biomedizin", 42, (el: typeof Bg) => 
+          new el(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "bgPage" */"../../_page/_sectionedPage/_lazySectionedPage/bgPage/bgPage")
+      },
+      {
+        key: new Import("tagesschule/biomedizin/projekte", 30, (elProj: typeof BgProjekte) =>
+            new elProj(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "bgProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/bgProjekte/bgProjekte")
+      },
+      {
+        key: new Import("tagesschule/biomedizin/team", 30, (elTeam: typeof BgTeam) =>
+            new elTeam(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "bgTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/bgTeam/bgTeam")
+      },
+      {
+        key: new Import("tagesschule/elektronik", 42, (elektrotechnikPage: typeof El) => 
           new elektrotechnikPage(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "elektrotechnik" */"../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikPage/elektrotechnikPage")
+        ), val: () => import(/* webpackChunkName: "el" */"../../_page/_sectionedPage/_lazySectionedPage/elPage/elPage")
       },
       {
-        key: new Import("tagesschule/elektrotechnik/projekte", 30, (elektrotechnikProjekte: typeof ElektrotechnikProjekte) =>
+        key: new Import("tagesschule/elektronik/projekte", 30, (elektrotechnikProjekte: typeof ElProjekte) =>
             new elektrotechnikProjekte(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "elektrotechnikProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikProjekte/elektrotechnikProjekte")
+        ), val: () => import(/* webpackChunkName: "elProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/elProjekte/elProjekte")
       },
       {
-        key: new Import("tagesschule/elektrotechnik/team", 30, (elektrotechnikTeam: typeof ElektrotechnikTeam) =>
+        key: new Import("tagesschule/elektronik/team", 30, (elektrotechnikTeam: typeof ElTeam) =>
             new elektrotechnikTeam(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "elektrotechnikTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elektrotechnikTeam/elektrotechnikTeam")
+        ), val: () => import(/* webpackChunkName: "elTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elTeam/elTeam")
       },
       {
-        key: new Import("tagesschule/biomedizin", 42, (elektrotechnikPage: typeof ElektrotechnikPage) => 
-          new elektrotechnikPage(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "biomedPage" */"../../_page/_sectionedPage/_lazySectionedPage/biomedPage/biomedPage")
-      },
-      {
-        key: new Import("tagesschule/biomedizin/projekte", 30, (elektrotechnikProjekte: typeof ElektrotechnikProjekte) =>
-            new elektrotechnikProjekte(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "biomedProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/biomedProjekte/biomedProjekte")
-      },
-      {
-        key: new Import("tagesschule/biomedizin/team", 30, (elektrotechnikTeam: typeof ElektrotechnikTeam) =>
-            new elektrotechnikTeam(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "biomedizin" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/biomedTeam/biomedTeam")
-      },
-      {
-        key: new Import("tagesschule/elektronik", 42, (elektrotechnikPage: typeof ElektrotechnikPage) => 
-          new elektrotechnikPage(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "elektronik" */"../../_page/_sectionedPage/_lazySectionedPage/elektronikPage/elektronikPage")
-      },
-      {
-        key: new Import("tagesschule/elektronik/projekte", 30, (elektrotechnikProjekte: typeof ElektrotechnikProjekte) =>
-            new elektrotechnikProjekte(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "elektronikProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/elektronikProjekte/elektronikProjekte")
-      },
-      {
-        key: new Import("tagesschule/elektronik/team", 30, (elektrotechnikTeam: typeof ElektrotechnikTeam) =>
-            new elektrotechnikTeam(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "elektronikTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elektronikTeam/elektronikTeam")
-      },
-      {
-        key: new Import("tagesschule/raumfahrt", 20, (raumfahrtPage: typeof RaumfahrtPage) => 
+        key: new Import("tagesschule/raumfahrt", 20, (raumfahrtPage: typeof RtPage) => 
           new raumfahrtPage(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "raumfahrt" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtPage/raumfahrtPage")
+        ), val: () => import(/* webpackChunkName: "rt" */"../../_page/_sectionedPage/_lazySectionedPage/rtPage/rtPage")
       },
       {
-        key: new Import("tagesschule/raumfahrt/projekte", 30, (raumfahrtProjekte: typeof RaumfahrtProjekte) =>
+        key: new Import("tagesschule/raumfahrt/projekte", 30, (raumfahrtProjekte: typeof RtProjekte) =>
             new raumfahrtProjekte(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "raumfahrtProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/raumfahrtProjekte/raumfahrtProjekte")
+        ), val: () => import(/* webpackChunkName: "rtProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/rtProjekte/rtProjekte")
       },
       {
-        key: new Import("tagesschule/raumfahrt/team", 30, (raumfahrtTeam: typeof RaumfahrtTeam) =>
+        key: new Import("tagesschule/raumfahrt/team", 30, (raumfahrtTeam: typeof RtTeam) =>
             new raumfahrtTeam(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "raumfahrtTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/raumfahrtTeam/raumfahrtTeam")
+        ), val: () => import(/* webpackChunkName: "rtTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/rtTeam/rtTeam")
       },
       // {
       //   key: new Import("schularzt", 30, (raumfahrtTeam: typeof Schularzt) =>

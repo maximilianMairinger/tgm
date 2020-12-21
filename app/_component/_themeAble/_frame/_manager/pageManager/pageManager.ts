@@ -16,6 +16,7 @@ import Schularzt from "../../_page/_sectionedPage/_lazySectionedPage/schularzt/s
 import BlogPage from "../../_page/blogPage/blogPage"
 import ElektrotechnikTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elektrotechnikTeam/elektrotechnikTeam";
 import ElektrotechnikProjekte from "../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikProjekte/elektrotechnikProjekte";
+
 import Wi from "../../_page/_sectionedPage/_lazySectionedPage/wiPage/wiPage"
 import WiProjekte from "../../_page/_sectionedPage/_lazySectionedPage/wirtschaftsingenieureProjekte/wirtschaftsingenieureProjekte";
 import WiTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wiTeam/wiTeam"
@@ -23,6 +24,10 @@ import WiTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wiTe
 import It from "../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage"
 import ItProjekte from "../../_page/_sectionedPage/_lazySectionedPage/itProjekte/itProjekte";
 import ItTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/itTeam/itTeam"
+
+import Kt from "../../_page/_sectionedPage/_lazySectionedPage/ktPage/ktPage"
+import KtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/ktProjekte/ktProjekte";
+import KtTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/ktTeam/ktTeam"
 
 export type PageName = string
 
@@ -70,6 +75,21 @@ export default declareComponent("page-manager", class PageManager extends Manage
         key: new Import("tagesschule/wirtschaftsingenieure/team", 30, (wiTeam: typeof WiTeam) =>
             new wiTeam(sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "wiTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wiTeam/wiTeam")
+      },
+      {
+        key: new Import("tagesschule/kunststofftechnik", 22, (kt: typeof Kt) => 
+          new kt(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "elektrotechnik" */"../../_page/_sectionedPage/_lazySectionedPage/ktPage/ktPage")
+      },
+      {
+        key: new Import("tagesschule/kunststofftechnik/projekte", 30, (ktProjekte: typeof KtProjekte) =>
+            new ktProjekte(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "wiProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/ktProjekte/ktProjekte")
+      },
+      {
+        key: new Import("tagesschule/kunststofftechnik/team", 30, (ktTeam: typeof KtTeam) =>
+            new ktTeam(sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "wiTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/ktTeam/ktTeam")
       },
       {
         key: new Import("tagesschule/informationstechnologie", 22, (it: typeof It) => 

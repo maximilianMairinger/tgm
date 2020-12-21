@@ -18,7 +18,7 @@ import ElektrotechnikTeam from "../../_page/_sectionedPage/_lazySectionedPage/_t
 import ElektrotechnikProjekte from "../../_page/_sectionedPage/_lazySectionedPage/elektrotechnikProjekte/elektrotechnikProjekte";
 
 import Wi from "../../_page/_sectionedPage/_lazySectionedPage/wiPage/wiPage"
-import WiProjekte from "../../_page/_sectionedPage/_lazySectionedPage/wirtschaftsingenieureProjekte/wirtschaftsingenieureProjekte";
+import WiProjekte from "../../_page/_sectionedPage/_lazySectionedPage/wiProjekte/wiProjekte";
 import WiTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wiTeam/wiTeam"
 
 import It from "../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage"
@@ -73,7 +73,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       {
         key: new Import("tagesschule/wirtschaftsingenieure/projekte", 30, (wiProjekte: typeof WiProjekte) =>
             new wiProjekte(sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "wiProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/wirtschaftsingenieureProjekte/wirtschaftsingenieureProjekte")
+        ), val: () => import(/* webpackChunkName: "wiProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/wiProjekte/wiProjekte")
       },
       {
         key: new Import("tagesschule/wirtschaftsingenieure/team", 30, (wiTeam: typeof WiTeam) =>

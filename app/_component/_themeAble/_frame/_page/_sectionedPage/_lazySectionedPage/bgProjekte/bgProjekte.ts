@@ -1,10 +1,9 @@
 import { declareComponent } from "../../../../../../../lib/declareComponent"
 import LazySectionedPage from "../lazySectionedPage"
-import { set } from "../../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../../lib/lazyLoad"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Thumbnail from "../../../../../_text/_thumbnail/thumbnail";
-import InformationenSection from "../../../../../_text/_sectionTextblob/informationenSection/informationenSection";
+import InformationenSection from "../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection";
 import ProjekteSection from "../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection";
 import {Project} from "../../../../../_text/tabletBlob/tabletBlob";
 

@@ -17,7 +17,7 @@ export default declareComponent("bg-projekte", class RaumfahrtProjekte extends L
           let e = new thumbnail();
           e.note("die")
           e.heading("Projekte");
-          e.subheading("der Biomedizin");
+          e.subheading("der HBG");
           e.background("biomedProj.png")
           return new WrapperSection(e, 'dark') as any;
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/thumbnail")

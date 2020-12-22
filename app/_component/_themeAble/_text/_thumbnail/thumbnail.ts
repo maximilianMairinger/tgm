@@ -75,7 +75,7 @@ export default class Thumbnail extends Text {
   }
 
   private videohref:string;
-  private startIframe(){
+  protected startIframe(){
     this.q("iframe").setAttribute("src", "https://www.youtube.com/embed/" +this.videohref.split("/watch?v=").splice(-1).pop() + "?autoplay=1&controls=0")
     let textbox = this.q("text-box")
     let shader = this.q("background-shader");

@@ -20,7 +20,7 @@ export default class MbPage extends LazySectionedPage {
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
           let e = new _Thumbnail("biomedizin")
-          e.heading("Biomedizin und Gesundheitstechnik")
+          e.heading("Maschinenbau")
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("biomedLanding.png")

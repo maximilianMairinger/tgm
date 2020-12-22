@@ -20,7 +20,7 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
           let e = new _Thumbnail("informationstechnologie")
-          e.heading("Biomedizin und Gesundheitstechnik")
+          e.heading("Informationstechnologie")
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("biomedLanding.png")

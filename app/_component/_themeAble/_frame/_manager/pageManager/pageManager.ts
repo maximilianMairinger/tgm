@@ -19,7 +19,7 @@ import Et from "../../_page/_sectionedPage/_lazySectionedPage/etPage/etPage";
 import EtTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/etTeam/etTeam";
 import EtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/etProjekte/etProjekte";
 
-import El from "../../_page/_sectionedPage/_lazySectionedPage/elektronikPage/elektronikPage";
+import El from "../../_page/_sectionedPage/_lazySectionedPage/elPage/elPage";
 import ElTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elTeam/elTeam";
 import ElProjekte from "../../_page/_sectionedPage/_lazySectionedPage/elProjekte/elProjekte";
 
@@ -35,7 +35,7 @@ import Kt from "../../_page/_sectionedPage/_lazySectionedPage/ktPage/ktPage"
 import KtProjekte from "../../_page/_sectionedPage/_lazySectionedPage/ktProjekte/ktProjekte";
 import KtTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/ktTeam/ktTeam"
 
-import Mb from "../../_page/_sectionedPage/_lazySectionedPage/ktPage/mbPage"
+import Mb from "../../_page/_sectionedPage/_lazySectionedPage/mbPage/mbPage"
 import MbProjekte from "../../_page/_sectionedPage/_lazySectionedPage/mbProjekte/mbProjekte";
 import MbTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/mbTeam/mbTeam"
 

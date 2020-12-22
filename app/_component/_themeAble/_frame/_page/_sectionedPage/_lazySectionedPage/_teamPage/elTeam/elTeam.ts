@@ -6,7 +6,7 @@ import Thumbnail from "../../../../../../_text/_thumbnail/thumbnail";
 import TeamSection from "../../../../../../_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../../_text/imageTextblob/imageTextblob"
 
-export default declareComponent("biomed-team", class RaumfahrtTeam extends TeamPage {
+export default declareComponent("el-team", class KtTeam extends TeamPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
@@ -16,7 +16,7 @@ export default declareComponent("biomed-team", class RaumfahrtTeam extends TeamP
                 e.note("mit");
                 e.heading("Teamgeist");
                 e.subheading("in die Zukunft");
-                e.background("biomedPpl.png")
+                e.background("landingTeamLeitung.jpg")
                 return new WrapperSection(e, 'dark') as any
             }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_text/_thumbnail/thumbnail")
         },
@@ -24,8 +24,9 @@ export default declareComponent("biomed-team", class RaumfahrtTeam extends TeamP
             key: new Import("info", 1, (Team: typeof Element) =>
                 {
                     let teamSection = new (Team as typeof TeamSection)();
-                    teamSection.subheading("der BG");
-                    teamSection.content("Die Lehrkräfte unserer Abteilung gewährleisten durch neueste pädagogische Methodiken und individuelle Betreuung die bestmögliche Entwicklung der SchülerInnen. Unser Lehrkörper rekrutiert aus den erfahrensten Mitgliedern der Wissenschaft und Industrie.")
+                    teamSection.subheading("der WI");
+                    teamSection.note("das")
+                    teamSection.content("Die Lehrkräfte der Höheren Lehranstalt für Wirtschaftsingenieure ermöglichen dank Erfahrung mit viel Engagement individuelle Förderung zur optimalen Entwicklung der Schülerinnen und Schüler.")
                     return new WrapperSection(teamSection);
                 }
             ), val: () => import(/* webpackChunkName: "teamSection" */"../../../../../../_text/_sectionTextblob/teamSection/teamSection")
@@ -35,14 +36,14 @@ export default declareComponent("biomed-team", class RaumfahrtTeam extends TeamP
                 {
                     let leitungImageTextblob = new (leitung as typeof ImageTextblob)();
                     leitungImageTextblob.note("Abteilungvorstand");
-                    leitungImageTextblob.heading("DI Dr. Wess");
-                    leitungImageTextblob.subheading("Bernhard");
-                    leitungImageTextblob.content("Ich stehe Ihnen gerne am Dienstag von 9:50 bis 10:40 in meiner Sprechstunde zu Verfügung.")
-                    leitungImageTextblob.address("Wexstraße 19-21 / 12. Stock / H1226");
-                    leitungImageTextblob.email("bernhard.wess@tgm.ac.at");
-                    leitungImageTextblob.tel("01 33 126 320");
+                    leitungImageTextblob.heading("DI Angerer");
+                    leitungImageTextblob.subheading("Georg");
+                    // leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")
+                    leitungImageTextblob.address("Wexstraße 19-23 / 5. Stock");
+                    leitungImageTextblob.email("georg.angerer@tgm.ac.at");
+                    leitungImageTextblob.tel("0664 80126262");
                     leitungImageTextblob.image('url("/res/img/team_1.png")');
-                    leitungImageTextblob.stellvertreter([{"name":"Stefan Hertl", "email":"shertl@tgm.ac.at"}])
+                    // leitungImageTextblob.stellvertreter([{"name":"Stefan Hertl", "email":"shertl@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_text/imageTextblob/imageTextblob")
@@ -53,13 +54,14 @@ export default declareComponent("biomed-team", class RaumfahrtTeam extends TeamP
                     let schuelerImageTextblob = new (schueler as typeof ImageTextblob)();
                     schuelerImageTextblob.alignment('left');
                     schuelerImageTextblob.note("schülervertretung");
-                    schuelerImageTextblob.heading("Nadler");
-                    schuelerImageTextblob.subheading("Florian");
+                    schuelerImageTextblob.heading("Kaan");
+                    schuelerImageTextblob.subheading("Yigitbilek");
                     schuelerImageTextblob.content("Ich darf euch dieses Jahr als Abteilungssprecher vertreten, bei Anliegen bitte einfach melden!")
-                    schuelerImageTextblob.email("fnadler@student.tgm.ac.at");
-                    schuelerImageTextblob.tel("+43‭ 660 6210505‬");
+                    schuelerImageTextblob.address("Wexstraße 19-23 / 11. Stock");
+                    schuelerImageTextblob.email("kyigitbilek@student.tgm.ac.at");
+                    // schuelerImageTextblob.tel("+43 ‭650 7311330‬");
                     schuelerImageTextblob.image('url("/res/img/team_2.jpg")');
-                    schuelerImageTextblob.stellvertreter([{"name":"Kristina Kutejova", "email":"kkutejova@student.tgm.ac.at"}])
+                    schuelerImageTextblob.stellvertreter([{"name":"Jakob Masching", "email":"jmasching@student.tgm.ac.at "}])
                     return new WrapperSection(schuelerImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../../_text/imageTextblob/imageTextblob")

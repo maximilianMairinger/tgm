@@ -50,11 +50,8 @@ export default declareComponent("home-page", class Homepage extends LazySectione
     })
   }
 
-  stl() {
-    return super.stl() + require("./homepage.css").toString()
-  }
   pug() {
-    return require("./homepage.pug").default
+    return ""
   }
 
 }) 

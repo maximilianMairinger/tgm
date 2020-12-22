@@ -1,6 +1,5 @@
 import { declareComponent } from "../../../../../../../lib/declareComponent"
 import LazySectionedPage from "../lazySectionedPage"
-import { set } from "../../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../../lib/lazyLoad"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Thumbnail from "../../../../../_text/_thumbnail/thumbnail";
@@ -9,7 +8,7 @@ import ProjekteSection from "../../../../_pageSection/schuelerprojekteSection/sc
 import {Project} from "../../../../../_text/tabletBlob/tabletBlob";
 
 
-export default declareComponent("elektrotechnik-projekte", class RaumfahrtProjekte extends LazySectionedPage {
+export default declareComponent("kt-projekte", class KtProjekte extends LazySectionedPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
@@ -18,8 +17,8 @@ export default declareComponent("elektrotechnik-projekte", class RaumfahrtProjek
           let e = new thumbnail();
           e.note("Bemerkenswerte")
           e.heading("Diplomarbeiten");
-          e.subheading("der ET");
-          e.background('elProj.jpg');
+          e.subheading("der KT");
+          e.background('wiProject.png');
           return new WrapperSection(e, 'dark') as any;
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/thumbnail")
       },
@@ -27,7 +26,7 @@ export default declareComponent("elektrotechnik-projekte", class RaumfahrtProjek
         key: new Import("info", 1, (Information: typeof Element) =>
         {
           let info = new (Information as typeof InformationenSection)();
-          info.content("SchülerInnen arbeiten in Kooperation mit Unternehmen aus der Privatwirtschaft an innovativen Projekten. Im Zuge des Diplomprojekts demonstrieren die zukünftigen Elektrotechniker im 5. Jahrgang die erlernten Fähigkeiten.")
+          info.content("Im 5. Jahrgang haben die Schülerinnen und Schüler die Möglichkeit Praxisluft zu schnuppern und ihr Wissen aus den fachtheoretischen und fachpraktischen Gegenständen im Rahmen einer Diplomarbeit umzusetzen. Die Diplomarbeiten werden fast ausschließlich mit externen Firmen durchgeführt wobei die Schülerinnen und Schüler in Projektteams zusammenarbeiten. Da die Ausbildung der Wirtschaftsingenieure sehr breit gefächert ist, sind Themen aus dem Bereich des Maschinenbaus, der Logistik, der IT, der Elektrotechnik, ja sogar aus dem medizinischen Bereich möglich.")
           return new WrapperSection(info);
         }
         ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/informationenSection")

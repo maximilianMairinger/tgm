@@ -3,13 +3,13 @@ import LazySectionedPage from "../lazySectionedPage"
 import { set } from "../../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../../lib/lazyLoad"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
-import Thumbnail from "../../../../../../_themeAble/_text/_thumbnail/thumbnail";
-import InformationenSection from "../../../../../../_themeAble/_text/_sectionTextblob/informationenSection/informationenSection";
+import Thumbnail from "../../../../../_text/_thumbnail/thumbnail";
+import InformationenSection from "../../../../../_text/_sectionTextblob/informationenSection/informationenSection";
 import ProjekteSection from "../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection";
 import {Project} from "../../../../../_text/tabletBlob/tabletBlob";
 
 
-export default declareComponent("raumfahrt-projekte", class RaumfahrtProjekte extends LazySectionedPage {
+export default declareComponent("bg-projekte", class RaumfahrtProjekte extends LazySectionedPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
@@ -17,9 +17,9 @@ export default declareComponent("raumfahrt-projekte", class RaumfahrtProjekte ex
         key: new Import("", 1, (thumbnail: typeof Thumbnail) => {
           let e = new thumbnail();
           e.note("Bemerkenswerte")
-          e.heading("Diplomprojekte");
-          e.subheading("der ET");
-          e.background("raumfahrtProject.jpg")
+          e.heading("Diplomarbeiten");
+          e.subheading("der Biomedizin");
+          e.background("biomedProj.png")
           return new WrapperSection(e, 'dark') as any;
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/thumbnail")
       },
@@ -27,10 +27,10 @@ export default declareComponent("raumfahrt-projekte", class RaumfahrtProjekte ex
         key: new Import("info", 1, (Information: typeof Element) =>
         {
           let info = new (Information as typeof InformationenSection)();
-          info.content("Schüler und Schülerinnen arbeiten in Kooperation mit internationalen Aerospace Unternehmen um nachhaltige Projekte in den Bereichen der Weltraumforschung, Robotik und Biologie umzusetzen. So sammeln sie wertvolle Erfahrungen und entwickeln ein Resume, ")
+          info.content("SchülerInnen setzen im Zuge der Diplomarbeit Projekte in Bereichen wie etwa Diagnose und Therapie oder Prothesen- und Implantattechnik um. Dabei arbeiten sie oft in Kooperation mit renommierten Unternehmen aus der Industrie und können erste Erfahrungen für das Berufsleben sammeln.")
           return new WrapperSection(info);
         }
-        ), val: () => import(/* webpackChunkName: "info" */"../../../../../../_themeAble/_text/_sectionTextblob/informationenSection/informationenSection")
+        ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/informationenSection")
       },
       {
         key: new Import("projekte", 1, (projekte: typeof ProjekteSection) => {

@@ -6,7 +6,7 @@ import Thumbnail from "../../../../../../_text/_thumbnail/thumbnail";
 import TeamSection from "../../../../../../_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../../_text/imageTextblob/imageTextblob"
 
-export default declareComponent("elektrotechnik-team", class RaumfahrtTeam extends TeamPage {
+export default declareComponent("et-team", class EtTeam extends TeamPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(

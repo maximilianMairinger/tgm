@@ -13,18 +13,17 @@ import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
-export default class BiomedPage extends LazySectionedPage {
+export default declareComponent("et-page", class EtPage extends LazySectionedPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail("biomedizin")
-          e.heading("Biomedizin und Gesundheitstechnik")
+          let e = new _Thumbnail("elektrotechnik")
+          e.heading("Elektrotechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
-          e.background("biomedLanding.png")
-          e.videolink("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+          e.background("het_main.jpg")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
@@ -38,11 +37,7 @@ export default class BiomedPage extends LazySectionedPage {
           info.note("bei uns");
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
-          info.content(`
-          Das Ausbildungsziel an dieser Lehranstalt ist die Entwicklung eines soliden Verständnisses der Wechselwirkung von Technik und Medizin, das durch inhaltliche und organisatorische Vernetzung der Unterrichtsgegenstände „Biologie, Medizin und Gesundheitswesen“, „Biomedizinische Signal-Verarbeitung“, „Medizinische Gerätetechnik“, „Gesundheitsmechatronik“ und „Medizin- und Gesundheitsinformatik“ vermittelt wird.
-          <br><br>
-          Die Absolventen/innen der Höheren Lehranstalt für Biomedizin- und Gesundheitstechnik können ingenieurmäßige Tätigkeiten auf den Gebieten Diagnose und Therapie, Bildverarbeitung, Prothesen- und Implantattechnik sowie in Rehabilitations-, Sportgeräte- und Wellnesstechnik ausführen. Dabei steht die Planung, Entwicklung und Realisierung medizintechnischer Geräte, der Entwurf und Implementierung von Softwarelösungen auf den Gebieten der Biologie, Medizin und des Gesundheitswesens, die Auswahl, Analyse, messtechnische Überprüfung bzw. der Test  der Komponenten, Module und Systeme im Vordergrund.
-          `)
+          info.content("Die Abteilung Elektrotechnik bietet eine besonders umfassende technische Ausbildung. Grundsätzlich beschäftigt sie sich mit allen Bereichen, die mit elektrischem Strom zu tun haben. Dadurch ergeben sich viele Berufsfelder, etwa Antriebstechnik, Automation und Informatik in denen unsere Absolventen kompetent sind.")
 
           return new WrapperSection(info) as any
         }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")
@@ -50,26 +45,26 @@ export default class BiomedPage extends LazySectionedPage {
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
           new _AusmachtSection()
-        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/ausmachtSectionBiomed/ausmachtSectionBiomed")
+        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/ausmachtSectionElektrotechnik/ausmachtSectionElektrotechnik")
       },
       {
         key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
           new _DarkNewsSection()
-        ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/biomedTriangleNews/biomedTriangleNews")
+        ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews")
       },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("mit der Biomedizin");
-          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Biomedizin einzutauchen.")
+          imageTextBlob.subheading("zur Elektrotechnik");
+          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Elektrotechnik einzutauchen.")
           imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("tagesschule/elektrotechnik")
-          imageTextBlob.address("Wexstraße 19-23 / 12. Stock");
-          imageTextBlob.email("office-hbg@tgm.ac.at");
-          imageTextBlob.tel("01 33 126 321");
-          imageTextBlob.image('url("/res/img/biomedKontakt.png")');
+          imageTextBlob.address("Wexstraße 19-23 / 3. Stock");
+          imageTextBlob.email("tdeininger@tgm.ac.at");
+          imageTextBlob.tel("+43 (1) 33 126 / 231");
+          imageTextBlob.image('url("/res/img/elektrotechnik_kotakt.png")');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },
@@ -89,6 +84,4 @@ export default class BiomedPage extends LazySectionedPage {
     return ""
   }
 
-}
-
-declareComponent("biomed-page", BiomedPage)
+}) 

@@ -9,7 +9,7 @@ import ProjekteSection from "../../../../_pageSection/schuelerprojekteSection/sc
 import {Project} from "../../../../../_text/tabletBlob/tabletBlob";
 
 
-export default declareComponent("biomed-projekte", class RaumfahrtProjekte extends LazySectionedPage {
+export default declareComponent("rt-projekte", class RaumfahrtProjekte extends LazySectionedPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
@@ -17,9 +17,9 @@ export default declareComponent("biomed-projekte", class RaumfahrtProjekte exten
         key: new Import("", 1, (thumbnail: typeof Thumbnail) => {
           let e = new thumbnail();
           e.note("Bemerkenswerte")
-          e.heading("Diplomarbeiten");
-          e.subheading("der Biomedizin");
-          e.background("biomedProj.png")
+          e.heading("Diplomprojekte");
+          e.subheading("der ET");
+          e.background("raumfahrtProject.jpg")
           return new WrapperSection(e, 'dark') as any;
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/thumbnail")
       },
@@ -27,7 +27,7 @@ export default declareComponent("biomed-projekte", class RaumfahrtProjekte exten
         key: new Import("info", 1, (Information: typeof Element) =>
         {
           let info = new (Information as typeof InformationenSection)();
-          info.content("SchülerInnen setzen im Zuge der Diplomarbeit Projekte in Bereichen wie etwa Diagnose und Therapie oder Prothesen- und Implantattechnik um. Dabei arbeiten sie oft in Kooperation mit renommierten Unternehmen aus der Industrie und können erste Erfahrungen für das Berufsleben sammeln.")
+          info.content("Schüler und Schülerinnen arbeiten in Kooperation mit internationalen Aerospace Unternehmen um nachhaltige Projekte in den Bereichen der Weltraumforschung, Robotik und Biologie umzusetzen. So sammeln sie wertvolle Erfahrungen und entwickeln ein Resume, ")
           return new WrapperSection(info);
         }
         ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/informationenSection")

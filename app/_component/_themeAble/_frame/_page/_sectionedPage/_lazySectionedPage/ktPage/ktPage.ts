@@ -13,14 +13,14 @@ import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
-export default declareComponent("it-page", class ItPage extends LazySectionedPage {
+export default declareComponent("kt-page", class KtPage extends LazySectionedPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
           let e = new _Thumbnail("informationstechnologie")
-          e.heading("Biomedizin und Gesundheitstechnik")
+          e.heading("Kunstofftechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("biomedLanding.png")

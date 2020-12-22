@@ -7,23 +7,23 @@ import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
 import Thumbnail from "../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection"
-import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionRaumfahrt/ausmachtSectionRaumfahrt"
+import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionElektronik/ausmachtSectionElektronik"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
-export default declareComponent("it-page", class ItPage extends LazySectionedPage {
+export default class KunststoffPage extends LazySectionedPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail("informationstechnologie")
-          e.heading("Informationstechnologie")
+          let e = new _Thumbnail("elektronik")
+          e.heading("Kunststofftechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
-          e.background("biomedLanding.png")
+          e.background("elektronikLanding.png")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
@@ -37,15 +37,15 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
           info.note("bei uns");
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
-          info.content("Die Informationstechnologie ist mit der Digitalisierung der treibende Faktor unserer Zeit. Unsere Ausbildung gibt dir ein umfassendes technisches Verständnis für die Digitalisierung und ermöglicht dir damit, in jeder Branche, in jedem Unternehmen und in nahezu jeder Berufsrolle einzusteigen. Dafür setzten wir in Pädagogik und Didaktik auf Individualisierung und unterstützen dich mit dem Lernbüro auf deinem persönlichen Weg in die IT.  Ganz egal ob IT-Security, Big-Data, Game- & App-Development, Sichere Webentwicklung oder Digital Media-Art & Design.")
+          info.content("Als weltweit erste und einzige HTL Ausbildung für Kunststofftechnik im Osten Österreichs begleiten wir am TGM seit 1963 angehende Ingenieurinnen und Ingenieure auf ihrem Weg in die Industrie. Kunststoff ist ein moderner Werkstoff, der unser Leben in vielfältiger Weise verbessert, sei es durch Artikel des täglichen Lebens oder durch hochtechnische Erzeugnisse wie Teile im Automobil- und Flugzeugbau. Wir lehren aber nicht nur moderne Technologien zur Herstellung, sondern vor allem auch wichtige Recyclingmethoden, um eine Kreislaufwirtschaft sicherzustellen. Österreich gilt als Pioniernation in der Kunststofftechnik und beheimatet zahlreiche Global Player, die mit unseren Absolventinnen und Absolventen zu Weltmarktführern in der Materialherstellung, im Kunststoffmaschinenbau und in Produktsparten, wie der Verpackungs- und Medizintechnik, geworden sind. Einen Einblick in die unzähligen Einsatzgebiet für Kunststoffe kann man hier finden: https://www.plasticseurope.org/de/about-plastics/what-are-plastics/innovative-material")
 
           return new WrapperSection(info) as any
         }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")
       },
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
-          new _AusmachtSection()
-        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/ausmachtSectionBiomed/ausmachtSectionBiomed")
+          new _AusmachtSection("tagesschule/elektronik/highlights/")
+        ), val: () => import(/* webpackChunkName: "ausmachtSectionElektonik" */"../../../../_pageSection/ausmachtSection/ausmachtSectionElektronik/ausmachtSectionElektronik")
       },
       {
         key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
@@ -57,13 +57,13 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("mit der Informationstechnologie");
-          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Informationstechnologie einzutauchen.")
+          imageTextBlob.subheading("mit der Kunststofftechnik");
+          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Kunststofftechnik einzutauchen.")
           imageTextBlob.linktext("Einen Besuch planen")
-          imageTextBlob.linkhref("tagesschule/informationstechnologie")
-          imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 9. Stock");
-          imageTextBlob.email("office-hit@tgm.ac.at");
-          imageTextBlob.tel("+43 1 33126 291");
+          imageTextBlob.linkhref("tagesschule/Kunststofftechnik")
+          imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 12. Stock");
+          imageTextBlob.email("office-hk5@tgm.ac.at");
+          imageTextBlob.tel("01 33 126 / 300");
           imageTextBlob.image('url("/res/img/biomedKontakt.png")');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
@@ -79,8 +79,11 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
     })
 
   }
+
   pug() {
     return ""
   }
 
-}) 
+}
+
+declareComponent("kunststoff-page", KunststoffPage)

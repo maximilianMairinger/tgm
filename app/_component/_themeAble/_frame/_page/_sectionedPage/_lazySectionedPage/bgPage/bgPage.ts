@@ -13,17 +13,18 @@ import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
-export default declareComponent("it-page", class ItPage extends LazySectionedPage {
+export default class BiomedPage extends LazySectionedPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail("informationstechnologie")
-          e.heading("Informationstechnologie")
+          let e = new _Thumbnail("biomedizin")
+          e.heading("Biomedizin und Gesundheitstechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("biomedLanding.png")
+          e.videolink("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
@@ -37,7 +38,11 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
           info.note("bei uns");
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
-          info.content("Die Informationstechnologie ist mit der Digitalisierung der treibende Faktor unserer Zeit. Unsere Ausbildung gibt dir ein umfassendes technisches Verständnis für die Digitalisierung und ermöglicht dir damit, in jeder Branche, in jedem Unternehmen und in nahezu jeder Berufsrolle einzusteigen. Dafür setzten wir in Pädagogik und Didaktik auf Individualisierung und unterstützen dich mit dem Lernbüro auf deinem persönlichen Weg in die IT.  Ganz egal ob IT-Security, Big-Data, Game- & App-Development, Sichere Webentwicklung oder Digital Media-Art & Design.")
+          info.content(`
+          Das Ausbildungsziel an dieser Lehranstalt ist die Entwicklung eines soliden Verständnisses der Wechselwirkung von Technik und Medizin, das durch inhaltliche und organisatorische Vernetzung der Unterrichtsgegenstände „Biologie, Medizin und Gesundheitswesen“, „Biomedizinische Signal-Verarbeitung“, „Medizinische Gerätetechnik“, „Gesundheitsmechatronik“ und „Medizin- und Gesundheitsinformatik“ vermittelt wird.
+          <br><br>
+          Die Absolventen/innen der Höheren Lehranstalt für Biomedizin- und Gesundheitstechnik können ingenieurmäßige Tätigkeiten auf den Gebieten Diagnose und Therapie, Bildverarbeitung, Prothesen- und Implantattechnik sowie in Rehabilitations-, Sportgeräte- und Wellnesstechnik ausführen. Dabei steht die Planung, Entwicklung und Realisierung medizintechnischer Geräte, der Entwurf und Implementierung von Softwarelösungen auf den Gebieten der Biologie, Medizin und des Gesundheitswesens, die Auswahl, Analyse, messtechnische Überprüfung bzw. der Test  der Komponenten, Module und Systeme im Vordergrund.
+          `)
 
           return new WrapperSection(info) as any
         }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")
@@ -57,13 +62,13 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("mit der Informationstechnologie");
-          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Informationstechnologie einzutauchen.")
+          imageTextBlob.subheading("mit der Biomedizin");
+          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Biomedizin einzutauchen.")
           imageTextBlob.linktext("Einen Besuch planen")
-          imageTextBlob.linkhref("tagesschule/informationstechnologie")
-          imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 9. Stock");
-          imageTextBlob.email("office-hit@tgm.ac.at");
-          imageTextBlob.tel("+43 1 33126 291");
+          imageTextBlob.linkhref("tagesschule/elektrotechnik")
+          imageTextBlob.address("Wexstraße 19-23 / 12. Stock");
+          imageTextBlob.email("office-hbg@tgm.ac.at");
+          imageTextBlob.tel("01 33 126 321");
           imageTextBlob.image('url("/res/img/biomedKontakt.png")');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
@@ -79,8 +84,11 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
     })
 
   }
+
   pug() {
     return ""
   }
 
-}) 
+}
+
+declareComponent("bg-page", BiomedPage)

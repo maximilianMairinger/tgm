@@ -6,7 +6,7 @@ import Thumbnail from "../../../../../../_text/_thumbnail/thumbnail";
 import TeamSection from "../../../../../../_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../../_text/imageTextblob/imageTextblob"
 
-export default declareComponent("wirtschaftsingenieure-team", class WiTeam extends TeamPage {
+export default declareComponent("el-team", class KtTeam extends TeamPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
@@ -35,7 +35,7 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
             key: new Import("leitung", 1, (leitung: typeof Element) =>
                 {
                     let leitungImageTextblob = new (leitung as typeof ImageTextblob)();
-                    leitungImageTextblob.note("Abteilungsvorstand");
+                    leitungImageTextblob.note("Abteilungvorstand");
                     leitungImageTextblob.heading("DI Angerer");
                     leitungImageTextblob.subheading("Georg");
                     // leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")

@@ -13,31 +13,31 @@ import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
-export default declareComponent("it-page", class ItPage extends LazySectionedPage {
+export default declareComponent("rt-page", class RtPage extends LazySectionedPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
-      {
-        key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail("informationstechnologie")
-          e.heading("Informationstechnologie")
-          e.subheading("der Tagesschule")
-          e.note("abteilung");
-          e.background("biomedLanding.png")
+      // {
+      //   key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
+      //     // let e = new _Thumbnail()
+      //     // e.heading("Raumfahrttechnik")
+      //     // e.subheading("der Tagesschule")
+      //     // e.note("abteilung");
+      //     // e.background("rocket.png")
           
-          return new WrapperSection(e, "dark") as any
-        }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
-      },
+      //     return new WrapperSection(e, "dark") as any
+      //   }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
+      // },
       {
         key: new Import("info", 1, (_Info: typeof Info) => {
           let info = new _Info()
 
           info.heading("Technische Ausbildung");
           info.subheading("am Puls der Zeit");
-          info.note("bei uns");
+          info.note("unsere");
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
-          info.content("Die Informationstechnologie ist mit der Digitalisierung der treibende Faktor unserer Zeit. Unsere Ausbildung gibt dir ein umfassendes technisches Verständnis für die Digitalisierung und ermöglicht dir damit, in jeder Branche, in jedem Unternehmen und in nahezu jeder Berufsrolle einzusteigen. Dafür setzten wir in Pädagogik und Didaktik auf Individualisierung und unterstützen dich mit dem Lernbüro auf deinem persönlichen Weg in die IT.  Ganz egal ob IT-Security, Big-Data, Game- & App-Development, Sichere Webentwicklung oder Digital Media-Art & Design.")
+          info.content("In der Abteilung für Raumfahrttechnik erhalten SchülerInnen eine fundierte Ausbildung in den wichtigsten Aerospace-Themenbereichen. Unser rigoroser Lehrplan ermöglicht AbsolventInnen den Einstieg in die Industrie und öffnet Türen für eine tertiäre Ausbildung.")
 
           return new WrapperSection(info) as any
         }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")
@@ -45,26 +45,26 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
           new _AusmachtSection()
-        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/ausmachtSectionBiomed/ausmachtSectionBiomed")
+        ), val: () => import(/* webpackChunkName: "ausmachtSectionRaumfahrt" */"../../../../_pageSection/ausmachtSection/ausmachtSectionRaumfahrt/ausmachtSectionRaumfahrt")
       },
       {
         key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
           new _DarkNewsSection()
-        ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/biomedTriangleNews/biomedTriangleNews")
+        ), val: () => import(/* webpackChunkName: "raumfahrtNews" */"../../../../_pageSection/triangleNews/raumfahrtTriangleNews/raumfahrtTriangleNews")
       },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("mit der Informationstechnologie");
-          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Informationstechnologie einzutauchen.")
+          imageTextBlob.subheading("zur Raumfahrttechnik");
+          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich. Wir ermöglichen dir als SchnupperschülerIn in die Welt der Raumfahrt einzutauchen.")
           imageTextBlob.linktext("Einen Besuch planen")
-          imageTextBlob.linkhref("tagesschule/informationstechnologie")
-          imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 9. Stock");
-          imageTextBlob.email("office-hit@tgm.ac.at");
+          imageTextBlob.linkhref("tagesschule/raumfahrt")
+          imageTextBlob.address("Wexstraße 19-23 / 100. Stock");
+          imageTextBlob.email("avhrt@tgm.ac.at");
           imageTextBlob.tel("+43 1 33126 291");
-          imageTextBlob.image('url("/res/img/biomedKontakt.png")');
+          imageTextBlob.image('url("/res/img/computersRaumfahrt.jpg")');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },
@@ -79,6 +79,7 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
     })
 
   }
+
   pug() {
     return ""
   }

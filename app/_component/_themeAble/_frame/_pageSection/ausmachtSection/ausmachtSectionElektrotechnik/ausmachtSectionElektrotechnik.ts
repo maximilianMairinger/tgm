@@ -25,7 +25,7 @@ export default declareComponent("ausmacht-section-elektrotechnik", class extends
                     {"icon":"industrieelektronik", "title":"Industrieelektronik", "content":"Elektrotechnik in der Industrie", "link":"tagesschule/elektrotechnik/highlights/industrieelektronik"},
                     {"icon":"angewandteInformatik", "title":"Angewandte Informatik", "content":"Entwickeln von computerbasierten Lösungen", "link":"tagesschule/elektrotechnik/highlights/angewandte-informatik"}
                 ],
-                stundentafel:"/"
+                stundentafel: "tagesschule/biomedizin/highlights/stundentafel-el"
             },
             cards: [
                 {
@@ -70,12 +70,5 @@ export default declareComponent("ausmacht-section-elektrotechnik", class extends
                 
             }
         })
-    }
-
-    stl() {
-        return super.stl() + require("./ausmachtSectionElektrotechnik.css").toString()
-    }
-    pug() {
-        return super.pug() + require("./ausmachtSectionElektrotechnik.pug").default
     }
 });

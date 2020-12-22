@@ -94,13 +94,10 @@ export default class WIPage extends LazySectionedPage {
 
   }
 
-  stl() {
-    return super.stl() + require("./wiPage.css").toString()
-  }
   pug() {
-    return require("./wiPage.pug").default
+    return ""
   }
 
 }
 
-declareComponent("wirtschafts-ingenieure-page", WIPage)
+declareComponent("wi-page", WIPage)

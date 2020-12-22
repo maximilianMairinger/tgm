@@ -65,6 +65,7 @@ selection-box{
     position: relative;
     flex-direction: row;
     align-items: center;
+    padding-right: 20px;
 }
 
 selection-content{
@@ -83,6 +84,7 @@ c-button{
     z-index: 2;
     height: 100%;
     width: 100%;
+    cursor: pointer;
 }
 
 selection-background{
@@ -91,8 +93,8 @@ selection-background{
     opacity: 0;
     height: 100%;
     width: 100%;
-    background: black;
-    border-radius: 5px;
+    background: var(--primary-background-color);
+    border-radius: 5px 0 0 5px;
 }
 
 icon-container{
@@ -159,7 +161,12 @@ content-text{
 }
 
 selection-box:hover selection-background{
-    opacity: .03;
+    opacity: 1;
+    transition: 0.25s;
+}
+
+selection-box.selected selection-background{
+    opacity: 1;
     transition: 0.25s;
 }
 
@@ -171,6 +178,7 @@ selection-box:hover link-container{
 overview-heading{
     font-weight: bold;
     font-size: 24px;
+    margin-bottom: 0.3em;
 }
 
 overview-container{
@@ -180,8 +188,7 @@ overview-container{
     max-width: 700px;
     width: calc(200 * ((100vw - 1300px)/(1600 - 1300)));
     min-width: 250px;
-    margin: 20px 35px 20px 20px;
-    border-radius: 8px;
+    margin: 20px 35px 45px 0;
 }
 
 c-zertificate-man{
@@ -193,7 +200,7 @@ overview-box{
     position: relative;
     display: flex;
     flex-direction: column;
-    align-self: center;
+    align-self: flex-end;
     height: auto;
     width: 100%;
     padding: 20px;
@@ -201,19 +208,23 @@ overview-box{
     backface-visibility: hidden;
     background: var(--primary-background-color);
     overflow: hidden;
+    border-radius: 8px;
 }
 
 overview-content-box{
     display: flex;
     flex-direction: row;
-    margin-top: 30px;
+    margin-top: 20px;
     flex-grow: 1;
+}
+
+overview-content-box c-link{
+    margin-top: 1em;
 }
 
 overview-img-box{
     display: block;
     min-width: 150px;
-    height: 150px;
     margin-right: 25px;
     height: auto;
 }
@@ -226,6 +237,10 @@ overview-img-box *{
     width: 170px;
     height: auto;
     overflow: hidden;
+}
+
+overview-text-box *{
+    display: block;
 }
 
 overview-title{

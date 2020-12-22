@@ -1,7 +1,7 @@
 :host {
     display: block;
     max-width: min(1000px, 100%);
-    min-width: 900px;
+    min-width: 950px;
     width: auto;
     user-select: auto;
     box-sizing: border-box;

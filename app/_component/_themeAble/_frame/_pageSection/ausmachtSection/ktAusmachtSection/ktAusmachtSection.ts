@@ -50,7 +50,7 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
                         link: baseLink + "angewandte-informatik"
                     }
                 ],
-                stundentafel: "tagesschule/biomedizin/highlights/stundentafel-el"
+                stundentafel: baseLink + "stundentafel-kt"
             },
             cards: [
                 {

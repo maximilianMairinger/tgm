@@ -48,7 +48,7 @@ export default declareComponent("ausmacht-section-mb", class extends AusmachtSec
                         link: baseLink + "softwaretechnik"
                     }
                 ],
-                stundentafel: "tagesschule/elektronik/highlights/stundentafel-bg"
+                stundentafel: baseLink + "stundentafel-mb"
             },
             cards: [
                 {

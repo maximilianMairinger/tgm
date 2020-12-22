@@ -48,7 +48,7 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                         link: baseLink + "angewandte-informatik"
                     }
                 ],
-                stundentafel: "tagesschule/wirtschaftsingeni/highlights/stundentafel-wi"
+                stundentafel: baseLink + "stundentafel-wi"
             },
             cards: [
                 {

@@ -13,7 +13,7 @@ import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
-export default class BiomedPage extends LazySectionedPage {
+export default class BgPage extends LazySectionedPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
@@ -24,7 +24,7 @@ export default class BiomedPage extends LazySectionedPage {
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("biomedLanding.png")
-          e.videolink("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+          e.videolink("https://www.youtube.com/watch?v=FYY0FSMk70s")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
@@ -91,4 +91,4 @@ export default class BiomedPage extends LazySectionedPage {
 
 }
 
-declareComponent("bg-page", BiomedPage)
+declareComponent("bg-page", BgPage)

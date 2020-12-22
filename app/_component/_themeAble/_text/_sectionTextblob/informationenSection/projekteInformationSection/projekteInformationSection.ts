@@ -7,7 +7,7 @@ export default declareComponent("projekte-informations-section", class Informati
         super();
 
         this.heading("Informationen");
-        this.subheading("über die Diplomarbeiten.");
+        this.subheading("über die Diplomarbeiten");
         this.note("wichtige");
     }
 })

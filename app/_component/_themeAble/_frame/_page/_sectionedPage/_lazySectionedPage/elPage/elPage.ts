@@ -7,19 +7,19 @@ import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
 import Thumbnail from "../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection"
-import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionElektronik/ausmachtSectionElektronik"
+import AusmachtSection from "../../../../_pageSection/ausmachtSection/etAusmachtSection/etAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
 export default class ElektronikPage extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail("elektronik")
+          let e = new _Thumbnail(baseLink)
           e.heading("Elektronik & Technische Informatik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
@@ -44,14 +44,14 @@ export default class ElektronikPage extends LazySectionedPage {
       },
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
-          new _AusmachtSection("tagesschule/elektronik/highlights/")
+          new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSectionElektonik" */"../../../../_pageSection/ausmachtSection/elAusmachtSection/elAusmachtSection")
       },
-      {
-        key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-          new _DarkNewsSection()
-        ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/biomedTriangleNews/biomedTriangleNews")
-      },
+      // {
+      //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
+      //     new _DarkNewsSection()
+      //   ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/biomedTriangleNews/biomedTriangleNews")
+      // },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');
@@ -63,7 +63,7 @@ export default class ElektronikPage extends LazySectionedPage {
           imageTextBlob.linkhref("tagesschule/Elektronik")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 12. Stock");
           imageTextBlob.email("office-hel@tgm.ac.at");
-          imageTextBlob.tel("01 33 126 321");
+          imageTextBlob.tel("01 33 126 320");
           imageTextBlob.image('url("/res/img/biomedKontakt.png")');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")

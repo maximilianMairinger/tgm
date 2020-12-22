@@ -7,9 +7,9 @@ import {MediaQuerySize} from "../../../../_text/textblob/textblob";
 
 
 
-export default declareComponent("ausmacht-section-elektrotechnik", class extends AusmachtSection {
+export default declareComponent("ausmacht-section-it", class extends AusmachtSection {
 
-    constructor() {
+    constructor(baseLink: string) {
         super({
             heading: {
                 heading: "Was uns ausmacht",
@@ -19,11 +19,36 @@ export default declareComponent("ausmacht-section-elektrotechnik", class extends
                 heading: "Gegenstände",
                 note: "Fachspezifische",
                 selection: [
-                    {"icon":"energysysteme", "title":"Energiesysteme", "content":"Energiegewinnung und -speicherung", "link":"tagesschule/elektrotechnik/highlights/energiesysteme"},
-                    {"icon":"automatisierungstechnik", "title":"Automatisierungstechnik", "content":"Automatisieren in elektrotechnischen Anwendungen", "link":"tagesschule/elektrotechnik/highlights/automatisierungstechnik"},
-                    {"icon":"antriebstechnik", "title":"Antriebstechnik", "content":"Bewegung und Elektrotechnik", "link":"tagesschule/elektrotechnik/highlights/antriebstechnik"},
-                    {"icon":"industrieelektronik", "title":"Industrieelektronik", "content":"Elektrotechnik in der Industrie", "link":"tagesschule/elektrotechnik/highlights/industrieelektronik"},
-                    {"icon":"angewandteInformatik", "title":"Angewandte Informatik", "content":"Entwickeln von computerbasierten Lösungen", "link":"tagesschule/elektrotechnik/highlights/angewandte-informatik"}
+                    {
+                        icon: "energysysteme", 
+                        title: "Energiesysteme", 
+                        content: "Energiegewinnung und -speicherung", 
+                        link: baseLink + "energiesysteme"
+                    },
+                    {
+                        icon: "automatisierungstechnik", 
+                        title: "Automatisierungstechnik", 
+                        content: "Automatisieren in elektrotechnischen Anwendungen", 
+                        link: baseLink + "automatisierungstechnik"
+                    },
+                    {
+                        icon: "antriebstechnik", 
+                        title: "Antriebstechnik", 
+                        content: "Bewegung und Elektrotechnik", 
+                        link: baseLink + "antriebstechnik"
+                    },
+                    {
+                        icon: "industrieelektronik", 
+                        title: "Industrieelektronik", 
+                        content: "Elektrotechnik in der Industrie", 
+                        link: baseLink + "industrieelektronik"
+                    },
+                    {
+                        icon: "angewandteInformatik", 
+                        title: "Angewandte Informatik", 
+                        content: "Entwickeln von computerbasierten Lösungen", 
+                        link: baseLink + "angewandte-informatik"
+                    }
                 ],
                 stundentafel: "tagesschule/biomedizin/highlights/stundentafel-el"
             },

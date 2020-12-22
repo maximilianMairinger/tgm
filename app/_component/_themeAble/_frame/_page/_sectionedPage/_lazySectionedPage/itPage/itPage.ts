@@ -7,19 +7,19 @@ import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
 import Thumbnail from "../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection"
-import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionRaumfahrt/ausmachtSectionRaumfahrt"
+import AusmachtSection from "../../../../_pageSection/ausmachtSection/itAusmachtSection/itAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
 export default declareComponent("it-page", class ItPage extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail("informationstechnologie")
+          let e = new _Thumbnail(baseLink)
           e.heading("Informationstechnologie")
           e.subheading("der Tagesschule")
           e.note("abteilung");
@@ -44,14 +44,14 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
       },
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
-          new _AusmachtSection()
-        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/elAusmachtSection/elAusmachtSection")
+          new _AusmachtSection(baseLink + "highlights/")
+        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/itAusmachtSection/itAusmachtSection")
       },
-      {
-        key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-          new _DarkNewsSection()
-        ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/biomedTriangleNews/biomedTriangleNews")
-      },
+      // {
+      //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
+      //     new _DarkNewsSection()
+      //   ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/biomedTriangleNews/biomedTriangleNews")
+      // },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');

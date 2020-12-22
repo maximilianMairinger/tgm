@@ -7,7 +7,7 @@ import AusmachtSection from "../ausmachtSection";
 
 export default declareComponent("ausmacht-section-wi", class extends AusmachtSection {
 
-    constructor() {
+    constructor(baseLink: string) {
         super({
             heading: {
                 heading: "Was uns ausmacht",
@@ -17,11 +17,36 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                 heading: "Gegenstände",
                 note: "Fachtheoretische",
                 selection: [
-                    {"icon":"energysysteme", "title":"Energiesysteme", "content":"Energiegewinnung und -speicherung", "link":"tagesschule/wirtschaftsingenieure/highlights/energiesysteme"},
-                    {"icon":"automatisierungstechnik", "title":"Automatisierungstechnik", "content":"Automatisieren in elektrotechnischen Anwendungen", "link":"tagesschule/wirtschaftsingenieure/highlights/automatisierungstechnik"},
-                    {"icon":"antriebstechnik", "title":"Antriebstechnik", "content":"Bewegung und Elektrotechnik", "link":"tagesschule/wirtschaftsingenieure/highlights/antriebstechnik"},
-                    {"icon":"industrieelektronik", "title":"Industrieelektronik", "content":"Elektrotechnik in der Industrie", "link":"tagesschule/wirtschaftsingenieure/highlights/industrieelektronik"},
-                    {"icon":"angewandteInformatik", "title":"Angewandte Informatik", "content":"Entwickeln von computerbasierten Lösungen", "link":"tagesschule/wirtschaftsingenieure/highlights/angewandte-informatik"}
+                    {
+                        icon: "energysysteme", 
+                        title: "Energiesysteme", 
+                        content: "Energiegewinnung und -speicherung", 
+                        link: baseLink + "energiesysteme"
+                    },
+                    {
+                        icon: "automatisierungstechnik", 
+                        title: "Automatisierungstechnik", 
+                        content: "Automatisieren in elektrotechnischen Anwendungen", 
+                        link: baseLink + "automatisierungstechnik"
+                    },
+                    {
+                        icon: "antriebstechnik", 
+                        title: "Antriebstechnik", 
+                        content: "Bewegung und Elektrotechnik", 
+                        link: baseLink + "antriebstechnik"
+                    },
+                    {
+                        icon: "industrieelektronik", 
+                        title: "Industrieelektronik", 
+                        content: "Elektrotechnik in der Industrie", 
+                        link: baseLink + "industrieelektronik"
+                    },
+                    {
+                        icon: "angewandteInformatik", 
+                        title: "Angewandte Informatik", 
+                        content: "Entwickeln von computerbasierten Lösungen", 
+                        link: baseLink + "angewandte-informatik"
+                    }
                 ],
                 stundentafel: "tagesschule/wirtschaftsingeni/highlights/stundentafel-wi"
             },

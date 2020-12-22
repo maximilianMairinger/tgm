@@ -7,27 +7,27 @@ import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
 import Thumbnail from "../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection"
-import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionRaumfahrt/ausmachtSectionRaumfahrt"
+import AusmachtSection from "../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
 export default declareComponent("rt-page", class RtPage extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
-      // {
-      //   key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-      //     // let e = new _Thumbnail()
-      //     // e.heading("Raumfahrttechnik")
-      //     // e.subheading("der Tagesschule")
-      //     // e.note("abteilung");
-      //     // e.background("rocket.png")
+      {
+        key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
+          let e = new _Thumbnail(baseLink)
+          e.heading("Raumfahrttechnik")
+          e.subheading("der Tagesschule")
+          e.note("abteilung");
+          e.background("rocket.png")
           
-      //     return new WrapperSection(e, "dark") as any
-      //   }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
-      // },
+          return new WrapperSection(e, "dark") as any
+        }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
+      },
       {
         key: new Import("info", 1, (_Info: typeof Info) => {
           let info = new _Info()
@@ -44,8 +44,8 @@ export default declareComponent("rt-page", class RtPage extends LazySectionedPag
       },
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
-          new _AusmachtSection()
-        ), val: () => import(/* webpackChunkName: "ausmachtSectionRaumfahrt" */"../../../../_pageSection/ausmachtSection/ausmachtSectionRaumfahrt/ausmachtSectionRaumfahrt")
+          new _AusmachtSection(baseLink + "highlights/")
+        ), val: () => import(/* webpackChunkName: "ausmachtSectionRaumfahrt" */"../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection")
       },
       {
         key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 

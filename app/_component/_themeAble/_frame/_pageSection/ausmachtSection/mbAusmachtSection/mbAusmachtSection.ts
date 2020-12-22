@@ -5,7 +5,7 @@ import AusmachtSection from "../ausmachtSection";
 
 
 
-export default declareComponent("ausmacht-section-elektronik", class extends AusmachtSection {
+export default declareComponent("ausmacht-section-mb", class extends AusmachtSection {
 
     constructor(baseLink: string) {
         super({
@@ -48,7 +48,7 @@ export default declareComponent("ausmacht-section-elektronik", class extends Aus
                         link: baseLink + "softwaretechnik"
                     }
                 ],
-                stundentafel: "tagesschule/elektronik/highlights/stundentafel-bg"
+                stundentafel: baseLink + "stundentafel-mb"
             },
             cards: [
                 {

@@ -18,37 +18,31 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                 note: "Fachtheoretische",
                 selection: [
                     {
-                        icon: "energysysteme", 
-                        title: "Energiesysteme", 
-                        content: "Energiegewinnung und -speicherung", 
-                        link: baseLink + "energiesysteme"
+                        icon: "unternehmensführung", 
+                        title: "Unternehmensführung und Wirtschaftsrecht", 
+                        content: "Einführung in die Wirtschaftswissenschaften", 
+                        link: baseLink + "unternehmensführung-und-wirtschaftsrecht"
                     },
                     {
-                        icon: "automatisierungstechnik", 
-                        title: "Automatisierungstechnik", 
-                        content: "Automatisieren in elektrotechnischen Anwendungen", 
-                        link: baseLink + "automatisierungstechnik"
+                        icon: "betriebstechnik", 
+                        title: "Betriebstechnik", 
+                        content: "Projektmanagement und Unternehmensplanung", 
+                        link: baseLink + "betriebstechnik"
                     },
                     {
-                        icon: "antriebstechnik", 
-                        title: "Antriebstechnik", 
-                        content: "Bewegung und Elektrotechnik", 
-                        link: baseLink + "antriebstechnik"
+                        icon: "laboratorium", 
+                        title: "Laboratorium", 
+                        content: "Fachtheorie in die Praxis umsetzen", 
+                        link: baseLink + "laboratorium-wi"
                     },
                     {
-                        icon: "industrieelektronik", 
-                        title: "Industrieelektronik", 
-                        content: "Elektrotechnik in der Industrie", 
-                        link: baseLink + "industrieelektronik"
-                    },
-                    {
-                        icon: "angewandteInformatik", 
-                        title: "Angewandte Informatik", 
-                        content: "Entwickeln von computerbasierten Lösungen", 
-                        link: baseLink + "angewandte-informatik"
+                        icon: "informatik", 
+                        title: "Informatik", 
+                        content: "ERP Lösungen, Datenbanken und Webseiten erstellen", 
+                        link: baseLink + "informatik-wi"
                     }
                 ],
-                stundentafel: "tagesschule/wirtschaftsingeni/highlights/stundentafel-wi"
+                stundentafel: baseLink + "stundentafel-wi"
             },
             cards: [
                 {

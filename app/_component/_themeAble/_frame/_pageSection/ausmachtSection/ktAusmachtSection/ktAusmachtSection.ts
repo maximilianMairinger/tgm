@@ -7,7 +7,7 @@ import {MediaQuerySize} from "../../../../_text/textblob/textblob";
 
 
 
-export default declareComponent("ausmacht-section-et", class extends AusmachtSection {
+export default declareComponent("ausmacht-section-kt", class extends AusmachtSection {
 
     constructor(baseLink: string) {
         super({
@@ -50,7 +50,7 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
                         link: baseLink + "angewandte-informatik"
                     }
                 ],
-                stundentafel: "tagesschule/biomedizin/highlights/stundentafel-el"
+                stundentafel: baseLink + "stundentafel-kt"
             },
             cards: [
                 {

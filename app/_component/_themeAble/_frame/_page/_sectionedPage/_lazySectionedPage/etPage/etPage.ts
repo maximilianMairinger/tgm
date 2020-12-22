@@ -14,12 +14,12 @@ import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechni
 
 
 export default declareComponent("et-page", class EtPage extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail("elektrotechnik")
+          let e = new _Thumbnail(baseLink)
           e.heading("Elektrotechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
@@ -44,7 +44,7 @@ export default declareComponent("et-page", class EtPage extends LazySectionedPag
       },
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
-          new _AusmachtSection()
+          new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/etAusmachtSection/etAusmachtSection")
       },
       // {

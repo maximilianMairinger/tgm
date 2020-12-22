@@ -14,20 +14,20 @@ import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechni
 
 
 export default declareComponent("rt-page", class RtPage extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
-      // {
-      //   key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-      //     // let e = new _Thumbnail()
-      //     // e.heading("Raumfahrttechnik")
-      //     // e.subheading("der Tagesschule")
-      //     // e.note("abteilung");
-      //     // e.background("rocket.png")
+      {
+        key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
+          let e = new _Thumbnail(baseLink)
+          e.heading("Raumfahrttechnik")
+          e.subheading("der Tagesschule")
+          e.note("abteilung");
+          e.background("rocket.png")
           
-      //     return new WrapperSection(e, "dark") as any
-      //   }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
-      // },
+          return new WrapperSection(e, "dark") as any
+        }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
+      },
       {
         key: new Import("info", 1, (_Info: typeof Info) => {
           let info = new _Info()
@@ -44,7 +44,7 @@ export default declareComponent("rt-page", class RtPage extends LazySectionedPag
       },
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
-          new _AusmachtSection()
+          new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSectionRaumfahrt" */"../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection")
       },
       {

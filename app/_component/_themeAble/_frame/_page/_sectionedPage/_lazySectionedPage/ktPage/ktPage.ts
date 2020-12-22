@@ -14,12 +14,12 @@ import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechni
 
 
 export default class KunststoffPage extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail("elektronik")
+          let e = new _Thumbnail(baseLink)
           e.heading("Kunststofftechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
@@ -44,7 +44,7 @@ export default class KunststoffPage extends LazySectionedPage {
       },
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
-          new _AusmachtSection("tagesschule/elektronik/highlights/")
+          new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSectionElektonik" */"../../../../_pageSection/ausmachtSection/ktAusmachtSection/ktAusmachtSection")
       },
       // {

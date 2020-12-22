@@ -77,7 +77,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       // },
       {
         key: new Import("tagesschule/wirtschaftsingenieure", 22, (wi: typeof Wi) => 
-          new wi(sectionChangeCallback)
+          new wi("tagesschule/wirtschaftsingenieure", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "wi" */"../../_page/_sectionedPage/_lazySectionedPage/wiPage/wiPage")
       },
       {
@@ -92,7 +92,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/kunststofftechnik", 22, (kt: typeof Kt) => 
-          new kt(sectionChangeCallback)
+          new kt("tagesschule/kunststofftechnik", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "kt" */"../../_page/_sectionedPage/_lazySectionedPage/ktPage/ktPage")
       },
       {
@@ -107,7 +107,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/maschinenbau", 22, (kt: typeof Mb) => 
-          new kt(sectionChangeCallback)
+          new kt("tagesschule/maschinenbau", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "mb" */"../../_page/_sectionedPage/_lazySectionedPage/mbPage/mbPage")
       },
       {
@@ -122,7 +122,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/informationstechnologie", 22, (it: typeof It) => 
-          new it(sectionChangeCallback)
+          new it("tagesschule/informationstechnologie", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "it" */"../../_page/_sectionedPage/_lazySectionedPage/itPage/itPage")
       },
       {
@@ -137,7 +137,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/elektrotechnik", 21, (et: typeof Et) => 
-          new et(sectionChangeCallback)
+          new et("tagesschule/elektrotechnik", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "et" */"../../_page/_sectionedPage/_lazySectionedPage/etPage/etPage")
       },
       {
@@ -152,7 +152,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/biomedizin", 42, (el: typeof Bg) => 
-          new el(sectionChangeCallback)
+          new el("tagesschule/biomedizin", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "bgPage" */"../../_page/_sectionedPage/_lazySectionedPage/bgPage/bgPage")
       },
       {
@@ -167,7 +167,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/elektronik", 42, (elektrotechnikPage: typeof El) => 
-          new elektrotechnikPage(sectionChangeCallback)
+          new elektrotechnikPage("tagesschule/elektronik", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "el" */"../../_page/_sectionedPage/_lazySectionedPage/elPage/elPage")
       },
       {
@@ -182,7 +182,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/raumfahrt", 20, (raumfahrtPage: typeof RtPage) => 
-          new raumfahrtPage(sectionChangeCallback)
+          new raumfahrtPage("tagesschule/raumfahrt", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "rt" */"../../_page/_sectionedPage/_lazySectionedPage/rtPage/rtPage")
       },
       {

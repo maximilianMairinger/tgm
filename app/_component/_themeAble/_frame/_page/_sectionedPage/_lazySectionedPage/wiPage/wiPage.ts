@@ -14,12 +14,12 @@ import News from "../../../../_pageSection/triangleNews/triangleNews"
 
 
 export default class WIPage extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail("wirtschaftsingenieure")
+          let e = new _Thumbnail(baseLink)
           e.heading("Wirtschaftsingenieure")
           e.subheading("der Tagesschule")
           e.note("abteilung");
@@ -43,7 +43,7 @@ export default class WIPage extends LazySectionedPage {
       },
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
-          new _AusmachtSection()
+          new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/wiAusmachtSection/wiAusmachtSection")
       },
       // {

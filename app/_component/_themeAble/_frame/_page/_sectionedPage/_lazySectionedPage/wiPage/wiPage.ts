@@ -73,7 +73,7 @@ export default class WIPage extends LazySectionedPage {
           imageTextBlob.heading("Kontakt");
           imageTextBlob.subheading("zur WI");
           imageTextBlob.content(`DU würdest dir gerne selbst ein Bild von unserer Abteilung machen und einen oder vielleicht sogar alle drei Schwerpunkte kennenlernen? Dann melde dich für einen Schnuppertag an – tauche ein in die Welt der Technik, Wirtschaft und Informatik! Hier findest du das Anmeldeformular`)
-          imageTextBlob.linktext("Einen Besuch planen")
+          // imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("/")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 5. Stock");
           imageTextBlob.email("georg.angerer@tgm.ac.at");

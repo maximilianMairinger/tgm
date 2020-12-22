@@ -59,7 +59,7 @@ export default declareComponent("et-page", class EtPage extends LazySectionedPag
           imageTextBlob.heading("Kontakt");
           imageTextBlob.subheading("zur Elektrotechnik");
           imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Elektrotechnik einzutauchen.")
-          imageTextBlob.linktext("Einen Besuch planen")
+          // imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("tagesschule/elektrotechnik")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 3. Stock");
           imageTextBlob.email("tdeininger@tgm.ac.at");

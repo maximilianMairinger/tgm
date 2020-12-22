@@ -64,7 +64,7 @@ export default class MbPage extends LazySectionedPage {
           imageTextBlob.heading("Kontakt");
           imageTextBlob.subheading("mit der Biomedizin");
           imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Biomedizin einzutauchen.")
-          imageTextBlob.linktext("Einen Besuch planen")
+          // imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("tagesschule/elektrotechnik")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 12. Stock");
           imageTextBlob.email("office-hbg@tgm.ac.at");

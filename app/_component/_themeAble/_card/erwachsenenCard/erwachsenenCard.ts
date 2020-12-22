@@ -55,6 +55,7 @@ export default declareComponent("erwachsenen-card", class ErwachsenenCard extend
 
     private clickHandler(){
         if(this[1].hasClass(SELECTED_CLASS)){
+            //quick-fix
             window.location.href = this[2].link ? this[2].link : "/";
         }else{
             this[0].selected.removeClass(SELECTED_CLASS)

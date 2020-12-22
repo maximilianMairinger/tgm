@@ -50,7 +50,7 @@ export default class MbPage extends LazySectionedPage {
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
           new _AusmachtSection()
-        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/ausmachtSectionBiomed/ausmachtSectionBiomed")
+        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/bgAusmachtSection/bgAusmachtSection")
       },
       {
         key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 

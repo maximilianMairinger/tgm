@@ -26,20 +26,20 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                     {
                         icon: "betriebstechnik", 
                         title: "Betriebstechnik", 
-                        content: "Unternehmensplanung und Organisation", 
+                        content: "Projektmanagement und Unternehmensplanung", 
                         link: baseLink + "betriebstechnik"
                     },
                     {
                         icon: "laboratorium", 
                         title: "Laboratorium", 
-                        content: "Elektrotechnik in der Industrie", 
-                        link: baseLink + "laboratorium"
+                        content: "Fachtheorie in die Praxis umsetzen", 
+                        link: baseLink + "laboratorium-wi"
                     },
                     {
                         icon: "informatik", 
                         title: "Informatik", 
                         content: "ERP Lösungen, Datenbank und Webseiten erstellen", 
-                        link: baseLink + "wi-informatik"
+                        link: baseLink + "informatik-wi"
                     }
                 ],
                 stundentafel: baseLink + "stundentafel-wi"

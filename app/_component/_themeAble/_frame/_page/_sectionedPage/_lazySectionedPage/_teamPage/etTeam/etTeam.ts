@@ -42,7 +42,7 @@ export default declareComponent("et-team", class EtTeam extends TeamPage {
                     leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 3. Stock / H330");
                     leitungImageTextblob.email("tdeininger@tgm.ac.at");
                     leitungImageTextblob.tel("+43 (1) 33 126 / 230");
-                    leitungImageTextblob.image('url("/res/img/team_1.png")');
+                    leitungImageTextblob.image('url("/res/img/avdeininger.png")');
                     leitungImageTextblob.stellvertreter([{"name":"Stefan Hertl", "email":"shertl@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }

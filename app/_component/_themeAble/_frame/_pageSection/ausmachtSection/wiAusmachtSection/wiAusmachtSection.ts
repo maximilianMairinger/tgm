@@ -20,7 +20,7 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                     {
                         icon: "unternehmensführung", 
                         title: "Unternehmensführung und Wirtschaftsrecht", 
-                        content: "Wirtschaftliche Grundlagen zur Unternehmensgründung", 
+                        content: "Einführung in die Wirtschaftswissenschaften", 
                         link: baseLink + "unternehmensführung-und-wirtschaftsrecht"
                     },
                     {
@@ -38,7 +38,7 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                     {
                         icon: "informatik", 
                         title: "Informatik", 
-                        content: "ERP Lösungen, Datenbank und Webseiten erstellen", 
+                        content: "ERP Lösungen, Datenbanken und Webseiten erstellen", 
                         link: baseLink + "informatik-wi"
                     }
                 ],

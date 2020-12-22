@@ -31,11 +31,14 @@ import OverflowX from "../../../overflowX/overflowX"
 export default declareComponent("georgs-sandbox", class extends Page {
     constructor() {
         super()
+        /*
         let next = this.q("c-button.next") as Button;
         let previous = this.q("c-button.previous") as Button;
         let overflowContainer = this.q("c-overflow-x.custom") as OverflowX;
         overflowContainer.setNextButton(next);
         overflowContainer.setPreviousButton(previous);
+
+         */
     }
 
     protected activationCallback(active: boolean): void {

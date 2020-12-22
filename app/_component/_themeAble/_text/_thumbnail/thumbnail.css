@@ -99,7 +99,7 @@ video-button:hover{
         height: calc(100% - 75px);
     }
 
-    landing-textblob{
+    text-box{
         padding: 0 10vw;
     }
 
@@ -107,10 +107,6 @@ video-button:hover{
         max-width: 100%;
     }
 
-    background-box{
-        right:-10vw;
-        left:-10vw;
-    }
 
     video-button{
         margin-left: 0;

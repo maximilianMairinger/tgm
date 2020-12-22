@@ -39,7 +39,7 @@ export default declareComponent("kt-team", class KtTeam extends TeamPage {
                     leitungImageTextblob.heading("Reitinger");
                     leitungImageTextblob.subheading("Klemens");
                     // leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")
-                    leitungImageTextblob.address("Wexstraße 19-23 / 10. Stock");
+                    leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 10. Stock");
                     leitungImageTextblob.email("avhkt@tgm.ac.at");
                     leitungImageTextblob.tel("0 33 126 / 300");
                     leitungImageTextblob.image('url("/res/img/team_1.png")');
@@ -57,7 +57,7 @@ export default declareComponent("kt-team", class KtTeam extends TeamPage {
                     schuelerImageTextblob.heading("Orhan");
                     schuelerImageTextblob.subheading("Deniz");
                     schuelerImageTextblob.content("Ich darf euch dieses Jahr als Abteilungssprecher vertreten, bei Anliegen bitte einfach melden!")
-                    schuelerImageTextblob.address("Wexstraße 19-23 / 10. Stock");
+                    schuelerImageTextblob.address("Wexstraße 19-23, 1200 Wien / 10. Stock");
                     schuelerImageTextblob.email("dorhan@student.tgm.ac.at");
                     // schuelerImageTextblob.tel("+43 ‭650 7311330‬");
                     schuelerImageTextblob.image('url("/res/img/team_2.jpg")');

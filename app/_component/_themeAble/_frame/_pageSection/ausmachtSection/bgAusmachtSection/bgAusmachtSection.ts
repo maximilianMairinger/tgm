@@ -7,7 +7,7 @@ import {MediaQuerySize} from "../../../../_text/textblob/textblob";
 
 
 
-export default declareComponent("ausmacht-section-biomed", class extends AusmachtSection {
+export default declareComponent("ausmacht-section-bg", class extends AusmachtSection {
 
     constructor() {
         super({
@@ -17,10 +17,10 @@ export default declareComponent("ausmacht-section-biomed", class extends Ausmach
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "Fachtheoretische",
                 selection: [
                     {"icon":"biologie", "title":"Biologie, Medizin & Gesundheitswesen", "content":"Ärzte unterrichten medizinisches Grundwissen", "link":"tagesschule/biomedizin/highlights/biologie-medizin-gesundheitswesen"},
-                    {"icon":"signalverarbeitung", "title":"Biomedizinische Signalverarbeitung", "content":"Technische Geräte Prüfung von Vitalfunktionen", "link":"tagesschule/biomedizin/highlights/biomedizinische-signalverarbeitung"},
+                    {"icon":"signalverarbeitung", "title":"Biomedizinische Signalverarbeitung", "content":"Prüfung von Vitalfunktionen mit Messgeräten", "link":"tagesschule/biomedizin/highlights/biomedizinische-signalverarbeitung"},
                     {"icon":"gerätetechnik", "title":"Medizinische Gerätetechnik", "content":"Technische Geräte verstehen und warten", "link":"tagesschule/biomedizin/highlights/medizinische-geraetetechnik"},
                     {"icon":"gesundheitsmechatronik", "title":"Gesundheitsmechatronik", "content":"Entwicklung von Prothesen", "link":"tagesschule/biomedizin/highlights/gesundheitsmechatronik"},
                     {"icon":"gesundheitsinformatik", "title":"Medizin & Gesundheitsinformatik", "content":"IT Anwendungen im biomedizinischen Kontext", "link":"tagesschule/biomedizin/highlights/medizin-gesundheitsinformatik"}
@@ -30,7 +30,7 @@ export default declareComponent("ausmacht-section-biomed", class extends Ausmach
             cards: [
                 {
                     heading: "Zellkulturlabor",
-                    note: "praxisunterricht",
+                    note: "highlight",
                     thumbnail: "/res/img/biomedPrototype.jpg",
                     href: "tagesschule/biomedizin/highlights/zellkultur",
                     contentTitle: "Zellkulturlabortechnik",
@@ -38,7 +38,7 @@ export default declareComponent("ausmacht-section-biomed", class extends Ausmach
                 },
                 {
                     heading: "Prototypenbau",
-                    note: "PRAXISUNTERRICHT",
+                    note: "fachpraktischer unterricht",
                     thumbnail: "/res/img/biomedLabor.png",
                     href: "tagesschule/biomedizin/highlights/prototypenbau",
                     contentTitle: "Prototypenbau",

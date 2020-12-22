@@ -45,7 +45,7 @@ export default class ElektronikPage extends LazySectionedPage {
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
           new _AusmachtSection("tagesschule/elektronik/highlights/")
-        ), val: () => import(/* webpackChunkName: "ausmachtSectionElektonik" */"../../../../_pageSection/ausmachtSection/ausmachtSectionElektronik/ausmachtSectionElektronik")
+        ), val: () => import(/* webpackChunkName: "ausmachtSectionElektonik" */"../../../../_pageSection/ausmachtSection/elAusmachtSection/elAusmachtSection")
       },
       {
         key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
@@ -59,7 +59,7 @@ export default class ElektronikPage extends LazySectionedPage {
           imageTextBlob.heading("Kontakt");
           imageTextBlob.subheading("mit der Elektronik");
           imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Elektrotechnik einzutauchen.")
-          imageTextBlob.linktext("Einen Besuch planen")
+          // imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("tagesschule/Elektronik")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 12. Stock");
           imageTextBlob.email("office-hel@tgm.ac.at");

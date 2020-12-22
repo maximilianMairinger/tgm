@@ -57,7 +57,7 @@ export default declareComponent("it-team", class ItTeam extends TeamPage {
                     schuelerImageTextblob.heading("Gartner");
                     schuelerImageTextblob.subheading("Simon");
                     schuelerImageTextblob.content("Ich darf euch dieses Jahr als Abteilungssprecher vertreten, bei Anliegen bitte einfach melden!")
-                    schuelerImageTextblob.address("Wexstraße 19-23 / 9. Stock");
+                    schuelerImageTextblob.address("Wexstraße 19-23, 1200 Wien / 9. Stock");
                     schuelerImageTextblob.email("sgartner@student.tgm.ac.at");
                     schuelerImageTextblob.tel("‭+43 699 13117916‬‬");
                     schuelerImageTextblob.image('url("/res/img/team_2.jpg")');

@@ -39,7 +39,7 @@ export default declareComponent("et-team", class EtTeam extends TeamPage {
                     leitungImageTextblob.heading("DI Deininger");
                     leitungImageTextblob.subheading("Thomas");
                     // leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")
-                    leitungImageTextblob.address("Wexstraße 19-23 / 3. Stock / H330");
+                    leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 3. Stock / H330");
                     leitungImageTextblob.email("tdeininger@tgm.ac.at");
                     leitungImageTextblob.tel("+43 (1) 33 126 / 230");
                     leitungImageTextblob.image('url("/res/img/team_1.png")');
@@ -57,7 +57,7 @@ export default declareComponent("et-team", class EtTeam extends TeamPage {
                     schuelerImageTextblob.heading("Tacho");
                     schuelerImageTextblob.subheading("Marc-Luis");
                     schuelerImageTextblob.content("Ich darf euch dieses Jahr als Abteilungssprecher vertreten, bei Anliegen bitte einfach melden!")
-                    schuelerImageTextblob.address("Wexstraße 19-23 / 11. Stock");
+                    schuelerImageTextblob.address("Wexstraße 19-23, 1200 Wien / 11. Stock");
                     schuelerImageTextblob.email("mtacho@student.tgm.ac.at");
                     schuelerImageTextblob.tel("+43 ‭650 7311330‬");
                     schuelerImageTextblob.image('url("/res/img/team_2.jpg")');

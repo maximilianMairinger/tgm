@@ -4,7 +4,7 @@ import { set } from "../../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../../lib/lazyLoad"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Thumbnail from "../../../../../_text/_thumbnail/thumbnail";
-import InformationenSection from "../../../../../_text/_sectionTextblob/informationenSection/informationenSection";
+import InformationenSection from "../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection";
 import ProjekteSection from "../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection";
 import {Project} from "../../../../../_text/tabletBlob/tabletBlob";
 
@@ -30,7 +30,7 @@ export default declareComponent("et-projekte", class EtProjekte extends LazySect
           info.content("SchülerInnen arbeiten in Kooperation mit Unternehmen aus der Privatwirtschaft an innovativen Projekten. Im Zuge des Diplomprojekts demonstrieren die zukünftigen Elektrotechniker im 5. Jahrgang die erlernten Fähigkeiten.")
           return new WrapperSection(info);
         }
-        ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/informationenSection")
+        ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection")
       },
       {
         key: new Import("projekte", 1, (projekte: typeof ProjekteSection) => {

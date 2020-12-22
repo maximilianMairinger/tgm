@@ -59,7 +59,7 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
           imageTextBlob.heading("Kontakt");
           imageTextBlob.subheading("mit der Informationstechnologie");
           imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Informationstechnologie einzutauchen.")
-          imageTextBlob.linktext("Einen Besuch planen")
+          // imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("tagesschule/informationstechnologie")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 9. Stock");
           imageTextBlob.email("office-hit@tgm.ac.at");

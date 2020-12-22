@@ -5,12 +5,9 @@ export default declareComponent("informationen-section", class InformationenSect
 
     constructor(){
         super();
-        this.theme('light');
         this.heading("Informationen");
-        this.subheading("zu den Projekten.");
-        this.note("Vorweg");
-        this.hsize({max:65, min:37});
-        this.hmobile({max:40, min:30});
+        this.subheading("über die Diplomarbeiten.");
+        this.note("wichtige");
     }
 
     stl() {

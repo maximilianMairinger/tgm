@@ -9,7 +9,7 @@ import {MediaQuerySize} from "../../../../_text/textblob/textblob";
 
 export default declareComponent("ausmacht-section-bg", class extends AusmachtSection {
 
-    constructor() {
+    constructor(baseLink: string) {
         super({
             heading: {
                 heading: "Was uns ausmacht",
@@ -19,13 +19,38 @@ export default declareComponent("ausmacht-section-bg", class extends AusmachtSec
                 heading: "Gegenstände",
                 note: "Fachtheoretische",
                 selection: [
-                    {"icon":"biologie", "title":"Biologie, Medizin & Gesundheitswesen", "content":"Ärzte unterrichten medizinisches Grundwissen", "link":"tagesschule/biomedizin/highlights/biologie-medizin-gesundheitswesen"},
-                    {"icon":"signalverarbeitung", "title":"Biomedizinische Signalverarbeitung", "content":"Prüfung von Vitalfunktionen mit Messgeräten", "link":"tagesschule/biomedizin/highlights/biomedizinische-signalverarbeitung"},
-                    {"icon":"gerätetechnik", "title":"Medizinische Gerätetechnik", "content":"Technische Geräte verstehen und warten", "link":"tagesschule/biomedizin/highlights/medizinische-geraetetechnik"},
-                    {"icon":"gesundheitsmechatronik", "title":"Gesundheitsmechatronik", "content":"Entwicklung von Prothesen", "link":"tagesschule/biomedizin/highlights/gesundheitsmechatronik"},
-                    {"icon":"gesundheitsinformatik", "title":"Medizin & Gesundheitsinformatik", "content":"IT Anwendungen im biomedizinischen Kontext", "link":"tagesschule/biomedizin/highlights/medizin-gesundheitsinformatik"}
+                    {
+                        icon: "biologie", 
+                        title: "Biologie, Medizin & Gesundheitswesen", 
+                        content: "Ärzte unterrichten medizinisches Grundwissen", 
+                        link: baseLink + "biologie-medizin-gesundheitswesen"
+                    },
+                    {
+                        icon: "signalverarbeitung", 
+                        title: "Biomedizinische Signalverarbeitung", 
+                        content: "Prüfung von Vitalfunktionen mit Messgeräten", 
+                        link:  baseLink + "biomedizinische-signalverarbeitung"
+                    },
+                    {
+                        icon: "gerätetechnik", 
+                        title: "Medizinische Gerätetechnik", 
+                        content: "Technische Geräte verstehen und warten", 
+                        link: baseLink + "medizinische-geraetetechnik"
+                    },
+                    {
+                        icon: "gesundheitsmechatronik", 
+                        title: "Gesundheitsmechatronik", 
+                        content: "Entwicklung von Prothesen", 
+                        link:  baseLink + "gesundheitsmechatronik"
+                    },
+                    {
+                        icon: "gesundheitsinformatik", 
+                        title: "Medizin & Gesundheitsinformatik", 
+                        content: "IT Anwendungen im biomedizinischen Kontext", 
+                        link:  baseLink + "medizin-gesundheitsinformatik"
+                    }
                 ],
-                stundentafel: "tagesschule/biomedizin/highlights/stundentafel-bg"
+                stundentafel: baseLink + "stundentafel-bg"
             },
             cards: [
                 {
@@ -38,7 +63,7 @@ export default declareComponent("ausmacht-section-bg", class extends AusmachtSec
                 },
                 {
                     heading: "Prototypenbau",
-                    note: "fachpraktischer unterricht",
+                    note: "fachpraktisch",
                     thumbnail: "/res/img/biomedLabor.png",
                     href: "tagesschule/biomedizin/highlights/prototypenbau",
                     contentTitle: "Prototypenbau",

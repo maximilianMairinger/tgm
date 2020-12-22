@@ -7,19 +7,19 @@ import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
 import Thumbnail from "../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection"
-import AusmachtSection from "../../../../_pageSection/ausmachtSection/ausmachtSectionRaumfahrt/ausmachtSectionRaumfahrt"
+import AusmachtSection from "../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
 export default class BgPage extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail("biomedizin")
+          let e = new _Thumbnail(baseLink)
           e.heading("Biomedizin und Gesundheitstechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
@@ -49,7 +49,7 @@ export default class BgPage extends LazySectionedPage {
       },
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
-          new _AusmachtSection()
+          new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/bgAusmachtSection/bgAusmachtSection")
       },
       // {
@@ -68,7 +68,7 @@ export default class BgPage extends LazySectionedPage {
           imageTextBlob.linkhref("tagesschule/elektrotechnik")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 12. Stock");
           imageTextBlob.email("office-hbg@tgm.ac.at");
-          imageTextBlob.tel("01 33 126 321");
+          imageTextBlob.tel("01 33 126 320");
           imageTextBlob.image('url("/res/img/biomedKontakt.png")');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")

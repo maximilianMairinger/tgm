@@ -14,7 +14,8 @@ icon-card-body {
 }
 
 icon-container {
-  width: 100%;
+  width: 40%;
+  left: 30%;
   height: 74%;
   display: flex;
   justify-content: center;

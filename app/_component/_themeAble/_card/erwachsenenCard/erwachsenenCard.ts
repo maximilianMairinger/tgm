@@ -117,6 +117,8 @@ export default declareComponent("erwachsenen-card", class ErwachsenenCard extend
         //todo
         //this.overviewIcon.removeChilds();
         //this.overviewIcon.apd(ce(options.extraIcon));
+        let time = 400;
+        this.overviewIcon.anim({opacity:0}, time).then(() => this.overviewIcon.anim({opacity:1}, time))
         this.overviewTitle.text(options.extraTitle);
         this.overviewContent.text(options.extraContent);
         this.overviewLink.link(options.link);

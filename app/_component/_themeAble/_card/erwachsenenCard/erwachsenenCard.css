@@ -293,7 +293,7 @@ overview-title{
         width: 100%;
         min-width: unset;
         margin-top: 0;
-        padding: 0 0 40px 0;
+        padding: 0;
         align-self: stretch;
     }
 
@@ -306,7 +306,7 @@ overview-title{
     }
 
     selection-card{
-        padding: 0 35px;
+        padding: 0 20px;
     }
 
     content-box{

@@ -16,6 +16,7 @@ import "../../../_themeAble/_icon/satellite/satellite"
 import "../../../_themeAble/_icon/rover/rover"
 import "../../../_themeAble/_icon/space-aids/space-aids"
 import { iconIndex } from "../../_icon/icon";
+import "../../../_themeAble/_icon/pruefung/pruefung"
 
 
 type ErwachsenenCardOption = {icon: string, title: string, content: string, link: string, heading: string, info:string, extraIcon:string, extraTitle:string, extraContent:string}
@@ -52,7 +53,7 @@ export default declareComponent("erwachsenen-card", class ErwachsenenCard extend
         }
     }
 
-    private clickHandler(event){
+    private clickHandler(){
         if(this[1].hasClass(SELECTED_CLASS)){
             window.location.href = this[2].link ? this[2].link : "/";
         }else{
@@ -114,8 +115,9 @@ export default declareComponent("erwachsenen-card", class ErwachsenenCard extend
     overview(options:ErwachsenenCardOption){
         this.overviewHeading.text(options.heading);
         this.overviewInfo.text(options.info);
-        this.overviewIcon.removeChilds();
-        this.overviewIcon.apd(ce(options.extraIcon));
+        //todo
+        //this.overviewIcon.removeChilds();
+        //this.overviewIcon.apd(ce(options.extraIcon));
         this.overviewTitle.text(options.extraTitle);
         this.overviewContent.text(options.extraContent);
         this.overviewLink.link(options.link);

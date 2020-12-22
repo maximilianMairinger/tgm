@@ -188,7 +188,7 @@ overview-container{
     max-width: 700px;
     width: calc(200 * ((100vw - 1300px)/(1600 - 1300)));
     min-width: 250px;
-    margin: 20px 35px 45px 0;
+    margin: 20px 35px 35px 0;
 }
 
 c-zertificate-man{
@@ -237,6 +237,13 @@ overview-img-box *{
     width: 170px;
     height: auto;
     overflow: hidden;
+}
+
+overview-img-box c-pruefung-icon{
+    width: 125px;
+    margin-top: 50px;
+    margin-left: 25px;
+    margin-right: 35px;
 }
 
 overview-text-box *{

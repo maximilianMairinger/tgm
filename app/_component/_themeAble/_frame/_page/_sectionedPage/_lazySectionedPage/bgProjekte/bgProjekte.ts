@@ -16,8 +16,8 @@ export default declareComponent("bg-projekte", class RaumfahrtProjekte extends L
       {
         key: new Import("", 1, (thumbnail: typeof Thumbnail) => {
           let e = new thumbnail();
-          e.note("Bemerkenswerte")
-          e.heading("Diplomarbeiten");
+          e.note("die")
+          e.heading("Projekte");
           e.subheading("der Biomedizin");
           e.background("biomedProj.png")
           return new WrapperSection(e, 'dark') as any;
@@ -28,9 +28,9 @@ export default declareComponent("bg-projekte", class RaumfahrtProjekte extends L
         {
           let info = new (Information as typeof InformationenSection)();
           info.content("SchülerInnen setzen im Zuge der Diplomarbeit Projekte in Bereichen wie etwa Diagnose und Therapie oder Prothesen- und Implantattechnik um. Dabei arbeiten sie oft in Kooperation mit renommierten Unternehmen aus der Industrie und können erste Erfahrungen für das Berufsleben sammeln.")
-          return new WrapperSection(info);
+          return new WrapperSection(info) as any;
         }
-        ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/informationenSection")
+        ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection")
       },
       {
         key: new Import("projekte", 1, (projekte: typeof ProjekteSection) => {

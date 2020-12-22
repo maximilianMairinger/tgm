@@ -11,7 +11,7 @@ export default class CardThumbnail extends Thumbnail {
     super()
 
     if (typeof card_abteilung === "string") cards.add(
-      ["anmelden", "Anmelden"],
+      ["anmelden", "Anmelden", undefined, "https://anmeldung.tgm.ac.at/anmeldung/"],
       ["sprechstunden", "Sprechstunde", undefined, "neilo.webuntis.com/WebUntis/?school=tgm#/basic/officehours"],
       ["projekte", "Projekte", undefined, "tagesschule/" + card_abteilung + "/projekte"],
       ["team", "Team", undefined, "tagesschule/" + card_abteilung + "/team"]

@@ -13,14 +13,14 @@ import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
-export default class ElektronikPage extends LazySectionedPage {
+export default class KunststoffPage extends LazySectionedPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
           let e = new _Thumbnail("elektronik")
-          e.heading("Elektronik & Technische Informatik")
+          e.heading("Kunststofftechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("elektronikLanding.png")
@@ -37,7 +37,7 @@ export default class ElektronikPage extends LazySectionedPage {
           info.note("bei uns");
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
-          info.content("Ohne elektronische Geräte ist unser tägliches Leben praktisch nicht mehr vorstellbar. Die Elektronik hat in den letzten Jahrzehnten eine besonders rasante Entwicklung erfahren. Der Entwurf, die Fertigung, der Vertrieb, die Inbetriebnahme und Wartung elektronischer Schaltungen bzw. Geräte, insbesondere der angeführten Elektronikbranchen, stellen einen wesentlichen Wirtschaftsfaktor unseres Landes dar.")
+          info.content("Als weltweit erste und einzige HTL Ausbildung für Kunststofftechnik im Osten Österreichs begleiten wir am TGM seit 1963 angehende Ingenieurinnen und Ingenieure auf ihrem Weg in die Industrie. Kunststoff ist ein moderner Werkstoff, der unser Leben in vielfältiger Weise verbessert, sei es durch Artikel des täglichen Lebens oder durch hochtechnische Erzeugnisse wie Teile im Automobil- und Flugzeugbau. Wir lehren aber nicht nur moderne Technologien zur Herstellung, sondern vor allem auch wichtige Recyclingmethoden, um eine Kreislaufwirtschaft sicherzustellen. Österreich gilt als Pioniernation in der Kunststofftechnik und beheimatet zahlreiche Global Player, die mit unseren Absolventinnen und Absolventen zu Weltmarktführern in der Materialherstellung, im Kunststoffmaschinenbau und in Produktsparten, wie der Verpackungs- und Medizintechnik, geworden sind. Einen Einblick in die unzähligen Einsatzgebiet für Kunststoffe kann man hier finden: https://www.plasticseurope.org/de/about-plastics/what-are-plastics/innovative-material")
 
           return new WrapperSection(info) as any
         }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")
@@ -57,13 +57,13 @@ export default class ElektronikPage extends LazySectionedPage {
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("mit der Elektronik");
-          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Elektrotechnik einzutauchen.")
+          imageTextBlob.subheading("mit der Kunststofftechnik");
+          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Kunststofftechnik einzutauchen.")
           imageTextBlob.linktext("Einen Besuch planen")
-          imageTextBlob.linkhref("tagesschule/Elektronik")
+          imageTextBlob.linkhref("tagesschule/Kunststofftechnik")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 12. Stock");
-          imageTextBlob.email("office-hel@tgm.ac.at");
-          imageTextBlob.tel("01 33 126 321");
+          imageTextBlob.email("office-hk5@tgm.ac.at");
+          imageTextBlob.tel("01 33 126 / 300");
           imageTextBlob.image('url("/res/img/biomedKontakt.png")');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
@@ -86,4 +86,4 @@ export default class ElektronikPage extends LazySectionedPage {
 
 }
 
-declareComponent("elektronik-page", ElektronikPage)
+declareComponent("kunststoff-page", KunststoffPage)

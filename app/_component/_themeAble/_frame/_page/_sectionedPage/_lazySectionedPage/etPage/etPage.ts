@@ -47,11 +47,11 @@ export default declareComponent("et-page", class EtPage extends LazySectionedPag
           new _AusmachtSection()
         ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/etAusmachtSection/etAusmachtSection")
       },
-      {
-        key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-          new _DarkNewsSection()
-        ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews")
-      },
+      // {
+      //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
+      //     new _DarkNewsSection()
+      //   ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews")
+      // },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');

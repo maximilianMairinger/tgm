@@ -45,13 +45,13 @@ export default class KunststoffPage extends LazySectionedPage {
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
           new _AusmachtSection("tagesschule/elektronik/highlights/")
-        ), val: () => import(/* webpackChunkName: "ausmachtSectionElektonik" */"../../../../_pageSection/ausmachtSection/elAusmachtSection/elAusmachtSection")
+        ), val: () => import(/* webpackChunkName: "ausmachtSectionElektonik" */"../../../../_pageSection/ausmachtSection/ktAusmachtSection/ktAusmachtSection")
       },
-      {
-        key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-          new _DarkNewsSection()
-        ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/biomedTriangleNews/biomedTriangleNews")
-      },
+      // {
+      //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
+      //     new _DarkNewsSection()
+      //   ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/biomedTriangleNews/biomedTriangleNews")
+      // },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');

@@ -5,7 +5,7 @@ import AusmachtSection from "../ausmachtSection";
 
 
 
-export default declareComponent("ausmacht-section-raumfahrt", class extends AusmachtSection {
+export default declareComponent("ausmacht-section-rt", class extends AusmachtSection {
 
     // c-selection-card( note='Fachspezifische' heading='Vertiefungen' background='none'
     //         selection='[' +

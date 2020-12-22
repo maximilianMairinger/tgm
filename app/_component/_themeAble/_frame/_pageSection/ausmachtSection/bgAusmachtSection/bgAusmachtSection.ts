@@ -38,7 +38,7 @@ export default declareComponent("ausmacht-section-bg", class extends AusmachtSec
                 },
                 {
                     heading: "Prototypenbau",
-                    note: "fachpraktischer unterricht",
+                    note: "fachpraktisch",
                     thumbnail: "/res/img/biomedLabor.png",
                     href: "tagesschule/biomedizin/highlights/prototypenbau",
                     contentTitle: "Prototypenbau",

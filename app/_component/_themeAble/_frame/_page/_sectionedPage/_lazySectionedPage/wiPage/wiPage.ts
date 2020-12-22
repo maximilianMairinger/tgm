@@ -46,26 +46,26 @@ export default class WIPage extends LazySectionedPage {
           new _AusmachtSection()
         ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/wiAusmachtSection/wiAusmachtSection")
       },
-      {
-        key: new Import("news", 1, (_News: typeof News) => 
-          new _News({
-            text: {
-              note: "Termine und",
-              heading: "Aktuelles",
-              subheading: "aus der WI",
-              content: `Folge uns auf <c-link link="https://de-de.facebook.com/tgmhwi">Instagram</c-link> und <c-link link="https://www.instagram.com/tgm_wirtschaftsingenieure">Facebook</c-link>, so bist DU über unsere neuesten Aktivitäten immer up to date.`
-            },
-            cards: [
-              {heading: "Samstag", note: "18.04.20", thumbnail: "/res/img/het-blog-rad.png", href: "/", contentTitle: "Elektro-Fahrrad", content: "Das Elektrofahrrad der ET-Abteilung wurde offiziell zugelassen und ist im Handel verfügbar."},
-              {heading: "Montag", note: "20.04.20", thumbnail: "/res/img/het-blog-wind.png", href: "/", contentTitle: "Zukunft des Strom", content: "Am 20.12.2020 findet ein Vortrag zur Zukunft von erneuerbareren Energiegewinnungsmethoden statt."},
-              {heading: "Donnerstag", note: "16.04.20", thumbnail: "/res/img/ball.jpg", href: "/", contentTitle: "TGM-Ball", content: "Der 100. TGM-Ball findet kommenden Donnerstag statt, jetzt Tickets sichern!"},
-              {heading: "Samstag", note: "18.04.20", thumbnail: "/res/img/het-blog-rad.png", href: "/", contentTitle: "Elektro-Fahrrad", content: "Das Elektrofahrrad der ET-Abteilung wurde offiziell zugelassen und ist im Handel verfügbar."},
-              {heading: "Montag", note: "20.04.20", thumbnail: "/res/img/het-blog-wind.png", href: "/", contentTitle: "Zukunft des Strom", content: "Am 20.12.2020 findet ein Vortrag zur Zukunft von erneuerbareren Energiegewinnungsmethoden statt."},
-              {heading: "Donnerstag", note: "16.04.20", thumbnail: "/res/img/ball.jpg", href: "/", contentTitle: "TGM-Ball", content: "Der 100. TGM-Ball findet kommenden Donnerstag statt, jetzt Tickets sichern!"}
-            ]
-          })
-        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
-      },
+      // {
+      //   key: new Import("news", 1, (_News: typeof News) => 
+      //     new _News({
+      //       text: {
+      //         note: "Termine und",
+      //         heading: "Aktuelles",
+      //         subheading: "aus der WI",
+      //         content: `Folge uns auf <c-link link="https://de-de.facebook.com/tgmhwi">Instagram</c-link> und <c-link link="https://www.instagram.com/tgm_wirtschaftsingenieure">Facebook</c-link>, so bist DU über unsere neuesten Aktivitäten immer up to date.`
+      //       },
+      //       cards: [
+      //         {heading: "Samstag", note: "18.04.20", thumbnail: "/res/img/het-blog-rad.png", href: "/", contentTitle: "Elektro-Fahrrad", content: "Das Elektrofahrrad der ET-Abteilung wurde offiziell zugelassen und ist im Handel verfügbar."},
+      //         {heading: "Montag", note: "20.04.20", thumbnail: "/res/img/het-blog-wind.png", href: "/", contentTitle: "Zukunft des Strom", content: "Am 20.12.2020 findet ein Vortrag zur Zukunft von erneuerbareren Energiegewinnungsmethoden statt."},
+      //         {heading: "Donnerstag", note: "16.04.20", thumbnail: "/res/img/ball.jpg", href: "/", contentTitle: "TGM-Ball", content: "Der 100. TGM-Ball findet kommenden Donnerstag statt, jetzt Tickets sichern!"},
+      //         {heading: "Samstag", note: "18.04.20", thumbnail: "/res/img/het-blog-rad.png", href: "/", contentTitle: "Elektro-Fahrrad", content: "Das Elektrofahrrad der ET-Abteilung wurde offiziell zugelassen und ist im Handel verfügbar."},
+      //         {heading: "Montag", note: "20.04.20", thumbnail: "/res/img/het-blog-wind.png", href: "/", contentTitle: "Zukunft des Strom", content: "Am 20.12.2020 findet ein Vortrag zur Zukunft von erneuerbareren Energiegewinnungsmethoden statt."},
+      //         {heading: "Donnerstag", note: "16.04.20", thumbnail: "/res/img/ball.jpg", href: "/", contentTitle: "TGM-Ball", content: "Der 100. TGM-Ball findet kommenden Donnerstag statt, jetzt Tickets sichern!"}
+      //       ]
+      //     })
+      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
+      // },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');

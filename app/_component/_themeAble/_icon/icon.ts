@@ -49,6 +49,13 @@ export const iconIndex = {
     computersysteme: () => import("./fachIcon/shortWaves/shortWaves"),
     kommunikationssysteme: () => import("./fachIcon/graphNetwork/graphNetwork"),
     softwaretechnik: () => import("./fachIcon/terminal/terminal"),
+
+    // HWI
+    unternehmensführung: () => import("./fachIcon/law/law"),
+    // logistik: () => import("./fachIcon/deliveryCar/deliveryCar"),
+    laboratorium: () => import("./fachIcon/electricGear/electricGear"),
+    betriebstechnik: () => import("./fachIcon/flag/flag"),
+    informatik: () => import("./fachIcon/smartCode/smartCode"),
   },
   vertiefung: {
     // HET

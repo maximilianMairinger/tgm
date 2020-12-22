@@ -61,7 +61,7 @@ export default declareComponent("rt-page", class RtPage extends LazySectionedPag
           imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich. Wir ermöglichen dir als SchnupperschülerIn in die Welt der Raumfahrt einzutauchen.")
           imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("tagesschule/raumfahrt")
-          imageTextBlob.address("Wexstraße 19-23 / 100. Stock");
+          imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 100. Stock");
           imageTextBlob.email("avhrt@tgm.ac.at");
           imageTextBlob.tel("+43 1 33126 291");
           imageTextBlob.image('url("/res/img/computersRaumfahrt.jpg")');

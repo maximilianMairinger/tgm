@@ -40,7 +40,7 @@ export default declareComponent("rt-team", class RtTeam extends TeamPage {
                     leitungImageTextblob.heading("Cassidy");
                     leitungImageTextblob.subheading("Chris");
                     leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")
-                    leitungImageTextblob.address("Wexstraße 19-23 / 20. Stock / H2028");
+                    leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 20. Stock / H2028");
                     leitungImageTextblob.email("abt-adminhrt@tgm.ac.at");
                     leitungImageTextblob.tel("+43 1 33126 291");
                     leitungImageTextblob.image('url("/res/img/team_1.png")');
@@ -58,7 +58,7 @@ export default declareComponent("rt-team", class RtTeam extends TeamPage {
                     schuelerImageTextblob.heading("Jones");
                     schuelerImageTextblob.subheading("Lucas");
                     schuelerImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")
-                    schuelerImageTextblob.address("Wexstraße 19-23 / 11. Stock");
+                    schuelerImageTextblob.address("Wexstraße 19-23, 1200 Wien / 11. Stock");
                     schuelerImageTextblob.email("ljonest@student.tgm.ac.at");
                     schuelerImageTextblob.tel("+43 1 33126 291");
                     schuelerImageTextblob.image('url("/res/img/team_2.jpg")');

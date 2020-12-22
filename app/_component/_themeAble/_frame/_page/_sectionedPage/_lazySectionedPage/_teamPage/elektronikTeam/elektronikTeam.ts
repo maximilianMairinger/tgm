@@ -57,7 +57,7 @@ export default declareComponent("elektronik-team", class ElektronikTeam extends 
                     schuelerImageTextblob.heading("Tauber");
                     schuelerImageTextblob.subheading("Tobias");
                     schuelerImageTextblob.content("Ich darf euch dieses Jahr als Abteilungssprecher vertreten, bei Anliegen bitte einfach melden!")
-                    schuelerImageTextblob.address("Wexstraße 19-23 / 12. Stock");
+                    schuelerImageTextblob.address("Wexstraße 19-23, 1200 Wien / 12. Stock");
                     schuelerImageTextblob.email("ttauberk@student.tgm.ac.at");
                     // schuelerImageTextblob.tel("+43 ‭650 7311330‬");
                     schuelerImageTextblob.image('url("/res/img/team_2.jpg")');

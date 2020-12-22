@@ -37,7 +37,7 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
                     leitungImageTextblob.note("Abteilungsvorstand");
                     leitungImageTextblob.heading("DI Dr. Wess");
                     leitungImageTextblob.subheading("Bernhard");
-                    leitungImageTextblob.content("Ich stehe Ihnen gerne am Dienstag von 9:50 bis 10:40 in meiner Sprechstunde zu Verfügung.")
+                    leitungImageTextblob.content("Ich stehe Ihnen gerne am Donnerstag von 9:50 bis 10:40 in meiner Sprechstunde zu Verfügung.")
                     leitungImageTextblob.address("Wexstraße 19-21, 1200 Wien / 12. Stock / H1226");
                     leitungImageTextblob.email("bernhard.wess@tgm.ac.at");
                     leitungImageTextblob.tel("01 33 126 320");

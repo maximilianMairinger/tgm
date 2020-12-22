@@ -75,11 +75,9 @@ export default declareComponent("erwachsenen-card", class ErwachsenenCard extend
                 let box = ce("selection-box");
                 let content = ce("selection-content");
                 let icon = ce("icon-container");
-                /*
                 (async () => {
-                    icon.append(new (await iconIndex.fach[conf.icon]() as any).default)
+                    icon.append(new (await iconIndex.abendschule[conf.icon]() as any).default)
                 })()
-                 */
                 let infocontainer = ce("info-container");
                 let textcontainer = ce("text-container");
                 let button = new Button();

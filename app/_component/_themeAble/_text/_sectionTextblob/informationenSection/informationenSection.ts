@@ -5,9 +5,10 @@ export default declareComponent("informationen-section", class InformationenSect
 
     constructor(){
         super();
-        this.heading("Informationen");
-        this.subheading("über die Diplomarbeiten.");
-        this.note("wichtige");
+        this.theme('light');
+        
+        this.hsize({max:65, min:37});
+        this.hmobile({max:40, min:30});
     }
 
     stl() {

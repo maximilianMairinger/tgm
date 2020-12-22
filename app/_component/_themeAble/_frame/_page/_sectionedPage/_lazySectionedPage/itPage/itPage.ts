@@ -45,7 +45,7 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
           new _AusmachtSection()
-        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/ausmachtSectionBiomed/ausmachtSectionBiomed")
+        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/elAusmachtSection/elAusmachtSection")
       },
       {
         key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 

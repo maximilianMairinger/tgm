@@ -5,7 +5,7 @@ import AusmachtSection from "../ausmachtSection";
 
 
 
-export default declareComponent("ausmacht-section-elektronik", class extends AusmachtSection {
+export default declareComponent("ausmacht-section-mb", class extends AusmachtSection {
 
     constructor(baseLink: string) {
         super({

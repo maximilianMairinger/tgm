@@ -7,7 +7,7 @@ import {MediaQuerySize} from "../../../../_text/textblob/textblob";
 
 
 
-export default declareComponent("ausmacht-section-et", class extends AusmachtSection {
+export default declareComponent("ausmacht-section-kt", class extends AusmachtSection {
 
     constructor(baseLink: string) {
         super({

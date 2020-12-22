@@ -18,34 +18,28 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                 note: "Fachtheoretische",
                 selection: [
                     {
-                        icon: "energysysteme", 
-                        title: "Energiesysteme", 
-                        content: "Energiegewinnung und -speicherung", 
-                        link: baseLink + "energiesysteme"
+                        icon: "unternehmensführung", 
+                        title: "Unternehmensführung und Wirtschaftsrecht", 
+                        content: "Wirtschaftliche Grundlagen zur Unternehmensgründung", 
+                        link: baseLink + "unternehmensführung-und-wirtschaftsrecht"
                     },
                     {
-                        icon: "automatisierungstechnik", 
-                        title: "Automatisierungstechnik", 
-                        content: "Automatisieren in elektrotechnischen Anwendungen", 
-                        link: baseLink + "automatisierungstechnik"
+                        icon: "betriebstechnik", 
+                        title: "Betriebstechnik", 
+                        content: "Unternehmensplanung und Organisation", 
+                        link: baseLink + "betriebstechnik"
                     },
                     {
-                        icon: "antriebstechnik", 
-                        title: "Antriebstechnik", 
-                        content: "Bewegung und Elektrotechnik", 
-                        link: baseLink + "antriebstechnik"
-                    },
-                    {
-                        icon: "industrieelektronik", 
-                        title: "Industrieelektronik", 
+                        icon: "laboratorium", 
+                        title: "Laboratorium", 
                         content: "Elektrotechnik in der Industrie", 
-                        link: baseLink + "industrieelektronik"
+                        link: baseLink + "laboratorium"
                     },
                     {
-                        icon: "angewandteInformatik", 
-                        title: "Angewandte Informatik", 
-                        content: "Entwickeln von computerbasierten Lösungen", 
-                        link: baseLink + "angewandte-informatik"
+                        icon: "informatik", 
+                        title: "Informatik", 
+                        content: "ERP Lösungen, Datenbank und Webseiten erstellen", 
+                        link: baseLink + "wi-informatik"
                     }
                 ],
                 stundentafel: baseLink + "stundentafel-wi"

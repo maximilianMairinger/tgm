@@ -52,7 +52,8 @@ export const iconIndex = {
 
     // HWI
     unternehmensführung: () => import("./fachIcon/law/law"),
-    logistik: () => import("./fachIcon/deliveryCar/deliveryCar"),
+    laboratorium: () => import("./fachIcon/lab/lab"),
+    // logistik: () => import("./fachIcon/deliveryCar/deliveryCar"),
     // automatisierungstechnik: () => import("./fachIcon/sprintGear/sprintGear"), // same as in het 
     betriebstechnik: () => import("./fachIcon/flag/flag"),
     informatik: () => import("./fachIcon/smartCode/smartCode"),

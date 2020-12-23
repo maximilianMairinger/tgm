@@ -24,12 +24,10 @@ export default declareComponent("it-page", class itPage extends LazySectionedPag
     ), sectionChangeCallback)
 
 
-    this.sectionIndex.then((sectionIndex) => {
-      sectionIndex.forEach((elem, name) => {
-        elem.then((e) => {
-          e.on("click", () => {
-            set(name, domainLevel)
-          })
+    this.sectionIndex.forEach((elem, name) => {
+      elem.then((e) => {
+        e.on("click", () => {
+          set(name, domainLevel)
         })
       })
     })

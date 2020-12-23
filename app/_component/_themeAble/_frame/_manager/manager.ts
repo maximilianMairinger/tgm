@@ -102,7 +102,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
   private scrollEventListener: EventListener
 
   private domainSubscription: domain.DomainSubscription
-  async minimalContentFullPaint() {
+  async fullContentPaint() {
     const {resourcesMap} = lazyLoad(this.importanceMap, e => {
       this.body.apd(e)
     })
@@ -153,19 +153,18 @@ export default abstract class Manager<ManagementElementName extends string> exte
     this.removeIntersectionListener(root)
   }
 
-
+  private async canSwap(to: Page, domainFragment: string): Promise<boolean> {
+    return await to.navigate(domainFragment)
+  }
   /**
    * Swaps to given Frame
    * @param to frame to be swaped to
    */
-  private async swapFrame(to: Page, domainFragment: string): Promise<void | boolean> {
-    if (to === undefined) {
-      throw new Error("Unknown frame");
-    }
-    
-
+  private async swapFrame(to: Page, domainFragment: string): Promise<void> {
     if (this.busySwaping) {
-      return true;
+      console.warn("was busy, unable to execute pageswap")
+      // maybe retry, or cancel ...
+      return 
     }
     this.busySwaping = true;
 
@@ -180,42 +179,21 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (from === to) {
       //Focus even when it is already the active frame
       if (!this.preserveFocus) to.focus()
-      if (!await to.navigate(domainFragment)) {  
-        to.hide()
-        await to.deactivate()
-        this.busySwaping = false
-        return false
-      }
       this.busySwaping = false
-      return true
+      return
     }
     
 
     
-    let activationsPromises = []
-    let activationProm: any
 
     to.show();
     if (!this.preserveFocus) to.focus();
     
-    if (from !== undefined) activationsPromises.add(from.deactivate())
-    if (this.active) activationsPromises.add(activationProm = to.activate(domainFragment))
-    await Promise.all(activationsPromises)
+    if (from !== undefined) from.deactivate()
+    if (this.active) to.activate()
 
-    let activationResult: boolean = await activationProm
 
-    
-
-    
-
-    if (!activationResult) {  
-      to.hide()
-      await to.deactivate()
-      this.busySwaping = false
-      return false
-    }
-    
-
+  
     this.currentPage = to;
 
     if (this.onScrollBarWidthChange) {
@@ -284,8 +262,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
         return
       }
     })()
-
-    return true
   }
 
   private currentManagedElementName: ManagementElementName
@@ -309,7 +285,9 @@ export default abstract class Manager<ManagementElementName extends string> exte
     let nextPageToken = Symbol("nextPageToken")
     this.nextPageToken = nextPageToken;
 
-    
+    let sucDomainFrag: string
+    let sucPage: any
+
     let accepted = false
     let pageProm = this.managedElementMap.get(to, 1)
     while(!accepted) {
@@ -334,33 +312,17 @@ export default abstract class Manager<ManagementElementName extends string> exte
       while(pageProm !== undefined) {
         nthTry++
 
-        let suc: boolean = await pageProm.priorityThen(async (page: Page | SectionedPage<any>) => {
+        let suc: boolean = await pageProm.priorityThen(async (page: Page | SectionedPage) => {
           if (nextPageToken === this.nextPageToken) {
+            sucPage = page
             page.domainLevel = domainLevel
-            return await this.swapFrame(page, domainFragment === "" ? page.defaultDomain : domainFragment);
+            return await this.canSwap(page, domainFragment === "" ? page.defaultDomain : domainFragment)
           }
           return false
         });
   
         if (suc) {
-          if (this.currentManagedElementName !== to) {
-            this.currentManagedElementName = to;
-            let page = this.currentPage;
-            (async () => {
-              if (this.pageChangeCallback) {
-                try {
-                  if ((page as SectionedPage<any>).sectionList) {
-                    (await (page as SectionedPage<any>).sectionList).tunnel(e => e.filter(s => s !== "")).get((sectionListNested) => {
-                      this.pageChangeCallback(to, sectionListNested, page.domainLevel)
-                    })
-                  }
-                  else this.pageChangeCallback(to, [], page.domainLevel)
-                }
-                catch(e) {}
-              }
-            })()
-          }
-          
+          sucDomainFrag = domainFragment
           accepted = true
           break
         }
@@ -369,6 +331,31 @@ export default abstract class Manager<ManagementElementName extends string> exte
         }
       }
     }
+
+    pageProm.priorityThen(() => {
+      if (this.currentManagedElementName !== to) {
+        this.currentManagedElementName = to;
+        let page = this.currentPage;
+        (async () => {
+          if (this.pageChangeCallback) {
+            try {
+              if ((page as SectionedPage).sectionList) {
+                (page as SectionedPage).sectionList.tunnel(e => e.filter(s => s !== "")).get((sectionListNested) => {
+                  this.pageChangeCallback(to, sectionListNested, page.domainLevel)
+                })
+              }
+              else this.pageChangeCallback(to, [], page.domainLevel)
+            }
+            catch(e) {}
+          }
+        })()
+      }
+    }, sucDomainFrag)
+
+    this.swapFrame(sucPage, sucDomainFrag)
+
+    
+
   }
 
   protected async activationCallback(active: boolean) {

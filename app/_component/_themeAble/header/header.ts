@@ -183,7 +183,7 @@ export default class Header extends ThemeAble {
       new ElementList(...fadeOutElems.reverse()).anim({translateX: 5, opacity: 0}, 250, 100)
       await delay(250)
     }
-    console.log("fadeInElems", fadeInElems)
+
     if (!fadeInElems.empty) fadeInElems.css({translateX: -5}).anim({translateX: .1, opacity: 1}, 250, 100)
 
 
@@ -360,7 +360,7 @@ export default class Header extends ThemeAble {
       let bounds = elem.getBoundingClientRect()
       this.underlineElem.css({translateX: bounds.left, width: bounds.width})
       window.on("resize", this.resizeFn)
-      console.log("now")
+
       this.updateUnderlineTheme(super.theme())
       await this.underlineElem.anim({opacity: 1}, 700)
 

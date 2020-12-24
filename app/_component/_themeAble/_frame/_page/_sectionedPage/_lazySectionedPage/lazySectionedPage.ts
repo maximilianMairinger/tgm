@@ -29,19 +29,16 @@ export default abstract class LazySectionedPage extends SectionedPage {
   
 
   async minimalContentPaint(domainFragment: string = this.importanceMap.entries().next().value.first) {
+    console.log("min")
     this.importanceMap.whiteListAll()
     await this.importanceMap.getByString(domainFragment).val
     this.importanceMap.whiteList() // clear white list
   }
+  
 
-  private initialDomainFragment: string
-  navigationCallback(domainFragment: string) {
-    let e = super.navigationCallback(domainFragment)
-    this.initialDomainFragment = domainFragment
-    return e
-  }
 
   async fullContentPaint() {
+    console.log("fully")
     this.importanceMap.whiteListAll()
     await this.resourceMap.fullyLoaded  
   }

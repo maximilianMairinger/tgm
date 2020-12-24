@@ -187,7 +187,7 @@ export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, 
       for (let i = 0; i < whiteList.length; i++) {
         if (whiteList !== this.whiteListedImports) return
         while (this.superWhiteListDone) await this.superWhiteListDone
-        await this.resolver(this.get(this.whiteList[i]), this.whiteList[i], state);
+        await this.resolver(this.get(this.whiteListedImports[i]), this.whiteListedImports[i], state);
       }
     }
   }
@@ -226,8 +226,8 @@ export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, 
         const v = this.get(imp)
         if (sourceDomain !== undefined) {
           if (this.whiteListedImports.includes(imp)) this.whiteListedImports.rmV(imp)
-          for (let state in loadStates) {
-            await this.resolver(v, imp, state)
+          for (let state of loadStates) {
+            await this.resolver(v, imp, sourceDomain, state)
             res()
             if (mySuperWhiteListDone !== this.superWhiteListDone) {
               if (state !== loadStates.last) this.whiteListedImports.add(imp)

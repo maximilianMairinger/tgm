@@ -108,11 +108,15 @@ export default abstract class Manager<ManagementElementName extends string> exte
     })
     this.managedElementMap = resourcesMap
 
-    this.domainSubscription = domain.get(this.domainLevel, async (to: any) => {await this.setElem(to)}, false, "")
-    let initElemName = this.domainSubscription.domain
+    const getDomain = async (to: any) => {
+      let wanted = await this.setElem(to)
+      domain.set(wanted.domain, wanted.level, false)
+    }
+    this.domainSubscription = domain.get(this.domainLevel, getDomain, false, "")
+    await getDomain(this.domainSubscription.domain)
 
     // if (this.managedElementMap.get(this.notFoundElementName) === undefined) console.error("404 elementName: \"" + this.notFoundElementName + "\" is not found in given importanceMap", this.importanceMap)
-    await this.setElem(initElemName as ManagementElementName)
+    
     // await this.managedElementMap.fullyLoaded
   }
 
@@ -287,6 +291,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
     let sucDomainFrag: string
     let sucPage: any
+    let sucDomainLevel: any
 
     let accepted = false
     let pageProm = this.managedElementMap.get(to, 1)
@@ -306,8 +311,10 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
       let domFrag = fullDomain.splice(0, to.length)
       if (domFrag.startsWith("/")) domFrag = domFrag.substring(1)
-      const domainFragment = domFrag
+      const rootDomainFragment = domFrag
+      let domainFragment: string
       const domainLevel = to === "" ? 0 : (occurrences(to, "/") + 1 + this.domainLevel)
+      sucDomainLevel = domainLevel
 
       while(pageProm !== undefined) {
         nthTry++
@@ -316,7 +323,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
           if (nextPageToken === this.nextPageToken) {
             sucPage = page
             page.domainLevel = domainLevel
-            return await this.canSwap(page, domainFragment === "" ? page.defaultDomain : domainFragment)
+            domainFragment = rootDomainFragment === "" ? page.defaultDomain : rootDomainFragment
+            return await this.canSwap(page, domainFragment)
           }
           return false
         });
@@ -355,7 +363,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     this.swapFrame(sucPage, sucDomainFrag)
 
     
-
+    return {domain: sucDomainFrag, level: sucDomainLevel}
   }
 
   protected async activationCallback(active: boolean) {

@@ -6,7 +6,8 @@ import { ElementList } from "extended-dom";
 import {Theme} from "../../themeAble";
 import { Data } from "josm";
 import delay from "delay";
-import DateTimeFormat = Intl.DateTimeFormat;
+import AT from "../../../../lib/formatTime"
+
 
 export default class BlogPost extends Text {
   
@@ -28,12 +29,11 @@ export default class BlogPost extends Text {
     return this.textblob.heading(title);
   }
 
-  date():string
-  date(date:Date):void
-  date(date?:Date){
+  date(): string
+  date(date: Date | string): void
+  date(date?: Date | string){
     if(date) {
-      let moment = require('moment');
-      this.q("blog-date").text(moment(date).format("DD.MM.YYYY"));
+      this.q("blog-date").text(AT.formatDate(date));
     }
     else return this.q("blog-date").text();
   }

@@ -106,6 +106,9 @@ class MultiKeyMap<K, V> {
       }
     }
   }
+  has(key: K, nth: number = 1) {
+    return !!this.get(key, nth)
+  }
   forEach(cb: (val: V, key: K) => void) {
     for (let e of this) {
       cb(e.val, e.key)

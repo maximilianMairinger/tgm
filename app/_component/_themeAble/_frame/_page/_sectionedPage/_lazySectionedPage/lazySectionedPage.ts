@@ -4,10 +4,8 @@ import LoadingIndecator from "../../../../../_indecator/loadingIndecator/loading
 import * as domain from "../../../../../../lib/domain";
 import constructAttachToPrototype from "attatch-to-prototype";
 
-export default abstract class LazySectionedPage extends SectionedPage<Promise<any>> {
+export default abstract class LazySectionedPage extends SectionedPage {
 
-  private loadMe: (initalKey?: string) => ResourcesMap
-  private resResourceMap: Function
   private resourceMap: ResourcesMap
 
   private loadingIndecatorBot: HTMLElement

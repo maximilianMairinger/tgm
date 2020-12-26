@@ -62,7 +62,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private managedElementMap: ResourcesMap
 
-  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, private onUserScroll?: (scrollProgress: number, userInited: boolean) => void, private onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, private onUserScroll?: (scrollProgress: number, userInited: boolean) => void, private onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
     super(null);
 
     this.body = ce("manager-body");
@@ -164,7 +164,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
    * Swaps to given Frame
    * @param to frame to be swaped to
    */
-  private async swapFrame(to: Page, domainFragment: string): Promise<void> {
+  private async swapFrame(to: Page): Promise<void> {
     if (this.busySwaping) {
       console.warn("was busy, unable to execute pageswap")
       // maybe retry, or cancel ...
@@ -262,7 +262,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
       to.css("zIndex", 0)
       this.busySwaping = false;
       if (this.wantedFrame !== to) {
-        await this.swapFrame(this.wantedFrame, domainFragment);
+        await this.swapFrame(this.wantedFrame);
         return
       }
     })()
@@ -300,11 +300,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
       
       
       while(pageProm === undefined) {
-        if (to === "") {
-          to = this.notFoundElementName
-          pageProm = this.managedElementMap.get(to, nthTry)
-          break
-        }
         to = to.substr(0, to.lastIndexOf("/")) as any
         pageProm = this.managedElementMap.get(to, nthTry)
       }

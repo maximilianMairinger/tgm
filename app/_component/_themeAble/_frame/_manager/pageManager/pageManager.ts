@@ -32,11 +32,6 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
       },
       {
-        key: new Import("404", 60, (__404Page: typeof _404Page) =>
-          new __404Page()
-        ), val: () => import(/* webpackChunkName: "404Page" */"../../_page/404/404")
-      },
-      {
         key: new Import("georgsSandbox", 50, (georgsSandbox: typeof GeorgsSandbox) => 
           new georgsSandbox()
         ), val: () => import(/* webpackChunkName: "georgsSandbox" */"../../_page/georgsSanbox/georgsSanbox")
@@ -106,7 +101,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
             new blogPage()
         ), val: () => import(/* webpackChunkName: "blogPage" */"../../_page/blogPage/blogPage")
       },
-    ), 0, pageChangeCallback, "404", true, onScrollBarWidthChange, onUserScroll, onScroll)
+      {
+        key: new Import("", 60, (__404Page: typeof _404Page) =>
+          new __404Page()
+        ), val: () => import(/* webpackChunkName: "404Page" */"../../_page/404/404")
+      }
+    ), 0, pageChangeCallback, true, onScrollBarWidthChange, onUserScroll, onScroll)
   }
 
 

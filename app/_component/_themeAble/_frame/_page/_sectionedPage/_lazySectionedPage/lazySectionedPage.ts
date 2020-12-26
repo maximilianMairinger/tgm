@@ -2,24 +2,53 @@ import SectionedPage, { QuerySelector, AliasList } from "../sectionedPage";
 import lazyLoad, { ImportanceMap, ResourcesMap } from "../../../../../../lib/lazyLoad";
 import LoadingIndecator from "../../../../../_indecator/loadingIndecator/loadingIndecator";
 import * as domain from "../../../../../../lib/domain";
+import constructAttachToPrototype from "attatch-to-prototype";
 
 export default abstract class LazySectionedPage extends SectionedPage {
 
   private resourceMap: ResourcesMap
 
-  private loadingIndecator: HTMLElement
+  private loadingIndecatorBot: HTMLElement
+  private loadingIndecatorTop: HTMLElement
   private importanceMap: ImportanceMap<any, any>
 
   constructor(sectionIndex: ImportanceMap<() => Promise<any>, any>, sectionChangeCallback?: (section: string) => void, sectionAliasList?: AliasList, mergeIndex?: {[part in string]: string}) {
-    const { resourcesMap, importanceMap } = lazyLoad(sectionIndex, e => {
-      this.elementBody.insertBefore(e, this.loadingIndecator)
+    const { resourcesMap, importanceMap } = lazyLoad(sectionIndex, (e, ind) => {
+      // debugger
+      let priorElem: HTMLElement
+      let i = ind
+      do {
+        i--
+        priorElem = loadedElementsIndex[i]
+      } while (priorElem === undefined)
+
+
+      this.elementBody.insertAfter(e, priorElem)
+      loadedElementsIndex[ind] = e
       e.anim({opacity: 1})
     })
     super(resourcesMap, sectionChangeCallback, sectionAliasList, mergeIndex)
     
-    this.elementBody.apd(this.loadingIndecator = ce("loading-indecator"))
+    this.elementBody.apd(this.loadingIndecatorTop = ce("loading-indecator"))
+    this.elementBody.apd(this.loadingIndecatorBot = ce("loading-indecator"))
+
+    
+    const loadedElementsIndex = {"-1": this.loadingIndecatorTop}
+    loadedElementsIndex[sectionIndex.size] = this.loadingIndecatorBot
+    const attach = constructAttachToPrototype(loadedElementsIndex)
+    attach("0", {set: (e) => {
+      this.loadingIndecatorTop.remove()
+      attach("0", {value: e})
+    }})
+    const lastIndex = (sectionIndex.size - 1) + ""
+    attach(lastIndex, {set: (e) => {
+      this.loadingIndecatorBot.remove()
+      attach(lastIndex, {value: e})
+    }})
+    
+    
     resourcesMap.fullyLoaded.then(() => {
-      this.loadingIndecator.remove()
+      this.loadingIndecatorBot.remove()
     })
 
     this.importanceMap = importanceMap
@@ -30,9 +59,7 @@ export default abstract class LazySectionedPage extends SectionedPage {
 
   async minimalContentPaint(domainFragment: string = this.importanceMap.entries().next().value.first) {
     console.log("min")
-    this.importanceMap.whiteListAll()
-    await this.importanceMap.getByString(domainFragment).val
-    this.importanceMap.whiteList() // clear white list
+    await this.resourceMap.get(domainFragment).priorityThen()
   }
   
 

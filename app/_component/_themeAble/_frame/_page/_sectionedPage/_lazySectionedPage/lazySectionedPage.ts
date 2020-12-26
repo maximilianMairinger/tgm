@@ -28,6 +28,8 @@ export default abstract class LazySectionedPage extends SectionedPage {
       e.anim({opacity: 1})
     })
     super(resourcesMap, sectionChangeCallback, sectionAliasList, mergeIndex)
+
+
     
     this.elementBody.apd(this.loadingIndecatorTop = ce("loading-indecator"))
     this.elementBody.apd(this.loadingIndecatorBot = ce("loading-indecator"))
@@ -55,11 +57,17 @@ export default abstract class LazySectionedPage extends SectionedPage {
     this.resourceMap = resourcesMap
   }
 
-  
+  initialActivationCallback() {
+    if (this.initElemProm !== this.resourceMap.entries().next().value.val) this.elementBody.scrollTop = this.loadingIndecatorTop.height() - 1
+    super.initialActivationCallback()
+  }
 
+  
+  private initElemProm: any
   async minimalContentPaint(domainFragment: string = this.importanceMap.entries().next().value.first) {
     console.log("min")
-    await this.resourceMap.get(domainFragment).priorityThen()
+    this.initElemProm = this.resourceMap.get(domainFragment)
+    await this.initElemProm.priorityThen()
   }
   
 

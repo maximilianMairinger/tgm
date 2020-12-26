@@ -4,7 +4,7 @@ import { set } from "../../../../../../lib/domain"
 import { ResourcesMap } from "../../../../../../lib/lazyLoad"
 
 
-export default declareComponent("test-page", class TestPage extends SectionedPage<{[name: string]: string}> {
+export default declareComponent("test-page", class TestPage extends SectionedPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
     super({
       tagesschule: ".a",

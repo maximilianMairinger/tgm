@@ -110,9 +110,13 @@ export default declareComponent("site", class extends Component {
       lowerNav.theme(themeUnderneath)
     })
     
-    pageManager.loadedCallback()
+
+    pageManager.fullContentPaint().then(() => {
+      pageManager.activate()
+    })
     this.apd(pageManager)
-    pageManager.activate()
+    
+    
 
 
     let cookieNoteContainer = ce("cookie-notice-container")

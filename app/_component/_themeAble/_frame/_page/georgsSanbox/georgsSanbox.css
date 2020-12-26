@@ -184,4 +184,9 @@ c-textblob.first{
         width: 80%;
         min-width: 0;
     }
+
+    c-vertiefungs-container{
+        margin: 0 10vw;
+        max-width: 100%;
+    }
 }

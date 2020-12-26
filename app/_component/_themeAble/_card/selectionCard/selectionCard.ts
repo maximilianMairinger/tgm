@@ -24,6 +24,7 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
 
     private textblob = this.q("c-textblob") as Textblob;
     private _options: SelectionOptions;
+    private stundentafelLink = this.q("c-link") as Link;
 
     constructor() {
         super(false, false)
@@ -95,6 +96,13 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
             this.q("image-container").css({'display': 'none'});
             this.q("content-box").css({'maxWidth':'100%'});
         }else return this.q("image-container").css('display');
+    }
+
+    stundentafel(link?:string){
+        if(link) {
+            this.stundentafelLink.css({"display":"block"})
+            this.stundentafelLink.link(link)
+        } else return this.stundentafelLink.link();
     }
 
     stl(){

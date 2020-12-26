@@ -66,7 +66,33 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
 
   return {
     resourcesMap,
-    importanceMap: resources
+    load(initalKey?: string): ResourcesMap {
+      try {
+        if (initalKey !== undefined) resources.getByString(initalKey).key.importance = superImportant;
+      }
+      catch (e) {
+        console.warn("Unexpected initalKey");
+      }
+
+      (async () => {
+        await resources.forEachOrdered(async <Mod>(e: () => Promise<{default: {new(): Mod}}>, imp: Import<string, Mod>) => {
+          if (imp.val !== undefined) {
+            let instance = imp.initer((await e()).default);
+            if (globalInitFunc !== undefined) await globalInitFunc(instance);
+            await resolvements.get(imp)(instance)
+            
+          }
+          // just load it (and preseve in webpack cache)
+          else (await e());
+        });
+      })();
+
+      
+      
+
+      
+      return resourcesMap;
+    }
   }
 }
 
@@ -145,7 +171,7 @@ export class ResourcesMap extends MultiKeyMap<string, PriorityPromise> {
   private reloadStatusPromises() {
     let proms = []
     this.forEach((e) => {
-      proms.add(e)
+      (proms as any).add(e)
     })
     
     this.fullyLoaded = Promise.all(proms)
@@ -249,9 +275,6 @@ export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, 
     
     return minimalReqLoaded
   }
-
-  public whiteListedImports = []
-  private superWhiteListDone: Promise<void>
 }
 
 export class Import<T, Mod> {

@@ -23,6 +23,7 @@ blog-html{
     max-width: 650px;
     color: var(--strong-text-color);
     font-size: 17px;
+    width: 100%;
 }
 
 blog-html *{
@@ -34,10 +35,27 @@ blog-html figure{
     width: 100%;
 }
 
-blog-html figure img{
+blog-html figure *{
     border-radius: 8px;
     width: 100%;
 }
+
+blog-html table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+blog-html tr:nth-child(2n - 1) *:not(th){
+    background-color: #f2f2f2
+}
+
+blog-html th, blog-html td {
+    text-align: left;
+    padding: 8px;
+}
+
 
 blog-extra{
     margin-top: 15px;

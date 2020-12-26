@@ -6,6 +6,8 @@ import {Theme} from "../../themeAble";
 import "./../../../image/image"
 import Image from "./../../../image/image";
 import declareComponent from "../../../../lib/declareComponent";
+import "./../../_icon/playButton/playButton"
+import Button from "../../_button/button";
 
 
 
@@ -70,6 +72,21 @@ export default class Thumbnail extends Text {
   hmobile(hmobile: JSON | MediaQuerySize): void
   hmobile(hmobile?: JSON | MediaQuerySize): any {
     return this.textBlob.hmobile(hmobile)
+  }
+
+  private videohref:string;
+  private startIframe(){
+    this.q("iframe").setAttribute("src", "https://www.youtube.com/embed/" +this.videohref.split("/watch?v=").splice(-1).pop() + "?autoplay=1&controls=0")
+  }
+
+  videolink(link?:string){
+    let videoButton = this.q("video-button");
+    let videoLink = videoButton.querySelector("c-button") as Button;
+    if (link){
+      videoButton.css({display:"block"});
+      this.videohref = link;
+      videoLink.click(this.startIframe.bind(this))
+    }else return this.videohref;
   }
 
   theme():Theme

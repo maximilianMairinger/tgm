@@ -29,15 +29,40 @@ export const iconIndex = {
     team: () => import("../_icon/tagesschuleIcons/team/team"),
   },
   fach: {
+    // HET
     energysysteme: () => import("./fachIcon/sunElectricity/sunElectricity"),
     automatisierungstechnik: () => import("./fachIcon/sprintGear/sprintGear"),
     antriebstechnik: () => import("./fachIcon/electricCar/electricCar"),
     industrieelektronik: () => import("./fachIcon/powerPlant/powerPlant"),
     angewandteInformatik: () => import("./fachIcon/pcsConnected/pcsConnected"),
+
+    // Biomed
+    biologie: () => import("./fachIcon/biology/biology"),
+    signalverarbeitung: () => import("./fachIcon/heartBeat/heartBeat"),
+    gerätetechnik: () => import("./fachIcon/microscope/microscope"),
+    gesundheitsmechatronik: () => import("./fachIcon/prosthesis/prosthesis"),
+    gesundheitsinformatik: () => import("./fachIcon/heartSmartWatch/heartSmartWatch"),
+
+    // HEL
+    hardwareentwicklung: () => import("./fachIcon/nfcChip/nfcChip"),
+    messtechnik: () => import("./fachIcon/motionSensor/motionSensor"),
+    computersysteme: () => import("./fachIcon/shortWaves/shortWaves"),
+    kommunikationssysteme: () => import("./fachIcon/graphNetwork/graphNetwork"),
+    softwaretechnik: () => import("./fachIcon/terminal/terminal"),
+
+    // HWI
+    unternehmensführung: () => import("./fachIcon/law/law"),
+    // logistik: () => import("./fachIcon/deliveryCar/deliveryCar"),
+    laboratorium: () => import("./fachIcon/electricGear/electricGear"),
+    betriebstechnik: () => import("./fachIcon/flag/flag"),
+    informatik: () => import("./fachIcon/smartCode/smartCode"),
   },
   vertiefung: {
+    // HET
     automatisierung: () => import("./vertiefung/automationGear/automationGear"),
     erneuerbareEnergien: () => import("./vertiefung/windMills/windMills"),
+
+    // WI
     maschinenbau: () => import("./vertiefung/maschinenbau/maschinenbau"),
     logistik: () => import("./vertiefung/logistik/logistik"),
     betriebsinformatik: () => import("./vertiefung/betriebsinformatik/betriebsinformatik"),

@@ -158,17 +158,17 @@ export type Alias = ScrollProgressAliasIndex | SimpleAlias
 
 type SectionIndex = {[name in Name]: HTMLElement | QuerySelector}
 type Name = string
-type FullSectionIndex = ResourcesMap | SectionIndex | Promise<ResourcesMap | SectionIndex>
+type FullSectionIndex = ResourcesMap | SectionIndex
 export type QuerySelector = string
-export default abstract class SectionedPage<T extends FullSectionIndex> extends Page {
-  protected readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
-  public readonly sectionList: T extends Promise<any> ? Promise<Data<string[]>> : Data<string[]>
+export default abstract class SectionedPage extends Page {
+  protected readonly sectionIndex: ResourcesMap
+  public readonly sectionList: Data<string[]>
   private inScrollAnimation: Data<Symbol> = new Data()
 
   protected scrollToSection: (to?: number, speed?: number, force?: boolean) => Promise<void>
   private scrollToSectionFunctionIndex = constructIndex((section: PageSection) => this.constructScrollTo(section))
 
-  constructor(sectionIndex: T, protected sectionChangeCallback?: (section: string) => void, protected readonly sectionAliasList: AliasList = new AliasList(), protected readonly mergeIndex: {[part in string]: string} = {}) {
+  constructor(sectionIndex: FullSectionIndex, protected sectionChangeCallback?: (section: string) => void, protected readonly sectionAliasList: AliasList = new AliasList(), protected readonly mergeIndex: {[part in string]: string} = {}) {
     super()
 
     let that = this

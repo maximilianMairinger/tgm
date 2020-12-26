@@ -46,7 +46,6 @@ function occurrences(string: string, subString: string, allowOverlapping = false
 
 
 export default abstract class Manager<ManagementElementName extends string> extends Frame {
-  private resLoaded: Function;
 
   protected busySwaping: boolean = false;
   public currentPage: Page;
@@ -57,7 +56,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
 
   private loadingElem: any;
-  private firstFrameLoaded: Promise<void>
 
 
 
@@ -66,9 +64,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, private onUserScroll?: (scrollProgress: number, userInited: boolean) => void, private onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
     super(null);
-    this.firstFrameLoaded = new Promise((res) => {
-      this.resLoaded = res
-    })
 
     this.body = ce("manager-body");
     this.loadingElem = new LoadingIndecator();
@@ -367,7 +362,6 @@ export default abstract class Manager<ManagementElementName extends string> exte
   }
 
   protected async activationCallback(active: boolean) {
-    await this.firstFrameLoaded
     if (this.currentPage.active !== active) this.currentPage.vate(active)
   }
   stl() {

@@ -237,38 +237,36 @@ export default abstract class SectionedPage extends Page {
   }
 
   navigationCallback(domainFragment: string) {
-    
-    let verticalOffset = padding
-    
-    if (this.sectionAliasList.reverseIndex[domainFragment] !== undefined) {
-      let reverseAlias = this.sectionAliasList.reverseIndex[domainFragment]
-      let originalDomain = domainFragment
-      if (reverseAlias instanceof SimpleAlias.Reverse) {
-        domainFragment = reverseAlias.root
-      }
-      else if (reverseAlias instanceof ScrollProgressAliasIndex.Reverse) {
-        domainFragment = reverseAlias.root
-        verticalOffset += reverseAlias.progress - padding + .5
-      }
-      this.activateSectionName(originalDomain)
-    }
-
-    else {
-      this.currentlyActiveSectionRootName = this.sectionAliasList.getRootOfAlias(domainFragment)
-      this.activateSectionName(this.sectionAliasList.aliasify(this.merge(domainFragment)).get().first)
-    }
-
-    
-
 
     
     let promElem = this.sectionIndex.get(domainFragment) as PriorityPromise<HTMLElement>
+    let ok = promElem !== undefined
+    if (!ok) return ok
 
-    
     
     let scrollAnimation: any
     this.inScrollAnimation.set(scrollAnimation = Symbol())
-    promElem.priorityThen(async (elem) => {
+    promElem.then(async (elem) => {
+      let verticalOffset = padding
+    
+      if (this.sectionAliasList.reverseIndex[domainFragment] !== undefined) {
+        let reverseAlias = this.sectionAliasList.reverseIndex[domainFragment]
+        let originalDomain = domainFragment
+        if (reverseAlias instanceof SimpleAlias.Reverse) {
+          domainFragment = reverseAlias.root
+        }
+        else if (reverseAlias instanceof ScrollProgressAliasIndex.Reverse) {
+          domainFragment = reverseAlias.root
+          verticalOffset += reverseAlias.progress - padding + .5
+        }
+        this.activateSectionName(originalDomain)
+      }
+
+      else {
+        this.currentlyActiveSectionRootName = this.sectionAliasList.getRootOfAlias(domainFragment)
+        this.activateSectionName(this.sectionAliasList.aliasify(this.merge(domainFragment)).get().first)
+      }
+
       this.userInitedScrollEvent = false
 
       
@@ -286,7 +284,7 @@ export default abstract class SectionedPage extends Page {
       }
     })
 
-    return promElem !== undefined
+    return ok
 
     
   }
@@ -491,22 +489,10 @@ export default abstract class SectionedPage extends Page {
   }
 
   private constructScrollTo(section: PageSection) {
-    let sectionIndex: ResourcesMap
     let sectionRootName: string
-    const init = (secInd: any) => {
-      sectionIndex = secInd
-      sectionRootName = sectionIndex.getLoadedKeyOfResource(section)
-    }
-
+    sectionRootName = this.sectionIndex.getLoadedKeyOfResource(section)
     let whileWaitingQueue = []
-    if (this.sectionIndex instanceof Promise) {
-      this.sectionIndex.then((s) => {
-        init(s)
-        whileWaitingQueue.call().clear()
-      })
-      
-    }
-    else init(sectionIndex)
+    
 
 
     const go = async (verticalOffset: number, speed: number, force: boolean) => {

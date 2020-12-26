@@ -48,7 +48,7 @@ function occurrences(string: string, subString: string, allowOverlapping = false
 export default abstract class Manager<ManagementElementName extends string> extends Frame {
 
   protected busySwaping: boolean = false;
-  public currentPage: Page;
+  public currentPage: Page
 
   protected body: HTMLElement;
 
@@ -60,7 +60,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
 
 
-  private managedElementMap: ResourcesMap
+  private resourcesMap: ResourcesMap
 
   constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, private onUserScroll?: (scrollProgress: number, userInited: boolean) => void, private onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
     super(null);
@@ -97,27 +97,28 @@ export default abstract class Manager<ManagementElementName extends string> exte
         onScroll(this.currentPage.elementBody.scrollTop)
       }, false)
     }
+
+    const { resourcesMap } = lazyLoad(this.importanceMap, e => {
+      this.body.apd(e)
+    })
+    this.resourcesMap = resourcesMap
+    this.domainSubscription = domain.get(this.domainLevel, this.setDomain.bind(this), false, "")
+  }
+  private async setDomain(to: ManagementElementName) {
+    let wanted = await this.setElem(to)
+    domain.set(wanted.domain, wanted.level, false)
   }
 
   private scrollEventListener: EventListener
-
   private domainSubscription: domain.DomainSubscription
+  async minimalContentPaint() {
+    await this.setDomain(this.domainSubscription.domain as ManagementElementName)
+  }
   async fullContentPaint() {
-    const {resourcesMap} = lazyLoad(this.importanceMap, e => {
-      this.body.apd(e)
-    })
-    this.managedElementMap = resourcesMap
 
-    const getDomain = async (to: any) => {
-      let wanted = await this.setElem(to)
-      domain.set(wanted.domain, wanted.level, false)
-    }
-    this.domainSubscription = domain.get(this.domainLevel, getDomain, false, "")
-    await getDomain(this.domainSubscription.domain)
+  }
+  async completePaint() {
 
-    // if (this.managedElementMap.get(this.notFoundElementName) === undefined) console.error("404 elementName: \"" + this.notFoundElementName + "\" is not found in given importanceMap", this.importanceMap)
-    
-    // await this.managedElementMap.fullyLoaded
   }
 
   private lastScrollbarWidth: number
@@ -158,13 +159,13 @@ export default abstract class Manager<ManagementElementName extends string> exte
   }
 
   private async canSwap(to: Page, domainFragment: string): Promise<boolean> {
-    return await to.navigate(domainFragment)
+    return await to.tryNavigate(domainFragment)
   }
   /**
    * Swaps to given Frame
    * @param to frame to be swaped to
    */
-  private async swapFrame(to: Page): Promise<void> {
+  private async swapFrame(to: Page, domainFragment: string): Promise<void> {
     if (this.busySwaping) {
       console.warn("was busy, unable to execute pageswap")
       // maybe retry, or cancel ...
@@ -183,6 +184,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (from === to) {
       //Focus even when it is already the active frame
       if (!this.preserveFocus) to.focus()
+      to.navigate(domainFragment)
       this.busySwaping = false
       return
     }
@@ -194,7 +196,10 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (!this.preserveFocus) to.focus();
     
     if (from !== undefined) from.deactivate()
-    if (this.active) to.activate()
+    if (this.active) {
+      to.navigate(domainFragment)
+      to.activate(domainFragment)
+    }
 
 
   
@@ -262,7 +267,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
       to.css("zIndex", 0)
       this.busySwaping = false;
       if (this.wantedFrame !== to) {
-        await this.swapFrame(this.wantedFrame);
+        await this.swapFrame(this.wantedFrame, domainFragment);
         return
       }
     })()
@@ -288,14 +293,14 @@ export default abstract class Manager<ManagementElementName extends string> exte
     let sucDomainLevel: any
 
     let accepted = false
-    let pageProm = this.managedElementMap.get(to, 1)
+    let pageProm = this.resourcesMap.get(to, 1)
     while(!accepted) {
       let nthTry = 1
       
       
       while(pageProm === undefined) {
         to = to.substr(0, to.lastIndexOf("/")) as any
-        pageProm = this.managedElementMap.get(to, nthTry)
+        pageProm = this.resourcesMap.get(to, nthTry)
       }
 
       let domFrag = fullDomain.splice(0, to.length)
@@ -324,7 +329,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
           break
         }
         else {
-          pageProm = this.managedElementMap.get(to, nthTry)
+          pageProm = this.resourcesMap.get(to, nthTry)
         }
       }
     }
@@ -349,14 +354,14 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
     }, sucDomainFrag)
 
-    this.swapFrame(sucPage)
+    this.swapFrame(sucPage, sucDomainFrag)
 
     
     return {domain: sucDomainFrag, level: sucDomainLevel}
   }
 
-  protected async activationCallback(active: boolean) {
-    if (this.currentPage.active !== active) this.currentPage.vate(active)
+  protected async activationCallback(active: boolean, domainFragment?: string) {
+    if (this.currentPage) if (this.currentPage.active !== active) this.currentPage.vate(active as any, domainFragment)
   }
   stl() {
     return super.stl() + require('./manager.css').toString();

@@ -6,34 +6,36 @@ export default abstract class Frame extends ThemeAble<HTMLElement> {
   constructor(theme?: Theme) {
     super(undefined, theme)
   }
-  public activate() {
-    return this.vate(true)
+  public activate(domainFragment: string) {
+    return this.vate(true, domainFragment)
   }
   public deactivate() {
     return this.vate(false)
   }
   
-  public vate(activate: boolean) {
+  public vate(activate: false, domainFragment?: string)
+  public vate(activate: true, domainFragment: string)
+  public vate(activate: boolean, domainFragment?: string) {
     (this as any).active = activate
-    if (activate && this.initialActivationCallback && !this.initiallyActivated) {
+    if (this.initialActivationCallback && activate && !this.initiallyActivated) {
       (this as any).initiallyActivated = true
-      this.initialActivationCallback()
+      this.initialActivationCallback(domainFragment)
     }
 
-    if (this.activationCallback) return this.activationCallback(activate)
+    if (this.activationCallback) return this.activationCallback(activate, domainFragment)
   }
-  async navigate(domainFragment?: string) {
-    return true
-  }
+  
   stl() {
     return require("./frame.css").toString()
   }
-  
   protected minimalContentPaint?(domainFragment?: string): void | Promise<void>
   protected fullContentPaint?(domainFragment?: string): void | Promise<void>
   protected completePaint?(domainFragment?: string): void | Promise<void>
-  protected activationCallback?(active: boolean): void
-  protected initialActivationCallback?(): void
+
+  protected activationCallback?(active: true, domainFragment: string): void
+  protected activationCallback?(active: false): void
+  protected activationCallback?(active: boolean, domainFragment?: string): void
+  protected initialActivationCallback?(domainFragment: string): void
   public userInitedScrollEvent = true
   public addIntersectionListener?(root: HTMLElement, cb: Function, threshold?: number, rootMargin?: string): void
   public removeIntersectionListener?(root: HTMLElement): void

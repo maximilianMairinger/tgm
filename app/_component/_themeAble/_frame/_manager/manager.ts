@@ -274,14 +274,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
   public element(): ManagementElementName
   public element(to: ManagementElementName, push?: boolean): void
   public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
-    if (to === null) {
-      // FIXME: Do we need this check here?
-      if (this.managedElementMap.get(this.domainSubscription.domain) === undefined) return this.setElem(this.notFoundElementName)
-    }
-    else {
-      if (to) domain.set(to, this.domainLevel, push)
-      else return this.currentManagedElementName
-    }
+    if (to) domain.set(to, this.domainLevel, push)
+    else return this.currentManagedElementName
   }
 
   private async setElem(fullDomain: ManagementElementName) {
@@ -355,7 +349,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
       }
     }, sucDomainFrag)
 
-    this.swapFrame(sucPage, sucDomainFrag)
+    this.swapFrame(sucPage)
 
     
     return {domain: sucDomainFrag, level: sucDomainLevel}

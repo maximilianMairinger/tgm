@@ -103,7 +103,7 @@ export default declareComponent("site", class extends Component {
     
 
     this.apd(pageManager)
-    pageManager.activate("")
+    pageManager.activate()
     pageManager.minimalContentPaint().then(() => {
       pageManager.addThemeIntersectionListener(header, (themeUnderneath) => {
         header.theme(themeUnderneath)

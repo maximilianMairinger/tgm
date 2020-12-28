@@ -6,36 +6,36 @@ export default abstract class Frame extends ThemeAble<HTMLElement> {
   constructor(theme?: Theme) {
     super(undefined, theme)
   }
-  public activate(domainFragment: string) {
-    return this.vate(true, domainFragment)
+  public activate() {
+    return this.vate(true)
   }
   public deactivate() {
     return this.vate(false)
   }
   
-  public vate(activate: false, domainFragment?: string)
-  public vate(activate: true, domainFragment: string)
-  public vate(activate: boolean, domainFragment?: string) {
+  public vate(activate: false)
+  public vate(activate: true)
+  public vate(activate: boolean) {
     (this as any).active = activate
     if (this.initialActivationCallback && activate && !this.initiallyActivated) {
       (this as any).initiallyActivated = true
-      this.initialActivationCallback(domainFragment)
+      this.initialActivationCallback()
     }
 
-    if (this.activationCallback) return this.activationCallback(activate, domainFragment)
+    if (this.activationCallback) return this.activationCallback(activate)
   }
   
   stl() {
     return require("./frame.css").toString()
   }
-  protected minimalContentPaint?(domainFragment?: string): void | Promise<void>
-  protected fullContentPaint?(domainFragment?: string): void | Promise<void>
-  protected completePaint?(domainFragment?: string): void | Promise<void>
+  protected minimalContentPaint(): void | Promise<void> {
 
-  protected activationCallback?(active: true, domainFragment: string): void
-  protected activationCallback?(active: false): void
-  protected activationCallback?(active: boolean, domainFragment?: string): void
-  protected initialActivationCallback?(domainFragment: string): void
+  }
+  protected fullContentPaint?(): void | Promise<void>
+  protected completePaint?(): void | Promise<void>
+
+  protected activationCallback?(active: boolean): void
+  protected initialActivationCallback?(): void
   public userInitedScrollEvent = true
   public addIntersectionListener?(root: HTMLElement, cb: Function, threshold?: number, rootMargin?: string): void
   public removeIntersectionListener?(root: HTMLElement): void

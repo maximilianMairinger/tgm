@@ -8,6 +8,7 @@ import { Theme } from "../../../_themeAble/themeAble";
 import PageSection from "../_pageSection/pageSection";
 import { EventListener } from "extended-dom";
 import Page from "../_page/page";
+import { record } from "../../../image/image";
 
 
 
@@ -111,14 +112,18 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
   private scrollEventListener: EventListener
   private domainSubscription: domain.DomainSubscription
+  private loadImages: Function
+  private doneRec: ReturnType<typeof record["record"]>
   async minimalContentPaint() {
+    this.doneRec = record.record()
     await this.setDomain(this.domainSubscription.domain as ManagementElementName)
+    this.loadImages = this.doneRec()
   }
   async fullContentPaint() {
-
+    this.loadImages = this.doneRec()
   }
   async completePaint() {
-
+    this.loadImages()
   }
 
   private lastScrollbarWidth: number
@@ -165,7 +170,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
    * Swaps to given Frame
    * @param to frame to be swaped to
    */
-  private async swapFrame(to: Page, domainFragment: string): Promise<void> {
+  private async swapFrame(to: Page): Promise<void> {
     if (this.busySwaping) {
       console.warn("was busy, unable to execute pageswap")
       // maybe retry, or cancel ...
@@ -184,7 +189,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (from === to) {
       //Focus even when it is already the active frame
       if (!this.preserveFocus) to.focus()
-      to.navigate(domainFragment)
+      to.navigate()
       this.busySwaping = false
       return
     }
@@ -197,8 +202,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
     
     if (from !== undefined) from.deactivate()
     if (this.active) {
-      to.navigate(domainFragment)
-      to.activate(domainFragment)
+      to.navigate()
+      to.activate()
     }
 
 
@@ -267,7 +272,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
       to.css("zIndex", 0)
       this.busySwaping = false;
       if (this.wantedFrame !== to) {
-        await this.swapFrame(this.wantedFrame, domainFragment);
+        await this.swapFrame(this.wantedFrame);
         return
       }
     })()
@@ -352,16 +357,16 @@ export default abstract class Manager<ManagementElementName extends string> exte
           }
         })()
       }
-    }, sucDomainFrag)
+    }, true)
 
-    this.swapFrame(sucPage, sucDomainFrag)
+    this.swapFrame(sucPage)
 
     
     return {domain: sucDomainFrag, level: sucDomainLevel}
   }
 
-  protected async activationCallback(active: boolean, domainFragment?: string) {
-    if (this.currentPage) if (this.currentPage.active !== active) this.currentPage.vate(active as any, domainFragment)
+  protected async activationCallback(active: boolean) {
+    if (this.currentPage) if (this.currentPage.active !== active) this.currentPage.vate(active as any)
   }
   stl() {
     return super.stl() + require('./manager.css').toString();

@@ -88,6 +88,7 @@ export default class BlogPage extends Page {
   private cache: {[slug in string]: PostOrPage} = {}
   private domainFrag: string
   async tryNavigationCallback(domainFragment: string) {
+    domainFragment = domainFragment.split(domain.dirString).last
     this.domainFrag = domainFragment
     if (this.cache[domainFragment]) return true
     let blogData: PostOrPage

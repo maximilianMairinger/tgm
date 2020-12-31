@@ -1,53 +1,53 @@
-let superImportant = 1000000
+const loadStates = ["minimalContentPaint", "fullContentPaint", "completePaint"]
+const preloadToLoadStatusAtIndex = 1
 
-export default function init<Func extends () => Promise<any>>(resources: ImportanceMap<any, any>, globalInitFunc?: (instance: any) => void | Promise<void>) {
-  const resolvements = new Map<Import<any, any>, Function>();
+export default function init<Func extends () => Promise<any>>(resources: ImportanceMap<any, any>, globalInitFunc?: (instance: any, index: number) => void | Promise<void>) {
+  const resolvements = new Map<Import<any, any>, (load: () => Promise<{default: {new(): any}}>, sourceDomain: string, index: number, state: (typeof loadStates)[number]) => void>();
   const resourcesMap = new ResourcesMap();
 
   resources.forEach((e: () => Promise<object>, imp) => {
 
     if (imp.val !== undefined) {
+      let instanc: any
+      let resProm: any
       let prom = new Promise((res) => {
-        resolvements.set(imp, async (a: any) => {
-          let load = a.loadedCallback ? a.loadedCallback() : undefined
-          res(a)
+        resolvements.set(imp, async (load: () => Promise<{default: {new(): any}}>, sourceDomain: string, index: number, state?) => {
+          const loadState = async (load: () => Promise<{default: {new(): any}}>, sourceDomain: string, index: number, state?) => {
+            if (state) {
+              if (instance[state]) await instance[state](sourceDomain)
+              instance[state] = undefined
+            }
+          }
+          resolvements.set(imp, loadState)
 
-          await Promise.all([...thenResults, load])
+          
+          let instance = imp.initer((await load()).default);
+          if (globalInitFunc !== undefined) await globalInitFunc(instance, index);
+  
+          await loadState(load, sourceDomain, index, state)
+          
+
+          if (dontRes) {
+            instanc = instance
+            resProm = res
+          }
+          else {
+            res(instance)
+          }
         })
       })
 
-      let thenResults = []
+      let dontRes = false
+
       //@ts-ignore
-      prom.priorityThen = function(cb) {
-        let thenRes: any
-        thenResults.add(new Promise((r) => {
-          thenRes = r
-        }))
-        if (!resources.loadedImports.includes(imp)) {
-          imp.importance += superImportant
-          superImportant += 1000000
-          resources.changedImportance = true
-        }
-        
-        return prom.then((a) => {
-          if (cb) {
-            let res = cb(a)
-            if (res instanceof Promise) return res.then((e) => {
-              let end = e === undefined ? a : e
-              thenRes(end)
-              return end
-            })
-            else {
-              res === undefined ? a : res
-              thenRes(res)
-              return res
-            }
-          }
-          else {
-            thenRes(a)
-            return a
-          }
-        })
+      prom.priorityThen = async function(cb?: Function, sourceDomain?: string) {
+        dontRes = true
+        await resources.superWhiteList(imp, sourceDomain)
+        let resolveWith: any
+        if (cb) resolveWith = await cb(instanc)
+        else resolveWith = instanc
+        resProm(resolveWith)
+        return resolveWith
       }
       //@ts-ignore
       resourcesMap.add(imp.val, prom);
@@ -58,38 +58,15 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
   resourcesMap.reloadStatusPromises();
 
 
+  (resources as any).resolve(<Mod>(load: () => Promise<{default: {new(): Mod}}>, imp: Import<string, Mod>, index: number, sourceDomain?: string, state?: any) => {
+    return resolvements.get(imp)(load, sourceDomain !== undefined ? sourceDomain : imp.val, index, state)
+  })
   
 
 
   return {
     resourcesMap,
-    load(initalKey?: string): ResourcesMap {
-      try {
-        if (initalKey !== undefined) resources.getByString(initalKey).key.importance = superImportant;
-      }
-      catch (e) {
-        console.warn("Unexpected initalKey");
-      }
-
-      (async () => {
-        await resources.forEachOrdered(async <Mod>(e: () => Promise<{default: {new(): Mod}}>, imp: Import<string, Mod>) => {
-          if (imp.val !== undefined) {
-            let instance = imp.initer((await e()).default);
-            if (globalInitFunc !== undefined) await globalInitFunc(instance);
-            await resolvements.get(imp)(instance)
-            
-          }
-          // just load it (and preseve in webpack cache)
-          else (await e());
-        });
-      })();
-
-      
-      
-
-      
-      return resourcesMap;
-    }
+    importanceMap: resources
   }
 }
 
@@ -98,7 +75,7 @@ import { dirString } from "./domain";
 export const slugifyUrl = (url: string) => url.split(dirString).replace((s) => slugify(s)).join(dirString)
 
 
-export type PriorityPromise<T = any> = Promise<T> & {priorityThen: (cb?: (a: any) => void) => any}
+export type PriorityPromise<T = any> = Promise<T> & {priorityThen: (cb?: (instance: any) => void, sourceDomain?: string) => any}
 
 export class BidirectionalMap<K, V> extends Map<K, V> {
   public reverse: Map<V, K> = new Map
@@ -168,7 +145,7 @@ export class ResourcesMap extends MultiKeyMap<string, PriorityPromise> {
   private reloadStatusPromises() {
     let proms = []
     this.forEach((e) => {
-      (proms as any).add(e)
+      proms.add(e)
     })
     
     this.fullyLoaded = Promise.all(proms)
@@ -192,6 +169,31 @@ export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, 
     }
   }
 
+  private resolver: (e: Func, key: Import<string, Mod>, index: number, sourceDomain?: string, state?: (typeof loadStates)[number]) => any
+  protected resolve(resolver: ImportanceMap<Func, Mod>["resolver"]) {
+    this.resolver = resolver
+    if (this.superWhiteListCache) {
+      this.superWhiteList(this.superWhiteListCache.imp, this.superWhiteListCache.sourceDomain)
+    }
+    if (!this.whiteListedImports.empty) {
+      this.startResolvement()
+    }
+  }
+
+  private async startResolvement() {
+    if (!this.resolver) return
+    const whiteList = this.whiteListedImports
+    whiteList.sort((a, b) => b.importance - a.importance)
+    for (let j = 0; j < preloadToLoadStatusAtIndex; j++) {
+      const state = loadStates[j];
+      for (let i = 0; i < whiteList.length; i++) {
+        if (whiteList !== this.whiteListedImports) return
+        while (this.superWhiteListDone) await this.superWhiteListDone
+        await this.resolver(this.get(this.whiteListedImports[i]), this.whiteListedImports[i], this.importanceList.indexOf(this.whiteListedImports[i]), state);
+      }
+    }
+  }
+
   public getByString(key: string): {key: Import<string, Mod>, val: Func} {
     let kk: any, vv: any;
     this.forEach((v,k) => {
@@ -208,23 +210,48 @@ export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, 
     super.set(key, val);
     return this;
   }
-  public changedImportance = false
-  public loadedImports = []
-  public async forEachOrdered(loop: (e?: Func, key?: Import<string, Mod>, i?: number) => any) {
-    this.importanceList.sort((a, b) => b.importance - a.importance)
-    for (let i = 0; i < this.importanceList.length; i++) {
-      if (this.changedImportance) {
-        this.importanceList.sort((a, b) => b.importance - a.importance)
-        this.changedImportance = false
-        i = -1
-        continue
-      }
-      if (!this.loadedImports.includes(this.importanceList[i])) {
-        this.loadedImports.add(this.importanceList[i])
-        await loop(this.get(this.importanceList[i]), this.importanceList[i], i);
-      }
-    }
+
+  public whiteList(...imp: Import<string, Mod>[]) {
+    this.whiteListedImports = imp
+    this.startResolvement()
   }
+  public whiteListAll() {
+    this.whiteList(...this.importanceList)
+  }
+
+  private superWhiteListCache: {imp: Import<string, Mod>, sourceDomain?: string}
+  public superWhiteList(imp: Import<string, Mod>, sourceDomain?: string) {
+    this.superWhiteListCache = {imp, sourceDomain}
+    if (!this.resolver) return
+    let minimalReqLoaded: Promise<void> = new Promise((res) => {
+      let mySuperWhiteListDone = this.superWhiteListDone = new Promise(async (next) => {
+        const v = this.get(imp)
+        if (sourceDomain !== undefined) {
+          if (this.whiteListedImports.includes(imp)) this.whiteListedImports.rmV(imp)
+          for (let state of loadStates) {
+            await this.resolver(v, imp, this.importanceList.indexOf(imp), sourceDomain, state)
+            res()
+            if (mySuperWhiteListDone !== this.superWhiteListDone) {
+              if (state !== loadStates.last) this.whiteListedImports.add(imp)
+              return
+            }
+          }
+        }
+        else {
+          await this.resolver(v, imp, this.importanceList.indexOf(imp))
+          res()
+        }
+        
+        this.superWhiteListDone = undefined
+        next()
+      })
+    })
+    
+    return minimalReqLoaded
+  }
+
+  public whiteListedImports = []
+  private superWhiteListDone: Promise<void>
 }
 
 export class Import<T, Mod> {

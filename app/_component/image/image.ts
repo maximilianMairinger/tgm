@@ -1,10 +1,12 @@
 import Component from "../component"
 import declareComponent from "./../../lib/declareComponent"
 
+export const pleaseLoadMe = []
+
 
 export default class Image extends Component {
   public readonly ready: Promise<void>
-  constructor(src?: string) {
+  constructor(src?: string, forceLoad?: boolean) {
     super(ce("img") as any)
     this.ready = new Promise((res) => {
       (this.elementBody as any as HTMLImageElement).onload = () => {
@@ -13,14 +15,22 @@ export default class Image extends Component {
       }
     })
     
-    if (src) this.src(src)
+    if (src) this.src(src, forceLoad)
     
   }
 
 
-  src(src: string) {
-    if (!src.startsWith("/")) src = "/res/img/" + src;
-    (this.elementBody as any as HTMLImageElement).src = src
+  src(src: string, forceLoad: boolean = false) {
+    if (forceLoad) {
+      if (!src.startsWith("/")) src = "/res/img/" + src;
+      (this.elementBody as any as HTMLImageElement).src = src
+    }
+    else {
+      pleaseLoadMe.add(() => {
+        this.src(src, true)
+      })
+    }
+    
   }
 
 

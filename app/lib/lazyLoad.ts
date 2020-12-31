@@ -80,10 +80,10 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
       prom.priorityThen = async function(cb?: Function, deepLoad?: boolean) {
         dontRes = true
         await resources.superWhiteList(imp, deepLoad)
-        let result = instanc
+        let result: any
         if (cb) result = cb(instanc)
         resProm(instanc)
-        return result
+        return result !== undefined ? result : instanc
       }
       //@ts-ignore
       resourcesMap.add(imp.val, prom);

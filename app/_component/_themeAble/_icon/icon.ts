@@ -67,5 +67,11 @@ export const iconIndex = {
     logistik: () => import("./vertiefung/logistik/logistik"),
     betriebsinformatik: () => import("./vertiefung/betriebsinformatik/betriebsinformatik"),
 
+  },
+  abendschule: {
+    bigStonks: () => import("./abendschule/bigStonks/bigStonks"),
+    smallStonks: () => import("./abendschule/smallStonks/smallStonks"),
+    kolleg: () => import("./abendschule/kolleg/kolleg"),
+    tools: () => import("./tools/tools"),
   }
 }

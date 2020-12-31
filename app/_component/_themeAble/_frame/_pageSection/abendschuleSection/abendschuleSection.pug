@@ -1,13 +1,37 @@
 abendschule-section
     section-header Erwachsene
     card-box
-        c-selection-card( heading='Neues Lernen' note='unser Versprechen'
-            selection='[' +
-        '{"icon":"energysysteme", "title":"Erneurbare Energie", "content":"Bausteine der Zukunft, mit unglaublichen Portenzial", "link":"tagesschule/raumfahrt"},' +
-        '{"icon":"automatisierungstechnik", "title":"Elektronik", "content":"Die Grundlagen der Digitalisierung", "link":"tagesschule/raumfahrt"},' +
-        '{"icon":"antriebstechnik", "title":"Wirtschaft", "content":"Prozessoptimierung und Managment gelernt", "link":"tagesschule/raumfahrt"},' +
-        '{"icon":"industrieelektronik", "title":"Werkmeister", "content":"Öffnet Möglichkeiten zur Selbstständigkeit", "link":"tagesschule/raumfahrt"}' +
-        ']')
+        card-item
+            extra-line-1
+            extra-line-2
+            extra-circle
+            c-erwachsenen-card( note='Ausbildung für Erwachsene' heading='Tagesformen'
+                selection='[' +
+                '{"icon":"smallStonks", "title":"Vorbereitungslehrgang", "content":"Vorbereitung auf den Aufbaulehrgang", "heading":"Voraussetzungen","info":"Facheinschlägiger Lehrabschluss und positive Testung in D, E, AM oder erfolgreicher Besuch des Vorbereitungslehrgangs. Dabei sind individuelle Anrechnungen möglich.",' +
+                '"extraIcon":"c-pruefung-icon", "extraTitle":"Dauer", "extraContent":"Nach 7 Monaten Beginnend mit dem 1.Monat im September"},' +
+                '{"icon":"bigStonks", "title":"Aufbaulehrgang", "content":"Der Weg zur BHS-Matura", "heading":"Voraussetzungen","info":"Facheinschlägiger Lehrabschluss und positive Testung in D, E, AM oder erfolgreicher Besuch des Vorbereitungslehrgangs. Dabei sind individuelle Anrechnungen möglich.",' +
+                '"extraIcon":"c-zertificate-man", "extraTitle":"Dauer", "extraContent":"Nach 7 Monaten Beginnend mit dem 1.Monat im September"},' +
+                '{"icon":"kolleg", "title":"Kolleg", "content":"In 4 Semestern zum Ingenieur", "heading":"Voraussetzungen","info":"Facheinschlägiger Lehrabschluss und positive Testung in D, E, AM oder erfolgreicher Besuch des Vorbereitungslehrgangs. Dabei sind individuelle Anrechnungen möglich.",' +
+                '"extraIcon":"c-zertificate-man", "extraTitle":"Dauer", "extraContent":"Nach 7 Monaten Beginnend mit dem 1.Monat im September"},' +
+                '{"icon":"tools", "title":"Werkmeisterlehrgang", "content":"Berechtigt u.A zur Ausbildung von Lehrlingen", "heading":"Voraussetzungen","info":"Facheinschlägiger Lehrabschluss und positive Testung in D, E, AM oder erfolgreicher Besuch des Vorbereitungslehrgangs. Dabei sind individuelle Anrechnungen möglich.",' +
+                '"extraIcon":"c-zertificate-man", "extraTitle":"Dauer", "extraContent":"Nach 7 Monaten Beginnend mit dem 1.Monat im September"}' +
+                ']')
+
+        card-item
+            extra-line-1
+            extra-line-2
+            extra-circle
+            c-erwachsenen-card( note='Ausbildung für Erwachsene' heading='Abendformen'
+                selection='[' +
+                '{"icon":"smallStonks", "title":"Vorbereitungslehrgang", "content":"Vorbereitung auf den Aufbaulehrgang", "heading":"Voraussetzungen","info":"Facheinschlägiger Lehrabschluss und positive Testung in D, E, AM oder erfolgreicher Besuch des Vorbereitungslehrgangs. Dabei sind individuelle Anrechnungen möglich.",' +
+                '"extraIcon":"c-pruefung-icon", "extraTitle":"Dauer", "extraContent":"Nach 7 Monaten Beginnend mit dem 1.Monat im September"},' +
+                '{"icon":"bigStonks", "title":"Aufbaulehrgang", "content":"Der Weg zur BHS-Matura", "heading":"Voraussetzungen","info":"Facheinschlägiger Lehrabschluss und positive Testung in D, E, AM oder erfolgreicher Besuch des Vorbereitungslehrgangs. Dabei sind individuelle Anrechnungen möglich.",' +
+                '"extraIcon":"c-zertificate-man", "extraTitle":"Dauer", "extraContent":"Nach 7 Monaten Beginnend mit dem 1.Monat im September"},' +
+                '{"icon":"kolleg", "title":"Kolleg", "content":"In 4 Semestern zum Ingenieur", "heading":"Voraussetzungen","info":"Facheinschlägiger Lehrabschluss und positive Testung in D, E, AM oder erfolgreicher Besuch des Vorbereitungslehrgangs. Dabei sind individuelle Anrechnungen möglich.",' +
+                '"extraIcon":"c-zertificate-man", "extraTitle":"Dauer", "extraContent":"Nach 7 Monaten Beginnend mit dem 1.Monat im September"}' +
+                ']')
+
+    //-
         c-anmelden-card
     image-container
         image-box

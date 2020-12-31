@@ -14,7 +14,7 @@ abendschule-section{
 section-header{
     display: block;
     max-width: 100%;
-    margin: calc(220px - 12vw + 0.1em) 180px 100px 180px;
+    margin: calc(220px - 12vw + 0.1em) 180px 50px 180px;
     background: url("../../../../../res/img/abendschule_header_background.svg") 50px 0 no-repeat;
     background-size: cover;
     background-clip: text;
@@ -30,25 +30,16 @@ section-header{
 
 card-box{
     display: flex;
-    margin: 0 205px 100px 205px;
-    flex-direction: row;
-    justify-content: space-evenly;
+    margin: 0 205px 25px 205px;
+    flex-direction: column;
     flex-wrap: wrap;
-}
-
-card-box * {
-    margin: 0 25px 50px 25px;
+    align-items: stretch;
 }
 
 c-anmelden-card{
     width: 25%;
 }
 
-
-c-selection-card{
-    width: 50%;
-    flex-grow: 1;
-}
 
 image-container {
     position: absolute;
@@ -69,7 +60,111 @@ image-box {
     background-position: left bottom;
 }
 
-@media only screen and (max-width: 1250px) {
+card-item{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    --spacing: 7%;
+    margin-bottom: 75px;
+    max-width: 100%
+}
+
+card-box card-item:nth-child(2n - 1){
+    flex-direction: row-reverse;
+}
+
+card-box card-item:nth-child(2n){
+    flex-direction: row;
+}
+
+c-erwachsenen-card{
+    z-index: 1;
+}
+
+extra-circle{
+    position: relative;
+    display: block;
+    height: 37px;
+    min-height: 37px;
+    width: 37px;
+    min-width: 37px;
+    border-radius: 100%;
+    box-shadow: var(--medium-shadow);
+    align-self: center;
+    background: var(--secondary-background-color);
+}
+
+
+card-box card-item:nth-child(2n - 1) extra-circle{
+    margin-right: var(--spacing);
+    margin-left: auto;
+}
+
+card-box card-item:nth-child(2n) extra-circle{
+    margin-left: var(--spacing);
+    margin-right: auto;
+}
+
+extra-line-1{
+    position: absolute;
+    height: 7px;
+    top: calc(50% - 7px / 2);
+    box-shadow: var(--medium-shadow);
+}
+
+card-box card-item:nth-child(2n - 1) extra-line-1{
+    right: calc(var(--spacing) + 37px / 2);
+    left: var(--spacing);
+}
+
+card-box card-item:nth-child(2n) extra-line-1{
+    left: calc(var(--spacing) + 37px / 2);
+    right: var(--spacing);
+}
+
+extra-line-2{
+    position: absolute;
+    width: 7px;
+    height: 100%;
+    box-shadow: var(--medium-shadow);
+}
+
+card-box card-item:nth-child(2n - 1) extra-line-2{
+    right: calc(var(--spacing) + 30px / 2);
+}
+
+card-box card-item:nth-child(2n - 1):last-child extra-line-2{
+    bottom: calc(50% - 7px / 2);
+}
+
+card-box card-item:nth-child(2n - 1):not(:last-child) extra-line-2{
+    top: 50%;
+    height: 100%;
+}
+
+card-box card-item:nth-child(2n)  extra-line-2{
+    left: calc(var(--spacing) + 30px / 2);
+}
+
+card-box card-item:nth-child(2n):first-child  extra-line-2{
+    top: calc(50% - 7px / 2);
+}
+
+card-box card-item:nth-child(2n):not(:first-child)  extra-line-2{
+    bottom: 50%;
+}
+
+card-box card-item:nth-child(2n):first-child:last-child extra-line-2{
+    display: none;
+}
+
+@media only screen and (max-width: 1450px) {
+    card-box{
+        margin: 0 50px 25px 50px;
+    }
+}
+
+@media only screen and (max-width: 950px) {
     abendschule-section{
         padding-top: 225px;
     }
@@ -88,14 +183,36 @@ image-box {
 
     card-box *{
         margin: 50px 0 0 0;
+        align-self: unset!important;
     }
 
-    c-selection-card{
+    c-erwachsenen-card{
         width: auto;
     }
 
     c-anmelden-card{
         width: auto;
+    }
+
+    extra-circle{
+        display: none;
+    }
+
+    extra-line-1{
+        display: none;
+    }
+
+    card-box card-item:nth-child(2n - 1):not(:last-child) extra-line-2{
+        height: 100%;
+        top: 50%;
+    }
+
+    card-box card-item:nth-child(2n - 1):last-child extra-line-2{
+        display: none;
+    }
+
+    card-box card-item:nth-child(2n):not(:first-child)  extra-line-2{
+        display: none;
     }
 }
 
@@ -105,7 +222,7 @@ image-box {
         margin-left: 10vw;
     }
 
-    c-selection-card{
+    c-erwachsenen-card{
         max-width: 100%;
         min-width: unset;
         margin-right: 0;

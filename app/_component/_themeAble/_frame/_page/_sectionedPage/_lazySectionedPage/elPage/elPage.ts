@@ -23,6 +23,7 @@ export default class ElektronikPage extends LazySectionedPage {
           e.heading("Elektronik & Technische Informatik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
+          e.videolink("https://www.youtube.com/watch?v=FYY0FSMk70s")
           e.background("elektronikLanding.png")
           
           return new WrapperSection(e, "dark") as any

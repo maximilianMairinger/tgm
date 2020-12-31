@@ -24,6 +24,8 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("biomedLanding.png")
+          e.videolink("https://www.youtube.com/watch?v=93aXzeeolkY")
+          
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")

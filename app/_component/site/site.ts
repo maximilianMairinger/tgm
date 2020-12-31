@@ -100,21 +100,25 @@ export default declareComponent("site", class extends Component {
       lastScrollProg = prog
     });
 
-    pageManager.addThemeIntersectionListener(header, (themeUnderneath) => {
-      header.theme(themeUnderneath)
-    })    
-    
     
 
-    pageManager.addThemeIntersectionListener(lowerNav, (themeUnderneath) => {
-      lowerNav.theme(themeUnderneath)
-    })
-    
-
-    pageManager.fullContentPaint().then(() => {
-      pageManager.activate()
-    })
     this.apd(pageManager)
+    pageManager.activate()
+    pageManager.minimalContentPaint().then(() => {
+      pageManager.addThemeIntersectionListener(header, (themeUnderneath) => {
+        header.theme(themeUnderneath)
+      })    
+      pageManager.addThemeIntersectionListener(lowerNav, (themeUnderneath) => {
+        lowerNav.theme(themeUnderneath)
+      })
+      pageManager.fullContentPaint().then(() => {
+        pageManager.completePaint().then(() => {
+
+        })
+      })
+
+    })
+    
     
     
 

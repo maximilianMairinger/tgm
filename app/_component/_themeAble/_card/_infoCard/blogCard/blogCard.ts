@@ -1,6 +1,8 @@
 import declareComponent from "../../../../../lib/declareComponent";
 import InfoCard from "../infoCard";
 import Button from "../../../_button/button";
+import local from "../../../../../lib/formatTime";
+
 
 export default class BlogCard extends InfoCard {
 
@@ -18,8 +20,7 @@ export default class BlogCard extends InfoCard {
     note(note?:Date|string){
         console.log(new Date(note).toDateString() );
         if(new Date(note).toDateString() !== 'Invalid Date'){
-            let moment = require("moment");
-            this.q("note-text").text(moment(note).format("DD.MM.YY"));
+            this.q("note-text").text(local.formatDate(note));
         } else if (typeof note === 'string') super.note(note as string);
         else return this.q("note-text").text();
     }

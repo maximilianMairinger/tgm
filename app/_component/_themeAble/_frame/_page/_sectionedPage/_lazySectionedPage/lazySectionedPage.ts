@@ -1,4 +1,4 @@
-import SectionedPage, { QuerySelector, AliasList } from "../sectionedPage";
+import SectionedPage, { QuerySelector, AliasList, scrollToPadding } from "../sectionedPage";
 import lazyLoad, { ImportanceMap, ResourcesMap } from "../../../../../../lib/lazyLoad";
 import LoadingIndecator from "../../../../../_indecator/loadingIndecator/loadingIndecator";
 import * as domain from "../../../../../../lib/domain";
@@ -56,18 +56,10 @@ export default abstract class LazySectionedPage extends SectionedPage {
     this.importanceMap = importanceMap
     this.resourceMap = resourcesMap
   }
-
-  initialActivationCallback() {
-    if (this.initElemProm !== this.resourceMap.entries().next().value.val) this.elementBody.scrollTop = this.loadingIndecatorTop.height() - 1
-    super.initialActivationCallback()
-  }
-
   
-  private initElemProm: any
-  async minimalContentPaint(domainFragment: string = this.importanceMap.entries().next().value.first) {
+  async minimalContentPaint() {
     console.log("min")
-    this.initElemProm = this.resourceMap.get(domainFragment)
-    await this.initElemProm.priorityThen()
+    await this.resourceMap.get(this.currentDomainFragment).priorityThen()
   }
   
 

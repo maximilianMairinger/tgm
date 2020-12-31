@@ -9,26 +9,25 @@ export default abstract class Page extends Frame {
     super(theme)
 
   }
-  public async navigate(domainFragment?: string) {
+  public async tryNavigate(domainFragment?: string) {
     let res = true
     if (this.navigationCallback) {
-      let acRes = await this.navigationCallback(domainFragment)
+      let acRes = await this.tryNavigationCallback(domainFragment)
       if (acRes === undefined) acRes = true
       if (!acRes) res = false
     }
     
     return res
   }
-  public async vate(activate: boolean) {
-    
-    
-    
-    return super.vate(activate)
+  public navigate() {
+    this.navigationCallback()
   }
+
   /**
    * @return resolve Promise as soon as you know if the navigation will be successful or not. Dont wait for swap animation etc
    */
-  protected navigationCallback?(domainFragment: string): boolean | void | Promise<boolean | void>
+  protected tryNavigationCallback?(domainFragment: string): boolean | void | Promise<boolean | void>
+  protected navigationCallback?(): Promise<void>
   protected initialActivationCallback?(): boolean | void | Promise<boolean | void>
   stl() {
     return super.stl() + require("./page.css").toString()

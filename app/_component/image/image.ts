@@ -1,8 +1,8 @@
 import Component from "../component"
 import declareComponent from "./../../lib/declareComponent"
-
-export const pleaseLoadMe = []
-
+import { InstanceRecord } from "../../lib/record"
+const _record = new InstanceRecord(() => console.warn("img load without init proxy"))
+export const record = _record as Omit<typeof _record, "add">
 
 export default class Image extends Component {
   public readonly ready: Promise<void>
@@ -16,7 +16,6 @@ export default class Image extends Component {
     })
     
     if (src) this.src(src, forceLoad)
-    
   }
 
 
@@ -26,7 +25,7 @@ export default class Image extends Component {
       (this.elementBody as any as HTMLImageElement).src = src
     }
     else {
-      pleaseLoadMe.add(() => {
+      _record.add(() => {
         this.src(src, true)
       })
     }

@@ -3,7 +3,7 @@ import Page from "../page"
 import * as domain from "./../../../../../lib/domain"
 import Blog from "../../../../_themeAble/_text/blogPost/blogPost"
 import BlogSuggestions, {blogCardInfo} from "../../../blogSuggestions/blogSuggestions";
-import GhostContentAPI from '@tryghost/content-api'
+import GhostContentAPI, { PostOrPage, ReadFunction } from '@tryghost/content-api'
 import { lang } from "../../../../../lib/lang"
 import BlogCard from "../../../_card/_infoCard/blogCard/blogCard";
 import { Data } from "josm";
@@ -25,19 +25,14 @@ export default class BlogPage extends Page {
   }
 
   private blogLoaded = false;
-  private async setBlog(query: string): Promise<boolean> {
+  private async setBlog(query: string) {
     if(this.blogLoaded) {
       this.elementBody.removeChilds()
     }
 
 
-    let blogData: any
-    try {
-      blogData = await api.posts.read({slug: query}, {formats: ['html', 'plaintext']})
-    }
-    catch(e) {
-      return false
-    }
+    let blogData: PostOrPage = this.cache[query]
+    
     
 
     lang.links[query] = new Data(blogData.title)
@@ -45,7 +40,7 @@ export default class BlogPage extends Page {
     
     let blog = new Blog();
     blog.blogtitle(blogData.title);
-    blog.date(blogData.published_at);
+    if (blogData.published_at) blog.date(blogData.published_at);
     blog.image(blogData.feature_image);
     blog.htmlcontent(blogData.html);
     blog.css({"order": 1});
@@ -90,8 +85,23 @@ export default class BlogPage extends Page {
     return this.setBlog(id)
   }
 
-  navigationCallback(domainFragment: string) {
-    return this.setBlogFromUrl(domainFragment)
+  private cache: {[slug in string]: PostOrPage} = {}
+  private domainFrag: string
+  async tryNavigationCallback(domainFragment: string) {
+    this.domainFrag = domainFragment
+    if (this.cache[domainFragment]) return true
+    let blogData: PostOrPage
+    try {
+      blogData = await api.posts.read({slug: domainFragment}, {formats: ['html', 'plaintext']})
+    }
+    catch(e) {
+      return false
+    }
+    this.cache[domainFragment] = blogData
+    return true
+  }
+  navigationCallback() {
+    return this.setBlogFromUrl(this.domainFrag)
   }
 
   stl() {

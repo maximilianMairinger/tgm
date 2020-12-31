@@ -13,25 +13,27 @@ export default abstract class Frame extends ThemeAble<HTMLElement> {
     return this.vate(false)
   }
   
+  public vate(activate: false)
+  public vate(activate: true)
   public vate(activate: boolean) {
     (this as any).active = activate
-    if (activate && this.initialActivationCallback && !this.initiallyActivated) {
+    if (this.initialActivationCallback && activate && !this.initiallyActivated) {
       (this as any).initiallyActivated = true
       this.initialActivationCallback()
     }
 
     if (this.activationCallback) return this.activationCallback(activate)
   }
-  async navigate(domainFragment?: string) {
-    return true
-  }
+  
   stl() {
     return require("./frame.css").toString()
   }
-  
-  protected minimalContentPaint?(domainFragment?: string): void | Promise<void>
-  protected fullContentPaint?(domainFragment?: string): void | Promise<void>
-  protected completePaint?(domainFragment?: string): void | Promise<void>
+  protected minimalContentPaint(): void | Promise<void> {
+
+  }
+  protected fullContentPaint?(): void | Promise<void>
+  protected completePaint?(): void | Promise<void>
+
   protected activationCallback?(active: boolean): void
   protected initialActivationCallback?(): void
   public userInitedScrollEvent = true

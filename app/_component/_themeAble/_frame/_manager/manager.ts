@@ -115,15 +115,15 @@ export default abstract class Manager<ManagementElementName extends string> exte
   private loadImages: Function
   private doneRec: ReturnType<typeof record["record"]>
   async minimalContentPaint() {
-    this.doneRec = record.record()
+    // this.doneRec = record.record()
     await this.setDomain(this.domainSubscription.domain as ManagementElementName)
-    this.loadImages = this.doneRec()
+    // this.loadImages = this.doneRec()
   }
   async fullContentPaint() {
-    this.loadImages = this.doneRec()
+    // this.loadImages = this.doneRec()
   }
   async completePaint() {
-    this.loadImages()
+    // this.loadImages()
   }
 
   private lastScrollbarWidth: number
@@ -338,7 +338,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
         }
       }
     }
-
+    
     pageProm.priorityThen(() => {
       if (this.currentManagedElementName !== to) {
         this.currentManagedElementName = to;

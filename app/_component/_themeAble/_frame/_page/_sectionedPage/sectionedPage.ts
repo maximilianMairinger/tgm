@@ -170,7 +170,7 @@ export default abstract class SectionedPage extends Page {
 
   constructor(sectionIndex: FullSectionIndex, protected sectionChangeCallback?: (section: string) => void, protected readonly sectionAliasList: AliasList = new AliasList(), protected readonly mergeIndex: {[part in string]: string} = {}) {
     super()
-
+    
     let that = this
     this.scrollToSection = function(to?: number, speed?: number, force?: boolean) {
       if (!(this instanceof PageSection)) console.warn("Unable to scrollTo this. This is not instanceof PageSection.")
@@ -349,7 +349,7 @@ export default abstract class SectionedPage extends Page {
 
             if (currentlyActiveSectionElem !== elem) {
               if (currentlyActiveSectionElem !== undefined) currentlyActiveSectionElem.deactivate()
-              elem.activate(root) // todo: check if thats actually correct
+              elem.activate() // todo: check if thats actually correct
               currentlyActiveSectionElem = elem
             }
 

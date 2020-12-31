@@ -27,7 +27,7 @@ export default abstract class Page extends Frame {
    * @return resolve Promise as soon as you know if the navigation will be successful or not. Dont wait for swap animation etc
    */
   protected tryNavigationCallback?(domainFragment: string): boolean | void | Promise<boolean | void>
-  protected navigationCallback?()
+  protected navigationCallback?(): Promise<void>
   protected initialActivationCallback?(): boolean | void | Promise<boolean | void>
   stl() {
     return super.stl() + require("./page.css").toString()

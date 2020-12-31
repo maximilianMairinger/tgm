@@ -86,7 +86,10 @@ export default class BlogPage extends Page {
   }
 
   private cache: {[slug in string]: PostOrPage} = {}
+  private domainFrag: string
   async tryNavigationCallback(domainFragment: string) {
+    this.domainFrag = domainFragment
+    if (this.cache[domainFragment]) return true
     let blogData: PostOrPage
     try {
       blogData = await api.posts.read({slug: domainFragment}, {formats: ['html', 'plaintext']})
@@ -97,8 +100,8 @@ export default class BlogPage extends Page {
     this.cache[domainFragment] = blogData
     return true
   }
-  navigationCallback(domainFragment: string) {
-    return this.setBlogFromUrl(domainFragment)
+  navigationCallback() {
+    return this.setBlogFromUrl(this.domainFrag)
   }
 
   stl() {

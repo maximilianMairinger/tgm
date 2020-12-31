@@ -12,40 +12,58 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
       let resProm: any
       let prom = new Promise((res) => {
         resolvements.set(imp, async (load: () => Promise<{default: {new(): any}}>, index: number, state?) => {
-          const loadState = async (load: () => Promise<{default: {new(): any}}>, index: number, state?) => {
-            if (state) {
-              if (!instance[state].done.started) {
-                await instance[state]()
-                instance[state].done.res()
-              }
-              
+          let loadState = async (load: () => Promise<{default: {new(): any}}>, index: number, state) => {
+            if (!instance[state].done.started) {
+              await instance[state]()
+              instance[state].done.res()
             }
           }
+
+          let instanceProm = ((async () => imp.initer((await load()).default)))();
+          (async () => {
+            async function loado(state) {
+              let instance = await instanceProm
+              if (!instance[state]) {
+                instance[state] = () => {}
+                const p = instance[state].done = Promise.resolve() as any
+                p.yet = p.started = true
+              }
+              else {
+                let r: Function
+                const p = instance[state].done = new Promise((res) => {r = res}) as any
+                p.started = false
+                p.res = () => {
+                  p.yet = true
+                  r()
+                }
+              }
+            }
+            if (state) {
+              await loado(state)
+            }
+            else {
+              const oldLoad = loadState
+              loadState = async (load: () => Promise<{default: {new(): any}}>, index: number, state?) => {
+                if (state) {                
+                  await loado(state)
+                  await oldLoad(load, index, state)
+                }
+              }
+
+            }
+          })()
+
+
           resolvements.set(imp, loadState)
 
           
-          let instance = imp.initer((await load()).default);
-          if (state) {
-            if (!instance[state]) {
-              instance[state] = () => {}
-              const p = instance[state].done = Promise.resolve() as any
-              p.yet = p.started = true
-            }
-            else {
-              let r: Function
-              const p = instance[state].done = new Promise((res) => {r = res}) as any
-              p.started = true
-              p.res = () => {
-                p.yet = true
-                r()
-              }
-            }
-          }
+          let instance = await instanceProm
+          
+          
           if (globalInitFunc !== undefined) await globalInitFunc(instance, index);
-  
+
           await loadState(load, index, state)
           
-
           if (dontRes) {
             instanc = instance
             resProm = res
@@ -62,11 +80,9 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
       prom.priorityThen = async function(cb?: Function, deepLoad?: boolean) {
         dontRes = true
         await resources.superWhiteList(imp, deepLoad)
-        let resolveWith: any
-        if (cb) resolveWith = await cb(instanc)
-        else resolveWith = instanc
-        resProm(resolveWith)
-        return resolveWith
+        if (cb) cb(instanc)
+        resProm(instanc)
+        return instanc
       }
       //@ts-ignore
       resourcesMap.add(imp.val, prom);

@@ -13,7 +13,7 @@ vertiefungs-card{
     padding: 25px;
 }
 
-vertiefungs-content * {
+vertiefungs-content > * {
     display: block;
     width: 100%;
 }
@@ -47,7 +47,7 @@ vertiefungs-title{
     margin-bottom: .25em;
 }
 
-vertiefungs-content c-link{
+vertiefungs-content c-link#mehr{
     font-weight: bold;
     margin-top: 0.5em;
 }

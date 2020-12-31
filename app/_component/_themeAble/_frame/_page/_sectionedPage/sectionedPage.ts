@@ -258,7 +258,7 @@ export default abstract class SectionedPage extends Page {
       this.activateSectionName(this.sectionAliasList.aliasify(this.merge(domainFragment)).get().first)
     }
 
-    return this.curSectionProm = this.sectionIndex.get(this.currentDomainFragment = domainFragment)
+    return !!(this.curSectionProm = this.sectionIndex.get(this.currentDomainFragment = domainFragment))
   }
 
   async navigationCallback() {

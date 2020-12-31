@@ -20,7 +20,7 @@ export default abstract class Page extends Frame {
     return res
   }
   public navigate() {
-    this.navigationCallback()
+    if (this.navigationCallback) this.navigationCallback()
   }
 
   /**

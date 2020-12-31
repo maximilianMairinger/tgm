@@ -81,7 +81,7 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
         dontRes = true
         await resources.superWhiteList(imp, deepLoad)
         let result: any
-        if (cb) result = cb(instanc)
+        if (cb) result = await cb(instanc)
         resProm(instanc)
         return result !== undefined ? result : instanc
       }

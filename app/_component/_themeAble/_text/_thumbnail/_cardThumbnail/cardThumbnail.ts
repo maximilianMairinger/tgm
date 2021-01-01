@@ -18,9 +18,6 @@ export default class CardThumbnail extends Thumbnail {
     )
     
     this.cardContainer.apd(...cards.map(args => args instanceof Card ? args : new Card(...args)))
-
-    this.hsize({max:70, min:35});
-    this.hmobile({max:55, min:35});
   }
 
   protected startIframe() {

@@ -7,7 +7,6 @@ export default declareComponent("team-section", class TeamSection extends sectio
         super();
         this.theme('light');
         this.heading("Team");
-        this.subheading("der RT Abteilung.");
         this.note("das");
         this.hsize({max:68, min:40});
         this.hmobile({max:40, min:30});

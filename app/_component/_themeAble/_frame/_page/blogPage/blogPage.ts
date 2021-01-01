@@ -9,12 +9,11 @@ import BlogCard from "../../../_card/_infoCard/blogCard/blogCard";
 import { Data } from "josm";
 
 
-// change after deployment to root url
-//@ts-ignore
+//todo: change after deployment to root url
 const api = new GhostContentAPI({
   url: 'https://dev.tgmrebrand.xyz',
   key: '062f128c326e0312972d41f705',
-  version: 'v2'
+  version: 'v3'
 });
 
 export default class BlogPage extends Page {
@@ -48,7 +47,8 @@ export default class BlogPage extends Page {
 
     let preview = false
 
-    if (preview) {
+    //deativates suggestions
+    if (false) {
       let blogData: any
       try {
         blogData = await api.posts.browse({limit: 6})

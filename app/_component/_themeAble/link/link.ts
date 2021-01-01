@@ -6,7 +6,8 @@ import delay from "delay"
 import ExternalLinkIcon from "../../_themeAble/_icon/externalLink/externalLink"
 import { Prim } from "extended-dom";
 
-function openInNewTab(href) {
+export function openInNewTab(href: string) {
+  if (!(href.startsWith("https://") || href.startsWith("http://"))) href = "https://" + href
   Object.assign(document.createElement('a'), {
     target: '_blank',
     href,
@@ -209,7 +210,7 @@ export default class Link extends ThemeAble {
         }
         else {
           return new Promise((res) => {
-            click = res
+            click = res as any
           })
           
         }

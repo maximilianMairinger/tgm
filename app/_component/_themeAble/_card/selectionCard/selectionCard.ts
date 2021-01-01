@@ -16,6 +16,7 @@ import "../../../_themeAble/_icon/satellite/satellite"
 import "../../../_themeAble/_icon/rover/rover"
 import "../../../_themeAble/_icon/space-aids/space-aids"
 import { iconIndex } from "../../_icon/icon";
+import "../../_text/textblob/textblob"
 
 
 type SelectionOptions = {icon: string, title: string, content: string, link: string}[]

@@ -9,39 +9,26 @@ export default abstract class Page extends Frame {
     super(theme)
 
   }
-  public async activate(domainFragment?: string): Promise<boolean> {
-    let res = true
-
-    if (this.initialActivationCallback && !this.initiallyActivated) {
-      let acRes = await this.initialActivationCallback(domainFragment);
-      (this as any).initiallyActivated = true
-      if (acRes === undefined) acRes = true
-      if (!acRes) res = false
-    }
-    let acRes = await this.vate(true)
-    if (acRes === undefined) acRes = true
-    if (!acRes) res = false
-
-    if (this.navigationCallback) {
-      let acRes = await this.navigationCallback(domainFragment)
-      if (acRes === undefined) acRes = true
-      if (!acRes) res = false
-    }
-
-    return res
-  }
-  public async navigate(domainFragment: string) {
+  public async tryNavigate(domainFragment?: string) {
     let res = true
     if (this.navigationCallback) {
-      let acRes = await this.navigationCallback(domainFragment)
+      let acRes = await this.tryNavigationCallback(domainFragment)
       if (acRes === undefined) acRes = true
       if (!acRes) res = false
     }
     
     return res
   }
-  protected navigationCallback?(domainFragment: string): boolean | void | Promise<boolean | void>
-  protected initialActivationCallback?(domainFragment?: string): boolean | void | Promise<boolean | void>
+  public navigate() {
+    if (this.navigationCallback) this.navigationCallback()
+  }
+
+  /**
+   * @return resolve Promise as soon as you know if the navigation will be successful or not. Dont wait for swap animation etc
+   */
+  protected tryNavigationCallback?(domainFragment: string): boolean | void | Promise<boolean | void>
+  protected navigationCallback?(): Promise<void>
+  protected initialActivationCallback?(): boolean | void | Promise<boolean | void>
   stl() {
     return super.stl() + require("./page.css").toString()
   }

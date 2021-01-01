@@ -66,6 +66,7 @@ card-item{
     justify-content: space-between;
     --spacing: 7%;
     margin-bottom: 75px;
+    max-width: 100%
 }
 
 card-box card-item:nth-child(2n - 1){

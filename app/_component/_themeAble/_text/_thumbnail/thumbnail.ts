@@ -8,6 +8,7 @@ import Image from "./../../../image/image";
 import declareComponent from "../../../../lib/declareComponent";
 import "./../../_icon/playButton/playButton"
 import Button from "../../_button/button";
+import "../../_button/button";
 
 
 
@@ -88,9 +89,11 @@ export default class Thumbnail extends Text {
     let videoLink = videoButton.querySelector("c-button") as Button;
     if (link){
       videoButton.css({display:"block"});
-      this.videohref = link;
-      videoLink.click(this.startIframe.bind(this))
-    }else return this.videohref;
+      videoLink.link(link)
+      
+      // this.videohref = link;
+      // videoLink.click(this.startIframe.bind(this))
+    } else return this.videohref;
   }
 
   theme():Theme

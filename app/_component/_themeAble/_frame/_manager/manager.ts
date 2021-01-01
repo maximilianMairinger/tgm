@@ -8,6 +8,7 @@ import { Theme } from "../../../_themeAble/themeAble";
 import PageSection from "../_pageSection/pageSection";
 import { EventListener } from "extended-dom";
 import Page from "../_page/page";
+import { record } from "../../../image/image";
 
 
 
@@ -46,10 +47,9 @@ function occurrences(string: string, subString: string, allowOverlapping = false
 
 
 export default abstract class Manager<ManagementElementName extends string> extends Frame {
-  private resLoaded: Function;
 
   protected busySwaping: boolean = false;
-  public currentPage: Page;
+  public currentPage: Page
 
   protected body: HTMLElement;
 
@@ -57,18 +57,14 @@ export default abstract class Manager<ManagementElementName extends string> exte
 
 
   private loadingElem: any;
-  private firstFrameLoaded: Promise<void>
 
 
 
 
-  private managedElementMap: ResourcesMap
+  private resourcesMap: ResourcesMap
 
-  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private notFoundElementName: ManagementElementName = "404" as any, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, private onUserScroll?: (scrollProgress: number, userInited: boolean) => void, private onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
+  constructor(private importanceMap: ImportanceMap<() => Promise<any>, any>, public domainLevel: number, private pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, private pushDomainDefault: boolean = true, public onScrollBarWidthChange?: (scrollBarWidth: number) => void, private onUserScroll?: (scrollProgress: number, userInited: boolean) => void, private onScroll?: (scrollProgress: number) => void, public blurCallback?: Function, public preserveFocus?: boolean) {
     super(null);
-    this.firstFrameLoaded = new Promise((res) => {
-      this.resLoaded = res
-    })
 
     this.body = ce("manager-body");
     this.loadingElem = new LoadingIndecator();
@@ -102,26 +98,32 @@ export default abstract class Manager<ManagementElementName extends string> exte
         onScroll(this.currentPage.elementBody.scrollTop)
       }, false)
     }
+
+    const { resourcesMap } = lazyLoad(this.importanceMap, e => {
+      this.body.apd(e)
+    })
+    this.resourcesMap = resourcesMap
+    this.domainSubscription = domain.get(this.domainLevel, this.setDomain.bind(this), false, "")
+  }
+  private async setDomain(to: ManagementElementName) {
+    let wanted = await this.setElem(to)
+    domain.set(wanted.domain, wanted.level, false)
   }
 
   private scrollEventListener: EventListener
-
   private domainSubscription: domain.DomainSubscription
-  async loadedCallback() {
-    const {load, resourcesMap} = lazyLoad(this.importanceMap, e => {
-      this.body.apd(e)
-    })
-    this.managedElementMap = resourcesMap
-
-    this.domainSubscription = domain.get(this.domainLevel, async (to: any) => {await this.setElem(to)}, false, "")
-    let initElemName = this.domainSubscription.domain
-
-    // if (this.managedElementMap.get(this.notFoundElementName) === undefined) console.error("404 elementName: \"" + this.notFoundElementName + "\" is not found in given importanceMap", this.importanceMap)
-    let setFirstPageProm = this.setElem(initElemName as ManagementElementName)
-    load()
-    await setFirstPageProm
-    this.resLoaded();
-    await this.managedElementMap.fullyLoaded
+  private loadImages: Function
+  private doneRec: ReturnType<typeof record["record"]>
+  async minimalContentPaint() {
+    // this.doneRec = record.record()
+    await this.setDomain(this.domainSubscription.domain as ManagementElementName)
+    // this.loadImages = this.doneRec()
+  }
+  async fullContentPaint() {
+    // this.loadImages = this.doneRec()
+  }
+  async completePaint() {
+    // this.loadImages()
   }
 
   private lastScrollbarWidth: number
@@ -161,19 +163,18 @@ export default abstract class Manager<ManagementElementName extends string> exte
     this.removeIntersectionListener(root)
   }
 
-
+  private async canSwap(to: Page, domainFragment: string): Promise<boolean> {
+    return await to.tryNavigate(domainFragment)
+  }
   /**
    * Swaps to given Frame
    * @param to frame to be swaped to
    */
-  private async swapFrame(to: Page, domainFragment: string): Promise<void | boolean> {
-    if (to === undefined) {
-      throw new Error("Unknown frame");
-    }
-    
-
+  private async swapFrame(to: Page): Promise<void> {
     if (this.busySwaping) {
-      return true;
+      console.warn("was busy, unable to execute pageswap")
+      // maybe retry, or cancel ...
+      return 
     }
     this.busySwaping = true;
 
@@ -188,42 +189,25 @@ export default abstract class Manager<ManagementElementName extends string> exte
     if (from === to) {
       //Focus even when it is already the active frame
       if (!this.preserveFocus) to.focus()
-      if (!await to.navigate(domainFragment)) {  
-        to.hide()
-        await to.deactivate()
-        this.busySwaping = false
-        return false
-      }
+      to.navigate()
       this.busySwaping = false
-      return true
+      return
     }
     
 
     
-    let activationsPromises = []
-    let activationProm: any
 
     to.show();
     if (!this.preserveFocus) to.focus();
     
-    if (from !== undefined) activationsPromises.add(from.deactivate())
-    if (this.active) activationsPromises.add(activationProm = to.activate(domainFragment))
-    await Promise.all(activationsPromises)
-
-    let activationResult: boolean = await activationProm
-
-    
-
-    
-
-    if (!activationResult) {  
-      to.hide()
-      await to.deactivate()
-      this.busySwaping = false
-      return false
+    if (from !== undefined) from.deactivate()
+    if (this.active) {
+      to.navigate()
+      to.activate()
     }
-    
 
+
+  
     this.currentPage = to;
 
     if (this.onScrollBarWidthChange) {
@@ -288,12 +272,10 @@ export default abstract class Manager<ManagementElementName extends string> exte
       to.css("zIndex", 0)
       this.busySwaping = false;
       if (this.wantedFrame !== to) {
-        await this.swapFrame(this.wantedFrame, domainFragment);
+        await this.swapFrame(this.wantedFrame);
         return
       }
     })()
-
-    return true
   }
 
   private currentManagedElementName: ManagementElementName
@@ -302,14 +284,8 @@ export default abstract class Manager<ManagementElementName extends string> exte
   public element(): ManagementElementName
   public element(to: ManagementElementName, push?: boolean): void
   public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
-    if (to === null) {
-      // FIXME: Do we need this check here?
-      if (this.managedElementMap.get(this.domainSubscription.domain) === undefined) return this.setElem(this.notFoundElementName)
-    }
-    else {
-      if (to) domain.set(to, this.domainLevel, push)
-      else return this.currentManagedElementName
-    }
+    if (to) domain.set(to, this.domainLevel, push)
+    else return this.currentManagedElementName
   }
 
   private async setElem(fullDomain: ManagementElementName) {
@@ -317,71 +293,80 @@ export default abstract class Manager<ManagementElementName extends string> exte
     let nextPageToken = Symbol("nextPageToken")
     this.nextPageToken = nextPageToken;
 
-    
+    let sucDomainFrag: string
+    let sucPage: any
+    let sucDomainLevel: any
+
     let accepted = false
-    let pageProm = this.managedElementMap.get(to, 1)
+    let pageProm = this.resourcesMap.get(to, 1)
     while(!accepted) {
       let nthTry = 1
       
       
       while(pageProm === undefined) {
-        if (to === "") {
-          to = this.notFoundElementName
-          pageProm = this.managedElementMap.get(to, nthTry)
-          break
-        }
         to = to.substr(0, to.lastIndexOf("/")) as any
-        pageProm = this.managedElementMap.get(to, nthTry)
+        pageProm = this.resourcesMap.get(to, nthTry)
       }
 
       let domFrag = fullDomain.splice(0, to.length)
       if (domFrag.startsWith("/")) domFrag = domFrag.substring(1)
-      const domainFragment = domFrag
+      const rootDomainFragment = domFrag
+      let domainFragment: string
       const domainLevel = to === "" ? 0 : (occurrences(to, "/") + 1 + this.domainLevel)
+      sucDomainLevel = domainLevel
 
       while(pageProm !== undefined) {
         nthTry++
 
-        let suc: boolean = await pageProm.priorityThen(async (page: Page | SectionedPage<any>) => {
+        let suc: boolean = await pageProm.priorityThen(async (page: Page | SectionedPage) => {
           if (nextPageToken === this.nextPageToken) {
+            sucPage = page
             page.domainLevel = domainLevel
-            return await this.swapFrame(page, domainFragment === "" ? page.defaultDomain : domainFragment);
+            domainFragment = rootDomainFragment === "" ? page.defaultDomain : rootDomainFragment
+            return await this.canSwap(page, domainFragment)
           }
           return false
         });
   
         if (suc) {
-          if (this.currentManagedElementName !== to) {
-            this.currentManagedElementName = to;
-            let page = this.currentPage;
-            (async () => {
-              if (this.pageChangeCallback) {
-                try {
-                  if ((page as SectionedPage<any>).sectionList) {
-                    (await (page as SectionedPage<any>).sectionList).tunnel(e => e.filter(s => s !== "")).get((sectionListNested) => {
-                      this.pageChangeCallback(to, sectionListNested, page.domainLevel)
-                    })
-                  }
-                  else this.pageChangeCallback(to, [], page.domainLevel)
-                }
-                catch(e) {}
-              }
-            })()
-          }
-          
+          sucDomainFrag = domainFragment
           accepted = true
           break
         }
         else {
-          pageProm = this.managedElementMap.get(to, nthTry)
+          pageProm = this.resourcesMap.get(to, nthTry)
         }
       }
     }
+    
+    pageProm.priorityThen(() => {
+      if (this.currentManagedElementName !== to) {
+        this.currentManagedElementName = to;
+        let page = this.currentPage;
+        (async () => {
+          if (this.pageChangeCallback) {
+            try {
+              if ((page as SectionedPage).sectionList) {
+                (page as SectionedPage).sectionList.tunnel(e => e.filter(s => s !== "")).get((sectionListNested) => {
+                  this.pageChangeCallback(to, sectionListNested, page.domainLevel)
+                })
+              }
+              else this.pageChangeCallback(to, [], page.domainLevel)
+            }
+            catch(e) {}
+          }
+        })()
+      }
+    }, true)
+
+    this.swapFrame(sucPage)
+
+    
+    return {domain: sucDomainFrag, level: sucDomainLevel}
   }
 
   protected async activationCallback(active: boolean) {
-    await this.firstFrameLoaded
-    if (this.currentPage.active !== active) this.currentPage.vate(active)
+    if (this.currentPage) if (this.currentPage.active !== active) this.currentPage.vate(active as any)
   }
   stl() {
     return super.stl() + require('./manager.css').toString();

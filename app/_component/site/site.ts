@@ -100,19 +100,27 @@ export default declareComponent("site", class extends Component {
       lastScrollProg = prog
     });
 
-    pageManager.addThemeIntersectionListener(header, (themeUnderneath) => {
-      header.theme(themeUnderneath)
-    })    
-    
     
 
-    pageManager.addThemeIntersectionListener(lowerNav, (themeUnderneath) => {
-      lowerNav.theme(themeUnderneath)
-    })
-    
-    pageManager.loadedCallback()
     this.apd(pageManager)
     pageManager.activate()
+    pageManager.minimalContentPaint().then(() => {
+      pageManager.addThemeIntersectionListener(header, (themeUnderneath) => {
+        header.theme(themeUnderneath)
+      })    
+      pageManager.addThemeIntersectionListener(lowerNav, (themeUnderneath) => {
+        lowerNav.theme(themeUnderneath)
+      })
+      pageManager.fullContentPaint().then(() => {
+        pageManager.completePaint().then(() => {
+
+        })
+      })
+
+    })
+    
+    
+    
 
 
     let cookieNoteContainer = ce("cookie-notice-container")

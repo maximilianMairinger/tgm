@@ -6,8 +6,20 @@ import Textblob from "../textblob/textblob";
 import "../../_icon/swipe/swipe"
 import "../../_icon/arrow/arrow"
 import {ElementList} from "extended-dom";
+import GhostContentAPI from "@tryghost/content-api";
+import BlogSuggestions, {blogCardInfo} from "../../blogSuggestions/blogSuggestions";
+import * as domain from "../../../../lib/domain";
 
 export type Project = { heading: string, note: string, logo: string, team: string[], thumbnail: string, title: string, content: string, loaded:boolean}
+
+//todo: make dynamic
+const ABTEILUNG:string = "rt";
+//todo: change after deployment to root url
+const api = new GhostContentAPI({
+    url: 'https://dev.tgmrebrand.xyz',
+    key: '062f128c326e0312972d41f705',
+    version: 'v3'
+});
 
 export default class TabletBlob extends Text {
 
@@ -130,18 +142,56 @@ export default class TabletBlob extends Text {
         }, 32)
     }
 
-    constructor(projekte?: JSON[] | Project[]){
+    constructor(projekte?: JSON[] | Project[], api?:boolean){
         super()
-        if(projekte) this.projectList(projekte);
+        if(api) this.apiData().then(() => this.build());
+        else if(projekte) {
+            this.projectList(projekte)
+            this.build()
+        }
+    }
+
+    private build(){
         this.nextArrow.addEventListener("click", this.next.bind(this));
         this.previousArrow.addEventListener("click", this.previous.bind(this));
         this.slider.addEventListener("scroll", this.scrollUpdate.bind(this))
         this.tutorialBind = this.tutorialHandler.bind(this);
         this.tutorial.addEventListener("scroll", this.tutorialBind);
-        if(this.projectData.length) {
+        if (this.projectData.length) {
             this.project(this.projectData[this.index]);
             this.update();
         }
+    }
+
+    private async apiData(){
+        this.projectData = []
+        let blogData: any
+        try {
+            blogData = await api.posts.browse({filter:"tag:projekt+tag:"+ABTEILUNG})
+        }
+        catch(e) {
+            console.error("problem with project api")
+        }
+        blogData.forEach(post=>this.apiParser(post));
+        console.log("api data")
+
+    }
+
+    private apiParser(data){
+        let project:Project = {
+            content: "",
+            heading: data.title,
+            loaded: false,
+            logo: "",
+            note: "",
+            team: [],
+            thumbnail: data.feature_image,
+            title: ""
+        };
+        console.log(data)
+        let parser = new DOMParser();
+        let html = parser.parseFromString(data.html, 'text/html');
+        this.projectData.add(project)
     }
 
     theme():Theme
@@ -190,6 +240,7 @@ export default class TabletBlob extends Text {
         info.append(ce("info-title"));
         info.append(ce("info-text"));
         tablet.append(info);
+
 
 
         this.slider.append(tablet);

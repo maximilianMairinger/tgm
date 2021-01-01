@@ -178,20 +178,25 @@ export default class TabletBlob extends Text {
     }
 
     private apiParser(data){
-        let project:Project = {
-            content: "",
-            heading: data.title,
-            loaded: false,
-            logo: "",
-            note: "",
-            team: [],
-            thumbnail: data.feature_image,
-            title: ""
-        };
-        console.log(data)
         let parser = new DOMParser();
         let html = parser.parseFromString(data.html, 'text/html');
+        let project:Project = {
+            content: this.apiContentParser(html),
+            heading: data.title,
+            loaded: false,
+            logo: html.querySelector("img:last-of-type").getAttribute("src"),
+            note: html.querySelector("p:first-child").text(),
+            team: html.querySelector("td:first-child").innerHTML.split(/<\s*br\s*\/*>/),
+            thumbnail: data.feature_image,
+            title: html.querySelector("p:nth-child(2)").text()
+        };
+        console.log(data)
         this.projectData.add(project)
+    }
+
+    //todo: make pictures possible
+    private apiContentParser(html:Document):string{
+        return Array.from(html.querySelectorAll("p:nth-child(n+3)")).map(elm => elm.text()).join('<br><br>')
     }
 
     theme():Theme

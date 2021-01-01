@@ -16,7 +16,7 @@ export default declareComponent("it-team", class ItTeam extends TeamPage {
                 e.note("mit");
                 e.heading("Teamgeist");
                 e.subheading("in die Zukunft");
-                e.background("landingTeamLeitung.jpg")
+                e.background("itTeam.png")
                 return new WrapperSection(e, 'dark') as any
             }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_text/_thumbnail/thumbnail")
         },

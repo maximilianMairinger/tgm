@@ -173,7 +173,6 @@ export default class TabletBlob extends Text {
             console.error("problem with project api")
         }
         blogData.forEach(post=>this.apiParser(post));
-        console.log("api data")
 
     }
 
@@ -190,7 +189,7 @@ export default class TabletBlob extends Text {
             thumbnail: data.feature_image,
             title: html.querySelector("p:nth-child(2)").text()
         };
-        console.log(data)
+        //console.log(data)
         this.projectData.add(project)
     }
 

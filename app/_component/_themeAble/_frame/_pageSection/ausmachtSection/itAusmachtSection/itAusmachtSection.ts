@@ -51,7 +51,7 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                     heading: "Lernbüro",
                     note: "Unterrichtssystem",
                     thumbnail: "/res/img/student_2.jpg",
-                    href: "tagesschule/elektrotechnik/highlights/lernbüro-elektrotechnik",
+                    href: baseLink + "lernbüro-elektrotechnik",
                     contentTitle: "Lernen im Aufbruch",
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
                 },
@@ -59,7 +59,7 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                     heading: "Werkstatt",
                     note: "fachpraxis",
                     thumbnail: "/res/img/werkstaetteHET.png",
-                    href: "tagesschule/elektrotechnik/highlights/werkstätte-elektrotechnik",
+                    href: baseLink + "werkstätte-elektrotechnik",
                     contentTitle: "Praxisbasierte Erfahrungen",
                     content: "In unseren Werkstätten erlernen SchülerInnen den Umgang mit technischen Gerätschaften und setzen das gelernte Theoriewissen selbst um."
                 }
@@ -76,13 +76,13 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                     {
                         heading:"Medientechnik",
                         icon:"medientechnik",
-                        link:"tagesschule/elektrotechnik/highlights/automatisierung",
+                        link: baseLink + "medientechnik",
                         content:"Das reibungslose Zusammenspiel aller Einrichtungen in einer Fabrik, der U-Bahnbetrieb, der immer vorhandene Strom in unseren Steckdosen – das alles ist ohne Automatisierungstechnik unmöglich."
                     },
                     {
                         heading:"Systemtechnik",
                         icon:"systemtechnik",
-                        link:"tagesschule/elektrotechnik/highlights/erneuerbare-energien",
+                        link: baseLink + "systemtechnik",
                         content:"Die Umwandlung von Strahlungsenergie der Sonne in elektrischen Strom (Photovoltaik) bzw. in Wärme (Solarthermie) oder der Aufbau von Windkraftanlagen – das sind nur einige der nachhaltigen Technologien aus dem Bereich der Erneuerbaren Energien."
                     }
                 ]

@@ -23,6 +23,11 @@ export default class CardThumbnail extends Thumbnail {
     this.hmobile({max:55, min:35});
   }
 
+  protected startIframe() {
+    super.startIframe();
+    this.cardContainer.anim({translateY: "-25%"}, 1000)
+  }
+
   stl() {
       return super.stl() + require("./cardThumbnail.css").toString();
   }

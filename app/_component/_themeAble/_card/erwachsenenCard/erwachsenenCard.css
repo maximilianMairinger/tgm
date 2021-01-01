@@ -1,13 +1,13 @@
 :host {
     display: block;
-    max-width: 860px;
-    min-width: 445px;
+    max-width: min(1000px, 100%);
+    min-width: 950px;
     width: auto;
     user-select: auto;
     box-sizing: border-box;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1450px) {
     :host {
         min-width: unset;
     }
@@ -18,9 +18,9 @@ selection-card{
     width: 100%;
     min-width: auto;
     flex-direction: row-reverse;
-    align-items: center;
+    align-items: stretch;
     justify-content: flex-end;
-    padding: 0 45px;
+    padding-left: 45px;
     box-sizing: border-box;
 }
 
@@ -65,6 +65,7 @@ selection-box{
     position: relative;
     flex-direction: row;
     align-items: center;
+    padding-right: 20px;
 }
 
 selection-content{
@@ -83,6 +84,7 @@ c-button{
     z-index: 2;
     height: 100%;
     width: 100%;
+    cursor: pointer;
 }
 
 selection-background{
@@ -91,8 +93,8 @@ selection-background{
     opacity: 0;
     height: 100%;
     width: 100%;
-    background: black;
-    border-radius: 5px;
+    background: var(--primary-background-color);
+    border-radius: 5px 0 0 5px;
 }
 
 icon-container{
@@ -158,20 +160,13 @@ content-text{
     white-space: nowrap;
 }
 
-
-link-container{
-    display: flex;
-    opacity: 0;
-    margin: 0 10px;
-    flex-direction: row;
-    justify-content: flex-end;
-    min-width: auto;
-    font-size: 14px;
+selection-box:hover selection-background{
+    opacity: 1;
+    transition: 0.25s;
 }
 
-
-selection-box:hover selection-background{
-    opacity: .03;
+selection-box.selected selection-background{
+    opacity: 1;
     transition: 0.25s;
 }
 
@@ -180,74 +175,128 @@ selection-box:hover link-container{
     transition: 0.25s;
 }
 
-image-container{
+overview-heading{
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 0.3em;
+}
+
+overview-container{
     position: relative;
-    display: block;
+    display: flex;
     flex-grow: 1;
-    max-width: 200px;
+    max-width: 700px;
     width: calc(200 * ((100vw - 1300px)/(1600 - 1300)));
-    min-width: 115px;
-    align-self: stretch;
-    margin-right: 70px;
-    margin-left: 10px;
-    transform: skewX(-10deg);
-    transform-origin: bottom left;
+    min-width: 250px;
+    margin: 20px 35px 35px 0;
+}
+
+c-zertificate-man{
+    background: rgba(0, 0, 0, 0);
+    --secondary-background-color: var(--primary-background-color) !important;
+}
+
+overview-box{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    height: auto;
+    width: 100%;
+    padding: 20px;
     overflow: hidden;
     backface-visibility: hidden;
+    background: var(--primary-background-color);
+    overflow: hidden;
+    border-radius: 8px;
 }
 
-c-link.stundentafel{
-    display: none;
-    margin-top: 25px;
-    font-size: 18px;
+overview-content-box{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    flex-grow: 1;
 }
 
-image-box{
-    position: absolute;
-    width: 400px;
-    left: -100px;
-    height: 100%;
+overview-content-box c-link{
+    margin-top: 1em;
+}
+
+overview-img-box{
     display: block;
-    transform: skewX(10deg);
-    background: url("../../../../res/img/selection-background.svg") 0 -15px no-repeat;
-    background-size: calc(100% + 30px);
-    backface-visibility: hidden;
+    min-width: 150px;
+    margin-right: 25px;
+    height: auto;
+}
+
+overview-img-box *{
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    width: 170px;
+    height: auto;
+    overflow: hidden;
+}
+
+overview-img-box c-pruefung-icon{
+    width: 125px;
+    margin-top: 50px;
+    margin-left: 25px;
+    margin-right: 35px;
+}
+
+overview-text-box *{
+    display: block;
+}
+
+overview-title{
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 @media only screen and (max-width: 1450px) {
 
-    :host{
-        max-width: 580px;
-    }
-
     selection-card{
-        flex-direction: row;
-        justify-content: flex-start;
+        flex-direction: row-reverse;
         padding: 0 40px;
+        max-width: 100%;
     }
 
     content-box{
         padding: 40px 0;
     }
 
-    image-container{
-        display: none;
-        margin-right: 10px;
-    }
-
-    image-box{
-        background: none;
-    }
-
     content-box{
         max-width: 100%;
     }
+
+    overview-img-box{
+        display: none;
+    }
+
 }
 
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 950px) {
     :host{
         max-width: 100%;
     }
+
+    selection-card{
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    overview-container{
+        max-width: unset;
+        width: 100%;
+        min-width: unset;
+        margin-top: 0;
+        padding: 0;
+        align-self: stretch;
+    }
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -264,11 +313,7 @@ image-box{
         padding: 35px 0;
     }
 
-    selection-box link-container{
-        display: none;
-    }
-
-    image-container{
-        display: none;
+    overview-content-box{
+        flex-direction: column;
     }
 }

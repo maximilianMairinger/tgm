@@ -8,6 +8,7 @@ import "../../../../_themeAble/_text/_sectionTextblob/informationenSection/infor
 import "../../../../_themeAble/_text/_sectionTextblob/ausbildungSection/ausbildungSection"
 import "../../../../_themeAble/_text/_thumbnail/thumbnail"
 import "../../../../_themeAble/_card/selectionCard/selectionCard"
+import "../../../../_themeAble/_card/erwachsenenCard/erwachsenenCard"
 import "../../../../_themeAble/_card/anmeldenCard/anmeldenCard"
 import "../../../../_themeAble/_card/_infoCard/infoCard"
 import "../../../../_themeAble/_text/tabletBlob/tabletBlob"
@@ -30,11 +31,14 @@ import OverflowX from "../../../overflowX/overflowX"
 export default declareComponent("georgs-sandbox", class extends Page {
     constructor() {
         super()
+        /*
         let next = this.q("c-button.next") as Button;
         let previous = this.q("c-button.previous") as Button;
         let overflowContainer = this.q("c-overflow-x.custom") as OverflowX;
         overflowContainer.setNextButton(next);
         overflowContainer.setPreviousButton(previous);
+
+         */
     }
 
     protected activationCallback(active: boolean): void {

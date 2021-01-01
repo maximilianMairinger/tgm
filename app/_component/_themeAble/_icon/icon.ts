@@ -77,5 +77,11 @@ export const iconIndex = {
     // HIT
     medientechnik: () => import("./vertiefung/mediaCode/mediaCode"),
     systemtechnik: () => import("./vertiefung/cloudNetwork/cloudNetwork"),
+  },
+  abendschule: {
+    bigStonks: () => import("./abendschule/bigStonks/bigStonks"),
+    smallStonks: () => import("./abendschule/smallStonks/smallStonks"),
+    kolleg: () => import("./abendschule/kolleg/kolleg"),
+    tools: () => import("./tools/tools"),
   }
 }

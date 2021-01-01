@@ -13,41 +13,35 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
         super({
             heading: {
                 heading: "Was uns ausmacht",
-                subheading: "als Elektrotechnik"
+                subheading: "als IT Abteilung"
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "fachtheoretische",
                 selection: [
                     {
-                        icon: "energysysteme", 
-                        title: "Energiesysteme", 
-                        content: "Energiegewinnung und -speicherung", 
-                        link: baseLink + "energiesysteme"
+                        icon: "softwareentwicklung", 
+                        title: "Softwareentwicklung", 
+                        content: "Eigene Ideen mit Code zum Leben bringen.", 
+                        link: baseLink + "softwareentwicklung"
                     },
                     {
-                        icon: "automatisierungstechnik", 
-                        title: "Automatisierungstechnik", 
-                        content: "Automatisieren in elektrotechnischen Anwendungen", 
-                        link: baseLink + "automatisierungstechnik"
+                        icon: "informationstechnischeProjekte", 
+                        title: "Informationstechnische Projekte", 
+                        content: "Über Projektmanagement-Skills zum Start-Up", 
+                        link: baseLink + "informationstechnische-projekte"
                     },
                     {
-                        icon: "antriebstechnik", 
-                        title: "Antriebstechnik", 
-                        content: "Bewegung und Elektrotechnik", 
-                        link: baseLink + "antriebstechnik"
+                        icon: "netzwerktechnik", 
+                        title: "Netzwerktechnik", 
+                        content: "Ein IT-Netzwerk verstehen, aufbauen & überwachen", 
+                        link: baseLink + "netzwerktechnik"
                     },
                     {
-                        icon: "industrieelektronik", 
-                        title: "Industrieelektronik", 
-                        content: "Elektrotechnik in der Industrie", 
-                        link: baseLink + "industrieelektronik"
-                    },
-                    {
-                        icon: "angewandteInformatik", 
-                        title: "Angewandte Informatik", 
-                        content: "Entwickeln von computerbasierten Lösungen", 
-                        link: baseLink + "angewandte-informatik"
+                        icon: "informationssysteme", 
+                        title: "Informationssysteme", 
+                        content: "Wie Informationen erfasst und abgelegt werden", 
+                        link: baseLink + "informationssysteme"
                     }
                 ],
                 stundentafel: baseLink + "stundentafel-it"

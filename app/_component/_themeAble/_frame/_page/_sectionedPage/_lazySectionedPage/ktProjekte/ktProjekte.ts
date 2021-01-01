@@ -15,8 +15,8 @@ export default declareComponent("kt-projekte", class KtProjekte extends LazySect
       {
         key: new Import("", 1, (thumbnail: typeof Thumbnail) => {
           let e = new thumbnail();
-          e.note("Bemerkenswerte")
-          e.heading("Diplomarbeiten");
+          e.note("die")
+          e.heading("Projekte");
           e.subheading("der KT");
           e.background('wiProject.png');
           return new WrapperSection(e, 'dark') as any;

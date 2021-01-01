@@ -31,14 +31,17 @@ card-container > *:last-child {
 }
 
 c-unterricht-systeme-card{
-  min-height:440px;
+  flex-grow: 1;
+  width: 180px;
+  min-width: 320px;
 }
 
 
-c-selection-card{
-  width: 37%;
+c-selection-card {
+  width: 400px;
   max-width: 580px;
   flex-grow: 1;
+  min-width: 480px;
 }
 
 vertiefung-section {

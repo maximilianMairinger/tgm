@@ -70,20 +70,20 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                     heading: "Vertiefungen",
                     subheading: "der IT",
                     hsize: {max:60, min:40},
-                    content: "Nach drei Jahren Grundausbildung in allen Bereichen, entschiden sich die SchülerInnen für einene Zweig. Beide dieser haben jeweils mehrere Untervertiefungen, in welche sich die SchuelerInnen weiter Verteifen können."
+                    content: "Nach drei Jahren Grundausbildung in allen Bereichen, entscheiden sich die SchülerInnen für einen Vertiefung. Welche beide jeweils mehrere Unterzweige haben, durch welche sich die SchuelerInnen weiter Verteifen können."
                 },
                 cards: [
                     {
                         heading:"Medientechnik",
                         icon:"medientechnik",
                         link: baseLink + "medientechnik",
-                        content:"Das reibungslose Zusammenspiel aller Einrichtungen in einer Fabrik, der U-Bahnbetrieb, der immer vorhandene Strom in unseren Steckdosen – das alles ist ohne Automatisierungstechnik unmöglich."
+                        content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Planung, Entwurf und Realisierung sowie des Betriebes von Multimediaprodukten. Grundkenntnisse wie Programmiertechniken für Internet und Multimedia-Anwendungen werden dazu ebenso wie Marketing und Medienwirtschaft vermittelt."
                     },
                     {
                         heading:"Systemtechnik",
                         icon:"systemtechnik",
                         link: baseLink + "systemtechnik",
-                        content:"Die Umwandlung von Strahlungsenergie der Sonne in elektrischen Strom (Photovoltaik) bzw. in Wärme (Solarthermie) oder der Aufbau von Windkraftanlagen – das sind nur einige der nachhaltigen Technologien aus dem Bereich der Erneuerbaren Energien."
+                        content:"Diese Ausbildungsrichtung bildet den universell einsetzbaren Informationstechniker mit einem umfassenden Wissen in den erforderlichen technischen wie auch wirtschaftlichen Fachgebieten aus, um die IT-Infrastruktur eines Unternehmens zu planen, zu erstellen und zu warten."
                     }
                 ]
                 

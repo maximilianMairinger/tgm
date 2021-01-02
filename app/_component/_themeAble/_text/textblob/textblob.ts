@@ -3,6 +3,7 @@ import declareComponent from "../../../../lib/declareComponent";
 import ThemeAble, {Theme} from "../../themeAble";
 import "./../../link/link"
 import Link from "./../../link/link"
+import delay from "delay";
 
 
 export type MediaQuerySize = { min: number, max: number }
@@ -152,6 +153,19 @@ export default class Textblob extends Text {
     
   }
 
+  async mobileSwitchAt(to: number | string) {
+    const elem = this.q("style")[1]
+    let sheet: CSSStyleSheet = elem.sheet
+    while(!sheet) {
+      sheet = elem.sheet
+      await delay(0)
+    }
+    const rules = sheet.cssRules
+    const media = (rules[rules.length-1] as any).media
+    if (typeof to === "number") media.mediaText = `(max-width: ${to}px)`
+    else media.mediaText = to
+  }
+
   linktext(): string
   linktext(linktext: string): void
   linktext(linktext?: string): any {
@@ -174,7 +188,7 @@ export default class Textblob extends Text {
   }
 
   stl() {
-    return super.stl() + require("./textblob.css").toString()
+    return require("./textblob.css").toString()
   }
 
   pug() {

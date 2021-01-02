@@ -106,7 +106,7 @@ export default class Thumbnail extends Text {
   }
 
   stl() {
-    return super.stl() + require("./thumbnail.css").toString()
+    return require("./thumbnail.css").toString()
   }
 
   pug() {

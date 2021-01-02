@@ -34,7 +34,7 @@ export default class VertiefungsContainer extends ThemeAble {
     }
 
     stl() {
-        return super.stl() + require("./vertiefungsContainer.css").toString()
+        return require("./vertiefungsContainer.css").toString()
     }
 
     pug() {

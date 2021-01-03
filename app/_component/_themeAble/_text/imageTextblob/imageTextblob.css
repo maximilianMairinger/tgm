@@ -49,6 +49,7 @@ connector-box{
     display: block;
     height: auto;
     margin-bottom: 5px;
+    
 }
 
 connector-box hr{
@@ -74,6 +75,7 @@ connector-box.top hr{
 
 connector-box.bottom{
     width: 40px;
+    display: none;
 }
 
 connector-box.bottom hr{

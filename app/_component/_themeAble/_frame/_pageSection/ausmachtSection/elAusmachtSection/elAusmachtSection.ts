@@ -55,7 +55,7 @@ export default declareComponent("ausmacht-section-el", class extends AusmachtSec
                     heading: "IoT",
                     note: "highlight",
                     thumbnail: "/res/img/iotElektronik.jpg",
-                    href: baseLink + "zellkultur",
+                    href: baseLink + "todo",
                     contentTitle: "Internet of things",
                     content: "TODO"
                 },

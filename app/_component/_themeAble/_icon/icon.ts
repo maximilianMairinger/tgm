@@ -65,9 +65,9 @@ export const iconIndex = {
 
     // KT
     laboratoriumKt: () => import("./fachIcon/microscope/microscope"),
-    konstruktionProduktentwicklung: () => import("./fachIcon/sketch/sketch"),
+    konstruktionProduktentwicklung: () => import("./fachIcon/pen/pen"),
     technischeMechanikKt: () => import("./fachIcon/chain/chain"),
-    kunststoffverarbeitung: () => import("./fachIcon/plasticBottle/plasticBottle"),
+    kunststoffverarbeitung: () => import("./fachIcon/filter/filter"),
     fertigungstechnik: () => import("./fachIcon/layers/layers")
   },
   vertiefung: {

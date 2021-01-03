@@ -16,9 +16,9 @@ export default declareComponent("rt-projekte", class RaumfahrtProjekte extends L
       {
         key: new Import("", 1, (thumbnail: typeof Thumbnail) => {
           let e = new thumbnail();
-          e.note("Bemerkenswerte")
-          e.heading("Diplomprojekte");
-          e.subheading("der ET");
+          e.note("die")
+          e.heading("Projekte");
+          e.subheading("der RT");
           e.background("raumfahrtProject.jpg")
           return new WrapperSection(e, 'dark') as any;
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/thumbnail")

@@ -25,9 +25,7 @@ export default declareComponent("rt-team", class RtTeam extends TeamPage {
                 {
                     let teamSection = new (Team as typeof TeamSection)();
                     teamSection.subheading("der RT Abteilung");
-                    teamSection.content("We are a bunch of talented and passionate people who hate beige walls and dull parties. If this is your case you can always send us your information!\n" +
-                        "\n" +
-                        "Derzeit suchen wir nach einem LehrerInnen im bereich Softwareentwicklung, Fotographie, Graphic Design und Web-Entwicklung bestmöglichst mit Praxiserfahrung.")
+                    teamSection.content("Die Lehrkräfte der Höheren Lehranstalt für Kunststofftechnik ermöglichen dank Erfahrung mit viel Engagement individuelle Förderung zur optimalen Entwicklung der Schülerinnen und Schüler.")
                     return new WrapperSection(teamSection);
                 }
             ), val: () => import(/* webpackChunkName: "teamSection" */"../../../../../../_text/_sectionTextblob/teamSection/teamSection")

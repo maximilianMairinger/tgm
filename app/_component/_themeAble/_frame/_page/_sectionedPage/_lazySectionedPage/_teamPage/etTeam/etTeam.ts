@@ -26,7 +26,7 @@ export default declareComponent("et-team", class EtTeam extends TeamPage {
                     let teamSection = new (Team as typeof TeamSection)();
                     teamSection.subheading("der ET");
                     teamSection.note("das")
-                    teamSection.content("Die Lehrkräfte unserer Abteilung gewährleisten durch neueste pädagogische Methodik und individuelle Betreuung die bestmögliche Entwicklung der SchülerInnen. Besonders im neuen Unterrichtssystem Lernbüro, nehmen die ProfessorInnen eine gänzlich neue Position ein und unterstützen die SchülerInnen bei dem selbstständigen")
+                    teamSection.content("Die Lehrkräfte unserer Abteilung gewährleisten durch neueste pädagogische Methodik und individuelle Betreuung die bestmögliche Entwicklung der SchülerInnen. Besonders im neuen Unterrichtssystem Lernbüro, nehmen die ProfessorInnen eine gänzlich neue Position ein und unterstützen die SchülerInnen beim selbstständigen Lernen.")
                     return new WrapperSection(teamSection);
                 }
             ), val: () => import(/* webpackChunkName: "teamSection" */"../../../../../../_text/_sectionTextblob/teamSection/teamSection")

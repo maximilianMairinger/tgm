@@ -208,7 +208,7 @@ export default class OverflowX extends ThemeAble {
 
 
     stl() {
-        return super.stl() + require("./overflowX.css").toString()
+        return require("./overflowX.css").toString()
     }
 
     pug() {

@@ -179,7 +179,7 @@ export default class ImageTextblob extends Text {
   }
 
   stl() {
-    return super.stl() + require("./imageTextblob.css").toString()
+    return require("./imageTextblob.css").toString()
   }
 
   pug() {

@@ -27,7 +27,7 @@ export default declareComponent("cookie-note", class CookieNote extends ThemeAbl
 
 
     stl() {
-        return super.stl() + require("./cookieNote.css").toString()
+        return require("./cookieNote.css").toString()
     }
     pug() {
         return require("./cookieNote.pug").default

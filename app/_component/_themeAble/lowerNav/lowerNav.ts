@@ -109,7 +109,7 @@ export default declareComponent("lower-nav", class LowerNav extends ThemeAble {
   }
 
   stl() {
-    return super.stl() + require("./lowerNav.css").toString()
+    return require("./lowerNav.css").toString()
   }
   pug() {
     return require("./lowerNav.pug").default

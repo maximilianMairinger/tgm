@@ -41,6 +41,10 @@ note-text {
     color: var(--weak-text-color);
 }
 
+c-textblob {
+    width: 100%;
+}
+
 connector-box{
     display: block;
     height: auto;

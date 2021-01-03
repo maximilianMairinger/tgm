@@ -76,7 +76,7 @@ export default class SectionTextblob extends Text {
     }
 
     stl() {
-        return super.stl() + require("./sectionTextblob.css").toString()
+        return require("./sectionTextblob.css").toString()
     }
 
     pug() {

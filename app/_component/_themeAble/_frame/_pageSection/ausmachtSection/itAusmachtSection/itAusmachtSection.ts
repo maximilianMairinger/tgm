@@ -13,41 +13,35 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
         super({
             heading: {
                 heading: "Was uns ausmacht",
-                subheading: "als Elektrotechnik"
+                subheading: "als IT Abteilung"
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "fachtheoretische",
                 selection: [
                     {
-                        icon: "energysysteme", 
-                        title: "Energiesysteme", 
-                        content: "Energiegewinnung und -speicherung", 
-                        link: baseLink + "energiesysteme"
+                        icon: "softwareentwicklung", 
+                        title: "Softwareentwicklung", 
+                        content: "Eigene Ideen mit Code zum Leben bringen.", 
+                        link: baseLink + "softwareentwicklung"
                     },
                     {
-                        icon: "automatisierungstechnik", 
-                        title: "Automatisierungstechnik", 
-                        content: "Automatisieren in elektrotechnischen Anwendungen", 
-                        link: baseLink + "automatisierungstechnik"
+                        icon: "informationstechnischeProjekte", 
+                        title: "Informationstechnische Projekte", 
+                        content: "Über Projektmanagement-Skills zum Start-Up", 
+                        link: baseLink + "informationstechnische-projekte"
                     },
                     {
-                        icon: "antriebstechnik", 
-                        title: "Antriebstechnik", 
-                        content: "Bewegung und Elektrotechnik", 
-                        link: baseLink + "antriebstechnik"
+                        icon: "netzwerktechnik", 
+                        title: "Netzwerktechnik", 
+                        content: "Ein IT-Netzwerk verstehen, aufbauen & überwachen", 
+                        link: baseLink + "netzwerktechnik"
                     },
                     {
-                        icon: "industrieelektronik", 
-                        title: "Industrieelektronik", 
-                        content: "Elektrotechnik in der Industrie", 
-                        link: baseLink + "industrieelektronik"
-                    },
-                    {
-                        icon: "angewandteInformatik", 
-                        title: "Angewandte Informatik", 
-                        content: "Entwickeln von computerbasierten Lösungen", 
-                        link: baseLink + "angewandte-informatik"
+                        icon: "informationssysteme", 
+                        title: "Informationssysteme", 
+                        content: "Wie Informationen erfasst und abgelegt werden", 
+                        link: baseLink + "informationssysteme"
                     }
                 ],
                 stundentafel: baseLink + "stundentafel-it"
@@ -57,15 +51,15 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                     heading: "Lernbüro",
                     note: "Unterrichtssystem",
                     thumbnail: "/res/img/student_2.jpg",
-                    href: "tagesschule/elektrotechnik/highlights/lernbüro-elektrotechnik",
+                    href: baseLink + "lernbüro-it",
                     contentTitle: "Lernen im Aufbruch",
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
                 },
                 {
                     heading: "Werkstatt",
-                    note: "PRAXISUNTERRICHT",
+                    note: "fachpraxis",
                     thumbnail: "/res/img/werkstaetteHET.png",
-                    href: "tagesschule/elektrotechnik/highlights/werkstätte-elektrotechnik",
+                    href: baseLink + "werkstätte-it",
                     contentTitle: "Praxisbasierte Erfahrungen",
                     content: "In unseren Werkstätten erlernen SchülerInnen den Umgang mit technischen Gerätschaften und setzen das gelernte Theoriewissen selbst um."
                 }
@@ -74,22 +68,22 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                 text: {
                     note: "die",
                     heading: "Vertiefungen",
-                    subheading: "der Elektrotechnik",
+                    subheading: "der IT",
                     hsize: {max:60, min:40},
-                    content: "Die Abteilung Elektrotechnik bietet einen besonders umfassende technische Ausbildung. Grundsätzlich beschäftigt sie sich mit allen Bereichen"
+                    content: "Nach drei Jahren Grundausbildung in allen Bereichen, entscheiden sich die SchülerInnen für einen Vertiefung. Welche beide jeweils mehrere Unterzweige haben, durch welche sich die SchuelerInnen weiter Verteifen können."
                 },
                 cards: [
                     {
-                        heading:"Automatisierung",
-                        icon:"automatisierung",
-                        link:"tagesschule/elektrotechnik/highlights/automatisierung",
-                        content:"Das reibungslose Zusammenspiel aller Einrichtungen in einer Fabrik, der U-Bahnbetrieb, der immer vorhandene Strom in unseren Steckdosen – das alles ist ohne Automatisierungstechnik unmöglich."
+                        heading:"Medientechnik",
+                        icon:"medientechnik",
+                        link: baseLink + "medientechnik",
+                        content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Planung, Entwurf und Realisierung sowie des Betriebes von Multimediaprodukten. Grundkenntnisse wie Programmiertechniken für Internet und Multimedia-Anwendungen werden dazu ebenso wie Marketing und Medienwirtschaft vermittelt."
                     },
                     {
-                        heading:"Erneuerbare Energien",
-                        icon:"erneuerbareEnergien",
-                        link:"tagesschule/elektrotechnik/highlights/erneuerbare-energien",
-                        content:"Die Umwandlung von Strahlungsenergie der Sonne in elektrischen Strom (Photovoltaik) bzw. in Wärme (Solarthermie) oder der Aufbau von Windkraftanlagen – das sind nur einige der nachhaltigen Technologien aus dem Bereich der Erneuerbaren Energien."
+                        heading:"Systemtechnik",
+                        icon:"systemtechnik",
+                        link: baseLink + "systemtechnik",
+                        content:"Diese Ausbildungsrichtung bildet den universell einsetzbaren Informationstechniker mit einem umfassenden Wissen in den erforderlichen technischen wie auch wirtschaftlichen Fachgebieten aus, um die IT-Infrastruktur eines Unternehmens zu planen, zu erstellen und zu warten."
                     }
                 ]
                 

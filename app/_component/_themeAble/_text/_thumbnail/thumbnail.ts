@@ -21,6 +21,8 @@ export default class Thumbnail extends Text {
   constructor() {
     super();
     this.theme('dark');
+    this.hsize({max:70, min:35});
+    this.hmobile({max:55, min:35});
   }
 
   background(src: string) {
@@ -104,7 +106,7 @@ export default class Thumbnail extends Text {
   }
 
   stl() {
-    return super.stl() + require("./thumbnail.css").toString()
+    return require("./thumbnail.css").toString()
   }
 
   pug() {

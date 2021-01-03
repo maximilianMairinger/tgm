@@ -85,6 +85,10 @@ export default class AusmachtSection extends PageSection {
       }
       this.vertiefungSection.apd(vertiefungBlob)
       
+      vertiefungBlob.mobileSwitchAt("(max-width: 1600px) and (min-width: 1400px), (max-width: 768px)")
+      
+      
+      
       let vertiefungsContainer = new VertiefungsContainer();
       vertiefungsContainer.cards(content.vertiefung.cards);
       this.vertiefungSection.apd(vertiefungsContainer)

@@ -59,7 +59,7 @@ export default class BlogPost extends Text {
   }
 
   stl() {
-    return super.stl() + require("./blogPost.css").toString()
+    return require("./blogPost.css").toString()
   }
 
   pug() {

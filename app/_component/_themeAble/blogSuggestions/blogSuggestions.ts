@@ -48,7 +48,7 @@ export default class BlogSuggestions extends ThemeAble {
     }
 
     stl() {
-        return super.stl() + require("./blogSuggestions.css").toString()
+        return require("./blogSuggestions.css").toString()
     }
     pug() {
         return require("./blogSuggestions.pug").default

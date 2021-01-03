@@ -52,8 +52,11 @@ card-container {
   display: flex;
   overflow-y: auto;
   transform: translateY(.1px);
+  padding-left: 200px;
+  box-sizing: border-box;
+  padding-right: 200px;
 
-  scroll-snap-type: x mandatory;
+  /* scroll-snap-type: x mandatory; */
   
   
   

@@ -25,7 +25,7 @@ export default class KunststoffPage extends LazySectionedPage {
           e.note("abteilung");
           e.videolink("https://www.youtube.com/watch?v=7CPDqPgWjxM")
           
-          e.background("elektronikLanding.png")
+          e.background("ktLanding.png")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
@@ -39,7 +39,8 @@ export default class KunststoffPage extends LazySectionedPage {
           info.note("bei uns");
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
-          info.content("Als weltweit erste und einzige HTL Ausbildung für Kunststofftechnik im Osten Österreichs begleiten wir am TGM seit 1963 angehende Ingenieurinnen und Ingenieure auf ihrem Weg in die Industrie. Kunststoff ist ein moderner Werkstoff, der unser Leben in vielfältiger Weise verbessert, sei es durch Artikel des täglichen Lebens oder durch hochtechnische Erzeugnisse wie Teile im Automobil- und Flugzeugbau. Wir lehren aber nicht nur moderne Technologien zur Herstellung, sondern vor allem auch wichtige Recyclingmethoden, um eine Kreislaufwirtschaft sicherzustellen. Österreich gilt als Pioniernation in der Kunststofftechnik und beheimatet zahlreiche Global Player, die mit unseren Absolventinnen und Absolventen zu Weltmarktführern in der Materialherstellung, im Kunststoffmaschinenbau und in Produktsparten, wie der Verpackungs- und Medizintechnik, geworden sind. Einen Einblick in die unzähligen Einsatzgebiet für Kunststoffe kann man hier finden: https://www.plasticseurope.org/de/about-plastics/what-are-plastics/innovative-material")
+          info.content(`Als weltweit erste und einzige HTL Ausbildung für Kunststofftechnik im Osten Österreichs begleiten wir am TGM seit 1963 angehende Ingenieurinnen und Ingenieure auf ihrem Weg in die Industrie.<br><br>Kunststoff ist ein moderner Werkstoff, der unser Leben in vielfältiger Weise verbessert, sei es durch Artikel des täglichen Lebens oder durch hochtechnische Erzeugnisse wie Teile im Automobil- und Flugzeugbau.<br>Wir lehren aber nicht nur moderne Technologien zur Herstellung, sondern vor allem auch wichtige Recyclingmethoden, um eine Kreislaufwirtschaft sicherzustellen. Österreich gilt als Pioniernation in der Kunststofftechnik und beheimatet zahlreiche GlobalPlayer, die mit unseren Absolventinnen und Absolventen zu Weltmarktführern in der Materialherstellung, im Kunststoffmaschinenbau und in Produktsparten, wie der Verpackungs- und Medizintechnik, geworden sind. Einen Einblick in die unzähligen Einsatzgebiet für Kunststoffe kann man <c-link link="https://www.plasticseurope.org/de/about-plastics/what-are-plastics/innovative-material">hier</c-link> finden.`)
+
 
           return new WrapperSection(info) as any
         }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")
@@ -59,14 +60,14 @@ export default class KunststoffPage extends LazySectionedPage {
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("mit der Kunststofftechnik");
+          imageTextBlob.subheading("zur Kunststofftechnik");
           imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Kunststofftechnik einzutauchen.")
           // imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("tagesschule/Kunststofftechnik")
-          imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 12. Stock");
-          imageTextBlob.email("office-hk5@tgm.ac.at");
+          imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 10. Stock");
+          imageTextBlob.email("office-hkt@tgm.ac.at");
           imageTextBlob.tel("01 33 126 / 300");
-          imageTextBlob.image('url("/res/img/biomedKontakt.png")');
+          imageTextBlob.image('url("/res/img/ktContact.png")');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

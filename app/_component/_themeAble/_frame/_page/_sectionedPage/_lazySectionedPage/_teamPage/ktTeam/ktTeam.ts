@@ -16,7 +16,7 @@ export default declareComponent("kt-team", class KtTeam extends TeamPage {
                 e.note("mit");
                 e.heading("Teamgeist");
                 e.subheading("in die Zukunft");
-                e.background("landingTeamLeitung.jpg")
+                e.background("ktTeam.png")
                 return new WrapperSection(e, 'dark') as any
             }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_text/_thumbnail/thumbnail")
         },
@@ -38,11 +38,11 @@ export default declareComponent("kt-team", class KtTeam extends TeamPage {
                     leitungImageTextblob.note("Abteilungsvorstand");
                     leitungImageTextblob.heading("Reitinger");
                     leitungImageTextblob.subheading("Klemens");
-                    // leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")
+                    leitungImageTextblob.content("Ich stehe Ihnen gerne am Montag von 13:20 bis 14:10 in meiner Sprechstunde zu Verfügung.")
                     leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 10. Stock");
                     leitungImageTextblob.email("avhkt@tgm.ac.at");
                     leitungImageTextblob.tel("0 33 126 / 300");
-                    leitungImageTextblob.image('url("/res/img/team_1.png")');
+                    leitungImageTextblob.image('url("/res/img/avreitinger.png")');
                     // leitungImageTextblob.stellvertreter([{"name":"Stefan Hertl", "email":"shertl@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }

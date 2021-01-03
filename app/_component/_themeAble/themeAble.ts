@@ -59,10 +59,6 @@ export default abstract class ThemeAble<T extends false | HTMLElement | HTMLAnch
     return this
   }
 
-  stl() {
-    return require("./themeAble.css").toString()
-  }
-
 }
 
 export type Theme = keyof typeof themeIndex

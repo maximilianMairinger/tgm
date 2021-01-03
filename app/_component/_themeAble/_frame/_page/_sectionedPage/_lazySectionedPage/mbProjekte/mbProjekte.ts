@@ -16,9 +16,9 @@ export default declareComponent("mb-projekte", class MbProjekte extends LazySect
       {
         key: new Import("", 1, (thumbnail: typeof Thumbnail) => {
           let e = new thumbnail();
-          e.note("Bemerkenswerte")
-          e.heading("Diplomarbeiten");
-          e.subheading("der HMB");
+          e.note("die")
+          e.heading("Projekte");
+          e.subheading("der MB");
           e.background('elProj.jpg');
           return new WrapperSection(e, 'dark') as any;
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/thumbnail")

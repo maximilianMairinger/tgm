@@ -1,6 +1,6 @@
 :host {
     display: block;
-    max-width: min(625px, 100%);
+    max-width: min(725px, 100%);
     min-width: 625px;
     width: auto;
 }
@@ -10,7 +10,7 @@ vertiefungs-card{
     display: flex;
     flex-direction: row;
     border-radius: 8px;
-    padding: 25px;
+    padding: 20px 30px;
 }
 
 vertiefungs-content > * {
@@ -22,7 +22,7 @@ vertiefungs-thumbnail{
     display: block;
     height: auto;
     width: 100%;
-    margin-right: 25px;
+    margin-right: 30px;
 }
 
 vertiefungs-img{

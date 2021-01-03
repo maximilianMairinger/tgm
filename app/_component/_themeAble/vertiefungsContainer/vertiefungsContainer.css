@@ -30,6 +30,9 @@ vertiefungs-extra-circle{
     display: block;
     height: 37px;
     width: 37px;
+    min-width: 37px;
+    min-height: 37px;
+    margin: 10px;
     border-radius: 100%;
     box-shadow: var(--medium-shadow);
     align-self: center;
@@ -39,12 +42,12 @@ vertiefungs-extra-circle{
 
 vertiefungs-container vertiefungs-item:nth-child(2n) vertiefungs-extra-circle{
     margin-right: 10%;
-    margin-left: auto;
+    margin-left: 10px;
 }
 
 vertiefungs-container vertiefungs-item:nth-child(2n - 1) vertiefungs-extra-circle{
     margin-left: 10%;
-    margin-right: auto;
+    margin-right: 10px;
 }
 
 vertiefungs-extra-line-1{

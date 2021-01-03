@@ -33,14 +33,14 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
                     },
                     {
                         icon: "technischeMechanikKt", 
-                        title: "Technische Mechanik und Maschinenelemente", 
-                        content: "Arbeit mit Industriemaschinen", 
+                        title: "Technische Mechanik", 
+                        content: "Technische Mechanik und Maschinenelemente", 
                         link: baseLink + "antriebstechnik"
                     },
                     {
                         icon: "kunststoffverarbeitung", 
-                        title: "Kunststoffverarbeitung und Automatisierungstechnik", 
-                        content: "Herstellung und die Zukunft der Industrie", 
+                        title: "Kunststoffverarbeitung", 
+                        content: "Kunststoffverarbeitung und Automatisierungstechnik", 
                         link: baseLink + "industrieelektronik"
                     },
                     {
@@ -64,7 +64,7 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
                 {
                     heading: "Werkstatt",
                     note: "PRAXISUNTERRICHT",
-                    thumbnail: "/res/img/werkstattKt.png",
+                    thumbnail: "/res/img/ktWerkstatt.png",
                     href: baseLink + "werkstatte-in-der-hkt",
                     contentTitle: "Praxisbasierte Erfahrungen",
                     content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."

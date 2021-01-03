@@ -38,7 +38,7 @@ export default declareComponent("kt-team", class KtTeam extends TeamPage {
                     leitungImageTextblob.note("Abteilungsvorstand");
                     leitungImageTextblob.heading("Reitinger");
                     leitungImageTextblob.subheading("Klemens");
-                    leitungImageTextblob.content("Ich stehe Ihnen gerne am Montag von 13:20 bis 14:10 in meiner Sprechstunde zu Verfügung.")
+                    leitungImageTextblob.content("Ich stehe Ihnen gerne am Montag von 13:20 bis 14:10 in meiner Sprechstunde zur Verfügung.")
                     leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 10. Stock");
                     leitungImageTextblob.email("avhkt@tgm.ac.at");
                     leitungImageTextblob.tel("0 33 126 / 300");
@@ -65,6 +65,11 @@ export default declareComponent("kt-team", class KtTeam extends TeamPage {
                     return new WrapperSection(schuelerImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../../_text/imageTextblob/imageTextblob")
+        },
+        {
+          key: new Import("footer", 1, (_Footer: any) => 
+            new _Footer()
+          ), val: () => import(/* webpackChunkName: "footer" */"../../../../../_pageSection/footer/footer")
         }
     ), sectionChangeCallback, undefined)
 

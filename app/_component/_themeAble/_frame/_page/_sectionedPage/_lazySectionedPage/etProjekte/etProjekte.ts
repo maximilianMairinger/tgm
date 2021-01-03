@@ -79,9 +79,13 @@ export default declareComponent("et-projekte", class EtProjekte extends LazySect
                       "Es wurde der Prototyp eines leistungsstarken, mobilen Fahrzeuges gebaut, welches bei entsprechender Weiterentwicklung Einsatzkräften auf der ganzen Welt in Schneegebieten beziehungsweise nach Lawinen- oder Murenabgängen eine hilfreiche Unterstützung sein kann."
                 }] as Project[];
           return new projekte(projectData)
-        }
-        ), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
+        }), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
       },
+      {
+        key: new Import("footer", 1, (_Footer: any) => 
+          new _Footer()
+        ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
+      }
 
     ), sectionChangeCallback, undefined)
 

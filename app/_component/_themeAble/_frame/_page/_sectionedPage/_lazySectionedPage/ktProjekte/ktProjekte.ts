@@ -31,6 +31,11 @@ export default declareComponent("kt-projekte", class KtProjekte extends LazySect
         }
         ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection")
       },
+      {
+        key: new Import("footer", 1, (_Footer: any) => 
+          new _Footer()
+        ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
+      }
       // {
       //   key: new Import("projekte", 1, (projekte: typeof ProjekteSection) => {
       //       let projectData:Project[] = [{

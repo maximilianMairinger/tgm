@@ -8,7 +8,7 @@
 component-body {
     height: auto;
 }
-wrapper {
+outer-wrapper {
     padding-bottom: 60px;
     padding-top: 40px;
     display: block;
@@ -54,18 +54,18 @@ my-hbar {
     grid-column-end: 5;
 }
 
-my-item {
+.my-item {
     margin-top: 5px;
     color: #585e66;
     grid-row-start: 3;
     transition-duration: 0.3s;
 }
 
-my-item {
+.my-item {
     display: none;
 }
 
-my-something {
+.my-something {
     margin-top: 5px;
     color: #585e66;
 }
@@ -79,41 +79,6 @@ my-qfix {
     grid-column-end: 6;
 }
 
-my-item:after {
-    content: '';
-    width: 0px;
-    height: 1px;
-    display: block;
-    background: #585e66;
-    transition: 300ms;
-}
-
-my-item:hover {
-    cursor: pointer;
-    font-weight: bold;
-}
-
-my-item:hover:after {
-    width: 100%;
-}
-
-my-something:after {
-    content: '';
-    width: 0px;
-    height: 1px;
-    display: block;
-    background: #585e66;
-    transition: 300ms;
-}
-
-my-something:hover {
-    cursor: pointer;
-    font-weight: bold;
-}
-
-my-something:hover:after {
-    width: 100%;
-}
   
 
 
@@ -136,7 +101,7 @@ mobile-logo {
         display: none;
     }
 
-    my-item {
+    .my-item {
         display: block;
     }
     my-wrapper {
@@ -170,7 +135,7 @@ mobile-logo {
         grid-template-rows: 1fr 1fr 1fr 1fr; 
     }
 
-    my-item {
+    .my-item {
         margin-top: 5px;
         margin-bottom: 5px;
         color: #585e66;

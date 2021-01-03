@@ -58,7 +58,7 @@ export default class ElektronikPage extends LazySectionedPage {
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("mit der Elektronik");
+          imageTextBlob.subheading("zur Elektronik");
           imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Elektrotechnik einzutauchen.")
           // imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("tagesschule/Elektronik")

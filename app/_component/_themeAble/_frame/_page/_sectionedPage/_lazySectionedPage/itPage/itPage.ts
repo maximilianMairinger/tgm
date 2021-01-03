@@ -59,7 +59,7 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("mit der IT");
+          imageTextBlob.subheading("zur IT");
           imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Informationstechnologie einzutauchen.")
           // imageTextBlob.linktext("Einen Besuch planen")
           // imageTextBlob.linkhref("tagesschule/informationstechnologie")

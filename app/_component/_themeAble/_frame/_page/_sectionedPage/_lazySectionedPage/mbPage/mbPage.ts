@@ -62,7 +62,7 @@ export default class MbPage extends LazySectionedPage {
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("mit der Biomedizin");
+          imageTextBlob.subheading("zur Biomedizin");
           imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Biomedizin einzutauchen.")
           // imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("tagesschule/elektrotechnik")

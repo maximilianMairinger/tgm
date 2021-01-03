@@ -16,7 +16,7 @@ export default declareComponent("kt-team", class KtTeam extends TeamPage {
                 e.note("mit");
                 e.heading("Teamgeist");
                 e.subheading("in die Zukunft");
-                e.background("ktTeam.jpg")
+                e.background("ktTeam.png")
                 return new WrapperSection(e, 'dark') as any
             }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_text/_thumbnail/thumbnail")
         },

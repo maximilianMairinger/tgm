@@ -68,7 +68,8 @@ export const iconIndex = {
     konstruktionProduktentwicklung: () => import("./fachIcon/pen/pen"),
     technischeMechanikKt: () => import("./fachIcon/chain/chain"),
     kunststoffverarbeitung: () => import("./fachIcon/filter/filter"),
-    fertigungstechnik: () => import("./fachIcon/layers/layers")
+    fertigungstechnik: () => import("./fachIcon/layers/layers"),
+    umwelttechnik: () => import("./fachIcon/environment/environment")
   },
   vertiefung: {
     // HET

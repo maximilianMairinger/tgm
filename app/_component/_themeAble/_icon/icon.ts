@@ -53,7 +53,7 @@ export const iconIndex = {
     // HWI
     unternehmensführung: () => import("./fachIcon/law/law"),
     // logistik: () => import("./fachIcon/deliveryCar/deliveryCar"),
-    laboratorium: () => import("./fachIcon/electricGear/electricGear"),
+    laboratoriumWi: () => import("./fachIcon/electricGear/electricGear"),
     betriebstechnik: () => import("./fachIcon/flag/flag"),
     informatik: () => import("./fachIcon/smartCode/smartCode"),
 
@@ -63,6 +63,12 @@ export const iconIndex = {
     netzwerktechnik: () => import("./fachIcon/graphNetwork/graphNetwork"),
     informationssysteme: () => import("./fachIcon/cloudDataBase/cloudDataBase"),
 
+    // KT
+    laboratoriumKt: () => import("./fachIcon/microscope/microscope"),
+    konstruktionProduktentwicklung: () => import("./fachIcon/sketch/sketch"),
+    technischeMechanikKt: () => import("./fachIcon/chain/chain"),
+    kunststoffverarbeitung: () => import("./fachIcon/plasticBottle/plasticBottle"),
+    fertigungstechnik: () => import("./fachIcon/layers/layers")
   },
   vertiefung: {
     // HET

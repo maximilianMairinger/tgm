@@ -30,7 +30,7 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                         link: baseLink + "betriebstechnik"
                     },
                     {
-                        icon: "laboratorium", 
+                        icon: "laboratoriumWi", 
                         title: "Laboratorium", 
                         content: "Fachtheorie in die Praxis umsetzen", 
                         link: baseLink + "laboratorium-wi"

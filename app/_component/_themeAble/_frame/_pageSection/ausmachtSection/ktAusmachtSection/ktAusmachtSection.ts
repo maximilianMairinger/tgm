@@ -13,40 +13,40 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
         super({
             heading: {
                 heading: "Was uns ausmacht",
-                subheading: "als Elektrotechnik"
+                subheading: "als Kunststufftechnik"
             },
             selection: {
                 heading: "Gegenstände",
                 note: "Fachspezifische",
                 selection: [
                     {
-                        icon: "energysysteme", 
-                        title: "Energiesysteme", 
-                        content: "Energiegewinnung und -speicherung", 
+                        icon: "laboratoriumKt", 
+                        title: "Laboratorium", 
+                        content: "Arbeit mit Polymeren", 
                         link: baseLink + "energiesysteme"
                     },
                     {
-                        icon: "automatisierungstechnik", 
-                        title: "Automatisierungstechnik", 
-                        content: "Automatisieren in elektrotechnischen Anwendungen", 
+                        icon: "konstruktionProduktentwicklung", 
+                        title: "Konstruktion und Produktentwicklung", 
+                        content: "Planung und Umsetzung", 
                         link: baseLink + "automatisierungstechnik"
                     },
                     {
-                        icon: "antriebstechnik", 
-                        title: "Antriebstechnik", 
-                        content: "Bewegung und Elektrotechnik", 
+                        icon: "technischeMechanikKt", 
+                        title: "Technische Mechanik und Maschinenelemente", 
+                        content: "Arbeit mit Industriemaschinen", 
                         link: baseLink + "antriebstechnik"
                     },
                     {
-                        icon: "industrieelektronik", 
-                        title: "Industrieelektronik", 
-                        content: "Elektrotechnik in der Industrie", 
+                        icon: "kunststoffverarbeitung", 
+                        title: "Kunststoffverarbeitung und Automatisierungstechnik", 
+                        content: "Herstellung und die Zukunft der Industrie", 
                         link: baseLink + "industrieelektronik"
                     },
                     {
-                        icon: "angewandteInformatik", 
-                        title: "Angewandte Informatik", 
-                        content: "Entwickeln von computerbasierten Lösungen", 
+                        icon: "fertigungstechnik", 
+                        title: "Werkstoff- und Fertigungstechnik", 
+                        content: "Eigenschaften und Bearbeitung", 
                         link: baseLink + "angewandte-informatik"
                     }
                 ],
@@ -54,46 +54,22 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
             },
             cards: [
                 {
-                    heading: "Lernbüro",
-                    note: "Unterrichtssystem",
-                    thumbnail: "/res/img/student_2.jpg",
-                    href: baseLink + "lernbüro-elektrotechnik",
-                    contentTitle: "Lernen im Aufbruch",
-                    content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
+                    heading: "Umwelttechnik",
+                    note: "Unterrichtsfach",
+                    thumbnail: "/res/img/umwelt.png",
+                    href: baseLink + "umwelttechnik",
+                    contentTitle: "Chemie und Umwelttechnik",
+                    content: "Die Abteilung für Kunststofftechnik am tgm setzt mit ihrem Ausbildungsfokus „Biopolymere und Umwelttechnik“ einen Schwerpunkt auf umweltrelevante"
                 },
                 {
                     heading: "Werkstatt",
                     note: "PRAXISUNTERRICHT",
-                    thumbnail: "/res/img/werkstaetteHET.png",
-                    href: baseLink + "werkstätte-elektrotechnik",
+                    thumbnail: "/res/img/werkstattKt.png",
+                    href: baseLink + "werkstatte-in-der-hkt",
                     contentTitle: "Praxisbasierte Erfahrungen",
-                    content: "In unseren Werkstätten erlernen SchülerInnen den Umgang mit technischen Gerätschaften und setzen das gelernte Theoriewissen selbst um."
+                    content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."
                 }
-            ],
-            vertiefung: {
-                text: {
-                    note: "die",
-                    heading: "Vertiefungen",
-                    subheading: "der Elektrotechnik",
-                    hsize: {max:60, min:40},
-                    content: "Die Abteilung Elektrotechnik bietet einen besonders umfassende technische Ausbildung. Grundsätzlich beschäftigt sie sich mit allen Bereichen"
-                },
-                cards: [
-                    {
-                        heading:"Automatisierung",
-                        icon:"automatisierung",
-                        link: baseLink + "automatisierung",
-                        content:"Das reibungslose Zusammenspiel aller Einrichtungen in einer Fabrik, der U-Bahnbetrieb, der immer vorhandene Strom in unseren Steckdosen – das alles ist ohne Automatisierungstechnik unmöglich."
-                    },
-                    {
-                        heading:"Erneuerbare Energien",
-                        icon:"erneuerbareEnergien",
-                        link: baseLink + "erneuerbare-energien",
-                        content:"Die Umwandlung von Strahlungsenergie der Sonne in elektrischen Strom (Photovoltaik) bzw. in Wärme (Solarthermie) oder der Aufbau von Windkraftanlagen – das sind nur einige der nachhaltigen Technologien aus dem Bereich der Erneuerbaren Energien."
-                    }
-                ]
-                
-            }
+            ]
         })
     }
 });

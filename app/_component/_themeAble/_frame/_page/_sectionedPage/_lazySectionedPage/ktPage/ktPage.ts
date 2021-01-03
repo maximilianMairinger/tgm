@@ -64,7 +64,7 @@ export default class KunststoffPage extends LazySectionedPage {
           imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Kunststofftechnik einzutauchen.")
           // imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("tagesschule/Kunststofftechnik")
-          imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 12. Stock");
+          imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 10. Stock");
           imageTextBlob.email("office-hkt@tgm.ac.at");
           imageTextBlob.tel("01 33 126 / 300");
           imageTextBlob.image('url("/res/img/biomedKontakt.png")');

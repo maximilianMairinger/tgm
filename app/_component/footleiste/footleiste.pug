@@ -1,4 +1,4 @@
-wrapper
+outer-wrapper
     inner-wrapper
         my-items
             mobile-logo
@@ -8,27 +8,27 @@ wrapper
             my-hbar
 
             my-qfix
-                my-something Impressum
-                my-something Datenschutz
-                my-something Sprechstunden
-                my-something Extern
+                c-link(link="impressum").my-something Impressum
+                c-link(link="datenschutz").my-something Datenschutz
+                c-link(link="https://intern.tgmrebrand.xyz/").my-something Intern
+                c-link(link="todo").my-something Todo
 
-            my-item Impressum
-            my-item Datenschutz
-            my-item Sprechstunden
-            my-item Extern
+            c-link(link="impressum").my-item Impressum
+            c-link(link="datenschutz").my-item Datenschutz
+            c-link(link="https://intern.tgmrebrand.xyz/").my-item Intern
+            c-link(link="todo").my-item Todo
         my-logo
             c-tgm-logo
         my-items(class="itemslow")
             my-hbar(class="hbarlow")
 
             my-qfix 
-                my-something Partner 
-                my-something Kinder HTL
-                my-something Kontakt
-                my-something About
+                c-link(link="dienste").my-something Dienste 
+                c-link(link="partner").my-something Partner
+                c-link(link="gremien").my-something Gremien
+                c-link(link="todo").my-something About
 
-            my-item Partner
-            my-item Kinder HTL
-            my-item Kontakt
-            my-item About
+            c-link(link="dienste").my-item Dienste
+            c-link(link="partner").my-item Partner
+            c-link(link="gremien").my-item Gremien
+            c-link(link="todo").my-item About

@@ -64,6 +64,11 @@ export default declareComponent("it-team", class ItTeam extends TeamPage {
                     return new WrapperSection(schuelerImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../../_text/imageTextblob/imageTextblob")
+        },
+        {
+          key: new Import("footer", 1, (_Footer: any) => 
+            new _Footer()
+          ), val: () => import(/* webpackChunkName: "footer" */"../../../../../_pageSection/footer/footer")
         }
     ), sectionChangeCallback, undefined)
 

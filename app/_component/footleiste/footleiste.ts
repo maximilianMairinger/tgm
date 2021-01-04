@@ -8,8 +8,8 @@ type ContentArray = { content: string, link: string, absolute?: boolean }[]
 const content: { left: ContentArray, right: ContentArray } = {
     left: [
         {
-            content: "Impressum",
-            link: "impressum"
+            content: "Datenschutz",
+            link: "datenschutz"
         },
         {
             content: "Impressum",

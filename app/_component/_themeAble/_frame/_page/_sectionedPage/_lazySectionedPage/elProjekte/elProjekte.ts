@@ -6,6 +6,7 @@ import Thumbnail from "../../../../../_text/_thumbnail/thumbnail";
 import InformationenSection from "../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection";
 import ProjekteSection from "../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection";
 import {Project} from "../../../../../_text/tabletBlob/tabletBlob";
+import Footer from "../../../../_pageSection/footer/footer"
 
 
 export default declareComponent("el-projekte", class ItProjekte extends LazySectionedPage {
@@ -32,7 +33,7 @@ export default declareComponent("el-projekte", class ItProjekte extends LazySect
         ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection")
       },
       {
-        key: new Import("footer", 1, (_Footer: any) => 
+        key: new Import("footer", 1, (_Footer: typeof Footer) => 
           new _Footer()
         ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
       }

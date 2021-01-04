@@ -13,6 +13,7 @@ import Footer from "../../../../_pageSection/footer/footer"
 import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
 
 
+
 export default class ElektronikPage extends LazySectionedPage {
   constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     

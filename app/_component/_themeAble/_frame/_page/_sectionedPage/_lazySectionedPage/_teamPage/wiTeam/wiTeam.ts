@@ -5,6 +5,7 @@ import WrapperSection from "../../../../../_pageSection/wrapperSection/wrapperSe
 import Thumbnail from "../../../../../../_text/_thumbnail/thumbnail";
 import TeamSection from "../../../../../../_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../../_text/imageTextblob/imageTextblob"
+import Footer from "../../../../../_pageSection/footer/footer"
 
 export default declareComponent("wirtschaftsingenieure-team", class WiTeam extends TeamPage {
   constructor(sectionChangeCallback?: (section: string) => void) {
@@ -67,7 +68,7 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
             ), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../../_text/imageTextblob/imageTextblob")
         },
         {
-          key: new Import("footer", 1, (_Footer: any) => 
+          key: new Import("footer", 1, (_Footer: typeof Footer) => 
             new _Footer()
           ), val: () => import(/* webpackChunkName: "footer" */"../../../../../_pageSection/footer/footer")
         }

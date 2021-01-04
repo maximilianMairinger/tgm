@@ -46,7 +46,7 @@ function occurrences(string: string, subString: string, allowOverlapping = false
 
 
 
-export default abstract class Manager<ManagementElementName extends string> extends Frame {
+export default abstract class Manager extends Frame {
 
   protected busySwaping: boolean = false;
   public currentPage: Page
@@ -105,7 +105,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
     this.resourcesMap = resourcesMap
     this.domainSubscription = domain.get(this.domainLevel, this.setDomain.bind(this), false, "")
   }
-  private async setDomain(to: ManagementElementName) {
+  private async setDomain(to: string) {
     let wanted = await this.setElem(to)
     domain.set(wanted.domain, wanted.level, false)
   }
@@ -116,7 +116,7 @@ export default abstract class Manager<ManagementElementName extends string> exte
   private doneRec: ReturnType<typeof record["record"]>
   async minimalContentPaint() {
     // this.doneRec = record.record()
-    await this.setDomain(this.domainSubscription.domain as ManagementElementName)
+    await this.setDomain(this.domainSubscription.domain)
     // this.loadImages = this.doneRec()
   }
   async fullContentPaint() {
@@ -278,17 +278,17 @@ export default abstract class Manager<ManagementElementName extends string> exte
     })()
   }
 
-  private currentManagedElementName: ManagementElementName
+  private currentUrl: string
   private nextPageToken: Symbol
 
-  public element(): ManagementElementName
-  public element(to: ManagementElementName, push?: boolean): void
-  public element(to?: ManagementElementName, push: boolean = this.pushDomainDefault) {
+  public element(): string
+  public element(to: string, push?: boolean): void
+  public element(to?: string, push: boolean = this.pushDomainDefault) {
     if (to) domain.set(to, this.domainLevel, push)
-    else return this.currentManagedElementName
+    else return this.currentUrl
   }
 
-  private async setElem(fullDomain: ManagementElementName) {
+  private async setElem(fullDomain: string) {
     let to: any = fullDomain
     let nextPageToken = Symbol("nextPageToken")
     this.nextPageToken = nextPageToken;
@@ -340,18 +340,18 @@ export default abstract class Manager<ManagementElementName extends string> exte
     }
     
     pageProm.priorityThen(() => {
-      if (this.currentManagedElementName !== to) {
-        this.currentManagedElementName = to;
+      if (this.currentUrl !== fullDomain) {
+        this.currentUrl = fullDomain;
         let page = this.currentPage;
         (async () => {
           if (this.pageChangeCallback) {
             try {
               if ((page as SectionedPage).sectionList) {
                 (page as SectionedPage).sectionList.tunnel(e => e.filter(s => s !== "")).get((sectionListNested) => {
-                  this.pageChangeCallback(to, sectionListNested, page.domainLevel)
+                  this.pageChangeCallback(fullDomain, sectionListNested, page.domainLevel)
                 })
               }
-              else this.pageChangeCallback(to, [], page.domainLevel)
+              else this.pageChangeCallback(fullDomain, [], page.domainLevel)
             }
             catch(e) {}
           }

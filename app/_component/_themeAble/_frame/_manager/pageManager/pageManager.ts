@@ -43,9 +43,8 @@ import Bg from "../../_page/_sectionedPage/_lazySectionedPage/bgPage/bgPage"
 import BgProjekte from "../../_page/_sectionedPage/_lazySectionedPage/bgProjekte/bgProjekte";
 import BgTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/bgTeam/bgTeam"
 
-export type PageName = string
 
-export default declareComponent("page-manager", class PageManager extends Manager<PageName> {
+export default declareComponent("page-manager", class PageManager extends Manager {
   constructor(pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, sectionChangeCallback?: (section: string) => void, onScrollBarWidthChange?: (scrollBarWidth: number) => void, onUserScroll?: (scrollProgress: number, userInited: boolean) => void, onScroll?: (scrollProgress: number) => void) {
 
     super(new ImportanceMap<() => Promise<any>, any>(

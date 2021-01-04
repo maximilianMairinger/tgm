@@ -6,10 +6,10 @@ import FooterElem from "../../../../footleiste/footleiste"
 
 
 export default declareComponent("footer", class Footer extends PageSection {
-  constructor() {
+  constructor(baseLink: string) {
     super()
 
-    this.elementBody.apd(new FooterElem)
+    this.elementBody.apd(new FooterElem(baseLink))
   }
 
   stl() {

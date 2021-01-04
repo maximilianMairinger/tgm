@@ -54,18 +54,18 @@ my-hbar {
     grid-column-end: 5;
 }
 
-.my-item {
+my-items > c-link {
     margin-top: 5px;
     color: #585e66;
     grid-row-start: 3;
     transition-duration: 0.3s;
 }
 
-.my-item {
+my-items > c-link {
     display: none;
 }
 
-.my-something {
+my-qfix > c-link {
     margin-top: 5px;
     color: #585e66;
 }
@@ -101,7 +101,7 @@ mobile-logo {
         display: none;
     }
 
-    .my-item {
+    my-items > c-link {
         display: block;
     }
     my-wrapper {
@@ -135,7 +135,7 @@ mobile-logo {
         grid-template-rows: 1fr 1fr 1fr 1fr; 
     }
 
-    .my-item {
+    my-items > c-link {
         margin-top: 5px;
         margin-bottom: 5px;
         color: #585e66;

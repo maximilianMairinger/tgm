@@ -56,6 +56,7 @@ export default declareComponent("site", class extends Component {
     let scrollTrendDownCounter = 0
 
     let pageManager = new PageManager((page, sections, domainLevel) => {
+      debugger
       currentDomainLevel = domainLevel
       currentSectons = sections
       if (currentlyShowingLowerNav) lowerNav.updatePage(sections, domainLevel)

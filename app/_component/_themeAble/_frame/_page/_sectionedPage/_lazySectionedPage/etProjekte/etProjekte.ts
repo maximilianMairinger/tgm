@@ -11,7 +11,7 @@ import Footer from "../../../../_pageSection/footer/footer"
 
 
 export default declareComponent("et-projekte", class EtProjekte extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -84,11 +84,13 @@ export default declareComponent("et-projekte", class EtProjekte extends LazySect
       },
       {
         key: new Import("footer", 1, (_Footer: typeof Footer) => 
-          new _Footer()
+          new _Footer(baseLink + "projekte/")
         ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
       }
 
-    ), sectionChangeCallback, undefined)
+    ), sectionChangeCallback, undefined, {
+      footer: "projekte"
+    })
 
   }
 

@@ -71,7 +71,7 @@ export default declareComponent("et-page", class EtPage extends LazySectionedPag
       },
       {
         key: new Import("footer", 1, (_Footer: typeof Footer) => 
-          new _Footer()
+          new _Footer(baseLink + "kontakt/")
         ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
       }
     

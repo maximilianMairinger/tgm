@@ -8,7 +8,7 @@ import ImageTextblob from "../../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../../_pageSection/footer/footer"
 
 export default declareComponent("bg-team", class BgTeam extends TeamPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
         {
@@ -67,10 +67,12 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
         },
         {
           key: new Import("footer", 1, (_Footer: typeof Footer) => 
-            new _Footer()
+            new _Footer(baseLink + "schueler/")
           ), val: () => import(/* webpackChunkName: "footer" */"../../../../../_pageSection/footer/footer")
         }
-    ), sectionChangeCallback, undefined)
+    ), sectionChangeCallback, undefined, {
+        footer: "schueler"
+    })
 
       this.elementBody.append(ce("circle-feature"))
 

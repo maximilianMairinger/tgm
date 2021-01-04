@@ -46,7 +46,7 @@ for (let side in content) {
 
 
 
-export default class Footer extends Component {
+export default class FooterLeiste extends Component {
 
     constructor(subdir: string) {
         super()
@@ -82,4 +82,4 @@ export default class Footer extends Component {
 
 }
 
-declareComponent("footleiste", Footer)
+declareComponent("footleiste", FooterLeiste)

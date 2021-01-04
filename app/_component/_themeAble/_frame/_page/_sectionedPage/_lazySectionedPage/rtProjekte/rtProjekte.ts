@@ -7,10 +7,11 @@ import Thumbnail from "../../../../../_text/_thumbnail/thumbnail";
 import InformationenSection from "../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection";
 import ProjekteSection from "../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection";
 import {Project} from "../../../../../_text/tabletBlob/tabletBlob";
+import { Footer } from "../../../../_pageSection/footer/footer"
 
 
 export default declareComponent("rt-projekte", class RaumfahrtProjekte extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -184,8 +185,15 @@ export default declareComponent("rt-projekte", class RaumfahrtProjekte extends L
             }
         ), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
       },
+      {
+        key: new Import("footer", 1, (_Footer: typeof Footer) => 
+          new _Footer(baseLink + "projekte/")
+        ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
+      }
 
-    ), sectionChangeCallback, undefined)
+    ), sectionChangeCallback, undefined, {
+      footer: "projekte"
+    })
 
   }
 

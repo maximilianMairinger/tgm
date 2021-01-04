@@ -72,7 +72,7 @@ export default class ElektronikPage extends LazySectionedPage {
       },
       {
         key: new Import("footer", 1, (_Footer: typeof Footer) => 
-          new _Footer()
+          new _Footer(baseLink + "kontakt/")
         ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
       }
     

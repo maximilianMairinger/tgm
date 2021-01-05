@@ -36,38 +36,38 @@ export default declareComponent("kt-projekte", class KtProjekte extends LazySect
         key: new Import("projekte", 1, (projekte: typeof ProjekteSection) => {
           let projectData = [
             {
+              heading:"Biologisch abbaubare Kaffeekapseln",
+              note:"Anwendung von Biopolymeren für biologisch abbaubare Kaffeekapseln. In Kooperation mit Gabriel Chemie GmbH, Industriestraße 1, 2352 Gumpoldskirchen",
+              team:[
+                "Samantha Onderka",
+                "Katharina Schleinzer"
+              ],
+              thumbnail:"/res/img/nespresso.jpg",
+              title: "Projektziel",
+              content: 
+`Zeil des Projekts war ist die anwendung eines Biopolymers für die Herstellung von Kaffeekapseln, 
+sowie die Beurteilung der Kompostierfähigkeit. Dabei wurde ein Biokunststoff entwickelt, welcher 
+als alternative zu herkömmlichen Aluminiumverpackungen verwendet werden kann. Diese wurden sowohl
+auf ihre mechanische Stabilität als auch auf ihre Kompostierbarkeit geprüft.
+<img src="/res/img/kapselnKompostierbarkeit.png" class="illustration"></img>
+`
+            },
+            {
               heading:"Nachhaltigkeit von Post-Consumer-Rezyklaten",
               note:"Bewertung der Nachhaltigkeit von Post-Consumer-Rezyklaten. In Kooperation mit Gabriel-Chemie Gesellschaft m.b.H., Industriestraße 1, 2352 Gumpoldskirchen",
               team:[
                 "Semanur Demir",
                 "Armin Marhosevic"
               ],
-              thumbnail:"/res/img/projektBeispiel3.png",
+              thumbnail:"/res/img/PCR_Mahlgut.png",
               title: "Projektziel",
               content: 
 `Das EU-Kreislaufwirtschaftspaket fordert bis 2025 eine Recyclingquote von 50 % von Kunststoffverpackungen. Ziele sind die Umwelt zu schützen und Ressourcen zu schonen. In diesem Projekt sollte die technische Eignung von Post-Consumer-Rezyklaten (PCR) und deren Wirtschaftlichkeit untersucht werden.
-<h4>Realisierung</h4>
+<h3>Realisierung</h3>
 Unterschiedliche PCR’s wurden verarbeitet und mittels Zugprüfung, Dichtebestimmung, MFRund OIT-Prüfung charakterisiert. Auch wurden Sensoriktests (Geruch und Geschmack) mit den PCR‘s durchgeführt, um deren Eignung für Lebensmittelverpackungen zu untersuchen.
-<h4>Ergebnisse</h4>
+<h3>Ergebnisse</h3>
 Die mechanischen Eigenschaften der Post-Consumer-Rezyklate erreichten die Werte vom Neumaterial. Die Thermische Stabilisierung und auch die sensorischen Eigenschaften von PCR‘s erwiesen sich jedoch als schlechter und zeigen ein deutliches Verbesserungspotential.
 `
-            },
-            {
-              heading:"Nachhaltigkeit von Post-Consumer-Rezyklaten",
-              note:"Bewertung der Nachhaltigkeit von Post-Consumer-Rezyklaten. In Kooperation mit Gabriel-Chemie Gesellschaft m.b.H., Industriestraße 1, 2352 Gumpoldskirchen",
-              logo:"/res/img/projektLogoBeispiel3.png",
-              team:[
-                "Sabine Vollfrau",
-                "Maximillian Meiringer",
-                "Saphael Rschlage",
-                "Feorg Gelber",
-                "Moritz Meier"
-              ],
-              thumbnail:"/res/img/projektBeispiel3.png",
-              title: "Projektziel",
-              content: "Große Aerospace Unternehmen bieten keine ökonomischen Lösungen für kleinere wissenschaftliche Projekte, die eine Notwendigkeit für Satelliten im niedrigen Orbit haben. So kann zwar bei Missionen ein kleiner Satellit relativ billig mitgeschickt werden, Priorität ist aber jedenfalls die eigentliche Mission und eine individuelle Positionierung des Satelliten kann nicht garantiert werden.\n" +
-                  "\n" +
-                  "Schüler der 5. Klasse RT haben ein ökonomisches Launch Vehicle mit einer Kapazität von bis zu 500kg konzeptioniert, welches in Einzelausführung durch einen vergleichbar niedrigen Kostenpunkt, ein individuelles Deployment von Satelliten für kleinere wissenschaftliche Unternehmungen, als auch kommerzielle Applikationen bietet.",
             }
           ] as Project[];
 

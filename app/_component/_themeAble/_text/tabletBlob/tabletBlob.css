@@ -91,9 +91,12 @@ project-icon{
 img {
     height: auto;
     width: 100%;
-    box-shadow: var(--medium-shadow);
     border-radius: 10px;
     background: white;
+}
+
+img:not(.illustration) {
+    box-shadow: var(--medium-shadow);
 }
 
 img:not(.project-icon-pic) {

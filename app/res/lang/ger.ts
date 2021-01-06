@@ -19,14 +19,8 @@ export default {
     "auftrag": "Auftrag",
     "tätigkeiten": "Tätigkeiten",
     "highlights": "Highlights",
-
-
     "info": "Informationen",
-    "section1": "Section1",
-    "section2": "Section2",
-    "section3": "Section3",
-    "section4": "Section4",
-    "section5": "Section5"
+    
   },
 
   "tgm": "TGM",
@@ -61,8 +55,8 @@ export default {
     }
   },
   "AbteilungsShorts": {
-    "Biomedizien": "Entwicklung eines soliden Verständnisses der Wechselwirkung von Technik und Medizin",
-    "Elektronik": "Ohne elektronische Geräte ist unser tägliches Leben praktisch nicht mehr vorstellbar.",
+    "Biomedizien": "Es stehen die Planung, Entwicklung und Realisierung medizintechnischer Geräte, der Entwurf und Implementierung von Softwarelösungen auf den Gebieten der Biologie, Medizin und des Gesundheitswesens, die Auswahl, Analyse, messtechnische Überprüfung bzw. der Test der Komponenten, Module und Systeme im Vordergrund.",
+    "Elektronik": "Der Entwurf, die Fertigung, der Vertrieb, die Inbetriebnahme und Wartung elektronischer Schaltungen bzw. Geräte, insbesondere der angeführten Elektronikbranchen, stellen einen wesentlichen Wirtschaftsfaktor unseres Landes dar.",
     "Elektrotechnik": "Antriebstechnik, Automation und Informatik. Grundsätzlich alles was mit elektrischem Strom zu tun hat.",
     "Informationstechnologie": "Individualisierte Ausbildung am Puls der Zeit: Technisch, pädagogisch und didaktisch.",
     "Kunststofftechnik": "Kunststoff ist ein moderner Werkstoff, der unser Leben in vielfältiger Weise verbessert, sei es durch Artikel des täglichen Lebens oder durch hochtechnische Erzeugnisse wie Teile im Automobil- und Flugzeugbau",

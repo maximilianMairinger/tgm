@@ -65,7 +65,7 @@ export default declareComponent("et-page", class EtPage extends LazySectionedPag
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 3. Stock");
           imageTextBlob.email("tdeininger@tgm.ac.at");
           imageTextBlob.tel("+43 (1) 33 126 / 231");
-          imageTextBlob.image('elektrotechnik_kotakt');
+          imageTextBlob.image('etContact');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

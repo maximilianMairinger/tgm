@@ -36,7 +36,6 @@ export default abstract class InfoCard extends Card {
     note():string
     note(note:string):void
     note(note?:string){
-        debugger
         if(note !== undefined)
             this.q("note-text").text(note)
         else return this.q("note-text").text()

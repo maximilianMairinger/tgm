@@ -1,15 +1,15 @@
 :host{
     position: relative;
-    display: block;
-    height: calc(100vh - 150px);
-    min-height: 550px;
+    display: inline-block;
+    width: 100%;
 }
 
 landing-textblob{
-    position: absolute;
+    position: relative;
     display: flex;
-    height: 100%;
     width: 100%;
+    height: calc(100vh - 150px);
+    min-height: 550px;
     padding: 0 100px 0 100px;
     flex-direction: row;
     align-items: center;
@@ -43,8 +43,6 @@ text-box{
     width: 100%;
 }
 
-c-textblob{
-}
 
 background-shader{
     z-index: 1;
@@ -58,12 +56,9 @@ background-image{
 
 @media only screen and (max-width: 768px) {
 
-    :host{
-        height: calc(100% - 75px);
-    }
-
     landing-textblob{
         padding: 0 10vw;
+        height: calc(100% - 75px);
     }
 
     c-textblob{

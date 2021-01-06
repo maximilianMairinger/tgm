@@ -1,8 +1,9 @@
 c-card-carousel {
-  position: absolute;
+  position: relative;
   top: 100%;
+  display: inline-block;
   /* height: 250px; */
-  transform: translateY(-50%);
+  transform: translateY(-125px);
   /* width: 80%; */
   /* left: 10%; */
   /* display: flex; */

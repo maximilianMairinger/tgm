@@ -1,4 +1,5 @@
 
+
 c-icon-card {
   display: block;
   margin: 0 28px 56px 28px;
@@ -29,6 +30,14 @@ component-body {
   scroll-snap-type: x proximity; */
 }
 
+component-body:not(.wrap) {
+  flex-wrap: nowrap;
+}
+
+component-body.wrap {
+  flex-wrap: wrap;
+}
+
 
 component-body {
   scrollbar-width: none; /* Firefox */
@@ -39,7 +48,7 @@ component-body::-webkit-scrollbar { /* WebKit */
   height: 0;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1200px) {
   component-body {
     margin-bottom: 0;
     flex-wrap: nowrap;
@@ -48,11 +57,16 @@ component-body::-webkit-scrollbar { /* WebKit */
     margin-right: 0;
     width: 100%;
   }
-  c-icon-card:first-of-type {
+  component-body:not(.wrap) c-icon-card:first-of-type {
     margin-left: 40px;
   }
 
-  c-icon-card {
+  component-body:not(.wrap) c-icon-card {
     margin-bottom: 0;
+  }
+
+  c-icon-card {
+    width: 100%;
+    height: 53vw;
   }
 }

@@ -53,7 +53,7 @@ export default class CardCarousel extends Component {
     }
   }
 
-  private _wrap: boolean = true
+  private _wrap: boolean
   wrap(): boolean
   wrap(to?: boolean): this
   wrap(to?: boolean) {
@@ -61,10 +61,10 @@ export default class CardCarousel extends Component {
       if (to !== this._wrap) {
         this._wrap = to
         if (to) {
-          this.elementBody.css("flexWrap", "wrap")
+          this.elementBody.addClass("wrap")
         }
         else {
-          this.elementBody.css("flexWrap", "nowrap")
+          this.elementBody.removeClass("wrap")
         }
       }
       return this

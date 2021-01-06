@@ -57,7 +57,7 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
                     heading: "Lernbüro",
                     note: "Unterrichtssystem",
                     thumbnail: "/res/img/student_2.jpg",
-                    href: baseLink + "lernbüro-elektrotechnik",
+                    href: baseLink + "lernbüro-het",
                     contentTitle: "Lernen im Aufbruch",
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
                 },

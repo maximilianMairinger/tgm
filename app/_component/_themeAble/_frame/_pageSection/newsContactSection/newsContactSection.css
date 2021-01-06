@@ -8,14 +8,16 @@ scroll-ly {
 
 card-container {
   position: absolute;
-  width: 80%;
+  width: 65%;
   height: 100%;
   top: 0;
   left: 35%;
   display: flex;
   overflow-y: auto;
   transform: translateY(.1px);
-  scroll-snap-type: x mandatory;
+  
+  padding-left: 250px;
+  box-sizing: border-box;
 }
 
 

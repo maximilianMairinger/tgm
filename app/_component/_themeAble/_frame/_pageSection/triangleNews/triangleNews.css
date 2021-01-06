@@ -54,7 +54,6 @@ card-container {
   transform: translateY(.1px);
   padding-left: 200px;
   box-sizing: border-box;
-  padding-right: 200px;
 
   /* scroll-snap-type: x mandatory; */
   

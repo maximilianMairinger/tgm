@@ -12,6 +12,7 @@ import HighlightAbleIcon from "../../../../_themeAble/_icon/_highlightAbleIcon/h
 import "../../../../_themeAble/_card/_infoCard/infoCard"
 import { scrollAnimationEndWithMargin, scrollAnimationStart, scrollAnimationEnd, pointerFadinPos, tgmPosition } from "./conf";
 import "./../../../../image/image"
+import "./../../../../_themeAble/_card/_infoCard/newsCard/newsCard"
 
 
 
@@ -30,7 +31,7 @@ const vienna = {
 
 
 
-export default declareComponent("news-contact-section", class extends PageSection {
+export default class NewsContactSection extends PageSection {
   private mapElem = this.q("svg g#map")
   private allSvg = this.q("svg g#all")
   private allSvg2 = this.q("svg g#all2")
@@ -461,4 +462,6 @@ export default declareComponent("news-contact-section", class extends PageSectio
   pug() {
     return require("./newsContactSection.pug").default
   }
-});
+}
+
+declareComponent("news-contact-section", NewsContactSection)

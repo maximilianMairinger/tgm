@@ -8,7 +8,7 @@ export default class NewsCard extends InfoCard {
         super();
         if (heading) this.heading(heading)
         if (note) this.note(note)
-        if (thumbnail) this.note(thumbnail)
+        if (thumbnail) this.thumbnail(thumbnail)
         if (href) this.href(href)
         if (contentTitle) this.contentTitle(contentTitle)
         if (content) this.content(content)

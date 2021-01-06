@@ -10,7 +10,7 @@ build:
   stage: build
   script:
     - npm install
-    - npm run tryBuild
+    - npm run jsBuild
   only:
     - dev
     - master

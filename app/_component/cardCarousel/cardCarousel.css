@@ -30,11 +30,11 @@ component-body {
   scroll-snap-type: x proximity; */
 }
 
-component-body:not(.wrap) {
+:host(:not(.wrap)) {
   flex-wrap: nowrap;
 }
 
-component-body.wrap {
+:host(.wrap) {
   flex-wrap: wrap;
 }
 
@@ -57,15 +57,15 @@ component-body::-webkit-scrollbar { /* WebKit */
     margin-right: 0;
     width: 100%;
   }
-  component-body:not(.wrap) c-icon-card:first-of-type {
+  :host(:not(.wrap)) c-icon-card:first-of-type {
     margin-left: 40px;
   }
 
-  component-body:not(.wrap) c-icon-card {
+  :host(:not(.wrap)) c-icon-card {
     margin-bottom: 0;
   }
 
-  c-icon-card {
+  :host(.wrap) c-icon-card {
     width: 100%;
     height: 53vw;
   }

@@ -61,10 +61,10 @@ export default class CardCarousel extends Component {
       if (to !== this._wrap) {
         this._wrap = to
         if (to) {
-          this.elementBody.addClass("wrap")
+          this.addClass("wrap")
         }
         else {
-          this.elementBody.removeClass("wrap")
+          this.removeClass("wrap")
         }
       }
       return this

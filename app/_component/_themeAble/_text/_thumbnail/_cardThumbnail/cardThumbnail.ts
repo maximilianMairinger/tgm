@@ -5,7 +5,7 @@ import CardCarousel from "../../../../cardCarousel/cardCarousel";
 export default abstract class CardThumbnail extends Thumbnail {
   constructor(...cards: IconCard[]) {
     super()
-    this.apd(new CardCarousel(cards, true))
+    this.apd(new CardCarousel(cards, false))
   }
 
   stl() {

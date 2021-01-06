@@ -1,5 +1,5 @@
 c-card-carousel {
-  position: relative;
+  position: absolute;
   top: 100%;
   display: inline-block;
   /* height: 250px; */
@@ -11,6 +11,10 @@ c-card-carousel {
   /* align-items: center; */
   width: 100%;
   z-index: 2;
+}
+
+c-card-carousel.wrap {
+  position: relative;
 }
 
 /* card-container > * {

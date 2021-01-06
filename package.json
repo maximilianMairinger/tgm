@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "compressImages": "image-web app/res/img public/res/img --resolutions 3K --algorithms jpg,webp,avif",
     "devApp": "concurrently \"npm run buildDevReplServer\" \"node devServerInit.js --dev repl\"        \"npm run buildDevApp\"      \"npm run buildDevSw\"          -n \"serv,node,_app,sewo\" -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold,bgCyan.bold\"",
     "devHeadless": "concurrently \"npm run buildDevReplServer\" \"node devHeadlessServerInit.js --dev repl\"        \"npm run buildDevApp\"      \"npm run buildDevSw\"          -n \"serv,node,_app,sewo\" -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold,bgCyan.bold\"",
     "devServer": "concurrently \"npm run buildDevServer\"     \"node devServerInit.js --dev server\"      \"npm run buildDevReplApp\"                                  -n \"serv,node,_app\"      -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold,bgCyan.bold\"",
@@ -41,6 +42,7 @@
     "express": "^4.17.1",
     "express-ws": "^4.0.0",
     "file-loader": "^6.1.1",
+    "image-web": "^1.2.1",
     "nodemon": "^2.0.4",
     "open": "^7.3.0",
     "postcss-loader": "^3.0.0",

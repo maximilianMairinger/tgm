@@ -66,7 +66,7 @@ export default class ElektronikPage extends LazySectionedPage {
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 12. Stock");
           imageTextBlob.email("office-hel@tgm.ac.at");
           imageTextBlob.tel("01 33 126 320");
-          imageTextBlob.image('url("/res/img/biomedKontakt.png")');
+          imageTextBlob.image('elContact');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

@@ -88,16 +88,13 @@ thumbnail-box{
     backface-visibility: hidden;
 }
 
-thumbnail-pic{
+c-image {
     position: absolute;
     transform: skewY(1deg);
     -webkit-transform: skewY(1deg);
     top: -5%;
     height: 110%;
     width: 100%;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 content-box{

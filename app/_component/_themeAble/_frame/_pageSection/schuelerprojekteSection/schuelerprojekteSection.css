@@ -17,7 +17,7 @@ c-textblob{
 }
 
 c-tablet-blob{
-    background: url("../../../../../res/img/schuelerprojekteBackground.svg") center center no-repeat;
+    background: url("../../../../../res/svg/schuelerprojekteBackground.svg") center center no-repeat;
     background-size: min(90%, 900px) 100%;
 }
 

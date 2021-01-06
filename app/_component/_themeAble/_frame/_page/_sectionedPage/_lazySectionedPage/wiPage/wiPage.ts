@@ -79,7 +79,7 @@ export default class WIPage extends LazySectionedPage {
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 5. Stock");
           imageTextBlob.email("georg.angerer@tgm.ac.at");
           imageTextBlob.tel("0664 80126262");
-          imageTextBlob.image('url("/res/img/wiKontakt.png")');
+          imageTextBlob.image('wiKontakt');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

@@ -5,6 +5,8 @@ import {Theme} from "../../themeAble";
 import Textblob from "../../_text/textblob/textblob";
 import "../../../_themeAble/_icon/zertificateMan/zertificateMan"
 import FastAverageColor from 'fast-average-color';
+import Image from "../../../image/image"
+import "../../../image/image"
 
 
 export default abstract class InfoCard extends Card {
@@ -39,18 +41,15 @@ export default abstract class InfoCard extends Card {
         else return this.q("note-text").text()
     }
 
+    private img = this.q("c-image") as Image
     thumbnail():string
     thumbnail(url:string):void
     thumbnail(url?:string){
         if(url !== undefined) {
-            if (url === null) url = "/res/img/blog_default.jpg"
-            this.q("thumbnail-pic").css({'backgroundImage': url});
+            if (url === null) url = "blog_default"
+            this.img.src(url)
             if (!this.customColor) {
-                let quickFix = ce("img")
-                quickFix.css({position: "absolute", display: "none"})
-                quickFix.src = url
-                document.body.apd(quickFix as any)
-                quickFix.remove()
+                
                 let averageColor = new FastAverageColor();
                 averageColor.getColorAsync(url).then(color => {
                     let rgba = "rgba(".concat(color.value[0].toString(), ",", color.value[1].toString(), ",", color.value[2].toString(), ", 0.5)");

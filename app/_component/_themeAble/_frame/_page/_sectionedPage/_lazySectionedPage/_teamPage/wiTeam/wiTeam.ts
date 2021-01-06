@@ -43,7 +43,7 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
                     leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 5. Stock");
                     leitungImageTextblob.email("georg.angerer@tgm.ac.at");
                     leitungImageTextblob.tel("0664 80126262");
-                    leitungImageTextblob.image('url("/res/img/team_1.png")');
+                    leitungImageTextblob.image('team_1');
                     // leitungImageTextblob.stellvertreter([{"name":"Stefan Hertl", "email":"shertl@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
@@ -61,7 +61,7 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
                     schuelerImageTextblob.address("Wexstraße 19-23, 1200 Wien / 11. Stock");
                     schuelerImageTextblob.email("kyigitbilek@student.tgm.ac.at");
                     // schuelerImageTextblob.tel("+43 ‭650 7311330‬");
-                    schuelerImageTextblob.image('url("/res/img/team_2.jpg")');
+                    schuelerImageTextblob.image('team_2');
                     schuelerImageTextblob.stellvertreter([{"name":"Jakob Masching", "email":"jmasching@student.tgm.ac.at "}])
                     return new WrapperSection(schuelerImageTextblob);
                 }

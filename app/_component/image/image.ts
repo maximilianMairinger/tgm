@@ -30,18 +30,20 @@ export default class Image extends Component {
       const elem = ce("source") as HTMLSourceElement & {setSource: (to: string) => string}
       elem.type = typePrefix + format
       elem.setSource = (to: string) => elem.srcset = to + format
-      this.elems.add(elem)  
+      this.elems.add(elem)
     }
 
     this.img = ce("img") as HTMLImageElement & {setSource: (to: string) => string}
     this.img.setSource = (to) => this.img.src = to + fallbackFormat
     this.elems.add(this.img as any)
 
+    this.elementBody.apd(...this.elems)
+
 
     
     this.ready = new Promise((res) => {
-      (this.elementBody as any as HTMLImageElement).onload = () => {
-        this.elementBody.anim({opacity: 1})
+      (this.img as any as HTMLImageElement).onload = () => {
+        this.img.anim({opacity: 1})
         res()
       }
     })

@@ -66,7 +66,7 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 9. Stock");
           imageTextBlob.email("office-hit@tgm.ac.at");
           imageTextBlob.tel("+43 1 33126 291");
-          imageTextBlob.image('url("/res/img/itContact.jpg")');
+          imageTextBlob.image('itContact');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

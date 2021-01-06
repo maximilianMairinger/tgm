@@ -2,11 +2,12 @@ import "../../../_text/imageTextblob/imageTextblob";
 import "../../../_icon/bigNewsTriangle/bigNewsTriangle"
 import "../../../_card/_infoCard/newsCard/newsCard"
 import PageSection from "../pageSection"
-import NewsCard from "../../../_card/_infoCard/newsCard/newsCard";
+import NewsCard, {WEEKDAYS} from "../../../_card/_infoCard/newsCard/newsCard";
 import { Theme } from "../../../themeAble";
 import declareComponent from "../../../../../lib/declareComponent";
 import OverflowX from "../../../overflowX/overflowX";
 import Button from "../../../_button/button";
+import * as domain from "../../../../../lib/domain";
 
 
 
@@ -31,14 +32,13 @@ export default class TriangleNews extends PageSection {
       contentTitle: string,
       content: string
     }[]
-  }, api=false) {
+  }, api=false, tags?:string[]) {
     super("dark")
-    this.overflowX = new OverflowX(new Button(), new Button(), api)
+    this.overflowX = new OverflowX(new Button(), new Button(), api, tags.add("news"), NewsCard.apiParser)
     this.overflowX.padding(false, 25)
     this.overflowX.theme(this.theme())
     this.cardContainer.append(this.overflowX)
-    console.log("API_2:" + api)
-    if(!api) {
+    if(!api || !tags) {
       for (let card of content.cards) {
         let cardElem = new NewsCard()
         for (const k in card) {
@@ -49,6 +49,8 @@ export default class TriangleNews extends PageSection {
     }
 
 
+
+
     for (const k in content.text) {
       this.imageTextblob[k](content.text[k])
     }
@@ -57,6 +59,7 @@ export default class TriangleNews extends PageSection {
     
 
   }
+
 
   //todo: doesnt work with news cards
   theme(): Theme

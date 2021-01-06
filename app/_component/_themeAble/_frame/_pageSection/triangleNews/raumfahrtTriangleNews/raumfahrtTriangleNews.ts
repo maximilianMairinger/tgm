@@ -17,7 +17,7 @@ export default class RaumfahrtTriangleNews extends TriangleNews {
         {heading: "Montag", note: "20.04.20", thumbnail: "/res/img/robot.png", href: "/", contentTitle: "HRT Rover landet am Mars", content: "Ein Rover des TGM Robotikteams ist am Mars gelandet und hilft bei der Suche nach Wasser!"},
         {heading: "Donnerstag", note: "16.04.20", thumbnail: "/res/img/ball.jpg", href: "/", contentTitle: "TGM-Ball", content: "Der 100. TGM-Ball findet kommenden Donnerstag statt, jetzt Tickets sichern!"}
       ]
-    }, api)
+    }, api, ["rt"])
   }
   
   stl() {

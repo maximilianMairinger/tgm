@@ -11,8 +11,6 @@ import NewsCard from "../_card/_infoCard/newsCard/newsCard";
 import * as domain from "../../../lib/domain";
 import local from "../../../lib/formatTime";
 
-//todo: make dynamic
-const ABTEILUNG:string = "rt";
 //todo: change after deployment to root url
 const api = new GhostContentAPI({
     url: 'https://dev.tgmrebrand.xyz',
@@ -20,15 +18,6 @@ const api = new GhostContentAPI({
     version: 'v3'
 });
 
-const WEEKDAYS = [
-    "Sontag",
-    "Montag",
-    "Dienstag",
-    "Mittwoch",
-    "Donnerstag",
-    "Freitag",
-    "Samstag"
-]
 export default class OverflowX extends ThemeAble {
 
     private lastScrollLeft = 0;
@@ -104,10 +93,10 @@ export default class OverflowX extends ThemeAble {
         this.updating = false;
     }
 
-    constructor(next?: Button, previous?: Button, api?) {
+    constructor(next?: Button, previous?: Button, api?, tags?:string[], apiParser?) {
         super(false)
-        if(api){
-            this.apiData()
+        if(api && tags && apiParser){
+            this.apiData(tags, apiParser)
         }
         else {
             let children = []
@@ -227,32 +216,19 @@ export default class OverflowX extends ThemeAble {
 
 
     //todo: quick-fix (only news) make more abstract
-    private async apiData(){
+    private async apiData(tags:string[], apiParser){
         let blogData: any
         try {
-            blogData = await api.posts.browse({filter:"tag:news+tag:"+ABTEILUNG})
+            blogData = await api.posts.browse({filter:tags.map(tag => "tag:" + tag).join("+")})
         }
         catch(e) {
             console.error("problem with project api")
         }
-        blogData.forEach(post=>this.append(this.apiParser(post)));
+        blogData.forEach(post=>this.append(apiParser(post)));
 
     }
 
     //todo: maybe replace with lambda later
-    private apiParser(post) : HTMLElement{
-        const domainCommon = [...domain.domainIndex].rmI(domain.domainIndex.length - 1).join(domain.dirString) + domain.dirString
-        let newsCard = new NewsCard(
-            WEEKDAYS[new Date(post.published_at).getDay()],
-            new Date(post.published_at),
-            post.feature_image,
-            domainCommon + post.slug,
-            post.title,
-            post.excerpt,
-        );
-        return newsCard
-    }
-
     //todo: also theme children
     theme(): Theme
     theme(to: Theme): this

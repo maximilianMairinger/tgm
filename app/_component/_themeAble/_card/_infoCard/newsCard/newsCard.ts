@@ -1,6 +1,17 @@
 import declareComponent from "../../../../../lib/declareComponent";
 import local from "../../../../../lib/formatTime";
 import InfoCard from "../infoCard";
+import * as domain from "../../../../../lib/domain";
+
+export const WEEKDAYS = [
+    "Sontag",
+    "Montag",
+    "Dienstag",
+    "Mittwoch",
+    "Donnerstag",
+    "Freitag",
+    "Samstag"
+];
 
 export default class NewsCard extends InfoCard {
 
@@ -23,6 +34,19 @@ export default class NewsCard extends InfoCard {
             this.q("note-text").text(local.formatDate(note));
         } else if (typeof note === 'string') super.note(note as string);
         else return this.q("note-text").text();
+    }
+
+    static apiParser(post) : HTMLElement{
+        const domainCommon = [...domain.domainIndex].rmI(domain.domainIndex.length - 1).join(domain.dirString) + domain.dirString
+        let newsCard = new NewsCard(
+            WEEKDAYS[new Date(post.published_at).getDay()],
+            new Date(post.published_at),
+            post.feature_image,
+            domainCommon + post.slug,
+            post.title,
+            post.excerpt,
+        );
+        return newsCard
     }
 
     stl(){

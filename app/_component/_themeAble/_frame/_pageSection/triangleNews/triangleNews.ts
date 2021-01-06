@@ -24,7 +24,7 @@ export default class TriangleNews extends PageSection {
       note: string,
       thumbnail: string,
       href: string,
-      contentTitle: string,
+      contenttitle: string,
       content: string
     }[]
   }) {

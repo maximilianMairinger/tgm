@@ -58,7 +58,7 @@ export default declareComponent("ausmacht-section-bg", class extends AusmachtSec
                     note: "highlight",
                     thumbnail: "/res/img/biomedPrototype.jpg",
                     href: baseLink + "zellkultur",
-                    contentTitle: "Zellkulturlabortechnik",
+                    contenttitle: "Zellkulturlabortechnik",
                     content: "Du lernst hier an lebenden Zellen hygienisches Arbeiten mit sterilen Werkbänken und Inkubatoren. Damit bist du bestens gerüstet für die Zukunft der Biomedizinischen Technik."
                 },
                 {
@@ -66,7 +66,7 @@ export default declareComponent("ausmacht-section-bg", class extends AusmachtSec
                     note: "fachpraktisch",
                     thumbnail: "/res/img/biomedLabor.png",
                     href: baseLink + "prototypenbau",
-                    contentTitle: "Prototypenbau",
+                    contenttitle: "Prototypenbau",
                     content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."
                 }
             ]

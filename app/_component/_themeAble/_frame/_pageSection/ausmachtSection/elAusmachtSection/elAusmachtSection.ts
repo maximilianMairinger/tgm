@@ -56,7 +56,7 @@ export default declareComponent("ausmacht-section-el", class extends AusmachtSec
                     note: "highlight",
                     thumbnail: "/res/img/iotElektronik.jpg",
                     href: baseLink + "todo",
-                    contentTitle: "Internet of things",
+                    contenttitle: "Internet of things",
                     content: "TODO"
                 },
                 {
@@ -64,7 +64,7 @@ export default declareComponent("ausmacht-section-el", class extends AusmachtSec
                     note: "fachpraktisch",
                     thumbnail: "/res/img/elektronikWerkstatt.png",
                     href: baseLink + "prototypenbau",
-                    contentTitle: "Prototypenbau",
+                    contenttitle: "Prototypenbau",
                     content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."
                 }
             ]

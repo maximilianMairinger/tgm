@@ -183,7 +183,7 @@ export default class TabletBlob extends Text {
             content: this.apiContentParser(html),
             heading: data.title,
             loaded: false,
-            logo: html.querySelector("img:last-of-type").getAttribute("src"),
+            logo: html.querySelector("td img").getAttribute("src"),
             note: html.querySelector("p:first-child").text(),
             team: html.querySelector("td:first-child").innerHTML.split(/<\s*br\s*\/*>/),
             thumbnail: data.feature_image,
@@ -193,9 +193,8 @@ export default class TabletBlob extends Text {
         this.projectData.add(project)
     }
 
-    //todo: make pictures possible
     private apiContentParser(html:Document):string{
-        return Array.from(html.querySelectorAll("p:nth-child(n+3)")).map(elm => elm.text()).join('<br><br>')
+        return Array.from(html.querySelectorAll("*:nth-child(n + 3):not(table, td, tr)")).map(elm => elm.outerHTML).join('')
     }
 
     theme():Theme

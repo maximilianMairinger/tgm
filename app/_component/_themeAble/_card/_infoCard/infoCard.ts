@@ -36,28 +36,25 @@ export default abstract class InfoCard extends Card {
     note():string
     note(note:string):void
     note(note?:string){
+        debugger
         if(note !== undefined)
             this.q("note-text").text(note)
         else return this.q("note-text").text()
     }
 
     private img = this.q("c-image") as Image
-    thumbnail():string
     thumbnail(url:string):void
-    thumbnail(url?:string){
-        if(url !== undefined) {
-            if (url === null) url = "blog_default"
-            this.img.src(url)
-            if (!this.customColor) {
-                
-                let averageColor = new FastAverageColor();
-                averageColor.getColorAsync(url).then(color => {
-                    let rgba = "rgba(".concat(color.value[0].toString(), ",", color.value[1].toString(), ",", color.value[2].toString(), ", 0.5)");
-                    this.headingbackground(rgba, false);
-                });
-            }
+    thumbnail(url:string){
+        if (url === null) url = "blog_default"
+        this.img.src(url)
+        if (!this.customColor) {
+            
+            let averageColor = new FastAverageColor();
+            averageColor.getColorAsync(url).then(color => {
+                let rgba = "rgba(".concat(color.value[0].toString(), ",", color.value[1].toString(), ",", color.value[2].toString(), ", 0.5)");
+                this.headingbackground(rgba, false);
+            });
         }
-        else return this.q("thumbnail-pic").css('backgroundImage');
     }
 
     headingbackground():string

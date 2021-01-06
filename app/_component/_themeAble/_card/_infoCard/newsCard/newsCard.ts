@@ -19,6 +19,7 @@ export default class NewsCard extends InfoCard {
     note():string
     note(note:string | Date):void
     note(note?:string | Date){
+        debugger
         if(note && new Date(note).toDateString() !== 'Invalid Date'){
             this.q("note-text").text(local.formatDate(note));
         } else if (typeof note === 'string') super.note(note as string);

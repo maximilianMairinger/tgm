@@ -116,11 +116,11 @@ filler-element{
     }
 
     filler-element:first-child{
-        flex: 0 0 var(--spacing) !important;
+        flex: 0 0 calc(10vw - var(--spacing)) !important;
     }
 
     filler-element:nth-child(2){
-        flex: 0 0 calc(var(--spacing) * 2) !important;
+        flex: 0 0 10vw !important;
     }
 
     window-viewer{

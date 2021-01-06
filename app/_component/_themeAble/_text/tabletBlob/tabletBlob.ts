@@ -12,8 +12,6 @@ import * as domain from "../../../../lib/domain";
 
 export type Project = { heading: string, note: string, logo: string, team: string[], thumbnail: string, title: string, content: string, loaded:boolean}
 
-//todo: make dynamic
-const ABTEILUNG:string = "rt";
 //todo: change after deployment to root url
 const api = new GhostContentAPI({
     url: 'https://dev.tgmrebrand.xyz',
@@ -142,9 +140,9 @@ export default class TabletBlob extends Text {
         }, 32)
     }
 
-    constructor(projekte?: JSON[] | Project[], api?:boolean){
+    constructor(projekte?: JSON[] | Project[], api?:boolean, abt?:string){
         super()
-        if(api) this.apiData().then(() => this.build());
+        if(api) this.apiData(abt).then(() => this.build());
         else if(projekte) {
             this.projectList(projekte)
             this.build()
@@ -163,11 +161,11 @@ export default class TabletBlob extends Text {
         }
     }
 
-    private async apiData(){
+    private async apiData(abt: string){
         this.projectData = []
         let blogData: any
         try {
-            blogData = await api.posts.browse({filter:"tag:projekt+tag:"+ABTEILUNG})
+            blogData = await api.posts.browse({filter:"tag:projekt+tag:"+abt})
         }
         catch(e) {
             console.error("problem with project api")

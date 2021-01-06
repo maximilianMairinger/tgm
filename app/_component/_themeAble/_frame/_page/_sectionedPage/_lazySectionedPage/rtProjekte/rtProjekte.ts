@@ -181,7 +181,7 @@ export default declareComponent("rt-projekte", class RaumfahrtProjekte extends L
             }
           ] as Project[];
 
-          return new projekte(projectData, true)
+          return new projekte(projectData, true, "rt")
             }
         ), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
       },

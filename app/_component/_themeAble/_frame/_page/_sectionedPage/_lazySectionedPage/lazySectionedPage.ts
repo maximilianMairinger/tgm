@@ -38,11 +38,14 @@ export default abstract class LazySectionedPage extends SectionedPage {
     const loadedElementsIndex = {"-1": this.loadingIndecatorTop}
     loadedElementsIndex[sectionIndex.size] = this.loadingIndecatorBot
     const attach = constructAttachToPrototype(loadedElementsIndex)
+    //@ts-ignore
     attach("0", {set: (e) => {
       this.loadingIndecatorTop.remove()
       attach("0", {value: e})
     }})
+    
     const lastIndex = (sectionIndex.size - 1) + ""
+    //@ts-ignore
     attach(lastIndex, {set: (e) => {
       this.loadingIndecatorBot.remove()
       attach(lastIndex, {value: e})

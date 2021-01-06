@@ -215,7 +215,6 @@ export default class OverflowX extends ThemeAble {
     }
 
 
-    //todo: quick-fix (only news) make more abstract
     private async apiData(tags:string[], apiParser){
         let blogData: any
         try {
@@ -228,8 +227,6 @@ export default class OverflowX extends ThemeAble {
 
     }
 
-    //todo: maybe replace with lambda later
-    //todo: also theme children
     theme(): Theme
     theme(to: Theme): this
     theme(to?: Theme): any {

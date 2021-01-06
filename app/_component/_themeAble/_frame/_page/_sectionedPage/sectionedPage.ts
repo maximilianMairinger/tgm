@@ -2,13 +2,13 @@ import Page from "../page";
 import * as domain from "./../../../../../lib/domain"
 import scrollTo from "animated-scroll-to";
 import WaapiEasing from "waapi-easing";
-import { ResourcesMap } from "../../../../../lib/lazyLoad";
+import { PriorityPromise, ResourcesMap } from "../../../../../lib/lazyLoad";
 import PageSection from "../../_pageSection/pageSection";
 import { EventListener, ScrollData } from "extended-dom";
 import { Data, DataCollection, DataSubscription } from "josm";
 import { constructIndex } from "key-index"
 
-const padding = -70
+export const scrollToPadding = -70
 
 const windowMargi = -0.33334
 const windowMargin = (windowMargi * 100) + "%"
@@ -158,44 +158,33 @@ export type Alias = ScrollProgressAliasIndex | SimpleAlias
 
 type SectionIndex = {[name in Name]: HTMLElement | QuerySelector}
 type Name = string
-type FullSectionIndex = ResourcesMap | SectionIndex | Promise<ResourcesMap | SectionIndex>
+type FullSectionIndex = ResourcesMap | SectionIndex
 export type QuerySelector = string
-export default abstract class SectionedPage<T extends FullSectionIndex> extends Page {
-  protected readonly sectionIndex: T extends Promise<any> ? Promise<ResourcesMap> : ResourcesMap
-  public readonly sectionList: T extends Promise<any> ? Promise<Data<string[]>> : Data<string[]>
+export default abstract class SectionedPage extends Page {
+  protected readonly sectionIndex: ResourcesMap
+  public readonly sectionList: Data<string[]>
   private inScrollAnimation: Data<Symbol> = new Data()
 
   protected scrollToSection: (to?: number, speed?: number, force?: boolean) => Promise<void>
   private scrollToSectionFunctionIndex = constructIndex((section: PageSection) => this.constructScrollTo(section))
 
-  constructor(sectionIndex: T, public domainLevel: number, protected setPage: (domain: string) => void, protected sectionChangeCallback?: (section: string) => void, protected readonly sectionAliasList: AliasList = new AliasList(), protected readonly mergeIndex: {[part in string]: string} = {}) {
+  constructor(sectionIndex: FullSectionIndex, protected sectionChangeCallback?: (section: string) => void, protected readonly sectionAliasList: AliasList = new AliasList(), protected readonly mergeIndex: {[part in string]: string} = {}) {
     super()
-
+    
     let that = this
     this.scrollToSection = function(to?: number, speed?: number, force?: boolean) {
       if (!(this instanceof PageSection)) console.warn("Unable to scrollTo this. This is not instanceof PageSection.")
       return that.scrollToSectionFunctionIndex(this)(to, speed)
     }
 
-    if (sectionIndex instanceof Promise) {
-      let resSectionIndex: Function
-      this.sectionIndex = new Promise((r) => {resSectionIndex = r}) as any
 
-      let resSectionList: Function
-      this.sectionList = new Promise((r) => {resSectionList = r}) as any
-
-      sectionIndex.then((sectionIndex) => {
-        let r = this.prepSectionIndex(sectionIndex)
-        resSectionIndex(r.sectionIndex)
-        resSectionList(r.sectionList)
-      })
-      
-    }
-    else {
-      let r = this.prepSectionIndex(sectionIndex)
-      this.sectionIndex = r.sectionIndex as any
-      this.sectionList = r.sectionList as any
-    }
+    let r = this.prepSectionIndex(sectionIndex)
+    this.sectionIndex = r.sectionIndex as any
+    this.sectionList = r.sectionList as any
+    (this.sectionList as Data<string[]>).get((e) => {
+      //@ts-ignore
+      this.defaultDomain = e.first
+    })
   }
 
   private prepSectionIndex(sectionIndex: any) {
@@ -220,7 +209,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     let dataList: Data<string[]>[] = []
     map.forEach((val, key) => {
       let mer = this.merge(key)
-      if (mer !== "") dataList.add(this.sectionAliasList.aliasify(mer))
+      dataList.add(this.sectionAliasList.aliasify(mer))
     })
 
     let sectionList: Data<string[]> = new Data()
@@ -237,7 +226,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
   private lastSectionName: string
   private activateSectionName(name: string) {
-    if (name === "") name = this.defaultDomain
+    if (name === "") name = this.childsDefaultDomain
     if (this.sectionChangeCallback && this.lastSectionName !== name) this.sectionChangeCallback(name)
     this.lastSectionName = name
   }
@@ -247,73 +236,76 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
     domain.set(name, this.domainLevel, false)
   }
 
-  private defaultDomain: string
+  private curSectionProm: PriorityPromise<PageSection>
+  protected currentDomainFragment: string
+  private verticalOffset: number
+  tryNavigationCallback(domainFragment: string) {
+    this.verticalOffset = scrollToPadding
+    if (this.sectionAliasList.reverseIndex[domainFragment] !== undefined) {
+      let reverseAlias = this.sectionAliasList.reverseIndex[domainFragment]
+      let originalDomain = domainFragment
+      if (reverseAlias instanceof SimpleAlias.Reverse) {
+        domainFragment = reverseAlias.root
+      }
+      else if (reverseAlias instanceof ScrollProgressAliasIndex.Reverse) {
+        domainFragment = reverseAlias.root
+        this.verticalOffset += reverseAlias.progress - scrollToPadding + .5
+      }
+      this.activateSectionName(originalDomain)
+    }
+    else {
+      this.currentlyActiveSectionRootName = this.sectionAliasList.getRootOfAlias(domainFragment)
+      this.activateSectionName(this.sectionAliasList.aliasify(this.merge(domainFragment)).get().first)
+    }
+
+    return !!(this.curSectionProm = this.sectionIndex.get(this.currentDomainFragment = domainFragment))
+  }
+
+  async navigationCallback() {
+    let active = this.active
+    let scrollAnimation: any
+
+    this.inScrollAnimation.set(scrollAnimation = Symbol())
+
+
+    let elem = await this.curSectionProm
+    
+
+    this.userInitedScrollEvent = false
+    if (active) {
+      await scrollTo(elem, {
+        cancelOnUserAction: true,
+        verticalOffset: this.verticalOffset,
+        speed: scrollAnimationSpeed,
+        elementToScroll: this.elementBody,
+        easing
+      })
+    }
+    else {
+      this.elementBody.scrollTop = elem.offsetTop + scrollToPadding
+    }
+
+    
+    
+    
+    if (scrollAnimation === this.inScrollAnimation.get()) {
+      this.inScrollAnimation.set(undefined)
+      this.userInitedScrollEvent = true
+    }
+  }
+
+
+
+  private childsDefaultDomain: string
   private firstDomain: string
   private mainIntersectionObserver: IntersectionObserver
   private currentlyActiveSectionRootName: string
   private intersectingIndex: Element[] = []
-  async initialActivationCallback() {
-    let sectionIndex = await this.sectionIndex as ResourcesMap
-
-    let entries = sectionIndex.entries()
-    this.firstDomain = this.defaultDomain = entries.next().value[0]
-    if (this.defaultDomain === "") this.defaultDomain = entries.next().value[0]
-    this.domainSubscription = domain.get(this.domainLevel, (domainFragment: string) => {
-      return new Promise<boolean>(async (res) => {
-        let verticalOffset = padding
-        
-        if (this.sectionAliasList.reverseIndex[domainFragment] !== undefined) {
-          let reverseAlias = this.sectionAliasList.reverseIndex[domainFragment]
-          let originalDomain = domainFragment
-          if (reverseAlias instanceof SimpleAlias.Reverse) {
-            domainFragment = reverseAlias.root
-          }
-          else if (reverseAlias instanceof ScrollProgressAliasIndex.Reverse) {
-            domainFragment = reverseAlias.root
-            verticalOffset += reverseAlias.progress - padding + .5
-          }
-          this.activateSectionName(sectionIndex.deslugify(originalDomain))
-        }
-
-        else {
-          this.currentlyActiveSectionRootName = this.sectionAliasList.getRootOfAlias(domainFragment)
-          this.activateSectionName(this.sectionAliasList.aliasify(this.merge(sectionIndex.deslugify(domainFragment))).get().first)
-        }
-
-        
+  initialActivationCallback() {
 
 
-        let scrollAnimation: any
-        this.inScrollAnimation.set(scrollAnimation = Symbol())
-        this.userInitedScrollEvent = false
 
-        let elem = await sectionIndex.getSlugifyed(domainFragment) as HTMLElement
-        if (elem !== undefined) {
-          res(true)
-          await scrollTo(elem, {
-            cancelOnUserAction: true,
-            verticalOffset,
-            speed: scrollAnimationSpeed,
-            elementToScroll: this.elementBody,
-            easing
-          })
-          
-          if (scrollAnimation === this.inScrollAnimation.get()) {
-            this.inScrollAnimation.set(undefined)
-            this.userInitedScrollEvent = true
-          }
-        }
-        else {
-          this.setPage(null)
-          this.inScrollAnimation.set(undefined)
-          res(false)
-        }
-      })
-     
-    }, true, this.firstDomain)
-
-
-    let currentlyActiveSectionElem = await sectionIndex.getSlugifyed(this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)) as any as PageSection
+    let currentlyActiveSectionElem
     let globalToken: Symbol
     let aliasSubscriptions: DataSubscription<unknown[]>[] = []
     let localSegmentScrollDataIndex = constructIndex((pageSectionElement: PageSection) => this.elementBody.scrollData().tunnel(prog => prog - pageSectionElement.offsetTop))
@@ -349,7 +341,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
         let myToken = globalToken = Symbol("Token")
 
         // TODO: Optimize look into new methods of sectionIndex; 
-        sectionIndex.forEach(async (val, root) => {
+        this.sectionIndex.forEach(async (val, root) => {
           if ((await val) === elem) {
             if (myToken !== globalToken || this.currentlyActiveSectionRootName === root) return
             this.currentlyActiveSectionRootName = root
@@ -357,7 +349,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
             if (currentlyActiveSectionElem !== elem) {
               if (currentlyActiveSectionElem !== undefined) currentlyActiveSectionElem.deactivate()
-              elem.activate()
+              elem.activate() // todo: check if thats actually correct
               currentlyActiveSectionElem = elem
             }
 
@@ -445,7 +437,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       rootMargin: windowMargin
     })
 
-    sectionIndex.forEach(async (section: Promise<PageSection>) => {
+    this.sectionIndex.forEach(async (section: Promise<PageSection>) => {
       let sec = await section
       
       let localScrollProgressData = sec.localScrollProgressData
@@ -463,7 +455,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
       }
     })
 
-    if (currentlyActiveSectionElem === undefined) return false
+    if (currentlyActiveSectionElem === undefined) return
     else currentlyActiveSectionElem.activate()
   }
 
@@ -502,22 +494,10 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   }
 
   private constructScrollTo(section: PageSection) {
-    let sectionIndex: ResourcesMap
     let sectionRootName: string
-    const init = (secInd: any) => {
-      sectionIndex = secInd
-      sectionRootName = sectionIndex.getLoadedKeyOfResource(section)
-    }
-
+    sectionRootName = this.sectionIndex.getLoadedKeyOfResource(section)
     let whileWaitingQueue = []
-    if (this.sectionIndex instanceof Promise) {
-      this.sectionIndex.then((s) => {
-        init(s)
-        whileWaitingQueue.call().clear()
-      })
-      
-    }
-    else init(sectionIndex)
+    
 
 
     const go = async (verticalOffset: number, speed: number, force: boolean) => {
@@ -562,7 +542,7 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
 
     return (to?: number, speed: number = scrollAnimationSpeed, force: boolean = false) => {
       return new Promise((res) => {
-        let off = to !== undefined ? to : padding
+        let off = to !== undefined ? to : scrollToPadding
         let gogo = () => go(off, speed, force).then(res)
         if (sectionRootName === undefined) whileWaitingQueue.add(gogo)
         else gogo()
@@ -573,26 +553,23 @@ export default abstract class SectionedPage<T extends FullSectionIndex> extends 
   
 
 
-  private domainSubscription: domain.DomainSubscription
-
   protected async activationCallback(active: boolean) {
     //@ts-ignore
     let sectionIndex: ResourcesMap = await this.sectionIndex
-    this.domainSubscription.vate(active)
 
 
     if (active) {
-      let init = this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)
-      let sec = sectionIndex.getSlugifyed(init)
-      if (sec === undefined) return false
+      // let init = this.sectionAliasList.getRootOfAlias(this.domainSubscription.domain)
+      // let sec = sectionIndex.get(init)
+      // if (sec === undefined) return false
     
-      sec.priorityThen()
-      sec.then((e: PageSection) => {
-        let verticalOffset = padding + e.offsetTop
-        let ali = this.sectionAliasList.reverseIndex[this.domainSubscription.domain]
-        if (ali) if (ali instanceof ScrollProgressAliasIndex.Reverse) verticalOffset += ali.progress - padding + .5
-        this.elementBody.scrollBy(0, verticalOffset)
-      })
+      // sec.priorityThen()
+      // sec.then((e: PageSection) => {
+      //   let verticalOffset = padding + e.offsetTop
+      //   let ali = this.sectionAliasList.reverseIndex[this.domainSubscription.domain]
+      //   if (ali) if (ali instanceof ScrollProgressAliasIndex.Reverse) verticalOffset += ali.progress - padding + .5
+      //   this.elementBody.scrollBy(0, verticalOffset)
+      // })
           
 
       sectionIndex.forEach(async (elem: any) => {

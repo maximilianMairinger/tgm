@@ -3,12 +3,12 @@ import LazySectionedPage from "../lazySectionedPage"
 import { set } from "../../../../../../../lib/domain"
 import { ImportanceMap, Import } from "../../../../../../../lib/lazyLoad"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
-import ParameterThumbnail from "../../../../../../_themeAble/_text/_thumbnail/parameterThumbnail/parameterThumbnail";
+import ParameterThumbnail from "../../../../../../_themeAble/_text/_thumbnail/thumbnail";
 import TeamSection from "../../../../../../_themeAble/_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../../_themeAble/_text/imageTextblob/imageTextblob"
 
 export default declareComponent("schularzt", class Schularzt extends LazySectionedPage {
-  constructor(setPage: (domain: string) => void, domainLevel: number, sectionChangeCallback?: (section: string) => void) {
+  constructor(sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
         {
@@ -21,7 +21,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
           thumbnail.background('url("/res/img/schularzt.png")');
           return new WrapperSection(thumbnail, 'dark');
         }
-        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_themeAble/_text/_thumbnail/parameterThumbnail/parameterThumbnail")
+        ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_themeAble/_text/_thumbnail/thumbnail")
         },
         {
             key: new Import("auftrag", 1, (_TeamSection: typeof Element) =>
@@ -44,7 +44,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
                     schularzt.heading("Dr. Hafner");
                     schularzt.subheading("Gerhard");
                     schularzt.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 16:00 Uhr. ")
-                    schularzt.address("Wexstraße 123 / 1. Stock / T133");
+                    schularzt.address("Wexstraße 19-23, 1200 Wien / 1. Stock / T133");
                     schularzt.email("g.hafner@ergomobil.at  ");
                     schularzt.tel("+43 1 337 69 123");
                     schularzt.image('url("/res/img/student_1.jpg")');
@@ -61,7 +61,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
                     schularzt.heading("Dr. Kripser");
                     schularzt.subheading("Florian");
                     schularzt.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 13:00 Uhr. ")
-                    schularzt.address("Wexstraße 123 / 1. Stock / T133");
+                    schularzt.address("Wexstraße 19-23, 1200 Wien / 1. Stock / T133");
                     schularzt.email("fkrisper@tgm.ac.at");
                     schularzt.tel("+43 1 33126 291");
                     schularzt.image('url("/res/img/student_2.jpg")');
@@ -69,7 +69,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_themeAble/_text/imageTextblob/imageTextblob")
         },
-    ), domainLevel, setPage, sectionChangeCallback, undefined, {
+    ), sectionChangeCallback, undefined, {
         schularzt2: "schularzt"
     })
 

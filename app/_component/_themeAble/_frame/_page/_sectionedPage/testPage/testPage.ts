@@ -4,21 +4,21 @@ import { set } from "../../../../../../lib/domain"
 import { ResourcesMap } from "../../../../../../lib/lazyLoad"
 
 
-export default declareComponent("test-page", class TestPage extends SectionedPage<{[name: string]: string}> {
-  constructor(setPage: (page: string) => void, sectionChangeCallback?: (section: string) => void, domainLevel = 0) {
+export default declareComponent("test-page", class TestPage extends SectionedPage {
+  constructor(sectionChangeCallback?: (section: string) => void) {
     super({
       tagesschule: ".a",
       abendschule: ".b",
       versuchsanstalt: ".c",
       neues: ".d",
       kontakt: ".e",
-    }, domainLevel, setPage, sectionChangeCallback);
+    }, sectionChangeCallback);
 
 
     this.sectionIndex.forEach((elem, name) => {
       elem.then((e) => {
         e.on("click", () => {
-          set(name, domainLevel)
+          set(name, 1)
         })
       })
     })

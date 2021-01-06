@@ -63,14 +63,14 @@ export default class LowerNavLink extends ThemeAble {
   public href(): string
   public href(href: string, domainLevel?: number): void
   public href(href?: string, domainLevel?: number): any {
-    return this.buttonElem.link(href, domainLevel)
+    return this.buttonElem.link(href, domainLevel, false, true)
   }
 
   public content(): string
   public content(content: string | Data<string>): void
   public content(content: string | Data<string>): void
   public content(content?: string | Data<string>): any {
-    return this.textElem.text(content)
+    return this.textElem.text(content as any)
   }
 
 
@@ -122,7 +122,7 @@ export default class LowerNavLink extends ThemeAble {
 
 
   stl() {
-    return super.stl() + require("./lowerNavLink.css").toString()
+    return require("./lowerNavLink.css").toString()
   }
   pug() {
     return require("./lowerNavLink.pug").default

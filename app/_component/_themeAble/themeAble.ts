@@ -15,7 +15,6 @@ export default abstract class ThemeAble<T extends false | HTMLElement | HTMLAnch
     
     
 
-    this.themeStyleElement.html(themeIndex[this._theme])
     if (!(this.elementBody instanceof ShadowRoot)) this.sr.insertBefore(this.themeStyleElement, this.elementBody as HTMLElement)
     else this.shadowRoot.append(this.themeStyleElement)
   }
@@ -58,10 +57,6 @@ export default abstract class ThemeAble<T extends false | HTMLElement | HTMLAnch
       this.themeStyleElement.html(themeIndex[this._theme])
     }
     return this
-  }
-
-  stl() {
-    return require("./themeAble.css").toString()
   }
 
 }

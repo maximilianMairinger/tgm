@@ -6,10 +6,11 @@ import { ElementList } from "extended-dom";
 import {Theme} from "../../themeAble";
 import { Data } from "josm";
 import delay from "delay";
-import DateTimeFormat = Intl.DateTimeFormat;
+import AT from "../../../../lib/formatTime"
+
 
 export default class BlogPost extends Text {
-
+  
   private textblob = this.q("c-textblob") as TextBlob;
 
   constructor() {
@@ -28,12 +29,11 @@ export default class BlogPost extends Text {
     return this.textblob.heading(title);
   }
 
-  date():string
-  date(date:Date):void
-  date(date?:Date){
+  date(): string
+  date(date: Date | string): void
+  date(date?: Date | string){
     if(date) {
-      let moment = require('moment');
-      this.q("blog-date").text(moment(date).format("DD.MM.YYYY"));
+      this.q("blog-date").text(AT.formatDate(date));
     }
     else return this.q("blog-date").text();
   }
@@ -48,12 +48,18 @@ export default class BlogPost extends Text {
   htmlcontent():string
   htmlcontent(html:string):void
   htmlcontent(html?:string){
-    if(html) this.q("blog-html").innerHTML = html;
+    if(html) {
+      html = html
+          .replaceAll("<a href", "<c-link link")
+          .replaceAll("<\/a>", "<\/c-link>");
+      this.q("blog-html").innerHTML = html;
+
+    }
     else return this.q("blog-html").innerHTML;
   }
 
   stl() {
-    return super.stl() + require("./blogPost.css").toString()
+    return require("./blogPost.css").toString()
   }
 
   pug() {

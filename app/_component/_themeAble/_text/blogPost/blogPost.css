@@ -4,6 +4,7 @@ blog-post{
     align-items: flex-start;
     width: 650px;
     margin: 0 auto;
+    justify-content: center;
 }
 
 blog-header{
@@ -11,6 +12,8 @@ blog-header{
     flex-direction: column;
     justify-content: stretch;
     align-items: flex-start;
+    margin-left: -5%;
+    width: 110%;
     font-weight: bold;
     margin-bottom: 40px;
 }
@@ -18,14 +21,44 @@ blog-header{
 blog-html{
     display: block;
     max-width: 650px;
+    color: var(--strong-text-color);
+    font-size: 17px;
+    width: 100%;
 }
 
 blog-html *{
     max-width: 650px;
 }
 
+blog-html figure{
+    margin: auto;
+    width: 100%;
+}
+
+blog-html figure *{
+    border-radius: 8px;
+    width: 100%;
+}
+
+blog-html table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+blog-html tr:nth-child(2n - 1) *:not(th){
+    background-color: #f2f2f2
+}
+
+blog-html th, blog-html td {
+    text-align: left;
+    padding: 8px;
+}
+
+
 blog-extra{
-    margin-top: 1px;
+    margin-top: 15px;
     display: flex;
     flex-direction: row;
     align-self: stretch;
@@ -33,7 +66,7 @@ blog-extra{
 
 blog-date{
     font-family: 'PT Mono', monospace;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 blog-extra hr{
@@ -48,7 +81,9 @@ blog-extra hr{
 blog-image{
     position: relative;
     display: block;
-    width: 100%;
+    width: 110%;
+    left: -5%;
+     margin-bottom: 50px;
 }
 
 h2{

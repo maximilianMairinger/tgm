@@ -2,6 +2,7 @@ import ThemeAble from "../themeAble";
 import { EventListener } from "extended-dom";
 import declareComponent from "../../../lib/declareComponent";
 import * as domain from "./../../../lib/domain"
+import { openInNewTab } from "../link/link";
 
 
 const pressedClass = "pressed";
@@ -92,8 +93,8 @@ export default class Button extends ThemeAble<HTMLAnchorElement> {
   private _link: string
   private linkFn: any
   public link(): string
-  public link(to: string, domainLevel?: number, push?: boolean): void
-  public link(to?: string, domainLevel: number = 0, push = true) {
+  public link(to: string, domainLevel?: number, push?: boolean, notify?: boolean): void
+  public link(to?: string, domainLevel: number = 0, push = true, notify?: boolean) {
 
     if (to !== undefined) {
       if (to !== null) {
@@ -102,10 +103,10 @@ export default class Button extends ThemeAble<HTMLAnchorElement> {
         this.elementBody.href = link.href
         this._link = link.link
         this.linkFn = this.addActivationCallback((e) => {
-          if (link.isOnOrigin) {
-            if (e) e.preventDefault()
-            domain.set(to, domainLevel, push)
-          }
+          if (e) e.preventDefault()
+
+          if (link.isOnOrigin) domain.set(to, domainLevel, push, notify)
+          else openInNewTab(to)
         })
         let updateF = () => {
           let link = domain.linkMeta(to, domainLevel)

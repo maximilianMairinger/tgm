@@ -1,81 +1,117 @@
-const superImportant = 1000000
+const loadStates = ["minimalContentPaint", "fullContentPaint", "completePaint"]
+const preloadToLoadStatusAtIndex = 1
 
-export default function init<Func extends () => Promise<any>>(resources: ImportanceMap<any, any>, globalInitFunc?: (instance: any) => void | Promise<void>) {
-  const resolvements = new Map<string, Function>();
-  const indexMap = new ResourcesMap();
-  return function load(initalKey?: string): ResourcesMap {
-    try {
-      if (initalKey !== undefined) resources.getByString(initalKey).key.importance = superImportant;
-    }
-    catch (e) {
-      console.warn("Unexpected initalKey");
-    }
+export default function init<Func extends () => Promise<any>>(resources: ImportanceMap<any, any>, globalInitFunc?: (instance: any, index: number) => void | Promise<void>) {
+  const resolvements = new Map<Import<any, any>, (load: () => Promise<{default: {new(): any}}>, index: number, state: (typeof loadStates)[number]) => void>();
+  const resourcesMap = new ResourcesMap();
 
-    resources.forEach((e: () => Promise<object>, imp) => {
+  resources.forEach((e: () => Promise<object>, imp) => {
 
-      if (imp.val !== undefined) if (indexMap.get(imp.val) === undefined) {
-        let prom = new Promise((res) => {
-          resolvements.set(imp.val, async (a: any) => {
-            let load = a.loadedCallback ? a.loadedCallback() : undefined
-            res(a)
-
-            await Promise.all([...thenResults, load])
-          })
-        })
-
-        let thenResults = []
-        //@ts-ignore
-        prom.priorityThen = function(cb) {
-          let thenRes: any
-          thenResults.add(new Promise((r) => {
-            thenRes = r
-          }))
-          if (!resources.loadedImports.includes(imp)) {
-            imp.importance += superImportant
-            resources.changedImportance = true
-          }
-          
-          return prom.then((a) => {
-            if (cb) {
-              let res = cb(a)
-              if (res instanceof Promise) res.then(thenRes)
-              else thenRes()
-              return res
+    if (imp.val !== undefined) {
+      let instanc: any
+      let resProm: any
+      let prom = new Promise((res) => {
+        resolvements.set(imp, async (load: () => Promise<{default: {new(): any}}>, index: number, state?) => {
+          let loadState = async (load: () => Promise<{default: {new(): any}}>, index: number, state) => {
+            if (!instance[state].done.started) {
+              await instance[state]()
+              instance[state].done.res()
             }
-          })
-        }
-        //@ts-ignore
-        indexMap.set(imp.val, prom);
-      }
-    });
+          }
 
-    
-    //@ts-ignore
-    indexMap.reloadStatusPromises();
+          let instanceProm = ((async () => imp.initer((await load()).default)))();
+          (async () => {
+            async function loado(state) {
+              let instance = await instanceProm
+              if (!instance[state]) {
+                instance[state] = () => {}
+                const p = instance[state].done = Promise.resolve() as any
+                p.yet = p.started = true
+              }
+              else {
+                let r: Function
+                const p = instance[state].done = new Promise((res) => {r = res}) as any
+                p.started = false
+                p.res = () => {
+                  p.yet = true
+                  r()
+                }
+              }
+            }
+            if (state) {
+              await loado(state)
+            }
+            else {
+              const oldLoad = loadState
+              loadState = async (load: () => Promise<{default: {new(): any}}>, index: number, state?) => {
+                if (state) {                
+                  await loado(state)
+                  await oldLoad(load, index, state)
+                }
+              }
 
-    (async () => {
-      await resources.forEachOrdered(async <Mod>(e: () => Promise<{default: {new(): Mod}}>, imp: Import<string, Mod>) => {
-        if (imp.val !== undefined) {
-          let instance = imp.initer((await e()).default);
-          if (globalInitFunc !== undefined) await globalInitFunc(instance);
-          await resolvements.get(imp.val)(instance)
+            }
+          })()
+
+
+          resolvements.set(imp, loadState)
+
           
-        }
-        // just load it (and preseve in webpack cache)
-        else (await e());
-      });
-    })();
-    return indexMap;
+          let instance = await instanceProm
+          
+          
+          if (globalInitFunc !== undefined) await globalInitFunc(instance, index);
+
+          await loadState(load, index, state)
+          
+          if (dontRes) {
+            instanc = instance
+            resProm = res
+          }
+          else {
+            res(instance)
+          }
+        })
+      })
+
+      let dontRes = false
+
+      //@ts-ignore
+      prom.priorityThen = async function(cb?: Function, deepLoad?: boolean) {
+        dontRes = true
+        await resources.superWhiteList(imp, deepLoad)
+        let result: any
+        if (cb) result = await cb(instanc)
+        resProm(instanc)
+        return result !== undefined ? result : instanc
+      }
+      //@ts-ignore
+      resourcesMap.add(imp.val, prom);
+    }
+  });
+
+  //@ts-ignore
+  resourcesMap.reloadStatusPromises();
+
+
+  (resources as any).resolve(<Mod>(load: () => Promise<{default: {new(): Mod}}>, imp: Import<string, Mod>, index: number, state?: any) => {
+    return resolvements.get(imp)(load, index, state)
+  })
+  
+
+
+  return {
+    resourcesMap,
+    importanceMap: resources
   }
 }
 
 import slugify from "slugify"
 import { dirString } from "./domain";
-export function slugifyUrl(url: string) {
-  return url.split(dirString).replace((s) => slugify(s)).join(dirString)
-}
+export const slugifyUrl = (url: string) => url.split(dirString).replace((s) => slugify(s)).join(dirString)
 
-type PriorityPromise = Promise<any> & {priorityThen: (cb?: (a: any) => void) => void}
+
+export type PriorityPromise<T = any> = Promise<T> & {priorityThen: (cb?: (instance: any) => void, deepLoad?: boolean) => any}
 
 export class BidirectionalMap<K, V> extends Map<K, V> {
   public reverse: Map<V, K> = new Map
@@ -90,10 +126,53 @@ export class BidirectionalMap<K, V> extends Map<K, V> {
   }
 }
 
-export class ResourcesMap extends Map<string, PriorityPromise> {
+class MultiKeyMap<K, V> {
+  private index: {key: K, val: V}[]
+  constructor(...index: {key: K, val: V}[]) {
+    this.index = index
+  }
+  add(key: K, val: V) {
+    this.index.add({key, val})
+  }
+  get(key: K, nth: number = 1) {
+    for (let e of this.index) {
+      if (e.key === key) {
+        nth--
+        if (nth === 0) return e.val
+      }
+    }
+  }
+  has(key: K, nth: number = 1) {
+    return !!this.get(key, nth)
+  }
+  forEach(cb: (val: V, key: K) => void) {
+    for (let e of this) {
+      cb(e.val, e.key)
+    }
+  }
+  *[Symbol.iterator](): Iterator<{key: K, val: V}, {key: K, val: V}, any> {
+    for (let e of this.index) {
+      yield e
+    }
+    return this.index.last
+  }
+  entries() {
+    return this[Symbol.iterator]()
+  }
+}
+
+export class ResourcesMap extends MultiKeyMap<string, PriorityPromise> {
   public fullyLoaded: Promise<any>
   public anyLoaded: Promise<any>
-  public loadedIndex: BidirectionalMap<string, any> = new BidirectionalMap
+  public loadedIndex: BidirectionalMap<string, any>
+  constructor(...index: {key: string, val: PriorityPromise}[]) {
+    let toBeAdded = []
+    for (let e of index) {
+      toBeAdded.add({key: slugifyUrl(e.key), val: e.val})
+    }
+    super(...toBeAdded)
+    this.loadedIndex = new BidirectionalMap
+  }
 
   public getLoadedKeyOfResource(resource: any) {
     return this.loadedIndex.reverse.get(resource)
@@ -105,41 +184,14 @@ export class ResourcesMap extends Map<string, PriorityPromise> {
   private reloadStatusPromises() {
     let proms = []
     this.forEach((e) => {
-      (proms as any).add(e)
+      proms.add(e)
     })
     
     this.fullyLoaded = Promise.all(proms)
     this.anyLoaded = Promise.race(proms)
   }
-  public readonly slugifiedIndex = {}
-  public set(key: string, val: PriorityPromise) {
-    this.slugifiedIndex[slugifyUrl(key)] = key
-    val.then((v) => {
-      if (val === this.get(key)) this.loadedIndex.set(key, v)
-    })
-    return super.set(key, val)
-  }
-  public delete(key: string) {
-    this.slugifiedIndex[slugifyUrl(key)] = key
-    this.loadedIndex.delete(key)
-    return super.delete(key)
-  }
-  public getSlugifyed(wantedKey: string): PriorityPromise {
-    for (let slug in this.slugifiedIndex) {
-      if (wantedKey === slug) return this.get(this.slugifiedIndex[slug])
-    }
-  }
-  public deslugify(key: string) {
-    return this.slugifiedIndex[key] !== undefined ? this.slugifiedIndex[key] : key
-  }
-  public get(key: string): PriorityPromise {
-    let val = super.get(key);
-    if (val instanceof Function) {
-      let v = val()
-      this.set(key, v)
-      return v
-    }
-    else return val;
+  public add(key: string, val: PriorityPromise) {
+    return super.add(slugifyUrl(key), val)
   }
 }
 
@@ -147,25 +199,40 @@ export class ResourcesMap extends Map<string, PriorityPromise> {
 
 export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, Mod> extends Map<Import<string, Mod>, Func> {
   private importanceList: Import<string, Mod>[] = [];
-  constructor(...map: Map<Import<string, Mod>, Func>[]);
-  constructor(...a: {key: Import<string, Mod>, val: Func}[]);
-  constructor(...a: {key: Import<string, Mod>, val: Func}[] | Map<Import<string, Mod>, Func>[]) {
-    super();
-    if (a[0] instanceof Map) {
-      //@ts-ignore
-      a.ea((m) => {
-        m.forEach((v, k) => {
-          this.set(k, v);
-        })
-      })
-    }
-    else {
-      //@ts-ignore
-      a.forEach((e) => {
-        this.set(e.key, e.val);
-      });
+
+  constructor(...index: {key: Import<string, Mod>, val: Func}[]) {
+    super()
+    for (let e of index) {
+      this.importanceList.add(e.key)
+      super.set(e.key, e.val)
     }
   }
+
+  private resolver: (e: Func, key: Import<string, Mod>, index: number, state?: (typeof loadStates)[number]) => any
+  protected resolve(resolver: ImportanceMap<Func, Mod>["resolver"]) {
+    this.resolver = resolver
+    if (this.superWhiteListCache) {
+      this.superWhiteList(this.superWhiteListCache.imp, this.superWhiteListCache.deepLoad)
+    }
+    if (!this.whiteListedImports.empty) {
+      this.startResolvement()
+    }
+  }
+
+  private async startResolvement() {
+    if (!this.resolver) return
+    const whiteList = this.whiteListedImports
+    whiteList.sort((a, b) => b.importance - a.importance)
+    for (let j = 0; j < preloadToLoadStatusAtIndex; j++) {
+      const state = loadStates[j];
+      for (let i = 0; i < whiteList.length; i++) {
+        if (whiteList !== this.whiteListedImports) return
+        while (this.superWhiteListDone) await this.superWhiteListDone
+        await this.resolver(this.get(this.whiteListedImports[i]), this.whiteListedImports[i], this.importanceList.indexOf(this.whiteListedImports[i]), state);
+      }
+    }
+  }
+
   public getByString(key: string): {key: Import<string, Mod>, val: Func} {
     let kk: any, vv: any;
     this.forEach((v,k) => {
@@ -182,23 +249,48 @@ export class ImportanceMap<Func extends () => Promise<{default: {new(): Mod}}>, 
     super.set(key, val);
     return this;
   }
-  public changedImportance = false
-  public loadedImports = []
-  public async forEachOrdered(loop: (e?: Func, key?: Import<string, Mod>, i?: number) => any) {
-    this.importanceList.sort((a, b) => b.importance - a.importance)
-    for (let i = 0; i < this.importanceList.length; i++) {
-      if (this.changedImportance) {
-        this.importanceList.sort((a, b) => b.importance - a.importance)
-        this.changedImportance = false
-        i = -1
-        continue
-      }
-      if (!this.loadedImports.includes(this.importanceList[i])) {
-        this.loadedImports.add(this.importanceList[i])
-        await loop(this.get(this.importanceList[i]), this.importanceList[i], i);
-      }
-    }
+
+  public whiteList(...imp: Import<string, Mod>[]) {
+    this.whiteListedImports = imp
+    this.startResolvement()
   }
+  public whiteListAll() {
+    this.whiteList(...this.importanceList)
+  }
+
+  private superWhiteListCache: {imp: Import<string, Mod>, deepLoad: boolean}
+  public superWhiteList(imp: Import<string, Mod>, deepLoad: boolean = false) {
+    this.superWhiteListCache = {imp, deepLoad}
+    if (!this.resolver) return
+    let minimalReqLoaded: Promise<void> = new Promise((res) => {
+      let mySuperWhiteListDone = this.superWhiteListDone = new Promise(async (next) => {
+        const v = this.get(imp)
+        if (deepLoad) {
+          if (this.whiteListedImports.includes(imp)) this.whiteListedImports.rmV(imp)
+          for (let state of loadStates) {
+            await this.resolver(v, imp, this.importanceList.indexOf(imp), state)
+            res()
+            if (mySuperWhiteListDone !== this.superWhiteListDone) {
+              if (state !== loadStates.last) this.whiteListedImports.add(imp)
+              return
+            }
+          }
+        }
+        else {
+          await this.resolver(v, imp, this.importanceList.indexOf(imp))
+          res()
+        }
+        
+        this.superWhiteListDone = undefined
+        next()
+      })
+    })
+    
+    return minimalReqLoaded
+  }
+
+  public whiteListedImports = []
+  private superWhiteListDone: Promise<void>
 }
 
 export class Import<T, Mod> {

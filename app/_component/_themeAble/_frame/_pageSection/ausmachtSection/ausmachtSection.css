@@ -1,83 +1,109 @@
 :host{
-    display: block;
+  display: block;
 }
 
 c-textblob{
-    display: inline-block;
-    width: auto;
-    min-width: unset;
-    margin-bottom: 75px;
+  display: inline-block;
+  width: auto;
+  min-width: unset;
+  margin-bottom: 75px;
 }
 
 card-container{
-    display: flex;
-    margin: 0 205px 100px 205px;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+  display: flex;
+  margin: 0 100px 100px 100px;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap-reverse;
 }
 
-card-container * {
-    margin: 0 25px 50px 25px;
+card-container > * {
+  margin: 0 25px 50px 25px;
+}
+
+card-container > *:first-child {
+  margin-right: 0;
+}
+
+card-container > *:last-child {
+  margin-left: 0;
 }
 
 c-unterricht-systeme-card{
-    min-height:440px;
+  flex-grow: 1;
+  width: 180px;
+  min-width: 320px;
 }
 
 
-c-selection-card{
-    width: 37%;
-    max-width: 580px;
-    flex-grow: 1;
+c-selection-card {
+  width: 400px;
+  max-width: 580px;
+  flex-grow: 1;
+  min-width: 480px;
+}
+
+vertiefung-section {
+    display: flex;
+    padding: 0 100px 150px 100px;
+}
+
+vertiefung-section c-textblob{
+    margin-top: 25px;
+    margin-right: 1.5%;
+}
+
+@media only screen and (max-width: 1400px) {
+    vertiefung-section{
+        flex-direction: column;
+    }
 }
 
 @media only screen and (max-width: 1250px) {
-    section-header{
-        margin: 50px 100px 100px 100px;
-        text-align: center;
-    }
+  section-header{
+      margin: 50px 100px 100px 100px;
+      text-align: center;
+  }
 
-    card-container{
-        margin: 0 100px 100px 100px;
-        flex-direction: column;
-        align-items: center;
-    }
+  c-selection-card{
+      width: auto;
+  }
 
-    c-selection-card{
-        width: auto;
-    }
-
-    c-unterricht-systeme-card{
-        width: auto;
-    }
+  c-unterricht-systeme-card{
+      width: auto;
+  }
 }
 
 @media only screen and (max-width: 768px) {
-    card-container{
-        margin-right: 10vw;
-        margin-left: 10vw;
-    }
+  card-container{
+      margin-right: 10vw;
+      margin-left: 10vw;
+  }
 
-    card-container *{
-        margin: 50px 0 0 0;
-    }
+  card-container *{
+      margin: 50px 0 0 0;
+  }
 
-    c-selection-card{
-        max-width: 100%;
-        min-width: unset;
-        margin-right: 0;
-    }
+  c-selection-card{
+      max-width: 100%;
+      min-width: unset;
+      margin-right: 0;
+  }
 
-    c-unterricht-systeme-card{
-        width: unset;
-    }
+  c-unterricht-systeme-card{
+      width: unset;
+  }
 
-    section-header{
-        font-size: max(27px, calc(35px + (80 - 35)*((100vw - 300px)/(768 - 300))));
-        margin: 0 10vw;
-        color: #425870;
-    }
+  section-header{
+      font-size: max(27px, calc(35px + (80 - 35)*((100vw - 300px)/(768 - 300))));
+      margin: 0 10vw;
+      color: #425870;
+  }
 
+    vertiefung-section {
+        padding-left: 10vw;
+        padding-right: 10vw;
+    }
 }
 

@@ -11,9 +11,8 @@ import Footer from "../../../../_pageSection/footer/footer"
 
 
 
-
 export default declareComponent("home-page", class Homepage extends LazySectionedPage {
-  constructor(setPage: (domain: string) => void, sectionChangeCallback?: (section: string) => void, domainLevel = 1) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
 
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -27,7 +26,7 @@ export default declareComponent("home-page", class Homepage extends LazySectione
         ), val: () => import(/* webpackChunkName: "VersuchsanstaltSection" */"../../../../_pageSection/versuchsanstaltSection/versuchsanstaltSection")
       },
       {
-        key: new Import("abendschule", 1, (_AbendschuleSection: typeof AbendschuleSection) =>
+        key: new Import("erwachsenenschule", 1, (_AbendschuleSection: typeof AbendschuleSection) =>
           new _AbendschuleSection()
         ), val: () => import(/* webpackChunkName: "AbendschuleSection" */"../../../../_pageSection/abendschuleSection/abendschuleSection")
       },
@@ -38,10 +37,10 @@ export default declareComponent("home-page", class Homepage extends LazySectione
       },
       {
         key: new Import("footer", 1, (_Footer: typeof Footer) =>
-          new _Footer()
+          new _Footer(baseLink + "kontakt/")
         ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
       }
-    ), domainLevel, setPage, sectionChangeCallback, new AliasList(
+    ), sectionChangeCallback, new AliasList(
       new ScrollProgressAliasIndex("newsKontakt", [
         new ScrollProgressAlias(begin, "news"),
         new ScrollProgressAlias(scrollAnimationEnd, "kontakt")
@@ -51,11 +50,8 @@ export default declareComponent("home-page", class Homepage extends LazySectione
     })
   }
 
-  stl() {
-    return super.stl() + require("./homepage.css").toString()
-  }
   pug() {
-    return require("./homepage.pug").default
+    return ""
   }
 
 }) 

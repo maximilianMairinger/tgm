@@ -33,7 +33,7 @@ function parselocalUrlToDomainIndex() {
 
   let endDomain = !currentDomain.endsWith("/") ? currentDomain + dirString : currentDomain
   
-  history.replaceState(argData, updateTitle(), endDomain)
+  history.replaceState(argData, updateTitle(), document.location.origin + endDomain)
 }
 parselocalUrlToDomainIndex()
 
@@ -109,7 +109,7 @@ export function parseDomainToDomainIndex(domainIndex: string[], domain: string, 
 
 let currentDomainSet: Promise<void>
 let inDomainSet = false
-export async function set(subdomain: string, level: number = 0, push: boolean = true) {
+export async function set(subdomain: string, level: number = 0, push: boolean = true, notify = push) {
   initialGet = false
   if (subdomain.startsWith("/")) subdomain = subdomain.splice(0, 1)
   else if (subdomain.startsWith("./")) console.warn("Please use the domain level to set relative domains")
@@ -140,7 +140,7 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
   if (!endDomain.endsWith(dirString)) endDomain += dirString
 
   
-  if (push) {
+  if (notify) {
     let recall: any
     for (let keyValue of ls) {
       let r = await keyValue[1]()
@@ -155,14 +155,19 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
         domIndex.set(domainIndexRollback)
         set(endDomain, 0, true)
       }
-      else history.pushState(argData, updateTitle(), endDomain)
+      else {
+        if (push) pushState(updateTitle(), endDomain)
+        else replaceState(updateTitle(), endDomain)
+      }
     }
     else {
-      history.pushState(argData, updateTitle(), endDomain)
+      if (push) pushState(updateTitle(), endDomain)
+      else replaceState(updateTitle(), endDomain)
     }
   }
   else {
-    replaceState(argData, updateTitle(), endDomain)
+    if (push) pushState(updateTitle, endDomain)
+    else replaceState(updateTitle(), endDomain)
   }
 
 
@@ -172,10 +177,11 @@ export async function set(subdomain: string, level: number = 0, push: boolean = 
 }
 
 
-const replaceStateListener = []
-function replaceState(argData: any, title: any, endDomain: any) {
-  history.replaceState(argData, title, endDomain)
-  replaceStateListener.Call([])
+function pushState(title: any, endDomain: any) {
+  history.pushState(argData, title, document.location.origin + endDomain)
+}
+function replaceState(title: any, endDomain: any) {
+  history.replaceState(argData, title, document.location.origin + endDomain)
 }
 
 
@@ -226,10 +232,6 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
 
 
   if (subscription) {
-    let lastDomain: string = currentDomain
-    replaceStateListener.add(() => {
-      lastDomain = calcCurrentDomain()
-    })
     let f = async () => {
       
       if (!onlyInterestedInLevel) {
@@ -239,12 +241,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
         }
         let joined = parseDomainIndexToDomain(myDomainIndex)
         let domain = joined === "" ? defaultDomain : joined
-        if (lastDomain !== domain) {
-          let res = await subscription(domain)
-          if (res === undefined) res = true
-          if (res) lastDomain = domain
-
-        }
+        await subscription(domain)
         if (joined !== domain) {
           return {domain, domainLevel}
         }
@@ -252,12 +249,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
       }
       else {
         let domain = domIndex[domainLevel] === undefined ? defaultDomain : domIndex[domainLevel]
-        if (domain !== lastDomain) {
-          let res = await subscription(domain)
-          if (res === undefined) res = true
-          if (res) lastDomain = domain
-
-        }
+        await subscription(domain)
         if (domIndex[domainLevel] !== domain) {
           return {domain, domainLevel}
         }
@@ -322,7 +314,7 @@ window.onpopstate = async function(e) {
 }
 
 //@ts-ignore
-window.domain = {set, get}
+window.domain = {set, get, domainIndex}
 
 
 

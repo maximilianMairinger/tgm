@@ -3,16 +3,30 @@ import "../textblob/textblob"
 import TextBlob, { MediaQuerySize } from "./../textblob/textblob"
 import { ElementList } from "extended-dom";
 import {Theme} from "../../themeAble";
+import "./../../../image/image"
+import Image from "./../../../image/image";
+import declareComponent from "../../../../lib/declareComponent";
+import "./../../_icon/playButton/playButton"
+import Button from "../../_button/button";
+import "../../_button/button";
 
 
 
 
 export default class Thumbnail extends Text {
   private textBlob = this.q("c-textblob") as TextBlob;
+  private imgContainer = this.q("background-image")
+  private img = this.imgContainer.childs("c-image") as Image
 
   constructor() {
     super();
     this.theme('dark');
+    this.hsize({max:70, min:35});
+    this.hmobile({max:55, min:35});
+  }
+
+  background(src: string) {
+    this.img.src(src)
   }
 
   note(): string
@@ -63,6 +77,27 @@ export default class Thumbnail extends Text {
     return this.textBlob.hmobile(hmobile)
   }
 
+  private videohref:string;
+  protected startIframe(){
+    this.q("iframe").setAttribute("src", "https://www.youtube.com/embed/" +this.videohref.split("/watch?v=").splice(-1).pop() + "?autoplay=1&controls=0")
+    let textbox = this.q("text-box")
+    let shader = this.q("background-shader");
+    [textbox].forEach((elmn) => elmn.anim({opacity:0},1000));
+    setTimeout(() => [textbox,shader].forEach((elmn) => elmn.css({display:"none"})), 1000);
+  }
+
+  videolink(link?:string){
+    let videoButton = this.q("video-button");
+    let videoLink = videoButton.querySelector("c-button") as Button;
+    if (link){
+      videoButton.css({display:"block"});
+      videoLink.link(link)
+      
+      // this.videohref = link;
+      // videoLink.click(this.startIframe.bind(this))
+    } else return this.videohref;
+  }
+
   theme():Theme
   theme(to:Theme):this
   theme(to?:Theme):any{
@@ -71,11 +106,12 @@ export default class Thumbnail extends Text {
   }
 
   stl() {
-    return super.stl() + require("./thumbnail.css").toString()
+    return require("./thumbnail.css").toString()
   }
 
   pug() {
     return require("./thumbnail.pug").default
   }
-
 }
+
+declareComponent("thumbnail", Thumbnail)

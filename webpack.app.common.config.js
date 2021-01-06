@@ -1,5 +1,6 @@
-const InjectPlugin = require("webpack-inject-plugin")
+// const InjectPlugin = require("webpack-inject-plugin")
 const path = require("path")
+// const webpack = require("webpack")
 
 
 
@@ -12,6 +13,11 @@ module.exports = () => {
             path: path.resolve(path.dirname(''), "public"),
             publicPath: "/",
         },
+        // plugins: [
+        //     new webpack.EnvironmentPlugin({
+        //         env: "prod" // "prod" | "uat" | "dev"
+        //     })
+        // ],
         resolve: {
             extensions: ['.ts', '.js']
         },

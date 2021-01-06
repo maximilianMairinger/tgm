@@ -41,10 +41,15 @@ note-text {
     color: var(--weak-text-color);
 }
 
+c-textblob {
+    width: 100%;
+}
+
 connector-box{
     display: block;
     height: auto;
     margin-bottom: 5px;
+    
 }
 
 connector-box hr{
@@ -70,6 +75,7 @@ connector-box.top hr{
 
 connector-box.bottom{
     width: 40px;
+    display: none;
 }
 
 connector-box.bottom hr{
@@ -144,7 +150,7 @@ image-text-blob.right{
 }
 
 image-text-blob.right image-container{
-    margin: -10vw 75px -10vw -20vw;
+    margin: -10vw 75px -10vw -150px;
     border-radius: 0 10px 10px 0;
 }
 
@@ -160,7 +166,7 @@ image-text-blob.left content-box{
 }
 
 image-text-blob.left image-container{
-    margin: -7vw -14vw -7vw 50px;
+    margin: -7vw -150px -7vw 50px;
     border-radius: 10px 0 0 10px;
 }
 
@@ -170,8 +176,16 @@ image-text-blob.left image-container{
         padding: 10vw 0 10vw 7vw;
     }
 
+    image-text-blob.right image-container{
+        margin-left: -10vw;
+    }
+
     image-text-blob.left{
         padding: 10vw 7vw 10vw 0;
+    }
+
+    image-text-blob.left image-container{
+        margin-right: -10vw;
     }
 }
 

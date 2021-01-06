@@ -6,7 +6,8 @@ import delay from "delay"
 import ExternalLinkIcon from "../../_themeAble/_icon/externalLink/externalLink"
 import { Prim } from "extended-dom";
 
-function openInNewTab(href) {
+export function openInNewTab(href: string) {
+  if (!(href.startsWith("https://") || href.startsWith("http://"))) href = "https://" + href
   Object.assign(document.createElement('a'), {
     target: '_blank',
     href,
@@ -21,7 +22,7 @@ export default class Link extends ThemeAble {
   private slidy = this.slidyWrapper.childs()
   private externalIcon = new ExternalLinkIcon()
 
-  constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0, public push: boolean = true, underline: boolean = true, textChangeAnim = true) {
+  constructor(content: string | Data<string>, link?: string, public domainLevel: number = 0, public push: boolean = true, public notify?: boolean, underline: boolean = true, textChangeAnim = true) {
     super(false)
 
 
@@ -50,7 +51,7 @@ export default class Link extends ThemeAble {
       if (link) {
         
         if (!dontSetLocation) {
-          if (meta.isOnOrigin) domain.set(link, this.domainLevel, this.push)
+          if (meta.isOnOrigin) domain.set(link, this.domainLevel, this.push, this.notify)
           else openInNewTab(link)
         }
       }
@@ -209,7 +210,7 @@ export default class Link extends ThemeAble {
         }
         else {
           return new Promise((res) => {
-            click = res
+            click = res as any
           })
           
         }
@@ -266,7 +267,7 @@ export default class Link extends ThemeAble {
   }
 
   stl() {
-    return super.stl() + require("./link.css").toString()
+    return require("./link.css").toString()
   }
   pug() {
     return require("./link.pug").default

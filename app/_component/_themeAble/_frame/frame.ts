@@ -3,41 +3,39 @@ import ThemeAble, { Theme } from "../../_themeAble/themeAble";
 export default abstract class Frame extends ThemeAble<HTMLElement> {
   public readonly active: boolean = false;
   public readonly initiallyActivated = false
-  public domainLevel?: number
   constructor(theme?: Theme) {
     super(undefined, theme)
   }
-  public activate(): Promise<boolean> {
+  public activate() {
     return this.vate(true)
   }
-  public deactivate(): Promise<boolean> {
+  public deactivate() {
     return this.vate(false)
   }
   
-  public async vate(activate: boolean): Promise<boolean> {
+  public vate(activate: false)
+  public vate(activate: true)
+  public vate(activate: boolean) {
     (this as any).active = activate
-
-    let res = true
-    if (activate && this.initialActivationCallback && !this.initiallyActivated) {
-      let acRes = await this.initialActivationCallback();
+    if (this.initialActivationCallback && activate && !this.initiallyActivated) {
       (this as any).initiallyActivated = true
-      if (acRes === undefined) acRes = true
-      if (!acRes) res = false
+      this.initialActivationCallback()
     }
-    if (this.activationCallback) {
-      let acRes = await this.activationCallback(activate)
-      if (acRes === undefined) acRes = true
-      if (!acRes) res = false
-    }
-    return res
+
+    if (this.activationCallback) return this.activationCallback(activate)
   }
+  
   stl() {
     return require("./frame.css").toString()
   }
-  
-  protected activationCallback?(active: boolean): boolean | void | Promise<boolean | void>
-  protected initialActivationCallback?(): boolean | void | Promise<boolean | void>
-  protected loadedCallback?(): boolean | void | Promise<boolean | void>
+  protected minimalContentPaint(): void | Promise<void> {
+
+  }
+  protected fullContentPaint?(): void | Promise<void>
+  protected completePaint?(): void | Promise<void>
+
+  protected activationCallback?(active: boolean): void
+  protected initialActivationCallback?(): void
   public userInitedScrollEvent = true
   public addIntersectionListener?(root: HTMLElement, cb: Function, threshold?: number, rootMargin?: string): void
   public removeIntersectionListener?(root: HTMLElement): void

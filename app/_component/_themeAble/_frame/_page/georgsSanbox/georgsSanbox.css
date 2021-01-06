@@ -92,6 +92,11 @@ c-selection-card{
     flex-grow: 1;
 }
 
+c-vertiefungs-container{
+    display: block;
+    margin: 0 100px;
+}
+
 @media only screen and (max-width: 1250px) {
     card-container{
         margin: 0 100px 100px 100px;
@@ -178,5 +183,10 @@ c-textblob.first{
     c-textblob {
         width: 80%;
         min-width: 0;
+    }
+
+    c-vertiefungs-container{
+        margin: 0 10vw;
+        max-width: 100%;
     }
 }

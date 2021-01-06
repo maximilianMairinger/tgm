@@ -1,22 +1,18 @@
 import Icon from "../icon";
 
 
-const highlightStrengthPrefix = "highlight-"
-const hightlightClassString = "highlight"
+const highlightClassString = "highlight"
 
 export default abstract class HighlightAbleIcon extends Icon {
-  constructor(highlightStrength: "strong" | "weak" | null = "weak") {
-    super()
-    if (highlightStrength !== null) {
-      this.addClass(highlightStrengthPrefix + highlightStrength)
-    }
+  constructor(strength?: "strong" | "weak") {
+    super(strength)
   }
   public highlight() {
-    return this.addClass(hightlightClassString)
+    return this.addClass(highlightClassString)
     
   }
   public downlight() {
-    return this.removeClass(hightlightClassString)
+    return this.removeClass(highlightClassString)
   }
 
   stl() {

@@ -1,0 +1,349 @@
+:host {
+    display: block;
+    max-width: min(1000px, 100%);
+    min-width: 950px;
+    width: auto;
+    user-select: auto;
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 1450px) {
+    :host {
+        min-width: unset;
+    }
+}
+
+selection-card{
+    display: flex;
+    width: 100%;
+    min-width: auto;
+    flex-direction: row-reverse;
+    align-items: stretch;
+    justify-content: flex-end;
+    padding-left: 45px;
+    box-sizing: border-box;
+}
+
+content-box{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 45px 0;
+    max-width: calc(100% - 195px);
+    box-sizing: border-box;
+}
+
+note-box{
+    display: block;
+}
+
+note-text{
+    font-size: 12px;
+    font-family: 'PT Mono', monospace;
+    color: var(--weak-text-color);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+c-textblob{
+    margin-top: 2px;
+    margin-bottom: 13px;
+}
+
+selection-container{
+    display: flex;
+    flex-direction: column;
+}
+
+selection-container selection-box:not(:last-child) info-container{
+    border-bottom: 1px solid var(--strong-background-color);
+}
+
+selection-box{
+    display: flex;
+    align-self: stretch;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 20px;
+}
+
+selection-content{
+    display: flex;
+    z-index: 1;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+c-button{
+    position: absolute;
+    display: block;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+selection-background{
+    position: absolute;
+    display: block;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--primary-background-color);
+    border-radius: 5px 0 0 5px;
+}
+
+icon-container{
+    display: block;
+    position: relative;
+    margin-left: 5px;
+    height: 40px;
+    min-height: 40px;
+    width: 40px;
+    min-width: 40px;
+}
+
+info-container{
+    display: flex;
+    align-self: stretch;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-right: 2px;
+    margin-bottom: -15px;
+    margin-left: 13px;
+    padding-bottom: 15px;
+    padding-right: 10px;
+    font-size: 15px;
+    max-width: 100%;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+icon-container *{
+    display: block;
+    height: 100%;
+    width: 100%;
+    /*
+    background: url("../../../../res/img/windmil.svg") center center no-repeat;
+    background-size: 100% 100%;
+     */
+}
+
+text-container{
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+heading-text{
+    margin-bottom: 2px;
+    font-weight: bold;
+    color: var(--strong-text-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.02em;
+}
+
+content-text{
+    color: var(--weak-text-color);
+    font-size: 13px;
+    flex-basis: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+selection-box:hover selection-background{
+    opacity: 1;
+    transition: 0.25s;
+}
+
+selection-box.selected selection-background{
+    opacity: 1;
+    transition: 0.25s;
+}
+
+selection-box:hover link-container{
+    opacity: 1;
+    transition: 0.25s;
+}
+
+overview-heading{
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 0.3em;
+}
+
+overview-container{
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    max-width: 700px;
+    width: calc(200 * ((100vw - 1300px)/(1600 - 1300)));
+    min-width: 250px;
+    margin: 20px 35px 35px 0;
+}
+
+c-zertificate-man{
+    background: rgba(0, 0, 0, 0);
+    --secondary-background-color: var(--primary-background-color) !important;
+}
+
+overview-box{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    height: auto;
+    width: 100%;
+    min-height: calc(100% - 100px);
+    padding: 30px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    background: var(--primary-background-color);
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+#topContent {
+    margin-bottom: 130px;
+    min-height: 133px;
+    display: block;
+    position: relative;
+}
+
+overview-content-box{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    flex-grow: 1;
+}
+
+overview-content-box c-link{
+    margin-top: 1em;
+}
+
+overview-img-box{
+    display: block;
+    min-width: 150px;
+    margin-right: 25px;
+    height: auto;
+}
+
+overview-img-box *{
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    width: 170px;
+    height: auto;
+    overflow: hidden;
+}
+
+overview-img-box c-pruefung-icon{
+    width: 125px;
+    margin-top: 50px;
+    margin-left: 25px;
+    margin-right: 35px;
+}
+
+overview-text-box {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    left: 180px;
+}
+
+overview-text-box *{
+    display: block;
+}
+
+overview-title{
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 1450px) {
+
+    #topContent {
+        margin-bottom: 10px;
+        min-height: initial;
+        display: initial;
+        position: initial;
+    }
+
+    overview-text-box {
+        position: relative;
+        bottom: initial;
+        right: initial;
+        left: initial;
+        width: 100%;
+    }
+
+    selection-card{
+        flex-direction: row-reverse;
+        padding: 0 40px;
+        max-width: 100%;
+    }
+
+    content-box{
+        padding: 40px 0;
+    }
+
+    content-box{
+        max-width: 100%;
+    }
+
+    overview-img-box{
+        display: none;
+    }
+
+}
+
+@media only screen and (max-width: 950px) {
+    :host{
+        max-width: 100%;
+    }
+
+    selection-card{
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    overview-container{
+        max-width: unset;
+        width: 100%;
+        min-width: unset;
+        margin-top: 0;
+        padding: 0;
+        align-self: stretch;
+    }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+    :host{
+        max-width: 515px;
+    }
+
+    selection-card{
+        padding: 0 20px;
+    }
+
+    content-box{
+        padding: 35px 0;
+    }
+
+    overview-content-box{
+        flex-direction: column;
+    }
+}

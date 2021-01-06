@@ -36,6 +36,9 @@ export default declareComponent("lower-nav", class LowerNav extends ThemeAble {
 
   public linkContents: string[]
   public async updatePage(linkContents: string[], domainLevel?: number) {
+    if (linkContents.empty) return this.hide()
+    this.show()
+    
     this.linkContents = linkContents
     this.currentLinkWrapperElems = new ElementList()
     this.currentLinkElems = new ElementList()
@@ -56,12 +59,23 @@ export default declareComponent("lower-nav", class LowerNav extends ThemeAble {
     }
 
     this.linkContainer.html(this.currentLinkWrapperElems)
+
+    if (this.callMeMaybe) {
+      this.updateSelectedLink(this.callMeMaybe)
+      delete this.callMeMaybe
+    }
   }
 
   private lastHighlightElem: LowerNavLink
   private initialUpdate = true
+  private callMeMaybe: string
   public async updateSelectedLink(activeLink: string) {
+    if (!this.linkContents) {
+      this.callMeMaybe = activeLink
+      return
+    }
     let index = this.linkContents.indexOf(activeLink)
+    if (index === -1) return
     let x = 100 * index
     if (this.lastHighlightElem) this.lastHighlightElem.downlight()
     this.lastHighlightElem = this.currentLinkElems[index]
@@ -95,7 +109,7 @@ export default declareComponent("lower-nav", class LowerNav extends ThemeAble {
   }
 
   stl() {
-    return super.stl() + require("./lowerNav.css").toString()
+    return require("./lowerNav.css").toString()
   }
   pug() {
     return require("./lowerNav.pug").default

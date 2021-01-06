@@ -14,6 +14,7 @@ note-box {
     display: flex;
     flex-direction: row;
     width: 130px;
+    min-width: 130px;
     margin-right: 15px;
     margin-bottom: 2px;
     padding-top: 6px;
@@ -89,7 +90,7 @@ text-box *:nth-child(n+3){
 }
 
 text-box content-text {
-    max-width: 21.6em;
+    max-width: calc(10vw + 450px);
     line-height: 1.5em;
     letter-spacing: 0.02em;
     color: var(--weak-text-color);
@@ -107,14 +108,21 @@ text-box c-link.link {
 }
 
 
-@media only screen and (max-width: 768px) {
+
+ /* This needs to be the last css rule */
+@media (max-width: 768px) {
     text-blob {
         display: flex;
         flex-direction: column;
     }
 
+    content-text {
+        min-width: 100%;
+    }
+
     note-box{
         width: 100%;
+        min-width: unset;
     }
 
     note-box connector-box {
@@ -129,3 +137,5 @@ text-box c-link.link {
         color: #27a1d4;
     }
 }
+/* Above needs to be the last css rule */
+

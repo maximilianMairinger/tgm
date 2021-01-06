@@ -72,11 +72,11 @@ export default class ImageTextblob extends Text {
 
         }
         else {
-          this.infoIndex[infoName].text(info)
+          this.infoIndex[infoName].text(info as string)
         }
       }
       else {
-        if (info !== null) this.infoGrid.apd(ce("info-text").addClass("heading").text(infoName), this.infoIndex[infoName] = ce("info-text").text(info))
+        if (info !== null) this.infoGrid.apd(ce("info-text").addClass("heading").text(infoName), this.infoIndex[infoName] = ce("info-text").text(info as string))
       }
 
       if (Object.keys(this.infoIndex).length > 0) this.hrLower.show().anim({opacity: 1})
@@ -115,7 +115,7 @@ export default class ImageTextblob extends Text {
     if (stellvertreter) {
       this._stellverterter = this.parseJSONProp(stellvertreter);
 
-      this.infoGrid.append(ce("stellvertreter-text").addClass("bold").text("Stellverteter"));
+      this.infoGrid.append(ce("stellvertreter-text").addClass("heading").text("Stellverteter"));
       for (let i = 0; i < this._stellverterter.length; i++) {
         let stellvertreterData = this._stellverterter[i];
         this.infoGrid.append(ce("info-text").text(stellvertreterData.name));
@@ -139,6 +139,11 @@ export default class ImageTextblob extends Text {
   content(): string
   content(content: string): void
   content(content?: string): any {
+    if (content !== undefined) {
+      if (content !== "") {
+        this.q("connector-box.bottom").css("display", "block")
+      }
+    }
     return this.textBlob.content(content)
   }
 
@@ -174,7 +179,7 @@ export default class ImageTextblob extends Text {
   }
 
   stl() {
-    return super.stl() + require("./imageTextblob.css").toString()
+    return require("./imageTextblob.css").toString()
   }
 
   pug() {

@@ -78,7 +78,7 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.newsTextBlob.heading("Aktuelles")
     this.newsTextBlob.subheading("aus dem TGM")
     this.newsTextBlob.note("Termine und")
-    this.newsTextBlob.content(`Bei rund 3000 Schülern geschieht ständig etwas. Bleiben Sie informiert, indem Sie unserer <c-link link="https://instagram.com/tgmhit/">Instagram</c-link> oder <c-link link="https://facebook.com/tgmhtl/">Facebook</c-link> Seite folgen.`)
+    this.newsTextBlob.content(`Bei rund 3000 Schülern geschieht ständig etwas. Bleiben Sie informiert, indem Sie unserer <c-link link="https://facebook.com/tgmhtl/">Facebook</c-link> Seite folgen.`)
     this.newsTextBlob.hsize({"max": 60, "min": 40})
     this.newsTextBlob.hmobile({"max": 55, "min": 35})
     

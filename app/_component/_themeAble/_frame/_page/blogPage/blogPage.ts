@@ -76,29 +76,28 @@ export default class BlogPage extends Page {
     this.blogLoaded = true;
   }
 
-  private setBlogFromUrl(url: string) {
-    let split = url.split(domain.dirString)
-    this.domainLevel = split.length
-    let id = split.last
-    
+  private setBlogFromUrl(id: string) {
+    this.domainLevel = this.domainFrag.length
 
     return this.setBlog(id)
   }
 
   private cache: {[slug in string]: PostOrPage} = {}
   private domainFrag: string
+  private splitDomain: string[]
+  
   async tryNavigationCallback(domainFragment: string) {
-    domainFragment = domainFragment.split(domain.dirString).last
-    this.domainFrag = domainFragment
-    if (this.cache[domainFragment]) return true
+    this.splitDomain = domainFragment.split(domain.dirString)
+    this.domainFrag = this.splitDomain.last
+    if (this.cache[this.domainFrag]) return true
     let blogData: PostOrPage
     try {
-      blogData = await api.posts.read({slug: domainFragment}, {formats: ['html', 'plaintext']})
+      blogData = await api.posts.read({slug: this.domainFrag}, {formats: ['html', 'plaintext']})
     }
     catch(e) {
       return false
     }
-    this.cache[domainFragment] = blogData
+    this.cache[this.domainFrag] = blogData
     return true
   }
   navigationCallback() {

@@ -43,16 +43,15 @@ import Bg from "../../_page/_sectionedPage/_lazySectionedPage/bgPage/bgPage"
 import BgProjekte from "../../_page/_sectionedPage/_lazySectionedPage/bgProjekte/bgProjekte";
 import BgTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/bgTeam/bgTeam"
 
-export type PageName = string
 
-export default declareComponent("page-manager", class PageManager extends Manager<PageName> {
+export default declareComponent("page-manager", class PageManager extends Manager {
   constructor(pageChangeCallback?: (page: string, sectiones: string[], domainLevel: number) => void, sectionChangeCallback?: (section: string) => void, onScrollBarWidthChange?: (scrollBarWidth: number) => void, onUserScroll?: (scrollProgress: number, userInited: boolean) => void, onScroll?: (scrollProgress: number) => void) {
 
     super(new ImportanceMap<() => Promise<any>, any>(
       
       {
         key: new Import("", 10, (homepage: typeof HomePage) =>
-            new homepage(sectionChangeCallback)
+            new homepage("", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
       },
       {
@@ -77,12 +76,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/wirtschaftsingenieure/projekte", 30, (wiProjekte: typeof WiProjekte) =>
-            new wiProjekte(sectionChangeCallback)
+            new wiProjekte("tagesschule/wirtschaftsingenieure/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "wiProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/wiProjekte/wiProjekte")
       },
       {
         key: new Import("tagesschule/wirtschaftsingenieure/team", 30, (wiTeam: typeof WiTeam) =>
-            new wiTeam(sectionChangeCallback)
+            new wiTeam("tagesschule/wirtschaftsingenieure/team", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "wiTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/wiTeam/wiTeam")
       },
       {
@@ -92,12 +91,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/kunststofftechnik/projekte", 30, (ktProjekte: typeof KtProjekte) =>
-            new ktProjekte(sectionChangeCallback)
+            new ktProjekte("tagesschule/kunststofftechnik/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "ktProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/ktProjekte/ktProjekte")
       },
       {
         key: new Import("tagesschule/kunststofftechnik/team", 30, (ktTeam: typeof KtTeam) =>
-            new ktTeam(sectionChangeCallback)
+            new ktTeam("tagesschule/kunststofftechnik/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "ktTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/ktTeam/ktTeam")
       },
       {
@@ -107,12 +106,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/maschinenbau/projekte", 30, (ktProjekte: typeof MbProjekte) =>
-            new ktProjekte(sectionChangeCallback)
+            new ktProjekte("tagesschule/maschinenbau/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "mbProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/mbProjekte/mbProjekte")
       },
       {
         key: new Import("tagesschule/maschinenbau/team", 30, (ktTeam: typeof MbTeam) =>
-            new ktTeam(sectionChangeCallback)
+            new ktTeam("tagesschule/maschinenbau/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "mbTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/mbTeam/mbTeam")
       },
       {
@@ -122,12 +121,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/informationstechnologie/projekte", 30, (itProjekte: typeof ItProjekte) =>
-            new itProjekte(sectionChangeCallback)
+            new itProjekte("tagesschule/informationstechnologie/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "itProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/itProjekte/itProjekte")
       },
       {
         key: new Import("tagesschule/informationstechnologie/team", 30, (itTeam: typeof ItTeam) =>
-            new itTeam(sectionChangeCallback)
+            new itTeam("tagesschule/informationstechnologie/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "itTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/itTeam/itTeam")
       },
       {
@@ -137,12 +136,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/elektrotechnik/projekte", 30, (etProj: typeof EtProjekte) =>
-            new etProj(sectionChangeCallback)
+            new etProj("tagesschule/elektrotechnik/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "etProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/etProjekte/etProjekte")
       },
       {
         key: new Import("tagesschule/elektrotechnik/team", 30, (etTeam: typeof EtTeam) =>
-            new etTeam(sectionChangeCallback)
+            new etTeam("tagesschule/elektrotechnik/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "etTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/etTeam/etTeam")
       },
       {
@@ -152,12 +151,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/biomedizin/projekte", 30, (elProj: typeof BgProjekte) =>
-            new elProj(sectionChangeCallback)
+            new elProj("tagesschule/biomedizin/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "bgProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/bgProjekte/bgProjekte")
       },
       {
         key: new Import("tagesschule/biomedizin/team", 30, (elTeam: typeof BgTeam) =>
-            new elTeam(sectionChangeCallback)
+            new elTeam("tagesschule/biomedizin/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "bgTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/bgTeam/bgTeam")
       },
       {
@@ -167,12 +166,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/elektronik/projekte", 30, (elektrotechnikProjekte: typeof ElProjekte) =>
-            new elektrotechnikProjekte(sectionChangeCallback)
+            new elektrotechnikProjekte("tagesschule/elektronik/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "elProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/elProjekte/elProjekte")
       },
       {
         key: new Import("tagesschule/elektronik/team", 30, (elektrotechnikTeam: typeof ElTeam) =>
-            new elektrotechnikTeam(sectionChangeCallback)
+            new elektrotechnikTeam("tagesschule/elektronik/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "elTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/elTeam/elTeam")
       },
       {
@@ -182,12 +181,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("tagesschule/raumfahrt/projekte", 30, (raumfahrtProjekte: typeof RtProjekte) =>
-            new raumfahrtProjekte(sectionChangeCallback)
+            new raumfahrtProjekte("tagesschule/raumfahrt/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "rtProjekte" */"../../_page/_sectionedPage/_lazySectionedPage/rtProjekte/rtProjekte")
       },
       {
         key: new Import("tagesschule/raumfahrt/team", 30, (raumfahrtTeam: typeof RtTeam) =>
-            new raumfahrtTeam(sectionChangeCallback)
+            new raumfahrtTeam("tagesschule/raumfahrt/projekte", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "rtTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/rtTeam/rtTeam")
       },
       // {

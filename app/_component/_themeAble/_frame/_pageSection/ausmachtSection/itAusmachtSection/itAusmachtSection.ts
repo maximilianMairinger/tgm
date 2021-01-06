@@ -70,7 +70,7 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                     heading: "Vertiefungen",
                     subheading: "der IT",
                     hsize: {max:60, min:40},
-                    content: "Nach drei Jahren Grundausbildung in allen Bereichen, entscheiden sich die SchülerInnen für einen Vertiefung. Welche beide jeweils mehrere Unterzweige haben, durch welche sich die SchuelerInnen weiter Verteifen können."
+                    content: "Die SchülerInnen der IT vertiefen sich nach dem dritten Jahr in einem Spezialgebiet. In der Medientechnik können sie frei zwischen Secure Web- and App- Development, Kreativität und Design oder Game-Design wählen. In Systemtechnik stehen die Spezialisierungen IT-Security und Data Science offen."
                 },
                 cards: [
                     {

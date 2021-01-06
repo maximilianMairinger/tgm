@@ -5,9 +5,10 @@ import WrapperSection from "../../../../../_pageSection/wrapperSection/wrapperSe
 import Thumbnail from "../../../../../../_text/_thumbnail/thumbnail";
 import TeamSection from "../../../../../../_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../../_text/imageTextblob/imageTextblob"
+import Footer from "../../../../../_pageSection/footer/footer"
 
 export default declareComponent("kt-team", class KtTeam extends TeamPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
         {
@@ -38,7 +39,7 @@ export default declareComponent("kt-team", class KtTeam extends TeamPage {
                     leitungImageTextblob.note("Abteilungsvorstand");
                     leitungImageTextblob.heading("Reitinger");
                     leitungImageTextblob.subheading("Klemens");
-                    leitungImageTextblob.content("Ich stehe Ihnen gerne am Montag von 13:20 bis 14:10 in meiner Sprechstunde zu Verfügung.")
+                    leitungImageTextblob.content("Ich stehe Ihnen gerne am Montag von 13:20 bis 14:10 in meiner Sprechstunde zur Verfügung.")
                     leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 10. Stock");
                     leitungImageTextblob.email("avhkt@tgm.ac.at");
                     leitungImageTextblob.tel("0 33 126 / 300");
@@ -65,8 +66,15 @@ export default declareComponent("kt-team", class KtTeam extends TeamPage {
                     return new WrapperSection(schuelerImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../../_text/imageTextblob/imageTextblob")
+        },
+        {
+          key: new Import("footer", 1, (_Footer: typeof Footer) => 
+            new _Footer(baseLink + "schueler/")
+          ), val: () => import(/* webpackChunkName: "footer" */"../../../../../_pageSection/footer/footer")
         }
-    ), sectionChangeCallback, undefined)
+    ), sectionChangeCallback, undefined, {
+        footer: "schueler"
+    })
 
       this.elementBody.append(ce("circle-feature"))
 

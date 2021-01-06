@@ -23,32 +23,38 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
                         icon: "laboratoriumKt", 
                         title: "Laboratorium", 
                         content: "Arbeit mit Polymeren", 
-                        link: baseLink + "energiesysteme"
+                        link: baseLink + "laboratorium"
                     },
                     {
                         icon: "konstruktionProduktentwicklung", 
                         title: "Konstruktion und Produktentwicklung", 
                         content: "Planung und Umsetzung", 
-                        link: baseLink + "automatisierungstechnik"
+                        link: baseLink + "konstruktion-und-produktentwicklung"
                     },
-                    {
-                        icon: "technischeMechanikKt", 
-                        title: "Technische Mechanik", 
-                        content: "Technische Mechanik und Maschinenelemente", 
-                        link: baseLink + "antriebstechnik"
-                    },
+                    // {
+                    //     icon: "technischeMechanikKt", 
+                    //     title: "Technische Mechanik", 
+                    //     content: "Technische Mechanik und Maschinenelemente", 
+                    //     link: baseLink + "antriebstechnik"
+                    // },
                     {
                         icon: "kunststoffverarbeitung", 
                         title: "Kunststoffverarbeitung", 
                         content: "Kunststoffverarbeitung und Automatisierungstechnik", 
-                        link: baseLink + "industrieelektronik"
+                        link: baseLink + "kunststoffverarbeitung-und-automatisierungstechnik"
                     },
                     {
-                        icon: "fertigungstechnik", 
-                        title: "Werkstoff- und Fertigungstechnik", 
-                        content: "Eigenschaften und Bearbeitung", 
-                        link: baseLink + "angewandte-informatik"
+                        icon: "umwelttechnik", 
+                        title: "Chemie und Umwelttechnik", 
+                        content: "Die essenziellen Schritte der Wiederaufbereitung", 
+                        link: baseLink + "chemie-und-umwelttechnik"
                     }
+                    // {
+                    //     icon: "fertigungstechnik", 
+                    //     title: "Werkstoff- und Fertigungstechnik", 
+                    //     content: "Eigenschaften und Bearbeitung", 
+                    //     link: baseLink + "angewandte-informatik"
+                    // }
                 ],
                 stundentafel: baseLink + "stundentafel-kt"
             },
@@ -58,7 +64,7 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
                     note: "Unterrichtsfach",
                     thumbnail: "/res/img/umwelt.png",
                     href: baseLink + "umwelttechnik",
-                    contentTitle: "Chemie und Umwelttechnik",
+                    contentTitle: "Umwelttechnik",
                     content: "Die Abteilung für Kunststofftechnik am tgm setzt mit ihrem Ausbildungsfokus „Biopolymere und Umwelttechnik“ einen Schwerpunkt auf umweltrelevante"
                 },
                 {

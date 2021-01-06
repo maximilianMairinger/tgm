@@ -4,12 +4,11 @@ import FooterElem from "../../../../footleiste/footleiste"
 
 
 
-
-export default declareComponent("footer", class Footer extends PageSection {
-  constructor() {
+export class Footer extends PageSection {
+  constructor(baseLink: string) {
     super()
 
-    this.elementBody.apd(new FooterElem)
+    this.elementBody.apd(new FooterElem(baseLink))
   }
 
   stl() {
@@ -19,4 +18,6 @@ export default declareComponent("footer", class Footer extends PageSection {
   pug(){
     return "";
   }
-});
+}
+
+export default declareComponent("footer", Footer);

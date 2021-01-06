@@ -6,10 +6,11 @@ import Thumbnail from "../../../../../_text/_thumbnail/thumbnail";
 import InformationenSection from "../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection";
 import ProjekteSection from "../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection";
 import {Project} from "../../../../../_text/tabletBlob/tabletBlob";
+import Footer from "../../../../_pageSection/footer/footer"
 
 
 export default declareComponent("wirtschaftsingenieure-projekte", class RaumfahrtProjekte extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -31,58 +32,56 @@ export default declareComponent("wirtschaftsingenieure-projekte", class Raumfahr
         }
         ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection")
       },
-      // {
-      //   key: new Import("projekte", 1, (projekte: typeof ProjekteSection) => {
-      //       let projectData:Project[] = [{
-      //           heading:"Power Kite",
-      //           note:"Stromerzeugung mittels kitessurfen",
-      //           // logo:"/res/img/projektLogoBeispiel3.png",
-      //           team: [
-      //             "Lukas Buza",
-      //             "Lukas Gassner",
-      //             "Matteo Ingegneri",
-      //             "Mario Lang"
-      //           ],
-      //           thumbnail:"/res/img/kitesurf.jpg",
-      //           title: "Diplomarbeit der 5AHET (2018/19)",
-      //           content:
-      //               "Das Ziel dieser Diplomarbeit war die Fertigung eines Funktionsprototyps zur Stromerzeugung mittels eines Kites, wie man es vom Kitesurfen her kennt. Durch das Ausfahren eines Kites sollte über eine Welle ein Gleichstrommotor als Generator betrieben und die erzeugte Energie in einem Akku gespeichert werden. Weiters wurde als Ziel gesetzt, das Maturaprojekt mit einem so geringen Budget wie möglich durchzuführen. Daher wurden für dieses Projekt möglichst viele Teile wiederverwendet, welche in der Abteilung keine anderweitige Anwendung mehr fanden."
-      //               +
-      //               "<img src='/res/img/kiteprinzip.png'></img>"
-      //               +
-      //               "Als Basis des Prototyps wurde eine Europalette gewählt. Auf dieser wurden sowohl die mechanischen als auch die elektrischen Komponenten befestigt. Zur Leistungswandlung wurde eine 150W Gleichstrommaschine gewählt. Für die zweite, kleinere Maschine, welche für das Funktionsprinzip notwendig war, wurde ein Bohrmaschinenmotor verwendet."
-      //               + "<br><br>" +
-      //               "Nachdem die mechanischen Komponenten auf der Palette angebracht worden waren, wurde eine elektrische Schaltung zum Messen von Spannung und Strom entworfen. In einem von der Schule zur Verfügung gestellten Akkumulator sollte die erzeugte elektrische Energie gespeichert werden. Zur Ansteuerung der beiden elektrischen Maschinen wurden zusätzlich zwei HBrücken benötigt. Diese sollten mittels Mikrocontroller angesteuert werden. Die elektrischen Bauteile wurden anschließend in einer angefertigten Holzbox verschaltet. Diese diente auch als Steuerpult, welches zwei Potentiometer zur Steuerung der Gleichstrommaschinen über den Arduino sowie einen Schalter zum Ein- und Ausschalten des PowerKites beinhaltet. Für den Arduino wurde ein Programm zur Steuerung der beiden Maschinen sowie eine Ausgabe der gemessenen Größen erstellt. Der fertige Prototyp wurde zuerst am Gelände des TGM und später auf der Donauinsel einem Funktionstest unterworfen und es konnte tatsächlich elektrische Energie erzeugt werden. Allerdings wurde dabei das Kite-Segel manuell gesteuert, was im Falle einer kommerziellen Stromerzeugung natürlich automatisiert erfolgen müsste."
-      //         },
-      //           {
-      //             heading:"ELFASNO",
-      //             note:"Elektrisches Fahrrad für Schneebetrieb.",
-      //             team:[
-      //               "Jan Dworschak",
-      //               "Christian Wiedenhofer",
-      //               "Michael Beierl"
-      //             ],
-      //             thumbnail:"/res/img/schneerad.png",
-      //             title: "Diplomarbeit der 5AHET (2016/17)",
-      //             content:
-      //                 "Das Primärziel dieses Projekts war es ein elektrisch betriebenes Fahrrad für den Schneebetrieb zu konstruieren und zu realisieren. Das Elektrofahrrad sollte dabei größere Steigungen bewältigen können, eine gewisse Geschwindigkeit erreichen und mit möglichst geringen Verlusten im Schnee fahren können. Das Antriebskonzept sollte dem eines „Pedelec-Mobils“ ähneln. Dabei fährt man, im Gegensatz zu einem Moped nicht rein elektrisch, sondern tritt mit seinen Füßen im mit. Das war eine wichtige Rahmenbedingung, die man einhalten musste."
-      //                 + "<br><br>" +
-      //                 "Es sollte ein möglichst detailgetreues OpenModelica Modell erstellt werden, um alle Teile richtig auslegen zu können und so auch abzuschätzen, wie das Gefährt mit unterschiedlichen Bedingungen fertig werden könne. Ebenso galt es abzuwägen und zu entscheiden , welches Antriebs - bz w. Fortbewegungskonzept gewählt werden sollte - herkömmliche Schneeräder, Fat Tyres oder eine Ski/Schneeraupenkombination."
-      //                 + "<br>" +
-      //                 "Es sollte ein Vehikel geschaffen werden, welches auf einem Fahrrad basiert, sich möglichst wendig verhält und eine gute Steigfähigkeit aufweist, um zum Beispiel Rettungskräfte nach Lawinen oder Personen in verschneiten Gebieten zu unterstützen."
-      //                 + "<br>" +
-      //                 "Ein wichtiges Ziel ist es, eine wirtschaftliche Alternative zu lauten, umweltbelastenden Schneemobilen beziehungsweise MotoCross-Motorrädern zu finden und somit die Pisten und Schneegebiete angenehmer und idyllischer zu machen."
-      //                 + "<br>" +
-      //                 "Zusätzlich zum umwelttechnischen Aspekt hat das Team sich überlegt, dass das ELFASNO auch im winterlichen Hilfseinsatz eine Rolle spielen könnte."
-      //                 + "<br><br>" +
-      //                 "Es wurde der Prototyp eines leistungsstarken, mobilen Fahrzeuges gebaut, welches bei entsprechender Weiterentwicklung Einsatzkräften auf der ganzen Welt in Schneegebieten beziehungsweise nach Lawinen- oder Murenabgängen eine hilfreiche Unterstützung sein kann."
-      //           }] as Project[];
-      //     return new projekte(projectData)
-      //   }
-      //   ), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
-      // },
+      {
+        key: new Import("projekte", 1, (projekte: typeof ProjekteSection) => {
+          let projectData = [
+            {
+              heading:"Clima bike box",
+              note:`Entwicklung eines mobilen, thermischen Transportbehälters für Fahrräder`,
+              team:[
 
-    ), sectionChangeCallback, undefined)
+              ],
+              thumbnail:"/res/img/cbb.png",
+              title: "Die clima bike box",
+              content: 
+`Der online-Handel boomt und macht auch nicht vor Speisen und Getränken halt. Von AmazonFresh bis Z-Catering liefern Firmen Nahrungsmittel aus. Beliebtes Tarnsport­mittel ist hier innerstädtisch das Fahrrad. Fahrradzustelldienste werben mit ökologisch abbaubarer Verpackung und Öko-Strom für Server und Büro, aber keiner verfügt über eine mobile beheizbare Thermobox, die über die kinetische Energie des Fahrrades betrieben wird und die transportierten Nahrungsmittel wärmt bzw. kühlt.
+<br><br>
+Hier setzt diese Diplomarbeit an, die sich die Aufgabe gestellt hat, eine derartige Transportbox zu entwickeln und zu vermarkten. Nach ausführlichen Recherchen zum Stand der Technik und dem wirtschaftlichen Umfeld wurde mittels eines strukturierten Ideenfindungs- und Auswahlprozesses ein Designkonzept aus­gewählt: eine Thermobox aus EPP mit einer isolierten Kühlkammer und einer mittels einer Heizfolie beheizbaren Wärmekammer. Die Energiegewinnung erfolgt primär durch einen Nabendynamo, der jedoch bei Stillstand des Fahrrades durch einen integrierten Akku unterstützt wird. Die Box selbst kann mittels eines Schienensystems auf jedes herkömmliche Fahrrad montiert werden.
+<br><br>
+Doch die Frage ist: Gibt es für eine derartige Technologie überhaupt einen Markt? Die wirtschaftliche Analyse ergab für die Hauptzielgruppe – die Radfahrlieferdienste – ein Marktvolumen von annähernd 7500 Stück mit hohem Wachstumspotenzial. Auf diese Zielgruppe hat sich auch das erstellte Marketingkonzept mit einem angestrebten Verkaufspreis von 235€ fokussiert.
+`
+            },
+            {
+              heading:"Smarte Fassadenbegrünung",
+              note:"Smarte Fassadenbegrünung mit IoT Technologien",
+              team:[
+
+              ],
+              thumbnail:"/res/img/smartFasade.jpg",
+              title: "Projektziel",
+              content: 
+`Im Rahmen des Projektes wurde zunächst eine Marktanalyse durchgeführt, um unterschiedliche Anbieter von Begrünungsvarianten vergleichen zu können. Auf dieser Basis wurde anschließend ein Online-Fragenbogen entwickelt, der sowohl an Unternehmen als auch an Einzelkunden gerichtet wurde.
+<br><br>
+Aufgrund dieser Vorarbeiten konnte aus unterschiedlichen Konstruktionsvorschlägen die bestmögliche Lösung ausgewählt werden. Aufbauend auf der Konstruktion wurde das gewählte Modell im Kooperationsunternehmen „Gebrüder Haas“ produziert und als Prototyp an der Außenfassade montiert.
+<img src="/res/img/iotFasade.png"></img>
+Der zweite Teil der Arbeit bestand in der Implementierung eines IoT Systems für die Fassadenbegrünung, das zunächst für die Erhebung und Analyse von Daten eingesetzt werden sollte. Dabei wurde eine Reporting-Lösung mit R, OpenHAB und Grafana entwickelt, die nicht nur eigene Sensordaten darstellen konnte, sondern auch die Einbindung externer Wetterdaten und die automatische Ansteuerung weiterer IoT – Geräte ermöglichte.
+`
+            }
+          ] as Project[];
+
+          return new projekte(projectData)
+        }), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
+      },
+      {
+        key: new Import("footer", 1, (_Footer: typeof Footer) => 
+          new _Footer(baseLink + "projekte/")
+        ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
+      }
+
+
+    ), sectionChangeCallback, undefined, {
+      footer: "projekte"
+    })
 
   }
 

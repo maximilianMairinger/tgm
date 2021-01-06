@@ -7,10 +7,11 @@ import Thumbnail from "../../../../../_text/_thumbnail/thumbnail";
 import InformationenSection from "../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection";
 import ProjekteSection from "../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection";
 import {Project} from "../../../../../_text/tabletBlob/tabletBlob";
+import Footer from "../../../../_pageSection/footer/footer"
 
 
 export default declareComponent("et-projekte", class EtProjekte extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -79,11 +80,17 @@ export default declareComponent("et-projekte", class EtProjekte extends LazySect
                       "Es wurde der Prototyp eines leistungsstarken, mobilen Fahrzeuges gebaut, welches bei entsprechender Weiterentwicklung Einsatzkräften auf der ganzen Welt in Schneegebieten beziehungsweise nach Lawinen- oder Murenabgängen eine hilfreiche Unterstützung sein kann."
                 }] as Project[];
           return new projekte(projectData)
-        }
-        ), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
+        }), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
       },
+      {
+        key: new Import("footer", 1, (_Footer: typeof Footer) => 
+          new _Footer(baseLink + "projekte/")
+        ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
+      }
 
-    ), sectionChangeCallback, undefined)
+    ), sectionChangeCallback, undefined, {
+      footer: "projekte"
+    })
 
   }
 

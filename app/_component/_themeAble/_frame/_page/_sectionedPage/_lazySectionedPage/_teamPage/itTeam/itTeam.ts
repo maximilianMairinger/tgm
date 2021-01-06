@@ -5,9 +5,10 @@ import WrapperSection from "../../../../../_pageSection/wrapperSection/wrapperSe
 import Thumbnail from "../../../../../../_text/_thumbnail/thumbnail";
 import TeamSection from "../../../../../../_text/_sectionTextblob/teamSection/teamSection";
 import ImageTextblob from "../../../../../../_text/imageTextblob/imageTextblob"
+import Footer from "../../../../../_pageSection/footer/footer"
 
 export default declareComponent("it-team", class ItTeam extends TeamPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
         {
@@ -64,8 +65,15 @@ export default declareComponent("it-team", class ItTeam extends TeamPage {
                     return new WrapperSection(schuelerImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../../_text/imageTextblob/imageTextblob")
+        },
+        {
+          key: new Import("footer", 1, (_Footer: typeof Footer) => 
+            new _Footer(baseLink + "schueler/")
+          ), val: () => import(/* webpackChunkName: "footer" */"../../../../../_pageSection/footer/footer")
         }
-    ), sectionChangeCallback, undefined)
+    ), sectionChangeCallback, undefined, {
+        footer: "schueler"
+    })
 
       this.elementBody.append(ce("circle-feature"))
 

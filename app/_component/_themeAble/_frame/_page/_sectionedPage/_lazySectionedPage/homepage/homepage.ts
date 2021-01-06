@@ -12,7 +12,7 @@ import Footer from "../../../../_pageSection/footer/footer"
 
 
 export default declareComponent("home-page", class Homepage extends LazySectionedPage {
-  constructor(sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
 
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -37,7 +37,7 @@ export default declareComponent("home-page", class Homepage extends LazySectione
       },
       {
         key: new Import("footer", 1, (_Footer: typeof Footer) =>
-          new _Footer()
+          new _Footer(baseLink + "kontakt/")
         ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
       }
     ), sectionChangeCallback, new AliasList(

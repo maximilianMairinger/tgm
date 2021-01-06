@@ -4,10 +4,17 @@ import { InstanceRecord } from "../../lib/record"
 const _record = new InstanceRecord(() => console.warn("img load without init proxy"))
 export const record = _record as Omit<typeof _record, "add">
 
+const formats = [
+  "avif",
+  "webp",
+  "jpg"
+]
+
 export default class Image extends Component {
   public readonly ready: Promise<void>
   constructor(src?: string, forceLoad?: boolean) {
-    super(ce("img") as any)
+    super(ce("picture"))
+    
     this.ready = new Promise((res) => {
       (this.elementBody as any as HTMLImageElement).onload = () => {
         this.elementBody.anim({opacity: 1})

@@ -4,13 +4,13 @@ import declareComponent from "../../../../../../lib/declareComponent";
 
 
 
-export default declareComponent("abendschule-icon", class AbendschuleIcon extends HighlightAbleIcon {
+export default declareComponent("erwachsenenschule-icon", class ErwachsenenschuleIcon extends HighlightAbleIcon {
   constructor() {
     super()
 
   }
 
   pug() {
-    return require("./abendschule.pug").default
+    return require("./erwachsenenschule.pug").default
   }
 })

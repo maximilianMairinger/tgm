@@ -17,7 +17,7 @@ export const iconIndex = {
   navigation: {
     tagesschule: () => import("../_icon/_highlightAbleIcon/navigationIcon/tagesschule/tagesschule"),
     versuchsanstalt: () => import("../_icon/_highlightAbleIcon/navigationIcon/versuchsanstalt/versuchsanstalt"),
-    abendschule: () => import("../_icon/_highlightAbleIcon/navigationIcon/abendschule/abendschule"),
+    erwachsenenschule: () => import("../_icon/_highlightAbleIcon/navigationIcon/erwachsenenschule/erwachsenenschule"),
     news: () => import("../_icon/_highlightAbleIcon/navigationIcon/news/news"),
     kontakt: () => import("../_icon/_highlightAbleIcon/navigationIcon/kontakt/kontakt"),
   },

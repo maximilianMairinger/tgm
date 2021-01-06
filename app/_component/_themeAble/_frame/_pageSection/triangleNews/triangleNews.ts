@@ -5,11 +5,14 @@ import PageSection from "../pageSection"
 import NewsCard from "../../../_card/_infoCard/newsCard/newsCard";
 import { Theme } from "../../../themeAble";
 import declareComponent from "../../../../../lib/declareComponent";
+import OverflowX from "../../../overflowX/overflowX";
+import Button from "../../../_button/button";
 
 
 
 export default class TriangleNews extends PageSection {
   private cardContainer = this.q("card-container")
+  private overflowX = new OverflowX();
   private imageTextblob = this.q("c-image-textblob")
   constructor(content: {
     text: {
@@ -29,15 +32,20 @@ export default class TriangleNews extends PageSection {
     }[]
   }) {
     super("dark")
-    
+    this.overflowX.padding(false, 25)
+    this.overflowX.setNextButton(new Button())
+    this.overflowX.setPreviousButton(new Button())
+    this.cardContainer.append(this.overflowX)
     for (let card of content.cards) {
       let cardElem = new NewsCard()
-      this.cardContainer.apd(cardElem)
       for (const k in card) {
         cardElem[k](card[k])
       }
       cardElem.theme(this.theme())
+      this.overflowX.append(cardElem)
     }
+
+    this.overflowX.theme(this.theme())
 
     for (const k in content.text) {
       this.imageTextblob[k](content.text[k])
@@ -48,6 +56,7 @@ export default class TriangleNews extends PageSection {
 
   }
 
+  //todo: doesnt work with news cards
   theme(): Theme
   theme(to: Theme): this
   theme(to?: Theme): any {

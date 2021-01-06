@@ -32,7 +32,11 @@ blog-html *{
 
 blog-html figure{
     margin: auto;
-    width: 100%;
+}
+
+blog-html iframe{
+    width: 650px;
+    height: 365px;
 }
 
 blog-html figure *{
@@ -110,5 +114,10 @@ blog-image img{
         width: 100%;
         padding: 0 10vw;
         box-sizing: border-box;
+    }
+
+    blog-html iframe{
+        width: 80vw;
+        height: 45vw;
     }
 }

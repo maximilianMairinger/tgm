@@ -203,12 +203,20 @@ overview-box{
     align-self: flex-end;
     height: auto;
     width: 100%;
-    padding: 20px;
+    min-height: calc(100% - 100px);
+    padding: 30px;
     overflow: hidden;
     backface-visibility: hidden;
     background: var(--primary-background-color);
     overflow: hidden;
     border-radius: 8px;
+}
+
+#topContent {
+    margin-bottom: 130px;
+    min-height: 133px;
+    display: block;
+    position: relative;
 }
 
 overview-content-box{
@@ -246,6 +254,13 @@ overview-img-box c-pruefung-icon{
     margin-right: 35px;
 }
 
+overview-text-box {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    left: 180px;
+}
+
 overview-text-box *{
     display: block;
 }
@@ -257,6 +272,21 @@ overview-title{
 }
 
 @media only screen and (max-width: 1450px) {
+
+    #topContent {
+        margin-bottom: 10px;
+        min-height: initial;
+        display: initial;
+        position: initial;
+    }
+
+    overview-text-box {
+        position: relative;
+        bottom: initial;
+        right: initial;
+        left: initial;
+        width: 100%;
+    }
 
     selection-card{
         flex-direction: row-reverse;

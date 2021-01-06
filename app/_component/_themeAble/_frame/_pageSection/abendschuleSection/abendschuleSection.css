@@ -165,6 +165,14 @@ card-box card-item:nth-child(2n):first-child:last-child extra-line-2{
 }
 
 @media only screen and (max-width: 950px) {
+    card-item {
+        width: 100%;
+    }
+
+    c-erwachsenen-card{
+        width: 100%;
+    }
+
     abendschule-section{
         padding-top: 225px;
     }
@@ -186,13 +194,6 @@ card-box card-item:nth-child(2n):first-child:last-child extra-line-2{
         align-self: unset!important;
     }
 
-    c-erwachsenen-card{
-        width: auto;
-    }
-
-    c-anmelden-card{
-        width: auto;
-    }
 
     extra-circle{
         display: none;

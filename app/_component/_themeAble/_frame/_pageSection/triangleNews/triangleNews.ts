@@ -12,8 +12,9 @@ import Button from "../../../_button/button";
 
 export default class TriangleNews extends PageSection {
   private cardContainer = this.q("card-container")
-  private overflowX = new OverflowX();
+  private overflowX;
   private imageTextblob = this.q("c-image-textblob")
+
   constructor(content: {
     text: {
       note: string,
@@ -30,22 +31,23 @@ export default class TriangleNews extends PageSection {
       contentTitle: string,
       content: string
     }[]
-  }) {
+  }, api=false) {
     super("dark")
+    this.overflowX = new OverflowX(new Button(), new Button(), api)
     this.overflowX.padding(false, 25)
-    this.overflowX.setNextButton(new Button())
-    this.overflowX.setPreviousButton(new Button())
+    this.overflowX.theme(this.theme())
     this.cardContainer.append(this.overflowX)
-    for (let card of content.cards) {
-      let cardElem = new NewsCard()
-      for (const k in card) {
-        cardElem[k](card[k])
+    console.log("API_2:" + api)
+    if(!api) {
+      for (let card of content.cards) {
+        let cardElem = new NewsCard()
+        for (const k in card) {
+          cardElem[k](card[k])
+        }
+        this.overflowX.append(cardElem)
       }
-      cardElem.theme(this.theme())
-      this.overflowX.append(cardElem)
     }
 
-    this.overflowX.theme(this.theme())
 
     for (const k in content.text) {
       this.imageTextblob[k](content.text[k])
@@ -63,6 +65,7 @@ export default class TriangleNews extends PageSection {
     if (to !== undefined) {
       //@ts-ignore
       this.imageTextblob.childs(1, true).Inner("theme", [to])
+      this.overflowX.theme(to)
     }
     return super.theme()
   }

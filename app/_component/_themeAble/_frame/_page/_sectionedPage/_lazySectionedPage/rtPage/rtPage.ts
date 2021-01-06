@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
+import DarkNewsSection from "../../../../_pageSection/triangleNews/raumfahrtTriangleNews/raumfahrtTriangleNews"
 
 
 export default declareComponent("rt-page", class RtPage extends LazySectionedPage {
@@ -49,7 +49,7 @@ export default declareComponent("rt-page", class RtPage extends LazySectionedPag
       },
       {
         key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-          new _DarkNewsSection()
+          new _DarkNewsSection(true)
         ), val: () => import(/* webpackChunkName: "raumfahrtNews" */"../../../../_pageSection/triangleNews/raumfahrtTriangleNews/raumfahrtTriangleNews")
       },
       {

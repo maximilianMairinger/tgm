@@ -43,7 +43,7 @@ export default declareComponent("et-team", class EtTeam extends TeamPage {
                     leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 3. Stock / H330");
                     leitungImageTextblob.email("tdeininger@tgm.ac.at");
                     leitungImageTextblob.tel("+43 (1) 33 126 / 230");
-                    leitungImageTextblob.image('url("/res/img/avdeininger.png")');
+                    leitungImageTextblob.image('avdeininger');
                     leitungImageTextblob.stellvertreter([{"name":"Stefan Hertl", "email":"shertl@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
@@ -61,7 +61,7 @@ export default declareComponent("et-team", class EtTeam extends TeamPage {
                     schuelerImageTextblob.address("Wexstraße 19-23, 1200 Wien / 11. Stock");
                     schuelerImageTextblob.email("mtacho@student.tgm.ac.at");
                     schuelerImageTextblob.tel("+43 ‭650 7311330‬");
-                    schuelerImageTextblob.image('url("/res/img/team_2.jpg")');
+                    schuelerImageTextblob.image('team_2');
                     schuelerImageTextblob.stellvertreter([{"name":"Martin Polak", "email":"mpolak@student.tgm.ac.at"}])
                     return new WrapperSection(schuelerImageTextblob);
                 }

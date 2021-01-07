@@ -42,7 +42,7 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
                     leitungImageTextblob.address("Wexstraße 19-21, 1200 Wien / 12. Stock / H1226");
                     leitungImageTextblob.email("bernhard.wess@tgm.ac.at");
                     leitungImageTextblob.tel("01 33 126 320");
-                    leitungImageTextblob.image('url("/res/img/avwess.png")');
+                    leitungImageTextblob.image('avwess');
                     leitungImageTextblob.stellvertreter([{"name":"Josef Kollmitzer", "email":"jkollmitzer@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
@@ -59,7 +59,7 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
                     schuelerImageTextblob.content("Ich darf euch dieses Jahr als Abteilungssprecher vertreten, bei Anliegen bitte einfach melden!")
                     schuelerImageTextblob.email("fnadler@student.tgm.ac.at");
                     schuelerImageTextblob.tel("+43‭ 660 6210505‬");
-                    schuelerImageTextblob.image('url("/res/img/team_2.jpg")');
+                    schuelerImageTextblob.image('team_2.jpg');
                     schuelerImageTextblob.stellvertreter([{"name":"Kristina Kutejova", "email":"kkutejova@student.tgm.ac.at"}])
                     return new WrapperSection(schuelerImageTextblob);
                 }

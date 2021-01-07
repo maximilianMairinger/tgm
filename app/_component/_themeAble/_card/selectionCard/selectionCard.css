@@ -209,7 +209,7 @@ image-box{
     height: 100%;
     display: block;
     transform: skewX(10deg);
-    background: url("../../../../res/img/selection-background.svg") 0 -15px no-repeat;
+    background: url("../../../../res/svg/selection-background.svg") 0 -15px no-repeat;
     background-size: calc(100% + 30px);
     backface-visibility: hidden;
 }

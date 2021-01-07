@@ -36,7 +36,7 @@ export default declareComponent("wirtschaftsingenieure-projekte", class Raumfahr
         key: new Import("projekte", 1, (projekte: typeof ProjekteSection) => {
           let projectData = [
             {
-              heading:"Clima bike box",
+              heading:"Thermischer Transportbehälter - cbb",
               note:`Entwicklung eines mobilen, thermischen Transportbehälters für Fahrräder`,
               team:[
 

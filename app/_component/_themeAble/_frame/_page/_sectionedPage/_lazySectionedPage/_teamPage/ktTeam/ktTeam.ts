@@ -43,7 +43,7 @@ export default declareComponent("kt-team", class KtTeam extends TeamPage {
                     leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 10. Stock");
                     leitungImageTextblob.email("avhkt@tgm.ac.at");
                     leitungImageTextblob.tel("0 33 126 / 300");
-                    leitungImageTextblob.image('url("/res/img/avreitinger.png")');
+                    leitungImageTextblob.image('avreitinger');
                     // leitungImageTextblob.stellvertreter([{"name":"Stefan Hertl", "email":"shertl@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
@@ -61,7 +61,7 @@ export default declareComponent("kt-team", class KtTeam extends TeamPage {
                     schuelerImageTextblob.address("Wexstraße 19-23, 1200 Wien / 10. Stock");
                     schuelerImageTextblob.email("dorhan@student.tgm.ac.at");
                     // schuelerImageTextblob.tel("+43 ‭650 7311330‬");
-                    schuelerImageTextblob.image('url("/res/img/team_2.jpg")');
+                    schuelerImageTextblob.image('team_2');
                     schuelerImageTextblob.stellvertreter([{"name":"Sebastian Fuchs", "email":"sfuchs@student.tgm.ac.at "}])
                     return new WrapperSection(schuelerImageTextblob);
                 }

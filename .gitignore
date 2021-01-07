@@ -6,6 +6,7 @@ electron-source/dist/
 electron-source/assets/
 electron-build/
 .idea*
+public/res/img
 
 package-lock.json
 

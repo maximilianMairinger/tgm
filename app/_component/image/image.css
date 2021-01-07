@@ -3,6 +3,11 @@
   height: 100%;
 }
 
+picture {
+  width: inherit;
+  height: inherit;
+}
+
 img {
   opacity: 0;
   object-fit: cover;

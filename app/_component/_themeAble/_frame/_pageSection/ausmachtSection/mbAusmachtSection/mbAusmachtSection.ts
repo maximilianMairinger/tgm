@@ -56,7 +56,7 @@ export default declareComponent("ausmacht-section-mb", class extends AusmachtSec
                     note: "praxisunterricht",
                     thumbnail: "/res/img/iotElektronik.jpg",
                     href: baseLink + "zellkultur",
-                    contentTitle: "Zellkulturlabortechnik",
+                    contenttitle: "Zellkulturlabortechnik",
                     content: "Du lernst hier an lebenden Zellen hygienisches Arbeiten mit sterilen Werkbänken und Inkubatoren. Damit bist du bestens gerüstet für die Zukunft der Biomedizinischen Technik."
                 },
                 {
@@ -64,7 +64,7 @@ export default declareComponent("ausmacht-section-mb", class extends AusmachtSec
                     note: "PRAXISUNTERRICHT",
                     thumbnail: "/res/img/elektronikWerkstatt.png",
                     href: baseLink + "prototypenbau",
-                    contentTitle: "Prototypenbau",
+                    contenttitle: "Prototypenbau",
                     content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."
                 }
             ]

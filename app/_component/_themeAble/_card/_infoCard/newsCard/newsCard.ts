@@ -4,13 +4,13 @@ import InfoCard from "../infoCard";
 
 export default class NewsCard extends InfoCard {
 
-    constructor(heading?: string, note?: string | Date, thumbnail?: string, href?: string, contentTitle?: string, content?: string) {
+    constructor(heading?: string, note?: string | Date, thumbnail?: string, href?: string, contenttitle?: string, content?: string) {
         super();
         if (heading) this.heading(heading)
         if (note) this.note(note)
-        if (thumbnail) this.note(thumbnail)
+        if (thumbnail) this.thumbnail(thumbnail)
         if (href) this.href(href)
-        if (contentTitle) this.contentTitle(contentTitle)
+        if (contenttitle) this.contenttitle(contenttitle)
         if (content) this.content(content)
 
         this.textblob.hsize({max:40, min:35});

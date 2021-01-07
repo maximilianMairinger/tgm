@@ -45,9 +45,9 @@ export default declareComponent("kt-projekte", class KtProjekte extends LazySect
               thumbnail:"/res/img/nespresso.jpg",
               title: "Projektziel",
               content: 
-`Zeil des Projekts war ist die anwendung eines Biopolymers für die Herstellung von Kaffeekapseln, 
+`Zeil des Projekts war ist die Anwendung eines Biopolymers für die Herstellung von Kaffeekapseln, 
 sowie die Beurteilung der Kompostierfähigkeit. Dabei wurde ein Biokunststoff entwickelt, welcher 
-als alternative zu herkömmlichen Aluminiumverpackungen verwendet werden kann. Diese wurden sowohl
+als Alternative zu herkömmlichen Aluminiumverpackungen verwendet werden kann. Diese wurden sowohl
 auf ihre mechanische Stabilität als auch auf ihre Kompostierbarkeit geprüft.
 <img src="/res/img/kapselnKompostierbarkeit.png" class="illustration"></img>
 `

@@ -67,7 +67,7 @@ export default class KunststoffPage extends LazySectionedPage {
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 10. Stock");
           imageTextBlob.email("office-hkt@tgm.ac.at");
           imageTextBlob.tel("01 33 126 / 300");
-          imageTextBlob.image('url("/res/img/ktContact.png")');
+          imageTextBlob.image('ktContact');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

@@ -64,7 +64,7 @@ export default declareComponent("rt-page", class RtPage extends LazySectionedPag
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 100. Stock");
           imageTextBlob.email("avhrt@tgm.ac.at");
           imageTextBlob.tel("+43 1 33126 291");
-          imageTextBlob.image('url("/res/img/computersRaumfahrt.jpg")');
+          imageTextBlob.image('computersRaumfahrt');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

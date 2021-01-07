@@ -174,11 +174,7 @@ tagesschule-container c-textblob {
 
   c-button {
     margin-left: 0;
-    width: 120px;
+    width: 200px;
     max-width: 100%;
-  }
-
-  c-button:after{
-    content: "Webinar TDOT"
   }
 }

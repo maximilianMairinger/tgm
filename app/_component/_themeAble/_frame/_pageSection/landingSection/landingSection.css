@@ -46,11 +46,26 @@ text-container {
   min-height: 650px;
 }
 
-text-container > c-textblob {
+text-container textblob-animation-wrapper {
   display: block;
   position: absolute;
   left: 100px;
   transition: top .5s;
+}
+
+c-button {
+  padding: 13px 25px;
+  max-width: 250px;
+  width: fit-content;
+  background: var(--strong-contrast-text-color);
+  color: var(--strong-background-color);
+  font-weight: bold;
+  border-radius: 7px;
+  display: block;
+  margin-top: 10px;
+  margin-left: 145px;
+  text-align: center;
+  box-shadow: 2px 2px 20px 0 rgba(var(--strong-contrast-text-color-raw), 0.17);
 }
 
 card-wrapper {
@@ -84,7 +99,7 @@ tagesschule-container {
   top: max(67vh, 450px);
 }
 
-tagesschule-container > c-textblob {
+tagesschule-container c-textblob {
   opacity: 0;
   transform: translateY(-20px);
   max-width: 100%;
@@ -101,7 +116,7 @@ tagesschule-container > c-textblob {
 
 
 @media only screen and (max-width: 1130px) {
-  text-container > c-textblob {
+  text-container c-textblob {
     left: unset;
   }
   text-container {

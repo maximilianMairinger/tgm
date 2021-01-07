@@ -33,10 +33,11 @@ export default class WIPage extends LazySectionedPage {
         key: new Import("info", 1, (_Info: typeof Info) => {
           let info = new _Info()
 
-          info.content(`Wirtschaftsingenieure sind echte Allrounder, da sie durch ihre fundierte technische und wirtschaftliche Ausbildung nicht nur Spezialisten sind, sondern auch Abläufe an den wesentlichen Schnittstellen im Unternehmen gestalten. Entscheidest DU dich für unsere Abteilung dann entscheidest du dich für eine sehr breit gefächerte Ausbildung, die so vielfältig ist wie das LEBEN selbst.
+          info.content(`Wirtschaftsingenieure sind echte Allrounder, da sie durch ihre fundierte technische und wirtschaftliche Ausbildung nicht nur Spezialisten sind, sondern auch Abläufe an den wesentlichen Schnittstellen im Unternehmen gestalten. Durch diverse <c-link link="tagesschule/wirtschaftsingenieure/info/freigegenstande-und-zusatzausbildungen-sowie-gelebte-individualisierung/">Freigegenstände und Zusatzausbildungen</c-link>, sowie gelebte Individualisierung, kannst du deine Fähigkeiten noch stärker vertiefen.
           <br><br>
-          Als Wirtschaftsingenieur bzw. Wirtschaftsingenieurin bekommst du neben Fachtheorie und Fachpraxis wichtige <c-link link="tagesschule/wirtschaftsingenieure/info/softskills">Softskills</c-link> vermittelt, die dich nach der Ausbildung für Managementposition qualifizieren. Wir unterstützen unsere Absolventen auch noch nach der bestandenen Reife- und Diplomprüfung. 
-          Aus diesem Grund arbeiten wir stets an <c-link link="tagesschule/wirtschaftsingenieure/info/kooperationen">Kooperationsvereinbarungen</c-link> mit verschiedenen Fachhochschulen. Das bedeutet für DICH, dass dir einige Inhalte deiner Ausbildung angerechnet werden, und dein Studium dadurch kürzer wird.
+          "Logistik, Maschinenbau, IT, Elektrotechnik, Elektronik, Werkstoff- und Fertigungstechnik, Wirtschaft sowie Entrepreneurship" sind hier nur einige Begriffe, die DIR in der Ausbildung zum Wirtschaftsingenieur bzw. zur Wirtschaftsingenieurin begegnen werden.
+          <br><br>
+          Als Wirtschaftsingenieur bzw. Wirtschaftsingenieurin bekommst du neben Fachtheorie und Fachpraxis wichtige <c-link link="tagesschule/wirtschaftsingenieure/info/softskills">Softskills</c-link> vermittelt, die dich nach der Ausbildung für Managementposition qualifizieren. <c-link link="tagesschule/wirtschaftsingenieure/info/kooperationen-2">Kooperationen, mit Unternehmen aus der Wirtschaft</c-link> sowie verschiedenen <c-link link="tagesschule/wirtschaftsingenieure/info/kooperationen/">Fachhochschulen</c-link> sollen unsere Absolventinnen und Absolventen auch nach der Reife- und Diplomprüfung unterstützen.
           `)
 
           return new WrapperSection(info) as any
@@ -73,11 +74,11 @@ export default class WIPage extends LazySectionedPage {
 
           imageTextBlob.heading("Kontakt");
           imageTextBlob.subheading("zur WI");
-          imageTextBlob.content(`DU würdest dir gerne selbst ein Bild von unserer Abteilung machen und einen oder vielleicht sogar alle drei Schwerpunkte kennenlernen? Dann melde dich für einen Schnuppertag an – tauche ein in die Welt der Technik, Wirtschaft und Informatik! Hier findest du das Anmeldeformular`)
+          imageTextBlob.content(`DU würdest dir gerne selbst ein Bild von unserer Abteilung machen und einen oder vielleicht sogar alle drei Schwerpunkte kennenlernen? Dann melde dich für einen Schnuppertag an – tauche ein in die Welt der Technik, Wirtschaft und Informatik!`)
           // imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("/")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 5. Stock");
-          imageTextBlob.email("georg.angerer@tgm.ac.at");
+          imageTextBlob.email("office-hwi@tgm.ac.at");
           imageTextBlob.tel("0664 80126262");
           imageTextBlob.image('wiKontakt');
           return new WrapperSection(imageTextBlob) as any

@@ -7,6 +7,7 @@ component-body{
 c-blog-post{
     display: block;
     padding-top: 150px;
+    padding-bottom: 150px;
     order: 1;
 }
 

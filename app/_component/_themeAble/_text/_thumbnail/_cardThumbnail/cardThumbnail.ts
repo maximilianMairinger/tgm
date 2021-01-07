@@ -1,5 +1,6 @@
 import IconCard from "./../../../_card/iconCard/iconCard"
 import Thumbnail from "../thumbnail";
+import CardCarousel from "../../../../cardCarousel/cardCarousel";
 import Card from "../../../_card/iconCard/iconCard"
 import declareComponent from "../../../../../lib/declareComponent";
 
@@ -16,8 +17,10 @@ export default class CardThumbnail extends Thumbnail {
       ["projekte", "Projekte", undefined, card_baseLink + "projekte"],
       ["team", "Team", undefined, card_baseLink + "team"]
     )
+
+    cards = cards.map(args => args instanceof Card ? args : new Card(...args)) as any
+    this.apd(new CardCarousel(cards as any, false))
     
-    this.cardContainer.apd(...cards.map(args => args instanceof Card ? args : new Card(...args)))
   }
 
   protected startIframe() {

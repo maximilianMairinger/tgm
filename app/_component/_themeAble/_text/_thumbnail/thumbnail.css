@@ -1,15 +1,16 @@
 :host{
     position: relative;
-    display: block;
-    height: calc(100vh - 150px);
-    min-height: 550px;
+    display: inline-block;
+    width: 100%;
 }
 
 landing-textblob{
-    position: absolute;
+    position: relative;
     display: flex;
-    height: 100%;
     width: 100%;
+    height: calc(100vh - 150px);
+    min-height: 550px;
+    padding: 0 100px 0 100px;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
@@ -43,8 +44,6 @@ text-box{
     padding: 0 100px 0 100px;
 }
 
-c-textblob{
-}
 
 background-shader{
     z-index: 1;
@@ -102,7 +101,11 @@ video-button c-button{
 
     text-box{
         width: 80vw;
+        padding: 0;
+    }
+    landing-textblob{
         padding: 0 10vw;
+        height: calc(100% - 75px);
     }
 
     c-textblob{

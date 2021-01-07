@@ -53,19 +53,25 @@ text-container textblob-animation-wrapper {
   transition: top .5s;
 }
 
-c-button {
-  padding: 13px 25px;
-  max-width: 250px;
-  width: fit-content;
+c-button{
+  position: relative;
+  width: 200px;
+  height: auto;
   background: var(--strong-contrast-text-color);
   color: var(--strong-background-color);
   font-weight: bold;
   border-radius: 7px;
-  display: block;
+  display: flex;
+  justify-content: center;
   margin-top: 10px;
   margin-left: 145px;
   text-align: center;
   box-shadow: 2px 2px 20px 0 rgba(var(--strong-contrast-text-color-raw), 0.17);
+}
+
+c-button:after{
+  padding: 13px 25px;
+  content: "Webinar - TDOT"
 }
 
 card-wrapper {
@@ -157,5 +163,22 @@ tagesschule-container c-textblob {
   big-image > c-image {
     transform: translateX(calc(475px - 50vw)) translateY(-100px);
     
+  }
+}
+
+@media only screen and (max-width: 768px) {
+
+  text-container textblob-animation-wrapper {
+    left: unset;
+  }
+
+  c-button {
+    margin-left: 0;
+    width: 120px;
+    max-width: 100%;
+  }
+
+  c-button:after{
+    content: "Webinar TDOT"
   }
 }

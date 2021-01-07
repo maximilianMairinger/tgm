@@ -40,7 +40,7 @@ export default declareComponent("et-team", class EtTeam extends TeamPage {
                     leitungImageTextblob.heading("DI Deininger");
                     leitungImageTextblob.subheading("Thomas");
                     // leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")
-                    leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 3. Stock / H330");
+                    leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 3. Stock / H326");
                     leitungImageTextblob.email("tdeininger@tgm.ac.at");
                     leitungImageTextblob.tel("+43 (1) 33 126 / 230");
                     leitungImageTextblob.image('avdeininger');

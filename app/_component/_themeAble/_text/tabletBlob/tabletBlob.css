@@ -88,18 +88,18 @@ project-icon{
     pointer-events: none;
 }
 
-img {
+c-image {
     height: auto;
     width: 100%;
     border-radius: 10px;
     background: white;
 }
 
-img:not(.illustration) {
+c-image:not(.illustration) {
     box-shadow: var(--medium-shadow);
 }
 
-img:not(.project-icon-pic) {
+c-image:not(.project-icon-pic) {
     margin: 20px 0;
 }
 

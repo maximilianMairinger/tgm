@@ -20,7 +20,7 @@ const whenPossibleFormats = formats.slice(0, -1)
 const fallbackFormat = formats.last
 
 export default class Image extends Component {
-  public readonly ready: Promise<void>
+  public readonly loaded: Promise<void>
   private elems = new ElementList<HTMLElement & {setSource: (to: string) => string}>()
   private img: HTMLImageElement & {setSource: (to: string) => string}
   constructor(src?: string, forceLoad?: boolean) {
@@ -41,7 +41,7 @@ export default class Image extends Component {
 
 
     
-    this.ready = new Promise((res) => {
+    this.loaded = new Promise((res) => {
       (this.img as any as HTMLImageElement).onload = () => {
         this.img.anim({opacity: 1})
         res()
@@ -52,19 +52,24 @@ export default class Image extends Component {
   }
 
 
-  src(src: string, forceLoad: boolean = false) {
-    if (forceLoad) {
-      const pointIndex = src.indexOf(".")
-      if (pointIndex !== -1) src = src.slice(0, pointIndex)
-      if (!src.startsWith("/")) src = "/res/img/" + src
-      this.elems.Inner("setSource", [src + unionSymbol + res + "."])
+  src(): Promise<string>
+  src(src: string, forceLoad?: boolean): this
+  src(src?: string, forceLoad: boolean = false) {
+    if (src !== undefined) {
+      if (forceLoad) {
+        const pointIndex = src.indexOf(".")
+        if (pointIndex !== -1) src = src.slice(0, pointIndex)
+        if (!src.startsWith("/")) src = "/res/img/" + src
+        this.elems.Inner("setSource", [src + unionSymbol + res + "."])
+      }
+      else {
+        _record.add(() => {
+          this.src(src, true)
+        })
+      }
+      return this
     }
-    else {
-      _record.add(() => {
-        this.src(src, true)
-      })
-    }
-    
+    else return this.loaded.then(() => this.img.currentSrc !== undefined ? this.img.currentSrc : this.img.src)
   }
 
 

@@ -49,10 +49,12 @@ export default abstract class InfoCard extends Card {
         if (!this.customColor) {
             
             let averageColor = new FastAverageColor();
-            averageColor.getColorAsync(url).then(color => {
-                let rgba = "rgba(".concat(color.value[0].toString(), ",", color.value[1].toString(), ",", color.value[2].toString(), ", 0.5)");
-                this.headingbackground(rgba, false);
-            });
+            this.img.src().then((src) => {
+                averageColor.getColorAsync(src).then(color => {
+                    let rgba = "rgba(".concat(color.value[0].toString(), ",", color.value[1].toString(), ",", color.value[2].toString(), ", 0.5)");
+                    this.headingbackground(rgba, false);
+                });
+            })
         }
     }
 

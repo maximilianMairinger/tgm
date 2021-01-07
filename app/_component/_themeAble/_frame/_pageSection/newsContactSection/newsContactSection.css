@@ -239,3 +239,52 @@ textblob-fadin.news {
   display: block;
   transform: translateY(.1);
 }
+
+
+mobile-overlay {
+  width: 100%;
+  background:rgb(249 250 254);
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity .1s;
+  pointer-events: none;
+}
+
+@media (max-width: 1200px) {
+  mobile-overlay {
+    opacity: 1;
+  }
+  mobile-overlay.bot {
+    opacity: 0;
+  }
+
+  c-image-textblob.news {
+    margin-top: -40px;
+    width: 100%;
+  }
+  textblob-wrapper.news {
+    width: 100%;
+  }
+  card-container > *:first-child {
+    margin-left: 0;
+  }
+  card-container-wrapper, card-container {
+    z-index: 3;
+    left: 0;
+    padding-left: 10vw;
+    width: 100%;
+    position: absolute;
+    pointer-events: none;
+    height: 500px;
+  }
+  card-container-wrapper {
+    top: 275px;
+  }
+
+  card-container > * {
+    pointer-events: all;
+  }
+}

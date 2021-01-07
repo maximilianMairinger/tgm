@@ -56,6 +56,10 @@ export default class ImageTextblob extends Text {
     }
   }
 
+  mobileSwitchAt(to: number | string) {
+    this.textBlob.mobileSwitchAt(to)
+  }
+
 
 
   private infoIndex: {[infoName in string]: HTMLElement} = {}

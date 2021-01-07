@@ -33,7 +33,7 @@ export default class WIPage extends LazySectionedPage {
         key: new Import("info", 1, (_Info: typeof Info) => {
           let info = new _Info()
 
-          info.content(`Wirtschaftsingenieure sind echte Allrounder, da sie durch ihre fundierte technische und wirtschaftliche Ausbildung nicht nur Spezialisten sind, sondern auch Abläufe an den wesentlichen Schnittstellen im Unternehmen gestalten. Durch diverse <c-link link="blog/freigegenstande-und-zusatzausbildungen-sowie-gelebte-individualisierung/">Freigegenstände und Zusatzausbildungen</c-link>, sowie gelebte Individualisierung, kannst du deine Fähigkeiten noch stärker vertiefen.
+          info.content(`Wirtschaftsingenieure sind echte Allrounder, da sie durch ihre fundierte technische und wirtschaftliche Ausbildung nicht nur Spezialisten sind, sondern auch Abläufe an den wesentlichen Schnittstellen im Unternehmen gestalten. Durch diverse <c-link link="tagesschule/wirtschaftsingenieure/info/freigegenstande-und-zusatzausbildungen-sowie-gelebte-individualisierung/">Freigegenstände und Zusatzausbildungen</c-link>, sowie gelebte Individualisierung, kannst du deine Fähigkeiten noch stärker vertiefen.
           <br><br>
           "Logistik, Maschinenbau, IT, Elektrotechnik, Elektronik, Werkstoff- und Fertigungstechnik, Wirtschaft sowie Entrepreneurship" sind hier nur einige Begriffe, die DIR in der Ausbildung zum Wirtschaftsingenieur bzw. zur Wirtschaftsingenieurin begegnen werden.
           <br><br>

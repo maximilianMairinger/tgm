@@ -16,6 +16,7 @@ content-box {
     position: relative;
     flex-direction: column;
     height: auto;
+    min-height: 375px;
     width: max(30%, auto);
 }
 

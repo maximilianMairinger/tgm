@@ -13,6 +13,9 @@ import Icon from "../_icon/icon"
 import SlidyUnderline from "./../slidyUnderline/slidyUnderline"
 import keyIndex from "key-index"
 import "xtring"
+import MailIcon from "../_icon/mail/mail"
+import CalendarIcon from "../_icon/calendar/calendar"
+import GraduateIcon from "../_icon/graduate/graduate"
 
 
 const pathDisplayHeaderMinMargin = 100
@@ -49,12 +52,23 @@ export default class Header extends ThemeAble {
   ))
   // private backLinkComponents: ElementList<ThemAble> = new ElementList()
 
+  private additionalPathDisplay = this.q("additional-path-display")
   constructor(public linksShownChangeCallback?: (linksShown: boolean, init: boolean, func: any) => void) { 
     super()
     this.linkContainerElem.apd(this.underlineElem)
     
     window.on("resize", this.resizeHandler.bind(this))
+
+
+    delay(500).then(() => {
+      let elems = new ElementList(new CalendarIcon, new MailIcon, new GraduateIcon)
+      this.additionalPathDisplay.apd(...elems)
+      elems.show().anim({opacity: 1, translateX: .1}, 400, 70)
+    })
+    
   }
+
+
 
 
   theme(): Theme

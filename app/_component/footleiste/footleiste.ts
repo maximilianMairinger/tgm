@@ -17,7 +17,7 @@ const content: { left: ContentArray, right: ContentArray } = {
         },
         {
             content: "Intern",
-            link: "todo"
+            link: "intern"
         },
     ],
     right: [

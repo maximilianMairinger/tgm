@@ -30,8 +30,8 @@ export default declareComponent("landing-section", class Landing extends PageSec
       new IconCard(new ElektronikIcon, abt.Elektronik, lang.AbteilungsShorts.Elektronik, "tagesschule/elektronik"),
       new IconCard(new ElektrotechnikIcon, abt.Elektrotechnik, lang.AbteilungsShorts.Elektrotechnik, "tagesschule/elektrotechnik"),
       new IconCard(new ItIcon, abt.Informationstechnologie, lang.AbteilungsShorts.Informationstechnologie, "tagesschule/informationstechnologie"),
-      new IconCard(new KunststofftechnikIcon, abt.Kunststofftechnik, lang.AbteilungsShorts.Kunststofftechnik, "tagesschule/kunststofftechnik"),
-      new IconCard(new MaschinenbauIcon, abt.Maschinenbau, lang.AbteilungsShorts.Maschinenbau, "tagesschule/todo"),
+      new IconCard(new KunststofftechnikIcon, abt.Kunststofftechnik, lang.AbteilungsShorts.Kunststofftechnik, "https://www2.tgm.ac.at/tagesschule/hkt"),
+      new IconCard(new MaschinenbauIcon, abt.Maschinenbau, lang.AbteilungsShorts.Maschinenbau, "https://www2.tgm.ac.at/tagesschule/hmb"),
       new IconCard(new WirtschaftsingenieureIcon, abt.Wirtschaftsingenieure, lang.AbteilungsShorts.Wirtschaftsingenieure, "tagesschule/wirtschaftsingenieure")
     ]
 

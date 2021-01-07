@@ -6,4 +6,6 @@ a {
   position: absolute;
   color: rgb(59, 59, 59);
   transition: .3s color;
+  width: 100%;
+  height: 100%;
 }

@@ -1,14 +1,9 @@
-:host {
-  color: var(--strong-text-color);
-  text-align: left;
-  user-select: none;
-  cursor: pointer;
-}
-
 a {
-  text-align: inherit;
-  color: inherit;
+  width: 100%;
+  height: 100%;
   display: block;
   font-family: inherit;
+  position: absolute;
+  color: rgb(59, 59, 59);
   transition: .3s color;
 }

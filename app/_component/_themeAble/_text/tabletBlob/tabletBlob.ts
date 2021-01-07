@@ -207,7 +207,7 @@ export default class TabletBlob extends Text {
 
     private logoElem = this.q(".project-icon-pic")
     private logo(logo:string){
-        if (logo) this.logoElem.show().src(logo)
+        if (logo) (this.logoElem.show() as any).src(logo)
         else this.logoElem.hide()
     }
 

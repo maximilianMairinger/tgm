@@ -51,6 +51,10 @@ blog-html table {
     border: 1px solid #ddd;
 }
 
+blog-html img {
+    height: 100%;
+}
+
 blog-html tr:nth-child(2n - 1) *:not(th){
     background-color: #f2f2f2
 }

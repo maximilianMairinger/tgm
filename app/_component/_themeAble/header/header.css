@@ -2,6 +2,20 @@ component-body {
   display: flex;
   align-items: center;
   user-select: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Do not show a scrollbar */
+component-body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+/* WebKit */
+component-body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 blurry-background {
@@ -125,12 +139,11 @@ path-display {
   position: relative;
   display: flex;
   align-items: center;
-
-
 }
 
 path-display > * {
   opacity: 0;
+  white-space: nowrap;
 }
 
 path-display c-arrow-icon {

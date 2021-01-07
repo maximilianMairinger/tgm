@@ -13,13 +13,12 @@ import delay from "delay";
 import lang from "../../../../../lib/lang";
 import CardCarousel from "../../../../cardCarousel/cardCarousel";
 import "./../../../../image/image"
-import "./../../../_button/button"
 
 
 export default declareComponent("landing-section", class Landing extends PageSection {
   private cardWrapper = this.q("card-wrapper")
   
-  private mainHeaderElem = this.q("text-container > textblob-animation-wrapper")
+  private mainHeaderElem = this.q("text-container > c-textblob")
   private tagesschuleHeaderElem = this.q("tagesschule-container > c-textblob")
   constructor() {
     super()

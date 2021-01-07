@@ -124,7 +124,7 @@ export default declareComponent("erwachsenen-card", class ErwachsenenCard extend
         //this.overviewIcon.apd(ce(options.extraIcon));
         let time = 400;
         this.overviewIcon.anim({opacity:0}, time).then(() => {
-            this.overviewPruefung.certificat(options.certificate ? options.certificate : "Reife und Dipl-\nomprüfung");
+            this.overviewPruefung.certificate(options.certificate ? options.certificate : "Reife und Dipl-\nomprüfung");
             this.overviewIcon.anim({opacity:1}, time)
         })
         this.overviewTitle.text(options.extraTitle);

@@ -21,8 +21,9 @@ export default class Thumbnail extends Text {
   constructor() {
     super();
     this.theme('dark');
-    this.hsize({max:70, min:35});
+    this.hsize({max:70, min:55});
     this.hmobile({max:55, min:35});
+    this.textBlob.mobileSwitchAt(1000)
   }
 
   background(src: string) {

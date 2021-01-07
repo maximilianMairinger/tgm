@@ -9,6 +9,8 @@ image-text-blob{
     justify-content: flex-end;
     padding: 10vw 7vw 10vw 7vw;
     overflow: hidden;
+    min-height: min(650px, 44vw);
+    box-sizing: border-box;
 }
 
 content-box {

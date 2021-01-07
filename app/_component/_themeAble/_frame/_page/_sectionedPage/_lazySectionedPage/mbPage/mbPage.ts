@@ -23,8 +23,8 @@ export default class MbPage extends LazySectionedPage {
           e.heading("Maschinenbau")
           e.subheading("der Tagesschule")
           e.note("abteilung");
-          e.background("biomedLanding.png")
-          e.videolink("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+          e.background("mbLanding.png")
+          e.videolink("https://www.youtube.com/watch?v=XIB-3K20Vaw")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
@@ -39,9 +39,9 @@ export default class MbPage extends LazySectionedPage {
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
           info.content(`
-          Das Ausbildungsziel an dieser Lehranstalt ist die Entwicklung eines soliden Verständnisses der Wechselwirkung von Technik und Medizin, das durch inhaltliche und organisatorische Vernetzung der Unterrichtsgegenstände „Biologie, Medizin und Gesundheitswesen“, „Biomedizinische Signal-Verarbeitung“, „Medizinische Gerätetechnik“, „Gesundheitsmechatronik“ und „Medizin- und Gesundheitsinformatik“ vermittelt wird.
-          <br><br>
-          Die Absolventen/innen der Höheren Lehranstalt für Biomedizin- und Gesundheitstechnik können ingenieurmäßige Tätigkeiten auf den Gebieten Diagnose und Therapie, Bildverarbeitung, Prothesen- und Implantattechnik sowie in Rehabilitations-, Sportgeräte- und Wellnesstechnik ausführen. Dabei steht die Planung, Entwicklung und Realisierung medizintechnischer Geräte, der Entwurf und Implementierung von Softwarelösungen auf den Gebieten der Biologie, Medizin und des Gesundheitswesens, die Auswahl, Analyse, messtechnische Überprüfung bzw. der Test  der Komponenten, Module und Systeme im Vordergrund.
+          Moderner Maschinenbau ist geprägt durch Robotik, Design/ Konstruktion, digitales Prototyping, Augmented Reality, intelligente Bauteile, Automatisierung, Entwicklung und Prototypenbau. Maschinenbau schafft Neues, wie Roboter, Werkzeuge, Maschinen und Systeme, entwickelt und baut die Produkte.
+          <br>
+          Es gibt kein haptisches, reales Produkt an dem der Maschinenbau nicht beteiligt ist! Er bietet dir eine solide Grundlage, um die Zukunft aktiv mitgestalten zu können. Die Werkstoffe (Metalle, Kunststoffe, Holz, Papier, Keramik, Biomaterialien, ..) mit denen du deine Projekte und Ideen umsetzen wirst, sind so vielfältig wie deine Ausbildung im Maschinenbau selbst. Leichtbau ist angesagt! Willst du später vielleicht einmal etwas im Bereich "Robotik" machen, dann ist diese Ausbildung des Maschinenbaus die genau richtige Basis dafür. Wenn du zum Beispiel auf der FH-Technikum Wien nachliest, geben sie als Voraussetzung für das Masterstudium "Mechatronik/Robotik" einen Bachelor in Maschinenbau, Elektronik, Kommunikationssystemen, Automatisierung oder Fahrzeugtechnik an.
           `)
 
           return new WrapperSection(info) as any
@@ -62,13 +62,13 @@ export default class MbPage extends LazySectionedPage {
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("zur Biomedizin");
+          imageTextBlob.subheading("zur Maschinenbau");
           imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Biomedizin einzutauchen.")
           // imageTextBlob.linktext("Einen Besuch planen")
           imageTextBlob.linkhref("tagesschule/elektrotechnik")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 6. Stock");
-          imageTextBlob.email("office-hbg@tgm.ac.at");
-          imageTextBlob.tel("01 33 126 321");
+          imageTextBlob.email("office-hmb@tgm.ac.at");
+          imageTextBlob.tel("+43 1 33126 261");
           imageTextBlob.image('ktContact');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")

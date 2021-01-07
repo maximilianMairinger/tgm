@@ -11,7 +11,7 @@ export default declareComponent("ausmacht-section-mb", class extends AusmachtSec
         super({
             heading: {
                 heading: "Was uns ausmacht",
-                subheading: "als Elektronik"
+                subheading: "als Maschinenbau"
             },
             selection: {
                 heading: "Gegenstände",
@@ -19,55 +19,76 @@ export default declareComponent("ausmacht-section-mb", class extends AusmachtSec
                 selection: [
                     {
                         icon:"hardwareentwicklung", 
-                        title:"Hardwareentwicklung", 
-                        content:"Entwurf und Konzeptionierung von Geraeten", 
-                        link: baseLink + "hardwareentwicklung"
+                        title:"Konstruktion und Projektmanagement", 
+                        content:"Managementfähigkeiten und Konstruktion", 
+                        // link: baseLink + "hardwareentwicklung"
                     },
                     {
                         icon:"messtechnik", 
-                        title:"Messtechnik und Regelungssysteme", 
-                        content:"Arbeit mit komplexen Sensoren", 
-                        link: baseLink + "messtechnik-regelungssysteme"
+                        title:"Techn. Mechanik und Berechnung", 
+                        content:"Mathematische Anwendungen in der Technik", 
+                        // link: baseLink + "messtechnik-regelungssysteme"
                     },
                     {
                         icon:"computersysteme", 
-                        title:"Digitale Systeme und Computersysteme", 
-                        content:"Signalprozesse und digitale Systeme", 
-                        link: baseLink + "computersysteme"
+                        title:"Fertigungstechnik", 
+                        content:"Herstellen von Werkstücken", 
+                        // link: baseLink + "computersysteme"
                     },
                     {
                         icon:"kommunikationssysteme", 
-                        title:"Kommunikationssysteme und -netze",
-                        content:"Kommunikationsnetze und Übertragungssysteme", 
-                        link: baseLink + "kommunikationssysteme"
+                        title:"Maschinen und Anlagen",
+                        content:"Industrieprozesse verstehen und verwalten", 
+                        // link: baseLink + "kommunikationssysteme"
                     },
                     {
                         icon:"softwaretechnik", 
-                        title:"Fachspezifische Softwaretechnik", 
-                        content:"Mikrocontroller und Softwareentwicklung", 
-                        link: baseLink + "softwaretechnik"
+                        title:"Automatisierungstechnik", 
+                        content:"Arbeiten mit Industrierobotern", 
+                        // link: baseLink + "softwaretechnik"
                     }
                 ],
                 stundentafel: baseLink + "stundentafel-mb"
             },
             cards: [
                 {
-                    heading: "IoT",
-                    note: "praxisunterricht",
-                    thumbnail: "/res/img/iotElektronik.jpg",
-                    href: baseLink + "zellkultur",
-                    contenttitle: "Zellkulturlabortechnik",
-                    content: "Du lernst hier an lebenden Zellen hygienisches Arbeiten mit sterilen Werkbänken und Inkubatoren. Damit bist du bestens gerüstet für die Zukunft der Biomedizinischen Technik."
-                },
-                {
                     heading: "Werkstatt",
                     note: "PRAXISUNTERRICHT",
-                    thumbnail: "/res/img/elektronikWerkstatt.png",
-                    href: baseLink + "prototypenbau",
+                    thumbnail: "elektronikWerkstatt",
+                    href: baseLink + "werkstatte-in-der-maschinenbau",
                     contenttitle: "Prototypenbau",
                     content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."
                 }
-            ]
+            ],
+            vertiefung: {
+                text: {
+                    note: "die",
+                    heading: "Vertiefungen",
+                    subheading: "der MB",
+                    hsize: {max:60, min:40},
+                    content: "Prinzipiell wird der rasanten weltweiten, technologischen Weiterentwicklung durch eine solide Grundausbildung Rechnung getragen, sodass es unseren Absolventinnen und Absolventen auch in Zukunft möglich sein wird, mit der entsprechenden fachlichen Kompetenz, auch unter Beachtung ökologischer Notwendigkeiten, erfolgreich national und international zu agieren. Wir blicken auf über 100 Jahre an Erfahrung zurück und bieten eine vielfältige Ausbildung für Mädchen und Burschen. Im ersten Ausbildungsjahr liegt der Schwerpunkt in der Vermittlung maschinenbaulicher Grundlagen, danach erfolgt die vertiefte Ausbildung im Schwerpunkt Deiner Wahl."
+                },
+                cards: [
+                    {
+                        heading:"Fahrzeugtechnik",
+                        icon:"systemtechnik",
+                        link: baseLink + "fahrzeugtechnik”",
+                        content:"Hier sind findige, kreative Köpfe gefragt, die unsere Fortbewegungsmittel und Transportmöglichkeiten der Zukunft technisch, ökologisch und designmäßig aktiv mitgestalten wollen: vom Kinderdreirad, Skateboard, Fahrrad, Motorrad, Auto, Bus, LKW, Traktor, Schienenfahrzeug bis hin zu Seilbahnen."
+                    },
+                    {
+                        heading:"Industriedesign",
+                        icon:"systemtechnik",
+                        link: baseLink + "industrie-design",
+                        content:"Du gestaltest, zeichnest, entwirfst, entwickelst, baust. Reine Funktionalität von Produkten genügt heute lange nicht mehr den Bedürfnissen der Kunden. Daher stellt im „IndustrieDesign“ sowohl das Design (Entwurf, Konstruktion), als auch die Funktion von Produkten einen Schwerpunkt dar."
+                    },
+                    {
+                        heading:"Robotik und Smart Engineering",
+                        icon:"systemtechnik",
+                        link: baseLink + "robotik-und-smart-engineering",
+                        content:"Industrieroboter, Mechatronische Systeme, Smarte Assistenten, sind heute allgegenwärtig, aus der modernen Automatisierungswelt nicht mehr wegzudenken. In Zukunft wird sich ihre Präsenz noch verstärken. Die Kombination von Mensch-Maschinen-Interfaces, Dashboards (das neue modulare Programmieren - Drag & Drop) und Maschinenbau-Skills ist der zukünftige Standard und genau dies wird gelehrt."
+                    }
+                ]
+            }
         })
     }
 });

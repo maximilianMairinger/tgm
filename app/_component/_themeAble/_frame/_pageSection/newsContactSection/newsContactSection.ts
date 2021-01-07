@@ -12,6 +12,7 @@ import HighlightAbleIcon from "../../../../_themeAble/_icon/_highlightAbleIcon/h
 import "../../../../_themeAble/_card/_infoCard/infoCard"
 import { scrollAnimationEndWithMargin, scrollAnimationStart, scrollAnimationEnd, pointerFadinPos, tgmPosition } from "./conf";
 import "./../../../../image/image"
+import "./../../../../_themeAble/_card/_infoCard/newsCard/newsCard"
 
 
 
@@ -30,7 +31,7 @@ const vienna = {
 
 
 
-export default declareComponent("news-contact-section", class extends PageSection {
+export default class NewsContactSection extends PageSection {
   private mapElem = this.q("svg g#map")
   private allSvg = this.q("svg g#all")
   private allSvg2 = this.q("svg g#all2")
@@ -60,7 +61,9 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
 
 
+  private cardContainerWrapper = this.q("card-container-wrapper")
   private cardContainer = this.q("card-container")
+  private mobileOverlay = this.q("mobile-overlay")
 
   
   constructor(private scrollToPos: (to?: number, speed?: number) => void) {
@@ -74,18 +77,17 @@ export default declareComponent("news-contact-section", class extends PageSectio
 
 
 
-
+    this.newsTextBlob.mobileSwitchAt(1200)
     this.newsTextBlob.heading("Aktuelles")
     this.newsTextBlob.subheading("aus dem TGM")
     this.newsTextBlob.note("Termine und")
     this.newsTextBlob.content(`Bei rund 3000 SchülerInnen geschieht ständig etwas. Bleiben Sie informiert, indem Sie unserer <c-link link="https://facebook.com/tgmhtl/">Facebook</c-link> Seite folgen.`)
-    this.newsTextBlob.hsize({"max": 60, "min": 40})
+    this.newsTextBlob.hsize({"max": 55, "min": 40})
     this.newsTextBlob.hmobile({"max": 55, "min": 35})
     
 
 
     this.allFrame.insertBefore(this.newsTextBlobFadin, this.overlay) 
-
 
 
     this.mapTextBlob.heading("Kontakt")
@@ -117,15 +119,32 @@ export default declareComponent("news-contact-section", class extends PageSectio
     this.scrollPosData.scrollTrigger(scrollAnimationStart)
       .on("forward", () => {
         return [
+          this.mobileOverlay.addClass("bot"),
           this.newsTextBlob.anim({opacity: 0, translateY: 10}).then(() => this.newsTextBlob.hide()),
           this.cardContainer.anim({opacity: 0, translateY: 10}).then(() => this.cardContainer.hide())
         ]
       })
       .on("backward", () => {
         return [
+          this.mobileOverlay.removeClass("bot"),
           this.newsTextBlob.show().anim({opacity: 1, translateY: .1}),
           this.cardContainer.css("display", "flex").anim({opacity: 1, translateY: .1})
         ]
+      })
+
+      console.log("scrollAnimationStart - 250", scrollAnimationStart - 150)
+      this.scrollPosData.scrollTrigger(scrollAnimationStart - 150)
+      .on("forward", () => {
+        
+        this.cardContainerWrapper.anim({translateY: -140}, 600),
+        this.newsTextBlobFadin.anim({opacity: 0, translateY: -10})
+        
+      })
+      .on("backward", () => {
+        
+        this.cardContainerWrapper.anim({translateY: .1}, 600),
+        this.newsTextBlobFadin.anim({opacity: 1, translateY: .1})
+        
       })
 
 
@@ -222,129 +241,164 @@ export default declareComponent("news-contact-section", class extends PageSectio
     let smallDesk: boolean
     let bigMobile: boolean
     let inMapPointerAnim = false
-    window.on("resize", (q) => {
+    window.on("resize", async (q) => {
       // debugger
-      if (q.width < 1600) {
+
+      const width1600 = q.width < 1600
+      if (width1600) {
 
         if (!midDesk) {
           midDesk = true
           this.mapPointerCenter.anim({translateX: -150})
           this.allSvg.anim({translateX: -150})
         }
-
-        if (q.width < 1400) {
-
-          if (!smallDesk) {
-            smallDesk = true
-            this.mapPointerCenter.anim({translateX: -240})
-            this.allSvg.anim({translateX: -240})
-          }
-
-
-
-          if (q.width < 1200) {
-
-
-            if (!bigMobile) {
-              bigMobile = true
-
-              this.allSvg2.anim({translateX: -240})
-              this.mapPointerCenter.anim({translateX: "17vw", marginLeft: -240})
-              this.allSvg.anim({translateX: "17vw"})
-
-              this.mapTextBlobWrapper.anim({width: "80%", right: "10%", left: "10%"})
-              // must be seperated, because this animation will maybe be cancelled by mobile. We do need the rest to fire however
-              this.mapTextBlobWrapper.anim({translateY: 500})
-              // debugger
-              this.mapTextBlob.anim({marginLeft: .1})
-            }
-
-            if (q.width < 978) {
-
-
-
-              if (!mobile) {
-                mobile = true
-
-                
-                let lastWidth = q.width
-                const mapPointerAnim = async (o: {translateX: number, translateY: number}, short: boolean = false) => {
-                  await this.mapPointer.anim(o, short ? 50 : undefined)
-                  let nowWidth = window.innerWidth
-                  if (nowWidth !== lastWidth) {
-                    lastWidth = nowWidth
-
-
-                    let translate = getScaledXY(nowWidth)
-                    await mapPointerAnim(translate, true)
-                  }
-
-                  
-                }
-                inMapPointerAnim = true
-                mapPointerAnim(getScaledXY(q.width)).then(() => {
-                  inMapPointerAnim = false
-                })
-
-                // debugger
-                this.allSvg.anim({translateX: -120})
-                this.mapPointerCenter.anim({translateX: -120, left: "calc(120px + 2%)", width: "96%", height: "100%", marginLeft: .1})
-                this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
-                this.allSvg2.anim({translateX: .1})
-                this.mapTextBlobWrapper.anim({translateY: "45vw"})
-                this.mapTextBlob.anim({translateY: 200})
-              }
-              else {
-                if (!inMapPointerAnim) {
-                  this.mapPointer.css(getScaledXY(q.width))
-                }
-              }
-
-            }
-            else {
-              if (mobile) {
-                mobile = false
+      }
       
-                this.mapPointer.anim({translateX: posUnscaled.x, translateY: posUnscaled.y})
-                this.mapElem.anim({scale: 1, translateX: 0.1, translateY: 0.1})
+      const width1400 = q.width < 1400
+      if (width1400) {
 
-                this.allSvg2.anim({translateX: -240})
-                this.mapPointerCenter.anim({left: 257, width: 623.41, height: 478.66, translateX: "17vw", marginLeft: -240})
-                this.allSvg.anim({translateX: "17vw"})
-                this.mapTextBlobWrapper.anim({translateY: 500})
-                this.mapTextBlob.anim({translateY: .1})
-              }
+        if (!smallDesk) {
+          smallDesk = true
+          this.mapPointerCenter.anim({translateX: -240})
+          this.allSvg.anim({translateX: -240})
+        }
+      }
+      
+
+
+
+      const width1200 = q.width < 1200
+      if (width1200) {
+
+
+        if (!bigMobile) {
+          bigMobile = true
+
+          this.allSvg2.anim({translateX: -240})
+          this.mapPointerCenter.anim({translateX: "17vw", marginLeft: -240})
+          this.allSvg.anim({translateX: "17vw"})
+
+          this.mapTextBlobWrapper.anim({width: "100%", right: "0", left: "0"})
+          // must be seperated, because this animation will maybe be cancelled by mobile. We do need the rest to fire however
+          this.mapTextBlobWrapper.anim({translateY: 500})
+          // debugger
+          this.mapTextBlob.anim({marginLeft: .1})
+        }
+      }
+      
+      const width978 = q.width < 978
+      if (width978) {
+
+
+
+        if (!mobile) {
+          mobile = true
+
+          
+          let lastWidth = q.width
+          const mapPointerAnim = async (o: {translateX: number, translateY: number}, short: boolean = false) => {
+            await this.mapPointer.anim(o, short ? 50 : undefined)
+            let nowWidth = window.innerWidth
+            if (nowWidth !== lastWidth) {
+              lastWidth = nowWidth
+
+
+              let translate = getScaledXY(nowWidth)
+              await mapPointerAnim(translate, true)
             }
-          }
-          else {
-            if (bigMobile) {
-              bigMobile = false
 
-              this.allSvg2.anim({translateX: .1})
-              this.mapPointerCenter.anim({translateX: -240, marginLeft: .1})
-              this.allSvg.anim({translateX: -240})
-              this.mapTextBlobWrapper.anim({translateY: .1, width: "50%", left: "50%", right: 0})
-              this.mapTextBlob.anim({marginLeft: "auto"})
-            }
+            
           }
+          inMapPointerAnim = true
+          mapPointerAnim(getScaledXY(q.width)).then(() => {
+            inMapPointerAnim = false
+          })
 
+          // debugger
+          this.allSvg.anim({translateX: -120})
+          this.mapPointerCenter.anim({translateX: -120, left: "calc(120px + 2%)", width: "96%", height: "100%", marginLeft: .1})
+          this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
+          this.allSvg2.anim({translateX: .1})
+          this.mapTextBlobWrapper.anim({translateY: "45vw"})
+          this.mapTextBlob.anim({translateY: 250})
         }
         else {
-          if (smallDesk) {
-            smallDesk = false
-            this.mapPointerCenter.anim({translateX: -150})
-            this.allSvg.anim({translateX: -150})
+          if (!inMapPointerAnim) {
+            this.mapPointer.css(getScaledXY(q.width))  
           }
         }
-        
+
       }
-      else {
+      
+
+
+
+
+      // back
+
+      let waaaait: Promise<any>
+      if (!width978) {
+        if (mobile) {
+          mobile = false
+          
+          
+          let proms = []
+          proms.add(
+            this.mapPointer.anim({translateX: posUnscaled.x, translateY: posUnscaled.y}),
+            this.mapElem.anim({scale: 1, translateX: 0.1, translateY: 0.1}),
+            this.allSvg2.anim({translateX: -240}),
+            this.allSvg.anim({translateX: "17vw"}),
+            this.mapTextBlobWrapper.anim({translateY: 500}),
+            this.mapTextBlob.anim({translateY: .1}),
+            this.mapPointerCenter.anim({left: 257, width: 623.41, height: 478.66, translateX: "17vw", marginLeft: -240})
+          )
+          waaaait = Promise.all(proms)
+        }
+      }
+
+
+
+
+
+      if (!width1200) {
+        if (bigMobile) {
+          bigMobile = false
+
+          const go = () => {
+            this.allSvg2.anim({translateX: .1})
+          
+            this.allSvg.anim({translateX: -240})
+            this.mapTextBlobWrapper.anim({translateY: .1, width: "50%", left: "50%", right: 0})
+            this.mapTextBlob.anim({marginLeft: "auto"})
+            this.mapPointerCenter.anim({translateX: -240, marginLeft: .1})
+          }
+
+          if (waaaait) waaaait.then(go)
+          else go()
+          
+        }
+      }
+           
+      
+
+      if (!width1400) {
+        if (smallDesk) {
+          smallDesk = false
+          this.mapPointerCenter.anim({translateX: -150})
+          this.allSvg.anim({translateX: -150})
+        }
+      }
+          
+
+      if (!width1600) {
         if (midDesk) {
           midDesk = false
           this.mapPointerCenter.anim({translateX: .1})
           this.allSvg.anim({translateX: .1})
         }
       }
+
+      
       
       
     })
@@ -461,4 +515,6 @@ export default declareComponent("news-contact-section", class extends PageSectio
   pug() {
     return require("./newsContactSection.pug").default
   }
-});
+}
+
+declareComponent("news-contact-section", NewsContactSection)

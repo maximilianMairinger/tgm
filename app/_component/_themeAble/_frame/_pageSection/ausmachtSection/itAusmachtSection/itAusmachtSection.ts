@@ -52,7 +52,7 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                     note: "Unterrichtssystem",
                     thumbnail: "/res/img/student_2.jpg",
                     href: baseLink + "lernbüro-it",
-                    contentTitle: "Lernen im Aufbruch",
+                    contenttitle: "Lernen im Aufbruch",
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
                 },
                 {
@@ -60,7 +60,7 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                     note: "fachpraxis",
                     thumbnail: "/res/img/werkstaetteHET.png",
                     href: baseLink + "werkstätte-it",
-                    contentTitle: "Praxisbasierte Erfahrungen",
+                    contenttitle: "Praxisbasierte Erfahrungen",
                     content: "In unseren Werkstätten erlernen SchülerInnen den Umgang mit technischen Gerätschaften und setzen das gelernte Theoriewissen selbst um."
                 }
             ],

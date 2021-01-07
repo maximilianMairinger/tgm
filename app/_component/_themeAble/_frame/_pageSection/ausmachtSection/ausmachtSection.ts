@@ -36,7 +36,7 @@ export default class AusmachtSection extends PageSection {
       note: string, 
       thumbnail: string,
       href: string, 
-      contentTitle: string,
+      contenttitle: string,
       content: string
     }[],
     vertiefung?: {

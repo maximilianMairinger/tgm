@@ -118,6 +118,7 @@ text-box c-link.link {
 
     content-text {
         min-width: 100%;
+        max-width: initial!important;
     }
 
     note-box{

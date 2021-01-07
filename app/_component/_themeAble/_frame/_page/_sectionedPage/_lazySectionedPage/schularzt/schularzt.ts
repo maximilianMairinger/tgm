@@ -18,7 +18,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
           thumbnail.note("der");
           thumbnail.heading("Schulärztliche Dienst");
           thumbnail.subheading("für unsere Gesundheit");
-          thumbnail.background('url("/res/img/schularzt.png")');
+          thumbnail.background('schularzt');
           return new WrapperSection(thumbnail, 'dark');
         }
         ), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_themeAble/_text/_thumbnail/thumbnail")
@@ -47,7 +47,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
                     schularzt.address("Wexstraße 19-23, 1200 Wien / 1. Stock / T133");
                     schularzt.email("g.hafner@ergomobil.at  ");
                     schularzt.tel("+43 1 337 69 123");
-                    schularzt.image('url("/res/img/student_1.jpg")');
+                    schularzt.image('student_1');
                     return new WrapperSection(schularzt);
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_themeAble/_text/imageTextblob/imageTextblob")
@@ -64,7 +64,7 @@ export default declareComponent("schularzt", class Schularzt extends LazySection
                     schularzt.address("Wexstraße 19-23, 1200 Wien / 1. Stock / T133");
                     schularzt.email("fkrisper@tgm.ac.at");
                     schularzt.tel("+43 1 33126 291");
-                    schularzt.image('url("/res/img/student_2.jpg")');
+                    schularzt.image('student_2');
                     return new WrapperSection(schularzt);
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_themeAble/_text/imageTextblob/imageTextblob")

@@ -6,6 +6,7 @@ import { ElementList } from "extended-dom";
 import {Theme} from "../../themeAble";
 import { Data } from "josm";
 import delay from "delay";
+import Image from "../../../image/image";
 
 
 type Stellvertreter = {name: string, email: string}[]
@@ -42,19 +43,21 @@ export default class ImageTextblob extends Text {
     return this.q("note-text").text(note)
   }
 
-  private imgElem: HTMLElement
-  image(): string
+  private imgElem: Image
   image(image: null): this
   image(image: string): this
-  image(image?: string | null): any {
+  image(image: string | null): any {
     if (image === null) {
       if (this.imgElem) this.q("image-container").remove()
       return this
     }
     else {
-      if (!this.imgElem) this.imageTextBlob.apd(ce("image-container").apd(this.imgElem = ce("image-box")))
-      return this.imgElem.css("backgroundImage", image)
+      this.imageTextBlob.apd(ce("image-container").apd(this.imgElem = new Image(image)))
     }
+  }
+
+  mobileSwitchAt(to: number | string) {
+    this.textBlob.mobileSwitchAt(to)
   }
 
 

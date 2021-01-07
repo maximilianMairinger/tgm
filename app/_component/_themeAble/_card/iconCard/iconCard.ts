@@ -72,7 +72,7 @@ export default class IconCard extends Card {
   heading(to: string | Data<string>): void
   heading(to?: string | Data<string>): any {
     if (to !== undefined) {
-      this.headingContainer.text(to)
+      this.headingContainer.text(to as any)
       if (to instanceof Data) this.setWordBreakListener.data(to)
       else this.setWordBreakListenerFunction(to)
     }
@@ -93,7 +93,7 @@ export default class IconCard extends Card {
       this.subs.deactivate()
       this.updateDescAnim(to)
     }
-    return this.descContainer.text(to)
+    return this.descContainer.text(to as any)
   }
 
   icon(): Icon

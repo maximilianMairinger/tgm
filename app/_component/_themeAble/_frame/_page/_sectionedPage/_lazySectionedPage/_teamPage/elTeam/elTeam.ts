@@ -43,7 +43,7 @@ export default declareComponent("elektronik-team", class ElektronikTeam extends 
                     leitungImageTextblob.address("Wexstraße 19-21, 1200 Wien / 12. Stock / H1226");
                     leitungImageTextblob.email("bernhard.wess@tgm.ac.at");
                     leitungImageTextblob.tel("01 33 126 320");
-                    leitungImageTextblob.image('url("/res/img/avwess.png")');
+                    leitungImageTextblob.image('avwess');
                     leitungImageTextblob.stellvertreter([{"name":"Mag. Elisabeth Völk", "email":"evoelk@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
@@ -61,7 +61,7 @@ export default declareComponent("elektronik-team", class ElektronikTeam extends 
                     schuelerImageTextblob.address("Wexstraße 19-23, 1200 Wien / 12. Stock");
                     schuelerImageTextblob.email("ttauberk@student.tgm.ac.at");
                     // schuelerImageTextblob.tel("+43 ‭650 7311330‬");
-                    schuelerImageTextblob.image('url("/res/img/team_2.jpg")');
+                    schuelerImageTextblob.image('team_2');
                     schuelerImageTextblob.stellvertreter([{"name":"Benjamin Thurn und Taxis", "email":"bthurn@student.tgm.ac.at"}])
                     return new WrapperSection(schuelerImageTextblob);
                 }

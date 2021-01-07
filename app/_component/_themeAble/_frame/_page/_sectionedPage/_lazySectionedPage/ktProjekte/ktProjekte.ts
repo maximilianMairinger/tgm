@@ -42,14 +42,14 @@ export default declareComponent("kt-projekte", class KtProjekte extends LazySect
                 "Samantha Onderka",
                 "Katharina Schleinzer"
               ],
-              thumbnail:"/res/img/nespresso.jpg",
+              thumbnail:"nespresso",
               title: "Projektziel",
               content: 
 `Zeil des Projekts war ist die Anwendung eines Biopolymers für die Herstellung von Kaffeekapseln, 
 sowie die Beurteilung der Kompostierfähigkeit. Dabei wurde ein Biokunststoff entwickelt, welcher 
 als Alternative zu herkömmlichen Aluminiumverpackungen verwendet werden kann. Diese wurden sowohl
 auf ihre mechanische Stabilität als auch auf ihre Kompostierbarkeit geprüft.
-<img src="/res/img/kapselnKompostierbarkeit.png" class="illustration"></img>
+<c-image src="kapselnKompostierbarkeit" class="illustration"></c-image>
 `
             },
             {
@@ -59,7 +59,7 @@ auf ihre mechanische Stabilität als auch auf ihre Kompostierbarkeit geprüft.
                 "Semanur Demir",
                 "Armin Marhosevic"
               ],
-              thumbnail:"/res/img/PCR_Mahlgut.png",
+              thumbnail:"PCR_Mahlgut",
               title: "Projektziel",
               content: 
 `Das EU-Kreislaufwirtschaftspaket fordert bis 2025 eine Recyclingquote von 50 % von Kunststoffverpackungen. Ziele sind die Umwelt zu schützen und Ressourcen zu schonen. In diesem Projekt sollte die technische Eignung von Post-Consumer-Rezyklaten (PCR) und deren Wirtschaftlichkeit untersucht werden.

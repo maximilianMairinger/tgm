@@ -4,7 +4,7 @@ import InfoCard from "../infoCard";
 
 export default class NewsCard extends InfoCard {
 
-    constructor(heading?: string, note?: string | Date, thumbnail?: string, href?: string, contenttitle?: string, content?: string) {
+    constructor(heading?: string, note?: string, thumbnail?: string, href?: string, contenttitle?: string, content?: string) {
         super();
         if (heading) this.heading(heading)
         if (note) this.note(note)
@@ -16,14 +16,14 @@ export default class NewsCard extends InfoCard {
         this.textblob.hsize({max:40, min:35});
     }
 
-    note():string
-    note(note:string | Date):void
-    note(note?:string | Date){
-        if(note && new Date(note).toDateString() !== 'Invalid Date'){
-            this.q("note-text").text(local.formatDate(note));
-        } else if (typeof note === 'string') super.note(note as string);
-        else return this.q("note-text").text();
-    }
+    // note():string
+    // note(note:string | Date):void
+    // note(note?:string | Date){
+    //     if(note && new Date(note).toDateString() !== 'Invalid Date'){
+    //         this.q("note-text").text(local.formatDate(note));
+    //     } else if (typeof note === 'string') super.note(note as string);
+    //     else return this.q("note-text").text();
+    // }
 
     stl(){
         return super.stl() + require('./newsCard.css').toString();

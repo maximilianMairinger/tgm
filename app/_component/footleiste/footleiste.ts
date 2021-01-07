@@ -17,7 +17,7 @@ const content: { left: ContentArray, right: ContentArray } = {
         },
         {
             content: "Intern",
-            link: "https://intern.tgmrebrand.xyz/"
+            link: "todo"
         },
     ],
     right: [

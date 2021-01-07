@@ -5,6 +5,7 @@ type FormatOptions = {weekday?: "long" | "short", year?: "numeric", month?: "2-d
 export function constructFormat(local = "de-AT", timeZone = "Europe/Vienna", defaultFormat: FormatOptions = {day: "2-digit", month: "2-digit", year: "numeric"}) {
   return {
     formatDate(date: string | Date, format: FormatOptions = {}) {
+      debugger
       return new Date(date).toLocaleDateString(local, { ...defaultFormat, ...format, timeZone })
     }
   }

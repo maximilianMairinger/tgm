@@ -112,6 +112,8 @@ export default declareComponent("erwachsenen-card", class ErwachsenenCard extend
     private overviewContent=this.q("overview-content-box overview-content");
     private overviewLink=this.q("overview-box c-link") as Link;
 
+    
+
     overview(options:ErwachsenenCardOption){
         this.overviewHeading.text(options.heading);
         this.overviewInfo.text(options.info);

@@ -6,6 +6,7 @@ import Textblob from "../textblob/textblob";
 import "../../_icon/swipe/swipe"
 import "../../_icon/arrow/arrow"
 import {ElementList} from "extended-dom";
+import "./../../../image/image"
 
 export type Project = { heading: string, note: string, logo: string, team: string[], thumbnail: string, title: string, content: string, loaded:boolean}
 
@@ -159,7 +160,7 @@ export default class TabletBlob extends Text {
             let projectJson = this.parseJSONProp(project);
             (tablet.querySelector("c-textblob") as Textblob).heading(projectJson.heading)
             tablet.querySelector("note-box").text(projectJson.note);
-            tablet.querySelector(".thumbnail-pic").setAttribute("src", projectJson.thumbnail);
+            (tablet.querySelector(".thumbnail-pic") as any).src(projectJson.thumbnail);
             tablet.querySelector("info-title").text(projectJson.title);
             tablet.querySelector("info-text").html(projectJson.content);
             // console.log(project.heading);
@@ -182,7 +183,7 @@ export default class TabletBlob extends Text {
 
         let thumbnail = ce("thumbnail-container");
         //Why does it work that way?!?!?!?
-        thumbnail.append(ce("IMG").addClass("thumbnail-pic"));
+        thumbnail.append(ce("c-image").addClass("thumbnail-pic"));
         thumbnail.append(ce("thumbnail-background"));
         tablet.append(thumbnail);
 
@@ -206,7 +207,7 @@ export default class TabletBlob extends Text {
 
     private logoElem = this.q(".project-icon-pic")
     private logo(logo:string){
-        if (logo) this.logoElem.show().setAttribute("src", logo)
+        if (logo) (this.logoElem.show() as any).src(logo)
         else this.logoElem.hide()
     }
 

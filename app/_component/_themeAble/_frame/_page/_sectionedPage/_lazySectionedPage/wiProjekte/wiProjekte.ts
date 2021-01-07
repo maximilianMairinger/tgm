@@ -41,7 +41,7 @@ export default declareComponent("wirtschaftsingenieure-projekte", class Raumfahr
               team:[
 
               ],
-              thumbnail:"/res/img/cbb.png",
+              thumbnail:"cbb",
               title: "Die clima bike box",
               content: 
 `Der online-Handel boomt und macht auch nicht vor Speisen und Getränken halt. Von AmazonFresh bis Z-Catering liefern Firmen Nahrungsmittel aus. Beliebtes Tarnsport­mittel ist hier innerstädtisch das Fahrrad. Fahrradzustelldienste werben mit ökologisch abbaubarer Verpackung und Öko-Strom für Server und Büro, aber keiner verfügt über eine mobile beheizbare Thermobox, die über die kinetische Energie des Fahrrades betrieben wird und die transportierten Nahrungsmittel wärmt bzw. kühlt.
@@ -57,13 +57,13 @@ Doch die Frage ist: Gibt es für eine derartige Technologie überhaupt einen Mar
               team:[
 
               ],
-              thumbnail:"/res/img/smartFasade.jpg",
+              thumbnail:"smartFasade",
               title: "Projektziel",
               content: 
 `Im Rahmen des Projektes wurde zunächst eine Marktanalyse durchgeführt, um unterschiedliche Anbieter von Begrünungsvarianten vergleichen zu können. Auf dieser Basis wurde anschließend ein Online-Fragenbogen entwickelt, der sowohl an Unternehmen als auch an Einzelkunden gerichtet wurde.
 <br><br>
 Aufgrund dieser Vorarbeiten konnte aus unterschiedlichen Konstruktionsvorschlägen die bestmögliche Lösung ausgewählt werden. Aufbauend auf der Konstruktion wurde das gewählte Modell im Kooperationsunternehmen „Gebrüder Haas“ produziert und als Prototyp an der Außenfassade montiert.
-<img src="/res/img/iotFasade.png"></img>
+<c-image src="iotFasade"></c-image>
 Der zweite Teil der Arbeit bestand in der Implementierung eines IoT Systems für die Fassadenbegrünung, das zunächst für die Erhebung und Analyse von Daten eingesetzt werden sollte. Dabei wurde eine Reporting-Lösung mit R, OpenHAB und Grafana entwickelt, die nicht nur eigene Sensordaten darstellen konnte, sondern auch die Einbindung externer Wetterdaten und die automatische Ansteuerung weiterer IoT – Geräte ermöglichte.
 `
             }

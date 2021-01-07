@@ -90,7 +90,6 @@ export default class NewsContactSection extends PageSection {
     this.allFrame.insertBefore(this.newsTextBlobFadin, this.overlay) 
 
 
-
     this.mapTextBlob.heading("Kontakt")
     this.mapTextBlob.subheading("zum TGM")
     this.mapTextBlob.note("Direktion")
@@ -279,7 +278,7 @@ export default class NewsContactSection extends PageSection {
           this.mapPointerCenter.anim({translateX: "17vw", marginLeft: -240})
           this.allSvg.anim({translateX: "17vw"})
 
-          this.mapTextBlobWrapper.anim({width: "80%", right: "10%", left: "10%"})
+          this.mapTextBlobWrapper.anim({width: "100%", right: "0", left: "0"})
           // must be seperated, because this animation will maybe be cancelled by mobile. We do need the rest to fire however
           this.mapTextBlobWrapper.anim({translateY: 500})
           // debugger
@@ -321,7 +320,7 @@ export default class NewsContactSection extends PageSection {
           this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
           this.allSvg2.anim({translateX: .1})
           this.mapTextBlobWrapper.anim({translateY: "45vw"})
-          this.mapTextBlob.anim({translateY: 200})
+          this.mapTextBlob.anim({translateY: 250})
         }
         else {
           if (!inMapPointerAnim) {

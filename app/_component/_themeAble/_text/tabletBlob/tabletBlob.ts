@@ -7,8 +7,10 @@ import "../../_icon/swipe/swipe"
 import "../../_icon/arrow/arrow"
 import {ElementList} from "extended-dom";
 import "./../../../image/image"
+import Image from "./../../../image/image"
+import PenIcon from "../../_icon/fachIcon/pen/pen";
 
-export type Project = { heading: string, note: string, logo: string, team: string[], thumbnail: string, title: string, content: string, loaded:boolean}
+export type Project = { heading: string, note: string, logo: string, team: string[], thumbnail?: string, thumbVid?: string, title: string, content: string, loaded:boolean}
 
 export default class TabletBlob extends Text {
 
@@ -160,7 +162,22 @@ export default class TabletBlob extends Text {
             let projectJson = this.parseJSONProp(project);
             (tablet.querySelector("c-textblob") as Textblob).heading(projectJson.heading)
             tablet.querySelector("note-box").text(projectJson.note);
-            (tablet.querySelector(".thumbnail-pic") as any).src(projectJson.thumbnail);
+
+            let thumbnailContainer = tablet.querySelector("thumbnail-container")
+            let oldThumbNail = this.q(".thumbnail-pic", true)
+            if (!oldThumbNail.empty) oldThumbNail.remove()
+            
+            
+            if (projectJson.thumbnail) {
+                let pic = ce("c-image").addClass("thumbnail-pic") as Image
+                thumbnailContainer.prepend(pic)
+                pic.src(projectJson.thumbnail)
+            }
+            else if (projectJson.thumbVid) {
+                setTimeout(() => {
+                    thumbnailContainer.insertAdjacentHTML("beforeend", `<iframe class="thumbnail-pic" width="560" height="515" src="${projectJson.thumbVid}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`)
+                })
+            }
             tablet.querySelector("info-title").text(projectJson.title);
             tablet.querySelector("info-text").html(projectJson.content);
             // console.log(project.heading);
@@ -183,7 +200,7 @@ export default class TabletBlob extends Text {
 
         let thumbnail = ce("thumbnail-container");
         //Why does it work that way?!?!?!?
-        thumbnail.append(ce("c-image").addClass("thumbnail-pic"));
+        // thumbnail.append(ce("c-image").addClass("thumbnail-pic"));
         thumbnail.append(ce("thumbnail-background"));
         tablet.append(thumbnail);
 

@@ -56,7 +56,7 @@ export default declareComponent("ausmacht-section-mb", class extends AusmachtSec
                     note: "PRAXISUNTERRICHT",
                     thumbnail: "elektronikWerkstatt",
                     href: baseLink + "werkstatte-in-der-maschinenbau",
-                    contenttitle: "Prototypenbau",
+                    contenttitle: "Werkstatt",
                     content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."
                 }
             ],

@@ -55,7 +55,7 @@ export default class WIPage extends LazySectionedPage {
               note: "Termine und",
               heading: "Aktuelles",
               subheading: "aus der WI",
-              content: `Folge uns auf <c-link link="https://de-de.facebook.com/tgmhwi">Instagram</c-link> und <c-link link="https://www.instagram.com/tgm_wirtschaftsingenieure">Facebook</c-link>, so bist DU über unsere neuesten Aktivitäten immer up to date.`
+              content: `Folge uns auf <c-link link="https://www.instagram.com/tgm_wirtschaftsingenieure">Instagram</c-link> und <c-link link="https://de-de.facebook.com/tgmhwi">Facebook</c-link>, so bist DU über unsere neuesten Aktivitäten immer up to date.`
             },
             cards: [
               {heading: "Mittwoch", note: "20.01.2021", thumbnail: "gotoMeeting", href: baseLink + "news/virtueller-tag-der-offenen-ture-der-wirtschaftsingenieure", contenttitle: "TdoT - Virtuell", content: "Die Abteilung Wirtschaftsingenieure veranstaltet den diesjährigen Tag der offenen Türe als Webinar am Mittwoch dem 20.1 von 18:30 bis 19:30 virtuell in Form eines Webinars."},

@@ -161,7 +161,12 @@ additional-path-display {
   margin: 0 10px;
   height: 100%;
   width: auto;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  width: max-content;
+  transform: translateY(-7px) scale(.9);
 }
 
 additional-path-display > * {
@@ -178,3 +183,19 @@ additional-path-display > * {
   transform: translateX(-3px)
 }
 
+
+split-line {
+  background: var(--weaker-text-color);
+  width: 1px;
+  height: 25px;
+  transform: translateY(5px);
+  margin: 0 15px;
+}
+
+component-body.mobile split-line {
+  visibility: hidden;
+}
+
+component-body.mobile additional-path-display {
+  right: 20px;
+}

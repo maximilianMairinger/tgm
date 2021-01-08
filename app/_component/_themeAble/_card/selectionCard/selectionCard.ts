@@ -67,12 +67,16 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
                     icon.append(new (await iconIndex.fach[conf.icon]() as any).default)
                 })()
                 let infocontainer = ce("info-container");
-                let link = ce("link-container");
-                link.append(new Link("Mehr", conf.link));
+                
+                if (conf.link) {
+                    let link = ce("link-container");
+                    link.append(new Link("Mehr", conf.link));
+                    infocontainer.append(link);
+                }
+                
                 let textcontainer = ce("text-container");
                 textcontainer.append(ce("heading-text").text(conf.title));
                 textcontainer.append(ce("content-text").text(conf.content));
-                infocontainer.append(link);
                 infocontainer.append(textcontainer);
                 content.append(icon);
                 content.append(infocontainer);

@@ -48,7 +48,7 @@ component-body::-webkit-scrollbar { /* WebKit */
   height: 0;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1300px) {
   component-body {
     margin-bottom: 0;
     flex-wrap: nowrap;

@@ -18,31 +18,31 @@ export default declareComponent("ausmacht-section-mb", class extends AusmachtSec
                 note: "Fachspezifische",
                 selection: [
                     {
-                        icon:"hardwareentwicklung", 
+                        icon:"konstruktionProjManagement", 
                         title:"Konstruktion und Projektmanagement", 
                         content:"Managementfähigkeiten und Konstruktion", 
                         // link: baseLink + "hardwareentwicklung"
                     },
                     {
-                        icon:"messtechnik", 
+                        icon:"techMech", 
                         title:"Techn. Mechanik und Berechnung", 
                         content:"Mathematische Anwendungen in der Technik", 
                         // link: baseLink + "messtechnik-regelungssysteme"
                     },
                     {
-                        icon:"computersysteme", 
+                        icon:"fertigungstechnik", 
                         title:"Fertigungstechnik", 
                         content:"Herstellen von Werkstücken", 
                         // link: baseLink + "computersysteme"
                     },
                     {
-                        icon:"kommunikationssysteme", 
+                        icon:"maschinenAnlagen", 
                         title:"Maschinen und Anlagen",
                         content:"Industrieprozesse verstehen und verwalten", 
                         // link: baseLink + "kommunikationssysteme"
                     },
                     {
-                        icon:"softwaretechnik", 
+                        icon:"automatisierungstechnik", 
                         title:"Automatisierungstechnik", 
                         content:"Arbeiten mit Industrierobotern", 
                         // link: baseLink + "softwaretechnik"

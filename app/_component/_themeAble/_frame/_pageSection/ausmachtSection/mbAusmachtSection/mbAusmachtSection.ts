@@ -71,19 +71,19 @@ export default declareComponent("ausmacht-section-mb", class extends AusmachtSec
                 cards: [
                     {
                         heading:"Fahrzeugtechnik",
-                        icon:"systemtechnik",
-                        link: baseLink + "fahrzeugtechnik”",
+                        icon:"fahrzeugtechnik",
+                        link: baseLink + "fahrzeugtechnik",
                         content:"Hier sind findige, kreative Köpfe gefragt, die unsere Fortbewegungsmittel und Transportmöglichkeiten der Zukunft technisch, ökologisch und designmäßig aktiv mitgestalten wollen: vom Kinderdreirad, Skateboard, Fahrrad, Motorrad, Auto, Bus, LKW, Traktor, Schienenfahrzeug bis hin zu Seilbahnen."
                     },
                     {
                         heading:"Industriedesign",
-                        icon:"systemtechnik",
+                        icon:"industrieDesign",
                         link: baseLink + "industrie-design",
                         content:"Du gestaltest, zeichnest, entwirfst, entwickelst, baust. Reine Funktionalität von Produkten genügt heute lange nicht mehr den Bedürfnissen der Kunden. Daher stellt im „IndustrieDesign“ sowohl das Design (Entwurf, Konstruktion), als auch die Funktion von Produkten einen Schwerpunkt dar."
                     },
                     {
                         heading:"Robotik und Smart Engineering",
-                        icon:"systemtechnik",
+                        icon:"robotik",
                         link: baseLink + "robotik-und-smart-engineering",
                         content:"Industrieroboter, Mechatronische Systeme, Smarte Assistenten, sind heute allgegenwärtig, aus der modernen Automatisierungswelt nicht mehr wegzudenken. In Zukunft wird sich ihre Präsenz noch verstärken. Die Kombination von Mensch-Maschinen-Interfaces, Dashboards (das neue modulare Programmieren - Drag & Drop) und Maschinenbau-Skills ist der zukünftige Standard und genau dies wird gelehrt."
                     }

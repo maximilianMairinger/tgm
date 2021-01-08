@@ -93,6 +93,11 @@ export const iconIndex = {
     // HIT
     medientechnik: () => import("./vertiefung/mediaCode/mediaCode"),
     systemtechnik: () => import("./vertiefung/cloudNetwork/cloudNetwork"),
+
+    // HBG
+    fahrzeugtechnik: () => import("./vertiefung/fastCar/fastCar"),
+    industrieDesign : () => import("./vertiefung/industry/industry"),
+    robotik : () => import("./vertiefung/industrialRobot/industrialRobot"),
   },
   abendschule: {
     bigStonks: () => import("./abendschule/bigStonks/bigStonks"),

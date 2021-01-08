@@ -41,7 +41,7 @@ export default declareComponent("mb-team", class MbTeam extends TeamPage {
                     leitungImageTextblob.subheading("Christian");
                     // leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")
                     leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 3. Stock / H330");
-                    leitungImageTextblob.email("ckruisz@tgm.ac.at");
+                    leitungImageTextblob.email("avhmb@tgm.ac.at");
                     leitungImageTextblob.tel("+43 1 33126 261");
                     leitungImageTextblob.image('avKruisz');
                     // leitungImageTextblob.stellvertreter([{"name":"Stefan Hertl", "email":"shertl@tgm.ac.at"}])

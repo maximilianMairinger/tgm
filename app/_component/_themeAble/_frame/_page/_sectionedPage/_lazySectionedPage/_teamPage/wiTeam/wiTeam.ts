@@ -41,7 +41,7 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
                     leitungImageTextblob.subheading("Georg");
                     // leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")
                     leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 5. Stock");
-                    leitungImageTextblob.email("georg.angerer@tgm.ac.at");
+                    leitungImageTextblob.email("avhwi@tgm.ac.at");
                     leitungImageTextblob.tel("0664 80126262");
                     leitungImageTextblob.image('unknownMan');
                     // leitungImageTextblob.stellvertreter([{"name":"Stefan Hertl", "email":"shertl@tgm.ac.at"}])

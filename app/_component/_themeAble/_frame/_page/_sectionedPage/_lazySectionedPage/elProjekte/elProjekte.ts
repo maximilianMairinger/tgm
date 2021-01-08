@@ -33,12 +33,44 @@ export default declareComponent("el-projekte", class ItProjekte extends LazySect
         ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection")
       },
       {
+        key: new Import("projekte", 1, (projekte: typeof ProjekteSection) => {
+          let projectData = [
+            {
+              heading:"Stromerzeugendes Fahrzeug",
+              note:``,
+              team:[],
+              thumbVid:"https://www.youtube.com/embed/JNOY83XMoAE",
+              title: "",
+              content: ``
+            },
+            {
+              heading:"Funkgesteuertes Skateboard",
+              note:"",
+              thumbVid:"https://www.youtube.com/embed/SBJ2El2grYQ",
+              team:[],
+              title: "",
+              content: ``
+            },
+            {
+              heading:"Mobile Wasserdatenerfassung",
+              note:"",
+              thumbVid:"https://www.youtube.com/embed/b-9ndn8TBhQ",
+              team:[],
+              title: "",
+              content: ``
+            }
+          ] as Project[];
+
+          return new projekte(projectData)
+        }), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
+      },
+      {
         key: new Import("footer", 1, (_Footer: typeof Footer) => 
-          new _Footer(baseLink + "info/")
+          new _Footer(baseLink + "projekte/")
         ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
       }
     ), sectionChangeCallback, undefined, {
-      footer: "info"
+      footer: "projekte"
     })
 
   }

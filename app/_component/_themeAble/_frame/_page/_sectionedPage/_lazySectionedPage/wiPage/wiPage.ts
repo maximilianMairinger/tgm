@@ -48,26 +48,24 @@ export default class WIPage extends LazySectionedPage {
           new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/wiAusmachtSection/wiAusmachtSection")
       },
-      // {
-      //   key: new Import("news", 1, (_News: typeof News) => 
-      //     new _News({
-      //       text: {
-      //         note: "Termine und",
-      //         heading: "Aktuelles",
-      //         subheading: "aus der WI",
-      //         content: `Folge uns auf <c-link link="https://de-de.facebook.com/tgmhwi">Instagram</c-link> und <c-link link="https://www.instagram.com/tgm_wirtschaftsingenieure">Facebook</c-link>, so bist DU über unsere neuesten Aktivitäten immer up to date.`
-      //       },
-      //       cards: [
-      //         {heading: "Samstag", note: "18.04.20", thumbnail: "/res/img/het-blog-rad.png", href: "/", contenttitle: "Elektro-Fahrrad", content: "Das Elektrofahrrad der ET-Abteilung wurde offiziell zugelassen und ist im Handel verfügbar."},
-      //         {heading: "Montag", note: "20.04.20", thumbnail: "/res/img/het-blog-wind.png", href: "/", contenttitle: "Zukunft des Strom", content: "Am 20.12.2020 findet ein Vortrag zur Zukunft von erneuerbareren Energiegewinnungsmethoden statt."},
-      //         {heading: "Donnerstag", note: "16.04.20", thumbnail: "/res/img/ball.jpg", href: "/", contenttitle: "TGM-Ball", content: "Der 100. TGM-Ball findet kommenden Donnerstag statt, jetzt Tickets sichern!"},
-      //         {heading: "Samstag", note: "18.04.20", thumbnail: "/res/img/het-blog-rad.png", href: "/", contenttitle: "Elektro-Fahrrad", content: "Das Elektrofahrrad der ET-Abteilung wurde offiziell zugelassen und ist im Handel verfügbar."},
-      //         {heading: "Montag", note: "20.04.20", thumbnail: "/res/img/het-blog-wind.png", href: "/", contenttitle: "Zukunft des Strom", content: "Am 20.12.2020 findet ein Vortrag zur Zukunft von erneuerbareren Energiegewinnungsmethoden statt."},
-      //         {heading: "Donnerstag", note: "16.04.20", thumbnail: "/res/img/ball.jpg", href: "/", contenttitle: "TGM-Ball", content: "Der 100. TGM-Ball findet kommenden Donnerstag statt, jetzt Tickets sichern!"}
-      //       ]
-      //     })
-      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
-      // },
+      {
+        key: new Import("news", 1, (_News: typeof News) => 
+          new _News({
+            text: {
+              note: "Termine und",
+              heading: "Aktuelles",
+              subheading: "aus der WI",
+              content: `Folge uns auf <c-link link="https://de-de.facebook.com/tgmhwi">Instagram</c-link> und <c-link link="https://www.instagram.com/tgm_wirtschaftsingenieure">Facebook</c-link>, so bist DU über unsere neuesten Aktivitäten immer up to date.`
+            },
+            cards: [
+              {heading: "Mittwoch", note: "20.01.2021", thumbnail: "gotoMeeting", href: baseLink + "news/virtueller-tag-der-offenen-ture-der-wirtschaftsingenieure", contenttitle: "Tag der offenen Türe - Virtuell", content: "Die Abteilung Wirtschaftsingenieure veranstaltet den diesjährigen Tag der offenen Türe als Webinar am Mittwoch dem 20.1 von 18:30 bis 19:30 virtuell in Form eines Webinars."},
+              {heading: "Montag", note: "14.12.2020", thumbnail: "euroscola", href: baseLink + "news/euroscola-2020", contenttitle: "Euroscola 2020", content: "Am 14. Dezember 2020 beteiligte sich die 4AHWIM, welche im letzten Schuljahr trotz der veränderten Umstände des Sommersemesters österreichweit den hervorragenden dritten Platz beim Euroscola-Wettbewerb der EU belegt hatte, an einer virtuellen Sitzung im Straßburger Parlament."},
+              {heading: "Donnerstag", note: "07.01.2020", thumbnail: "graulicht", href: baseLink + "news/junior-company-2020-graulicht", contenttitle: "Junior Company - Graulicht", content: "Die Junior Company Graulicht entwickelt, produziert und verkauft moderne und einfache Lampen in Betonoptik."},
+              {heading: "Freitag", note: "08.01.2020", thumbnail: "holdon", href: baseLink + "news/junior-company-2020-holdon", contenttitle: "Junior Company - hold/on", content: "Die JuniorCompany hold/on produziert Smartphone-Halterungen und Tablet-Ständer aus Holz für mobile, aber auch stationäre Anwendungen."}
+            ]
+          })
+        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
+      },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');

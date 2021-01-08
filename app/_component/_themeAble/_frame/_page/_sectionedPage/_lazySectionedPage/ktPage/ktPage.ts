@@ -25,7 +25,7 @@ export default class KunststoffPage extends LazySectionedPage {
           e.note("abteilung");
           e.videolink("https://www.youtube.com/watch?v=7CPDqPgWjxM", "Einblick in die HKT")
           
-          e.background("ktLanding.png")
+          e.background("thumbnail_kt")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")

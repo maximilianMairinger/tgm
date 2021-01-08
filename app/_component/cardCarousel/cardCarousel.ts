@@ -4,7 +4,7 @@ import Card from "../_themeAble/_card/iconCard/iconCard"
 
 export default class CardCarousel extends Component {
 
-  constructor(cards: Card[], wrap?: boolean) {
+  constructor(cards: Card[], wrap: boolean = true) {
     super()
     this.wrap(wrap)
     

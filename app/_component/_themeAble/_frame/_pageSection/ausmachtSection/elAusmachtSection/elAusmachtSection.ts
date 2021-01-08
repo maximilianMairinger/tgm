@@ -51,7 +51,14 @@ export default declareComponent("ausmacht-section-el", class extends AusmachtSec
                 stundentafel: baseLink + "stundentafel-el"
             },
             cards: [
-                
+                {
+                    heading: "IoT",
+                    note: "highlight",
+                    thumbnail: "iotElektronik",
+                    href: baseLink + "internet-of-things",
+                    contenttitle: "Internet of things",
+                    content: "Unser Ziel ist es, Digitalisierung und IoT in die Bildung zu bringen und anfassbar zu machen. Das IoT-Lab fungiert dabei als breite Schnittstelle unterschiedlicher Disziplinen, von der Microcontroller Entwicklung, über Sensorik bis hin zum leistungseffizienten Schaltungsbau."
+                },
                 {
                     heading: "Prototypenbau",
                     note: "fachpraktisch",

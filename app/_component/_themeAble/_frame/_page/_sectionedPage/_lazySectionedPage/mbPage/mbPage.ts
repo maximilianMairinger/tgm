@@ -24,7 +24,7 @@ export default class MbPage extends LazySectionedPage {
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("mbLanding2")
-          e.videolink("https://www.youtube.com/watch?v=XIB-3K20Vaw")
+          e.videolink("https://www.youtube.com/watch?v=XIB-3K20Vaw", "Einblick in die HMB")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")

@@ -23,7 +23,7 @@ export default declareComponent("et-page", class EtPage extends LazySectionedPag
           e.heading("Elektrotechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
-          e.videolink("https://www.youtube.com/watch?v=N_1-JcpfbvE")
+          e.videolink("https://www.youtube.com/watch?v=N_1-JcpfbvE", "Einblick in die HET")
           e.background("het_main.jpg")
           
           return new WrapperSection(e, "dark") as any

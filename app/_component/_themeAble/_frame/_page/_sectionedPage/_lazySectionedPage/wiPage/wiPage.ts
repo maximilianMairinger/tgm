@@ -24,7 +24,7 @@ export default class WIPage extends LazySectionedPage {
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("stockMan.png")
-          e.videolink("https://www.youtube.com/watch?v=ZjlZZGAfH5k")
+          e.videolink("https://www.youtube.com/watch?v=ZjlZZGAfH5k", "Einblick in die HKT")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")

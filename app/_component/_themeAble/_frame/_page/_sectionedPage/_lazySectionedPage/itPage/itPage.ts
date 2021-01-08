@@ -24,7 +24,7 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("itMain.png")
-          e.videolink("https://www.youtube.com/watch?v=93aXzeeolkY")
+          e.videolink("https://www.youtube.com/watch?v=93aXzeeolkY", "Einblick in die HIT")
           
           
           return new WrapperSection(e, "dark") as any

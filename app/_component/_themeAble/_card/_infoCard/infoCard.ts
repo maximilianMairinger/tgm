@@ -17,6 +17,15 @@ export default abstract class InfoCard extends Card {
 
     constructor(){
         super(false, false);
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf('safari') != -1) {
+            if (ua.indexOf('chrome') > -1) {
+                // Chrome
+            } else {
+                this.q("c-image").css({height: "100%", top:"2px"})
+            }
+        }
+
     }
 
     theme():Theme

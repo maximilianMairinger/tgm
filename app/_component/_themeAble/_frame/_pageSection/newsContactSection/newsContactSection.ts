@@ -99,7 +99,7 @@ export default class NewsContactSection extends PageSection {
     this.mapTextBlob.address("Wexstraße 19-23, 1200 Wien")
     this.mapTextBlob.tel("33126 0")
     this.mapTextBlob.stellvertreterAlias("Emails");
-    this.mapTextBlob.stellvertreter([{name:"Info", email:"info@tgm.ac.at"}, {name:"Versuchsanstalt", email: "va@tgm.ac,at"}])
+    this.mapTextBlob.stellvertreter([{name:"Info", email:"info@tgm.ac.at"}, {name:"Versuchsanstalt", email: "va@tgm.ac.at"}])
 
 
     this.allFrame.insertBefore(this.mapTextBlobFadin, this.overlay)
@@ -116,7 +116,7 @@ export default class NewsContactSection extends PageSection {
     this.mapSvgPaths[1].anim({d: vienna.path.b, translateY: vienna.offset.y, translateX: vienna.offset.x}, mapOptions, guide)
 
 
-
+    
     this.scrollPosData.scrollTrigger(scrollAnimationStart)
       .on("forward", () => {
         return [
@@ -133,23 +133,29 @@ export default class NewsContactSection extends PageSection {
         ]
       })
 
-      console.log("scrollAnimationStart - 250", scrollAnimationStart - 150)
-      this.scrollPosData.scrollTrigger(scrollAnimationStart - 150)
-      .on("forward", () => {
-        
-        this.cardContainerWrapper.anim({translateY: -140}, 600),
-        this.newsTextBlobFadin.anim({opacity: 0, translateY: -10})
-        
-      })
-      .on("backward", () => {
-        
-        this.cardContainerWrapper.anim({translateY: .1}, 600),
-        this.newsTextBlobFadin.anim({opacity: 1, translateY: .1})
-        
-      })
 
 
+    const bigmobileScroll = {
+      forward: () => {
+        return [
+          this.mapPointerWrapper.show().anim({opacity: 1, translateY: .1}),
+          this.mapTextBlobFadin.show().anim({opacity: 1, translateY: .1})
+        ]
+      },
+      backward: () => {
+        return [
+          this.mapPointerWrapper.show().anim({opacity: 1, translateY: .1}),
+          this.mapTextBlobFadin.show().anim({opacity: 1, translateY: .1})
+        ]
+      }
+    }
+  
 
+
+    let bigmobileScrollTrigger = this.scrollPosData.scrollTrigger(scrollAnimationStart - 150)
+
+    
+    
     this.scrollPosData.scrollTrigger(pointerFadinPos)
       .on("forward", () => {
         return [
@@ -237,10 +243,20 @@ export default class NewsContactSection extends PageSection {
 
     this.mapPointer.css({translateX: posUnscaled.x, translateY: posUnscaled.y})
 
+
+
+    let bigMobile = new Data(false)
+    bigMobile.get((bigmobile) => {
+      const func = bigmobileScrollTrigger[bigmobile ? "on" : "off"].bind(bigmobileScrollTrigger)
+      for (let dir in bigmobileScroll) {
+        func(dir as any, bigmobileScroll[dir])
+      }
+    }, false)
+
     let mobile: boolean
     let midDesk: boolean
     let smallDesk: boolean
-    let bigMobile: boolean
+    
     let inMapPointerAnim = false
     window.on("resize", async (q) => {
       // debugger
@@ -250,6 +266,7 @@ export default class NewsContactSection extends PageSection {
 
         if (!midDesk) {
           midDesk = true
+          console.log("middesk")
           this.mapPointerCenter.anim({translateX: -150})
           this.allSvg.anim({translateX: -150})
         }
@@ -260,6 +277,7 @@ export default class NewsContactSection extends PageSection {
 
         if (!smallDesk) {
           smallDesk = true
+          console.log("smalldesk")
           this.mapPointerCenter.anim({translateX: -240})
           this.allSvg.anim({translateX: -240})
         }
@@ -272,8 +290,8 @@ export default class NewsContactSection extends PageSection {
       if (width1200) {
 
 
-        if (!bigMobile) {
-          bigMobile = true
+        if (!bigMobile.get()) {
+          bigMobile.set(true)
 
           this.allSvg2.anim({translateX: -240})
           this.mapPointerCenter.anim({translateX: "17vw", marginLeft: -240})
@@ -362,8 +380,8 @@ export default class NewsContactSection extends PageSection {
 
 
       if (!width1200) {
-        if (bigMobile) {
-          bigMobile = false
+        if (bigMobile.get()) {
+          bigMobile.set(false)
 
           const go = () => {
             this.allSvg2.anim({translateX: .1})

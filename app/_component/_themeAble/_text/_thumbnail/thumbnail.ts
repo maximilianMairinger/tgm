@@ -87,11 +87,12 @@ export default class Thumbnail extends Text {
     setTimeout(() => [textbox,shader].forEach((elmn) => elmn.css({display:"none"})), 1000);
   }
 
-  videolink(link?:string){
-    let videoButton = this.q("video-button");
+  videolink(link?:string, isCalled?: string){
+    let videoButton = this.q("video-button", true)[0] as HTMLElement;
     let videoLink = videoButton.querySelector("c-button") as Button;
     if (link){
       videoButton.css({display:"block"});
+      videoButton.title = isCalled
       videoLink.link(link)
       
       // this.videohref = link;

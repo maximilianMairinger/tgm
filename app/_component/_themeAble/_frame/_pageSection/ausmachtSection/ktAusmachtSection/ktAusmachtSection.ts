@@ -13,7 +13,7 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
         super({
             heading: {
                 heading: "Was uns ausmacht",
-                subheading: "als Kunststufftechnik"
+                subheading: "als Kunststofftechnik"
             },
             selection: {
                 heading: "Gegenstände",

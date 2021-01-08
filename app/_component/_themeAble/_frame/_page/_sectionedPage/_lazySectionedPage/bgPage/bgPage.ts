@@ -24,7 +24,7 @@ export default class BgPage extends LazySectionedPage {
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("biomedLanding.png")
-          e.videolink("https://www.youtube.com/watch?v=FYY0FSMk70s")
+          e.videolink("https://www.youtube.com/watch?v=FYY0FSMk70s", "Einblick in die HBG")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")

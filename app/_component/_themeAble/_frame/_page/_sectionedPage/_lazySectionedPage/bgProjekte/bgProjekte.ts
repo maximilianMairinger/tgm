@@ -28,6 +28,8 @@ export default declareComponent("bg-projekte", class RaumfahrtProjekte extends L
         {
           let info = new (Information as typeof InformationenSection)();
           info.content("SchülerInnen setzen im Zuge der Diplomarbeit Projekte in Bereichen wie etwa Diagnose und Therapie oder Prothesen- und Implantattechnik um. Dabei arbeiten sie oft in Kooperation mit renommierten Unternehmen aus der Industrie und können erste Erfahrungen für das Berufsleben sammeln. Unsere SchülerInnen stellen in Videos ihre Diplomprojekte vor.")
+          info.linktext("Mehr erfahren")
+          info.linkhref("/tagesschule/biomedizin/projekte/diplomprojekte-der-hbg")
           return new WrapperSection(info) as any;
         }
         ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection")

@@ -71,7 +71,14 @@ export const iconIndex = {
     technischeMechanikKt: () => import("./fachIcon/chain/chain"),
     kunststoffverarbeitung: () => import("./fachIcon/filter/filter"),
     fertigungstechnik: () => import("./fachIcon/layers/layers"),
-    umwelttechnik: () => import("./fachIcon/environment/environment")
+    umwelttechnik: () => import("./fachIcon/environment/environment"),
+
+    // MB
+    konstruktionProjManagement: () => import("./fachIcon/workflow/workflow"),
+    techMech: () => import("./fachIcon/calculator/calculator"),
+    // fertigungstechnik: () => import("./fachIcon/chain/chain"),
+    maschinenAnlagen: () => import("./fachIcon/factory/factory"),
+    // automatisierungstechnik: () => import("./fachIcon/layers/layers")
   },
   vertiefung: {
     // HET
@@ -86,6 +93,11 @@ export const iconIndex = {
     // HIT
     medientechnik: () => import("./vertiefung/mediaCode/mediaCode"),
     systemtechnik: () => import("./vertiefung/cloudNetwork/cloudNetwork"),
+
+    // HBG
+    fahrzeugtechnik: () => import("./vertiefung/fastCar/fastCar"),
+    industrieDesign : () => import("./vertiefung/industry/industry"),
+    robotik : () => import("./vertiefung/industrialRobot/industrialRobot"),
   },
   abendschule: {
     bigStonks: () => import("./abendschule/bigStonks/bigStonks"),

@@ -20,7 +20,7 @@ export default declareComponent("mb-projekte", class MbProjekte extends LazySect
           e.note("die")
           e.heading("Projekte");
           e.subheading("der MB");
-          e.background('elProj.jpg');
+          e.background('mbProj');
           return new WrapperSection(e, 'dark') as any;
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/thumbnail")
       },
@@ -28,7 +28,7 @@ export default declareComponent("mb-projekte", class MbProjekte extends LazySect
         key: new Import("info", 1, (Information: typeof Element) =>
         {
           let info = new (Information as typeof InformationenSection)();
-          info.content("SchülerInnen arbeiten in Kooperation mit Unternehmen aus der Privatwirtschaft an innovativen Projekten. Im Zuge des Diplomprojekts demonstrieren die zukünftigen Elektrotechniker im 5. Jahrgang die erlernten Fähigkeiten.")
+          info.content("SchülerInnen setzen im Zuge der Diplomarbeit Projekte in verschiedensten Bereichen um. Dabei arbeiten sie oft in Kooperation mit renommierten Unternehmen aus der Industrie und können erste Erfahrungen für das Berufsleben sammeln.")
           return new WrapperSection(info);
         }
         ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection")

@@ -27,7 +27,7 @@ export default declareComponent("it-projekte", class ItProjekte extends LazySect
         key: new Import("info", 1, (Information: typeof Element) =>
         {
           let info = new (Information as typeof InformationenSection)();
-          info.content("Im 5. Jahrgang haben die Schülerinnen und Schüler die Möglichkeit Praxisluft zu schnuppern und ihr Wissen aus den fachtheoretischen und fachpraktischen Gegenständen im Rahmen einer Diplomarbeit umzusetzen. Die Diplomarbeiten werden fast ausschließlich mit externen Firmen durchgeführt wobei die Schülerinnen und Schüler in Projektteams zusammenarbeiten. Da die Ausbildung der Wirtschaftsingenieure sehr breit gefächert ist, sind Themen aus dem Bereich des Maschinenbaus, der Logistik, der IT, der Elektrotechnik, ja sogar aus dem medizinischen Bereich möglich.")
+          info.content("ISchülerInnen setzen im Zuge der Diplomarbeit Projekte in verschiedensten Bereichen um. Dabei arbeiten sie oft in Kooperation mit renommierten Unternehmen aus der Industrie und können erste Erfahrungen für das Berufsleben sammeln.")
           return new WrapperSection(info);
         }
         ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection")

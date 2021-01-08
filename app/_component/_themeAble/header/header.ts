@@ -15,7 +15,7 @@ import keyIndex from "key-index"
 import "xtring"
 
 
-const pathDisplayHeaderMinMargin = 75
+const pathDisplayHeaderMinMargin = 100
 
 const linkAnimationOffset = 170
 const linkFadeInDuration = 800

@@ -36,6 +36,10 @@ c-unterricht-systeme-card{
   min-width: 320px;
 }
 
+c-vertiefungs-container {
+  padding-left: 68px;
+}
+
 
 c-selection-card {
   width: 400px;

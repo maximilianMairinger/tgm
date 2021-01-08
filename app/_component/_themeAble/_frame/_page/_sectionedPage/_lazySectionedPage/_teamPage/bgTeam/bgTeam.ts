@@ -43,7 +43,7 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
                     leitungImageTextblob.email("bernhard.wess@tgm.ac.at");
                     leitungImageTextblob.tel("01 33 126 320");
                     leitungImageTextblob.image('avwess');
-                    leitungImageTextblob.stellvertreter([{"name":"Josef Kollmitzer", "email":"jkollmitzer@tgm.ac.at"}])
+                    leitungImageTextblob.stellvertreter([{"name":"DI Dr. Josef Kollmitzer", "email":"jkollmitzer@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_text/imageTextblob/imageTextblob")

@@ -17,7 +17,7 @@ export default declareComponent("mb-team", class MbTeam extends TeamPage {
                 e.note("mit");
                 e.heading("Teamgeist");
                 e.subheading("in die Zukunft");
-                e.background("mbTeam")
+                e.background("mbTeam2")
                 return new WrapperSection(e, 'dark') as any
             }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_text/_thumbnail/thumbnail")
         },

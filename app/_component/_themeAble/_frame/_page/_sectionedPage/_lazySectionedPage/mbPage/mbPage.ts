@@ -23,7 +23,7 @@ export default class MbPage extends LazySectionedPage {
           e.heading("Maschinenbau")
           e.subheading("der Tagesschule")
           e.note("abteilung");
-          e.background("mbLanding2.png")
+          e.background("mbLanding2")
           e.videolink("https://www.youtube.com/watch?v=XIB-3K20Vaw")
           
           return new WrapperSection(e, "dark") as any

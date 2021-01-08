@@ -23,7 +23,7 @@ export default class KunststoffPage extends LazySectionedPage {
           e.heading("Kunststofftechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
-          e.videolink("https://www.youtube.com/watch?v=7CPDqPgWjxM")
+          e.videolink("https://www.youtube.com/watch?v=7CPDqPgWjxM", "Einblick in die HKT")
           
           e.background("ktLanding.png")
           

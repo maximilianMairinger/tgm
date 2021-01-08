@@ -37,7 +37,7 @@ export default declareComponent("kt-projekte", class KtProjekte extends LazySect
           let projectData = [
             {
               heading:"Biologisch abbaubare Kaffeekapseln",
-              note:"Anwendung von Biopolymeren für biologisch abbaubare Kaffeekapseln. In Kooperation mit Gabriel Chemie GmbH, Industriestraße 1, 2352 Gumpoldskirchen",
+              note:"Anwendung von Biopolymeren für biologisch abbaubare Kaffeekapseln. In Kooperation mit Gabriel Chemie GmbH, Industriestraße 1, 2352 Gumpoldskirchen.",
               team:[
                 "Samantha Onderka",
                 "Katharina Schleinzer"
@@ -54,7 +54,7 @@ auf ihre mechanische Stabilität als auch auf ihre Kompostierbarkeit geprüft.
             },
             {
               heading:"Nachhaltigkeit von Post-Consumer-Rezyklaten",
-              note:"Bewertung der Nachhaltigkeit von Post-Consumer-Rezyklaten. In Kooperation mit Gabriel-Chemie Gesellschaft m.b.H., Industriestraße 1, 2352 Gumpoldskirchen",
+              note:"Bewertung der Nachhaltigkeit von Post-Consumer-Rezyklaten. In Kooperation mit Gabriel-Chemie Gesellschaft m.b.H., Industriestraße 1, 2352 Gumpoldskirchen.",
               team:[
                 "Semanur Demir",
                 "Armin Marhosevic"

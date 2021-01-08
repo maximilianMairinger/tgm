@@ -51,7 +51,14 @@ export default declareComponent("ausmacht-section-el", class extends AusmachtSec
                 stundentafel: baseLink + "stundentafel-el"
             },
             cards: [
-                
+                {
+                    heading: "IoT",
+                    note: "highlight",
+                    thumbnail: "iotElektronik",
+                    href: baseLink + "todo",
+                    contenttitle: "Internet of things",
+                    content: "TODO"
+                },
                 {
                     heading: "Prototypenbau",
                     note: "fachpraktisch",

@@ -91,10 +91,10 @@ blog-extra hr{
 
 blog-image{
     position: relative;
-    display: block;
+    display: none;
     width: 110%;
     left: -5%;
-     margin-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 h2{

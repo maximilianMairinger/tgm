@@ -41,7 +41,10 @@ export default class BlogPost extends Text {
   image():string
   image(image:string):void
   image(image?:string){
-    if(image) this.q("blog-image img").setAttribute('src', image);
+    if(image) {
+      this.q("blog-image").css({display:"block"});
+      this.q("blog-image img").setAttribute('src', image);
+    }
     else return this.q("blog-image img").getAttribute('src');
   }
 

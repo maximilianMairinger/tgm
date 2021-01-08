@@ -35,12 +35,44 @@ export default declareComponent("bg-projekte", class RaumfahrtProjekte extends L
         ), val: () => import(/* webpackChunkName: "info" */"../../../../../_text/_sectionTextblob/informationenSection/projekteInformationSection/projekteInformationSection")
       },
       {
+        key: new Import("projekte", 1, (projekte: typeof ProjekteSection) => {
+          let projectData = [
+            {
+              heading:"Bio/Impedanzmessung",
+              note:``,
+              team:[],
+              thumbVid:"https://www.youtube.com/embed/U7oBnJKn9EE",
+              title: "",
+              content: ``
+            },
+            {
+              heading:"Zellkulturen unter Strom",
+              note:"Beeinflussung von Zellkulturen durch elektronischen Strom",
+              thumbVid:"https://www.youtube.com/embed/lk_zN2E0-FQ",
+              team:[],
+              title: "",
+              content: ``
+            },
+            {
+              heading:"Luftstrom / Heizdeckenregelung",
+              note:"",
+              thumbVid:"https://www.youtube.com/embed/l0BtoiM0qBc",
+              team:[],
+              title: "",
+              content: ``
+            }
+          ] as Project[];
+
+          return new projekte(projectData)
+        }), val: () => import(/* webpackChunkName: "projekte" */"../../../../_pageSection/schuelerprojekteSection/schuelerprojekteSection")
+      },
+      {
         key: new Import("footer", 1, (_Footer: typeof Footer) => 
-          new _Footer(baseLink + "info/")
+          new _Footer(baseLink + "projekte/")
         ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
       }
     ), sectionChangeCallback, undefined, {
-      footer: "info"
+      footer: "projekte"
     })
 
   }

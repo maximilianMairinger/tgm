@@ -36,9 +36,6 @@ c-unterricht-systeme-card{
   min-width: 320px;
 }
 
-c-vertiefungs-container {
-  padding-left: 68px;
-}
 
 
 c-selection-card {
@@ -78,6 +75,14 @@ vertiefung-section c-textblob{
       width: auto;
   }
 }
+
+@media (min-width: 768px) {
+  c-vertiefungs-container {
+    padding-left: 68px;
+  }
+}
+
+
 
 @media only screen and (max-width: 768px) {
   card-container{

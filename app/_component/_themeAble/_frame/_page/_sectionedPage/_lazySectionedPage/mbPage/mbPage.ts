@@ -69,7 +69,7 @@ export default class MbPage extends LazySectionedPage {
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 6. Stock");
           imageTextBlob.email("office-hmb@tgm.ac.at");
           imageTextBlob.tel("+43 1 33126 261");
-          imageTextBlob.image('ktContact');
+          imageTextBlob.image('mbContact');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

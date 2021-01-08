@@ -20,7 +20,7 @@ export default declareComponent("mb-projekte", class MbProjekte extends LazySect
           e.note("die")
           e.heading("Projekte");
           e.subheading("der MB");
-          e.background('elProj.jpg');
+          e.background('mbProj');
           return new WrapperSection(e, 'dark') as any;
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/thumbnail")
       },

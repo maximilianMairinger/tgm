@@ -15,6 +15,8 @@ import keyIndex from "key-index"
 import "xtring"
 
 
+const pathDisplayHeaderMinMargin = 100
+
 const linkAnimationOffset = 170
 const linkFadeInDuration = 800
 
@@ -91,7 +93,7 @@ export default class Header extends ThemeAble {
       let linksLeft: number = !this.currentLinkElems.empty ? this.currentLinkElems.first.getBoundingClientRect().left : q.width - 200
       let logo = this.pathDisplayElem.getBoundingClientRect()
 
-      let margin = 100 + (this.isLinkContainerCurrentlyHidden ? 80 : 0)
+      let margin = pathDisplayHeaderMinMargin + (this.isLinkContainerCurrentlyHidden ? pathDisplayHeaderMinMargin / 2 : 0)
       if (linksLeft < logo.right + margin) {
         if (!this.isLinkContainerCurrentlyHidden) {
           this.isLinkContainerCurrentlyHidden = true
@@ -130,8 +132,8 @@ export default class Header extends ThemeAble {
 
   public updatePage(linkContents: string[], domainLevel: number) {
     return Promise.all([
-      this.updatePathDisplay(domainLevel),
-      this.updateLinks(linkContents, domainLevel)
+      this.updateLinks(linkContents, domainLevel),
+      this.updatePathDisplay(domainLevel)
     ])
   }
 
@@ -179,12 +181,20 @@ export default class Header extends ThemeAble {
     //@ts-ignore
     if (elems) elems.last.push = false
 
+    let fadeoutProms = []
     if (!fadeOutElems.empty) {
-      new ElementList(...fadeOutElems.reverse()).anim({translateX: 5, opacity: 0}, 250, 100)
+      const elems = new ElementList(...fadeOutElems.reverse())
+      fadeoutProms.add(elems.anim({translateX: 5, opacity: 0}, 250, 100).then(() => {
+        elems.hide()
+      }))
       await delay(250)
     }
+    let fadeoutProm = Promise.all(fadeoutProms)
+    fadeoutProm.then(() => {
+      this.resizeHandler({width: this.clientWidth})
+    })
 
-    if (!fadeInElems.empty) fadeInElems.css({translateX: -5}).anim({translateX: .1, opacity: 1}, 250, 100)
+    if (!fadeInElems.empty) fadeInElems.css({display: "block", translateX: -5}).anim({translateX: .1, opacity: 1}, 250, 100)
 
 
 
@@ -285,7 +295,6 @@ export default class Header extends ThemeAble {
     
     animationWrapper.apd(...this.currentLinkElems)
     
-    this.resizeHandler({width: this.clientWidth})
     if (this.currentLinkElems.empty) {
       this.inFadeInAnim = false
       res()

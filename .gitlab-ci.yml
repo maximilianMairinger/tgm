@@ -6,6 +6,7 @@ stages:
 cache:
   paths:
     - node_modules/
+    - public/res/img/
 build:
   stage: build
   script:

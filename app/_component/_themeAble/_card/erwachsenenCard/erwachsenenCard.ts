@@ -18,9 +18,10 @@ import "../../../_themeAble/_icon/rover/rover"
 import "../../../_themeAble/_icon/space-aids/space-aids"
 import { iconIndex } from "../../_icon/icon";
 import "../../../_themeAble/_icon/pruefung/pruefung"
+import PruefungIcon from "../../_icon/pruefung/pruefung";
 
 
-type ErwachsenenCardOption = {icon: string, title: string, content: string, link: string, heading: string, info:string, extraIcon:string, extraTitle:string, extraContent:string}
+type ErwachsenenCardOption = {icon: string, title: string, content: string, link: string, heading: string, info:string, extraIcon:string, extraTitle:string, extraContent:string, certificate:string}
 const SELECTED_CLASS: string = "selected" ;
 export default declareComponent("erwachsenen-card", class ErwachsenenCard extends Card {
 
@@ -108,6 +109,7 @@ export default declareComponent("erwachsenen-card", class ErwachsenenCard extend
     private overviewHeading=this.q("overview-heading");
     private overviewInfo=this.q("overview-box > overview-content");
     private overviewIcon=this.q("overview-img-box");
+    private overviewPruefung=this.q("overview-img-box c-pruefung-icon") as PruefungIcon;
     private overviewTitle=this.q("overview-title");
     private overviewContent=this.q("overview-content-box overview-content");
     private overviewLink=this.q("overview-box c-link") as Link;
@@ -121,7 +123,10 @@ export default declareComponent("erwachsenen-card", class ErwachsenenCard extend
         //this.overviewIcon.removeChilds();
         //this.overviewIcon.apd(ce(options.extraIcon));
         let time = 400;
-        this.overviewIcon.anim({opacity:0}, time).then(() => this.overviewIcon.anim({opacity:1}, time))
+        this.overviewIcon.anim({opacity:0}, time).then(() => {
+            this.overviewPruefung.certificate(options.certificate ? options.certificate : "Reife und Dipl-\nomprüfung");
+            this.overviewIcon.anim({opacity:1}, time)
+        })
         this.overviewTitle.text(options.extraTitle);
         this.overviewContent.text(options.extraContent);
         this.overviewLink.link(options.link);

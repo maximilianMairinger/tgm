@@ -13,7 +13,7 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
         super({
             heading: {
                 heading: "Was uns ausmacht",
-                subheading: "als Kunststufftechnik"
+                subheading: "als Kunststofftechnik"
             },
             selection: {
                 heading: "Gegenstände",
@@ -62,7 +62,7 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
                 {
                     heading: "Umwelttechnik",
                     note: "Unterrichtsfach",
-                    thumbnail: "/res/img/umwelt.png",
+                    thumbnail: "recycling",
                     href: baseLink + "umwelttechnik",
                     contenttitle: "Umwelttechnik",
                     content: "Die Abteilung für Kunststofftechnik am tgm setzt mit ihrem Ausbildungsfokus „Biopolymere und Umwelttechnik“ einen Schwerpunkt auf umweltrelevante"
@@ -70,7 +70,7 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
                 {
                     heading: "Werkstatt",
                     note: "PRAXISUNTERRICHT",
-                    thumbnail: "/res/img/ktWerkstatt.png",
+                    thumbnail: "werkstattDrehen",
                     href: baseLink + "werkstatte-in-der-hkt",
                     contenttitle: "Praxisbasierte Erfahrungen",
                     content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."

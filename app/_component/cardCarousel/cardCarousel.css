@@ -48,8 +48,8 @@ component-body::-webkit-scrollbar { /* WebKit */
   height: 0;
 }
 
-@media only screen and (max-width: 1200px) {
-  component-body {
+@media only screen and (max-width: 905px) {
+  :host(.wrap) component-body {
     margin-bottom: 0;
     flex-wrap: nowrap;
     justify-content: left;
@@ -57,16 +57,29 @@ component-body::-webkit-scrollbar { /* WebKit */
     margin-right: 0;
     width: 100%;
   }
+
+  
+
+  :host(.wrap) c-icon-card {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  :host(:not(.wrap)) component-body {
+    margin-bottom: 0;
+    flex-wrap: nowrap;
+    justify-content: left;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+
   :host(:not(.wrap)) c-icon-card:first-of-type {
     margin-left: 40px;
   }
 
   :host(:not(.wrap)) c-icon-card {
     margin-bottom: 0;
-  }
-
-  :host(.wrap) c-icon-card {
-    width: 100%;
-    height: 53vw;
   }
 }

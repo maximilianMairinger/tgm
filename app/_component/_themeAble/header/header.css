@@ -2,6 +2,20 @@ component-body {
   display: flex;
   align-items: center;
   user-select: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Do not show a scrollbar */
+component-body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+/* WebKit */
+component-body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 blurry-background {
@@ -13,6 +27,7 @@ blurry-background {
   top: 0;
   transition: opacity .3s;
   border-bottom: 1px solid rgba(0,0,0,0.16);
+  box-sizing: border-box;
   opacity: 0;
 
   /* Only when browser does not support blur */
@@ -125,12 +140,12 @@ path-display {
   position: relative;
   display: flex;
   align-items: center;
-
-
 }
 
 path-display > * {
   opacity: 0;
+  display: none;
+  white-space: nowrap;
 }
 
 path-display c-arrow-icon {

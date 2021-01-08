@@ -26,7 +26,7 @@ export default declareComponent("home-page", class Homepage extends LazySectione
         ), val: () => import(/* webpackChunkName: "VersuchsanstaltSection" */"../../../../_pageSection/versuchsanstaltSection/versuchsanstaltSection")
       },
       {
-        key: new Import("erwachsenenschule", 1, (_AbendschuleSection: typeof AbendschuleSection) =>
+        key: new Import("erwachsenenbildung", 1, (_AbendschuleSection: typeof AbendschuleSection) =>
           new _AbendschuleSection()
         ), val: () => import(/* webpackChunkName: "AbendschuleSection" */"../../../../_pageSection/abendschuleSection/abendschuleSection")
       },

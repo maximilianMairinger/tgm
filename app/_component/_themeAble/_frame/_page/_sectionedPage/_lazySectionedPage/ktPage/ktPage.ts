@@ -23,9 +23,9 @@ export default class KunststoffPage extends LazySectionedPage {
           e.heading("Kunststofftechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
-          e.videolink("https://www.youtube.com/watch?v=7CPDqPgWjxM")
+          e.videolink("https://www.youtube.com/watch?v=7CPDqPgWjxM", "Einblick in die HKT")
           
-          e.background("ktLanding.png")
+          e.background("ktLanding")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
@@ -39,7 +39,7 @@ export default class KunststoffPage extends LazySectionedPage {
           info.note("bei uns");
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
-          info.content(`Als weltweit erste und einzige HTL Ausbildung für Kunststofftechnik im Osten Österreichs begleiten wir am TGM seit 1963 angehende Ingenieurinnen und Ingenieure auf ihrem Weg in die Industrie.<br><br>Kunststoff ist ein moderner Werkstoff, der unser Leben in vielfältiger Weise verbessert, sei es durch Artikel des täglichen Lebens oder durch hochtechnische Erzeugnisse wie Teile im Automobil- und Flugzeugbau.<br>Wir lehren aber nicht nur moderne Technologien zur Herstellung, sondern vor allem auch wichtige Recyclingmethoden, um eine Kreislaufwirtschaft sicherzustellen. Österreich gilt als Pioniernation in der Kunststofftechnik und beheimatet zahlreiche GlobalPlayer, die mit unseren Absolventinnen und Absolventen zu Weltmarktführern in der Materialherstellung, im Kunststoffmaschinenbau und in Produktsparten, wie der Verpackungs- und Medizintechnik, geworden sind. Einen Einblick in die unzähligen Einsatzgebiet für Kunststoffe kann man <c-link link="https://www.plasticseurope.org/de/about-plastics/what-are-plastics/innovative-material">hier</c-link> finden.`)
+          info.content(`Als weltweit erste und einzige HTL Ausbildung für Kunststofftechnik im Osten Österreichs begleiten wir am TGM seit 1963 angehende Ingenieurinnen und Ingenieure auf ihrem Weg in die Industrie.<br><br>Kunststoff ist ein moderner Werkstoff, der unser Leben in vielfältiger Weise verbessert, sei es durch Artikel des täglichen Lebens oder durch hochtechnische Erzeugnisse wie Teile im Automobil- und Flugzeugbau.<br><br>Wir lehren aber nicht nur moderne Technologien zur Herstellung, sondern vor allem auch wichtige Recyclingmethoden, um eine Kreislaufwirtschaft sicherzustellen.<br><br> Österreich gilt als Pioniernation in der Kunststofftechnik und beheimatet zahlreiche GlobalPlayer, die mit unseren Absolventinnen und Absolventen zu Weltmarktführern in der Materialherstellung, im Kunststoffmaschinenbau und in Produktsparten, wie der Verpackungs- und Medizintechnik, geworden sind. Einen Einblick in die unzähligen Einsatzgebiet für Kunststoffe kann man <c-link link="https://www.plasticseurope.org/de/about-plastics/what-are-plastics/innovative-material">hier</c-link> finden.`)
 
 
           return new WrapperSection(info) as any
@@ -62,12 +62,12 @@ export default class KunststoffPage extends LazySectionedPage {
           imageTextBlob.heading("Kontakt");
           imageTextBlob.subheading("zur Kunststofftechnik");
           imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Kunststofftechnik einzutauchen.")
-          // imageTextBlob.linktext("Einen Besuch planen")
+          // imageTextBlob.linktext("Einen Besuch planen")  
           imageTextBlob.linkhref("tagesschule/Kunststofftechnik")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 10. Stock");
           imageTextBlob.email("office-hkt@tgm.ac.at");
           imageTextBlob.tel("01 33 126 / 300");
-          imageTextBlob.image('ktContact');
+          imageTextBlob.image('ktContact2');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

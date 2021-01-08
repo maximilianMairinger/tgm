@@ -271,6 +271,14 @@ info-text{
     padding-bottom: 50px;
 }
 
+iframe.thumbnail-pic {
+    width: 100%;
+    height: 250px;
+}
+
+
+
+
 @media only screen and (max-width: 900px) {
 
     tablet-content {

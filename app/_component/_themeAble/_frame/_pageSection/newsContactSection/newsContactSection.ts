@@ -97,8 +97,9 @@ export default class NewsContactSection extends PageSection {
     this.mapTextBlob.hsize({"max": 60, "min": 40})
     this.mapTextBlob.hmobile({"max": 55, "min": 35})
     this.mapTextBlob.address("Wexstraße 19-23, 1200 Wien")
-    this.mapTextBlob.email("direktion@tgm.ac.at")
     this.mapTextBlob.tel("33126 0")
+    this.mapTextBlob.stellvertreterAlias("Emails");
+    this.mapTextBlob.stellvertreter([{name:"Info", email:"info@tgm.ac.at"}, {name:"Versuchsanstalt", email: "va@tgm.ac,at"}])
 
 
     this.allFrame.insertBefore(this.mapTextBlobFadin, this.overlay)

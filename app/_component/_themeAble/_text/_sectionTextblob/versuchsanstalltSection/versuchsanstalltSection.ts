@@ -12,9 +12,11 @@ export default declareComponent("versuchsanstalt-section", class Versuchsanstall
         this.hsize({max:75, min:35});
         this.hmobile({max:40, min:30});
         this.hscale(0.5);
+        this.linktext("Mehr erfahren")
+        this.linkhref("https://www2.tgm.ac.at/versuchsanstalt/va")
         this.content("Die Staatliche Versuchsanstalt am TGM wurde als „Probieranstalt für mechanisch-technische Materialprüfung“ im Jahr 1887 gegründet. Mit 100 Angestellten ist sie die größte in Österreich." +
             "<br>" +
-            "Sie ist in ihrer aktuellen Organisationsform in 6 Fachbereiche untergliedert\n");
+            "Sie ist in ihrer aktuellen Organisationsform in 6 Abteilungen untergliedert.\n");
         // this.linktext("Mehr erfahren");
         // this.linkhref("");
     }

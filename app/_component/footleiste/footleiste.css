@@ -112,7 +112,7 @@ mobile-logo {
 
     inner-wrapper {
         width: 100%;
-        margin: 30px;
+        margin: 0 7vw;
         max-width: -webkit-fill-available;
         min-width: 0px;
         height: fit-content;

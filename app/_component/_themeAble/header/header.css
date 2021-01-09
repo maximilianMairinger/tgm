@@ -77,6 +77,10 @@ link-animation-wrapper > * {
   pointer-events: all;
 }
 
+additional-path-display > * {
+  pointer-events: all;
+}
+
 
 
 left-content > c-tgm-logo {

@@ -17,6 +17,7 @@ import MailIcon from "../_icon/mail/mail"
 import CalendarIcon from "../_icon/calendar/calendar"
 import GraduateIcon from "../_icon/graduate/graduate"
 import { Data } from "josm"
+import Button from "../../_themeAble/_button/button"
 
 
 
@@ -86,13 +87,17 @@ export default class Header extends ThemeAble {
     
 
 
-    let elems = new ElementList(ce("split-line"), new CalendarIcon, new MailIcon, new GraduateIcon)
+    let elems = new ElementList(
+      ce("split-line"), 
+      new Button().apd(new CalendarIcon).link("https://stpl.tgm.ac.at"), 
+      new Button().apd(new MailIcon).link("https://owa.tgm.ac.at"), 
+      new Button().apd(new GraduateIcon).link("https://elearning.tgm.ac.at")
+    )
     if (this.pathDisplayEmpty.get()) {
       this.additionalPathDisplay.apd(...elems)
       elems.show()
     }
     setTimeout(() => {
-      debugger
       this.pathDisplayHeaderMargin = this.atTheTop.tunnel((e) => pathDisplayHeaderMinMargin + (e ? this.additionalPathDisplay.width() : 0))
       window.on("resize", this.resizeHandler.bind(this))
     })

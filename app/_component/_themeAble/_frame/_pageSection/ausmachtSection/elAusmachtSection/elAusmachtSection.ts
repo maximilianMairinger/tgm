@@ -15,7 +15,7 @@ export default declareComponent("ausmacht-section-el", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "Fachtheoretische",
                 selection: [
                     {
                         icon:"hardwareentwicklung", 
@@ -61,7 +61,7 @@ export default declareComponent("ausmacht-section-el", class extends AusmachtSec
                 },
                 {
                     heading: "Prototypenbau",
-                    note: "fachpraktisch",
+                    note: "Fachpraktischer Unterricht",
                     thumbnail: "elPrototypenbau",
                     href: baseLink + "prototypenbau",
                     contenttitle: "Prototypenbau",

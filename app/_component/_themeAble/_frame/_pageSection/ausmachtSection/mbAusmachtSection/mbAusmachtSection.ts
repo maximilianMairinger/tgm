@@ -15,7 +15,7 @@ export default declareComponent("ausmacht-section-mb", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "Fachtheoretische",
                 selection: [
                     {
                         icon:"konstruktionProjManagement", 
@@ -53,7 +53,7 @@ export default declareComponent("ausmacht-section-mb", class extends AusmachtSec
             cards: [
                 {
                     heading: "Werkstatt",
-                    note: "PRAXISUNTERRICHT",
+                    note: "Fachpraktischer Unterricht",
                     thumbnail: "mbWerkstatt",
                     href: baseLink + "werkstatte-in-der-maschinenbau",
                     contenttitle: "Werkstatt",

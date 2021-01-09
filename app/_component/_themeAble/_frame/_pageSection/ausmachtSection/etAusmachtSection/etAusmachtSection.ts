@@ -17,7 +17,7 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "Fachtheoretische",
                 selection: [
                     {
                         icon: "energysysteme", 
@@ -63,7 +63,7 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
                 },
                 {
                     heading: "Werkstatt",
-                    note: "PRAXISUNTERRICHT",
+                    note: "Fachpraktischer Unterricht",
                     thumbnail: "/res/img/werkstaetteHET.png",
                     href: baseLink + "werkstätte-elektrotechnik",
                     contenttitle: "Praxisbasierte Erfahrungen",

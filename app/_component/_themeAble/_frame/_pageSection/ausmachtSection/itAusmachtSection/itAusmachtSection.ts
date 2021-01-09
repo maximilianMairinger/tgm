@@ -17,7 +17,7 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "fachtheoretische",
+                note: "Fachtheoretische",
                 selection: [
                     {
                         icon: "softwareentwicklung", 
@@ -57,7 +57,7 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                 },
                 {
                     heading: "Werkstatt",
-                    note: "fachpraxis",
+                    note: "Fachpraktischer Unterricht",
                     thumbnail: "werkstaetteHET",
                     href: baseLink + "werkstatte-hit",
                     contenttitle: "Praxisbasierte Erfahrungen",

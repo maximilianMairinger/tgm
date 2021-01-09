@@ -17,7 +17,7 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "Fachtheoretische",
                 selection: [
                     {
                         icon: "laboratoriumKt", 
@@ -69,7 +69,7 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
                 },
                 {
                     heading: "Werkstatt",
-                    note: "PRAXISUNTERRICHT",
+                    note: "Fachpraktischer Unterricht",
                     thumbnail: "werkstattDrehen",
                     href: baseLink + "werkstatte-in-der-hkt",
                     contenttitle: "Praxisbasierte Erfahrungen",

@@ -85,7 +85,7 @@ c-card-carousel {
   width: calc(100% - 13%);
   position: relative;
   display: flex;
-  margin-top: max(calc(100vh - 145px), 600px);
+  margin-top: max(calc(100vh - 145px), 625px);
   margin-bottom: 30px;
 }
 

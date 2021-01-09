@@ -54,7 +54,7 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                     content: "Die haben nur WIR! Die Schuleingangsphase ist so gestaltet, dass alle Schülerinnen und Schüler gut in der Schule ankommen und sich vom ersten Tag an wohlfühlen. Wichtig sind hier aber nicht nur offene Unterrichtsformen, wie beispielsweise KOOL, sondern ausschlaggebend ist auch eine strukturierte Lernumgebung."
                 },
                 {   
-                    heading: "Werkstatt",
+                    heading: "Werkstätte",
                     note: "Fachpraktischer Unterricht",
                     thumbnail: "wiWerkstatt",
                     href: baseLink + "werkstatte-wirtschaftsingenieure",

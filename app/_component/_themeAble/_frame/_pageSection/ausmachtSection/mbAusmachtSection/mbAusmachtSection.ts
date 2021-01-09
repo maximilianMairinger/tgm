@@ -52,7 +52,7 @@ export default declareComponent("ausmacht-section-mb", class extends AusmachtSec
             },
             cards: [
                 {
-                    heading: "Werkstatt",
+                    heading: "Werkstätte",
                     note: "Fachpraktischer Unterricht",
                     thumbnail: "mbWerkstatt",
                     href: baseLink + "werkstatte-in-der-maschinenbau",

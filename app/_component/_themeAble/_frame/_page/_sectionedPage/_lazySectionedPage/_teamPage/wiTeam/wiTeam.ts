@@ -17,7 +17,7 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
                 e.note("mit");
                 e.heading("Teamgeist");
                 e.subheading("in die Zukunft");
-                e.background("wiTeam")
+                e.background("wiTeam3")
                 return new WrapperSection(e, 'dark') as any
             }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_text/_thumbnail/thumbnail")
         },
@@ -37,14 +37,15 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
                 {
                     let leitungImageTextblob = new (leitung as typeof ImageTextblob)();
                     leitungImageTextblob.note("Abteilungsvorstand");
-                    leitungImageTextblob.heading("DI Angerer");
+                    leitungImageTextblob.heading("DI Angerer BEd");
                     leitungImageTextblob.subheading("Georg");
-                    // leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")
+                    leitungImageTextblob.content("Ich stehe Ihnen gerne am Dienstag von 9:50 bis 10:40 in meiner Sprechstunde zu Verfügung.")
                     leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 5. Stock");
                     leitungImageTextblob.email("avhwi@tgm.ac.at");
-                    leitungImageTextblob.tel("0664 80126262");
+                    leitungImageTextblob.info("Mobil", "0664 80126262");
+                    leitungImageTextblob.tel("33126 – 262");
                     leitungImageTextblob.image('unknownMan');
-                    // leitungImageTextblob.stellvertreter([{"name":"Stefan Hertl", "email":"shertl@tgm.ac.at"}])
+                    leitungImageTextblob.stellvertreter([{"name":"DI Dr. Eder Nikolaus, BEd", "email":"neder@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_text/imageTextblob/imageTextblob")
@@ -58,7 +59,7 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
                     schuelerImageTextblob.heading("Kaan");
                     schuelerImageTextblob.subheading("Yigitbilek");
                     schuelerImageTextblob.content("Ich darf euch dieses Jahr als Abteilungssprecher vertreten, bei Anliegen bitte einfach melden!")
-                    schuelerImageTextblob.address("Wexstraße 19-23, 1200 Wien / 11. Stock");
+                    schuelerImageTextblob.address("Wexstraße 19-23, 1200 Wien / 5. Stock");
                     schuelerImageTextblob.email("kyigitbilek@student.tgm.ac.at");
                     // schuelerImageTextblob.tel("+43 ‭650 7311330‬");
                     schuelerImageTextblob.image('team_2');

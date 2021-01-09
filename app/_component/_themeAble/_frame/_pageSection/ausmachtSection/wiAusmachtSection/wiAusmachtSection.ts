@@ -56,7 +56,7 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                 {   
                     heading: "Werkstatt",
                     note: "Fachpraktischer Unterricht",
-                    thumbnail: "wiWerkstätte",
+                    thumbnail: "wiWerkstatt",
                     href: baseLink + "werkstatte-wirtschaftsingenieure",
                     contenttitle: "Praxisbasierte Erfahrungen",
                     content: "Das Herzstück der HTL Ausbildung ist die Verknüpfung aus Theorie und Praxis. In den diversen Werkstätten kannst du die Theorieinhalte auf Projekte anwenden. Das macht die HTL Ausbildung weltweit einzigartig!"

@@ -371,7 +371,7 @@ export default class NewsContactSection extends PageSection {
           this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
           this.allSvg2.anim({translateX: .1})
           this.mapTextBlobWrapper.anim({translateY: "45vw"})
-          this.mapTextBlob.anim({translateY: 350, marginLeft: "3vw"})
+          this.mapTextBlob.anim({translateY: 350, marginLeft: 0})
 
         }
         else {

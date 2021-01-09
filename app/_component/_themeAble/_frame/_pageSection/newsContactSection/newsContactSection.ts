@@ -89,7 +89,7 @@ export default class NewsContactSection extends PageSection {
 
     this.allFrame.insertBefore(this.newsTextBlobFadin, this.overlay) 
 
-
+    this.mapTextBlob.mobileSwitchAt(1000)
     this.mapTextBlob.heading("Kontakt")
     this.mapTextBlob.subheading("zum TGM")
     this.mapTextBlob.note("Direktion")

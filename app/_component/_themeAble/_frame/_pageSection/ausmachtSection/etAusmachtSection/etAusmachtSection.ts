@@ -17,7 +17,7 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "Fachtheoretische",
                 selection: [
                     {
                         icon: "energysysteme", 
@@ -62,8 +62,8 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
                 },
                 {
-                    heading: "Werkstatt",
-                    note: "PRAXISUNTERRICHT",
+                    heading: "Werkstätte",
+                    note: "Fachpraktischer Unterricht",
                     thumbnail: "/res/img/werkstaetteHET.png",
                     href: baseLink + "werkstätte-elektrotechnik",
                     contenttitle: "Praxisbasierte Erfahrungen",

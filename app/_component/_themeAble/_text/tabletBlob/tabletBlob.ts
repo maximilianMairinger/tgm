@@ -164,7 +164,7 @@ export default class TabletBlob extends Text {
             tablet.querySelector("note-box").text(projectJson.note);
 
             let thumbnailContainer = tablet.querySelector("thumbnail-container")
-            let oldThumbNail = this.q(".thumbnail-pic", true)
+            let oldThumbNail = thumbnailContainer.childs(".thumbnail-pic", true)
             if (!oldThumbNail.empty) oldThumbNail.remove()
             
             

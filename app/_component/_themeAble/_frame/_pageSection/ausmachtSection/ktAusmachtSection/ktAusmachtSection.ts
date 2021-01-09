@@ -17,7 +17,7 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "Fachtheoretische",
                 selection: [
                     {
                         icon: "laboratoriumKt", 
@@ -68,8 +68,8 @@ export default declareComponent("ausmacht-section-kt", class extends AusmachtSec
                     content: "Die Abteilung für Kunststofftechnik am tgm setzt mit ihrem Ausbildungsfokus „Biopolymere und Umwelttechnik“ einen Schwerpunkt auf umweltrelevante"
                 },
                 {
-                    heading: "Werkstatt",
-                    note: "PRAXISUNTERRICHT",
+                    heading: "Werkstätte",
+                    note: "Fachpraktischer Unterricht",
                     thumbnail: "werkstattDrehen",
                     href: baseLink + "werkstatte-in-der-hkt",
                     contenttitle: "Praxisbasierte Erfahrungen",

@@ -17,7 +17,7 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
                 e.note("mit");
                 e.heading("Teamgeist");
                 e.subheading("in die Zukunft");
-                e.background("landingTeamLeitung.jpg")
+                e.background("wiTeam")
                 return new WrapperSection(e, 'dark') as any
             }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_text/_thumbnail/thumbnail")
         },

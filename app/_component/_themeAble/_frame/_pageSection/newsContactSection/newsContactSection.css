@@ -280,16 +280,12 @@ mobile-overlay {
     padding-left: 10vw;
     width: 100%;
     position: absolute;
-    pointer-events: none;
     height: 500px;
   }
   card-container-wrapper {
     top: 275px;
   }
 
-  card-container > * {
-    pointer-events: all;
-  }
   component-body {
     margin-bottom: 200px;
   }

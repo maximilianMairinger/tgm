@@ -24,6 +24,10 @@ export default class ImageTextblob extends Text {
     this.alignment(aligment)
   }
 
+  contentwidth(to: number | null) {
+    this.textBlob.contentwidth(to)
+  }
+
   alignment(): Alignment
   alignment(alignment: Alignment): this
   alignment(alignment?: Alignment) {

@@ -63,8 +63,8 @@ c-arrow-icon {
 
 
 left-content {
-  position: absolute;
-  left: 100px;
+  position: relative;
+  margin-left: 100px;
   display: flex;
   align-items: center;
 }
@@ -74,6 +74,10 @@ left-content > * {
 }
 
 link-animation-wrapper > * {
+  pointer-events: all;
+}
+
+additional-path-display > * {
   pointer-events: all;
 }
 
@@ -143,9 +147,12 @@ path-display {
 }
 
 path-display > * {
+  white-space: nowrap;
+}
+
+path-display > *:not(additional-path-display) {
   opacity: 0;
   display: none;
-  white-space: nowrap;
 }
 
 path-display c-arrow-icon {
@@ -154,4 +161,49 @@ path-display c-arrow-icon {
   width: 6.5px;
 }
 
+additional-path-display {
+  margin: 0 10px;
+  height: 100%;
+  width: auto;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  width: max-content;
+  transform: translateY(-5px) scale(.95);
+}
 
+additional-path-display > * {
+  position: relative;
+  float: left;
+  display: block;
+  height: auto;
+  width: 35px;
+  height: 35px;
+  margin: 0 5px;
+
+  display: none;
+  opacity: 0;
+  transform: translateX(-3px)
+}
+
+
+split-line {
+  background: var(--weaker-text-color);
+  width: 1px;
+  height: 25px;
+  margin: 0 15px;
+  margin-left: 20px;
+}
+
+component-body.mobile split-line {
+  visibility: hidden;
+}
+
+component-body.mobile additional-path-display {
+  right: 20px;
+}
+
+component-body:not(.mobile) additional-path-display {
+  position: relative;
+}

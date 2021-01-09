@@ -45,12 +45,12 @@ export default declareComponent("et-projekte", class EtProjekte extends LazySect
                   "Matteo Ingegneri",
                   "Mario Lang"
                 ],
-                thumbnail:"/res/img/kitesurf.jpg",
+                thumbnail: "kitesurf",
                 title: "Diplomarbeit der 5AHET (2018/19)",
                 content:
                     "Das Ziel dieser Diplomarbeit war die Fertigung eines Funktionsprototyps zur Stromerzeugung mittels eines Kites, wie man es vom Kitesurfen her kennt. Durch das Ausfahren eines Kites sollte über eine Welle ein Gleichstrommotor als Generator betrieben und die erzeugte Energie in einem Akku gespeichert werden. Weiters wurde als Ziel gesetzt, das Maturaprojekt mit einem so geringen Budget wie möglich durchzuführen. Daher wurden für dieses Projekt möglichst viele Teile wiederverwendet, welche in der Abteilung keine anderweitige Anwendung mehr fanden."
                     +
-                    "<img src='/res/img/kiteprinzip.png'></img>"
+                    "<c-image src='kiteprinzip'></c-image>"
                     +
                     "Als Basis des Prototyps wurde eine Europalette gewählt. Auf dieser wurden sowohl die mechanischen als auch die elektrischen Komponenten befestigt. Zur Leistungswandlung wurde eine 150W Gleichstrommaschine gewählt. Für die zweite, kleinere Maschine, welche für das Funktionsprinzip notwendig war, wurde ein Bohrmaschinenmotor verwendet."
                     + "<br><br>" +

@@ -174,6 +174,7 @@ export default class NewsContactSection extends PageSection {
     let bigmobileScrollTrigger2 = this.scrollPosData.scrollTrigger(mobileScrollAnimationStart)
 
     let doneWithAnim = new Data(false)
+    doneWithAnim.get(console.log)
     let bigMobile = new Data(undefined)
     new DataCollection(bigMobile, doneWithAnim).get((bigmobile, done) => {
       const funcName = bigmobile ? "on" : "off"
@@ -186,6 +187,14 @@ export default class NewsContactSection extends PageSection {
       if (!done) {
         if (!bigmobile) {
           this.stayInFrameElem.css({position: "sticky", top: 0})
+        }
+        else {
+          if (this.scrollPosData.get() > 0 && this.scrollPosData.get() < mobileScrollAnimationStart) {
+            this.stayInFrameElem.css({position: "relative"})
+          }
+          else {
+            this.stayInFrameElem.css({position: "sticky", top: 0})
+          }
         }
       }
       else {

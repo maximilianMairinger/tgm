@@ -80,8 +80,8 @@ link-animation-wrapper > * {
 
 
 left-content > c-tgm-logo {
-  height: 36px;
-  width: 58px;
+  height: 28px;
+  width: 55px;
   position: relative;
   float: left;
 }
@@ -89,8 +89,8 @@ left-content > c-tgm-logo {
 c-button#homeButton {
   position: absolute;
   left: 0;
-  height: 36px;
-  width: 58px;
+  height: 28px;
+  width: 55px;
   opacity: .2;
 }
 

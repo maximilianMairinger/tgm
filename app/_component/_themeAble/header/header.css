@@ -166,7 +166,7 @@ additional-path-display {
   position: absolute;
   right: 10px;
   width: max-content;
-  transform: translateY(-7px) scale(.9);
+  transform: translateY(-5px) scale(.95);
 }
 
 additional-path-display > * {

@@ -61,8 +61,8 @@ export default class Header extends ThemeAble {
 
   private atTheTop = new Data(true)
 
-  private pathDisplayElementsCount = new Data(undefined)
-  private pathDisplayEmpty = this.pathDisplayElementsCount.tunnel((c) => c === 0, false)
+  private pathDisplayElementsCount = new Data(0)
+  private pathDisplayEmpty = this.pathDisplayElementsCount.tunnel((c) => c === 0)
   
   private pathDisplayHeaderMargin = this.atTheTop.tunnel((e) => pathDisplayHeaderMinMargin + (e ? this.additionalPathDisplay.width() : 0))
   
@@ -92,7 +92,7 @@ export default class Header extends ThemeAble {
       this.additionalPathDisplay.apd(...elems)
       this.pathDisplayEmpty.get((show) => {
         let localSym = globalSym = Symbol()
-        if (show) {
+        if (show) {          
           elems.show().anim({opacity: 1, translateX: .1}, 400, 70)
         }
         else {
@@ -109,12 +109,12 @@ export default class Header extends ThemeAble {
       this.atTheTop.get((show) => {
         let localSym = globalSym = Symbol()
         if (show) {
-          this.additionalPathDisplay.anim({translateY: .1, scale: 1})
+          this.additionalPathDisplay.anim({translateY: .1, scale: 1, opacity: 1}, 200)
         }
         else {
-          this.additionalPathDisplay.anim({translateY: 7, scale: .9}).then(() => {
+          this.additionalPathDisplay.anim({translateY: 5, scale: .95, opacity: 0}, 200).then(() => {
             if (globalSym !== localSym) return
-            this.additionalPathDisplay.css({translateY: -7})
+            this.additionalPathDisplay.css({translateY: -5})
           })
         }
       })

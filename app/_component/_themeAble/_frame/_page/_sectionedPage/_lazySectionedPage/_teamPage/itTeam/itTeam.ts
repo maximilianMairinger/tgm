@@ -43,7 +43,7 @@ export default declareComponent("it-team", class ItTeam extends TeamPage {
                     leitungImageTextblob.email("avhit@tgm.ac.at");
                     leitungImageTextblob.tel("+43 (0)1 33 126 / 290");
                     leitungImageTextblob.image('avKoppensteiner');
-                    leitungImageTextblob.stellvertreter([{name:"Christoph Brein", email:"cbrein@tgm.ac.at"}])
+                    leitungImageTextblob.stellvertreter([{name:"DI. Mag. Christoph Brein", email:"cbrein@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_text/imageTextblob/imageTextblob")

@@ -22,13 +22,6 @@ export default class ElektrotechnikTriangleNews extends TriangleNews {
       ]
     })
   }
-  
-  stl() {
-    return super.stl() + require("./elektrotechnikTriangleNews.css").toString()
-  }
-  pug() {
-    return super.pug() + require("./elektrotechnikTriangleNews.pug").default
-  }
 };
 
-declareComponent("et-triangle-news-section", ElektrotechnikTriangleNews)
+declareComponent("et-news-section", ElektrotechnikTriangleNews)

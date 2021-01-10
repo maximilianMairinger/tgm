@@ -42,4 +42,4 @@ export default class ItTriangleNews extends TriangleNews {
   }
 };
 
-declareComponent("it-triangle-news-section", ItTriangleNews)
+declareComponent("it-news-section", ItTriangleNews)

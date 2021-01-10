@@ -19,13 +19,7 @@ export default class RaumfahrtTriangleNews extends TriangleNews {
       ]
     })
   }
-  
-  stl() {
-    return super.stl() + require("./raumfahrtTriangleNews.css").toString()
-  }
-  pug() {
-    return super.pug() + require("./raumfahrtTriangleNews.pug").default
-  }
+
 };
 
-declareComponent("rt-triangle-news-section", RaumfahrtTriangleNews)
+declareComponent("rt-news-section", RaumfahrtTriangleNews)

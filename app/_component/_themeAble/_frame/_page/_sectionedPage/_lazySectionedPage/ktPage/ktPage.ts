@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/elAusmachtSection/elAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
+import DarkNewsSection from "../../../../_pageSection/triangleNews/elNewsSection/elNewsSection"
 
 
 export default class KunststoffPage extends LazySectionedPage {
@@ -50,11 +50,11 @@ export default class KunststoffPage extends LazySectionedPage {
           new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSectionElektonik" */"../../../../_pageSection/ausmachtSection/ktAusmachtSection/ktAusmachtSection")
       },
-      // {
-      //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-      //     new _DarkNewsSection()
-      //   ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/biomedTriangleNews/biomedTriangleNews")
-      // },
+      {
+        key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
+          new _DarkNewsSection()
+        ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/ktNewsSection/ktNewsSection")
+      },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');

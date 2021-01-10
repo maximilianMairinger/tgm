@@ -13,6 +13,13 @@ import Icon from "../_icon/icon"
 import SlidyUnderline from "./../slidyUnderline/slidyUnderline"
 import keyIndex from "key-index"
 import "xtring"
+import MailIcon from "../_icon/mail/mail"
+import CalendarIcon from "../_icon/calendar/calendar"
+import GraduateIcon from "../_icon/graduate/graduate"
+import { Data } from "josm"
+import Button from "../../_themeAble/_button/button"
+
+
 
 
 const linkAnimationOffset = 170
@@ -24,6 +31,9 @@ const slidyLineStretchFactor = .7
 const slidyLineStretchOffset = slidyLineStretchFactor / 2
 const slidyLineStretchDuration = slidyLineStretchFactor * 1000
 
+
+
+const pathDisplayHeaderMinMargin = 70
 
 
 
@@ -42,17 +52,95 @@ export default class Header extends ThemeAble {
     return ls
   })
 
+
   private linksIndex = keyIndex((toggle: boolean) => keyIndex((i: number) => 
     new Link("", "", undefined, false, true, false)
   ))
   // private backLinkComponents: ElementList<ThemAble> = new ElementList()
 
+  private additionalPathDisplay = this.q("additional-path-display")
+
+  private atTheTop = new Data(true)
+
+  private pathDisplayElementsCount = new Data(0)
+  private pathDisplayEmpty = this.pathDisplayElementsCount.tunnel((c) => c === 0)
+  
+  private pathDisplayHeaderMargin: Data<number>
+  
+
+  
   constructor(public linksShownChangeCallback?: (linksShown: boolean, init: boolean, func: any) => void) { 
     super()
     this.linkContainerElem.apd(this.underlineElem)
+
+    this.atTheTop.get((top) => {
+      if (top) {
+        this.css("pointerEvents", "none")
+        this.background.removeClass(notTopClassName)
+      }
+      else {
+        this.css("pointerEvents", "all")
+        this.background.addClass(notTopClassName)
+      }
+    }, false)
     
-    window.on("resize", this.resizeHandler.bind(this))
+    
+
+
+    let elems = new ElementList(
+      ce("split-line"), 
+      new Button().apd(new CalendarIcon).link("https://stpl.tgm.ac.at"), 
+      new Button().apd(new MailIcon).link("https://owa.tgm.ac.at"), 
+      new Button().apd(new GraduateIcon).link("https://elearning.tgm.ac.at")
+    )
+    if (this.pathDisplayEmpty.get()) {
+      this.additionalPathDisplay.apd(...elems)
+      elems.show()
+    }
+    setTimeout(() => {
+      this.pathDisplayHeaderMargin = this.atTheTop.tunnel((e) => pathDisplayHeaderMinMargin + (e ? this.additionalPathDisplay.width() : 0))
+      window.on("resize", this.resizeHandler.bind(this))
+    })
+    
+
+
+
+    
+    delay(500).then(() => {
+      let globalSym: Symbol
+      this.pathDisplayEmpty.get((show) => {
+        let localSym = globalSym = Symbol()
+        if (show) {          
+          elems.show().anim({opacity: 1, translateX: .1}, 400, 70)
+        }
+        else {
+          new ElementList(...elems.reverse()).anim({translateX: 3, opacity: 0}, 40).then(() => {
+            if (globalSym !== localSym) return
+            elems.css({translateX: -3})
+          })
+        }
+      })
+    });
+
+    (() => {
+      let globalSym: Symbol
+      this.atTheTop.get((show) => {
+        let localSym = globalSym = Symbol()
+        if (show) {
+          this.additionalPathDisplay.anim({translateY: .1, scale: 1, opacity: 1}, 200)
+        }
+        else {
+          this.additionalPathDisplay.anim({translateY: 5, scale: .95, opacity: 0}, 200).then(() => {
+            if (globalSym !== localSym) return
+            this.additionalPathDisplay.css({translateY: -5})
+          })
+        }
+      })
+    })()
+    
   }
+
+
 
 
   theme(): Theme
@@ -91,15 +179,18 @@ export default class Header extends ThemeAble {
       let linksLeft: number = !this.currentLinkElems.empty ? this.currentLinkElems.first.getBoundingClientRect().left : q.width - 200
       let logo = this.pathDisplayElem.getBoundingClientRect()
 
-      let margin = 100 + (this.isLinkContainerCurrentlyHidden ? 80 : 0)
+      
+      let margin = this.pathDisplayHeaderMargin.get() + (this.isLinkContainerCurrentlyHidden ? 25 : 0)
+      console.log("margin", margin)
       if (linksLeft < logo.right + margin) {
         if (!this.isLinkContainerCurrentlyHidden) {
           this.isLinkContainerCurrentlyHidden = true
           let func: "css" | "anim" = this.initialResize ? "css" : "anim"
           this.linkContainerElem[func as any]({opacity: 0})
-          this.leftContent[func as any]({left: "8vw"})
+          this.leftContent[func as any]({marginLeft: "8vw"})
           if (this.linksShownChangeCallback) this.linksShownChangeCallback(false, this.initialResize, func)
           this.initialResize = false
+          this.elementBody.addClass("mobile")
         }
       }
       else {
@@ -107,9 +198,10 @@ export default class Header extends ThemeAble {
           this.isLinkContainerCurrentlyHidden = false
           let func: "css" | "anim" = this.initialResize ? "css" : "anim"
           this.linkContainerElem[func as any]({opacity: 1})
-          this.leftContent[func as any]({left: 100})
+          this.leftContent[func as any]({marginLeft: 100})
           if (this.linksShownChangeCallback) this.linksShownChangeCallback(true, this.initialResize, func)
           this.initialResize = false
+          this.elementBody.removeClass("mobile")
         }
       }
     }
@@ -117,21 +209,19 @@ export default class Header extends ThemeAble {
 
 
   public onTop() {
-    this.css("pointerEvents", "none")
-    this.background.removeClass(notTopClassName)
+    this.atTheTop.set(true)
   }
 
   public notTop() {
-    this.css("pointerEvents", "all")
-    this.background.addClass(notTopClassName)
+    this.atTheTop.set(false)
   }
 
 
 
   public updatePage(linkContents: string[], domainLevel: number) {
     return Promise.all([
-      this.updatePathDisplay(domainLevel),
-      this.updateLinks(linkContents, domainLevel)
+      this.updateLinks(linkContents, domainLevel),
+      this.updatePathDisplay(domainLevel)
     ])
   }
 
@@ -179,14 +269,22 @@ export default class Header extends ThemeAble {
     //@ts-ignore
     if (elems) elems.last.push = false
 
+    let fadeoutProms = []
     if (!fadeOutElems.empty) {
-      new ElementList(...fadeOutElems.reverse()).anim({translateX: 5, opacity: 0}, 250, 100)
+      const elems = new ElementList(...fadeOutElems.reverse())
+      fadeoutProms.add(elems.anim({translateX: 5, opacity: 0}, 250, 100).then(() => {
+        elems.hide()
+      }))
       await delay(250)
     }
+    let fadeoutProm = Promise.all(fadeoutProms)
+    fadeoutProm.then(() => {
+      this.resizeHandler({width: this.clientWidth})
+    })
 
-    if (!fadeInElems.empty) fadeInElems.css({translateX: -5}).anim({translateX: .1, opacity: 1}, 250, 100)
+    if (!fadeInElems.empty) fadeInElems.css({display: "block", translateX: -5}).anim({translateX: .1, opacity: 1}, 250, 100)
 
-
+    this.pathDisplayElementsCount.set(this.pathDisplayElementsCount.get() + fadeInElems.length - fadeOutElems.length)
 
     this.lastDomainIndex = [...curDomainIndex]
 
@@ -285,7 +383,6 @@ export default class Header extends ThemeAble {
     
     animationWrapper.apd(...this.currentLinkElems)
     
-    this.resizeHandler({width: this.clientWidth})
     if (this.currentLinkElems.empty) {
       this.inFadeInAnim = false
       res()

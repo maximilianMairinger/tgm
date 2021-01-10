@@ -37,29 +37,29 @@ export default declareComponent("kt-projekte", class KtProjekte extends LazySect
           let projectData = [
             {
               heading:"Biologisch abbaubare Kaffeekapseln",
-              note:"Anwendung von Biopolymeren für biologisch abbaubare Kaffeekapseln. In Kooperation mit Gabriel Chemie GmbH, Industriestraße 1, 2352 Gumpoldskirchen",
+              note:"Anwendung von Biopolymeren für biologisch abbaubare Kaffeekapseln. In Kooperation mit Gabriel Chemie GmbH, Industriestraße 1, 2352 Gumpoldskirchen.",
               team:[
                 "Samantha Onderka",
                 "Katharina Schleinzer"
               ],
-              thumbnail:"/res/img/nespresso.jpg",
+              thumbnail:"nespresso",
               title: "Projektziel",
               content: 
-`Zeil des Projekts war ist die anwendung eines Biopolymers für die Herstellung von Kaffeekapseln, 
+`Zeil des Projekts war ist die Anwendung eines Biopolymers für die Herstellung von Kaffeekapseln, 
 sowie die Beurteilung der Kompostierfähigkeit. Dabei wurde ein Biokunststoff entwickelt, welcher 
-als alternative zu herkömmlichen Aluminiumverpackungen verwendet werden kann. Diese wurden sowohl
+als Alternative zu herkömmlichen Aluminiumverpackungen verwendet werden kann. Diese wurden sowohl
 auf ihre mechanische Stabilität als auch auf ihre Kompostierbarkeit geprüft.
-<img src="/res/img/kapselnKompostierbarkeit.png" class="illustration"></img>
+<c-image src="kapselnKompostierbarkeit" class="illustration"></c-image>
 `
             },
             {
               heading:"Nachhaltigkeit von Post-Consumer-Rezyklaten",
-              note:"Bewertung der Nachhaltigkeit von Post-Consumer-Rezyklaten. In Kooperation mit Gabriel-Chemie Gesellschaft m.b.H., Industriestraße 1, 2352 Gumpoldskirchen",
+              note:"Bewertung der Nachhaltigkeit von Post-Consumer-Rezyklaten. In Kooperation mit Gabriel-Chemie Gesellschaft m.b.H., Industriestraße 1, 2352 Gumpoldskirchen.",
               team:[
                 "Semanur Demir",
                 "Armin Marhosevic"
               ],
-              thumbnail:"/res/img/PCR_Mahlgut.png",
+              thumbnail:"PCR_Mahlgut",
               title: "Projektziel",
               content: 
 `Das EU-Kreislaufwirtschaftspaket fordert bis 2025 eine Recyclingquote von 50 % von Kunststoffverpackungen. Ziele sind die Umwelt zu schützen und Ressourcen zu schonen. In diesem Projekt sollte die technische Eignung von Post-Consumer-Rezyklaten (PCR) und deren Wirtschaftlichkeit untersucht werden.

@@ -17,7 +17,7 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "Fachtheoretische",
                 selection: [
                     {
                         icon: "energysysteme", 
@@ -57,16 +57,16 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
                     heading: "Lernbüro",
                     note: "Unterrichtssystem",
                     thumbnail: "/res/img/student_2.jpg",
-                    href: baseLink + "lernbüro-elektrotechnik",
-                    contentTitle: "Lernen im Aufbruch",
+                    href: baseLink + "lernbüro-het",
+                    contenttitle: "Lernen im Aufbruch",
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
                 },
                 {
-                    heading: "Werkstatt",
-                    note: "PRAXISUNTERRICHT",
+                    heading: "Werkstätte",
+                    note: "Fachpraktischer Unterricht",
                     thumbnail: "/res/img/werkstaetteHET.png",
                     href: baseLink + "werkstätte-elektrotechnik",
-                    contentTitle: "Praxisbasierte Erfahrungen",
+                    contenttitle: "Praxisbasierte Erfahrungen",
                     content: "In unseren Werkstätten erlernen SchülerInnen den Umgang mit technischen Gerätschaften und setzen das gelernte Theoriewissen selbst um."
                 }
             ],

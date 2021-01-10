@@ -1,16 +1,10 @@
 :host {
     display: block;
     max-width: min(1000px, 100%);
-    min-width: 950px;
+    min-width: 850px;
     width: auto;
     user-select: auto;
     box-sizing: border-box;
-}
-
-@media only screen and (max-width: 1450px) {
-    :host {
-        min-width: unset;
-    }
 }
 
 selection-card{
@@ -127,10 +121,6 @@ icon-container *{
     display: block;
     height: 100%;
     width: 100%;
-    /*
-    background: url("../../../../res/img/windmil.svg") center center no-repeat;
-    background-size: 100% 100%;
-     */
 }
 
 text-container{
@@ -201,10 +191,9 @@ overview-box{
     display: flex;
     flex-direction: column;
     align-self: flex-end;
-    height: auto;
+    height: calc(100% - 40px);
     width: 100%;
-    min-height: calc(100% - 100px);
-    padding: 30px;
+    padding: 20px;
     overflow: hidden;
     backface-visibility: hidden;
     background: var(--primary-background-color);
@@ -212,18 +201,15 @@ overview-box{
     border-radius: 8px;
 }
 
-#topContent {
-    margin-bottom: 130px;
-    min-height: 133px;
+overview-content{
     display: block;
-    position: relative;
+    flex-grow: 1;
 }
 
 overview-content-box{
     display: flex;
     flex-direction: row;
     margin-top: 20px;
-    flex-grow: 1;
 }
 
 overview-content-box c-link{
@@ -254,13 +240,6 @@ overview-img-box c-pruefung-icon{
     margin-right: 35px;
 }
 
-overview-text-box {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    left: 180px;
-}
-
 overview-text-box *{
     display: block;
 }
@@ -271,27 +250,20 @@ overview-title{
     font-size: 20px;
 }
 
-@media only screen and (max-width: 1450px) {
+@media only screen and (max-width: 1075px) {
 
-    #topContent {
-        margin-bottom: 10px;
-        min-height: initial;
-        display: initial;
-        position: initial;
-    }
-
-    overview-text-box {
-        position: relative;
-        bottom: initial;
-        right: initial;
-        left: initial;
-        width: 100%;
+    :host {
+        min-width: unset;
     }
 
     selection-card{
         flex-direction: row-reverse;
         padding: 0 40px;
         max-width: 100%;
+    }
+
+    overview-container{
+        margin: 20px 0 35px 0;
     }
 
     content-box{
@@ -325,6 +297,9 @@ overview-title{
         margin-top: 0;
         padding: 0;
         align-self: stretch;
+    }
+    selection-background{
+        border-radius: 5px;
     }
 
 }

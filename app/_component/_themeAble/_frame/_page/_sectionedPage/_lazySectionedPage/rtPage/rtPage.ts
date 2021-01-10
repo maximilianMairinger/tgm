@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import DarkNewsSection from "../../../../_pageSection/triangleNews/raumfahrtTriangleNews/raumfahrtTriangleNews"
+import NewsSection from "../../../../_pageSection/triangleNews/rtNewsSection/rtNewsSection"
 
 
 export default declareComponent("rt-page", class RtPage extends LazySectionedPage {
@@ -48,9 +48,9 @@ export default declareComponent("rt-page", class RtPage extends LazySectionedPag
         ), val: () => import(/* webpackChunkName: "ausmachtSectionRaumfahrt" */"../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection")
       },
       {
-        key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-          new _DarkNewsSection(true)
-        ), val: () => import(/* webpackChunkName: "raumfahrtNews" */"../../../../_pageSection/triangleNews/raumfahrtTriangleNews/raumfahrtTriangleNews")
+        key: new Import("news", 1, (_NewsSection: typeof NewsSection) => 
+          new _NewsSection(true)
+        ), val: () => import(/* webpackChunkName: "raumfahrtNews" */"../../../../_pageSection/triangleNews/rtNewsSection/rtNewsSection")
       },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
@@ -64,7 +64,7 @@ export default declareComponent("rt-page", class RtPage extends LazySectionedPag
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 100. Stock");
           imageTextBlob.email("avhrt@tgm.ac.at");
           imageTextBlob.tel("+43 1 33126 291");
-          imageTextBlob.image('url("/res/img/computersRaumfahrt.jpg")');
+          imageTextBlob.image('computersRaumfahrt');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

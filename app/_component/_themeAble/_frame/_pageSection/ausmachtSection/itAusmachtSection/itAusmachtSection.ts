@@ -17,7 +17,7 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "fachtheoretische",
+                note: "Fachtheoretische",
                 selection: [
                     {
                         icon: "softwareentwicklung", 
@@ -50,17 +50,17 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                 {
                     heading: "Lernbüro",
                     note: "Unterrichtssystem",
-                    thumbnail: "/res/img/student_2.jpg",
-                    href: baseLink + "lernbüro-it",
-                    contentTitle: "Lernen im Aufbruch",
+                    thumbnail: "student_2",
+                    href: baseLink + "lernburo-hit",
+                    contenttitle: "Lernen im Aufbruch",
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
                 },
                 {
-                    heading: "Werkstatt",
-                    note: "fachpraxis",
-                    thumbnail: "/res/img/werkstaetteHET.png",
-                    href: baseLink + "werkstätte-it",
-                    contentTitle: "Praxisbasierte Erfahrungen",
+                    heading: "Werkstätte",
+                    note: "Fachpraktischer Unterricht",
+                    thumbnail: "werkstaetteHET",
+                    href: baseLink + "werkstatte-hit",
+                    contenttitle: "Praxisbasierte Erfahrungen",
                     content: "In unseren Werkstätten erlernen SchülerInnen den Umgang mit technischen Gerätschaften und setzen das gelernte Theoriewissen selbst um."
                 }
             ],

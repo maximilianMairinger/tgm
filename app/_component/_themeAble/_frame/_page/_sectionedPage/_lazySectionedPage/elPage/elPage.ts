@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/etAusmachtSection/etAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
+import DarkNewsSection from "../../../../_pageSection/triangleNews/elNewsSection/elNewsSection"
 
 
 
@@ -24,7 +24,7 @@ export default class ElektronikPage extends LazySectionedPage {
           e.heading("Elektronik & Technische Informatik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
-          e.videolink("https://www.youtube.com/watch?v=FYY0FSMk70s")
+          e.videolink("https://www.youtube.com/watch?v=FYY0FSMk70s", "Einblick in die HEL")
           e.background("elektronikLanding.png")
           
           return new WrapperSection(e, "dark") as any
@@ -52,7 +52,7 @@ export default class ElektronikPage extends LazySectionedPage {
       // {
       //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
       //     new _DarkNewsSection()
-      //   ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/biomedTriangleNews/biomedTriangleNews")
+      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/elNewsSection/elNewsSection")
       // },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
@@ -66,7 +66,7 @@ export default class ElektronikPage extends LazySectionedPage {
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 12. Stock");
           imageTextBlob.email("office-hel@tgm.ac.at");
           imageTextBlob.tel("01 33 126 320");
-          imageTextBlob.image('url("/res/img/biomedKontakt.png")');
+          imageTextBlob.image('elContact');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

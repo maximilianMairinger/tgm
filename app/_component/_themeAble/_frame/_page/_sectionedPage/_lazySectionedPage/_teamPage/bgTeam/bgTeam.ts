@@ -40,10 +40,10 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
                     leitungImageTextblob.subheading("Bernhard");
                     leitungImageTextblob.content("Ich stehe Ihnen gerne am Donnerstag von 9:50 bis 10:40 in meiner Sprechstunde zu Verfügung.")
                     leitungImageTextblob.address("Wexstraße 19-21, 1200 Wien / 12. Stock / H1226");
-                    leitungImageTextblob.email("bernhard.wess@tgm.ac.at");
+                    leitungImageTextblob.email("avhbg@tgm.ac.at");
                     leitungImageTextblob.tel("01 33 126 320");
-                    leitungImageTextblob.image('url("/res/img/avwess.png")');
-                    leitungImageTextblob.stellvertreter([{"name":"Josef Kollmitzer", "email":"jkollmitzer@tgm.ac.at"}])
+                    leitungImageTextblob.image('avwess');
+                    leitungImageTextblob.stellvertreter([{"name":"DI Dr. Josef Kollmitzer", "email":"jkollmitzer@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_text/imageTextblob/imageTextblob")
@@ -59,7 +59,7 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
                     schuelerImageTextblob.content("Ich darf euch dieses Jahr als Abteilungssprecher vertreten, bei Anliegen bitte einfach melden!")
                     schuelerImageTextblob.email("fnadler@student.tgm.ac.at");
                     schuelerImageTextblob.tel("+43‭ 660 6210505‬");
-                    schuelerImageTextblob.image('url("/res/img/team_2.jpg")');
+                    schuelerImageTextblob.image('team_2.jpg');
                     schuelerImageTextblob.stellvertreter([{"name":"Kristina Kutejova", "email":"kkutejova@student.tgm.ac.at"}])
                     return new WrapperSection(schuelerImageTextblob);
                 }

@@ -12,7 +12,7 @@ svg {
   height: inherit;
 }
 
-:host *:not(tspan) {
+:host svg *:not(tspan) {
   transition: inherit
 }
 

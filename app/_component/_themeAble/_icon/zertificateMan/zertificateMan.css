@@ -10,7 +10,7 @@ zertificate-man svg {
     width: auto;
     max-width: 100%;
     height: auto;
-    background: url("../../../../res/img/anmelden-background.svg") 0 0 no-repeat;
+    background: url("../../../../res/svg/anmelden-background.svg") 0 0 no-repeat;
     background-size: cover;
     backface-visibility: hidden;
     background-origin: content-box;

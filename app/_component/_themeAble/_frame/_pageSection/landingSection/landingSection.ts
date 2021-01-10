@@ -13,12 +13,13 @@ import delay from "delay";
 import lang from "../../../../../lib/lang";
 import CardCarousel from "../../../../cardCarousel/cardCarousel";
 import "./../../../../image/image"
+import "./../../../_button/button"
 
 
 export default declareComponent("landing-section", class Landing extends PageSection {
   private cardWrapper = this.q("card-wrapper")
   
-  private mainHeaderElem = this.q("text-container > c-textblob")
+  private mainHeaderElem = this.q("text-container > textblob-animation-wrapper")
   private tagesschuleHeaderElem = this.q("tagesschule-container > c-textblob")
   constructor() {
     super()
@@ -31,14 +32,14 @@ export default declareComponent("landing-section", class Landing extends PageSec
       new IconCard(new ElektrotechnikIcon, abt.Elektrotechnik, lang.AbteilungsShorts.Elektrotechnik, "tagesschule/elektrotechnik"),
       new IconCard(new ItIcon, abt.Informationstechnologie, lang.AbteilungsShorts.Informationstechnologie, "tagesschule/informationstechnologie"),
       new IconCard(new KunststofftechnikIcon, abt.Kunststofftechnik, lang.AbteilungsShorts.Kunststofftechnik, "tagesschule/kunststofftechnik"),
-      new IconCard(new MaschinenbauIcon, abt.Maschinenbau, lang.AbteilungsShorts.Maschinenbau, "tagesschule/todo"),
+      new IconCard(new MaschinenbauIcon, abt.Maschinenbau, lang.AbteilungsShorts.Maschinenbau, "tagesschule/maschinenbau  "),
       new IconCard(new WirtschaftsingenieureIcon, abt.Wirtschaftsingenieure, lang.AbteilungsShorts.Wirtschaftsingenieure, "tagesschule/wirtschaftsingenieure")
     ]
 
 
     
 
-    this.cardWrapper.apd(new CardCarousel(...cards))
+    this.cardWrapper.apd(new CardCarousel(cards))
 
     
 

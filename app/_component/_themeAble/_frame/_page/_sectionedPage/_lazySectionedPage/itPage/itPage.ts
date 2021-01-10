@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/itAusmachtSection/itAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import DarkNewsSection from "../../../../_pageSection/triangleNews/itNewsSection/itNewsSection"
+import NewsSection from "../../../../_pageSection/triangleNews/itNewsSection/itNewsSection"
 
 
 export default declareComponent("it-page", class ItPage extends LazySectionedPage {
@@ -52,7 +52,7 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
       // {
       //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
       //     new _DarkNewsSection(baseLink + "highlights/")
-      //   ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/itNewsSection/itNewsSection")
+      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/itNewsSection/itNewsSection")
       // },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {

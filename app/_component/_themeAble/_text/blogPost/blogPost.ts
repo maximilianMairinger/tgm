@@ -55,8 +55,14 @@ export default class BlogPost extends Text {
       html = html
           .replaceAll("<a href", "<c-link link")
           .replaceAll("<\/a>", "<\/c-link>");
-      this.q("blog-html").innerHTML = html;
-
+      let parser = new DOMParser();
+      let htmlDOM = parser.parseFromString(html, 'text/html');
+      htmlDOM.querySelectorAll(".kg-gallery-image").forEach((img) => {
+        let ratio = parseInt(img.childs().getAttribute("width"), 10) / parseInt(img.childs().getAttribute("height"), 10);
+        img.css({"flex": ratio + "1 0"});
+      });
+      console.log(htmlDOM)
+      this.q("blog-html").innerHTML = (htmlDOM.firstChild as HTMLElement).innerHTML;
     }
     else return this.q("blog-html").innerHTML;
   }

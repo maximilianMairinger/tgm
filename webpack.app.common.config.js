@@ -15,8 +15,8 @@ module.exports = (env) => {
         },
         plugins: [
             new webpack.EnvironmentPlugin({
-                ghostHost: env.ghostHost,
-                ghostApiKey: env.ghostApiKey
+                ghostHost: null,
+                ghostApiKey: "062f128c326e0312972d41f705"
             })
         ],
         resolve: {

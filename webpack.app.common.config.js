@@ -4,7 +4,7 @@ const path = require("path")
 
 
 
-module.exports = () => {
+module.exports = (env) => {
     return {
         entry: './app/app.ts',
         output: {
@@ -13,11 +13,11 @@ module.exports = () => {
             path: path.resolve(path.dirname(''), "public"),
             publicPath: "/",
         },
-        // plugins: [
-        //     new webpack.EnvironmentPlugin({
-        //         env: "prod" // "prod" | "uat" | "dev"
-        //     })
-        // ],
+        plugins: [
+            new webpack.EnvironmentPlugin({
+                ghostApiKey: env.ghostApiKey
+            })
+        ],
         resolve: {
             extensions: ['.ts', '.js']
         },

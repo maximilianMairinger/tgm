@@ -3,7 +3,7 @@ echo 'Starting git stuff...'
 git checkout master
 git pull
 echo 'Building...'
-npm run build
+ghostHost=https://www.tgm.ac.at ghostApiKey=847d73bd7838dfa199ed2c16cb npm run build
 echo 'Zipping Build...'
 cd public
 zip -r public.zip *

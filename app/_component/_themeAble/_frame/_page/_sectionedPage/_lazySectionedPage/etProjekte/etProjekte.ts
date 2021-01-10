@@ -38,7 +38,7 @@ export default declareComponent("et-projekte", class EtProjekte extends LazySect
             let projectData:Project[] = [{
                 heading:"Power Kite",
                 note:"Stromerzeugung mittels kitessurfen",
-                // logo:"/res/img/projektLogoBeispiel3.png",
+                // logo:"projektLogoBeispiel3.png",
                 team: [
                   "Lukas Buza",
                   "Lukas Gassner",
@@ -64,7 +64,7 @@ export default declareComponent("et-projekte", class EtProjekte extends LazySect
                     "Christian Wiedenhofer",
                     "Michael Beierl"
                   ],
-                  thumbnail:"/res/img/schneerad.png",
+                  thumbnail:"schneerad.png",
                   title: "Diplomarbeit der 5AHET (2016/17)",
                   content:
                       "Das Primärziel dieses Projekts war es ein elektrisch betriebenes Fahrrad für den Schneebetrieb zu konstruieren und zu realisieren. Das Elektrofahrrad sollte dabei größere Steigungen bewältigen können, eine gewisse Geschwindigkeit erreichen und mit möglichst geringen Verlusten im Schnee fahren können. Das Antriebskonzept sollte dem eines „Pedelec-Mobils“ ähneln. Dabei fährt man, im Gegensatz zu einem Moped nicht rein elektrisch, sondern tritt mit seinen Füßen im mit. Das war eine wichtige Rahmenbedingung, die man einhalten musste."

@@ -45,6 +45,8 @@ deployUAT:
   script:
     - ssh 192.168.0.31 -l root 'rm -rf /var/www/html/*'
     - scp -r public/* root@192.168.0.31:/var/www/html/
+    - chmod +x deploy_images.sh
+    - bash deploy_images.sh
   only:
     - master
   variables:

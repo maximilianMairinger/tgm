@@ -15,8 +15,8 @@ export default declareComponent("ausmacht-section-rt", class extends AusmachtSec
     //         '{"icon":"rover", "title":"Raumfahrtrobotik", "content":"Weltraumfähige Roboter mit autonomen Anwendungen", "link":"/"},' +
     //         '{"icon":"space-aids", "title":"Raumfahrtbiologie", "content":"Biologische Untersuchungen in der Schwerelosigkeit", "link":"/"}' +
     //         ']')
-    //     c-unterricht-systeme-card(heading="Labor" headingBackground="#98AAB6" note="Unterrichtssystem"  thumbnail='/res/img/unterrichtSysteme_1.jpg' href="/" contenttitle="Im Aufbruch" content='Das Labor ermöglicht den SchülerInnen, ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit.')
-    //     c-unterricht-systeme-card(heading="Werkstätte" headingBackground="#C1DBCB" note="Unsere"  thumbnail='/res/img/werk.jpg' href="/" contenttitle="Werkstätte" content='Unser Unterricht in der Werkstätte ermöglicht es den SchülerInnen auch im fachpraktischen Bereich Erfahrung zu sammeln.')
+    //     c-unterricht-systeme-card(heading="Labor" headingBackground="#98AAB6" note="Unterrichtssystem"  thumbnail='unterrichtSysteme_1.jpg' href="/" contenttitle="Im Aufbruch" content='Das Labor ermöglicht den SchülerInnen, ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit.')
+    //     c-unterricht-systeme-card(heading="Werkstätte" headingBackground="#C1DBCB" note="Unsere"  thumbnail='werk.jpg' href="/" contenttitle="Werkstätte" content='Unser Unterricht in der Werkstätte ermöglicht es den SchülerInnen auch im fachpraktischen Bereich Erfahrung zu sammeln.')
 
 
     constructor(baseLink: string) {
@@ -66,7 +66,7 @@ export default declareComponent("ausmacht-section-rt", class extends AusmachtSec
                 {
                     heading: "Lernbüro",
                     note: "Unterrichtssystem",
-                    thumbnail: "/res/img/student_2.jpg",
+                    thumbnail: "student_2.jpg",
                     href: baseLink + "lernbüro-elektrotechnik",
                     contenttitle: "Lernen im Aufbruch",
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
@@ -74,7 +74,7 @@ export default declareComponent("ausmacht-section-rt", class extends AusmachtSec
                 {
                     heading: "Werkstatt",
                     note: "PRAXISUNTERRICHT",
-                    thumbnail: "/res/img/werkstaetteHET.png",
+                    thumbnail: "werkstaetteHET.png",
                     href: baseLink + "werkstätte-elektrotechnik",
                     contenttitle: "Praxisbasierte Erfahrungen",
                     content: "In unseren Werkstätten erlernen SchülerInnen den Umgang mit technischen Gerätschaften und setzen das gelernte Theoriewissen selbst um."

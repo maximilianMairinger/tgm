@@ -16,8 +16,8 @@ build:
     - dev
     - master
   variables:
-    - ghostHost: "https://dev.tgmrebrand.xyz"
-    - ghostApiKey: "062f128c326e0312972d41f705"
+    ghostHost: "https://dev.tgmrebrand.xyz"
+    ghostApiKey: "062f128c326e0312972d41f705"
 deploy:
   stage: deploy
   before_script:
@@ -32,8 +32,8 @@ deploy:
   only:
     - dev
   variables:
-    - ghostHost: "https://dev.tgmrebrand.xyz"
-    - ghostApiKey: "062f128c326e0312972d41f705"
+    ghostHost: "https://dev.tgmrebrand.xyz"
+    ghostApiKey: "062f128c326e0312972d41f705"
 deployUAT:
   stage: deployUAT
   before_script:
@@ -48,5 +48,5 @@ deployUAT:
   only:
     - master
   variables:
-    - ghostHost: "https://uat.tgmrebrand.xyz"
-    - ghostApiKey: "1169a059ff62b6cd9997764a0d"
+    ghostHost: "https://uat.tgmrebrand.xyz"
+    ghostApiKey: "1169a059ff62b6cd9997764a0d"

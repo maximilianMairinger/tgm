@@ -7,6 +7,7 @@ import "../../../_themeAble/_icon/zertificateMan/zertificateMan"
 import FastAverageColor from 'fast-average-color';
 import Image from "../../../image/image"
 import "../../../image/image"
+import local from "../../../../lib/formatTime";
 
 
 export default abstract class InfoCard extends Card {
@@ -43,10 +44,10 @@ export default abstract class InfoCard extends Card {
     }
 
     note():string
-    note(note:string):void
-    note(note?:string){
-        if(note !== undefined)
-            this.q("note-text").text(note)
+    note(note: string | Date):void
+    note(note?: string | Date){
+        if (note !== undefined)
+            this.q("note-text").text(local.formatDate(note))
         else return this.q("note-text").text()
     }
 

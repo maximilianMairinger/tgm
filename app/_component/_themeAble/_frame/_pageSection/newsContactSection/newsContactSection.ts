@@ -5,7 +5,7 @@ import "../../../../_themeAble/_card/anmeldenCard/anmeldenCard"
 import { ElementList } from "extended-dom";
 import delay from "delay";
 import ImageTextBlob from "../../../../_themeAble/_text/imageTextblob/imageTextblob"
-import { Data } from "josm";
+import { Data, DataCollection } from "josm";
 import "../../../../_themeAble/link/link"
 import "../../../../_themeAble/_icon/_highlightAbleIcon/filledArrow/filledArrow"
 import HighlightAbleIcon from "../../../../_themeAble/_icon/_highlightAbleIcon/highlightAbleIcon";
@@ -28,7 +28,7 @@ const vienna = {
   }
 }
 
-
+const mobileScrollAnimationStart = scrollAnimationStart + 100
 
 
 export default class NewsContactSection extends PageSection {
@@ -89,16 +89,18 @@ export default class NewsContactSection extends PageSection {
 
     this.allFrame.insertBefore(this.newsTextBlobFadin, this.overlay) 
 
-
+    this.mapTextBlob.mobileSwitchAt(1000)
     this.mapTextBlob.heading("Kontakt")
     this.mapTextBlob.subheading("zum TGM")
     this.mapTextBlob.note("Direktion")
-    this.mapTextBlob.content("Außerhalb der Ferien ist die Direktion am Mo, Mi & Do von 7:30 bis 15:30; am Di von 7:30 bis 17:30; am Fr von 7:30 bis 14:30")
+    this.mapTextBlob.content("Außerhalb der Ferien ist die Direktion am Mo, Mi & Do von 7:30 bis 15:30; am Di von 7:30 bis 17:30; am Fr von 7:30 bis 14:30 erreichbar.")
     this.mapTextBlob.hsize({"max": 60, "min": 40})
     this.mapTextBlob.hmobile({"max": 55, "min": 35})
+    this.mapTextBlob.contentwidth(300)
     this.mapTextBlob.address("Wexstraße 19-23, 1200 Wien")
-    this.mapTextBlob.email("direktion@tgm.ac.at")
     this.mapTextBlob.tel("33126 0")
+    this.mapTextBlob.stellvertreterAlias("Emails");
+    this.mapTextBlob.stellvertreter([{name:"Info", email:"info@tgm.ac.at"}, {name:"Versuchsanstalt", email: "va@tgm.ac.at"}])
 
 
     this.allFrame.insertBefore(this.mapTextBlobFadin, this.overlay)
@@ -115,40 +117,93 @@ export default class NewsContactSection extends PageSection {
     this.mapSvgPaths[1].anim({d: vienna.path.b, translateY: vienna.offset.y, translateX: vienna.offset.x}, mapOptions, guide)
 
 
-
-    this.scrollPosData.scrollTrigger(scrollAnimationStart)
+    
+    this.scrollPosData.scrollTrigger(mobileScrollAnimationStart - 50)
       .on("forward", () => {
         return [
-          this.mobileOverlay.addClass("bot"),
           this.newsTextBlob.anim({opacity: 0, translateY: 10}).then(() => this.newsTextBlob.hide()),
           this.cardContainer.anim({opacity: 0, translateY: 10}).then(() => this.cardContainer.hide())
         ]
       })
       .on("backward", () => {
         return [
-          this.mobileOverlay.removeClass("bot"),
           this.newsTextBlob.show().anim({opacity: 1, translateY: .1}),
           this.cardContainer.css("display", "flex").anim({opacity: 1, translateY: .1})
         ]
       })
-
-      console.log("scrollAnimationStart - 250", scrollAnimationStart - 150)
-      this.scrollPosData.scrollTrigger(scrollAnimationStart - 150)
+    this.scrollPosData.scrollTrigger(mobileScrollAnimationStart)
       .on("forward", () => {
-        
-        this.cardContainerWrapper.anim({translateY: -140}, 600),
-        this.newsTextBlobFadin.anim({opacity: 0, translateY: -10})
-        
+        return [
+          this.mobileOverlay.addClass("bot")
+        ]
       })
       .on("backward", () => {
-        
-        this.cardContainerWrapper.anim({translateY: .1}, 600),
-        this.newsTextBlobFadin.anim({opacity: 1, translateY: .1})
-        
+        return [
+          this.mobileOverlay.removeClass("bot")
+        ]
       })
 
 
+    const bigmobileScroll = {
+      forward: () => {
+        this.stayInFrameElem.css({position: "relative"})
+        // this.cardContainerWrapper.anim({translateY: -140}, 600),
+        // this.newsTextBlobFadin.anim({opacity: 0, translateY: -10})
+      },
+      backward: () => {
+        this.stayInFrameElem.css({position: "sticky"})
+        // this.cardContainerWrapper.anim({translateY: .1}, 600)
+        // this.newsTextBlobFadin.anim({opacity: 1, translateY: .1})
+      }
+    }
+    const bigmobileScroll2 = {
+      forward: () => {
+        this.stayInFrameElem.css({position: "sticky"})
+        // this.cardContainerWrapper.anim({translateY: -140}, 600),
+        // this.newsTextBlobFadin.anim({opacity: 0, translateY: -10})
+      },
+      backward: () => {
+        this.stayInFrameElem.css({position: "relative"})
+        // this.cardContainerWrapper.anim({translateY: .1}, 600)
+        // this.newsTextBlobFadin.anim({opacity: 1, translateY: .1})
+      }
+    }
+  
 
+
+    let bigmobileScrollTrigger = this.scrollPosData.scrollTrigger(0)
+    let bigmobileScrollTrigger2 = this.scrollPosData.scrollTrigger(mobileScrollAnimationStart)
+
+    let doneWithAnim = new Data(false)
+    doneWithAnim.get(console.log)
+    let bigMobile = new Data(undefined)
+    new DataCollection(bigMobile, doneWithAnim).get((bigmobile, done) => {
+      const funcName = bigmobile ? "on" : "off"
+      const func = bigmobileScrollTrigger[funcName].bind(bigmobileScrollTrigger)
+      const func2 = bigmobileScrollTrigger2[funcName].bind(bigmobileScrollTrigger2)
+      for (let dir in bigmobileScroll) {
+        func(dir as any, bigmobileScroll[dir])
+        func2(dir as any, bigmobileScroll2[dir])
+      }
+      if (!done) {
+        if (!bigmobile) {
+          this.stayInFrameElem.css({position: "sticky", top: 0})
+        }
+        else {
+          if (this.scrollPosData.get() > 0 && this.scrollPosData.get() < mobileScrollAnimationStart) {
+            this.stayInFrameElem.css({position: "relative"})
+          }
+          else {
+            this.stayInFrameElem.css({position: "sticky", top: 0})
+          }
+        }
+      }
+      else {
+        this.stayInFrameElem.css({position: "relative", top: scrollAnimationEndWithMargin})
+      }
+    }, false)
+    
+    
     this.scrollPosData.scrollTrigger(pointerFadinPos)
       .on("forward", () => {
         return [
@@ -163,13 +218,13 @@ export default class NewsContactSection extends PageSection {
         ]
       })
 
-
+    
     this.scrollPosData.scrollTrigger(scrollAnimationEndWithMargin)
       .on("forward", () => {
-        this.stayInFrameElem.css({position: "relative", top: scrollAnimationEndWithMargin})
+        doneWithAnim.set(true)
       })
       .on("backward", () => {
-        this.stayInFrameElem.css({position: "sticky", top: 0})
+        doneWithAnim.set(false)
       }
     )
 
@@ -236,10 +291,14 @@ export default class NewsContactSection extends PageSection {
 
     this.mapPointer.css({translateX: posUnscaled.x, translateY: posUnscaled.y})
 
+
+
+    
+
     let mobile: boolean
     let midDesk: boolean
     let smallDesk: boolean
-    let bigMobile: boolean
+    
     let inMapPointerAnim = false
     window.on("resize", async (q) => {
       // debugger
@@ -249,6 +308,7 @@ export default class NewsContactSection extends PageSection {
 
         if (!midDesk) {
           midDesk = true
+          console.log("middesk")
           this.mapPointerCenter.anim({translateX: -150})
           this.allSvg.anim({translateX: -150})
         }
@@ -259,6 +319,7 @@ export default class NewsContactSection extends PageSection {
 
         if (!smallDesk) {
           smallDesk = true
+          console.log("smalldesk")
           this.mapPointerCenter.anim({translateX: -240})
           this.allSvg.anim({translateX: -240})
         }
@@ -271,8 +332,8 @@ export default class NewsContactSection extends PageSection {
       if (width1200) {
 
 
-        if (!bigMobile) {
-          bigMobile = true
+        if (!bigMobile.get()) {
+          bigMobile.set(true)
 
           this.allSvg2.anim({translateX: -240})
           this.mapPointerCenter.anim({translateX: "17vw", marginLeft: -240})
@@ -280,9 +341,9 @@ export default class NewsContactSection extends PageSection {
 
           this.mapTextBlobWrapper.anim({width: "100%", right: "0", left: "0"})
           // must be seperated, because this animation will maybe be cancelled by mobile. We do need the rest to fire however
-          this.mapTextBlobWrapper.anim({translateY: 500})
+          this.mapTextBlobWrapper.anim({translateY: 600})
           // debugger
-          this.mapTextBlob.anim({marginLeft: .1})
+          this.mapTextBlob.anim({marginLeft: "11vw"})
         }
       }
       
@@ -320,7 +381,8 @@ export default class NewsContactSection extends PageSection {
           this.mapElem.anim({scale, translateX: transStr, translateY: transStr})
           this.allSvg2.anim({translateX: .1})
           this.mapTextBlobWrapper.anim({translateY: "45vw"})
-          this.mapTextBlob.anim({translateY: 250})
+          this.mapTextBlob.anim({translateY: 350, marginLeft: 0})
+
         }
         else {
           if (!inMapPointerAnim) {
@@ -349,7 +411,7 @@ export default class NewsContactSection extends PageSection {
             this.allSvg2.anim({translateX: -240}),
             this.allSvg.anim({translateX: "17vw"}),
             this.mapTextBlobWrapper.anim({translateY: 500}),
-            this.mapTextBlob.anim({translateY: .1}),
+            this.mapTextBlob.anim({translateY: .1, marginLeft: "11vw"}),
             this.mapPointerCenter.anim({left: 257, width: 623.41, height: 478.66, translateX: "17vw", marginLeft: -240})
           )
           waaaait = Promise.all(proms)
@@ -361,8 +423,8 @@ export default class NewsContactSection extends PageSection {
 
 
       if (!width1200) {
-        if (bigMobile) {
-          bigMobile = false
+        if (bigMobile.get()) {
+          bigMobile.set(false)
 
           const go = () => {
             this.allSvg2.anim({translateX: .1})

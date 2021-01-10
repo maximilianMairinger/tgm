@@ -56,15 +56,15 @@ export default declareComponent("ausmacht-section-bg", class extends AusmachtSec
                 {
                     heading: "Zellkulturlabor",
                     note: "highlight",
-                    thumbnail: "biomedPrototype",
+                    thumbnail: "biomedLabor",
                     href: baseLink + "zellkultur",
                     contenttitle: "Zellkulturlabortechnik",
                     content: "Du lernst hier an lebenden Zellen hygienisches Arbeiten mit sterilen Werkbänken und Inkubatoren. Damit bist du bestens gerüstet für die Zukunft der Biomedizinischen Technik."
                 },
                 {
                     heading: "Prototypenbau",
-                    note: "fachpraktisch",
-                    thumbnail: "biomedLabor",
+                    note: "Fachpraktischer Unterricht",
+                    thumbnail: "biomedPrototype",
                     href: baseLink + "prototypenbau",
                     contenttitle: "Prototypenbau",
                     content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."

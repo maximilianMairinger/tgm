@@ -24,6 +24,10 @@ export default class ImageTextblob extends Text {
     this.alignment(aligment)
   }
 
+  contentwidth(to: number | null) {
+    this.textBlob.contentwidth(to)
+  }
+
   alignment(): Alignment
   alignment(alignment: Alignment): this
   alignment(alignment?: Alignment) {
@@ -110,6 +114,12 @@ export default class ImageTextblob extends Text {
     return this.info("Tel", tel)
   }
 
+   stellvertreterAlias(stellverterterAlias:string){
+    this.stellvertreterAliasName = stellverterterAlias;
+  }
+
+
+  private stellvertreterAliasName = "Stellvertreter"
   private _stellverterter: Stellvertreter
   stellvertreter(): Stellvertreter
   stellvertreter(stellvertreter: JSON | Stellvertreter): void
@@ -118,7 +128,7 @@ export default class ImageTextblob extends Text {
     if (stellvertreter) {
       this._stellverterter = this.parseJSONProp(stellvertreter);
 
-      this.infoGrid.append(ce("stellvertreter-text").addClass("heading").text("Stellverteter"));
+      this.infoGrid.append(ce("stellvertreter-text").addClass("heading").text(this.stellvertreterAliasName));
       for (let i = 0; i < this._stellverterter.length; i++) {
         let stellvertreterData = this._stellverterter[i];
         this.infoGrid.append(ce("info-text").text(stellvertreterData.name));

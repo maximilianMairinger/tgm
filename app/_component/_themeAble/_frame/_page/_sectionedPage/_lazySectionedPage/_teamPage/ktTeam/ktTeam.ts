@@ -43,7 +43,7 @@ export default declareComponent("kt-team", class KtTeam extends TeamPage {
                     leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 10. Stock");
                     leitungImageTextblob.email("avhkt@tgm.ac.at");
                     leitungImageTextblob.tel("0 33 126 / 300");
-                    leitungImageTextblob.image('avreitinger');
+                    leitungImageTextblob.image('avReitinger2');
                     // leitungImageTextblob.stellvertreter([{"name":"Stefan Hertl", "email":"shertl@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }

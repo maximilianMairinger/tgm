@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import News from "../../../../_pageSection/triangleNews/triangleNews"
+import NewsSection from "../../../../_pageSection/triangleNews/wiNewsSection/wiNewsSection"
 
 
 export default class WIPage extends LazySectionedPage {
@@ -24,7 +24,7 @@ export default class WIPage extends LazySectionedPage {
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("stockMan.png")
-          e.videolink("https://www.youtube.com/watch?v=ZjlZZGAfH5k")
+          e.videolink("https://www.youtube.com/watch?v=ZjlZZGAfH5k", "Einblick in die HKT")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
@@ -49,22 +49,9 @@ export default class WIPage extends LazySectionedPage {
         ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/wiAusmachtSection/wiAusmachtSection")
       },
       {
-        key: new Import("news", 1, (_News: typeof News) => 
-          new _News({
-            text: {
-              note: "Termine und",
-              heading: "Aktuelles",
-              subheading: "aus der WI",
-              content: `Folge uns auf <c-link link="https://www.instagram.com/tgm_wirtschaftsingenieure">Instagram</c-link> und <c-link link="https://de-de.facebook.com/tgmhwi">Facebook</c-link>, so bist DU über unsere neuesten Aktivitäten immer up to date.`
-            },
-            cards: [
-              {heading: "Mittwoch", note: "20.01.2021", thumbnail: "gotoMeeting", href: baseLink + "news/virtueller-tag-der-offenen-ture-der-wirtschaftsingenieure", contenttitle: "TdoT - Virtuell", content: "Die Abteilung Wirtschaftsingenieure veranstaltet den diesjährigen Tag der offenen Türe als Webinar am Mittwoch dem 20.1 von 18:30 bis 19:30 virtuell in Form eines Webinars."},
-              {heading: "Donnerstag", note: "08.01.2020", thumbnail: "graulicht", href: baseLink + "news/junior-company-2020-graulicht", contenttitle: "Junior Company - Graulicht", content: "Die Junior Company Graulicht entwickelt, produziert und verkauft moderne und einfache Lampen in Betonoptik."},
-              {heading: "Freitag", note: "07.01.2020", thumbnail: "holdon", href: baseLink + "news/junior-company-2020-holdon", contenttitle: "Junior Company - hold/on", content: "Die JuniorCompany hold/on produziert Smartphone-Halterungen und Tablet-Ständer aus Holz für mobile, aber auch stationäre Anwendungen."},
-              {heading: "Montag", note: "14.12.2020", thumbnail: "euroscola", href: baseLink + "news/euroscola-2020", contenttitle: "Euroscola 2020", content: "Am 14. Dezember 2020 beteiligte sich die 4AHWIM, welche im letzten Schuljahr trotz der veränderten Umstände des Sommersemesters österreichweit den hervorragenden dritten Platz beim Euroscola-Wettbewerb der EU belegt hatte, an einer virtuellen Sitzung im Straßburger Parlament."},
-            ]
-          })
-        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
+        key: new Import("news", 1, (_News: typeof NewsSection) => 
+          new _News(baseLink + "news/")
+        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/wiNewsSection/wiNewsSection")
       },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {

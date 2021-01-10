@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
+import NewsSection from "../../../../_pageSection/triangleNews/mbNewsSection/mbNewsSection"
 
 
 export default class MbPage extends LazySectionedPage {
@@ -24,7 +24,7 @@ export default class MbPage extends LazySectionedPage {
           e.subheading("der Tagesschule")
           e.note("abteilung");
           e.background("mbLanding2")
-          e.videolink("https://www.youtube.com/watch?v=XIB-3K20Vaw")
+          e.videolink("https://www.youtube.com/watch?v=XIB-3K20Vaw", "Einblick in die HMB")
           
           return new WrapperSection(e, "dark") as any
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
@@ -55,7 +55,7 @@ export default class MbPage extends LazySectionedPage {
       // {
       //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
       //     new _DarkNewsSection()
-      //   ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/biomedTriangleNews/biomedTriangleNews")
+      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/mbNewsSection/mbNewsSection")
       // },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {

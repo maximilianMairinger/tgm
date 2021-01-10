@@ -7,6 +7,7 @@ import "../../../_themeAble/_icon/zertificateMan/zertificateMan"
 import FastAverageColor from 'fast-average-color';
 import Image from "../../../image/image"
 import "../../../image/image"
+import local from "../../../../lib/formatTime";
 
 
 export default abstract class InfoCard extends Card {
@@ -17,6 +18,15 @@ export default abstract class InfoCard extends Card {
 
     constructor(){
         super(false, false);
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf('safari') != -1) {
+            if (ua.indexOf('chrome') > -1) {
+                // Chrome
+            } else {
+                this.q("c-image").css({height: "100%", top:"2px"})
+            }
+        }
+
     }
 
     theme():Theme
@@ -34,10 +44,10 @@ export default abstract class InfoCard extends Card {
     }
 
     note():string
-    note(note:string):void
-    note(note?:string){
-        if(note !== undefined)
-            this.q("note-text").text(note)
+    note(note: string | Date):void
+    note(note?: string | Date){
+        if (note !== undefined)
+            this.q("note-text").text(local.formatDate(note))
         else return this.q("note-text").text()
     }
 

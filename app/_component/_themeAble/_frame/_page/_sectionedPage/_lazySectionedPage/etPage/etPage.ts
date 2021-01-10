@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/etAusmachtSection/etAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import DarkNewsSection from "../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews"
+import NewsSection from "../../../../_pageSection/triangleNews/etNewsSection/etNewsSection"
 
 
 export default declareComponent("et-page", class EtPage extends LazySectionedPage {
@@ -23,7 +23,7 @@ export default declareComponent("et-page", class EtPage extends LazySectionedPag
           e.heading("Elektrotechnik")
           e.subheading("der Tagesschule")
           e.note("abteilung");
-          e.videolink("https://www.youtube.com/watch?v=N_1-JcpfbvE")
+          e.videolink("https://www.youtube.com/watch?v=N_1-JcpfbvE", "Einblick in die HET")
           e.background("het_main.jpg")
           
           return new WrapperSection(e, "dark") as any
@@ -51,7 +51,7 @@ export default declareComponent("et-page", class EtPage extends LazySectionedPag
       // {
       //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
       //     new _DarkNewsSection()
-      //   ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/elektrotechnikTriangleNews/elektrotechnikTriangleNews")
+      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/etNewsSection/etNewsSection")
       // },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {

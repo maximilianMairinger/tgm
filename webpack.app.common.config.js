@@ -1,10 +1,10 @@
 // const InjectPlugin = require("webpack-inject-plugin")
 const path = require("path")
-// const webpack = require("webpack")
+const webpack = require("webpack")
 
 
 
-module.exports = () => {
+module.exports = (env) => {
     return {
         entry: './app/app.ts',
         output: {
@@ -13,11 +13,12 @@ module.exports = () => {
             path: path.resolve(path.dirname(''), "public"),
             publicPath: "/",
         },
-        // plugins: [
-        //     new webpack.EnvironmentPlugin({
-        //         env: "prod" // "prod" | "uat" | "dev"
-        //     })
-        // ],
+        plugins: [
+            new webpack.EnvironmentPlugin({
+                ghostHost: "https://dev.tgmrebrand.xyz",
+                ghostApiKey: "062f128c326e0312972d41f705"
+            })
+        ],
         resolve: {
             extensions: ['.ts', '.js']
         },

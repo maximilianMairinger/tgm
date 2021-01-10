@@ -9,10 +9,10 @@ import {Project} from "../../../_text/tabletBlob/tabletBlob";
 export default declareComponent("schulerprojekte-section", class extends PageSection {
 
 
-    constructor(projekte?:JSON[] | Project[]) {
+    constructor(projekte?:JSON[] | Project[], api?:boolean, abt?:string) {
         super()
         console.log(projekte)
-        if(projekte) {
+        if (projekte) {
             this.q("center").apd(new TabletBlob(projekte));
         }
     }

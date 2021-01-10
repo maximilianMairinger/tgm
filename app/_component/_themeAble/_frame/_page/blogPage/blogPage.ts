@@ -1,43 +1,35 @@
-import { declareComponent } from "../../../../../lib/declareComponent"
+import {declareComponent} from "../../../../../lib/declareComponent"
 import Page from "../page"
 import * as domain from "./../../../../../lib/domain"
 import Blog from "../../../../_themeAble/_text/blogPost/blogPost"
 import BlogSuggestions, {blogCardInfo} from "../../../blogSuggestions/blogSuggestions";
-import GhostContentAPI, { PostOrPage, ReadFunction } from '@tryghost/content-api'
-import { lang } from "../../../../../lib/lang"
-import BlogCard from "../../../_card/_infoCard/blogCard/blogCard";
-import { Data } from "josm";
+import GhostContentAPI, {PostOrPage} from '@tryghost/content-api'
+import {lang} from "../../../../../lib/lang"
+import {Data} from "josm";
+import {api} from "../../../../../lib/api";
 
-
-// change after deployment to root url
-//@ts-ignore
-const api = new GhostContentAPI({
-  url: 'https://dev.tgmrebrand.xyz',
-  key: '062f128c326e0312972d41f705',
-  version: 'v2'
-});
 
 export default class BlogPage extends Page {
-  
+
 
   constructor() {
     super("light")
   }
 
   private blogLoaded = false;
+
   private async setBlog(query: string) {
-    if(this.blogLoaded) {
+    if (this.blogLoaded) {
       this.elementBody.removeChilds()
     }
 
 
     let blogData: PostOrPage = this.cache[query]
-    
-    
+
 
     lang.links[query] = new Data(blogData.title)
 
-    
+
     let blog = new Blog();
     blog.blogtitle(blogData.title);
     if (blogData.published_at) blog.date(blogData.published_at);
@@ -48,15 +40,15 @@ export default class BlogPage extends Page {
 
     let preview = false
 
-    if (preview) {
+    //deativates suggestions
+    if (false) {
       let blogData: any
       try {
         blogData = await api.posts.browse({limit: 6})
-      }
-      catch(e) {
+      } catch (e) {
         console.error("Unable to load recommended blogs")
       }
-      
+
       let suggestions = new BlogSuggestions();
       const domainCommon = [...domain.domainIndex].rmI(domain.domainIndex.length - 1).join(domain.dirString) + domain.dirString
       suggestions.blogs(blogData.filter(blog => blog.slug != query).map((blog) => {
@@ -82,10 +74,10 @@ export default class BlogPage extends Page {
     return this.setBlog(id)
   }
 
-  private cache: {[slug in string]: PostOrPage} = {}
+  private cache: { [slug in string]: PostOrPage } = {}
   private domainFrag: string
   private splitDomain: string[]
-  
+
   async tryNavigationCallback(domainFragment: string) {
     this.splitDomain = domainFragment.split(domain.dirString)
     this.domainFrag = this.splitDomain.last
@@ -93,13 +85,13 @@ export default class BlogPage extends Page {
     let blogData: PostOrPage
     try {
       blogData = await api.posts.read({slug: this.domainFrag}, {formats: ['html', 'plaintext']})
-    }
-    catch(e) {
+    } catch (e) {
       return false
     }
     this.cache[this.domainFrag] = blogData
     return true
   }
+
   navigationCallback() {
     return this.setBlogFromUrl(this.domainFrag)
   }
@@ -107,6 +99,7 @@ export default class BlogPage extends Page {
   stl() {
     return super.stl() + require("./blogPage.css").toString()
   }
+
   pug() {
     return require("./blogPage.pug").default
   }

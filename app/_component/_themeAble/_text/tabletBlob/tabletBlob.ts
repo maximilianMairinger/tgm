@@ -6,9 +6,13 @@ import Textblob from "../textblob/textblob";
 import "../../_icon/swipe/swipe"
 import "../../_icon/arrow/arrow"
 import {ElementList} from "extended-dom";
+import GhostContentAPI from "@tryghost/content-api";
+import BlogSuggestions, {blogCardInfo} from "../../blogSuggestions/blogSuggestions";
+import * as domain from "../../../../lib/domain";
 import "./../../../image/image"
 import Image from "./../../../image/image"
 import PenIcon from "../../_icon/fachIcon/pen/pen";
+import {api} from "../../../../lib/api";
 
 export type Project = { heading: string, note: string, logo: string, team: string[], thumbnail?: string, thumbVid?: string, title: string, content: string, loaded:boolean}
 
@@ -133,18 +137,59 @@ export default class TabletBlob extends Text {
         }, 32)
     }
 
-    constructor(projekte?: JSON[] | Project[]){
+    constructor(projekte?: JSON[] | Project[], api?:boolean, abt?:string){
         super()
-        if(projekte) this.projectList(projekte);
+        if(api) this.apiData(abt).then(() => this.build());
+        else if(projekte) {
+            this.projectList(projekte)
+            this.build()
+        }
+    }
+
+    private build(){
         this.nextArrow.addEventListener("click", this.next.bind(this));
         this.previousArrow.addEventListener("click", this.previous.bind(this));
         this.slider.addEventListener("scroll", this.scrollUpdate.bind(this))
         this.tutorialBind = this.tutorialHandler.bind(this);
         this.tutorial.addEventListener("scroll", this.tutorialBind);
-        if(this.projectData.length) {
+        if (this.projectData.length) {
             this.project(this.projectData[this.index]);
             this.update();
         }
+    }
+
+    private async apiData(abt: string){
+        this.projectData = []
+        let blogData: any
+        try {
+            blogData = await api.posts.browse({filter:"tag:projekt+tag:"+abt})
+        }
+        catch(e) {
+            console.error("problem with project api")
+        }
+        blogData.forEach(post=>this.apiParser(post));
+
+    }
+
+    private apiParser(data){
+        let parser = new DOMParser();
+        let html = parser.parseFromString(data.html, 'text/html');
+        let project:Project = {
+            content: this.apiContentParser(html),
+            heading: data.title,
+            loaded: false,
+            logo: html.querySelector("td img").getAttribute("src"),
+            note: html.querySelector("p:first-child").text(),
+            team: html.querySelector("td:first-child").innerHTML.split(/<\s*br\s*\/*>/),
+            thumbnail: data.feature_image,
+            title: html.querySelector("p:nth-child(2)").text()
+        };
+        //console.log(data)
+        this.projectData.add(project)
+    }
+
+    private apiContentParser(html:Document):string{
+        return Array.from(html.querySelectorAll("*:nth-child(n + 3):not(table, td, tr)")).map(elm => elm.outerHTML).join('')
     }
 
     theme():Theme
@@ -164,7 +209,7 @@ export default class TabletBlob extends Text {
             tablet.querySelector("note-box").text(projectJson.note);
 
             let thumbnailContainer = tablet.querySelector("thumbnail-container")
-            let oldThumbNail = this.q(".thumbnail-pic", true)
+            let oldThumbNail = thumbnailContainer.childs(".thumbnail-pic", true)
             if (!oldThumbNail.empty) oldThumbNail.remove()
             
             
@@ -208,6 +253,7 @@ export default class TabletBlob extends Text {
         info.append(ce("info-title"));
         info.append(ce("info-text"));
         tablet.append(info);
+
 
 
         this.slider.append(tablet);

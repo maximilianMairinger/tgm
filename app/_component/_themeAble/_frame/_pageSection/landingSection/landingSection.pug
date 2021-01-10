@@ -1,7 +1,9 @@
 big-image
-  c-image(src="home/aeroplane.jpg")
+  c-image(src="aeroplane.jpg")
 text-container
-  c-textblob(heading="Fortschritt" subheading="verpflichtet" note="dem" hsize='{"min": 60, "max": 75}' hmobile='{"min": 50, "max": 60}')
+  textblob-animation-wrapper
+    c-textblob(heading="Die Schule" subheading="der Technik" note="TGM" hsize='{"min": 60, "max": 75}' hmobile='{"min": 50, "max": 60}')
+    c-button(link="tagesschule/virtuelle-wochen")
 tagesschule-container
   c-textblob(heading="Tagesschule" hsize='{"min": 60, "max": 67}' hmobile='{"min": 40, "max": 60}')
 card-wrapper

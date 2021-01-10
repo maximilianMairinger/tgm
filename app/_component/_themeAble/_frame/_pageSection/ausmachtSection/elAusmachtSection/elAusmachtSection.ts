@@ -15,7 +15,7 @@ export default declareComponent("ausmacht-section-el", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "Fachspezifische",
+                note: "Fachtheoretische",
                 selection: [
                     {
                         icon:"hardwareentwicklung", 
@@ -54,17 +54,17 @@ export default declareComponent("ausmacht-section-el", class extends AusmachtSec
                 {
                     heading: "IoT",
                     note: "highlight",
-                    thumbnail: "/res/img/iotElektronik.jpg",
-                    href: baseLink + "todo",
-                    contentTitle: "Internet of things",
-                    content: "TODO"
+                    thumbnail: "iotElektronik",
+                    href: baseLink + "internet-of-things",
+                    contenttitle: "Internet of things",
+                    content: "Unser Ziel ist es, Digitalisierung und IoT in die Bildung zu bringen und anfassbar zu machen. Das IoT-Lab fungiert dabei als breite Schnittstelle unterschiedlicher Disziplinen, von der Microcontroller Entwicklung, über Sensorik bis hin zum leistungseffizienten Schaltungsbau."
                 },
                 {
                     heading: "Prototypenbau",
-                    note: "fachpraktisch",
-                    thumbnail: "/res/img/elektronikWerkstatt.png",
+                    note: "Fachpraktischer Unterricht",
+                    thumbnail: "elPrototypenbau",
                     href: baseLink + "prototypenbau",
-                    contentTitle: "Prototypenbau",
+                    contenttitle: "Prototypenbau",
                     content: "Im praktischen Unterricht erlernen SchülerInnen den Umgang mit technischen Gerätschaften und aktuellen Tools zur Konzeptionierung von Projekten."
                 }
             ]

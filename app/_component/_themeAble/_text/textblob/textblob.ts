@@ -41,6 +41,15 @@ export default class Textblob extends Text {
     this.mediaQuery.addListener(this.mobileQueryFunc.bind(this));
   }
 
+  private explicitWidth = false
+  contentwidth(to: number | null) {
+    if (to !== null) {
+      this.contentElem.css({maxWidth: `calc(15vw + ${to}px)`})
+      this.explicitWidth = true
+    }
+    else this.explicitWidth = false
+  }
+
   theme(): Theme
   theme(to: Theme): this
   theme(to?: Theme): any {
@@ -137,7 +146,7 @@ export default class Textblob extends Text {
   content(content: string): this
   content(content?: string): any {
     if (content !== undefined) {
-      this.contentElem.css({maxWidth: `calc(15vw + ${content.length / 3}px)`})
+      if (!this.explicitWidth) this.contentElem.css({maxWidth: `calc(15vw + ${content.length / 3}px)`})
       
       this.contentElem.html(content)
       this.themeAblesInContent.clear()

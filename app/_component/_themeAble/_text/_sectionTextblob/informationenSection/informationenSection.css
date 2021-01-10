@@ -17,7 +17,7 @@ section-textblob-image-container {
 }
 
 section-textblob-image{
-    background-image: url(./../../../../../res/img/Informationen_Grafik.svg);
+    background-image: url(./../../../../../res/svg/Informationen_Grafik.svg);
 }
 
 @media only screen and (max-width: 768px) {

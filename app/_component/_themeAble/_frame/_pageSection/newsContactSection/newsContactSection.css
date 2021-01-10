@@ -8,14 +8,16 @@ scroll-ly {
 
 card-container {
   position: absolute;
-  width: 80%;
+  width: 65%;
   height: 100%;
   top: 0;
   left: 35%;
   display: flex;
   overflow-y: auto;
   transform: translateY(.1px);
-  scroll-snap-type: x mandatory;
+  
+  padding-left: 250px;
+  box-sizing: border-box;
 }
 
 
@@ -156,6 +158,7 @@ stay-in-frame {
   display: block;
   top: 0;
   left: 0;
+  min-height: 600px;
 }
 
 pointer-info-box > * {
@@ -236,4 +239,84 @@ textblob-fadin.news {
   opacity: 1;
   display: block;
   transform: translateY(.1);
+}
+
+
+mobile-overlay {
+  width: 100%;
+  background:rgb(249 250 254);
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity .1s;
+  pointer-events: none;
+}
+
+
+
+@media (max-width: 1200px) {
+  mobile-overlay {
+    opacity: 1;
+  }
+  mobile-overlay.bot {
+    opacity: 0;
+  }
+
+  c-image-textblob.news {
+    margin-top: -40px;
+    width: 100%;
+  }
+  textblob-wrapper.news {
+    width: 100%;
+  }
+  card-container > *:first-child {
+    margin-left: 0;
+  }
+  card-container-wrapper, card-container {
+    z-index: 3;
+    left: 0;
+    padding-left: 10vw;
+    width: 100%;
+    position: absolute;
+    height: 500px;
+  }
+  card-container-wrapper {
+    top: 275px;
+  }
+
+  component-body {
+    margin-bottom: 200px;
+  }
+}
+
+@media (max-width: 1200px) {
+  component-body {
+    margin-bottom: 400px;
+  }
+}
+
+@media (max-width: 978px) {
+  component-body {
+    margin-bottom: 500px;
+  }
+}
+
+@media (max-width: 885px) {
+  component-body {
+    margin-bottom: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  component-body {
+    margin-bottom: 400px;
+  }
+}
+
+@media (min-width: 1600px) {
+  c-image-textblob {
+    margin-left: 136px;
+  }
 }

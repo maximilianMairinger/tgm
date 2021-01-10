@@ -93,7 +93,7 @@ export default class Button extends ThemeAble<HTMLAnchorElement> {
   private _link: string
   private linkFn: any
   public link(): string
-  public link(to: string, domainLevel?: number, push?: boolean, notify?: boolean): void
+  public link(to: string, domainLevel?: number, push?: boolean, notify?: boolean): this
   public link(to?: string, domainLevel: number = 0, push = true, notify?: boolean) {
 
     if (to !== undefined) {
@@ -118,6 +118,8 @@ export default class Button extends ThemeAble<HTMLAnchorElement> {
       else {
         this.removeActivationCallback(this.linkFn)
       }
+
+      return this
       
     }
     else return this._link

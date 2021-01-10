@@ -15,7 +15,7 @@ section-header{
     display: block;
     max-width: 100%;
     margin: calc(220px - 12vw + 0.1em) 180px 50px 180px;
-    background: url("../../../../../res/img/abendschule_header_background.svg") 50px 0 no-repeat;
+    background: url("../../../../../res/svg/abendschule_header_background.svg") 50px 0 no-repeat;
     background-size: cover;
     background-clip: text;
     -webkit-background-clip: text;
@@ -54,7 +54,7 @@ image-box {
     position: relative;
     width: 100%;
     height: 100%;
-    background-image: url("./../../../../../res/img/L_two.svg");
+    background-image: url("./../../../../../res/svg/L_two.svg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: left bottom;
@@ -219,8 +219,8 @@ card-box card-item:nth-child(2n):first-child:last-child extra-line-2{
 
 @media only screen and (max-width: 768px) {
     card-box{
-        margin-right: 10vw;
-        margin-left: 10vw;
+        margin-right: 7vw;
+        margin-left: 7vw;
     }
 
     c-erwachsenen-card{

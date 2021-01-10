@@ -27,7 +27,7 @@ export default class AusmachtSection extends PageSection {
         icon: string,
         title: string,
         content: string,
-        link: string
+        link?: string
       }[],
       stundentafel?: string
     },
@@ -36,7 +36,7 @@ export default class AusmachtSection extends PageSection {
       note: string, 
       thumbnail: string,
       href: string, 
-      contentTitle: string,
+      contenttitle: string,
       content: string
     }[],
     vertiefung?: {

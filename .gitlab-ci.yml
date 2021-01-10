@@ -6,11 +6,12 @@ stages:
 cache:
   paths:
     - node_modules/
+    - public/res/img/
 build:
   stage: build
   script:
     - npm install
-    - npm run build
+    - npm run jsBuild
   only:
     - dev
     - master

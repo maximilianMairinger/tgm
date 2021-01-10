@@ -1,5 +1,5 @@
 component-body {
-  min-height: 130vh;
+  min-height: 117vh;
   background: #fffbfa;
   background: linear-gradient(#eceef1 40vh, #fffbfa 60vh);
 }
@@ -46,11 +46,32 @@ text-container {
   min-height: 650px;
 }
 
-text-container > c-textblob {
+text-container textblob-animation-wrapper {
   display: block;
   position: absolute;
   left: 100px;
   transition: top .5s;
+}
+
+c-button{
+  position: relative;
+  width: 200px;
+  height: auto;
+  background: var(--strong-contrast-text-color);
+  color: var(--strong-background-color);
+  font-weight: bold;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-left: 145px;
+  text-align: center;
+  box-shadow: 2px 2px 20px 0 rgba(var(--strong-contrast-text-color-raw), 0.17);
+}
+
+c-button:after{
+  padding: 13px 25px;
+  content: "Virtuelle Wochen"
 }
 
 card-wrapper {
@@ -64,54 +85,15 @@ c-card-carousel {
   width: calc(100% - 13%);
   position: relative;
   display: flex;
-  margin-top: max(calc(100vh - 145px), 600px);
-  /* This padding quickfix is needed because otherwise the shadow would be cut out from the top */
-  padding-top: 20px;
-  padding-bottom: 20px;
+  margin-top: max(calc(100vh - 145px), 625px);
   margin-bottom: 30px;
 }
 
-
-tagesschule-container {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  position: absolute;
-  top: max(67vh, 450px);
-}
-
-tagesschule-container > c-textblob {
-  opacity: 0;
-  transform: translateY(-20px);
-  max-width: 100%;
-  display: none;
-}
-
-
-@media only screen and (min-width: 1580px) {
-  big-image > c-image {
-    transform: translateX(0);
-    
-  }
-}
-
-
-@media only screen and (max-width: 1130px) {
-  text-container > c-textblob {
-    left: unset;
-  }
-  text-container {
-    justify-content: center;
-    top: 200px;
-  }
-  big-image > c-image {
-    transform: translateX(calc(475px - 50vw)) translateY(-30px);
+@media only screen and (max-width: 1100px) {
+  c-card-carousel {
+    margin-bottom: 0px;
   }
 
-  
-}
-
-@media only screen and (max-width: 1000px) {  
   c-card-carousel {
     margin-left: 0;
     margin-right: 0;
@@ -131,6 +113,47 @@ tagesschule-container > c-textblob {
 
 
 
+tagesschule-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: absolute;
+  top: max(67vh, 450px);
+}
+
+tagesschule-container c-textblob {
+  opacity: 0;
+  transform: translateY(-20px);
+  max-width: 100%;
+  display: none;
+}
+
+
+@media only screen and (min-width: 1580px) {
+  big-image > c-image {
+    transform: translateX(0);
+    
+  }
+}
+
+
+@media only screen and (max-width: 1130px) {
+  text-container c-textblob {
+    left: unset;
+  }
+  text-container {
+    justify-content: center;
+    top: 200px;
+  }
+  big-image > c-image {
+    transform: translateX(calc(475px - 50vw)) translateY(-30px);
+  }
+
+  
+}
+
+
+
 
 
 @media only screen and (max-height: 900px) and (max-width: 1130px) {
@@ -138,5 +161,18 @@ tagesschule-container > c-textblob {
   big-image > c-image {
     transform: translateX(calc(475px - 50vw)) translateY(-100px);
     
+  }
+}
+
+@media only screen and (max-width: 768px) {
+
+  text-container textblob-animation-wrapper {
+    left: unset;
+  }
+
+  c-button {
+    margin-left: 0;
+    width: 200px;
+    max-width: 100%;
   }
 }

@@ -17,8 +17,12 @@ const content: { left: ContentArray, right: ContentArray } = {
         },
         {
             content: "Intern",
-            link: "https://intern.tgmrebrand.xyz/"
+            link: "intern"
         },
+        {
+            content: "Gremien",
+            link: "gremien"
+        }
     ],
     right: [
         {
@@ -30,9 +34,13 @@ const content: { left: ContentArray, right: ContentArray } = {
             link: "partner"
         },
         {
-            content: "Gremien",
-            link: "gremien"
+            content: "Anleitungen",
+            link: "https://www2.tgm.ac.at/anleitungen"
         },
+        {
+            content: "Termine",
+            link: "termine"
+        }
     ]
 }
 

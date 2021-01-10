@@ -11,9 +11,9 @@ export default declareComponent("schulerprojekte-section", class extends PageSec
 
     constructor(projekte?:JSON[] | Project[], api?:boolean, abt?:string) {
         super()
-        //console.log(projekte)
-        if(projekte) {
-            this.q("center").apd(new TabletBlob(projekte, api, abt));
+        console.log(projekte)
+        if (projekte) {
+            this.q("center").apd(new TabletBlob(projekte));
         }
     }
 

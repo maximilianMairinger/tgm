@@ -48,17 +48,17 @@ export default declareComponent("ausmacht-section-wi", class extends AusmachtSec
                 {
                     heading: "Schuleingangsphase",
                     note: "Individualisierung",
-                    thumbnail: "/res/img/schuleingangsphase.png",
+                    thumbnail: "wiSchuleingangsphase",
                     href: baseLink + "schuleingangsphase",
-                    contentTitle: "Individuelle Betreuung und Entwicklung",
+                    contenttitle: "Individuelle Betreuung und Entwicklung",
                     content: "Die haben nur WIR! Die Schuleingangsphase ist so gestaltet, dass alle Schülerinnen und Schüler gut in der Schule ankommen und sich vom ersten Tag an wohlfühlen. Wichtig sind hier aber nicht nur offene Unterrichtsformen, wie beispielsweise KOOL, sondern ausschlaggebend ist auch eine strukturierte Lernumgebung."
                 },
                 {   
-                    heading: "Werkstatt",
+                    heading: "Werkstätte",
                     note: "Fachpraktischer Unterricht",
-                    thumbnail: "/res/img/werkstätteWi.png",
+                    thumbnail: "wiWerkstatt",
                     href: baseLink + "werkstatte-wirtschaftsingenieure",
-                    contentTitle: "Praxisbasierte Erfahrungen",
+                    contenttitle: "Praxisbasierte Erfahrungen",
                     content: "Das Herzstück der HTL Ausbildung ist die Verknüpfung aus Theorie und Praxis. In den diversen Werkstätten kannst du die Theorieinhalte auf Projekte anwenden. Das macht die HTL Ausbildung weltweit einzigartig!"
                 }
             ],

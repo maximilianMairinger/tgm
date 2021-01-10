@@ -5,15 +5,28 @@ type FormatOptions = {weekday?: "long" | "short", year?: "numeric", month?: "2-d
 
 
 
-export function parseDateToLocal(dateString: string) {
-  const [ date, month, year ] = dateString.split(".")
-  return new Date(+year, +month - 1, +date)
+function parseDateToLocal(dateImp: string | Date) {
+  let d: Date
+  if (dateImp instanceof Date) d = dateImp
+  else {
+    const [ date, month, year ] = dateImp.split(".")
+    d = new Date(+year, +month - 1, +date)
+  }
+  
+  if (isNaN(+d)) throw new Error("Invalid Date")
+  else return d
 }
 
 export function constructFormat(local: string, timeZone = "Europe/Vienna", defaultFormat: FormatOptions = {day: "2-digit", month: "2-digit", year: "numeric"}) {
   return {
-    formatDate(date: string | Date, format: FormatOptions = {}) {
-      return (date instanceof Date ? date : parseDateToLocal(date)).toLocaleDateString(local, { ...defaultFormat, ...format, timeZone })
+    formatDate(date: Date | string, format: FormatOptions = {}) {
+      try {
+        return parseDateToLocal(date).toLocaleDateString(local, { ...defaultFormat, ...format, timeZone })
+      }
+      catch(e) {
+        return date as string
+      }
+      
     }
   }
 }

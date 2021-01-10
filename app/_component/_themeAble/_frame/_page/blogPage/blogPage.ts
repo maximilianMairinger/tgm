@@ -12,7 +12,7 @@ import {Data} from "josm";
 //@ts-ignore
 const api = new GhostContentAPI({
   url: 'https://' + document.location.host,
-  key: '062f128c326e0312972d41f705',
+  key: '847d73bd7838dfa199ed2c16cb',
   version: 'v2'
 });
 

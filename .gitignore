@@ -8,7 +8,7 @@ electron-build/
 .idea*
 public/res/img
 public/public.zip
-
+images.zip
 
 package-lock.json
 

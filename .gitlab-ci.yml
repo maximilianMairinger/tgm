@@ -15,6 +15,9 @@ build:
   only:
     - dev
     - master
+  variables: 
+    - ghostHost: "https://dev.tgmrebrand.xyz"
+    - ghostApiKey: "062f128c326e0312972d41f705"
 deploy:
   stage: deploy
   before_script:
@@ -28,6 +31,9 @@ deploy:
     - scp -r public/* root@192.168.0.30:/var/www/html/
   only:
     - dev
+  variables: 
+    - ghostHost: "https://dev.tgmrebrand.xyz"
+    - ghostApiKey: "062f128c326e0312972d41f705"
 deployUAT:
   stage: deployUAT
   before_script:
@@ -41,3 +47,6 @@ deployUAT:
     - scp -r public/* root@192.168.0.31:/var/www/html/
   only:
     - master
+  variables: 
+    - ghostHost: "https://uat.tgmrebrand.xyz"
+    - ghostApiKey: "1169a059ff62b6cd9997764a0d"

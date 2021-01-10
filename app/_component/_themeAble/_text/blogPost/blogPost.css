@@ -110,8 +110,7 @@ p + p{
 .kg-gallery-container {
     display: flex;
     flex-direction: column;
-    max-width: 1040px;
-    width: 100vw;
+    max-width: 100%;
     margin-top: 50px;
 }
 

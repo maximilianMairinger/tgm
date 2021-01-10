@@ -24,4 +24,4 @@ export default class ElektrotechnikTriangleNews extends TriangleNews {
   }
 };
 
-declareComponent("biomed-triangle-news-section", ElektrotechnikTriangleNews)
+declareComponent("kt-news-section", ElektrotechnikTriangleNews)

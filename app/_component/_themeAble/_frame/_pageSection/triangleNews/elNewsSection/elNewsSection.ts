@@ -24,4 +24,4 @@ export default class ElektrotechnikTriangleNews extends TriangleNews {
   }
 };
 
-declareComponent("et-triangle-news-section", ElektrotechnikTriangleNews)
+declareComponent("et-news-section", ElektrotechnikTriangleNews)

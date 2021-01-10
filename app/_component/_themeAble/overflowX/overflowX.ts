@@ -4,6 +4,13 @@ import "../../_themeAble/_button/button"
 import Button from "../../_themeAble/_button/button";
 import "../_icon/arrow/arrow"
 import {Easing} from "waapi-easing";
+import {Project} from "../_text/tabletBlob/tabletBlob";
+import GhostContentAPI from "@tryghost/content-api";
+import {blogCardInfo} from "../blogSuggestions/blogSuggestions";
+import NewsCard from "../_card/_infoCard/newsCard/newsCard";
+import * as domain from "../../../lib/domain";
+import local from "../../../lib/formatTime";
+import {api} from "../../../lib/api";
 
 export default class OverflowX extends ThemeAble {
 
@@ -80,22 +87,35 @@ export default class OverflowX extends ThemeAble {
         this.updating = false;
     }
 
-    constructor(next?: Button, previous?: Button) {
+    constructor(next?: Button, previous?: Button, api?, tags?:string[], apiParser?) {
         super(false)
-        let children = []
-        this.childNodes.forEach(child => {
-            children.add(child)
-        })
-        this.removeChilds();
-        this.overflowContainer.apd(children);
-        if (!next)
+        if(api && tags && apiParser){
+            this.apiData(tags, apiParser)
+        }
+        else {
+            let children = []
+            this.childNodes.forEach(child => {
+                children.add(child)
+            })
+            this.removeChilds();
+            this.overflowContainer.apd(children);
+        }
+        if(!next)
             this.nextButton = this.q("next-button c-button") as Button;
-        else this.nextButton = next
+        else {
+            this.nextButton = next;
+            this.nextArrow =next
+            this.nextArrow.css({"display": "none"})
+        }
         this.nextButton.click(this.next.bind(this));
 
         if (!previous)
             this.previousButton = this.q("previous-button c-button") as Button;
-        else this.previousButton = previous;
+        else {
+            this.previousButton = previous;
+            this.previousArrow  = previous
+            this.previousArrow.css({"display": "none"})
+        }
         this.previousButton.click(this.previous.bind(this));
 
         this.overflowContainer.addEventListener("scroll", this.scrollUpdate.bind(this))
@@ -134,15 +154,18 @@ export default class OverflowX extends ThemeAble {
     }
 
     private hasGradient = false;
-    gradient(gradient:boolean | string, percent=15, fancy = false){
-        if(gradient) {
+    padding(gradient:boolean | string, percent=15, fancy = false){
+        if(gradient != null) {
             this.hasGradient = true;
-            let actualPercent = (percent / ((100 + (percent * 2)) / 100) );
-            //let maskimageHard = "linear-gradient(to right, transparent, transparent "+ transformedPercent +"%, rgba(0,0,0,1) "+ transformedPercent +"%, rgba(0,0,0,1) "+ (100-transformedPercent) +"%,transparent " + (100-transformedPercent) +"%)";
-            let maskimageSoft = "linear-gradient(to right, transparent, rgba(0,0,0,1) "+ actualPercent +"%, rgba(0,0,0,1) "+ (100-actualPercent) +"%,transparent)";
-            this.q("next-button").css({"borderRadius": "8px", "right": "calc(" + actualPercent + "% - 25px)"});
-            this.q("previous-button").css({"borderRadius": "8px", "left": "calc(" + actualPercent + "% - 25px)"});
-            if(gradient == "fancy" || fancy) {
+            let actualPercent = (percent / ((100 + (percent * 2)) / 100));
+            let maskimageSoft;
+            if (gradient) {
+                //let maskimageHard = "linear-gradient(to right, transparent, transparent "+ transformedPercent +"%, rgba(0,0,0,1) "+ transformedPercent +"%, rgba(0,0,0,1) "+ (100-transformedPercent) +"%,transparent " + (100-transformedPercent) +"%)";
+                maskimageSoft = "linear-gradient(to right, transparent, rgba(0,0,0,1) " + actualPercent + "%, rgba(0,0,0,1) " + (100 - actualPercent) + "%,transparent)";
+                this.q("next-button").css({"borderRadius": "8px", "right": "calc(" + actualPercent + "% - 25px)"});
+                this.q("previous-button").css({"borderRadius": "8px", "left": "calc(" + actualPercent + "% - 25px)"});
+            }
+            if(gradient == "fancy" || (fancy && gradient)) {
                 this.q("navigation-container").css({"opacity": 1})
                 let windowLeft= ce("window-viewer");
                 let windowRight= ce("window-viewer");
@@ -170,7 +193,8 @@ export default class OverflowX extends ThemeAble {
                 //@ts-ignore
                 this.overflowContainer.prepend(filler)
             }else{
-                this.overflowContainer.css({"maskImage": maskimageSoft});
+                if(gradient)
+                    this.overflowContainer.css({"maskImage": maskimageSoft});
                 let filler = ce("filler-element");
                 filler.css({"display": "block", "flex": "0 0 calc(" + actualPercent + "%)", "alignSelf": "stretch", "order": "42069"});
                 //@ts-ignore
@@ -184,21 +208,45 @@ export default class OverflowX extends ThemeAble {
             return this.hasGradient;
     }
 
+
+    private async apiData(tags:string[], apiParser){
+        let blogData: any
+        try {
+            blogData = await api.posts.browse({filter:tags.map(tag => "tag:" + tag).join("+")})
+        }
+        catch(e) {
+            console.error("problem with project api")
+        }
+        blogData.forEach(post=>this.append(apiParser(post)));
+
+    }
+
     theme(): Theme
     theme(to: Theme): this
     theme(to?: Theme): any {
+        this.overflowContainer.childNodes.forEach(child=>{
+            if(child['theme'] !== undefined) child['theme'](to)
+        })
         return super.theme(to)
     }
 
     appendChild<T extends Node>(newChild: T): T {
+        if(newChild['theme'] !== undefined) newChild['theme'](this.theme())
         return this.overflowContainer.appendChild(newChild);
     }
 
     append(...nodes) {
+        nodes.forEach(child=>{
+            if(child['theme'] !== undefined)
+                child['theme'](this.theme())
+        })
         this.overflowContainer.append(...nodes);
     }
 
     prepend(...nodes) {
+        nodes.forEach(child=>{
+            if(child instanceof ThemeAble) child.theme(this.theme())
+        })
         if(this.hasGradient)
             //@ts-ignore
             nodes.reverse().forEach(node => this.overflowContainer.insertAfter(node, this.q("filler-elemen:nth-child(2)") as Node));

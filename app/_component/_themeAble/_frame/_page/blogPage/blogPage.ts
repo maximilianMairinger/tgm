@@ -6,15 +6,8 @@ import BlogSuggestions, {blogCardInfo} from "../../../blogSuggestions/blogSugges
 import GhostContentAPI, {PostOrPage} from '@tryghost/content-api'
 import {lang} from "../../../../../lib/lang"
 import {Data} from "josm";
+import {api} from "../../../../../lib/api";
 
-
-// change after deployment to root url
-//@ts-ignore
-const api = new GhostContentAPI({
-  url: 'https://' + document.location.host,
-  key: '847d73bd7838dfa199ed2c16cb',
-  version: 'v2'
-});
 
 export default class BlogPage extends Page {
 
@@ -47,7 +40,8 @@ export default class BlogPage extends Page {
 
     let preview = false
 
-    if (preview) {
+    //deativates suggestions
+    if (false) {
       let blogData: any
       try {
         blogData = await api.posts.browse({limit: 6})

@@ -48,9 +48,9 @@ export default declareComponent("rt-page", class RtPage extends LazySectionedPag
         ), val: () => import(/* webpackChunkName: "ausmachtSectionRaumfahrt" */"../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection")
       },
       {
-        key: new Import("news", 1, (_DarkNewsSection: typeof NewsSection) => 
-          new _DarkNewsSection()
-        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/rtNewsSection/rtNewsSection")
+        key: new Import("news", 1, (_NewsSection: typeof NewsSection) => 
+          new _NewsSection(true)
+        ), val: () => import(/* webpackChunkName: "raumfahrtNews" */"../../../../_pageSection/triangleNews/rtNewsSection/rtNewsSection")
       },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {

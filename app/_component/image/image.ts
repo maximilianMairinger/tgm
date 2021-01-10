@@ -19,6 +19,14 @@ const res = "3K"
 const whenPossibleFormats = formats.slice(0, -1)
 const fallbackFormat = formats.last
 
+
+function isExplicitLocation(location: string) {
+  const firstSlash = location.indexOf("/")
+  if (firstSlash === 0) return true
+  if (location[firstSlash + 1] === "/") return true
+  return false
+}
+
 export default class Image extends Component {
   public readonly loaded: Promise<void>
   private elems = new ElementList<HTMLElement & {setSource: (to: string) => string}>()
@@ -34,6 +42,8 @@ export default class Image extends Component {
     }
 
     this.img = ce("img") as HTMLImageElement & {setSource: (to: string) => string}
+    //@ts-ignore
+    this.img.crossorigin = "anonymous"
     this.img.setSource = (to) => this.img.src = to + fallbackFormat
     this.elems.add(this.img as any)
 
@@ -57,10 +67,18 @@ export default class Image extends Component {
   src(src?: string, forceLoad: boolean = false) {
     if (src !== undefined) {
       if (forceLoad) {
-        const pointIndex = src.indexOf(".")
-        if (pointIndex !== -1) src = src.slice(0, pointIndex)
-        if (!src.startsWith("/")) src = "/res/img/" + src
-        this.elems.Inner("setSource", [src + unionSymbol + res + "."])
+        
+        if (isExplicitLocation(src)) {
+          this.img.src = src
+        }
+        else {
+          const pointIndex = src.lastIndexOf(".")
+          if (pointIndex !== -1) src = src.slice(0, pointIndex)
+          this.elems.Inner("setSource", [src + unionSymbol + res + "."])
+        }
+        
+        
+        
       }
       else {
         _record.add(() => {

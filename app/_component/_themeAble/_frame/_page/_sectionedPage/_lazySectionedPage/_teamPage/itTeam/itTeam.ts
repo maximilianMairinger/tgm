@@ -39,11 +39,11 @@ export default declareComponent("it-team", class ItTeam extends TeamPage {
                     leitungImageTextblob.heading("Dr. Koppensteiner");
                     leitungImageTextblob.subheading("Gottfried");
                     // leitungImageTextblob.content("Erreichbar von Montag bis Freitag zwischen 8:00 und 11:00 Uhr. ")
-                    leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 9. Stock / H330");
+                    leitungImageTextblob.address("Wexstraße 19-23, 1200 Wien / 9. Stock / H925");
                     leitungImageTextblob.email("avhit@tgm.ac.at");
                     leitungImageTextblob.tel("+43 (0)1 33 126 / 290");
                     leitungImageTextblob.image('avKoppensteiner');
-                    leitungImageTextblob.stellvertreter([{name:"Christoph Brein", email:"cbrein@tgm.ac.at"}])
+                    leitungImageTextblob.stellvertreter([{name:"DI. Mag. Christoph Brein", email:"cbrein@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_text/imageTextblob/imageTextblob")

@@ -17,7 +17,7 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
             },
             selection: {
                 heading: "Gegenstände",
-                note: "fachtheoretische",
+                note: "Fachtheoretische",
                 selection: [
                     {
                         icon: "softwareentwicklung", 
@@ -56,8 +56,8 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
                 },
                 {
-                    heading: "Werkstatt",
-                    note: "fachpraxis",
+                    heading: "Werkstätte",
+                    note: "Fachpraktischer Unterricht",
                     thumbnail: "werkstaetteHET",
                     href: baseLink + "werkstatte-hit",
                     contenttitle: "Praxisbasierte Erfahrungen",

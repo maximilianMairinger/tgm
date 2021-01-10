@@ -41,7 +41,7 @@ export default declareComponent("wirtschaftsingenieure-projekte", class Raumfahr
               team:[
 
               ],
-              thumbnail:"cbb",
+              thumbnail:"cbb2",
               title: "Die clima bike box",
               content: 
 `Der online-Handel boomt und macht auch nicht vor Speisen und Getränken halt. Von AmazonFresh bis Z-Catering liefern Firmen Nahrungsmittel aus. Beliebtes Tarnsport­mittel ist hier innerstädtisch das Fahrrad. Fahrradzustelldienste werben mit ökologisch abbaubarer Verpackung und Öko-Strom für Server und Büro, aber keiner verfügt über eine mobile beheizbare Thermobox, die über die kinetische Energie des Fahrrades betrieben wird und die transportierten Nahrungsmittel wärmt bzw. kühlt.

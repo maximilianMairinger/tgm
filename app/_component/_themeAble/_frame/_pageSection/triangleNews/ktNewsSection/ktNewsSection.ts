@@ -19,7 +19,15 @@ export default class ElektrotechnikTriangleNews extends TriangleNews {
           thumbnail: "kaltesLicht2", 
           href: "jahresausklang-2020", 
           contenttitle: "Jahresausklang", 
-          content: "Im Chemielabor gab es ein paar Überraschungsexperimente zum Thema \"Kaltes Licht\", welches das Labor in festliche Beleuchtung tauchte."
+          content: "Aufgrund der Hygienemaßnahmen war es uns vor den Weihnachtferien leider nicht mehr möglich wie gewohnt mit"
+        },
+        {
+          heading: "Mittwoch",
+          note: "1.4.2020",
+          thumbnail: "nespresso",
+          href: "schulerinnen-in-fachzeitschrift-gewurdigt",
+          contenttitle: "Bioplastics",
+          content: "Die Diplomarbeit von Anna-Maria Monks und Judith Nachbagauer steht erneut im Rampenlicht; die Zeitschrift Bioplastics MAGAZINE"
         },
         {
           heading: "Freitag", 
@@ -44,14 +52,6 @@ export default class ElektrotechnikTriangleNews extends TriangleNews {
           href: "vok-stipendienverleihung", 
           contenttitle: "VÖK-Stipendienverleihung", 
           content: "Auch dieses Jahr wurden fleißige und bedürftige Schülerinnen und Schüler der Abteilung Kunststofftechnik wieder mit den Stipendien der VÖK geehrt. Dank der großzügigen Spenden diverser Firmen und Einzelpersonen"
-        },
-        {
-          heading: "Montag", 
-          note: "17.12.2018", 
-          thumbnail: "nespresso", 
-          href: "schulerinnen-in-fachzeitschrift-gewurdigt", 
-          contenttitle: "Bioplastics", 
-          content: "Die Diplomarbeit von Anna-Maria Monks und Judith Nachbagauer steht erneut im Rampenlicht; die Zeitschrift Bioplastics MAGAZINE"
         }
       ]
     })

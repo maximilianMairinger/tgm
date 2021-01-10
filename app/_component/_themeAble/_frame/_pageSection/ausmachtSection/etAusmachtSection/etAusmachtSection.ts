@@ -56,7 +56,7 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
                 {
                     heading: "Lernbüro",
                     note: "Unterrichtssystem",
-                    thumbnail: "/res/img/student_2.jpg",
+                    thumbnail: "student_2",
                     href: baseLink + "lernbüro-het",
                     contenttitle: "Lernen im Aufbruch",
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
@@ -64,7 +64,7 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
                 {
                     heading: "Werkstätte",
                     note: "Fachpraktischer Unterricht",
-                    thumbnail: "/res/img/werkstaetteHET.png",
+                    thumbnail: "werkstaetteHET",
                     href: baseLink + "werkstätte-elektrotechnik",
                     contenttitle: "Praxisbasierte Erfahrungen",
                     content: "In unseren Werkstätten erlernen SchülerInnen den Umgang mit technischen Gerätschaften und setzen das gelernte Theoriewissen selbst um."

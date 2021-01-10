@@ -10,13 +10,7 @@ import {blogCardInfo} from "../blogSuggestions/blogSuggestions";
 import NewsCard from "../_card/_infoCard/newsCard/newsCard";
 import * as domain from "../../../lib/domain";
 import local from "../../../lib/formatTime";
-
-//todo: change after deployment to root url
-const api = new GhostContentAPI({
-    url: 'https://dev.tgmrebrand.xyz',
-    key: '062f128c326e0312972d41f705',
-    version: 'v3'
-});
+import {api} from "../../../lib/api";
 
 export default class OverflowX extends ThemeAble {
 

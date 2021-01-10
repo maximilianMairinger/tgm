@@ -12,15 +12,9 @@ import * as domain from "../../../../lib/domain";
 import "./../../../image/image"
 import Image from "./../../../image/image"
 import PenIcon from "../../_icon/fachIcon/pen/pen";
+import {api} from "../../../../lib/api";
 
 export type Project = { heading: string, note: string, logo: string, team: string[], thumbnail?: string, thumbVid?: string, title: string, content: string, loaded:boolean}
-
-//todo: change after deployment to root url
-const api = new GhostContentAPI({
-    url: 'https://dev.tgmrebrand.xyz',
-    key: '062f128c326e0312972d41f705',
-    version: 'v3'
-});
 
 export default class TabletBlob extends Text {
 

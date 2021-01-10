@@ -6,14 +6,8 @@ import BlogSuggestions, {blogCardInfo} from "../../../blogSuggestions/blogSugges
 import GhostContentAPI, {PostOrPage} from '@tryghost/content-api'
 import {lang} from "../../../../../lib/lang"
 import {Data} from "josm";
+import {api} from "../../../../../lib/api";
 
-
-//todo: change after deployment to root url
-const api = new GhostContentAPI({
-  url: 'https://dev.tgmrebrand.xyz',
-  key: '062f128c326e0312972d41f705',
-  version: 'v3'
-});
 
 export default class BlogPage extends Page {
 

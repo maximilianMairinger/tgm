@@ -34,7 +34,7 @@ export default class TriangleNews extends PageSection {
     }[]
   }, api=false, tags?:string[]) {
     super("dark")
-    this.overflowX = new OverflowX(new Button(), new Button(), api, tags.add("news"), NewsCard.apiParser)
+    this.overflowX = new OverflowX(new Button(), new Button(), api, tags ? tags.add("news") : ['news'], NewsCard.apiParser)
     this.overflowX.padding(false, 25)
     this.overflowX.theme(this.theme())
     this.cardContainer.append(this.overflowX)

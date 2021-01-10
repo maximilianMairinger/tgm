@@ -52,7 +52,7 @@ export default class ElektronikPage extends LazySectionedPage {
       // {
       //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
       //     new _DarkNewsSection()
-      //   ), val: () => import(/* webpackChunkName: "elektrotechnikNews" */"../../../../_pageSection/triangleNews/biomedTriangleNews/biomedTriangleNews")
+      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/elNewsSection/elNewsSection")
       // },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {

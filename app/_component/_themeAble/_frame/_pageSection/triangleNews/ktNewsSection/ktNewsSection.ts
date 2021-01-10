@@ -9,7 +9,7 @@ export default class ElektrotechnikTriangleNews extends TriangleNews {
       text: {
         note: "Termine und",
         heading: "Aktuelles",
-        subheading: "aus der Kunststofftechnik",
+        subheading: "aus der KT",
         content: `In unseren Blogartikeln berichten wir über Events, Wettbewerbe und außergewöhnliche Leistungen.`
       },
       cards: [

@@ -22,6 +22,14 @@ export default class ElektrotechnikTriangleNews extends TriangleNews {
           content: "Aufgrund der Hygienemaßnahmen war es uns vor den Weihnachtferien leider nicht mehr möglich wie gewohnt mit"
         },
         {
+          heading: "Mittwoch",
+          note: "1.4.2020",
+          thumbnail: "nespresso",
+          href: "schulerinnen-in-fachzeitschrift-gewurdigt",
+          contenttitle: "Bioplastics",
+          content: "Die Diplomarbeit von Anna-Maria Monks und Judith Nachbagauer steht erneut im Rampenlicht; die Zeitschrift Bioplastics MAGAZINE"
+        },
+        {
           heading: "Freitag", 
           note: "01.02.2019", 
           thumbnail: "wienING", 
@@ -44,14 +52,6 @@ export default class ElektrotechnikTriangleNews extends TriangleNews {
           href: "vok-stipendienverleihung", 
           contenttitle: "VÖK-Stipendienverleihung", 
           content: "Auch dieses Jahr wurden fleißige und bedürftige Schülerinnen und Schüler der Abteilung Kunststofftechnik wieder mit den Stipendien der VÖK geehrt. Dank der großzügigen Spenden diverser Firmen und Einzelpersonen"
-        },
-        {
-          heading: "Mittwoch",
-          note: "1.4.2020",
-          thumbnail: "nespresso", 
-          href: "schulerinnen-in-fachzeitschrift-gewurdigt", 
-          contenttitle: "Bioplastics", 
-          content: "Die Diplomarbeit von Anna-Maria Monks und Judith Nachbagauer steht erneut im Rampenlicht; die Zeitschrift Bioplastics MAGAZINE"
         }
       ]
     })

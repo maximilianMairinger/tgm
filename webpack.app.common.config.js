@@ -15,7 +15,7 @@ module.exports = (env) => {
         },
         plugins: [
             new webpack.EnvironmentPlugin({
-                ghostHost: null,
+                ghostHost: "https://dev.tgmrebrand.xyz",
                 ghostApiKey: "062f128c326e0312972d41f705"
             })
         ],

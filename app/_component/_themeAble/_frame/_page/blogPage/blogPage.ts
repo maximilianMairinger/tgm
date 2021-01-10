@@ -10,7 +10,7 @@ import {Data} from "josm";
 
 //todo: change after deployment to root url
 const api = new GhostContentAPI({
-  url: document.location.host === "localhost" ? 'https://dev.tgmrebrand.xyz' : "https://" + document.location.host,
+  url: 'https://dev.tgmrebrand.xyz',
   key: '062f128c326e0312972d41f705',
   version: 'v3'
 });

@@ -50,7 +50,7 @@ export default declareComponent("rt-page", class RtPage extends LazySectionedPag
       {
         key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
           new _DarkNewsSection()
-        ), val: () => import(/* webpackChunkName: "raumfahrtNews" */"../../../../_pageSection/triangleNews/raumfahrtTriangleNews/raumfahrtTriangleNews")
+        ), val: () => import(/* webpackChunkName: "raumfahrtNews" */"../../../../_pageSection/triangleNews/rtNewsSection/rtNewsSection")
       },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {

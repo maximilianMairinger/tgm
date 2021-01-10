@@ -9,8 +9,8 @@ export default class ElektrotechnikTriangleNews extends TriangleNews {
       text: {
         note: "Termine und",
         heading: "Aktuelles",
-        subheading: "aus der Biomedizin",
-        content: `In unseren Blogartikeln berichten wir über Events, Wettbewerbe und außergewöhnliche Leistungen.`
+        subheading: "aus der ET",
+        content: `Bei rund 3000 Schülern geschieht ständig etwas. Bleiben Sie informiert, indem Sie unserer <c-link link="https://instagram.com/tgmhit/">Instagram</c-link> oder <c-link link="https://facebook.com/tgmhtl/">Facebook</c-link> Seite folgen.`
       },
       cards: [
         {heading: "Samstag", note: "18.04.20", thumbnail: "/res/img/het-blog-rad.png", href: "/", contenttitle: "Elektro-Fahrrad", content: "Das Elektrofahrrad der ET-Abteilung wurde offiziell zugelassen und ist im Handel verfügbar."},
@@ -22,13 +22,6 @@ export default class ElektrotechnikTriangleNews extends TriangleNews {
       ]
     })
   }
-  
-  stl() {
-    return super.stl() + require("./biomedTriangleNews.css").toString()
-  }
-  pug() {
-    return super.pug() + require("./biomedTriangleNews.pug").default
-  }
 };
 
-declareComponent("biomed-triangle-news-section", ElektrotechnikTriangleNews)
+declareComponent("et-triangle-news-section", ElektrotechnikTriangleNews)

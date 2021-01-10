@@ -52,7 +52,7 @@ export default class KunststoffPage extends LazySectionedPage {
       },
       {
         key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-          new _DarkNewsSection()
+          new _DarkNewsSection(baseLink + "news/")
         ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/ktNewsSection/ktNewsSection")
       },
       {

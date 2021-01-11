@@ -247,7 +247,7 @@ export default class Link extends ThemeAble {
       }
       else {
         this._link = to
-        this.domainLevel = domainLevel !== undefined ? domainLevel : 0
+        this.domainLevel = domainLevel !== undefined ? domainLevel : this.domainLevel
       }
       this.updateHref()
       this.addClass("active")

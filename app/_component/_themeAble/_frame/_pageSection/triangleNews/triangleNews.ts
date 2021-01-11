@@ -2,7 +2,7 @@ import "../../../_text/imageTextblob/imageTextblob";
 import "../../../_icon/bigNewsTriangle/bigNewsTriangle"
 import "../../../_card/_infoCard/newsCard/newsCard"
 import PageSection from "../pageSection"
-import NewsCard, {WEEKDAYS} from "../../../_card/_infoCard/newsCard/newsCard";
+import NewsCard from "../../../_card/_infoCard/newsCard/newsCard";
 import { Theme } from "../../../themeAble";
 import declareComponent from "../../../../../lib/declareComponent";
 import OverflowX from "../../../overflowX/overflowX";
@@ -59,6 +59,11 @@ export default class TriangleNews extends PageSection {
   }, api = false, tags?:string[]) {
     super("dark")
 
+    
+    for (const k in content.text) {
+      this.imageTextblob[k](content.text[k])
+    }
+    
     this.overflowX = new OverflowX(new Button(), new Button(), api, tags ? tags.add("news") : ['news'], NewsCard.apiParser)
     this.overflowX.apiQuery.then(() => {
       this.overflowX.padding(false, 25)
@@ -74,9 +79,7 @@ export default class TriangleNews extends PageSection {
         }
       }
 
-      for (const k in content.text) {
-        this.imageTextblob[k](content.text[k])
-      }
+      
     }).catch(() => {
       this.shadowRoot.innerHTML = ""
     })

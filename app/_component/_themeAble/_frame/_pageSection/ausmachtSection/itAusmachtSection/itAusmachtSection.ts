@@ -56,7 +56,7 @@ export default declareComponent("ausmacht-section-it", class extends AusmachtSec
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
                 },
                 {
-                    heading: "Werkstätte",
+                    heading: "Computerpraktikum",
                     note: "Fachpraktischer Unterricht",
                     thumbnail: "werkstaetteHET",
                     href: baseLink + "werkstatte-hit",

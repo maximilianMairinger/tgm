@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import NewsSection from "../../../../_pageSection/triangleNews/mbNewsSection/mbNewsSection"
+import NewsSection from "../../../../_pageSection/triangleNews/triangleNews"
 
 
 export default class MbPage extends LazySectionedPage {
@@ -52,11 +52,18 @@ export default class MbPage extends LazySectionedPage {
           new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/mbAusmachtSection/mbAusmachtSection")
       },
-      // {
-      //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-      //     new _DarkNewsSection()
-      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/mbNewsSection/mbNewsSection")
-      // },
+      {
+        key: new Import("news", 1, (_NewsSection: typeof NewsSection) => 
+          new _NewsSection({
+            text: {
+              note: "Termine und",
+              heading: "Aktuelles",
+              subheading: "aus der MB",
+              content: `In unseren Blogartikeln berichten wir über Events, Wettbewerbe und außergewöhnliche Leistungen.`
+            }
+          }, true, ["hmb"])
+        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
+      },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');

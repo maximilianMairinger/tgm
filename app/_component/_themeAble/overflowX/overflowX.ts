@@ -11,6 +11,7 @@ import NewsCard from "../_card/_infoCard/newsCard/newsCard";
 import * as domain from "../../../lib/domain";
 import local from "../../../lib/formatTime";
 import {api} from "../../../lib/api";
+import { ElementList } from "extended-dom";
 
 export default class OverflowX extends ThemeAble {
 
@@ -89,23 +90,8 @@ export default class OverflowX extends ThemeAble {
 
     constructor(next?: Button, previous?: Button, api?: boolean, tags?:string[], apiParser?: (post: any) => Element) {
         super(false)
-        if(api && tags && apiParser){
-            this.apiData(tags, apiParser)
-            this.apiQuery.then(() => {
-                go()
-            })
-        }
-        else {
-            this.apiQuery = Promise.resolve()
-            let children = []
-            this.childNodes.forEach(child => {
-                children.add(child)
-            })
-            this.removeChilds();
-            this.overflowContainer.apd(children);
-            go()
-        }
-        function go () {
+
+        const go = () => {
             if(!next)
                 this.nextButton = this.q("next-button c-button") as Button;
             else {
@@ -130,9 +116,26 @@ export default class OverflowX extends ThemeAble {
                     this.update();
                     clearInterval(pid);
                 }
-        }, 32);
+            }, 32);
         }
-        
+
+
+        if(api && tags && apiParser){
+            this.apiData(tags, apiParser)
+            this.apiQuery.then(() => {
+                go()
+            })
+        }
+        else {
+            this.apiQuery = Promise.resolve()
+            let children = []
+            this.childNodes.forEach(child => {
+                children.add(child)
+            })
+            this.removeChilds();
+            this.overflowContainer.apd(children);
+            go()
+        }
     }
 
 
@@ -222,7 +225,15 @@ export default class OverflowX extends ThemeAble {
             try {
                 let blogData: any[] = await api.posts.browse({filter: tags.map(tag => "tag:" + tag).join("+")})
                 if (blogData.empty) throw new Error("Cannot find any blogs that match filter [" + tags.join(", ") + "].")
-                blogData.forEach(post=>this.append(apiParser(post)));
+                let elems = new ElementList(...blogData.map(post => {
+                    const elem = apiParser(post) as HTMLElement
+                    this.append(elem)
+                    return elem
+                }))
+                setTimeout(() => {
+                    elems.anim({opacity: 1, translateY: .1}, 1000, 200)
+                })
+                
                 res()
             }
             catch(e) {

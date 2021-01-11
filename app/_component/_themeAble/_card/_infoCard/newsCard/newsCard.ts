@@ -27,6 +27,7 @@ export default class NewsCard extends InfoCard {
         if (heading) this.heading(heading)
         if (note) this.note(note)
         if (thumbnail) this.thumbnail(thumbnail)
+        else this.thumbnail("defaultNews")
         if (href) this.href(href)
         if (contenttitle) this.contenttitle(contenttitle)
         if (content) this.content(content)

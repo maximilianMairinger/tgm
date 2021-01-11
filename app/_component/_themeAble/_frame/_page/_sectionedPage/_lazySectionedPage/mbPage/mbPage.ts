@@ -61,7 +61,7 @@ export default class MbPage extends LazySectionedPage {
               subheading: "aus der MB",
               content: `In unseren Blogartikeln berichten wir über Events, Wettbewerbe und außergewöhnliche Leistungen.`
             }
-          }, true, ["hkt"])
+          }, true, ["hmb"])
         ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
       },
       {

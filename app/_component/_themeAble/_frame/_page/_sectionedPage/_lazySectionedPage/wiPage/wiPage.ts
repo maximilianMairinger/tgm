@@ -57,7 +57,7 @@ export default class WIPage extends LazySectionedPage {
               subheading: "aus der WI",
               content: `Folge uns auf <c-link link="https://www.instagram.com/tgm_wirtschaftsingenieure">Instagram</c-link> und <c-link link="https://de-de.facebook.com/tgmhwi">Facebook</c-link>, so bist DU über unsere neuesten Aktivitäten immer up to date.`
             }
-          }, true, ["hkt"])
+          }, true, ["hwi"])
         ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
       },
       {

@@ -44,7 +44,7 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
                     leitungImageTextblob.email("avhwi@tgm.ac.at");
                     leitungImageTextblob.info("Mobil", "0664 80126262");
                     leitungImageTextblob.tel("33126 – 262");
-                    leitungImageTextblob.image('unknownMan');
+                    leitungImageTextblob.image('avAngerer');
                     leitungImageTextblob.stellvertreter([{"name":"DI Dr. Eder Nikolaus, BEd", "email":"neder@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }

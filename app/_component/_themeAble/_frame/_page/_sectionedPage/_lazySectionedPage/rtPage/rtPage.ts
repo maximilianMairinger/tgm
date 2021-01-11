@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import NewsSection from "../../../../_pageSection/triangleNews/triangleNews"
+import NewsSection from "../../../../_pageSection/triangleNews/rtNewsSection/rtNewsSection"
 
 
 export default declareComponent("rt-page", class RtPage extends LazySectionedPage {
@@ -49,15 +49,8 @@ export default declareComponent("rt-page", class RtPage extends LazySectionedPag
       },
       {
         key: new Import("news", 1, (_NewsSection: typeof NewsSection) => 
-          new _NewsSection({
-            text: {
-              note: "Termine und",
-              heading: "Aktuelles",
-              subheading: "aus der RT",
-              content: `Bei rund 3000 Schülern geschieht ständig etwas. Bleiben Sie informiert, indem Sie unserer <c-link link="https://instagram.com/tgmhit/">Instagram</c-link> oder <c-link link="https://facebook.com/tgmhtl/">Facebook</c-link> Seite folgen.`
-            }
-          }, true, ["rt"])
-        ), val: () => import(/* webpackChunkName: "raumfahrtNews" */"../../../../_pageSection/triangleNews/triangleNews")
+          new _NewsSection(true)
+        ), val: () => import(/* webpackChunkName: "raumfahrtNews" */"../../../../_pageSection/triangleNews/rtNewsSection/rtNewsSection")
       },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {

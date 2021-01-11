@@ -237,21 +237,12 @@ export default class Link extends ThemeAble {
   private _link: string
 
   link(): string
-  link(to: string | {link: string, domainLevel: number}): this
-  link(to: string, domainLevel?: number): this
-  link(to?: string | {link: string, domainLevel: number}, domainLevel?: number): any {
+  link(to?: string): void
+  link(to?: string): any {
     if (to) {
-      if (typeof to === "object") {
-        this._link = to.link
-        this.domainLevel = to.domainLevel
-      }
-      else {
-        this._link = to
-        this.domainLevel = domainLevel !== undefined ? domainLevel : 0
-      }
+      this._link = to
       this.updateHref()
       this.addClass("active")
-      return this
     }
     else if (to === null) {
       this._link = null
@@ -271,8 +262,8 @@ export default class Link extends ThemeAble {
 
   content(): string
   content(to?: string | Data<string>, textChangeAnim?: boolean): void
-  content(to?: string | Data<string>, textChangeAnim?: boolean): any {
-    return this.slotElem.text(to as any, textChangeAnim)
+  content(to?: Prim | Data<Prim, Prim>, textChangeAnim?: boolean): any {
+    return this.slotElem.text(to, textChangeAnim)
   }
 
   stl() {

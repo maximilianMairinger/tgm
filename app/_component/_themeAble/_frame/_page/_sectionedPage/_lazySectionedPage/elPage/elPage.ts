@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/etAusmachtSection/etAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import DarkNewsSection from "../../../../_pageSection/triangleNews/triangleNews"
+import DarkNewsSection from "../../../../_pageSection/triangleNews/elNewsSection/elNewsSection"
 
 
 
@@ -49,18 +49,11 @@ export default class ElektronikPage extends LazySectionedPage {
           new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSectionElektonik" */"../../../../_pageSection/ausmachtSection/elAusmachtSection/elAusmachtSection")
       },
-      {
-        key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-          new _DarkNewsSection({
-            text: {
-              note: "Termine und",
-              heading: "Aktuelles",
-              subheading: "aus der ET",
-              content: `In unseren Blogartikeln berichten wir über Events, Wettbewerbe und außergewöhnliche Leistungen.`
-            },
-          }, true, ["hel"])
-        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
-      },
+      // {
+      //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
+      //     new _DarkNewsSection()
+      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/elNewsSection/elNewsSection")
+      // },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');

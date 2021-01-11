@@ -67,6 +67,7 @@ export default class Image extends Component {
   src(src?: string, forceLoad: boolean = false) {
     if (src !== undefined) {
       if (forceLoad) {
+        debugger
         if (isExplicitLocation(src)) {
           this.img.src = src
         }

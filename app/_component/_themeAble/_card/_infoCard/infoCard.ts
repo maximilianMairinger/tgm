@@ -95,8 +95,8 @@ export default abstract class InfoCard extends Card {
     }
 
     href():string
-    href(href: string | {link: string, domainLevel: number}):void
-    href(href?: string | {link: string, domainLevel: number}):any{
+    href(href:string):void
+    href(href?:string):any{
         return this._link.link(href);
     }
 

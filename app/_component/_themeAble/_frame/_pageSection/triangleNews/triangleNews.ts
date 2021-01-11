@@ -59,6 +59,11 @@ export default class TriangleNews extends PageSection {
   }, api = false, tags?:string[]) {
     super("dark")
 
+    
+    for (const k in content.text) {
+      this.imageTextblob[k](content.text[k])
+    }
+    
     this.overflowX = new OverflowX(new Button(), new Button(), api, tags ? tags.add("news") : ['news'], NewsCard.apiParser)
     this.overflowX.apiQuery.then(() => {
       this.overflowX.padding(false, 25)
@@ -74,9 +79,7 @@ export default class TriangleNews extends PageSection {
         }
       }
 
-      for (const k in content.text) {
-        this.imageTextblob[k](content.text[k])
-      }
+      
     }).catch(() => {
       this.shadowRoot.innerHTML = ""
     })

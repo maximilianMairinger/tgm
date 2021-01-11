@@ -30,8 +30,8 @@ export default class BlogPost extends Text {
   }
 
   date(): string
-  date(date: Date | [from: Date, until: Date] | string): void
-  date(date?: Date | [from: Date, until: Date] | string){
+  date(date: Date | Date[]/*[from: Date, until: Date]*/ | string): void
+  date(date?: Date | Date[]/*[from: Date, until: Date]*/ | string){
     if(date) {
       this.q("blog-date").text(local.formatDate(date));
     }

@@ -22,7 +22,7 @@ export const weekday = (() => {
 
 export default class NewsCard extends InfoCard {
 
-    constructor(heading?: string, note?: string | Date | [from: Date, until: Date], thumbnail?: string, href?: string | {link: string, domainLevel: number}, contenttitle?: string, content?: string) {
+    constructor(heading?: string, note?: string | Date | Date[]/*[from: Date, until: Date]*/, thumbnail?: string, href?: string | {link: string, domainLevel: number}, contenttitle?: string, content?: string) {
         super();
         if (heading) this.heading(heading)
         if (note) this.note(note)
@@ -35,8 +35,8 @@ export default class NewsCard extends InfoCard {
     }
 
     note():string
-    note(note:string | Date | [from: Date, until: Date]): void
-    note(note?:string | Date | [from: Date, until: Date]){
+    note(note:string | Date | Date[]/*[from: Date, until: Date]*/): void
+    note(note?:string | Date | Date[]/*[from: Date, until: Date]*/){
         if(note) {
             this.q("note-text").text(local.formatDate(note));
         }
@@ -45,10 +45,10 @@ export default class NewsCard extends InfoCard {
 
     static apiParser(post): HTMLElement {        
         let startDate: Date
-        let date: Date | [from: Date, until: Date]
+        let date: Date | Date[]/*[from: Date, until: Date]*/
         if (post.event_data) {
             date = JSON.parse(post.event_data)
-            startDate = (date as [from: Date, until: Date]).first
+            startDate = (date as Date[]/*[from: Date, until: Date]*/).first
         }
         else startDate = date = new Date(post.published_at)
         let newsCard = new NewsCard(

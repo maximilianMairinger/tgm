@@ -8,7 +8,7 @@ function err() {
   throw new Error("Invalid Date")
 }
 
-function parseDateToLocal(dateImp: string | Date, formatOptions: [local: string, options: FormatOptions]) {
+function parseDateToLocal(dateImp: string | Date, formatOptions: any[] /*[local: string, options: FormatOptions]*/) {
   let d: Date
   if (dateImp instanceof Date) d = dateImp
   else {
@@ -46,7 +46,7 @@ function parseDateToLocal(dateImp: string | Date, formatOptions: [local: string,
 
 export function constructFormat(local: string, timeZone = "Europe/Vienna", defaultFormat: FormatOptions = {day: "2-digit", month: "2-digit", year: "numeric"}) {
   return {
-    formatDate(date: Date | string | [from: Date, until: Date], format: FormatOptions = {}) { 
+    formatDate(date: Date | string | Date[]/*[from: Date, until: Date]*/, format: FormatOptions = {}) { 
       const options = { ...defaultFormat, ...format, timeZone }
       try {
         if (date instanceof Array) {

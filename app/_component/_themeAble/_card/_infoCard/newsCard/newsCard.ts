@@ -15,7 +15,7 @@ export const WEEKDAYS = [
 
 export default class NewsCard extends InfoCard {
 
-    constructor(heading?: string, note?: string | Date, thumbnail?: string, href?: string, contenttitle?: string, content?: string) {
+    constructor(heading?: string, note?: string | Date, thumbnail?: string, href?: string | {link: string, domainLevel: number}, contenttitle?: string, content?: string) {
         super();
         if (heading) this.heading(heading)
         if (note) this.note(note)
@@ -27,22 +27,21 @@ export default class NewsCard extends InfoCard {
         this.textblob.hsize({max:40, min:35});
     }
 
-    // note():string
-    // note(note:string | Date):void
-    // note(note?:string | Date){
-    //     if(note && new Date(note).toDateString() !== 'Invalid Date'){
-    //         this.q("note-text").text(local.formatDate(note));
-    //     } else if (typeof note === 'string') super.note(note as string);
-    //     else return this.q("note-text").text();
-    // }
+    note():string
+    note(note:string | Date):void
+    note(note?:string | Date){
+        if(note) {
+            this.q("note-text").text(local.formatDate(note));
+        }
+        else return this.q("note-text").text();
+    }
 
     static apiParser(post) : HTMLElement{
-        const domainCommon = [...domain.domainIndex].rmI(domain.domainIndex.length - 1).join(domain.dirString) + domain.dirString
         let newsCard = new NewsCard(
             WEEKDAYS[new Date(post.published_at).getDay()],
             new Date(post.published_at),
             post.feature_image,
-            domainCommon + post.slug,
+            {link: post.slug, domainLevel: domain.domainIndex.length + 1},
             post.title,
             post.excerpt,
         );

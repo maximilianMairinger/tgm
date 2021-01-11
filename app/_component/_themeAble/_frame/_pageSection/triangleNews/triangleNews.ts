@@ -16,13 +16,13 @@ export default class TriangleNews extends PageSection {
   private overflowX;
   private imageTextblob = this.q("c-image-textblob")
 
+
   constructor(content: {
     text: {
       note: string,
       heading: string,
       subheading: string,
-      content: string,
-
+      content: string
     },
     cards: {
       heading: string,
@@ -32,7 +32,31 @@ export default class TriangleNews extends PageSection {
       contenttitle: string,
       content: string
     }[]
-  }, api=false, tags?:string[]) {
+  })
+  constructor(content: {
+    text: {
+      note: string,
+      heading: string,
+      subheading: string,
+      content: string
+    }
+  }, api: true, tags: string[])
+  constructor(content: {
+    text: {
+      note: string,
+      heading: string,
+      subheading: string,
+      content: string
+    },
+    cards?: {
+      heading: string,
+      note: string,
+      thumbnail: string,
+      href: string,
+      contenttitle: string,
+      content: string
+    }[]
+  }, api = false, tags?:string[]) {
     super("dark")
     this.overflowX = new OverflowX(new Button(), new Button(), api, tags ? tags.add("news") : ['news'], NewsCard.apiParser)
     this.overflowX.padding(false, 25)

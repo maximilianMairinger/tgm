@@ -87,7 +87,7 @@ export default class OverflowX extends ThemeAble {
         this.updating = false;
     }
 
-    constructor(next?: Button, previous?: Button, api?, tags?:string[], apiParser?) {
+    constructor(next?: Button, previous?: Button, api?: boolean, tags?:string[], apiParser?: (post: any) => Element) {
         super(false)
         if(api && tags && apiParser){
             this.apiData(tags, apiParser)
@@ -210,15 +210,13 @@ export default class OverflowX extends ThemeAble {
 
 
     private async apiData(tags:string[], apiParser){
-        let blogData: any
         try {
-            blogData = await api.posts.browse({filter:tags.map(tag => "tag:" + tag).join("+")})
+            let blogData: any = await api.posts.browse({filter: tags.map(tag => "tag:" + tag).join("+")})
+            blogData.forEach(post=>this.append(apiParser(post)));
         }
         catch(e) {
-            console.error("problem with project api")
+            throw new Error("Issue with ghost content api. Cannot get posts of tag: [" + tags.join(", ") + "].")
         }
-        blogData.forEach(post=>this.append(apiParser(post)));
-
     }
 
     theme(): Theme

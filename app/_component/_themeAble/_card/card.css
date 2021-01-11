@@ -12,12 +12,13 @@
   /* height: 310px; */
 }
 
+:host(.card-hover-effect-enabled) component-body, :host(.no-body.card-hover-effect-enabled) {
+  transition: .5s;
+}
 
 component-body, :host(.no-body) {
   border-radius: 15px;
-
-
-  transition: .5s;
+  
 
   box-shadow: 7px 7px 15px 0px rgba(0,0,0,.07);
   background-color: var(--secondary-background-color);

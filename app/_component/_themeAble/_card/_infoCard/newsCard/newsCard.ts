@@ -47,7 +47,7 @@ export default class NewsCard extends InfoCard {
         let startDate: Date
         let date: Date | Date[]/*[from: Date, until: Date]*/
         if (post.event_data) {
-            date = JSON.parse(post.event_data)
+            date = JSON.parse(post.event_data).map((date: string) => new Date(date))
             startDate = (date as Date[]/*[from: Date, until: Date]*/).first
         }
         else startDate = date = new Date(post.published_at)

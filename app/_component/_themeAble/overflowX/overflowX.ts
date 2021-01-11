@@ -89,23 +89,8 @@ export default class OverflowX extends ThemeAble {
 
     constructor(next?: Button, previous?: Button, api?: boolean, tags?:string[], apiParser?: (post: any) => Element) {
         super(false)
-        if(api && tags && apiParser){
-            this.apiData(tags, apiParser)
-            this.apiQuery.then(() => {
-                go()
-            })
-        }
-        else {
-            this.apiQuery = Promise.resolve()
-            let children = []
-            this.childNodes.forEach(child => {
-                children.add(child)
-            })
-            this.removeChilds();
-            this.overflowContainer.apd(children);
-            go()
-        }
-        function go () {
+
+        const go = () => {
             if(!next)
                 this.nextButton = this.q("next-button c-button") as Button;
             else {
@@ -130,9 +115,26 @@ export default class OverflowX extends ThemeAble {
                     this.update();
                     clearInterval(pid);
                 }
-        }, 32);
+            }, 32);
         }
-        
+
+
+        if(api && tags && apiParser){
+            this.apiData(tags, apiParser)
+            this.apiQuery.then(() => {
+                go()
+            })
+        }
+        else {
+            this.apiQuery = Promise.resolve()
+            let children = []
+            this.childNodes.forEach(child => {
+                children.add(child)
+            })
+            this.removeChilds();
+            this.overflowContainer.apd(children);
+            go()
+        }
     }
 
 

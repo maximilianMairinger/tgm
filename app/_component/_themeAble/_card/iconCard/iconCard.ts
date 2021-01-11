@@ -57,13 +57,24 @@ export default class IconCard extends Card {
   private disableWrapAll() {
     this.headingContainer.css("wordBreak", "normal")
   }
+  private shyWrap() {
+    this.disableWrapAll()
+    //@ts-ignore
+    this.headingContainer.css("hyphens", "manual")
+  }
 
   private setWordBreakListenerFunction(to: string) {
-    if (to.includes(" ")) {
-      this.disableWrapAll()
-      if (this.headingContainer.offsetWidth >= 225) this.enableWrapAll()
+    if (to.includes("&shy;")) {
+      this.shyWrap()
     }
-    else this.enableWrapAll()
+    else {
+      if (to.includes(" ")) {
+        this.disableWrapAll()
+        if (this.headingContainer.offsetWidth >= 225) this.enableWrapAll()
+      }
+      else this.enableWrapAll()
+    }
+    
   }
 
   private setWordBreakListener = new DataSubscription(new Data(""), this.setWordBreakListenerFunction.bind(this), true, false)
@@ -72,9 +83,16 @@ export default class IconCard extends Card {
   heading(to: string | Data<string>): void
   heading(to?: string | Data<string>): any {
     if (to !== undefined) {
-      this.headingContainer.text(to as any)
-      if (to instanceof Data) this.setWordBreakListener.data(to)
-      else this.setWordBreakListenerFunction(to)
+      if (to instanceof Data) {
+        this.setWordBreakListener.data(to)
+        to.get((to) => {
+          this.headingContainer.html(to)
+        })
+      }
+      else {
+        this.setWordBreakListenerFunction(to)
+        this.headingContainer.html(to)
+      }
     }
     else return this.headingContainer.text()
   }

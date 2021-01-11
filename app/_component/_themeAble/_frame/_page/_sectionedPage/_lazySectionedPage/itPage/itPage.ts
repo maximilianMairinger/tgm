@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/itAusmachtSection/itAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import NewsSection from "../../../../_pageSection/triangleNews/itNewsSection/itNewsSection"
+import NewsSection from "../../../../_pageSection/triangleNews/triangleNews"
 
 
 export default declareComponent("it-page", class ItPage extends LazySectionedPage {
@@ -49,11 +49,18 @@ export default declareComponent("it-page", class ItPage extends LazySectionedPag
           new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/itAusmachtSection/itAusmachtSection")
       },
-      // {
-      //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-      //     new _DarkNewsSection(baseLink + "highlights/")
-      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/itNewsSection/itNewsSection")
-      // },
+      {
+        key: new Import("news", 1, (_DarkNewsSection: typeof NewsSection) => 
+          new _DarkNewsSection({
+            text: {
+              note: "Termine und",
+              heading: "Aktuelles",
+              subheading: "aus der IT",
+              content: `In unseren Blogartikeln berichten wir über Events, Wettbewerbe und außergewöhnliche Leistungen. Sie können uns auf <c-link link="https://instagram.com/tgmhit/">Instagram</c-link> oder <c-link link="https://facebook.com/tgmhit/">Facebook</c-link> Seite folgen, um am Laufenden zu bleiben.`
+            }
+          }, true, ["hit"])
+        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
+      },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');

@@ -83,8 +83,12 @@ export function parseDomainIndexToDomain(domainIndex: Readonly<string[]>) {
 
 export function parseDomainToDomainIndex(domainIndex: string[], domain: string, level: number) {
 
-  let originalLength = domainIndex.length;
-  if (originalLength < level || level < 0) {
+  let originalLength = domainIndex.length
+  
+  if (level < 0) {
+    level = originalLength - level    
+  }
+  if (originalLength < level) {
     console.warn("Unexpected index: " + level + ". Replacing it with " + originalLength + ".")
     level = originalLength
   }
@@ -110,6 +114,7 @@ export function parseDomainToDomainIndex(domainIndex: string[], domain: string, 
 let currentDomainSet: Promise<void>
 let inDomainSet = false
 export async function set(subdomain: string, level: number = 0, push: boolean = true, notify = push) {
+  if (level < 0) level = domainIndex.length - level
   initialGet = false
   if (subdomain.startsWith("/")) subdomain = subdomain.splice(0, 1)
   else if (subdomain.startsWith("./")) console.warn("Please use the domain level to set relative domains")
@@ -206,9 +211,10 @@ export function get(domainLevel: number, subscription: undefined | null, onlyInt
 export function get(domainLevel: number, subscription?: undefined, onlyInterestedInLevel?: boolean, defaultDomain?: string): DomainFragment
 export function get(domainLevel: number, subscription?: (domainFragment: DomainFragment) => (boolean |  Promise<void> | Promise<boolean> | void), onlyInterestedInLevel: boolean = false, defaultDomain = ""): DomainFragment | DomainSubscription {
   let calcCurrentDomain = (() => {
+    let domLvl = domainLevel < 0 ? domIndex.length - domainLevel : domainLevel
     if (!onlyInterestedInLevel) {
       let myDomainIndex = domIndex.clone()
-      for (let i = 0; i < domainLevel; i++) {
+      for (let i = 0; i < domLvl; i++) {
         myDomainIndex.shift() 
       }
   
@@ -216,7 +222,7 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
       return joined === "" ? defaultDomain : joined
     }
     else {
-      return domIndex[domainLevel] === undefined ? defaultDomain : domIndex[domainLevel]
+      return domIndex[domLvl] === undefined ? defaultDomain : domIndex[domLvl]
     }
   })
   let currentDomain = calcCurrentDomain();
@@ -226,32 +232,32 @@ export function get(domainLevel: number, subscription?: (domainFragment: DomainF
     let domain = joined === "" ? defaultDomain : joined
 
     if (joined !== domain) {
-      set(domain, domainLevel, false)
+      set(domain, domainLevel < 0 ? domIndex.length - domainLevel : domainLevel, false)
     }
   })()
 
 
   if (subscription) {
     let f = async () => {
-      
+      let domLvl = domainLevel < 0 ? domIndex.length - domainLevel : domainLevel
       if (!onlyInterestedInLevel) {
         let myDomainIndex = domIndex.clone()
-        for (let i = 0; i < domainLevel; i++) {
+        for (let i = 0; i < domLvl; i++) {
           myDomainIndex.shift() 
         }
         let joined = parseDomainIndexToDomain(myDomainIndex)
         let domain = joined === "" ? defaultDomain : joined
         await subscription(domain)
         if (joined !== domain) {
-          return {domain, domainLevel}
+          return {domain, domLvl}
         }
 
       }
       else {
-        let domain = domIndex[domainLevel] === undefined ? defaultDomain : domIndex[domainLevel]
+        let domain = domIndex[domLvl] === undefined ? defaultDomain : domIndex[domLvl]
         await subscription(domain)
-        if (domIndex[domainLevel] !== domain) {
-          return {domain, domainLevel}
+        if (domIndex[domLvl] !== domain) {
+          return {domain, domainLevel: domLvl}
         }
 
       }

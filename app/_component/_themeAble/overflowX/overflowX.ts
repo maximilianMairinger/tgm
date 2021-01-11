@@ -87,44 +87,52 @@ export default class OverflowX extends ThemeAble {
         this.updating = false;
     }
 
-    constructor(next?: Button, previous?: Button, api?, tags?:string[], apiParser?) {
+    constructor(next?: Button, previous?: Button, api?: boolean, tags?:string[], apiParser?: (post: any) => Element) {
         super(false)
         if(api && tags && apiParser){
             this.apiData(tags, apiParser)
+            this.apiQuery.then(() => {
+                go()
+            })
         }
         else {
+            this.apiQuery = Promise.resolve()
             let children = []
             this.childNodes.forEach(child => {
                 children.add(child)
             })
             this.removeChilds();
             this.overflowContainer.apd(children);
+            go()
         }
-        if(!next)
-            this.nextButton = this.q("next-button c-button") as Button;
-        else {
-            this.nextButton = next;
-            this.nextArrow =next
-            this.nextArrow.css({"display": "none"})
-        }
-        this.nextButton.click(this.next.bind(this));
-
-        if (!previous)
-            this.previousButton = this.q("previous-button c-button") as Button;
-        else {
-            this.previousButton = previous;
-            this.previousArrow  = previous
-            this.previousArrow.css({"display": "none"})
-        }
-        this.previousButton.click(this.previous.bind(this));
-
-        this.overflowContainer.addEventListener("scroll", this.scrollUpdate.bind(this))
-        let pid = setInterval(() => {
-            if (this.overflowContainer.scrollWidth != undefined) {
-                this.update();
-                clearInterval(pid);
+        function go () {
+            if(!next)
+                this.nextButton = this.q("next-button c-button") as Button;
+            else {
+                this.nextButton = next;
+                this.nextArrow =next
+                this.nextArrow.css({"display": "none"})
             }
+            this.nextButton.click(this.next.bind(this));
+
+            if (!previous)
+                this.previousButton = this.q("previous-button c-button") as Button;
+            else {
+                this.previousButton = previous;
+                this.previousArrow  = previous
+                this.previousArrow.css({"display": "none"})
+            }
+            this.previousButton.click(this.previous.bind(this));
+
+            this.overflowContainer.addEventListener("scroll", this.scrollUpdate.bind(this))
+            let pid = setInterval(() => {
+                if (this.overflowContainer.scrollWidth != undefined) {
+                    this.update();
+                    clearInterval(pid);
+                }
         }, 32);
+        }
+        
     }
 
 
@@ -208,17 +216,20 @@ export default class OverflowX extends ThemeAble {
             return this.hasGradient;
     }
 
-
-    private async apiData(tags:string[], apiParser){
-        let blogData: any
-        try {
-            blogData = await api.posts.browse({filter:tags.map(tag => "tag:" + tag).join("+")})
-        }
-        catch(e) {
-            console.error("problem with project api")
-        }
-        blogData.forEach(post=>this.append(apiParser(post)));
-
+    public apiQuery?: Promise<void>
+    private apiData(tags:string[], apiParser: (post: any) => Element){
+        this.apiQuery = new Promise(async (res, rej) => {
+            try {
+                let blogData: any[] = await api.posts.browse({filter: tags.map(tag => "tag:" + tag).join("+")})
+                if (blogData.empty) throw new Error("Cannot find any blogs that match filter [" + tags.join(", ") + "].")
+                blogData.forEach(post=>this.append(apiParser(post)));
+                res()
+            }
+            catch(e) {
+                rej(new Error("Issue with ghost content api above. Cannot get posts of tag: [" + tags.join(", ") + "].\n\n" + e.toString()))
+            }
+        })
+        
     }
 
     theme(): Theme

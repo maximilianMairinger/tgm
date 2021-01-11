@@ -17,7 +17,7 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
                 e.note("mit");
                 e.heading("Teamgeist");
                 e.subheading("in die Zukunft");
-                e.background("wiTeam3")
+                e.background("wiTeam4")
                 return new WrapperSection(e, 'dark') as any
             }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_text/_thumbnail/thumbnail")
         },
@@ -44,7 +44,7 @@ export default declareComponent("wirtschaftsingenieure-team", class WiTeam exten
                     leitungImageTextblob.email("avhwi@tgm.ac.at");
                     leitungImageTextblob.info("Mobil", "0664 80126262");
                     leitungImageTextblob.tel("33126 – 262");
-                    leitungImageTextblob.image('unknownMan');
+                    leitungImageTextblob.image('avAngerer');
                     leitungImageTextblob.stellvertreter([{"name":"DI Dr. Eder Nikolaus, BEd", "email":"neder@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }

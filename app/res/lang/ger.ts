@@ -34,7 +34,7 @@ export default {
     "Biomedizien": "Biomedizin und Gesundheitstechnik",
     "Elektrotechnik": "Elektrotechnik",
     "Elektronik": "Elektronik und Technische Informatik",
-    "Informationstechnologie": "Informationstechnologie",
+    "Informationstechnologie": "Informations&shy;technologie",
     "Kunststofftechnik": "Kunststofftechnik",
     "Maschinenbau": "Maschinenbau",
     "Wirtschaftsingenieure": "Wirtschaftsingenieure"

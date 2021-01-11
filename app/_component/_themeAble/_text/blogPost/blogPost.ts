@@ -6,7 +6,7 @@ import { ElementList } from "extended-dom";
 import {Theme} from "../../themeAble";
 import { Data } from "josm";
 import delay from "delay";
-import AT from "../../../../lib/formatTime"
+import local from "../../../../lib/formatTime"
 
 
 export default class BlogPost extends Text {
@@ -30,10 +30,10 @@ export default class BlogPost extends Text {
   }
 
   date(): string
-  date(date: Date | string): void
-  date(date?: Date | string){
+  date(date: Date | [from: Date, until: Date] | string): void
+  date(date?: Date | [from: Date, until: Date] | string){
     if(date) {
-      this.q("blog-date").text(AT.formatDate(date));
+      this.q("blog-date").text(local.formatDate(date));
     }
     else return this.q("blog-date").text();
   }

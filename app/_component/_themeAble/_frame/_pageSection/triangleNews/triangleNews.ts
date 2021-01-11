@@ -2,7 +2,7 @@ import "../../../_text/imageTextblob/imageTextblob";
 import "../../../_icon/bigNewsTriangle/bigNewsTriangle"
 import "../../../_card/_infoCard/newsCard/newsCard"
 import PageSection from "../pageSection"
-import NewsCard, {WEEKDAYS} from "../../../_card/_infoCard/newsCard/newsCard";
+import NewsCard from "../../../_card/_infoCard/newsCard/newsCard";
 import { Theme } from "../../../themeAble";
 import declareComponent from "../../../../../lib/declareComponent";
 import OverflowX from "../../../overflowX/overflowX";

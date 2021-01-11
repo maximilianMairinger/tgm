@@ -3,8 +3,6 @@ type FormatOptions = {weekday?: "long" | "short", year?: "numeric", month?: "2-d
 
 // Locals documentation https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation
 
-const inflateCurrentDate = true
-
 
 function err() {
   throw new Error("Invalid Date")

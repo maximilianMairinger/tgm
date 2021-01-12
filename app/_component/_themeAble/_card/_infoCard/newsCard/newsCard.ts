@@ -7,7 +7,7 @@ import * as domain from "../../../../../lib/domain";
 
 export const weekday = (() => {
     const WEEKDAYS = [
-        "Sontag",
+        "Sonntag",
         "Montag",
         "Dienstag",
         "Mittwoch",

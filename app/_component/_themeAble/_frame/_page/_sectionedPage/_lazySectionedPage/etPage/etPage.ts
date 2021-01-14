@@ -71,7 +71,7 @@ export default declareComponent("et-page", class EtPage extends LazySectionedPag
           imageTextBlob.linkhref("tagesschule/elektrotechnik")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 3. Stock");
           imageTextBlob.email("tdeininger@tgm.ac.at");
-          imageTextBlob.tel("+43 (1) 33 126 / 231");
+          imageTextBlob.tel("+43 (1) 33 126 / 230");
           imageTextBlob.image('etContact');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")

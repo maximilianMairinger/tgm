@@ -93,7 +93,7 @@ export default class NewsContactSection extends PageSection {
     this.mapTextBlob.heading("Kontakt")
     this.mapTextBlob.subheading("zum TGM")
     this.mapTextBlob.note("Direktion")
-    this.mapTextBlob.content("Außerhalb der Ferien ist die Direktion am Mo, Mi & Do von 7:30 bis 15:30; am Di von 7:30 bis 17:30; am Fr von 7:30 bis 14:30 erreichbar.")
+    this.mapTextBlob.content("Außerhalb der Ferien ist die Direktion am Mo, Mi & Do von 7:30 bis 15:30; am Di von 7:30 bis 17:30; am Fr von 7:30 bis 14:00 erreichbar.")
     this.mapTextBlob.hsize({"max": 60, "min": 40})
     this.mapTextBlob.hmobile({"max": 55, "min": 35})
     this.mapTextBlob.contentwidth(300)

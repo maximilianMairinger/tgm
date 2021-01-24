@@ -23,7 +23,9 @@ export default {
     "vorbereitungs-lehrgang": "Vorbereitungslehrgang",
     "aufbau-lehrgang": "Vorbereitungslehrgang",
     "kolleg": "Kolleg",
-    "werkmeister-lehrgang": "Werkmeister"
+    "werkmeister-lehrgang": "Werkmeister",
+    // "erwachsenenbildung/tagesschule": "Erwachsenenbildung",
+    // "erwachsenenbildung/abendschule": "Erwachsenenbildung2"
     
   },
 

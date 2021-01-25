@@ -78,12 +78,12 @@ export default declareComponent("page-manager", class PageManager extends Manage
 
       {
         key: new Import("erwachsenenbildung/abendschule/vorbereitungs-lehrgang", 42, (abendAufbau: typeof AbendVorbereitung) => 
-          new abendAufbau("erwachsenenbildung/abendschule/vorbereitungs-lehrgang", sectionChangeCallback)
+          new abendAufbau("erwachsenenbildung/abendschule/vorbereitungs-lehrgang/", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "abendVorbereitung" */"../../_page/_sectionedPage/_lazySectionedPage/abendVorbereitungsPage/abendVorbereitungsPage")
       },
       {
-        key: new Import("erwachsenenbildung/abendschule/vorbereitungs-lehrgang", 42, (abendAufbau: typeof AbendAufbau) => 
-          new abendAufbau("erwachsenenbildung/abendschule/aufbaulehrgang-lehrgang/", sectionChangeCallback)
+        key: new Import("erwachsenenbildung/abendschule/aufbau-lehrgang", 42, (abendAufbau: typeof AbendAufbau) => 
+          new abendAufbau("erwachsenenbildung/abendschule/aufbau-lehrgang/", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "abendAufbau" */"../../_page/_sectionedPage/_lazySectionedPage/abendAufbauPage/abendAufbauPage")
       },
       {
@@ -93,7 +93,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       },
       {
         key: new Import("erwachsenenbildung/abendschule/werkmeister-lehrgang", 42, (abendAufbau: typeof AbendAufbau) => 
-          new abendAufbau("erwachsenenbildung/abendschule/werkmeister-lehrgang", sectionChangeCallback)
+          new abendAufbau("erwachsenenbildung/abendschule/werkmeister-lehrgang/", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "abendWerkmeister" */"../../_page/_sectionedPage/_lazySectionedPage/abendWerkmeisterPage/abendWerkmeisterPage")
       },
 

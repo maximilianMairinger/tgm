@@ -7,7 +7,7 @@ import TestSection2 from "../../../../_pageSection/testSection2/testSection2"
 import Thumbnail from "../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail"
 import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
 import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection"
-import AusmachtSection from "../../../../_pageSection/ausmachtSection/itAusmachtSection/itAusmachtSection"
+import AusmachtSection from "../../../../_pageSection/ausmachtSection/abendVorbereitungsAusmachtSection/abendVorbereitungsAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
 import NewsSection from "../../../../_pageSection/triangleNews/triangleNews"
@@ -23,8 +23,7 @@ export default declareComponent("abend-vorbereitungs-page", class AbendVorbereit
           e.heading("Vorbereitungslehrgang")
           e.subheading("der Abendschule")
           e.note("abteilung");
-          e.background("itMain.png")
-          e.videolink("https://www.youtube.com/watch?v=93aXzeeolkY", "Einblick in die HIT")
+          e.background("abendschuleVorbereitung2")
           
           
           return new WrapperSection(e, "dark") as any
@@ -34,12 +33,12 @@ export default declareComponent("abend-vorbereitungs-page", class AbendVorbereit
         key: new Import("info", 1, (_Info: typeof Info) => {
           let info = new _Info()
 
-          info.note("Unsere");
-          info.heading("Individualisierte IT-Ausbildung");
-          info.subheading("technisch, pädagogisch und didaktisch");
+          info.note("jetzt");
+          info.heading("Nutzen Sie die Gelegenheit");
+          info.subheading("Beruf/Familie und Ausbildung");
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
-          info.content("Die Informationstechnologie ist mit der Digitalisierung der treibende Faktor unserer Zeit. Unsere Ausbildung gibt dir ein umfassendes technisches Verständnis für die Digitalisierung und ermöglicht dir damit, in jeder Branche, in jedem Unternehmen und in nahezu jeder Berufsrolle einzusteigen. Dafür setzten wir in Pädagogik und Didaktik auf Individualisierung und unterstützen dich mit dem Lernbüro auf deinem persönlichen Weg in die IT. Ganz egal ob IT-Security, Big-Data, Game- & App-Development, Sichere Webentwicklung oder Digital Media-Art & Design.")
+          info.content("Kein Problem - Arbeit und Lernen ist miteinander zu vereinbaren! Mit einer Ausbildung in der Höheren Lehranstalt für Berufstätige am TGM können Sie wie gewohnt Ihrem Beruf nachgehen und am Abend gemeinsam mit Gleichgesinnten lernen und Ihre beruflichen Zukunftsperspektiven erweitern. Unterstützt werden Sie dabei durch klare Unterrichtskonzepte mit Flexibilität, Blended Learning Szenarien, Verknüpfung von Theorie und Praxis, erfahrene und engagierte Lehrende, Expertinnen und Experten aus Wirtschaft und Industrie... <br>Ihr nächster Karriereschritt ist für Sie bei uns äußerst gut plan- und organisierbar!")
 
           return new WrapperSection(info) as any
         }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")
@@ -47,32 +46,32 @@ export default declareComponent("abend-vorbereitungs-page", class AbendVorbereit
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
           new _AusmachtSection(baseLink + "highlights/")
-        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/itAusmachtSection/itAusmachtSection")
+        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/abendVorbereitungsAusmachtSection/abendVorbereitungsAusmachtSection")
       },
-      {
-        key: new Import("news", 1, (_DarkNewsSection: typeof NewsSection) => 
-          new _DarkNewsSection({
-            text: {
-              note: "Termine und",
-              heading: "Aktuelles",
-              subheading: "aus der IT",
-              content: `In unseren Blogartikeln berichten wir über Events, Wettbewerbe und außergewöhnliche Leistungen. Sie können uns auf <c-link link="https://instagram.com/tgmhit/">Instagram</c-link> oder <c-link link="https://facebook.com/tgmhit/">Facebook</c-link> Seite folgen, um am Laufenden zu bleiben.`
-            }
-          }, true, ["hit"])
-        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
-      },
+      // {
+      //   key: new Import("news", 1, (_DarkNewsSection: typeof NewsSection) => 
+      //     new _DarkNewsSection({
+      //       text: {
+      //         note: "Termine und",
+      //         heading: "Aktuelles",
+      //         subheading: "aus der IT",
+      //         content: `In unseren Blogartikeln berichten wir über Events, Wettbewerbe und außergewöhnliche Leistungen. Sie können uns auf <c-link link="https://instagram.com/tgmhit/">Instagram</c-link> oder <c-link link="https://facebook.com/tgmhit/">Facebook</c-link> Seite folgen, um am Laufenden zu bleiben.`
+      //       }
+      //     }, true, ["hit"])
+      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
+      // },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("zur IT");
-          imageTextBlob.content("Demnächst in der Nähe? Komm uns besuchen, wir freuen uns auf dich! Wir ermöglichen dir als SchnupperschülerIn in die Welt der Informationstechnologie einzutauchen.")
+          imageTextBlob.subheading("zur Abendschule");
+          imageTextBlob.content("Wir stehen Ihnen gerne außerhalb der Unterrichtszeiten nach Terminvereinbarung zur Verfügung.")
           // imageTextBlob.linktext("Einen Besuch planen")
           // imageTextBlob.linkhref("tagesschule/informationstechnologie")
-          imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 9. Stock");
-          imageTextBlob.email("office-hit@tgm.ac.at");
-          imageTextBlob.tel("+43 1 33126 291");
+          imageTextBlob.address("Wexstraße 19-21, 1200 Wien / 5. Stock / H526");
+          imageTextBlob.email("office-hlb@tgm.ac.at");
+          imageTextBlob.tel("01 33 126 251");
           imageTextBlob.image('itContact');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")

@@ -67,15 +67,15 @@ export default declareComponent("abend-vorbereitungs-ausmacht-section", class ex
                 cards: [
                     {
                         heading:"Elektrotechnik",
-                        icon:"medientechnik",
+                        icon:"electronics",
                         link: baseLink + "elektronik-vorbereitungslehrgang-abend",
-                        content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Erneuerbare Energie, Umwelt und Nachhaltigkeit sowie Mechatronik."
+                        content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Erneuerbare Energie, Umwelt und Nachhaltigkeit sowie Mechatronik. Damit wird eine fundierte Grundlage zur weiteren Ausbildung im Aufbaulehrgang garantiert."
                     },
                     {
                         heading:"Maschienenbau",
-                        icon:"systemtechnik",
+                        icon:"maschinenbau",
                         link: baseLink + "maschienenbau-vorbereitungslehrgang-abend",
-                        content:"Diese Ausbildungsrichtung bildet den universell einsetzbaren Maschienenbauer mit einem umfassenden Wissen in den erforderlichen technischen wie auch wirtschaftlichen Fachgebieten aus."
+                        content:"Diese Ausbildungsrichtung bildet den universell einsetzbaren Maschienenbauer mit einem umfassenden Wissen in den erforderlichen technischen wie auch wirtschaftlichen Fachgebieten aus. Damit wird eine fundierte Grundlage zur weiteren Ausbildung im Aufbaulehrgang garantiert."
                     }
                 ]
                 

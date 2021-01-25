@@ -98,6 +98,9 @@ export const iconIndex = {
     fahrzeugtechnik: () => import("./vertiefung/fastCar/fastCar"),
     industrieDesign : () => import("./vertiefung/industry/industry"),
     robotik : () => import("./vertiefung/industrialRobot/industrialRobot"),
+
+    // Abend
+    electronics: () => import("./vertiefung/elektronics/elektronics") 
   },
   abendschule: {
     bigStonks: () => import("./abendschule/bigStonks/bigStonks"),

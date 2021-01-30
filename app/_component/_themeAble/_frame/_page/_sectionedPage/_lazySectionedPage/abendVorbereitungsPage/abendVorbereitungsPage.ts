@@ -66,7 +66,7 @@ export default declareComponent("abend-vorbereitungs-page", class AbendVorbereit
 
           imageTextBlob.heading("Kontakt");
           imageTextBlob.subheading("zur Abendschule");
-          imageTextBlob.content("Wir stehen Ihnen gerne außerhalb der Unterrichtszeiten nach Terminvereinbarung zur Verfügung.")
+          imageTextBlob.content("Wir stehen Ihnen gerne außerhalb der Unterrichtszeiten nach Terminvereinbarung für ein persönliches Gespräch zur Verfügung.")
           // imageTextBlob.linktext("Einen Besuch planen")
           // imageTextBlob.linkhref("tagesschule/informationstechnologie")
           imageTextBlob.address("Wexstraße 19-21, 1200 Wien / 5. Stock / H526");

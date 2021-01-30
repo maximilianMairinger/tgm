@@ -72,7 +72,7 @@ export default declareComponent("abend-vorbereitungs-page", class AbendVorbereit
           imageTextBlob.address("Wexstraße 19-21, 1200 Wien / 5. Stock / H526");
           imageTextBlob.email("office-hlb@tgm.ac.at");
           imageTextBlob.tel("01 33 126 251");
-          imageTextBlob.image('itContact');
+          imageTextBlob.image('contactAbendschule');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")
       },

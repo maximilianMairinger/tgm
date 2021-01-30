@@ -50,7 +50,7 @@ export default declareComponent("abend-vorbereitungs-ausmacht-section", class ex
                 {
                     heading: "Unterricht",
                     note: "unser",
-                    thumbnail: "student_2",
+                    thumbnail: "lecture",
                     href: baseLink + "unterricht-abendschule",
                     contenttitle: "Unterricht",
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."

@@ -20,25 +20,25 @@ export default declareComponent("abend-vorbereitungs-ausmacht-section", class ex
                 note: "Anmeldungs",
                 selection: [
                     {
-                        icon: "softwareentwicklung", 
+                        icon: "requirement", 
                         title: "Vorraussetzungen", 
                         content: "Was für die anmeldung vorrausgesetzt ist", 
                         link: baseLink + "vorraussetzungen-vorbereitungslehrgang-abend"
                     },
                     {
-                        icon: "informationstechnischeProjekte", 
+                        icon: "register", 
                         title: "Anmeldung", 
                         content: "Für den Vorbereitungslehrgang der Abendschule amelden", 
                         link: baseLink + "anmeldung-vorbereitungslehrgang-abend"
                     },
                     {
-                        icon: "netzwerktechnik", 
+                        icon: "registration", 
                         title: "Aufnahme", 
                         content: "Am ersten Schultag mitzunehmen", 
                         link: baseLink + "aufnahme-vorbereitungslehrgang-abend"
                     },
                     {
-                        icon: "informationssysteme", 
+                        icon: "graduate", 
                         title: "Zertifizierung", 
                         content: "Wozu der Lehrgang berechtigt", 
                         link: baseLink + "zertifizierung-vorbereitungslehrgang-abend"

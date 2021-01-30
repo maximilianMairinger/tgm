@@ -79,6 +79,15 @@ export const iconIndex = {
     // fertigungstechnik: () => import("./fachIcon/chain/chain"),
     maschinenAnlagen: () => import("./fachIcon/factory/factory"),
     // automatisierungstechnik: () => import("./fachIcon/layers/layers")
+
+
+
+    // Abendschule
+    requirement: () => import("./fachIcon/attached/attached"),
+    register: () => import("./fachIcon/addUser/addUser"),
+    registration: () => import("./fachIcon/moveUp/moveUp"),
+    graduate: () => import("./fachIcon/star/star")
+
   },
   vertiefung: {
     // HET

@@ -13,8 +13,8 @@ import Footer from "../../../../_pageSection/footer/footer"
 import NewsSection from "../../../../_pageSection/triangleNews/triangleNews"
 
 
-export default declareComponent("abend-vorbereitungs-page", class AbendVorbereitungsPage extends LazySectionedPage {
-  constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
+export default abstract class AbendVorbereitungsPage extends LazySectionedPage {
+  constructor(baseLink: string, getAusmachtSectionFunc: () => any, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -46,7 +46,7 @@ export default declareComponent("abend-vorbereitungs-page", class AbendVorbereit
       {
         key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
           new _AusmachtSection(baseLink + "highlights/")
-        ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/abendVorbereitungsAusmachtSection/abendVorbereitungsAusmachtSection")
+        ), val: getAusmachtSectionFunc
       },
       // {
       //   key: new Import("news", 1, (_DarkNewsSection: typeof NewsSection) => 
@@ -90,5 +90,4 @@ export default declareComponent("abend-vorbereitungs-page", class AbendVorbereit
   pug() {
     return ""
   }
-
-}) 
+}

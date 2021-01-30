@@ -72,10 +72,10 @@ export default declareComponent("abend-vorbereitungs-ausmacht-section", class ex
                         content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Erneuerbare Energie, Umwelt und Nachhaltigkeit sowie Mechatronik. Damit wird eine fundierte Grundlage zur weiteren Ausbildung im Aufbaulehrgang garantiert."
                     },
                     {
-                        heading:"Maschienenbau",
+                        heading:"Maschinenbau",
                         icon:"maschinenbau",
-                        link: baseLink + "maschienenbau-vorbereitungslehrgang-abend",
-                        content:"Diese Ausbildungsrichtung bildet den universell einsetzbaren Maschienenbauer mit einem umfassenden Wissen in den erforderlichen technischen wie auch wirtschaftlichen Fachgebieten aus. Damit wird eine fundierte Grundlage zur weiteren Ausbildung im Aufbaulehrgang garantiert."
+                        link: baseLink + "maschinenbau-vorbereitungslehrgang-abend",
+                        content:"Diese Ausbildungsrichtung bildet den universell einsetzbaren Maschinenbauer mit einem umfassenden Wissen in den erforderlichen technischen wie auch wirtschaftlichen Fachgebieten aus. Damit wird eine fundierte Grundlage zur weiteren Ausbildung im Aufbaulehrgang garantiert."
                     }
                 ]
                 

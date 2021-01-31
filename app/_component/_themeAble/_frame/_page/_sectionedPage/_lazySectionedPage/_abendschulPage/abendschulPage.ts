@@ -47,7 +47,7 @@ export default abstract class AbendVorbereitungsPage extends LazySectionedPage {
       },
       {
         key: new Import("info", 1, (_AusmachtSection: typeof AusmachtSection) => 
-          new _AusmachtSection(baseLink + "highlights/")
+          new _AusmachtSection(baseLink + "info/")
         ), val: getAusmachtSectionFunc
       },
       // {

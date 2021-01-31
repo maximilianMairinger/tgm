@@ -21,7 +21,7 @@ export default {
     "highlights": "Highlights",
     "info": "Informationen",
     "vorbereitungs-lehrgang": "Vorbereitungslehrgang",
-    "aufbau-lehrgang": "Vorbereitungslehrgang",
+    "aufbau-lehrgang": "Aufbaulehrgang",
     "kolleg": "Kolleg",
     "werkmeister-lehrgang": "Werkmeister",
     // "erwachsenenbildung/tagesschule": "Erwachsenenbildung",

@@ -92,7 +92,7 @@ export const iconIndex = {
   vertiefung: {
     // HET
     automatisierung: () => import("./vertiefung/automationGear/automationGear"),
-    erneuerbareEnergien: () => import("./vertiefung/windMills/windMills"),
+    erneuerbareEnergien: () => import("./vertiefung/windMill/windMill"),
 
     // HWI
     maschinenbau: () => import("./vertiefung/maschinenbau/maschinenbau"),
@@ -109,7 +109,10 @@ export const iconIndex = {
     robotik : () => import("./vertiefung/industrialRobot/industrialRobot"),
 
     // Abend
-    electronics: () => import("./vertiefung/elektronics/elektronics") 
+    electronics: () => import("./vertiefung/elektronics/elektronics"),
+    wirtschaftsingenieure: () => import("./vertiefung/wirtschaftsingenieure/wirtschaftsingenieure")
+    // erneuerbareEnergien: () => import("./vertiefung/windMill/windMill"),
+    // maschinenbau: () => import("./vertiefung/maschinenbau/maschinenbau"),
   },
   abendschule: {
     bigStonks: () => import("./abendschule/bigStonks/bigStonks"),

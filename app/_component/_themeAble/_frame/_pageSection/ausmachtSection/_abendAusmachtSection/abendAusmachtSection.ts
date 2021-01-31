@@ -4,6 +4,7 @@ import "../../../../_card/_infoCard/unterrichtSystemeCard/unterrichtSystemeCard"
 import AusmachtSection from "../ausmachtSection";
 import VertiefungsContainer from "../../../../vertiefungsContainer/vertiefungsContainer";
 import {MediaQuerySize} from "../../../../_text/textblob/textblob";
+import Icon from "../../../../_icon/icon";
 
 
 
@@ -19,7 +20,7 @@ export default abstract class AbendschulAusmachtSection extends AusmachtSection 
         },
         cards: {
             heading: string,
-            icon: string,
+            icon: string | (() => any) | Icon,
             link: string,
             content: string
         }[]

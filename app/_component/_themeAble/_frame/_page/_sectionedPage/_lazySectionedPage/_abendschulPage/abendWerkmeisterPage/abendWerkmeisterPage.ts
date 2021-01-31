@@ -3,7 +3,7 @@ import AbendschulPage from "../abendschulPage"
 
 export default class AbendVorbereitungsPage extends AbendschulPage {
   constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
-    super(baseLink, () => import(/* webpackChunkName: "ausmachtSection" */"../../../../../_pageSection/ausmachtSection/abendVorbereitungsAusmachtSection/abendVorbereitungsAusmachtSection"), sectionChangeCallback)
+    super(baseLink, () => import(/* webpackChunkName: "ausmachtSection" */"../../../../../_pageSection/ausmachtSection/_abendAusmachtSection/abendVorbereitungsAusmachtSection/abendVorbereitungsAusmachtSection"), sectionChangeCallback)
   }
 }
 

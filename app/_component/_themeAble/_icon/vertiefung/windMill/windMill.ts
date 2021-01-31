@@ -4,15 +4,15 @@ import declareComponent from "../../../../../lib/declareComponent";
 
 
 
-export default class WindMillsIcon extends Icon {
+export default class WindMillIcon extends Icon {
   constructor() {
     super()
 
   }
 
   pug() {
-    return require("./windMills.pug").default
+    return require("./windMill.pug").default
   }
 }
 
-declareComponent("wind-mills-icon", WindMillsIcon)
+declareComponent("wind-mill-icon", WindMillIcon)

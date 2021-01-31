@@ -2,7 +2,7 @@ import declareComponent from "../../../../../../../../lib/declareComponent"
 import AbendschulPage from "../abendschulPage"
 import "../../../../../../link/link"
 
-export default class AbendVorbereitungsPage extends AbendschulPage {
+export default class AbendWerkmeisterPage extends AbendschulPage {
   constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     super(baseLink, {
       note: "der",
@@ -16,4 +16,4 @@ export default class AbendVorbereitungsPage extends AbendschulPage {
   }
 }
 
-declareComponent("abend-vorbereitungs-page", AbendVorbereitungsPage)
+declareComponent("abend-werkmeister-page", AbendWerkmeisterPage)

@@ -20,6 +20,7 @@ export default {
     "tätigkeiten": "Tätigkeiten",
     "highlights": "Highlights",
     "info": "Informationen",
+    "allgemeines": "Allgemeines",
     "vorbereitungs-lehrgang": "Vorbereitungslehrgang",
     "aufbau-lehrgang": "Aufbaulehrgang",
     "kolleg": "Kolleg",

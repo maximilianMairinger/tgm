@@ -31,7 +31,7 @@ export default abstract class AbendVorbereitungsPage extends LazySectionedPage {
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/_cardThumbnail/cardThumbnail")
       },
       {
-        key: new Import("info", 1, (_Info: typeof Info) => {
+        key: new Import("allgemeines", 1, (_Info: typeof Info) => {
           let info = new _Info()
 
           info.note("jetzt");
@@ -46,7 +46,7 @@ export default abstract class AbendVorbereitungsPage extends LazySectionedPage {
         }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")
       },
       {
-        key: new Import("highlights", 1, (_AusmachtSection: typeof AusmachtSection) => 
+        key: new Import("info", 1, (_AusmachtSection: typeof AusmachtSection) => 
           new _AusmachtSection(baseLink + "highlights/")
         ), val: getAusmachtSectionFunc
       },

@@ -20,6 +20,12 @@ export default {
     "tätigkeiten": "Tätigkeiten",
     "highlights": "Highlights",
     "info": "Informationen",
+    "vorbereitungs-lehrgang": "Vorbereitungslehrgang",
+    "aufbau-lehrgang": "Aufbaulehrgang",
+    "kolleg": "Kolleg",
+    "werkmeister-lehrgang": "Werkmeister",
+    // "erwachsenenbildung/tagesschule": "Erwachsenenbildung",
+    // "erwachsenenbildung/abendschule": "Erwachsenenbildung2"
     
   },
 

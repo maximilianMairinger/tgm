@@ -6,7 +6,7 @@ import Link from "../link/link"
 import { ElementList } from "extended-dom"
 import { lang } from "../../../lib/lang"
 import delay from "delay"
-import { domainIndex } from "./../../../lib/domain"
+import { dirString, domainIndex } from "./../../../lib/domain"
 import "./../_icon/arrow/arrow"
 import ArrowIcon from "./../_icon/arrow/arrow"
 import Icon from "../_icon/icon"
@@ -309,19 +309,43 @@ export default class Header extends ThemeAble {
   private latestFadeRequest: Symbol
   public async updateLinks(linkContents: string[], domainLevel: number) {
     let lastLinkElems = this.currentLinkElems
-    this.currentLinkContents = linkContents.clone()
+    
     this.currentLinkElems = new ElementList()
     this.dontChangeLinksTheme = true
 
     const elementIndex = this.linksIndex(this.linkNamespaceToggleBool)
+    let lastData: any
+    let removeIndices = []
     linkContents.ea((s, i) => {
       const elem = elementIndex(i)
-      elem.content(lang.links[s])
-      elem.domainLevel = domainLevel
-      elem.link(s)
+      console.log(lang.links[s])
 
-      this.currentLinkElems.add(elem)
+      
+      let data = lang.links[s]
+
+      while (data === undefined) {
+        if (s === "") {
+          data = lastData
+          break
+        }
+        s = s.slice(0, s.lastIndexOf(dirString))
+        data = lang.links[s]
+      }
+
+      if (data !== lastData) {
+        elem.content(lang.links[s])
+        elem.domainLevel = domainLevel
+        elem.link(s)
+
+        this.currentLinkElems.add(elem)
+        lastData = data
+      }
+      else removeIndices.add(i)
     })
+    linkContents.rmI(...removeIndices)
+
+    this.currentLinkContents = linkContents.clone()
+
 
     this.linkNamespaceToggleBool = !this.linkNamespaceToggleBool
 

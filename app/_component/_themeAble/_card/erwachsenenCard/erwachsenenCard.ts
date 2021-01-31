@@ -19,6 +19,7 @@ import "../../../_themeAble/_icon/space-aids/space-aids"
 import { iconIndex } from "../../_icon/icon";
 import "../../../_themeAble/_icon/pruefung/pruefung"
 import PruefungIcon from "../../_icon/pruefung/pruefung";
+import * as domain from "./../../../../lib/domain"
 
 
 type ErwachsenenCardOption = {icon: string, title: string, content: string, link: string, heading: string, info:string, extraIcon:string, extraTitle:string, extraContent:string, certificate:string}
@@ -57,8 +58,9 @@ export default declareComponent("erwachsenen-card", class ErwachsenenCard extend
 
     private clickHandler(){
         if(this[1].hasClass(SELECTED_CLASS)){
+            
             //quick-fix
-            window.location.href = this[2].link ? this[2].link : "/";
+            if (this[2].link) domain.set(this[2].link)
         }else{
             this[0].selected.removeClass(SELECTED_CLASS)
             this[0].selected = this[1]

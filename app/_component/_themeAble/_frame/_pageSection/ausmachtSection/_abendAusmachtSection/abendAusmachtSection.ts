@@ -39,35 +39,35 @@ export default abstract class AbendschulAusmachtSection extends AusmachtSection 
                         icon: "requirement", 
                         title: "Vorraussetzungen", 
                         content: "Was für die anmeldung vorrausgesetzt ist", 
-                        link: baseLink + "vorraussetzungen-vorbereitungslehrgang-abend"
+                        link: baseLink + "vorraussetzungen-" + baseLink + "-abend"
                     },
                     {
                         icon: "register", 
                         title: "Anmeldung", 
                         content: "Für den Vorbereitungslehrgang der Abendschule amelden", 
-                        link: baseLink + "anmeldung-vorbereitungslehrgang-abend"
+                        link: baseLink + "anmeldung-" + baseLink + "-abend"
                     },
                     {
                         icon: "registration", 
                         title: "Aufnahme", 
                         content: "Am ersten Schultag mitzunehmen", 
-                        link: baseLink + "aufnahme-vorbereitungslehrgang-abend"
+                        link: baseLink + "aufnahme-" + baseLink + "-abend"
                     },
                     {
                         icon: "graduate", 
                         title: "Zertifizierung", 
                         content: "Wozu der Lehrgang berechtigt", 
-                        link: baseLink + "zertifizierung-vorbereitungslehrgang-abend"
+                        link: baseLink + "zertifizierung-" + baseLink + "-abend"
                     }
                 ],
-                stundentafel: baseLink + "stundentafel-abendschule-vorberitungslehrgang"
+                stundentafel: baseLink + "stundentafel-" + baseLink + "-abend"
             },
             cards: [
                 {
                     heading: "Unterricht",
                     note: "unser",
                     thumbnail: "lecture",
-                    href: baseLink + "unterricht-abendschule",
+                    href: "unterricht-" + baseLink + "-abend",
                     contenttitle: "Unterricht",
                     content: "Wir sind bemüht, den Studierenden das Grundrüstzeug für die Ingenieurstätigkeit möglichst breit gestreut mitzugeben, damit die universelle Einsetzbarkeit "
                 }

@@ -10,7 +10,7 @@ import AbendAusmachtSection from "../abendAusmachtSection";
 export default declareComponent("abend-aufbau-ausmacht-section", class extends AbendAusmachtSection {
 
     constructor(baseLink: string) {
-        super(baseLink, {
+        super(baseLink, "aufbaulehrgang", {
             heading: "Informationen über den",
             subheading: "Aufbaulehrgang"
         },

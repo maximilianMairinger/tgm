@@ -10,7 +10,7 @@ import Icon from "../../../../_icon/icon";
 
 export default abstract class AbendschulAusmachtSection extends AusmachtSection {
 
-    constructor(baseLink: string, heading: {heading: string, subheading: string}, vertiefung?: {
+    constructor(baseLink: string, urlName: string, heading: {heading: string, subheading: string}, vertiefung?: {
         text: {
             note: string,
             heading: string,
@@ -39,35 +39,35 @@ export default abstract class AbendschulAusmachtSection extends AusmachtSection 
                         icon: "requirement", 
                         title: "Vorraussetzungen", 
                         content: "Die Vorraussetzungen für die Zulassung", 
-                        link: baseLink + "vorraussetzungen-" + baseLink + "-abend"
+                        link: baseLink + "vorraussetzungen-" + urlName + "-abend"
                     },
                     {
                         icon: "register", 
                         title: "Anmeldung", 
                         content: "Der Anmeldeprozess erklärt", 
-                        link: baseLink + "anmeldung-" + baseLink + "-abend"
+                        link: baseLink + "anmeldung-" + urlName + "-abend"
                     },
                     {
                         icon: "registration", 
                         title: "Aufnahme", 
                         content: "Informationen zum ersten Schultag", 
-                        link: baseLink + "aufnahme-" + baseLink + "-abend"
+                        link: baseLink + "aufnahme-" + urlName + "-abend"
                     },
                     {
                         icon: "graduate", 
                         title: "Zertifizierung", 
                         content: "Das Ergebnis Ihrer Ausbildung", 
-                        link: baseLink + "zertifizierung-" + baseLink + "-abend"
+                        link: baseLink + "zertifizierung-" + urlName + "-abend"
                     }
                 ],
-                stundentafel: baseLink + "stundentafel-" + baseLink + "-abend"
+                stundentafel: baseLink + "stundentafel-" + urlName + "-abend"
             },
             cards: [
                 {
                     heading: "Unterricht",
                     note: "unser",
                     thumbnail: "lecture",
-                    href: "unterricht-" + baseLink + "-abend",
+                    href: baseLink + "unterricht-" + urlName + "-abend",
                     contenttitle: "Unterricht",
                     content: "Wir sind bemüht, den Studierenden das Grundrüstzeug für die Ingenieurstätigkeit möglichst breit gestreut mitzugeben, damit die universelle Einsetzbarkeit "
                 }

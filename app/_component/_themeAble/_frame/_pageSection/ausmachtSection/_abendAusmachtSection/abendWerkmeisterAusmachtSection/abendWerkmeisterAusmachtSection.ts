@@ -9,7 +9,7 @@ import AbendAusmachtSection from "../abendAusmachtSection";
 export default declareComponent("abend-werkmeister-ausmacht-section", class extends AbendAusmachtSection {
 
     constructor(baseLink: string) {
-        super(baseLink, {
+        super(baseLink, "werkmeisterlehrgang", {
             heading: "Informationen über den",
             subheading: "Werkmeisterlehrgang"
         })

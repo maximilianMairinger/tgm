@@ -14,7 +14,7 @@ import NewsSection from "../../../../_pageSection/triangleNews/triangleNews"
 
 
 export default abstract class AbendVorbereitungsPage extends LazySectionedPage {
-  constructor(baseLink: string, heading: {heading: string, subheading: string, note: string}, getAusmachtSectionFunc: () => any, sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, heading: {heading: string, subheading: string, note: string}, getAusmachtSectionFunc: () => any, sectionChangeCallback?: (section: string) => void, infoText?: string) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
@@ -39,7 +39,8 @@ export default abstract class AbendVorbereitungsPage extends LazySectionedPage {
           info.subheading("Beruf/Familie und Ausbildung");
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
-          info.content("Kein Problem - Arbeit und Lernen ist miteinander zu vereinbaren! Mit einer Ausbildung in der Höheren Lehranstalt für Berufstätige am TGM können Sie wie gewohnt Ihrem Beruf nachgehen und am Abend gemeinsam mit Gleichgesinnten lernen und Ihre beruflichen Zukunftsperspektiven erweitern. Unterstützt werden Sie dabei durch klare Unterrichtskonzepte mit Flexibilität, Blended Learning Szenarien, Verknüpfung von Theorie und Praxis, erfahrene und engagierte Lehrende, Expertinnen und Experten aus Wirtschaft und Industrie... <br>Ihr nächster Karriereschritt ist für Sie bei uns äußerst gut plan- und organisierbar!")
+          if (!infoText) info.content("Kein Problem - Arbeit und Lernen ist miteinander zu vereinbaren! Mit einer Ausbildung in der Höheren Lehranstalt für Berufstätige am TGM können Sie wie gewohnt Ihrem Beruf nachgehen und am Abend gemeinsam mit Gleichgesinnten lernen und Ihre beruflichen Zukunftsperspektiven erweitern. Unterstützt werden Sie dabei durch klare Unterrichtskonzepte mit Flexibilität, Blended Learning Szenarien, Verknüpfung von Theorie und Praxis, erfahrene und engagierte Lehrende, Expertinnen und Experten aus Wirtschaft und Industrie... <br>Ihr nächster Karriereschritt ist für Sie bei uns äußerst gut plan- und organisierbar!")
+          else info.content(infoText)
 
           return new WrapperSection(info) as any
         }), val: () => import(/* webpackChunkName: "sectionTextblob" */"../../../../../_text/_sectionTextblob/ausbildungSection/ausbildungSection")

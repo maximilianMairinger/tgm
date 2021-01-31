@@ -10,7 +10,7 @@ import Icon from "../../../../_icon/icon";
 
 export default abstract class AbendschulAusmachtSection extends AusmachtSection {
 
-    constructor(baseLink: string, heading: {heading: string, subheading: string}, vertiefung: {
+    constructor(baseLink: string, heading: {heading: string, subheading: string}, vertiefung?: {
         text: {
             note: string,
             heading: string,
@@ -26,7 +26,7 @@ export default abstract class AbendschulAusmachtSection extends AusmachtSection 
         }[]
         
     }) {
-        vertiefung.cards.ea((e) => {
+        if (vertiefung) vertiefung.cards.ea((e) => {
             if (!e.link.startsWith(baseLink)) e.link = baseLink + e.link
         })
         super({

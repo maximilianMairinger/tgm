@@ -14,15 +14,16 @@ import NewsSection from "../../../../_pageSection/triangleNews/triangleNews"
 
 
 export default abstract class AbendVorbereitungsPage extends LazySectionedPage {
-  constructor(baseLink: string, getAusmachtSectionFunc: () => any, sectionChangeCallback?: (section: string) => void) {
+  constructor(baseLink: string, heading: {heading: string, subheading: string, note: string}, getAusmachtSectionFunc: () => any, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
           let e = new _Thumbnail(baseLink)
-          e.heading("Vorbereitungslehrgang")
-          e.subheading("der Abendschule")
-          e.note("abteilung");
+          for (let h in heading) {
+            e[h](heading[h])
+          }
+          
           e.background("abendschuleVorbereitung2")
           
           

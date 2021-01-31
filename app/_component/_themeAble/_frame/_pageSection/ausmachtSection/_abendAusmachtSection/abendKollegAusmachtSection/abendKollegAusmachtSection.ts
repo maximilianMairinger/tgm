@@ -12,13 +12,13 @@ export default declareComponent("abend-aufbau-ausmacht-section", class extends A
     constructor(baseLink: string) {
         super(baseLink, {
             heading: "Highlights des",
-            subheading: "Aufbaulehrgangs"
+            subheading: "Kollegs"
         },
         {
             text: {
-                note: "abendliche",
-                heading: "Aufbau",
-                subheading: "lehrgänge",
+                note: "die",
+                heading: "Vertiefungen",
+                subheading: "des Kollegs",
                 hsize: {max:60, min:40},
                 content: "Zusätzlich zu der grundlegenden Ausbildung in der Elektrotechnik können sich die SchülerInnen durch Wahl einer der zwei Abteilungen vertiefen. Damit können sie ihren Interessen nachgehen und werden zu Experten auf ihrem Gebiet!"
             },
@@ -26,13 +26,19 @@ export default declareComponent("abend-aufbau-ausmacht-section", class extends A
                 {
                     heading:"Erneuerbare Energie, Umwelt und Nachhaltigkeit",
                     icon:"erneuerbareEnergien",
-                    link: "erneuerbare-energie-aufbaulehrgang-abend",
+                    link: "erneuerbare-energie-kolleg-abend",
                     content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Erneuerbare Energie, Umwelt und Nachhaltigkeit. In der praxisnahen Ausbildung lernen die Studenten alles wichtige um im Beruf erfolgreich zu sein."
+                },
+                {
+                    heading:"Mechatronik",
+                    icon:"mechatronics",
+                    link: "mechatronik-kolleg-abend",
+                    content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Mechatronik. In der praxisnahen Ausbildung lernen die Studenten alles wichtige um im Beruf erfolgreich zu sein."
                 },
                 {
                     heading:"Wirtschaftsingenieurwesen",
                     icon: "wirtschaftsingenieure",
-                    link: "wirtschaftsingenieurwesen-aufbaulehrgang-abend",
+                    link: "wirtschaftsingenieurwesen-kolleg-abend",
                     content:"Diese Ausbildungsrichtung bildet den universell einsetzbaren Writschaftsingenieur mit einem umfassenden Wissen in den erforderlichen technischen wie auch wirtschaftlichen Fachgebieten aus. Wirtschaftsingenieure sind echte Allrounder!"
                 }
             ]

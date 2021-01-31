@@ -110,9 +110,10 @@ export const iconIndex = {
 
     // Abend
     electronics: () => import("./vertiefung/elektronics/elektronics"),
-    wirtschaftsingenieure: () => import("./vertiefung/wirtschaftsingenieure/wirtschaftsingenieure")
+    wirtschaftsingenieure: () => import("./vertiefung/ideaMechanics/ideaMechanics"),
     // erneuerbareEnergien: () => import("./vertiefung/windMill/windMill"),
     // maschinenbau: () => import("./vertiefung/maschinenbau/maschinenbau"),
+    mechatronics: () => import("./vertiefung/drone/drone")
   },
   abendschule: {
     bigStonks: () => import("./abendschule/bigStonks/bigStonks"),

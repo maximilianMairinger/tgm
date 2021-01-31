@@ -314,35 +314,14 @@ export default class Header extends ThemeAble {
     this.dontChangeLinksTheme = true
 
     const elementIndex = this.linksIndex(this.linkNamespaceToggleBool)
-    let lastData: any
-    let removeIndices = []
+
     linkContents.ea((s, i) => {
       const elem = elementIndex(i)
-      console.log(lang.links[s])
-
-      
-      let data = lang.links[s]
-
-      while (data === undefined) {
-        if (s === "") {
-          data = lastData
-          break
-        }
-        s = s.slice(0, s.lastIndexOf(dirString))
-        data = lang.links[s]
-      }
-
-      if (data !== lastData) {
-        elem.content(lang.links[s])
-        elem.domainLevel = domainLevel
-        elem.link(s)
-
-        this.currentLinkElems.add(elem)
-        lastData = data
-      }
-      else removeIndices.add(i)
+      elem.content(lang.links[s])
+      elem.domainLevel = domainLevel
+      elem.link(s)
+      this.currentLinkElems.add(elem)
     })
-    linkContents.rmI(...removeIndices)
 
     this.currentLinkContents = linkContents.clone()
 

@@ -10,8 +10,8 @@ export default declareComponent("abend-vorbereitungs-ausmacht-section", class ex
 
     constructor(baseLink: string) {
         super(baseLink, {
-            heading: "Highlights des",
-            subheading: "Vorbereitungslehrgangs"
+            heading: "Informationen über den",
+            subheading: "Vorbereitungslehrgang"
         },
         {
             text: {

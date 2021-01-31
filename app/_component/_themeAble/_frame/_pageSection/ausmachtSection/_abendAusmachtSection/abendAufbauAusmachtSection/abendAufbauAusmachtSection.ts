@@ -11,8 +11,8 @@ export default declareComponent("abend-aufbau-ausmacht-section", class extends A
 
     constructor(baseLink: string) {
         super(baseLink, {
-            heading: "Highlights des",
-            subheading: "Aufbaulehrgangs"
+            heading: "Informationen über den",
+            subheading: "Aufbaulehrgang"
         },
         {
             text: {

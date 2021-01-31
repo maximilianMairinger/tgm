@@ -10,8 +10,8 @@ export default declareComponent("abend-werkmeister-ausmacht-section", class exte
 
     constructor(baseLink: string) {
         super(baseLink, {
-            heading: "Highlights des",
-            subheading: "Werkmeisterlehrgangs"
+            heading: "Informationen über den",
+            subheading: "Werkmeisterlehrgang"
         })
     }
 });

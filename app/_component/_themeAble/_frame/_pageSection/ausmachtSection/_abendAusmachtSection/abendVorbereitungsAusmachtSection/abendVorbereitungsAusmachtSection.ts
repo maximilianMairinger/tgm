@@ -19,7 +19,7 @@ export default declareComponent("abend-vorbereitungs-ausmacht-section", class ex
                 heading: "Vorbereitungs",
                 subheading: "lehrgänge",
                 hsize: {max:60, min:40},
-                content: "Zusätzlich zu der grundlegenden Ausbildung in der Elektrotechnik können sich die SchülerInnen durch Wahl einer der zwei Abteilungen vertiefen. Damit können sie ihren Interessen nachgehen und werden zu Experten auf ihrem Gebiet!"
+                content: "Zusätzlich zu der grundlegenden Ausbildung im Vorbereitungslehrgang können sich die SchülerInnen durch Wahl einer der zwei Abteilungen vertiefen. Damit können sie ihren Interessen nachgehen und werden zu Experten auf ihrem Gebiet!"
             },
             cards: [
                 {

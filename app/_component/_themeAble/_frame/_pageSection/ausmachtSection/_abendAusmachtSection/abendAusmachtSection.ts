@@ -32,8 +32,8 @@ export default abstract class AbendschulAusmachtSection extends AusmachtSection 
         super({
             heading,
             selection: {
-                heading: "die",
-                note: "Anmeldung und Aufnahme",
+                note: "die",
+                heading: "Anmeldung und Aufnahme",
                 selection: [
                     {
                         icon: "requirement", 

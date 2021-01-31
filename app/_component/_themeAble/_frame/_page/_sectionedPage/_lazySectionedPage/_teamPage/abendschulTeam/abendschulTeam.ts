@@ -17,7 +17,7 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
                 e.note("mit");
                 e.heading("Teamgeist");
                 e.subheading("in die Zukunft");
-                e.background("biomedPpl.png")
+                e.background("abendTeam")
                 return new WrapperSection(e, 'dark') as any
             }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../../_text/_thumbnail/thumbnail")
         },
@@ -26,7 +26,7 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
                 {
                     let teamSection = new (Team as typeof TeamSection)();
                     teamSection.subheading("der BG");
-                    teamSection.content("Die Lehrkräfte unserer Abteilung gewährleisten durch neueste pädagogische Methodiken und individuelle Betreuung die bestmögliche Entwicklung der SchülerInnen. Unser Lehrkörper rekrutiert aus den erfahrensten Mitgliedern der Wissenschaft und Industrie.")
+                    teamSection.content("Die Lehrkräfte der Abendschule gewährleisten durch neueste pädagogische Methodiken und individuelle Betreuung die bestmögliche Entwicklung der SchülerInnen. Unser Lehrkörper rekrutiert aus den erfahrensten Mitgliedern der Wissenschaft und Industrie.")
                     return new WrapperSection(teamSection);
                 }
             ), val: () => import(/* webpackChunkName: "teamSection" */"../../../../../../_text/_sectionTextblob/teamSection/teamSection")
@@ -36,14 +36,14 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
                 {
                     let leitungImageTextblob = new (leitung as typeof ImageTextblob)();
                     leitungImageTextblob.note("Abteilungsvorstand");
-                    leitungImageTextblob.heading("DI Dr. Wess");
-                    leitungImageTextblob.subheading("Bernhard");
-                    leitungImageTextblob.content("Ich stehe Ihnen gerne am Donnerstag von 9:50 bis 10:40 in meiner Sprechstunde zu Verfügung.")
-                    leitungImageTextblob.address("Wexstraße 19-21, 1200 Wien / 12. Stock / H1226");
-                    leitungImageTextblob.email("avhbg@tgm.ac.at");
-                    leitungImageTextblob.tel("01 33 126 320");
-                    leitungImageTextblob.image('avwess');
-                    leitungImageTextblob.stellvertreter([{"name":"DI Dr. Josef Kollmitzer", "email":"jkollmitzer@tgm.ac.at"}])
+                    leitungImageTextblob.heading("Ing. Dipl.-Ing. Dvořak");
+                    leitungImageTextblob.subheading("Andreas F.");
+                    leitungImageTextblob.content("Ich stehe Ihnen gerne außerhalb meiner Unterrichtszeit nach Terminvereinbarung zur Verfügung.")
+                    leitungImageTextblob.address("Wexstraße 19-21, 1200 Wien / 5. Stock / H526");
+                    leitungImageTextblob.email("avhlb@tgm.ac.at");
+                    leitungImageTextblob.tel("01 33 126 250");
+                    leitungImageTextblob.image('unknownMan');
+                    // leitungImageTextblob.stellvertreter([{"name":"DI Dr. Josef Kollmitzer", "email":"jkollmitzer@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_text/imageTextblob/imageTextblob")
@@ -54,13 +54,13 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
                     let schuelerImageTextblob = new (schueler as typeof ImageTextblob)();
                     schuelerImageTextblob.alignment('left');
                     schuelerImageTextblob.note("schülervertretung");
-                    schuelerImageTextblob.heading("Nadler");
-                    schuelerImageTextblob.subheading("Florian");
+                    schuelerImageTextblob.heading("Langsenlehner");
+                    schuelerImageTextblob.subheading("Markus");
                     schuelerImageTextblob.content("Ich darf euch dieses Jahr als Abteilungssprecher vertreten, bei Anliegen bitte einfach melden!")
-                    schuelerImageTextblob.email("fnadler@student.tgm.ac.at");
-                    schuelerImageTextblob.tel("+43‭ 660 6210505‬");
+                    schuelerImageTextblob.email("mlangsenlehner@student.tgm.ac.at");
+                    schuelerImageTextblob.tel("N/A");
                     schuelerImageTextblob.image('team_2.jpg');
-                    schuelerImageTextblob.stellvertreter([{"name":"Kristina Kutejova", "email":"kkutejova@student.tgm.ac.at"}])
+                    schuelerImageTextblob.stellvertreter([{name: "Juric Verner", email: "vjuric@student.tgm.ac.at"}])
                     return new WrapperSection(schuelerImageTextblob);
                 }
             ), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../../_text/imageTextblob/imageTextblob")

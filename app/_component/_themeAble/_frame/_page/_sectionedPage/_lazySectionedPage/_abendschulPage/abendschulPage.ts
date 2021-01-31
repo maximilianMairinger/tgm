@@ -71,7 +71,7 @@ export default abstract class AbendVorbereitungsPage extends LazySectionedPage {
           imageTextBlob.content("Wir stehen Ihnen gerne außerhalb der Unterrichtszeiten nach Terminvereinbarung für ein persönliches Gespräch zur Verfügung.")
           // imageTextBlob.linktext("Einen Besuch planen")
           // imageTextBlob.linkhref("tagesschule/informationstechnologie")
-          imageTextBlob.address("Wexstraße 19-21, 1200 Wien / 5. Stock / H526");
+          imageTextBlob.address("Wexstraße 19-21, 1200 Wien / 5. Stock / H525");
           imageTextBlob.email("office-hlb@tgm.ac.at");
           imageTextBlob.tel("01 33 126 251");
           imageTextBlob.image('contactAbendschule');

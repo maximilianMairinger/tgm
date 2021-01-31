@@ -46,8 +46,8 @@ export default declareComponent("home-page", class Homepage extends LazySectione
         new ScrollProgressAlias(scrollAnimationEnd, "kontakt")
       ]),
       new ScrollProgressAliasIndex("erwachsenenbildung", [
-        new ScrollProgressAlias(0, "erwachsenenbildung/tagesschule"),
-        new ScrollProgressAlias(400, "erwachsenenbildung/abendschule")
+        new ScrollProgressAlias(0, "erwachsenenbildung/abendschule"),
+        new ScrollProgressAlias(400, "erwachsenenbildung/tagesschule")
       ])
     ), {
       footer: "kontakt"

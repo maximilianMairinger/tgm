@@ -32,31 +32,31 @@ export default abstract class AbendschulAusmachtSection extends AusmachtSection 
         super({
             heading,
             selection: {
-                note: "die",
-                heading: "Anmeldung und Aufnahme",
+                note: "zur",
+                heading: "Orientierung",
                 selection: [
                     {
                         icon: "requirement", 
                         title: "Vorraussetzungen", 
-                        content: "Was für die anmeldung vorrausgesetzt ist", 
+                        content: "Die Vorraussetzungen für die Zulassung", 
                         link: baseLink + "vorraussetzungen-" + baseLink + "-abend"
                     },
                     {
                         icon: "register", 
                         title: "Anmeldung", 
-                        content: "Für den Vorbereitungslehrgang der Abendschule amelden", 
+                        content: "Der Anmeldeprozess erklärt", 
                         link: baseLink + "anmeldung-" + baseLink + "-abend"
                     },
                     {
                         icon: "registration", 
                         title: "Aufnahme", 
-                        content: "Am ersten Schultag mitzunehmen", 
+                        content: "Informationen zum ersten Schultag", 
                         link: baseLink + "aufnahme-" + baseLink + "-abend"
                     },
                     {
                         icon: "graduate", 
                         title: "Zertifizierung", 
-                        content: "Wozu der Lehrgang berechtigt", 
+                        content: "Das Ergebnis Ihrer Ausbildung", 
                         link: baseLink + "zertifizierung-" + baseLink + "-abend"
                     }
                 ],

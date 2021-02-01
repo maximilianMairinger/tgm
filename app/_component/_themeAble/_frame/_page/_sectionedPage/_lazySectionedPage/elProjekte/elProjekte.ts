@@ -85,6 +85,40 @@ export default declareComponent("el-projekte", class ItProjekte extends LazySect
               `
             },
             {
+              heading:"Cardanic Self Stabilizing Unit",
+              note:`Selbst stabilisierende Einheit`,
+              thumbnail: "DA_DIEC",
+              team:[],
+              title: "Cardanic Self Stabilizing Unit",
+              content: `
+              Das Endprodukt soll eine mechanische, selbst stabilisierende Einheit (vgl Steadycam, Gimble) sein, die in der Bild- und Videoaufnahme helfen kann, das Aufnahmegerät zu stabilisieren. Die Stabilisierung erfolgt durch Servomotoren und einer Real-Time Positionsregelung.
+              <br>
+              Weiters soll unser Projekt als Basis für Weiterentwicklungen in diesem Bereich dienen. Auf dem Bild sieht man die Validierung und Programmierung einer neu entwickelten Platine.
+              `
+            },
+            {
+              heading:"Digitaler Synthesizer",
+              note:`Ziel des Projekts ist die Entwicklung eines digitalen Synthesizers.`,
+              thumbnail: "DigSynth",
+              team:[],
+              title: "Digitaler Synthesizer",
+              content: `
+              Beim Diplomprojekt "Digitaler Synthesizer II" der Schüler Arbin Hajredini, Dominik Frühwirth, Raphael Busanszky und Nico Srieder aus der 5AHEL der höheren TGM-Abteilung für Elektronik und Technische Informatik wird ein digitaler Musik-Synthesizer mit analogem Eingangs- und Ausgangsverstärker implementiert. Die digitale Klangsynthese basiert auf Frequenz- und Ringmodulation. Der Synthesizer wird über ein MIDI-Controller-Keyboard angesteuert und kann auch externe Audiosignale verarbeiten. Die digitale Signalverarbeitung erfolgt auf einem Raspberry-Pi-Mikrocontroller mit der Audiosignalverarbeitungssoftware Pure Data.
+              `
+            },
+            {
+              heading:"Mobiles RLC-Messgerät",
+              note:`Ziel des Projekts ist die Entwicklung eines mobilen RLC-Messgeräts.`,
+              thumbnail: "Mobiles_RLC",
+              team:[],
+              title: "Digitaler Synthesizer",
+              content: `
+              Die Schüler der 5AHEL Eman Dedovic, Müslim Dikmen, Miaoxin Jiao und Alireza Solgi entwickeln und bauen ein mobiles und kompaktes RLC-Messgerät, welches die elektrischen Größen Widerstand, Kapazität und Induktivität der entsprechenden Bauteile schnell und ohne stationäre Stromversorgung messen kann. Die Werte der Bauteile werden mit der Genauigkeit eines Betriebsmessgerätes ermittelt
+              <br>
+              Widerstände, Kondensatoren und Spulen unterschiedlicher Wertebereiche werden mittels einer Messschaltung erfasst und die jeweiligen elektrischen Größen werden als entsprechender Zahlenwert ausgegeben.
+              `
+            },
+            {
               heading:"Gestengesteuerte Flugdrohne",
               note:`In der vorliegenden Arbeit wird für eine handelsübliche Flugdrohne eine intuitive Gestensteuerung entwickelt. Die Drohne soll im Freizeitbereich eingesetzt werden.`,
               thumbnail: "gestengesteuerteDrohne",

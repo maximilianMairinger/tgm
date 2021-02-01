@@ -41,7 +41,7 @@ export default declareComponent("bg-projekte", class RaumfahrtProjekte extends L
               heading:"Kniedämpfungsanalyse",
               note:`Mit Beschleunigungssensoren werden die Vibrationen oberhalb und unterhalb des Knies gemessen. Im Vergleich kann auf die aktive und passive Dämpfung durch Muskulatur und Gelenksknorpel geschlossen werden. Das erlaubt einen quantitativen Vergleich von Bewegungsstrategien im Sport und in der Rehabilitation.`,
               team:[],
-              thumbnail: "bg_DA_1",
+              thumbnail: "bg_DA_1_2",
               title: "Kniedämpfungsanalyse",
               content: `
               Das Knie dämpft Erschütterungen beim Gehen, Laufen und Springen. Um diese Funktion zu Messen werden zwei Beschleunigungssensoren am Bein oberhalb und unterhalb des Knies befestigt. Während der Mensch sich nun bewegt, werden die Geschwindigkeitsprofile dieser beiden Sensoren durch eine Software berechnet und verglichen. Dadurch kann der Dämpfungsanteil des Knies bestimmt werden.

@@ -44,6 +44,10 @@ export default declareComponent("home-page", class Homepage extends LazySectione
       new ScrollProgressAliasIndex("newsKontakt", [
         new ScrollProgressAlias(begin, "news"),
         new ScrollProgressAlias(scrollAnimationEnd, "kontakt")
+      ]),
+      new ScrollProgressAliasIndex("erwachsenenbildung", [
+        new ScrollProgressAlias(0, "erwachsenenbildung/abendschule"),
+        new ScrollProgressAlias(400, "erwachsenenbildung/tagesschule")
       ])
     ), {
       footer: "kontakt"

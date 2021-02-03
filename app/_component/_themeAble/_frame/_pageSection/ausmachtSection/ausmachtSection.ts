@@ -45,7 +45,7 @@ export default class AusmachtSection extends PageSection {
         heading: string,
         subheading: string,
         hsize:MediaQuerySize,
-        content: string
+        content?: string
       }
       cards: VertiefungsCardContent[]
     }

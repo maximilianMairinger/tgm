@@ -2,7 +2,7 @@ import declareComponent from "../../../../lib/declareComponent";
 import Card from "../card";
 import "../../link/link"
 import {Theme} from "../../themeAble";
-import { iconIndex } from "../../_icon/icon";
+import Icon, { iconIndex } from "../../_icon/icon";
 import Link from "../../link/link"
 
 export default declareComponent("vertiefungs-card", class VertiefungsCard extends Card {
@@ -11,7 +11,7 @@ export default declareComponent("vertiefungs-card", class VertiefungsCard extend
     private iconContainer = this.q("vertiefungs-img")
     private linkElem = this.q("c-link") as Link;
 
-    constructor(heading?: string, content?: string, icon?: string, link?: string){
+    constructor(heading?: string, content?: string, icon?: string | (() => any) | Icon, link?: string){
         super(false, false);
         this.heading(heading)
         this.content(content)
@@ -25,11 +25,18 @@ export default declareComponent("vertiefungs-card", class VertiefungsCard extend
         return super.theme(to);
     }
 
-    async icon(to?: string) {
+    async icon(to?: string | (() => any) | Icon) {
         if (to) {
-            let ic = new (await iconIndex.vertiefung[to]()).default
+            let _Icon: any
+            if (to instanceof Icon) _Icon = to
+            else {
+                let f: any
+                if (to instanceof Function) f = to
+                else f = iconIndex.vertiefung[to]
+                _Icon = new (await f()).default
+            }
             this.iconContainer.emptyNodes()
-            this.iconContainer.apd(ic)
+            this.iconContainer.apd(_Icon)
         }
         
     }

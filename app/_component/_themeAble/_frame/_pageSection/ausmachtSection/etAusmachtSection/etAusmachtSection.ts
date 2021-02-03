@@ -76,7 +76,7 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
                     heading: "Vertiefungen",
                     subheading: "der Elektrotechnik",
                     hsize: {max:60, min:40},
-                    content: "Die Abteilung Elektrotechnik bietet einen besonders umfassende technische Ausbildung. Grundsätzlich beschäftigt sie sich mit allen Bereichen"
+                    content: "Zusätzlich zu der grundlegenden Ausbildung in der Elektrotechnik können sich die SchülerInnen durch Wahl einer der zwei Abteilungen vertiefen. Damit können sie ihren Interessen nachgehen und werden zu Experten auf ihrem Gebiet!"
                 },
                 cards: [
                     {

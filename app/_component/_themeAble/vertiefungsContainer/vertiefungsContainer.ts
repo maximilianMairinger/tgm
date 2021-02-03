@@ -3,9 +3,10 @@ import declareComponent from "../../../lib/declareComponent"
 import "../../_themeAble/_button/button"
 import "../_icon/arrow/arrow"
 import VertiefungsCard from  "../_card/vertiefungsCard/vertiefungsCard"
+import Icon from "../_icon/icon"
 
 
-export type VertiefungsCardContent = { heading: string, icon:string, link:string, content: string }
+export type VertiefungsCardContent = { heading: string, icon: string | (() => any) | Icon, link:string, content: string }
 export default class VertiefungsContainer extends ThemeAble {
 
     constructor() {

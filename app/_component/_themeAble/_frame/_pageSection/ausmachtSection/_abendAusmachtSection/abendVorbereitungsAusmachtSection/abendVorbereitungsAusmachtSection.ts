@@ -25,7 +25,7 @@ export default declareComponent("abend-vorbereitungs-ausmacht-section", class ex
                 {
                     heading:"Elektrotechnik",
                     icon:"electronics",
-                    link: "elektronik-vorbereitungslehrgang-abend",
+                    link: "elektrotechnik-vorbereitungslehrgang-abend",
                     content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Erneuerbare Energie, Umwelt und Nachhaltigkeit sowie Mechatronik. Damit wird eine fundierte Grundlage zur weiteren Ausbildung im Aufbaulehrgang garantiert."
                 },
                 {

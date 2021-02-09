@@ -30,7 +30,7 @@ export default declareComponent("abend-aufbau-ausmacht-section", class extends A
                     content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Erneuerbare Energie, Umwelt und Nachhaltigkeit. In der praxisnahen Ausbildung lernen die Studenten alles wichtige um im Beruf erfolgreich zu sein."
                 },
                 {
-                    heading:"Wirtschaftsingenieurwesen",
+                    heading:"Wirtschaftsingenieure und Maschinenbau",
                     icon: "wirtschaftsingenieure",
                     link: "wirtschaftsingenieurwesen-aufbaulehrgang-abend",
                     content:"Diese Ausbildungsrichtung bildet den universell einsetzbaren Writschaftsingenieur mit einem umfassenden Wissen in den erforderlichen technischen wie auch wirtschaftlichen Fachgebieten aus. Wirtschaftsingenieure sind echte Allrounder!"

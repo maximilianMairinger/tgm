@@ -69,6 +69,10 @@ c-button{
   box-shadow: 2px 2px 20px 0 rgba(var(--strong-contrast-text-color-raw), 0.17);
 }
 
+c-button:after{
+  padding: 13px 25px;
+  content: "Virtuelle Wochen"
+}
 
 card-wrapper {
   display: flex;

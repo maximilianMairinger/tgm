@@ -12,6 +12,10 @@ import * as domain from "../../../lib/domain";
 import local from "../../../lib/formatTime";
 import {api} from "../../../lib/api";
 import { ElementList } from "extended-dom";
+import animateScrollTo from "animated-scroll-to"
+
+const easing = new Easing("easeInOut").function
+
 
 export default class OverflowX extends ThemeAble {
 
@@ -31,8 +35,11 @@ export default class OverflowX extends ThemeAble {
             this.overflowContainer.width() * this.scrollPercent :
             this.overflowContainer.scrollWidth - (this.overflowContainer.scrollLeft + this.overflowContainer.width());
         let scrollTo = this.overflowContainer.scrollLeft + scrollZwi;
-        //@ts-ignore
-        this.overflowContainer.scroll({x: scrollTo}, {easing: new Easing("easeOut").function, speed: {begin: this.overflowContainer.width() * 2.5}})
+        animateScrollTo([scrollTo, null], {
+            easing,
+            elementToScroll: this.overflowContainer,
+            speed: 1700
+        })
     }
 
     protected childThemeAbles?(): string[] {
@@ -44,8 +51,11 @@ export default class OverflowX extends ThemeAble {
             this.overflowContainer.width() * this.scrollPercent :
             this.overflowContainer.scrollLeft;
         let scrollTo = this.overflowContainer.scrollLeft - scrollZwi;
-        //@ts-ignore
-        this.overflowContainer.scroll({x: scrollTo}, {easing: new Easing("easeOut").function, speed: {begin: this.overflowContainer.width() * 2.5}})
+        animateScrollTo([scrollTo, null], {
+            easing,
+            elementToScroll: this.overflowContainer,
+            speed: 1700
+        })
     }
 
     private scrollUpdate() {

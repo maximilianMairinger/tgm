@@ -64,7 +64,7 @@ export default class TriangleNews extends PageSection {
       this.imageTextblob[k](content.text[k])
     }
     
-    this.overflowX = new OverflowX(new Button(), new Button(), api, tags ? tags.add("news") : ['news'], NewsCard.apiParser)
+    this.overflowX = new OverflowX(api, tags ? tags.add("news") : ['news'], NewsCard.apiParser, { left: 80 })
     this.overflowX.apiQuery.then(() => {
       this.overflowX.padding(false, 25)
       this.overflowX.theme(this.theme())

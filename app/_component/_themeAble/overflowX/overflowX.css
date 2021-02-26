@@ -65,17 +65,21 @@ next-button, previous-button{
     z-index: 2;
     background: var(--primary-background-color);
     box-shadow: var(--medium-shadow);
+    border-radius: 8px;
+    transition: transform .25s;
+}
+
+next-button:hover, previous-button:hover {
+    transform: scale(1.05);
 }
 
 
 next-button{
-    right: 0;
-    border-radius: 8px 0 0 8px;
+    right: 25px;
 }
 
 previous-button{
-    left: 0;
-    border-radius: 0 8px 8px 0;
+    left: 25px;
 }
 
 overflow-x-container:hover ~ navigation-container, navigation-container:hover{

@@ -102,27 +102,24 @@ export default class OverflowX extends ThemeAble {
         this.updating = false;
     }
 
-    constructor(next?: Button, previous?: Button, api?: boolean, tags?:string[], apiParser?: (post: any) => Element) {
+    constructor()
+    constructor(api: boolean, tags: string[], apiParser: (post: any) => Element, margin?: {left?: number, right?: number})
+    constructor(api?: boolean, tags?: string[], apiParser?: (post: any) => Element, margin?: {left?: number, right?: number}) {
         super(false)
 
         const go = () => {
-            if(!next)
-                this.nextButton = this.q("next-button c-button") as Button;
-            else {
-                this.nextButton = next;
-                this.nextArrow =next
-                this.nextArrow.css({"display": "none"})
-            }
+            this.nextButton = this.q("next-button c-button") as Button;
             this.nextButton.click(this.next.bind(this));
 
-            if (!previous)
-                this.previousButton = this.q("previous-button c-button") as Button;
-            else {
-                this.previousButton = previous;
-                this.previousArrow  = previous
-                this.previousArrow.css({"display": "none"})
-            }
+            this.previousButton = this.q("previous-button c-button") as Button;
             this.previousButton.click(this.previous.bind(this));
+
+            if (margin) {
+                if (margin.left) this.previousArrow.css({ left: 25 + margin.left })
+                if (margin.right) this.nextArrow.css({ right: 25 + margin.right })
+            }
+            
+            
 
             this.overflowContainer.addEventListener("scroll", this.scrollUpdate.bind(this))
             let pid = setInterval(() => {

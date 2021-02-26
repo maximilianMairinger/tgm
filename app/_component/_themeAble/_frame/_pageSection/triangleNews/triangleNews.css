@@ -76,8 +76,10 @@ c-overflow-x{
     flex-direction: column-reverse;
     flex-wrap: nowrap;
     justify-content: space-around;
-    height: 100%;
+    height: unset;
+    min-height: 800px;
     padding-bottom: 10%;
+
   }
 
   c-big-news-triangle-icon {
@@ -91,7 +93,7 @@ c-overflow-x{
 
   card-container{
     margin-bottom: 25px;
-    height: calc(100% + 100px);
+    height: unset;
   }
 
   c-image-textblob{
@@ -106,6 +108,10 @@ c-overflow-x{
   }
   c-image-textblob {
     height: 100%;
+  }
+
+  c-overflow-x {
+    height: unset;
   }
 }
 

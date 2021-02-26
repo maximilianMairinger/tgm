@@ -35,6 +35,10 @@ export default class OverflowX extends ThemeAble {
         this.overflowContainer.scroll({x: scrollTo}, {easing: new Easing("easeOut").function, speed: {begin: this.overflowContainer.width() * 2.5}})
     }
 
+    protected childThemeAbles?(): string[] {
+        return ["c-arrow-icon"]
+    }
+
     private previous() {
         let scrollZwi = this.overflowContainer.scrollLeft > this.overflowContainer.width() ?
             this.overflowContainer.width() * this.scrollPercent :

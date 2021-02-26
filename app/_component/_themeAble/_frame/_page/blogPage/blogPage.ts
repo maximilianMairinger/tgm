@@ -52,14 +52,13 @@ export default class BlogPage extends Page {
       let suggestions = new BlogSuggestions();
       const domainCommon = [...domain.domainIndex].rmI(domain.domainIndex.length - 1).join(domain.dirString) + domain.dirString
       suggestions.blogs(blogData.filter(blog => blog.slug != query).map((blog) => {
-        let blogCard: blogCardInfo = {
+        return {
           heading: blog.title,
           date: blog.published_at,
           content: blog.excerpt,
           thumbnail: blog.feature_image,
           link: domainCommon + blog.slug
-        }
-        return blogCard;
+        } as blogCardInfo
       }));
       suggestions.css("order", 2);
       this.elementBody.append(suggestions)

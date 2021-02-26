@@ -139,5 +139,9 @@ filler-element{
     window-viewer{
         display: none;
     }
+
+    overflow-x-container {
+        height: unset;
+    }
 }
 

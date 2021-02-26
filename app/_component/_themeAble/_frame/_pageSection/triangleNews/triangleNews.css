@@ -101,5 +101,11 @@ c-overflow-x{
     height: 65%;
   }
 
+  text-center {
+    height: unset;
+  }
+  c-image-textblob {
+    height: 100%;
+  }
 }
 

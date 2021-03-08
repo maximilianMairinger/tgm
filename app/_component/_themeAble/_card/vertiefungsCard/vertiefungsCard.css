@@ -45,6 +45,13 @@ vertiefungs-title{
     font-weight: bold;
     line-height: 1em;
     margin-bottom: .25em;
+    display: block;
+}
+
+@media (max-width: 900px) {
+  vertiefungs-title {
+    word-break: break-all;   
+  }
 }
 
 vertiefungs-content c-link#mehr{

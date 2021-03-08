@@ -7,6 +7,8 @@ import CookieNote from "./../_themeAble/cookieNote/cookieNote"
 import { ElementList } from "extended-dom";
 import { negateTheme } from "../_themeAble/themeAble";
 import cookieSettings from "../../lib/cookieSettings";
+import { dirString } from "../../lib/domain";
+import lang from "../../lib/lang";
 
 
 const topLimit = 0
@@ -58,6 +60,28 @@ export default declareComponent("site", class extends Component {
     let pageManager = new PageManager((page, sections, domainLevel) => {
       currentDomainLevel = domainLevel
       currentSectons = sections
+
+
+      let lastData: any
+      let removeIndices = []
+      sections.ea((s, i) => {
+        let data = lang.links[s]
+
+        while (data === undefined) {
+          if (s === "") {
+            data = lastData
+            break
+          }
+          sections[i] = s = s.slice(0, s.lastIndexOf(dirString))
+          data = lang.links[s]
+        }
+  
+        if (data === lastData) removeIndices.add(i)
+        else lastData = data
+      })
+      sections.rmI(...removeIndices)
+
+
       if (currentlyShowingLowerNav) lowerNav.updatePage(sections, domainLevel)
       header.updatePage(sections, domainLevel)
     }, (section) => {

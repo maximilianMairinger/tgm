@@ -206,7 +206,7 @@ export default class TabletBlob extends Text {
         if(project){
             let projectJson = this.parseJSONProp(project);
             (tablet.querySelector("c-textblob") as Textblob).heading(projectJson.heading)
-            tablet.querySelector("note-box").text(projectJson.note);
+            tablet.querySelector("note-box").html(projectJson.note);
 
             let thumbnailContainer = tablet.querySelector("thumbnail-container")
             let oldThumbNail = thumbnailContainer.childs(".thumbnail-pic", true)

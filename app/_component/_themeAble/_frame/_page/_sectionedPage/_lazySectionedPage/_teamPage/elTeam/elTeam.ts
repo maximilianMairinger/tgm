@@ -43,7 +43,7 @@ export default declareComponent("elektronik-team", class ElektronikTeam extends 
                     leitungImageTextblob.address("Wexstraße 19-21, 1200 Wien / 12. Stock / H1226");
                     leitungImageTextblob.email("avhel@tgm.ac.at");
                     leitungImageTextblob.tel("01 33 126 320");
-                    leitungImageTextblob.image('avwess');
+                    leitungImageTextblob.image('avWess2');
                     leitungImageTextblob.stellvertreter([{"name":"Mag. Elisabeth Völk", "email":"evoelk@tgm.ac.at"}])
                     return new WrapperSection(leitungImageTextblob);
                 }

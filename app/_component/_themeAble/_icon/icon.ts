@@ -79,11 +79,20 @@ export const iconIndex = {
     // fertigungstechnik: () => import("./fachIcon/chain/chain"),
     maschinenAnlagen: () => import("./fachIcon/factory/factory"),
     // automatisierungstechnik: () => import("./fachIcon/layers/layers")
+
+
+
+    // Abendschule
+    requirement: () => import("./fachIcon/attached/attached"),
+    register: () => import("./fachIcon/addUser/addUser"),
+    registration: () => import("./fachIcon/moveUp/moveUp"),
+    graduate: () => import("./fachIcon/star/star")
+
   },
   vertiefung: {
     // HET
     automatisierung: () => import("./vertiefung/automationGear/automationGear"),
-    erneuerbareEnergien: () => import("./vertiefung/windMills/windMills"),
+    erneuerbareEnergien: () => import("./vertiefung/windMill/windMill"),
 
     // HWI
     maschinenbau: () => import("./vertiefung/maschinenbau/maschinenbau"),
@@ -98,6 +107,13 @@ export const iconIndex = {
     fahrzeugtechnik: () => import("./vertiefung/fastCar/fastCar"),
     industrieDesign : () => import("./vertiefung/industry/industry"),
     robotik : () => import("./vertiefung/industrialRobot/industrialRobot"),
+
+    // Abend
+    electronics: () => import("./vertiefung/elektronics/elektronics"),
+    wirtschaftsingenieure: () => import("./vertiefung/ideaMechanics/ideaMechanics"),
+    // erneuerbareEnergien: () => import("./vertiefung/windMill/windMill"),
+    // maschinenbau: () => import("./vertiefung/maschinenbau/maschinenbau"),
+    mechatronics: () => import("./vertiefung/drone/drone")
   },
   abendschule: {
     bigStonks: () => import("./abendschule/bigStonks/bigStonks"),

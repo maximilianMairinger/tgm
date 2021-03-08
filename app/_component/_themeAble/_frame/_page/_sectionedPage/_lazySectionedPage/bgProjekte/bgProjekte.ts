@@ -38,28 +38,41 @@ export default declareComponent("bg-projekte", class RaumfahrtProjekte extends L
         key: new Import("projekte", 1, (projekte: typeof ProjekteSection) => {
           let projectData = [
             {
-              heading:"Bio/Impedanzmessung",
-              note:``,
+              heading:"Kniedämpfungsanalyse",
+              note:`Mit Beschleunigungssensoren werden die Vibrationen oberhalb und unterhalb des Knies gemessen. Im Vergleich kann auf die aktive und passive Dämpfung durch Muskulatur und Gelenksknorpel geschlossen werden. Das erlaubt einen quantitativen Vergleich von Bewegungsstrategien im Sport und in der Rehabilitation.`,
               team:[],
-              thumbVid:"https://www.youtube.com/embed/U7oBnJKn9EE",
-              title: "",
-              content: ``
+              thumbnail: "bg_DA_1_2",
+              title: "Kniedämpfungsanalyse",
+              content: `
+              Das Knie dämpft Erschütterungen beim Gehen, Laufen und Springen. Um diese Funktion zu Messen werden zwei Beschleunigungssensoren am Bein oberhalb und unterhalb des Knies befestigt. Während der Mensch sich nun bewegt, werden die Geschwindigkeitsprofile dieser beiden Sensoren durch eine Software berechnet und verglichen. Dadurch kann der Dämpfungsanteil des Knies bestimmt werden.
+              <br>
+              Bisher haben die Schülerinnen die passiven Dämpfungseigenschaften durch Messungen sehr nahe am Knie bestimmt (die Schülerin am Bild ganz rechts trägt die Sensoren am linken Bein). Das betrifft die Funktion der Gelenksknorpel und von Innen- und Außen- Meniskus. Im Weiteren sollen aber auch die aktiven Dämpfungseigenschaften der Kniestrecker gemessen werden. Das wird dadurch geschehen, dass die Sensoren kniefern an Hüfte und Sprunggelenk angebracht werden. 
+              <br>
+              Mit diesem Messsystem ist es nun möglich die aktiven und passiven Dämpfungen im Knie bei verschiedenen Fortbewegungs- und Sportarten zu messen. Das eröffnet die Möglichkeit unterschiedliche Bewegungsstrategien auf ihre Auswirkung auf die Kniedämpfung zu vergleichen, sowohl im Sport als auch bei der Rehabilitation.`
             },
             {
-              heading:"Zellkulturen unter Strom",
+              heading:"Elektrophorese",
               note:"Beeinflussung von Zellkulturen durch elektronischen Strom",
-              thumbVid:"https://www.youtube.com/embed/lk_zN2E0-FQ",
+              thumbnail:"bg_DA_2",
               team:[],
-              title: "",
-              content: ``
+              title: "Elektrophorese",
+              content: `Die Elektrophorese wird bei der Analyse von Nukleinsäuren oder Proteinen verwendet. Dabei transportiert der elektrische Strom die verschiedenen Moleküle einer Probe, je nach ihrer Beweglichkeit, in einer vorgegebenen Zeit verschieden weit. Dafür werden eine sehr konstante Spanungsquelle, eine Elektrophoresekammer und ein Kontrollgerät zur Überwachung benötigt. Diese einzelnen Komponenten präsentieren unsere Schülerinnen im Bild von links nach rechts. Jedes Einzelteil wurde von den Schülerinnen unter tatkräftiger Mithilfe der Werkstättenlehrer selbst gefertigt. Dieses Gerät wird dann in Zukunft im Zellkulturlabor zur Analyse in den Laborübungen genutzt werden.`
             },
             {
-              heading:"Luftstrom / Heizdeckenregelung",
-              note:"",
-              thumbVid:"https://www.youtube.com/embed/l0BtoiM0qBc",
+              heading:"BloodFlowMonitoring",
+              note:`Das entwickelte Gerät misst indirekt den Blutfluss zum Gehirn, um Ursachen für spontane Migräneanfälle zu untersuchen.
+              <br>
+              Dazu werden auf beiden Ohrläppchen Leuchtdioden montiert, deren Licht vom zirkulierenden Blut absorbiert wird. Die Stärke des durchgelassenen Lichtanteiles wird gemessen. Es konnte der Nachweis erbracht werden, dass die Schwankungsamplitude mit zunehmender Durchblutung des Kopfes steigt. Diese kontaktlose Methode erlaubt, Durchblutungsänderungen am Kopf auch im Seitenvergleich zu bestimmen. 
+              `,
+              thumbnail:"bg_DA_3",
               team:[],
-              title: "",
-              content: ``
+              title: "BloodFlowMonitoring",
+              content: `Unsere Schüler versuchen technische Hilfsmittel für Menschen zu entwickeln, die an spontanen Migräneanfällen leiden. Als eine der möglichen Ursachen wird eine veränderte Durchblutung des Gehirns vermutet. Wenn so eine Veränderung der Durchblutung frühzeitig durch einfache Messungen erkannt werde kann, sollte es möglich sein, durch geeignete Übungen dem drohenden Migräneanfall entgegen zu wirken.
+              <br>
+              Die Messungen werden synchron an beiden Ohrläppchen mittels kontaktloser Durchleuchtung mit Dioden gemacht (rechter Schüler im Bild hat die Ohrenklipse angelegt). Bisher werden solche Pulsoximeter zur Bestimmung der Pulsrate und der Sauerstoffsättigung im Blut verwendet. Unsere Schüler konnten aber bisher schon zeigen, dass die Amplitude der Durchleuchtungsstärke sensibel ist auf die Blutdurchflussänderungen der Kopfarterien im Seitenvergleich. Weitere Versuche mit Körperschallmikrofonen direkt an den Arterien könnten noch genauere Ergebnisse über die Gehirndurchblutung liefern.
+              <br>
+              Mit dieser, vergleichsweise einfachen und kontaktlosen Methode ist es möglich die Durchblutung im Kopfbereich ab zu schätzen. Ob das auch für die Durchblutung direkt im Gehirn anwendbar ist, werden weitere Tests zeigen.  
+              `
             }
           ] as Project[];
 

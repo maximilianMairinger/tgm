@@ -56,7 +56,7 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
                 {
                     heading: "Lernbüro",
                     note: "Unterrichtssystem",
-                    thumbnail: "/res/img/student_2.jpg",
+                    thumbnail: "student_2",
                     href: baseLink + "lernbüro-het",
                     contenttitle: "Lernen im Aufbruch",
                     content: "Das Lernbüro ermöglicht den SchülerInnen ihren Stundenplan selbst zu organisieren. Dabei lernen sie Eigenverantwortung und Teamarbeit."
@@ -64,7 +64,7 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
                 {
                     heading: "Werkstätte",
                     note: "Fachpraktischer Unterricht",
-                    thumbnail: "/res/img/werkstaetteHET.png",
+                    thumbnail: "werkstaetteHET",
                     href: baseLink + "werkstätte-elektrotechnik",
                     contenttitle: "Praxisbasierte Erfahrungen",
                     content: "In unseren Werkstätten erlernen SchülerInnen den Umgang mit technischen Gerätschaften und setzen das gelernte Theoriewissen selbst um."
@@ -76,7 +76,7 @@ export default declareComponent("ausmacht-section-et", class extends AusmachtSec
                     heading: "Vertiefungen",
                     subheading: "der Elektrotechnik",
                     hsize: {max:60, min:40},
-                    content: "Die Abteilung Elektrotechnik bietet einen besonders umfassende technische Ausbildung. Grundsätzlich beschäftigt sie sich mit allen Bereichen"
+                    content: "Zusätzlich zu der grundlegenden Ausbildung in der Elektrotechnik können sich die SchülerInnen durch Wahl einer der zwei Abteilungen vertiefen. Damit können sie ihren Interessen nachgehen und werden zu Experten auf ihrem Gebiet!"
                 },
                 cards: [
                     {

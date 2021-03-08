@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/etAusmachtSection/etAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import NewsSection from "../../../../_pageSection/triangleNews/etNewsSection/etNewsSection"
+import NewsSection from "../../../../_pageSection/triangleNews/triangleNews"
 
 
 export default declareComponent("et-page", class EtPage extends LazySectionedPage {
@@ -48,11 +48,18 @@ export default declareComponent("et-page", class EtPage extends LazySectionedPag
           new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/etAusmachtSection/etAusmachtSection")
       },
-      // {
-      //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-      //     new _DarkNewsSection()
-      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/etNewsSection/etNewsSection")
-      // },
+      {
+        key: new Import("news", 1, (_NewsSection: typeof NewsSection) => 
+          new _NewsSection({
+            text: {
+              note: "Termine und",
+              heading: "Aktuelles",
+              subheading: "aus der ET",
+              content: `In unseren Blogartikeln berichten wir über Events, Wettbewerbe und außergewöhnliche Leistungen.`
+            }
+          }, true, ["het"])
+        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
+      },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');
@@ -64,7 +71,7 @@ export default declareComponent("et-page", class EtPage extends LazySectionedPag
           imageTextBlob.linkhref("tagesschule/elektrotechnik")
           imageTextBlob.address("Wexstraße 19-23, 1200 Wien / 3. Stock");
           imageTextBlob.email("tdeininger@tgm.ac.at");
-          imageTextBlob.tel("+43 (1) 33 126 / 231");
+          imageTextBlob.tel("+43 (1) 33 126 / 230");
           imageTextBlob.image('etContact');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")

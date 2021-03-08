@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/elAusmachtSection/elAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import DarkNewsSection from "../../../../_pageSection/triangleNews/ktNewsSection/ktNewsSection"
+import NewsSection from "../../../../_pageSection/triangleNews/triangleNews"
 
 
 export default class KunststoffPage extends LazySectionedPage {
@@ -51,9 +51,16 @@ export default class KunststoffPage extends LazySectionedPage {
         ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/ausmachtSection/ktAusmachtSection/ktAusmachtSection")
       },
       {
-        key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-          new _DarkNewsSection(baseLink + "news/")
-        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/ktNewsSection/ktNewsSection")
+        key: new Import("news", 1, (_NewsSection: typeof NewsSection) => 
+          new _NewsSection({
+            text: {
+              note: "Termine und",
+              heading: "Aktuelles",
+              subheading: "aus der KT",
+              content: `In unseren Blogartikeln berichten wir über Events, Wettbewerbe und außergewöhnliche Leistungen.`
+            }
+          }, true, ["hkt"])
+        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
       },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {

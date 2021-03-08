@@ -20,6 +20,13 @@ export default {
     "tätigkeiten": "Tätigkeiten",
     "highlights": "Highlights",
     "info": "Informationen",
+    "allgemeines": "Allgemeines",
+    "vorbereitungs-lehrgang": "Vorbereitungslehrgang",
+    "aufbau-lehrgang": "Aufbaulehrgang",
+    "kolleg": "Kolleg",
+    "werkmeister-lehrgang": "Werkmeister",
+    // "erwachsenenbildung/tagesschule": "Erwachsenenbildung",
+    // "erwachsenenbildung/abendschule": "Erwachsenenbildung2"
     
   },
 
@@ -34,7 +41,7 @@ export default {
     "Biomedizien": "Biomedizin und Gesundheitstechnik",
     "Elektrotechnik": "Elektrotechnik",
     "Elektronik": "Elektronik und Technische Informatik",
-    "Informationstechnologie": "Informationstechnologie",
+    "Informationstechnologie": "Informations&shy;technologie",
     "Kunststofftechnik": "Kunststofftechnik",
     "Maschinenbau": "Maschinenbau",
     "Wirtschaftsingenieure": "Wirtschaftsingenieure"

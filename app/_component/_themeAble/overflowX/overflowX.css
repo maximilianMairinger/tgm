@@ -12,6 +12,15 @@ overflow-x-container{
     -ms-overflow-style: none;
     scrollbar-width: none;
     padding-bottom: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+overflow-x-container > * {
+    opacity: 0;
+    transform: translateY(10px);
 }
 
 overflow-x-container > *:first-child:not(:last-child):not(filler-element){
@@ -54,19 +63,23 @@ next-button, previous-button{
     height: 75px;
     top: calc(50% - 75px);
     z-index: 2;
-    background: white;
+    background: var(--primary-background-color);
     box-shadow: var(--medium-shadow);
+    border-radius: 8px;
+    transition: transform .25s;
+}
+
+next-button:hover, previous-button:hover {
+    transform: scale(1.05);
 }
 
 
 next-button{
-    right: 0;
-    border-radius: 8px 0 0 8px;
+    right: 25px;
 }
 
 previous-button{
-    left: 0;
-    border-radius: 0 8px 8px 0;
+    left: 25px;
 }
 
 overflow-x-container:hover ~ navigation-container, navigation-container:hover{
@@ -125,6 +138,10 @@ filler-element{
 
     window-viewer{
         display: none;
+    }
+
+    overflow-x-container {
+        height: unset;
     }
 }
 

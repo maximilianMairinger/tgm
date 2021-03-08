@@ -38,28 +38,108 @@ export default declareComponent("el-projekte", class ItProjekte extends LazySect
         key: new Import("projekte", 1, (projekte: typeof ProjekteSection) => {
           let projectData = [
             {
-              heading:"Stromerzeugendes Fahrzeug",
-              note:``,
-              team:[],
-              thumbVid:"https://www.youtube.com/embed/JNOY83XMoAE",
-              title: "",
-              content: ``
+              heading:"Solarautonomes Golfcart",
+              note:"Weltweit erstes solarautonomes Golfcart mit Unterstützung des TGM",
+              thumbnail: "solarautonomesGolfcart",
+              team:["DI Reinhard Haiden", "reinhard.haiden@tgm.ac.at"],
+              title: "Solarautonomes Golfcart",
+              content: `
+              Wie nah am Puls der Wirtschaft Diplomprojekte sein können, zeigt die Zusammenarbeit zwischen einem italienischen Industrieunternehmen, einem Designbüro aus Wien, einer Schlosserei  und drei Diplomprojektteams an der Abteilung für Elektronik und Technische Informatik: In einer dreijährigen Projektzusammenarbeit wurde ein Golfcart konstruiert, das nach zehn Stunden Sonneneinstrahlung eine Stunde fahren kann, also nur solar und vollkommen autonmon von äußeren Energiequellen betrieben werden kann. Damit wurde technisches Neuland betreten: Es gab keine Modelle, an denen sich das TGM-Team orientieren konnte.
+              <br>
+              Das Team meisterte eine Reihe von Herausforderungen innovativ:
+              <ul>
+                <li>die Integration einer Vielzahl von Einzelsystemen in ein Gesamtkonzept nach dem Vorbild des modernen Automobilbaus</li>
+                <li>die richtige Auswahl an Komponenten, um die gewünschte Autonomie zu erreichen, etwa durch den Einbau eines fast 2 m2 großen Solarpanels</li>
+                <li>Vermeidung von Getriebeverlusten durch elektrisch direkt angetriebene Räder</li>
+                <li>energieeffiziente Balancertechnologie zum Laden der Bleiakkus</li>
+                <li>Maßnahmen zur Energierückgewinnung und elektronischer Fahrwerksunterstützung</li>
+              </ul>
+
+              <h3>Maturaaufgaben</h3>
+              Mehrere Maturagruppen waren über einige Schuljahre hinweg an diesem Projekt beteiligt:
+
+              <ul>
+                <li>2015/16: Elektronisches Differenzial und Fahrwerksregelung wurden entwickelt</li>
+                <li>2016/17: Entwicklung des BUS-Systems, der Laderegler und Akkubalancer</li>
+                <li>2017/18: Zentrales Energiemanagement wurde entwickelt, das während des Betriebes auf einem Tablet alle Energie- und Fahrdaten auf einen Blick darstellt, Wegfahrsperre</li>
+                <li>2019/2020: Solarladeeinheit und Energiemanagement wurde verbessert wodurch sich die Reichweite des Carts ca. auf zwei Stunden verdoppelte</li>
+              </ul>
+
+              <h3>Zum gemeinsamen Projekterfolg beigetragen haben</h3>
+
+              <ul>
+                <li>Das Industriedesignbüro <c-link link="https://www.dform.at">www.dform.at</c-link>, der Batterienhersteller enppex GmbH (<c-link link="https://www.enppex.at">www.enppex.at</c-link>), die Schlosserei Koiner sowie das italienische Industrieunternehmen Marcegaglia</li>
+                <li>Die Finanzierung, Organisation und Integration des Projektes erfolgte durch den Betreuer Prof. Haiden</li>
+                <li>Zur Demonstration des Echtbetriebes wurden die Mitglieder von zwei Maturajahrgängen für drei Tage zum Feldtest nach Italien eingeladen</li>
+              </ul>
+
+              <h3>Technische Eckdaten</h3>
+              <b>Ladekapazität:</b> 200 kg (2 Personen)<br>
+              <b>Fahrzeit:</b> 12 Stunden Sonne ergibt 2 Stunden fahren oder 1 Nacht an der Steckdose 4 Stunden Fahrzeit<br>
+              <b>Reichweite:</b> rd. 80 km nach vollständiger Ladung<br>
+              <b>Höchstgeschwindigkeit:</b> 43 km/h elektronisch auf 25km/h abgeregelt<br>
+
+              <br>
+
+              <c-link link="https://youtu.be/rdlwIdOpYzo">Zum Imagefilm</c-link>
+              `
             },
             {
-              heading:"Funkgesteuertes Skateboard",
-              note:"",
-              thumbVid:"https://www.youtube.com/embed/SBJ2El2grYQ",
+              heading:"Cardanic Self Stabilizing Unit",
+              note:`Selbst stabilisierende Einheit`,
+              thumbnail: "DA_DIEC",
               team:[],
-              title: "",
-              content: ``
+              title: "Cardanic Self Stabilizing Unit",
+              content: `
+              Das Endprodukt soll eine mechanische, selbst stabilisierende Einheit (vgl Steadycam, Gimble) sein, die in der Bild- und Videoaufnahme helfen kann, das Aufnahmegerät zu stabilisieren. Die Stabilisierung erfolgt durch Servomotoren und einer Real-Time Positionsregelung.
+              <br>
+              Weiters soll unser Projekt als Basis für Weiterentwicklungen in diesem Bereich dienen. Auf dem Bild sieht man die Validierung und Programmierung einer neu entwickelten Platine.
+              `
             },
             {
-              heading:"Mobile Wasserdatenerfassung",
-              note:"",
-              thumbVid:"https://www.youtube.com/embed/b-9ndn8TBhQ",
+              heading:"Digitaler Synthesizer",
+              note:`Ziel des Projekts ist die Entwicklung eines digitalen Synthesizers.`,
+              thumbnail: "DigSynth",
               team:[],
-              title: "",
-              content: ``
+              title: "Digitaler Synthesizer",
+              content: `
+              Beim Diplomprojekt "Digitaler Synthesizer II" der Schüler Arbin Hajredini, Dominik Frühwirth, Raphael Busanszky und Nico Srieder aus der 5AHEL der höheren TGM-Abteilung für Elektronik und Technische Informatik wird ein digitaler Musik-Synthesizer mit analogem Eingangs- und Ausgangsverstärker implementiert. Die digitale Klangsynthese basiert auf Frequenz- und Ringmodulation. Der Synthesizer wird über ein MIDI-Controller-Keyboard angesteuert und kann auch externe Audiosignale verarbeiten. Die digitale Signalverarbeitung erfolgt auf einem Raspberry-Pi-Mikrocontroller mit der Audiosignalverarbeitungssoftware Pure Data.
+              `
+            },
+            {
+              heading:"Mobiles RLC-Messgerät",
+              note:`Ziel des Projekts ist die Entwicklung eines mobilen RLC-Messgeräts.`,
+              thumbnail: "Mobiles_RLC",
+              team:[],
+              title: "Digitaler Synthesizer",
+              content: `
+              Die Schüler der 5AHEL Eman Dedovic, Müslim Dikmen, Miaoxin Jiao und Alireza Solgi entwickeln und bauen ein mobiles und kompaktes RLC-Messgerät, welches die elektrischen Größen Widerstand, Kapazität und Induktivität der entsprechenden Bauteile schnell und ohne stationäre Stromversorgung messen kann. Die Werte der Bauteile werden mit der Genauigkeit eines Betriebsmessgerätes ermittelt
+              <br>
+              Widerstände, Kondensatoren und Spulen unterschiedlicher Wertebereiche werden mittels einer Messschaltung erfasst und die jeweiligen elektrischen Größen werden als entsprechender Zahlenwert ausgegeben.
+              `
+            },
+            {
+              heading:"Gestengesteuerte Flugdrohne",
+              note:`In der vorliegenden Arbeit wird für eine handelsübliche Flugdrohne eine intuitive Gestensteuerung entwickelt. Die Drohne soll im Freizeitbereich eingesetzt werden.`,
+              thumbnail: "gestengesteuerteDrohne",
+              team:["Prof Di Norbert Jordan", "njordan@tgm.ac.at"],
+              title: "Gestengesteuerte Flugdrohne",
+              content: `Um die Gestensteuerung zu realisieren, wurden Bewegungssensoren eingesetzt. Diese Sensorik wird am Handschuh des Betreibers befestigt. Zwei Microcontroller übernehmen die Bewegungsdaten der beiden Bewegungssensoren und leiten diese über W-LAN an das zentrale Betriebssystem Robot Operating System weiter. Das Robot Operating System (ROS) ist ein Software-Framework für Roboter und Drohnen.
+              <br>
+              <br>
+              <c-image src="gestengesteuerteDrohneHands"></c-image>
+              <br>
+              <br>
+              Durch das Robot Operating System werden die Bewegungsdaten in Flugbefehle umgewandelt und in Echtzeit ebenfalls via W-LAN an die Drohne übermittelt.
+              `
+            },
+            {
+              heading:"Advanced e-Longboard",
+              note:"In der vorliegenden Arbeit wird ein elektrisches Longboard entwickelt.",
+              thumbnail: "funkLongboard",
+              team:[],
+              title: "Funkgesteuertes Longboard",
+              content: `Mit dem elektrischen Longboard sollen kurze bis mittlere Distanzen zurückgelegt werden. Es werden effiziente bürstenlose Motoren verwendet, da sie effizienter sind und geringe Materialabnützungen aufweisen. Um die Motoren anzutreiben benötigt man Steuerungshardware. Dazu wird ein Open-Source Projekt integriert. Der Controller ist leistungsfähig, programmierbar, und effizient im Betrieb programmierbar. Die Kommunikation zwischen dem Longboard und Fernbedienung erfolgt durch NRF24 Modul im Frequenzband von 2.4GHz. Ein integriertes OLED Display zeigt alle wichtigen Daten, wie z.B. Geschwindigkeit und Akkustatus an.`
             }
           ] as Project[];
 

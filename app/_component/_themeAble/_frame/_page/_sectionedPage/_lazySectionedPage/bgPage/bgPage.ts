@@ -10,7 +10,7 @@ import Info from "../../../../../_text/_sectionTextblob/ausbildungSection/ausbil
 import AusmachtSection from "../../../../_pageSection/ausmachtSection/rtAusmachtSection/rtAusmachtSection"
 import ImageTextblob from "../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../_pageSection/footer/footer"
-import NewsSection from "../../../../_pageSection/triangleNews/bgNewsSection/bgNewsSection"
+import NewsSection from "../../../../_pageSection/triangleNews/triangleNews"
 
 
 export default class BgPage extends LazySectionedPage {
@@ -52,11 +52,18 @@ export default class BgPage extends LazySectionedPage {
           new _AusmachtSection(baseLink + "highlights/")
         ), val: () => import(/* webpackChunkName: "ausmachtSection" */"../../../../_pageSection/ausmachtSection/bgAusmachtSection/bgAusmachtSection")
       },
-      // {
-      //   key: new Import("news", 1, (_DarkNewsSection: typeof DarkNewsSection) => 
-      //     new _DarkNewsSection()
-      //   ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/bgNewsSection/bgNewsSection")
-      // },
+      {
+        key: new Import("news", 1, (_NewsSection: typeof NewsSection) => 
+          new _NewsSection({
+            text: {
+              note: "Termine und",
+              heading: "Aktuelles",
+              subheading: "aus der Biomedizin",
+              content: `In unseren Blogartikeln berichten wir über Events, Wettbewerbe und außergewöhnliche Leistungen.`
+            }
+          }, true, ["hbg"])
+        ), val: () => import(/* webpackChunkName: "news" */"../../../../_pageSection/triangleNews/triangleNews")
+      },
       {
         key: new Import("kontakt", 1, (_ImageTextblob: typeof ImageTextblob) => {
           let imageTextBlob = new _ImageTextblob('right');

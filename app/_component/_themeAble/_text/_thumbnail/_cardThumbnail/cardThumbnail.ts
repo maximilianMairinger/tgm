@@ -17,6 +17,7 @@ export default class CardThumbnail extends Thumbnail {
       ["projekte", "Projekte", undefined, card_baseLink + "projekte"],
       ["team", "Team", undefined, card_baseLink + "team"]
     )
+    else cards.dda(card_baseLink)
 
     cards = cards.map(args => args instanceof Card ? args : new Card(...args)) as any
     this.apd(new CardCarousel(cards as any, false))

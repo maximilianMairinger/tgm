@@ -19,7 +19,11 @@ export default abstract class AbendVorbereitungsPage extends LazySectionedPage {
     super(new ImportanceMap<() => Promise<any>, any>(
       {
         key: new Import("", 1, (_Thumbnail: typeof Thumbnail) => {
-          let e = new _Thumbnail(baseLink)
+          let e = new _Thumbnail(
+            ["anmelden", "Anmelden", undefined, "https://anmeldung.tgm.ac.at/anmeldung/"],
+            ["projekte", "Projekte", undefined, baseLink + "projekte"],
+            ["team", "Team", undefined, baseLink + "team"]
+          )
           for (let h in heading) {
             e[h](heading[h])
           }

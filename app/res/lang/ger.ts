@@ -14,6 +14,7 @@ export default {
     "team": "Team",
     "leitung": "Leitung",
     "schueler": "Schülervertretung",
+    "studierenden": "Studierendenvertretung",
     "schularzt": "Schularzt",
     "tasks": "Tätigkeiten",
     "auftrag": "Auftrag",

@@ -17,8 +17,8 @@ export default declareComponent("abend-kolleg-ausmacht-section", class extends A
         {
             text: {
                 note: "die",
-                heading: "Vertiefungen",
-                subheading: "des Kollegs",
+                heading: "Kolleg",
+                subheading: "lehrgänge",
                 hsize: {max:60, min:40},
                 content: "Zusätzlich zu der grundlegenden Ausbildung im Kolleg können sich die SchülerInnen durch Wahl einer der drei Abteilungen vertiefen. Damit können sie ihren Interessen nachgehen und werden zu Experten auf dem gewählten Gebiet!"
             },
@@ -30,7 +30,7 @@ export default declareComponent("abend-kolleg-ausmacht-section", class extends A
                     content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Erneuerbare Energie, Umwelt und Nachhaltigkeit. In der praxisnahen Ausbildung lernen die Studenten alles wichtige um im Beruf erfolgreich zu sein."
                 },
                 {
-                    heading:"Mechatronik",
+                    heading:"Mechatronik (geplant)",
                     icon:"mechatronics",
                     link: "mechatronik-kolleg-abend",
                     content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Mechatronik. In der praxisnahen Ausbildung lernen die Studenten alles wichtige um im Beruf erfolgreich zu sein."

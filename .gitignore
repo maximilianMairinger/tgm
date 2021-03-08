@@ -10,8 +10,6 @@ public/res/img
 public/public.zip
 images.zip
 
-*tgm.sh
-
 package-lock.json
 
 public/sw.js

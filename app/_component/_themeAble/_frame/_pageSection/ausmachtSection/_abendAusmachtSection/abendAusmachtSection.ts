@@ -55,9 +55,9 @@ export default abstract class AbendschulAusmachtSection extends AusmachtSection 
                     },
                     {
                         icon: "graduate", 
-                        title: "Zertifizierung", 
+                        title: "Abschluss", 
                         content: "Das Ergebnis Ihrer Ausbildung", 
-                        link: baseLink + "zertifizierung-" + urlName + "-abend"
+                        link: baseLink + "abschluss-" + urlName + "-abend"
                     }
                 ],
                 stundentafel: baseLink + "stundentafel-" + urlName + "-abend"

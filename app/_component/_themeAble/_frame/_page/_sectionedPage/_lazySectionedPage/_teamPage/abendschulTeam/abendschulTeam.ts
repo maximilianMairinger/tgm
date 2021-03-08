@@ -25,7 +25,7 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
             key: new Import("info", 1, (Team: typeof Element) =>
                 {
                     let teamSection = new (Team as typeof TeamSection)();
-                    teamSection.subheading("der BG");
+                    teamSection.subheading("der HLB");
                     teamSection.content("Die Lehrkräfte der Abendschule gewährleisten durch neueste pädagogische Methodiken und individuelle Betreuung die bestmögliche Entwicklung der SchülerInnen. Unser Lehrkörper rekrutiert aus den erfahrensten Mitgliedern der Wissenschaft und Industrie.")
                     return new WrapperSection(teamSection);
                 }
@@ -49,14 +49,14 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
             ), val: () => import(/* webpackChunkName: "leitung" */"../../../../../../_text/imageTextblob/imageTextblob")
         },
         {
-            key: new Import("schueler", 1, (schueler: typeof Element) =>
+            key: new Import("studierenden", 1, (schueler: typeof Element) =>
                 {
                     let schuelerImageTextblob = new (schueler as typeof ImageTextblob)();
                     schuelerImageTextblob.alignment('left');
                     schuelerImageTextblob.note("schülervertretung");
                     schuelerImageTextblob.heading("Langsenlehner");
                     schuelerImageTextblob.subheading("Markus");
-                    schuelerImageTextblob.content("Ich darf euch dieses Jahr als Abteilungssprecher vertreten, bei Anliegen bitte einfach melden!")
+                    schuelerImageTextblob.content("Ich darf euch dieses Jahr als Studierendenvertretung vertreten, bei Anliegen bitte einfach melden!")
                     schuelerImageTextblob.email("mlangsenlehner@student.tgm.ac.at");
                     schuelerImageTextblob.tel("N/A");
                     schuelerImageTextblob.image('team_2.jpg');
@@ -67,11 +67,11 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
         },
         {
           key: new Import("footer", 1, (_Footer: typeof Footer) => 
-            new _Footer(baseLink + "schueler/")
+            new _Footer(baseLink + "studierenden/")
           ), val: () => import(/* webpackChunkName: "footer" */"../../../../../_pageSection/footer/footer")
         }
     ), sectionChangeCallback, undefined, {
-        footer: "schueler"
+        footer: "studierenden"
     })
 
       this.elementBody.append(ce("circle-feature"))

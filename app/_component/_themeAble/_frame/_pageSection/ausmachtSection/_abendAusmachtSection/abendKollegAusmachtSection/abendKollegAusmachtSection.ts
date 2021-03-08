@@ -20,7 +20,7 @@ export default declareComponent("abend-kolleg-ausmacht-section", class extends A
                 heading: "Kolleg",
                 subheading: "lehrgänge",
                 hsize: {max:60, min:40},
-                content: "Zusätzlich zu der grundlegenden Ausbildung im Kolleg können sich die SchülerInnen durch Wahl einer der drei Abteilungen vertiefen. Damit können sie ihren Interessen nachgehen und werden zu Experten auf dem gewählten Gebiet!"
+                content: "Zusätzlich zu der grundlegenden Ausbildung im Kolleg können sich die StudentInnen durch Wahl einer der drei Abteilungen vertiefen. Damit können sie ihren Interessen nachgehen und werden zu Experten auf dem gewählten Gebiet!"
             },
             cards: [
                 {

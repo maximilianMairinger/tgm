@@ -20,7 +20,7 @@ export default declareComponent("abend-aufbau-ausmacht-section", class extends A
                 heading: "Aufbau-",
                 subheading: "lehrgänge",
                 hsize: {max:60, min:40},
-                content: "Zusätzlich zu der grundlegenden Ausbildung im Aufbaulehrgang können sich die SchülerInnen durch Wahl einer der zwei Abteilungen vertiefen. Damit können sie ihren Interessen nachgehen und werden zu Experten auf dem gewählten Gebiet!"
+                content: "Zusätzlich zu der grundlegenden Ausbildung im Aufbaulehrgang können sich die StudentInnen durch Wahl einer der zwei Abteilungen vertiefen. Damit können sie ihren Interessen nachgehen und werden zu Experten auf dem gewählten Gebiet!"
             },
             cards: [
                 {

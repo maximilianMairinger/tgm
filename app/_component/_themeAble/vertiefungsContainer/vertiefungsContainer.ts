@@ -24,14 +24,26 @@ export default class VertiefungsContainer extends ThemeAble {
         let vertiefungsContainer = this.q("vertiefungs-container")
         cards = this.parseJSONProp(cards)
         console.log(cards)
-        cards.forEach((card) => {
+        if (cards.length === 1) {
+            const card = cards.first as VertiefungsCardContent
             let vertiefungItem = ce("vertiefungs-item");
-            vertiefungItem.apd(ce("vertiefungs-extra-line-1"));
-            vertiefungItem.apd(ce("vertiefungs-extra-line-2"));
-            vertiefungItem.apd(ce("vertiefungs-extra-circle"));
+            vertiefungItem.apd(ce("vertiefungs-extra-line-1").css("opacity", 0));
+            vertiefungItem.apd(ce("vertiefungs-extra-line-2").css("opacity", 0));
+            vertiefungItem.apd(ce("vertiefungs-extra-circle").css("opacity", 0));
             vertiefungItem.apd(new VertiefungsCard(card.heading, card.content, card.icon, card.link))
             vertiefungsContainer.apd(vertiefungItem)
-        });
+        }
+        else {
+            cards.forEach((card) => {
+                let vertiefungItem = ce("vertiefungs-item");
+                vertiefungItem.apd(ce("vertiefungs-extra-line-1"));
+                vertiefungItem.apd(ce("vertiefungs-extra-line-2"));
+                vertiefungItem.apd(ce("vertiefungs-extra-circle"));
+                vertiefungItem.apd(new VertiefungsCard(card.heading, card.content, card.icon, card.link))
+                vertiefungsContainer.apd(vertiefungItem)
+            });
+        }
+        
     }
 
     stl() {

@@ -59,8 +59,7 @@ export default abstract class AbendschulAusmachtSection extends AusmachtSection 
                         content: "Das Ergebnis Ihrer Ausbildung", 
                         link: baseLink + "abschluss-" + urlName + "-abend"
                     }
-                ],
-                stundentafel: baseLink + "stundentafel-" + urlName + "-abend"
+                ]
             },
             cards: [
                 {

@@ -30,7 +30,7 @@ export default declareComponent("abend-aufbau-ausmacht-section", class extends A
                     content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Erneuerbare Energie, Umwelt und Nachhaltigkeit. In der praxisnahen Ausbildung lernen die Studenten alles wichtige um im Beruf erfolgreich zu sein."
                 },
                 {
-                    heading:"Mechatronik",
+                    heading:"Mechatronik (geplant)",
                     icon:"mechatronics",
                     link: "mechatronik-aufbaulehrgang-abend",
                     content:"In dieser Ausbildungsrichtung erfolgt eine Spezialisierung hinsichtlich Mechatronik. In der praxisnahen Ausbildung lernen die Studenten alles wichtige um im Beruf erfolgreich zu sein."

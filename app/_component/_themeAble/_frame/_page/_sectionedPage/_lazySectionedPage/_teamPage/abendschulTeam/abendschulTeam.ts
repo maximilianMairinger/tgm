@@ -53,7 +53,7 @@ export default declareComponent("bg-team", class BgTeam extends TeamPage {
                 {
                     let schuelerImageTextblob = new (schueler as typeof ImageTextblob)();
                     schuelerImageTextblob.alignment('left');
-                    schuelerImageTextblob.note("schülervertretung");
+                    schuelerImageTextblob.note("studierendenvertretung");
                     schuelerImageTextblob.heading("Langsenlehner");
                     schuelerImageTextblob.subheading("Markus");
                     schuelerImageTextblob.content("Ich darf euch dieses Jahr als Studierendenvertretung vertreten, bei Anliegen bitte einfach melden!")

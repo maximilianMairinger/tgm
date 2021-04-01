@@ -15,16 +15,11 @@ export default declareComponent("april-fools", class AprilFools extends ThemeAbl
 
     constructor(public onChange?: (activate: boolean) => void) {
         super(false)
-        var today = new Date();
-        if(today.getMonth() == 3 && today.getDate() == 1) {
-            var confettiSettings = {target: this.confettiCanvas};
-            //@ts-ignore
-            var confetti = new ConfettiGenerator(confettiSettings);
-            confetti.render();
-            this.button.click(this.close.bind(this))
-        }else{
-            this.remove()
-        }
+        var confettiSettings = {target: this.confettiCanvas};
+        //@ts-ignore
+        var confetti = new ConfettiGenerator(confettiSettings);
+        confetti.render();
+        this.button.click(this.close.bind(this))
     }
 
     close(){

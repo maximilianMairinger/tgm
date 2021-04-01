@@ -44,12 +44,12 @@ export default declareComponent("home-page", class Homepage extends LazySectione
         {
           key: new Import("aprilFools", 1, (_AprilFools: typeof AprilFools) => {
               let e = null;
-              var today = new Date();
-                if(today.getMonth() == 3 && today.getDate() == 1) {
-                    e = new _AprilFools();
-                }
-                return new WrapperSection(e) as any
+              let today = new Date();
+              if(today.getMonth() == 3 && today.getDate() == 1 && today.getFullYear() != 2021) {
+                e = new _AprilFools();
               }
+            return new WrapperSection(e) as any
+          }
           ), val: () => import(/* webpackChunkName: "aprilFools" */"../../../../../aprilFools/aprilFools")
         }
     ), sectionChangeCallback, new AliasList(

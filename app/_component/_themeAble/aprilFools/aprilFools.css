@@ -20,5 +20,28 @@ april-fools{
 canvas {
     height: 100vw;
     width: 100vw;
-    z-index: 421;
+}
+
+
+c-button{
+    position: relative;
+    width: 200px;
+    height: auto;
+    background: var(--strong-contrast-text-color);
+    color: var(--strong-background-color);
+    font-weight: bold;
+    border-radius: 7px;
+    left: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-left: 145px;
+    margin-left: auto;
+    text-align: center;
+    box-shadow: 2px 2px 20px 0 rgba(var(--strong-contrast-text-color-raw), 0.17);
+}
+
+c-button:after{
+    padding: 13px 25px;
+    content: "close"
 }

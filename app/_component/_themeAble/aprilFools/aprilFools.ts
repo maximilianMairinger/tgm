@@ -4,14 +4,18 @@ import "../../_themeAble/_button/button"
 import {ElementList} from "extended-dom";
 import Button from "../../_themeAble/_button/button";
 import ConfettiGenerator from "confetti-js";
+import "../../_themeAble/_text/textblob/textblob"
 
 
 export default declareComponent("april-fools", class CookieNote extends ThemeAble {
 
-
+    private confettiCanvas = this.q("canvas#confetti");
 
     constructor(public onChange?: (activate: boolean) => void) {
         super(false)
+        var confettiSettings = { target: this.confettiCanvas};
+        var confetti = new ConfettiGenerator(confettiSettings);
+        confetti.render();
     }
 
 

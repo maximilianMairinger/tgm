@@ -8,18 +8,23 @@ import "../../_themeAble/_text/textblob/textblob"
 import "../../_themeAble/_button/button"
 
 
-export default declareComponent("april-fools", class CookieNote extends ThemeAble {
+export default declareComponent("april-fools", class AprilFools extends ThemeAble {
 
     private confettiCanvas = this.q("canvas#confetti");
     private button = this.q("c-button.close") as Button;
 
     constructor(public onChange?: (activate: boolean) => void) {
         super(false)
-        var confettiSettings = { target: this.confettiCanvas};
-        //@ts-ignore
-        var confetti = new ConfettiGenerator(confettiSettings);
-        confetti.render();
-        this.button.click(this.close.bind(this))
+        var today = new Date();
+        if(today.getMonth() == 3 && today.getDate() == 1) {
+            var confettiSettings = {target: this.confettiCanvas};
+            //@ts-ignore
+            var confetti = new ConfettiGenerator(confettiSettings);
+            confetti.render();
+            this.button.click(this.close.bind(this))
+        }else{
+            this.remove()
+        }
     }
 
     close(){

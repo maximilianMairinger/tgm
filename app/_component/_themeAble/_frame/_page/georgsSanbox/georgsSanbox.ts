@@ -20,6 +20,7 @@ import "../../../../_themeAble/_card/_infoCard/blogCard/blogCard"
 import "../../../../_themeAble/_card/_infoCard/newsCard/newsCard"
 import "../../../../_themeAble/_card/_infoCard/unterrichtSystemeCard/unterrichtSystemeCard"
 import "../../../../_themeAble/vertiefungsContainer/vertiefungsContainer"
+import "../../../../_themeAble/aprilFools/aprilFools"
 import "../../../_icon/swipe/swipe"
 
 import "../../_pageSection/schuelerprojekteSection/schuelerprojekteSection"

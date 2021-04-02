@@ -39,6 +39,24 @@ export default declareComponent("landing-section", class Landing extends PageSec
 
     
 
+    let today = new Date();
+    if(today.getMonth() == 3 && today.getDate() == 1 && false) {
+      // debugger
+      setTimeout(() => {
+        if (this.active) {
+          //@ts-ignore
+          import(/* webpackChunkName: "aprilFools" */"../../../aprilFools/aprilFools").then(({default: AprilFools}) => {
+            let april = new AprilFools();
+            this.apd(april)  
+          })    
+        }
+      }, 1000)
+    }
+
+    
+
+    
+
     this.cardWrapper.apd(new CardCarousel(cards))
 
     
@@ -69,7 +87,7 @@ export default declareComponent("landing-section", class Landing extends PageSec
 
 
   protected activationCallback(active: boolean) {
-
+    debugger
   }
   stl() {
     return super.stl() + require("./landingSection.css").toString()

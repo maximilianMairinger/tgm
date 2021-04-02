@@ -16,6 +16,7 @@ april-fools{
     border-radius: 8px;
     position: absolute;
     box-shadow: var(--medium-shadow);
+    margin: 10vw;
 }
 
 canvas {

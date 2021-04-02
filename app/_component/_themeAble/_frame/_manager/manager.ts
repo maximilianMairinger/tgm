@@ -340,18 +340,18 @@ export default abstract class Manager extends Frame {
     }
     
     pageProm.priorityThen(() => {
-      if (this.currentUrl !== fullDomain) {
-        this.currentUrl = fullDomain;
+      if (this.currentUrl !== to) {
+        this.currentUrl = to;
         let page = this.currentPage;
         (async () => {
           if (this.pageChangeCallback) {
             try {
               if ((page as SectionedPage).sectionList) {
                 (page as SectionedPage).sectionList.tunnel(e => e.filter(s => s !== "")).get((sectionListNested) => {
-                  this.pageChangeCallback(fullDomain, sectionListNested, page.domainLevel)
+                  this.pageChangeCallback(to, sectionListNested, page.domainLevel)
                 })
               }
-              else this.pageChangeCallback(fullDomain, [], page.domainLevel)
+              else this.pageChangeCallback(to, [], page.domainLevel)
             }
             catch(e) {}
           }

@@ -12,11 +12,15 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
       let resProm: any
       let prom = new Promise((res) => {
         resolvements.set(imp, async (load: () => Promise<{default: {new(): any}}>, index: number, state?) => {
-          let loadState = async (load: () => Promise<{default: {new(): any}}>, index: number, state) => {
-            if (!instance[state].done.started) {
-              await instance[state]()
-              instance[state].done.res()
+          let loadState = async (load: () => Promise<{default: {new(): any}}>, index: number, state?) => {
+            if (state) {
+              if (!instance[state].done.started) {
+                instance[state].done.started = true
+                await instance[state]()
+                instance[state].done.res()
+              }
             }
+            
           }
 
           let instanceProm = ((async () => imp.initer((await load()).default)))();
@@ -82,7 +86,7 @@ export default function init<Func extends () => Promise<any>>(resources: Importa
         await resources.superWhiteList(imp, deepLoad)
         let result: any
         if (cb) result = await cb(instanc)
-        resProm(instanc)
+        if (resProm) resProm(instanc)
         return result !== undefined ? result : instanc
       }
       //@ts-ignore

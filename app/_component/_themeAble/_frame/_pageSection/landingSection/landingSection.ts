@@ -41,7 +41,6 @@ export default declareComponent("landing-section", class Landing extends PageSec
 
     let today = new Date();
     if(today.getMonth() == 3 && today.getDate() == 1 && false) {
-      // debugger
       setTimeout(() => {
         if (this.active) {
           //@ts-ignore

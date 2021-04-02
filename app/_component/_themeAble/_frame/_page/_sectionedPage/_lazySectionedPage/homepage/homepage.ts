@@ -8,9 +8,6 @@ import LandingSection from "../../../../_pageSection/landingSection/landingSecti
 import NewsContactSection from "../../../../_pageSection/newsContactSection/newsContactSection"
 import { ScrollProgressAlias, ScrollProgressAliasIndex, AliasList, SimpleAlias } from "../../sectionedPage"
 import Footer from "../../../../_pageSection/footer/footer"
-import WrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection"
-import AprilFools from "../../../../../aprilFools/aprilFools"
-import wrapperSection from "../../../../_pageSection/wrapperSection/wrapperSection";
 
 export default declareComponent("home-page", class Homepage extends LazySectionedPage {
   constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
@@ -40,18 +37,7 @@ export default declareComponent("home-page", class Homepage extends LazySectione
         key: new Import("footer", 1, (_Footer: typeof Footer) =>
           new _Footer(baseLink + "kontakt/")
         ), val: () => import(/* webpackChunkName: "footer" */"../../../../_pageSection/footer/footer")
-      },
-        {
-          key: new Import("aprilFools", 1, (_AprilFools: typeof AprilFools) => {
-              let e = null;
-              let today = new Date();
-              if(today.getMonth() == 3 && today.getDate() == 1 && today.getFullYear() != 2021) {
-                e = new _AprilFools();
-              }
-            return new WrapperSection(e) as any
-          }
-          ), val: () => import(/* webpackChunkName: "aprilFools" */"../../../../../aprilFools/aprilFools")
-        }
+      }
     ), sectionChangeCallback, new AliasList(
       new ScrollProgressAliasIndex("newsKontakt", [
         new ScrollProgressAlias(begin, "news"),

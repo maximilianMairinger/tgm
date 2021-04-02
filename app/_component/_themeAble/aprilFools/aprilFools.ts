@@ -8,7 +8,7 @@ import "../../_themeAble/_text/textblob/textblob"
 import "../../_themeAble/_button/button"
 
 
-export default declareComponent("april-fools", class AprilFools extends ThemeAble {
+export default class AprilFools extends ThemeAble {
 
     private confettiCanvas = this.q("canvas#confetti");
     private button = this.q("c-button.close") as Button;
@@ -38,5 +38,7 @@ export default declareComponent("april-fools", class AprilFools extends ThemeAbl
     pug() {
         return require("./aprilFools.pug").default
     }
-})
+}
+
+declareComponent("april-fools", AprilFools)
 

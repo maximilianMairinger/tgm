@@ -4,6 +4,7 @@ import { ElementList } from "extended-dom"
 import LowerNavLink from "./../lowerNavLink/lowerNavLink"
 import delay from "delay"
 
+let q = 1
 
 export default declareComponent("lower-nav", class LowerNav extends ThemeAble {
   private currentLinkWrapperElems: ElementList

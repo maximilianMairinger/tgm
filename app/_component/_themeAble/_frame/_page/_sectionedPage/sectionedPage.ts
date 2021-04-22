@@ -226,9 +226,11 @@ export default abstract class SectionedPage extends Page {
 
   private lastSectionName: string
   private activateSectionName(name: string) {
-    if (name === "") name = this.childsDefaultDomain
-    if (this.sectionChangeCallback && this.lastSectionName !== name) this.sectionChangeCallback(name)
-    this.lastSectionName = name
+    if (this.activate) {
+      if (name === "") name = this.childsDefaultDomain
+      if (this.sectionChangeCallback && this.lastSectionName !== name) this.sectionChangeCallback(name)
+      this.lastSectionName = name as string
+    }
   }
   
   private activateSectionNameWithDomain(name: string) {
@@ -236,10 +238,22 @@ export default abstract class SectionedPage extends Page {
     domain.set(name, this.domainLevel, false)
   }
 
-  private curSectionProm: PriorityPromise<PageSection>
+  private curSectionProm: Promise<{ pageSection: PageSection, fragments: { rootElem: string, closeUp: string } }>
   protected currentDomainFragment: string
   private verticalOffset: number
   tryNavigationCallback(domainFragment: string) {
+
+    domainFragment = this.merge(domainFragment)
+    
+    //@ts-ignore
+    let fragments: {
+      rootElem: string, 
+      closeUp: string
+    } = {}
+
+
+    let justInTimeFunc: Function
+
     this.verticalOffset = scrollToPadding
     if (this.sectionAliasList.reverseIndex[domainFragment] !== undefined) {
       let reverseAlias = this.sectionAliasList.reverseIndex[domainFragment]
@@ -249,16 +263,29 @@ export default abstract class SectionedPage extends Page {
       }
       else if (reverseAlias instanceof ScrollProgressAliasIndex.Reverse) {
         domainFragment = reverseAlias.root
-        this.verticalOffset += reverseAlias.progress - scrollToPadding + .5
+        // this.verticalOffset += reverseAlias.progress - scrollToPadding + .5
+        //@ts-ignore
+        justInTimeFunc = () => {this.verticalOffset += reverseAlias.progress - scrollToPadding + .5}
       }
-      this.activateSectionName(originalDomain)
+      fragments.closeUp = originalDomain
+      fragments.rootElem = domainFragment
     }
     else {
-      this.currentlyActiveSectionRootName = this.sectionAliasList.getRootOfAlias(domainFragment)
-      this.activateSectionName(this.sectionAliasList.aliasify(this.merge(domainFragment)).get().first)
+      fragments.rootElem = this.sectionAliasList.getRootOfAlias(domainFragment)
+      fragments.closeUp = this.sectionAliasList.aliasify(domainFragment).get().first
     }
 
-    return !!(this.curSectionProm = this.sectionIndex.get(this.currentDomainFragment = domainFragment))
+    const m = this.sectionIndex.get(this.currentDomainFragment = domainFragment)
+    this.curSectionProm = new Promise((res) => {
+      if (m) m.then((pageSection) => {
+        if (justInTimeFunc) justInTimeFunc()
+        res({pageSection, fragments})
+      })
+      
+    })
+
+
+    return !!m
   }
 
   async navigationCallback() {
@@ -268,8 +295,14 @@ export default abstract class SectionedPage extends Page {
     this.inScrollAnimation.set(scrollAnimation = Symbol())
 
 
-    let elem = await this.curSectionProm
+    let { pageSection: elem, fragments } = await this.curSectionProm
+
+    this.activateSectionName(fragments.closeUp)
+    this.currentlyActiveSectionRootName = fragments.rootElem
     
+    if (this.currentlyActiveSectionElem) this.currentlyActiveSectionElem.deactivate()
+    this.currentlyActiveSectionElem = elem
+    this.currentlyActiveSectionElem.activate()
 
     this.userInitedScrollEvent = false
     if (active) {
@@ -282,7 +315,7 @@ export default abstract class SectionedPage extends Page {
       })
     }
     else {
-      this.elementBody.scrollTop = elem.offsetTop + scrollToPadding
+      this.elementBody.scrollTop = this.verticalOffset + elem.offsetTop
     }
 
     
@@ -301,11 +334,11 @@ export default abstract class SectionedPage extends Page {
   private mainIntersectionObserver: IntersectionObserver
   private currentlyActiveSectionRootName: string
   private intersectingIndex: Element[] = []
+  private currentlyActiveSectionElem: PageSection
   initialActivationCallback() {
 
 
 
-    let currentlyActiveSectionElem
     let globalToken: Symbol
     let aliasSubscriptions: DataSubscription<unknown[]>[] = []
     let localSegmentScrollDataIndex = constructIndex((pageSectionElement: PageSection) => this.elementBody.scrollData().tunnel(prog => prog - pageSectionElement.offsetTop))
@@ -313,7 +346,6 @@ export default abstract class SectionedPage extends Page {
     // ----------->
 
     this.mainIntersectionObserver = new IntersectionObserver(async (c) => {
-      
       c.ea((q) => {
         if (q.isIntersecting) { 
           if (Math.abs(0 - q.boundingClientRect.y) > Math.abs(q.rootBounds.y - q.boundingClientRect.bottom)) {
@@ -347,10 +379,10 @@ export default abstract class SectionedPage extends Page {
             this.currentlyActiveSectionRootName = root
 
 
-            if (currentlyActiveSectionElem !== elem) {
-              if (currentlyActiveSectionElem !== undefined) currentlyActiveSectionElem.deactivate()
-              elem.activate() // todo: check if thats actually correct
-              currentlyActiveSectionElem = elem
+            if (this.currentlyActiveSectionElem !== elem) {
+              if (this.currentlyActiveSectionElem !== undefined) this.currentlyActiveSectionElem.deactivate()
+              elem.activate()
+              this.currentlyActiveSectionElem = elem
             }
 
             aliasSubscriptions.Inner("deactivate", [])
@@ -454,9 +486,6 @@ export default abstract class SectionedPage extends Page {
 
       }
     })
-
-    if (currentlyActiveSectionElem === undefined) return
-    else currentlyActiveSectionElem.activate()
   }
 
   private customIntersectionObserver: Map<HTMLElement, EventListener> = new Map
@@ -520,6 +549,11 @@ export default abstract class SectionedPage extends Page {
 
       this.activateSectionName(sectionName)
 
+
+      if (this.currentlyActiveSectionElem) this.currentlyActiveSectionElem.deactivate()
+      this.currentlyActiveSectionElem = section
+      this.currentlyActiveSectionElem.activate()
+
       await scrollTo(section, {
         cancelOnUserAction: true,
         verticalOffset,
@@ -570,7 +604,7 @@ export default abstract class SectionedPage extends Page {
       //   if (ali) if (ali instanceof ScrollProgressAliasIndex.Reverse) verticalOffset += ali.progress - padding + .5
       //   this.elementBody.scrollBy(0, verticalOffset)
       // })
-          
+      if (this.currentlyActiveSectionElem) this.currentlyActiveSectionElem.activate()
 
       sectionIndex.forEach(async (elem: any) => {
         elem = await elem
@@ -579,12 +613,11 @@ export default abstract class SectionedPage extends Page {
     }
     else {
       this.intersectingIndex.clear()
+      this.currentlyActiveSectionElem.deactivate()
       sectionIndex.forEach(async (elem: any) => {
         elem = await elem
         this.mainIntersectionObserver.unobserve(elem)
       })
-      delete this.currentlyActiveSectionRootName
-      delete this.lastSectionName
     }
   }
 

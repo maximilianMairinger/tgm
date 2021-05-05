@@ -122,17 +122,15 @@ blockquote{
     margin-right: 0;
     margin-left: 0;
     z-index: 1;
+    background-image: url('../../../../res/svg/cite_back.svg');
+    background-position: top left;
+    background-repeat: no-repeat;
 }
 
 blockquote::before{
     content: url("../../../../res/svg/cite_front.svg");
     margin-right: 1em;
     z-index: 1;
-}
-blockquote::after{
-    position: absolute;
-    content: url('../../../../res/svg/cite_back.svg');
-    z-index: 0;
 }
 
 h2{

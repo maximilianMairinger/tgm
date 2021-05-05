@@ -100,28 +100,20 @@ blog-image{
 
 h1, h2, h3, h4, h5, h6{
     display: flex;
-    align-items: center;
-    margin-left: calc(-.85em + -10px);
+    margin-left: calc(-.75em + -10px);
 }
 
 h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
     display: block;
+    flex-shrink: 0;
     content: "";
     background-image: url("../../../../res/svg/heading_deco.svg");
     background-repeat: no-repeat;
     background-size: contain;
-    height: .85em;
-    width: .85em;
+    height: .75em;
+    width: .75em;
+    margin-top: .3em;
     margin-right: 10px;
-}
-
-figcaption{
-    font-size: 18px;
-    font-weight: bold;
-}
-
-figcaption:before{
-    content: "- ";
 }
 
 blockquote{
@@ -202,10 +194,18 @@ blog-image img{
 }
 
 figure.kg-image-card{
+    --offset: max(-8vw, -300px);
     position: relative;
     display: block;
+    width: calc(100% + (-2 * var(--offset)));
+    max-width: unset;
     z-index: 1;
-    margin-bottom: 60px;
+    margin: 60px var(--offset);
+}
+
+figure.kg-image-card img {
+    display: block;
+    max-height: 80vh;
 }
 
 figure.kg-image-card *{
@@ -225,9 +225,17 @@ figure.kg-image-card::after, blog-image::after{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right;
-    background-size: contain;
 }
 
+figcaption{
+    padding: 0 calc(-1 * var(--offset));
+    font-size: 18px;
+    font-weight: bold;
+}
+
+figcaption:before{
+    content: "- ";
+}
 @media only screen and (max-width: 768px) {
 
     blog-post{

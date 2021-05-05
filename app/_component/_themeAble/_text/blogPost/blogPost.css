@@ -1,8 +1,9 @@
 blog-post{
+    --tuersteher: min(80vw, 700px);
     display:flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 650px;
+    width: var(--tuersteher);
     margin: 0 auto;
     justify-content: center;
 }
@@ -20,14 +21,15 @@ blog-header{
 
 blog-html{
     display: block;
-    max-width: 650px;
+    max-width: var(--tuersteher);
     color: var(--strong-text-color);
-    font-size: 17px;
+    font-size: 20px;
+    line-height: 1.5em;
     width: 100%;
 }
 
 blog-html *{
-    max-width: 650px;
+    max-width: var(--tuersteher);
 }
 
 blog-html figure{
@@ -35,7 +37,7 @@ blog-html figure{
 }
 
 blog-html iframe{
-    width: 650px;
+    width: var(--tuersteher);
     height: 365px;
 }
 
@@ -117,7 +119,6 @@ h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
 }
 
 blockquote{
-    display: flex;
     min-height: 166px;
     margin-right: 0;
     margin-left: 0;
@@ -127,6 +128,7 @@ blockquote{
 }
 
 blockquote::before{
+    float: left;
     content: url("../../../../res/svg/cite_front.svg");
     margin-right: 1.2em;
 }
@@ -187,6 +189,7 @@ blog-image img{
     box-shadow: var(--medium-shadow);
     z-index: 1;
     background: white;
+    border-radius: 50px;
 }
 
 figure.kg-image-card{
@@ -202,6 +205,7 @@ figure.kg-image-card{
 figure.kg-image-card img {
     display: block;
     max-height: 80vh;
+    border-radius: 50px;
 }
 
 figure.kg-image-card *{
@@ -229,7 +233,6 @@ blog-image::after{
 
 figcaption{
     margin: 0 calc(-1 * var(--offset));
-    font-size: 18px;
     font-weight: bold;
 }
 
@@ -243,6 +246,14 @@ figcaption:before{
         width: 100%;
         padding: 0 10vw;
         box-sizing: border-box;
+    }
+
+    blog-html{
+        font-size: 18px;
+    }
+
+    blockquote{
+        padding-left: .65em;
     }
 
     blog-html iframe{

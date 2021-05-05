@@ -107,7 +107,7 @@ h1, h2, h3, h4, h5, h6{
 h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
     display: block;
     content: "";
-    background: url("../../../../res/svg/heading_deco.svg");
+    background-image: url("../../../../res/svg/heading_deco.svg");
     background-repeat: no-repeat;
     background-size: contain;
     height: .85em;
@@ -188,8 +188,8 @@ p + p{
     margin: -2.25em 0 3em;
 }
 
-
 blog-image img{
+    position: relative;
     width: 100%;
     max-width: 100%;
     height: auto;
@@ -197,6 +197,35 @@ blog-image img{
     user-select: none;
     border-radius: 8px;
     box-shadow: var(--medium-shadow);
+    z-index: 1;
+    background: white;
+}
+
+figure.kg-image-card{
+    position: relative;
+    display: block;
+    z-index: 1;
+    margin-bottom: 60px;
+}
+
+figure.kg-image-card *{
+    position: relative;
+    z-index: 1;
+}
+
+figure.kg-image-card::after, blog-image::after{
+    position: absolute;
+    z-index: 0;
+    height: calc(100% - 2em);
+    width: 100%;
+    top: 50px;
+    left: 100px;
+    content: "";
+    background-image: url("../../../../res/svg/image_deco.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
 }
 
 @media only screen and (max-width: 768px) {

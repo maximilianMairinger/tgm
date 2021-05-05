@@ -7,6 +7,18 @@ c-schulerprojekte-section{
     opacity: 1;
 }
 
+icons-container{
+    display: flex;
+    flex-direction: row;;
+    height: 100px;
+    width: 100vw;
+}
+
+icons-container *{
+    display: block;
+    height: 100%;
+    width: auto;
+}
 
 c-blog-suggestions{
     margin-bottom: 200px;

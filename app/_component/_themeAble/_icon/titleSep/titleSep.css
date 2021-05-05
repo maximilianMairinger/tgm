@@ -1,0 +1,3 @@
+:host(.strong) svg > g, :host(.strong) svg > path {
+    fill: none;
+}

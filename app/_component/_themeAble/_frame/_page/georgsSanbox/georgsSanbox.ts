@@ -22,6 +22,11 @@ import "../../../../_themeAble/_card/_infoCard/unterrichtSystemeCard/unterrichtS
 import "../../../../_themeAble/vertiefungsContainer/vertiefungsContainer"
 import "../../../../_themeAble/aprilFools/aprilFools"
 import "../../../_icon/swipe/swipe"
+import "../../../_icon/headingDeco/headingDeco"
+import "../../../_icon/imgDeco/imgDeco"
+import "../../../_icon/titleDeco/titleDeco"
+import "../../../_icon/titleSep/titleSep"
+import "../../../_icon/cite/cite"
 
 import "../../_pageSection/schuelerprojekteSection/schuelerprojekteSection"
 

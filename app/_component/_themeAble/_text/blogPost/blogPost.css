@@ -98,6 +98,34 @@ blog-image{
     margin-bottom: 50px;
 }
 
+figcaption{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+figcaption:before{
+    content: "- ";
+}
+
+blockquote{
+    display: flex;
+    min-height: 166px;
+    margin-right: 0;
+    margin-left: 0;
+    z-index: 1;
+}
+
+blockquote::before{
+    content: url("../../../../res/svg/cite_front.svg");
+    margin-right: 1em;
+    z-index: 1;
+}
+blockquote::after{
+    position: absolute;
+    content: url('../../../../res/svg/cite_back.svg');
+    z-index: 0;
+}
+
 h2{
     font-size: 35px;
 }
@@ -170,6 +198,12 @@ blog-image img{
 
     .kg-gallery-container {
         max-width: 100%;
+    }
+
+    blockquote::before{
+        content: "";
+        margin-right: 1em;
+        z-index: 1;
     }
 
 }

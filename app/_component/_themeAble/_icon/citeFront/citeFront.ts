@@ -4,13 +4,13 @@ import declareComponent from "../../../../lib/declareComponent";
 
 
 
-export default declareComponent("cite-icon", class citeIcon extends Icon {
+export default declareComponent("cite-front-icon", class CiteFrontIcon extends Icon {
   constructor() {
     super()
 
   }
 
   pug() {
-    return require("./cite.pug").default
+    return require("./citeFront.pug").default
   }
 })

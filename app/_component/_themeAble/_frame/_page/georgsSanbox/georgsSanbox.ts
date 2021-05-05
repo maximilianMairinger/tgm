@@ -26,7 +26,8 @@ import "../../../_icon/headingDeco/headingDeco"
 import "../../../_icon/imgDeco/imgDeco"
 import "../../../_icon/titleDeco/titleDeco"
 import "../../../_icon/titleSep/titleSep"
-import "../../../_icon/cite/cite"
+import "../../../_icon/citeFront/citeFront"
+import "../../../_icon/citeBack/citeBack"
 
 import "../../_pageSection/schuelerprojekteSection/schuelerprojekteSection"
 

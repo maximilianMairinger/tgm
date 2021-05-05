@@ -223,8 +223,12 @@ figure.kg-image-card::after, blog-image::after{
     background-position: right;
 }
 
+blog-image::after{
+    top: -25px;
+}
+
 figcaption{
-    padding: 0 calc(-1 * var(--offset));
+    margin: 0 calc(-1 * var(--offset));
     font-size: 18px;
     font-weight: bold;
 }

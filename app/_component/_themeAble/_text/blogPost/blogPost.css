@@ -98,6 +98,23 @@ blog-image{
     margin-bottom: 50px;
 }
 
+h1, h2, h3, h4, h5, h6{
+    display: flex;
+    align-items: center;
+    margin-left: calc(-.85em + -10px);
+}
+
+h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
+    display: block;
+    content: "";
+    background: url("../../../../res/svg/heading_deco.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: .85em;
+    width: .85em;
+    margin-right: 10px;
+}
+
 figcaption{
     font-size: 18px;
     font-weight: bold;
@@ -201,10 +218,15 @@ blog-image img{
     }
 
     blockquote::before{
-        content: "";
-        margin-right: 1em;
-        z-index: 1;
+        display: none;
     }
 
+    h1, h2, h3, h4, h5, h6{
+        margin-left: 0;
+    }
+
+    h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
+        display: none;
+    }
 }
 

@@ -127,7 +127,7 @@ h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
 blockquote{
     min-height: 166px;
     margin-right: 0;
-    margin-left: 0;
+    margin-left: .5em;
     background-image: url('../../../../res/svg/cite_back.svg');
     background-position: top left;
     background-repeat: no-repeat;
@@ -258,10 +258,6 @@ figcaption:before{
         font-size: 18px;
     }
 
-    blockquote{
-        padding-left: .65em;
-    }
-
     blog-html iframe{
         width: 80vw;
         height: 45vw;
@@ -270,11 +266,6 @@ figcaption:before{
     .kg-gallery-container {
         max-width: 100%;
     }
-
-    blockquote::before{
-        display: none;
-    }
-
     h1, h2, h3, h4, h5, h6{
         margin-left: 0;
     }

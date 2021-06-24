@@ -39,7 +39,7 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
 
 
         const go = (dir: number) => {
-            animateScrollTo([this.container.width() * dir, null], {
+            animateScrollTo([this.container.scrollLeft + this.container.width() * dir, null], {
                 cancelOnUserAction: true,
                 speed: scrollAnimationSpeed,
                 elementToScroll: this.container,

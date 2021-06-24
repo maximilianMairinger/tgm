@@ -56,7 +56,7 @@ selection-container{
 }
 
 selection-container selection-box:not(:last-child) info-container{
-    border-bottom: 1px solid var(--strong-background-color);
+    border-bottom: 1px solid var(--weak-darken);
 }
 
 selection-box{

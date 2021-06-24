@@ -52,8 +52,22 @@ c-textblob{
 
 selection-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    overflow-x: scroll;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+selection-container::-webkit-scrollbar {
+    display: none;
+}
+  
+/* Hide scrollbar for IE, Edge add Firefox */
+selection-container {
+-ms-overflow-style: none;
+scrollbar-width: none; /* Firefox */
+}
+
+
 
 selection-container selection-box:not(:last-child) info-container{
     border-bottom: 1px solid var(--weak-darken);
@@ -272,3 +286,13 @@ image-box{
         display: none;
     }
 }
+
+selection-face {
+    display: inline-block;
+}
+
+selection-face:not(:first-child) {
+    margin-left: 10px;
+}
+
+

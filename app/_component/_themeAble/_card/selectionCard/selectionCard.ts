@@ -59,33 +59,41 @@ export default declareComponent("selection-card", class SelectionCard extends Ca
         if(options){
             this._options = this.parseJSONProp(options);
             let container = this.q("selection-container");
-            for (let conf of this._options) {
-                let box = ce("selection-box");
-                let content = ce("selection-content");
-                let icon = ce("icon-container");
-                (async () => {
-                    icon.append(new (await iconIndex.fach[conf.icon]() as any).default)
-                })()
-                let infocontainer = ce("info-container");
-                
-                if (conf.link) {
-                    let link = ce("link-container");
-                    link.append(new Link("Mehr", conf.link));
-                    infocontainer.append(link);
+            for (let i = 0; i < this._options.length; i++) {
+                let blockEndPointer = i + 4
+                if (blockEndPointer > this._options.length) blockEndPointer = this._options.length
+                let contentFace = ce("selection-face");
+                container.apd(contentFace)
+                for (; i < blockEndPointer; i++) {
+                    const conf = this._options[i]
+                    let box = ce("selection-box");
+                    contentFace.apd(box)
+                    let content = ce("selection-content");
+                    let icon = ce("icon-container");
+                    (async () => {
+                        icon.append(new (await iconIndex.fach[conf.icon]() as any).default)
+                    })()
+                    let infocontainer = ce("info-container");
+                    
+                    if (conf.link) {
+                        let link = ce("link-container");
+                        link.append(new Link("Mehr", conf.link));
+                        infocontainer.append(link);
+                    }
+                    
+                    let textcontainer = ce("text-container");
+                    textcontainer.append(ce("heading-text").text(conf.title));
+                    textcontainer.append(ce("content-text").text(conf.content));
+                    infocontainer.append(textcontainer);
+                    content.append(icon);
+                    content.append(infocontainer);
+                    let button = new Button();
+                    button.link(conf.link);
+                    box.append(ce("selection-background"));
+                    box.append(content);
+                    box.append(button);
                 }
-                
-                let textcontainer = ce("text-container");
-                textcontainer.append(ce("heading-text").text(conf.title));
-                textcontainer.append(ce("content-text").text(conf.content));
-                infocontainer.append(textcontainer);
-                content.append(icon);
-                content.append(infocontainer);
-                let button = new Button();
-                button.link(conf.link);
-                box.append(ce("selection-background"));
-                box.append(content);
-                box.append(button);
-                container.append(box);
+                i--
             }
         }else return this._options
     }

@@ -52,11 +52,25 @@ c-textblob{
 
 selection-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    overflow-x: scroll;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+selection-container::-webkit-scrollbar {
+    display: none;
+}
+  
+/* Hide scrollbar for IE, Edge add Firefox */
+selection-container {
+-ms-overflow-style: none;
+scrollbar-width: none; /* Firefox */
+}
+
+
+
 selection-container selection-box:not(:last-child) info-container{
-    border-bottom: 1px solid var(--strong-background-color);
+    border-bottom: 1px solid var(--weak-darken);
 }
 
 selection-box{
@@ -272,3 +286,45 @@ image-box{
         display: none;
     }
 }
+
+selection-face {
+    display: inline-block;
+    min-width: 100%;
+}
+
+c-arrow-icon {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    top: 60px;
+    padding: 5px;
+    border-radius: 5px;
+    transition: .3s;
+    display: none;
+}
+
+c-arrow-icon:not(.disabled) {
+    cursor: pointer;
+}
+
+c-arrow-icon.disabled {
+    opacity: .35;
+}
+
+c-arrow-icon:not(.disabled):hover, c-arrow-icon:not(.disabled):focus {
+    background: rgba(0, 0, 0, 0.05)
+}
+
+c-arrow-icon.right {
+    right: 50px;
+}
+
+c-arrow-icon.left {
+    right: 95px;
+    transform: rotate(180deg);
+}
+
+
+
+
+

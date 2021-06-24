@@ -86,7 +86,7 @@ export default declareComponent("landing-section", class Landing extends PageSec
 
 
   protected activationCallback(active: boolean) {
-    debugger
+    // debugger
   }
   stl() {
     return super.stl() + require("./landingSection.css").toString()

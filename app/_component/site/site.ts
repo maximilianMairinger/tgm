@@ -84,7 +84,7 @@ export default declareComponent("site", class extends Component {
 
       if (currentlyShowingLowerNav) lowerNav.updatePage(sections, domainLevel)
       header.updatePage(sections, domainLevel)
-    }, (section) => {
+    }, (section = "") => {
       currentSection = section
       if (currentlyShowingLowerNav) lowerNav.updateSelectedLink(section)
       header.updateSelectedLink(section)

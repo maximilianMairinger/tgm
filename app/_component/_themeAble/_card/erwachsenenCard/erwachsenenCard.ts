@@ -58,8 +58,7 @@ export default declareComponent("erwachsenen-card", class ErwachsenenCard extend
 
     private clickHandler(){
         if(this[1].hasClass(SELECTED_CLASS)){
-            
-            //quick-fix
+            //quick-fix This cannot be indexed by a SE. But this isnt too bad as a proper link is beside it in our current implementation
             if (this[2].link) domain.set(this[2].link)
         }else{
             this[0].selected.removeClass(SELECTED_CLASS)

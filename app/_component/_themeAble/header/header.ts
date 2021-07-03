@@ -439,8 +439,13 @@ export default class Header extends ThemeAble {
       return
     }
     let index = this.currentLinkContents.indexOf(newSelected)
-    if (index === -1) return
+    while (index === -1) {
+      newSelected = newSelected.slice(0, newSelected.lastIndexOf(dirString))
+      index = this.currentLinkContents.indexOf(newSelected)
+      if (newSelected === "") return
+    }
     let elem = this.currentLinkElems[index]
+    if (this.lastSelectedElem === elem) return
     
     if (this.inFadeInAnim || this.linksUpdated) {
       let updateLinkToken = this.updateLinkAnimationToken = Symbol()  

@@ -86,6 +86,7 @@ thumbnail-box{
     margin: 0 -45px;
     overflow: hidden;
     backface-visibility: hidden;
+    background: var(--secondary-background-color);
 }
 
 c-image {

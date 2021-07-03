@@ -1,6 +1,7 @@
 :host{
     max-width: 100vw;
-    overflow-x: hidden;
+    /* We cannot set overflow x to hidden here, since doing so also sets overflow-x to auto, causing the scroll event not to be propergated (which is needed for the header blur)
+    This is very dumb and I dunno how to fix :/ Maybe just make all things not overflow at all costs (max-width: 100%) */
 }
 
 blog-post{

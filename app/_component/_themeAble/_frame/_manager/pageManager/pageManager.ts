@@ -53,9 +53,9 @@ import AbendTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/a
 import AbendProjekte from "../../_page/_sectionedPage/_lazySectionedPage/abendProjekte/abendProjekte"
 
 
-import TagVorbereitung from "../../_page/_sectionedPage/_lazySectionedPage/_tagesschulPage/tagVorbereitungsPage/tagVorbereitungsPage"
-import TagAufbau from "../../_page/_sectionedPage/_lazySectionedPage/_tagesschulPage/tagAufbauPage/tagAufbauPage"
-import TagKolleg from "../../_page/_sectionedPage/_lazySectionedPage/_tagesschulPage/tagKollegPage/tagKollegPage"
+import TagVorbereitung from "../../_page/_sectionedPage/_lazySectionedPage/_erwachsenenTagesschulPage/tagVorbereitungsPage/tagVorbereitungsPage"
+import TagAufbau from "../../_page/_sectionedPage/_lazySectionedPage/_erwachsenenTagesschulPage/tagAufbauPage/tagAufbauPage"
+import TagKolleg from "../../_page/_sectionedPage/_lazySectionedPage/_erwachsenenTagesschulPage/tagKollegPage/tagKollegPage"
 
 import TagTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/erwachsenenTagTeam/erwachsenenTagTeam"
 import TagProjekte from "../../_page/_sectionedPage/_lazySectionedPage/erwachsenenTagProjekte/erwachsenenTagProjekte"
@@ -165,7 +165,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       {
         key: new Import("erwachsenenbildung/tagesschule/vorbereitungs-lehrgang", 42, (tagVorbereitung: typeof TagVorbereitung) => 
           new tagVorbereitung("erwachsenenbildung/tagesschule/vorbereitungs-lehrgang/", sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "tagVorbereitung" */"../../_page/_sectionedPage/_lazySectionedPage/_tagesschulPage/tagVorbereitungsPage/tagVorbereitungsPage")
+        ), val: () => import(/* webpackChunkName: "tagVorbereitung" */"../../_page/_sectionedPage/_lazySectionedPage/_erwachsenenTagesschulPage/tagVorbereitungsPage/tagVorbereitungsPage")
       },
       {
         key: new Import("erwachsenenbildung/tagesschule/vorbereitungs-lehrgang/team", 42, (tagTeam: typeof TagTeam) => 
@@ -182,7 +182,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       {
         key: new Import("erwachsenenbildung/tagesschule/aufbau-lehrgang", 42, (tagAufbau: typeof TagAufbau) => 
           new tagAufbau("erwachsenenbildung/tagesschule/aufbau-lehrgang/", sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "tagAufbau" */"../../_page/_sectionedPage/_lazySectionedPage/_tagesschulPage/tagAufbauPage/tagAufbauPage")
+        ), val: () => import(/* webpackChunkName: "tagAufbau" */"../../_page/_sectionedPage/_lazySectionedPage/_erwachsenenTagesschulPage/tagAufbauPage/tagAufbauPage")
       },
       {
         key: new Import("erwachsenenbildung/tagesschule/aufbau-lehrgang/team", 42, (tagTeam: typeof TagTeam) => 
@@ -199,7 +199,7 @@ export default declareComponent("page-manager", class PageManager extends Manage
       {
         key: new Import("erwachsenenbildung/tagesschule/kolleg", 42, (tagKolleg: typeof TagKolleg) => 
           new tagKolleg("erwachsenenbildung/tagesschule/kolleg/", sectionChangeCallback)
-        ), val: () => import(/* webpackChunkName: "tagKolleg" */"../../_page/_sectionedPage/_lazySectionedPage/_tagesschulPage/tagKollegPage/tagKollegPage")
+        ), val: () => import(/* webpackChunkName: "tagKolleg" */"../../_page/_sectionedPage/_lazySectionedPage/_erwachsenenTagesschulPage/tagKollegPage/tagKollegPage")
       },
       {
         key: new Import("erwachsenenbildung/tagesschule/kolleg/team", 42, (tagTeam: typeof TagTeam) => 

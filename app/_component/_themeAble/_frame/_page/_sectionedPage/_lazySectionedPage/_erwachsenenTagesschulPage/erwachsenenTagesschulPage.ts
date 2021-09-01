@@ -72,7 +72,7 @@ export default abstract class TagPage extends LazySectionedPage {
 
           imageTextBlob.heading("Kontakt");
           imageTextBlob.subheading("zu Ihrem Ansprechpartner");
-          imageTextBlob.content(`Wir stehen Ihnen gerne außerhalb der Unterrichtszeiten nach Terminvereinbarung für ein persönliches Gespräch zur Verfügung. Bitte besuchen Sie die <c-link link="./team">Teamseite</c-link>, um Ihren Ansprechpartner zu finden.`)
+          imageTextBlob.content(`Wir stehen Ihnen gerne außerhalb der Unterrichtszeiten nach Terminvereinbarung für ein persönliches Gespräch zur Verfügung. Bitte besuchen Sie die <c-link link="./team">Teamseite</c-link>, um Ihre Ansprechpartner zu finden.`)
           // imageTextBlob.linktext("Einen Besuch planen")
           // imageTextBlob.linkhref("tagesschule/informationstechnologie")
           // imageTextBlob.address("Wexstraße 19-21, 1200 Wien / 5. Stock / H525");

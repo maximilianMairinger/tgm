@@ -1,5 +1,5 @@
 import declareComponent from "../../../../../../../../lib/declareComponent"
-import AbendschulPage from "../tagesschulPage"
+import AbendschulPage from "../erwachsenenTagesschulPage"
 
 export default class AbendAufbauPage extends AbendschulPage {
   constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {

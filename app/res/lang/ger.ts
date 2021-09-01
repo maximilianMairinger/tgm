@@ -27,6 +27,10 @@ export default {
     "aufbau-lehrgang": "Aufbaulehrgang",
     "kolleg": "Kolleg",
     "werkmeister-lehrgang": "Werkmeister",
+    "angerer": "DI Angerer BEd",
+    "deininger": "DI Deininger",
+    "wess": "Dr. DI Wess",
+    
     // "erwachsenenbildung/tagesschule": "Erwachsenenbildung",
     // "erwachsenenbildung/abendschule": "Erwachsenenbildung2"
     

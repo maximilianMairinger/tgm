@@ -10,7 +10,7 @@ import {Project} from "../../../../../_text/tabletBlob/tabletBlob";
 import { Footer } from "../../../../_pageSection/footer/footer"
 
 
-export default declareComponent("abendschul-projekte", class AbendschulProjekte extends LazySectionedPage {
+export default declareComponent("erwachsenen-tag-projekte", class ErwachsenenTagProjekte extends LazySectionedPage {
   constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
@@ -19,7 +19,7 @@ export default declareComponent("abendschul-projekte", class AbendschulProjekte 
           let e = new thumbnail();
           e.note("die")
           e.heading("Projekte");
-          e.subheading("der Abendschule");
+          e.subheading("unserer Absolventen");
           e.background('abendProj3');
           return new WrapperSection(e, 'dark') as any;
         }), val: () => import(/* webpackChunkName: "thumbnail" */"../../../../../_text/_thumbnail/thumbnail")

@@ -7,7 +7,7 @@ import TeamSection from "../../../../../../_text/_sectionTextblob/teamSection/te
 import ImageTextblob from "../../../../../../_text/imageTextblob/imageTextblob"
 import Footer from "../../../../../_pageSection/footer/footer"
 
-export default declareComponent("bg-team", class BgTeam extends TeamPage {
+export default declareComponent("abendschul-team", class AbendschulTeam extends TeamPage {
   constructor(baseLink: string, sectionChangeCallback?: (section: string) => void) {
     
     super(new ImportanceMap<() => Promise<any>, any>(

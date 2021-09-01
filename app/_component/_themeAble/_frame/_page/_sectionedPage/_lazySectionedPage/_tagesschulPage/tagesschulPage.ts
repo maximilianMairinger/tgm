@@ -13,7 +13,7 @@ import Footer from "../../../../_pageSection/footer/footer"
 import NewsSection from "../../../../_pageSection/triangleNews/triangleNews"
 
 
-export default abstract class AbendPage extends LazySectionedPage {
+export default abstract class TagPage extends LazySectionedPage {
   constructor(baseLink: string, heading: {heading: string, subheading: string, note: string}, getAusmachtSectionFunc: () => any, sectionChangeCallback?: (section: string) => void, infoText?: string) {
     
     super(new ImportanceMap<() => Promise<any>, any>(
@@ -40,10 +40,10 @@ export default abstract class AbendPage extends LazySectionedPage {
 
           info.note("jetzt");
           info.heading("Nutzen Sie die Gelegenheit");
-          info.subheading("Beruf/Familie und Ausbildung");
+          info.subheading("Bilden Sie sich weiter")
           info.hsize({max:68, min:40});
           info.hmobile({max:40, min:30});
-          if (!infoText) info.content("Kein Problem - Arbeit und Lernen ist miteinander zu vereinbaren! Mit einer Ausbildung in der Höheren Lehranstalt für Berufstätige am TGM können Sie wie gewohnt Ihrem Beruf nachgehen und am Abend gemeinsam mit Gleichgesinnten lernen und Ihre beruflichen Zukunftsperspektiven erweitern. Unterstützt werden Sie dabei durch klare Unterrichtskonzepte mit Flexibilität, Blended Learning Szenarien, Verknüpfung von Theorie und Praxis, erfahrene und engagierte Lehrende, Expertinnen und Experten aus Wirtschaft und Industrie... <br>Ihr nächster Karriereschritt ist für Sie bei uns äußerst gut plan- und organisierbar!")
+          if (!infoText) info.content("Mit einer Ausbildung in der Höheren Lehranstalt für Berufstätige am TGM können Sie Ihre beruflichen Zukunftsperspektiven erweitern. Unterstützt werden Sie dabei durch klare Unterrichtskonzepte mit Flexibilität, Blended Learning Szenarien, Verknüpfung von Theorie und Praxis, erfahrene und engagierte Lehrende, Expertinnen und Experten aus Wirtschaft und Industrie... Ihr nächster Karriereschritt ist für Sie bei uns äußerst gut plan- und organisierbar!")
           else info.content(infoText)
 
           return new WrapperSection(info) as any
@@ -71,13 +71,13 @@ export default abstract class AbendPage extends LazySectionedPage {
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("zur Abendschule");
-          imageTextBlob.content("Wir stehen Ihnen gerne außerhalb der Unterrichtszeiten nach Terminvereinbarung für ein persönliches Gespräch zur Verfügung.")
+          imageTextBlob.subheading("zu Ihrem Ansprechpartner");
+          imageTextBlob.content(`Wir stehen Ihnen gerne außerhalb der Unterrichtszeiten nach Terminvereinbarung für ein persönliches Gespräch zur Verfügung. Bitte besuchen Sie die <c-link link="./team">Teamseite</c-link>, um Ihren Ansprechpartner zu finden.`)
           // imageTextBlob.linktext("Einen Besuch planen")
           // imageTextBlob.linkhref("tagesschule/informationstechnologie")
-          imageTextBlob.address("Wexstraße 19-21, 1200 Wien / 5. Stock / H525");
-          imageTextBlob.email("office-hlb@tgm.ac.at");
-          imageTextBlob.tel("01 33 126 251");
+          // imageTextBlob.address("Wexstraße 19-21, 1200 Wien / 5. Stock / H525");
+          // imageTextBlob.email("office-hlb@tgm.ac.at");
+          // imageTextBlob.tel("01 33 126 251");
           imageTextBlob.image('contactAbendschule');
           return new WrapperSection(imageTextBlob) as any
         }), val: () => import(/* webpackChunkName: "imageTextblob" */"../../../../../_text/imageTextblob/imageTextblob")

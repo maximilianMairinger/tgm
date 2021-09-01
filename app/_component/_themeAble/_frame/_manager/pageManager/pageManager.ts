@@ -50,6 +50,15 @@ import AbendKolleg from "../../_page/_sectionedPage/_lazySectionedPage/_abendsch
 import AbendWerkmeister from "../../_page/_sectionedPage/_lazySectionedPage/_abendschulPage/abendWerkmeisterPage/abendWerkmeisterPage"
 
 import AbendTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/abendschulTeam/abendschulTeam"
+import AbendProjekte from "../../_page/_sectionedPage/_lazySectionedPage/abendProjekte/abendProjekte"
+
+
+import TagVorbereitung from "../../_page/_sectionedPage/_lazySectionedPage/_tagesschulPage/tagVorbereitungsPage/tagVorbereitungsPage"
+import TagAufbau from "../../_page/_sectionedPage/_lazySectionedPage/_tagesschulPage/tagAufbauPage/tagAufbauPage"
+import TagKolleg from "../../_page/_sectionedPage/_lazySectionedPage/_tagesschulPage/tagKollegPage/tagKollegPage"
+
+import TagTeam from "../../_page/_sectionedPage/_lazySectionedPage/_teamPage/erwachsenenTagTeam/erwachsenenTagTeam"
+import TagProjekte from "../../_page/_sectionedPage/_lazySectionedPage/erwachsenenTagProjekte/erwachsenenTagProjekte"
 
 
 export default declareComponent("page-manager", class PageManager extends Manager {
@@ -62,11 +71,11 @@ export default declareComponent("page-manager", class PageManager extends Manage
             new homepage("", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "homepage" */"../../_page/_sectionedPage/_lazySectionedPage/homepage/homepage")
       },
-      {
-        key: new Import("georgsSandbox", 50, (georgsSandbox: typeof GeorgsSandbox) => 
-          new georgsSandbox()
-        ), val: () => import(/* webpackChunkName: "georgsSandbox" */"../../_page/georgsSanbox/georgsSanbox")
-      },
+      // {
+      //   key: new Import("georgsSandbox", 50, (georgsSandbox: typeof GeorgsSandbox) => 
+      //     new georgsSandbox()
+      //   ), val: () => import(/* webpackChunkName: "georgsSandbox" */"../../_page/georgsSanbox/georgsSanbox")
+      // },
       // {
       //   key: new Import("maxsSandbox", 0, (maxsSandbox: typeof MaxsSandbox) => 
       //     new maxsSandbox()
@@ -89,8 +98,8 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "abendTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/abendschulTeam/abendschulTeam")
       },
       {
-        key: new Import("erwachsenenbildung/abendschule/vorbereitungs-lehrgang/projekte", 42, (abendTeam: typeof AbendTeam) => 
-          new abendTeam("erwachsenenbildung/abendschule/vorbereitungs-lehrgang/projekte/", sectionChangeCallback)
+        key: new Import("erwachsenenbildung/abendschule/vorbereitungs-lehrgang/projekte", 42, (abendProjekte: typeof AbendProjekte) => 
+          new abendProjekte("erwachsenenbildung/abendschule/vorbereitungs-lehrgang/projekte/", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "abendProj" */"../../_page/_sectionedPage/_lazySectionedPage/abendProjekte/abendProjekte")
       },
 
@@ -106,8 +115,8 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "abendTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/abendschulTeam/abendschulTeam")
       },
       {
-        key: new Import("erwachsenenbildung/abendschule/aufbau-lehrgang/projekte", 42, (abendTeam: typeof AbendTeam) => 
-          new abendTeam("erwachsenenbildung/abendschule/aufbau-lehrgang/projekte/", sectionChangeCallback)
+        key: new Import("erwachsenenbildung/abendschule/aufbau-lehrgang/projekte", 42, (abendProjekte: typeof AbendProjekte) => 
+          new abendProjekte("erwachsenenbildung/abendschule/aufbau-lehrgang/projekte/", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "abendProj" */"../../_page/_sectionedPage/_lazySectionedPage/abendProjekte/abendProjekte")
       },
 
@@ -123,8 +132,8 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "abendTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/abendschulTeam/abendschulTeam")
       },
       {
-        key: new Import("erwachsenenbildung/abendschule/kolleg/projekte", 42, (abendTeam: typeof AbendTeam) => 
-          new abendTeam("erwachsenenbildung/abendschule/kolleg/projekte/", sectionChangeCallback)
+        key: new Import("erwachsenenbildung/abendschule/kolleg/projekte", 42, (abendProjekte: typeof AbendProjekte) => 
+          new abendProjekte("erwachsenenbildung/abendschule/kolleg/projekte/", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "abendProj" */"../../_page/_sectionedPage/_lazySectionedPage/abendProjekte/abendProjekte")
       },
 
@@ -140,10 +149,73 @@ export default declareComponent("page-manager", class PageManager extends Manage
         ), val: () => import(/* webpackChunkName: "abendTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/abendschulTeam/abendschulTeam")
       },
       {
-        key: new Import("erwachsenenbildung/abendschule/werkmeister-lehrgang/projekte", 42, (abendTeam: typeof AbendTeam) => 
-          new abendTeam("erwachsenenbildung/abendschule/werkmeister-lehrgang/projekte/", sectionChangeCallback)
+        key: new Import("erwachsenenbildung/abendschule/werkmeister-lehrgang/projekte", 42, (abendProjekte: typeof AbendProjekte) => 
+          new abendProjekte("erwachsenenbildung/abendschule/werkmeister-lehrgang/projekte/", sectionChangeCallback)
         ), val: () => import(/* webpackChunkName: "abendProj" */"../../_page/_sectionedPage/_lazySectionedPage/abendProjekte/abendProjekte")
       },
+
+
+
+
+
+
+
+
+
+      {
+        key: new Import("erwachsenenbildung/tagesschule/vorbereitungs-lehrgang", 42, (tagVorbereitung: typeof TagVorbereitung) => 
+          new tagVorbereitung("erwachsenenbildung/tagesschule/vorbereitungs-lehrgang/", sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "tagVorbereitung" */"../../_page/_sectionedPage/_lazySectionedPage/_tagesschulPage/tagVorbereitungsPage/tagVorbereitungsPage")
+      },
+      {
+        key: new Import("erwachsenenbildung/tagesschule/vorbereitungs-lehrgang/team", 42, (tagTeam: typeof TagTeam) => 
+          new tagTeam("erwachsenenbildung/tagesschule/vorbereitungs-lehrgang/team/", sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "tagTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/erwachsenenTagTeam/erwachsenenTagTeam")
+      },
+      {
+        key: new Import("erwachsenenbildung/tagesschule/vorbereitungs-lehrgang/projekte", 42, (tagProjekte: typeof TagProjekte) => 
+          new tagProjekte("erwachsenenbildung/tagesschule/vorbereitungs-lehrgang/projekte/", sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "tagProj" */"../../_page/_sectionedPage/_lazySectionedPage/erwachsenenTagProjekte/erwachsenenTagProjekte")
+      },
+
+
+      {
+        key: new Import("erwachsenenbildung/tagesschule/aufbau-lehrgang", 42, (tagAufbau: typeof TagAufbau) => 
+          new tagAufbau("erwachsenenbildung/tagesschule/aufbau-lehrgang/", sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "tagAufbau" */"../../_page/_sectionedPage/_lazySectionedPage/_tagesschulPage/tagAufbauPage/tagAufbauPage")
+      },
+      {
+        key: new Import("erwachsenenbildung/tagesschule/aufbau-lehrgang/team", 42, (tagTeam: typeof TagTeam) => 
+          new tagTeam("erwachsenenbildung/tagesschule/aufbau-lehrgang/team/", sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "tagTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/erwachsenenTagTeam/erwachsenenTagTeam")
+      },
+      {
+        key: new Import("erwachsenenbildung/tagesschule/aufbau-lehrgang/projekte", 42, (tagProjekte: typeof TagProjekte) => 
+          new tagProjekte("erwachsenenbildung/tagesschule/aufbau-lehrgang/projekte/", sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "tagProj" */"../../_page/_sectionedPage/_lazySectionedPage/erwachsenenTagProjekte/erwachsenenTagProjekte")
+      },
+
+
+      {
+        key: new Import("erwachsenenbildung/tagesschule/kolleg", 42, (tagKolleg: typeof TagKolleg) => 
+          new tagKolleg("erwachsenenbildung/tagesschule/kolleg/", sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "tagKolleg" */"../../_page/_sectionedPage/_lazySectionedPage/_tagesschulPage/tagKollegPage/tagKollegPage")
+      },
+      {
+        key: new Import("erwachsenenbildung/tagesschule/kolleg/team", 42, (tagTeam: typeof TagTeam) => 
+          new tagTeam("erwachsenenbildung/tagesschule/kolleg/team/", sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "tagTeam" */"../../_page/_sectionedPage/_lazySectionedPage/_teamPage/erwachsenenTagTeam/erwachsenenTagTeam")
+      },
+      {
+        key: new Import("erwachsenenbildung/tagesschule/kolleg/projekte", 42, (tagTeam: typeof TagProjekte) => 
+          new tagTeam("erwachsenenbildung/tagesschule/kolleg/projekte/", sectionChangeCallback)
+        ), val: () => import(/* webpackChunkName: "tagProj" */"../../_page/_sectionedPage/_lazySectionedPage/erwachsenenTagProjekte/erwachsenenTagProjekte")
+      },
+
+
+
+
+
 
 
 

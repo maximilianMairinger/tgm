@@ -8,7 +8,7 @@ import Icon from "../../../../_icon/icon";
 
 
 
-export default abstract class AbendschulAusmachtSection extends AusmachtSection {
+export default abstract class TagesschulAusmachtSection extends AusmachtSection {
 
     constructor(baseLink: string, urlName: string, heading: {heading: string, subheading: string}, vertiefung?: {
         text: {
@@ -39,25 +39,25 @@ export default abstract class AbendschulAusmachtSection extends AusmachtSection 
                         icon: "requirement", 
                         title: "Vorraussetzungen", 
                         content: "Die Vorraussetzungen für die Zulassung", 
-                        link: baseLink + "vorraussetzungen-" + urlName + "-abend"
+                        link: baseLink + "vorraussetzungen-" + urlName + "-tag"
                     },
                     {
                         icon: "register", 
                         title: "Anmeldung", 
                         content: "Der Anmeldeprozess erklärt", 
-                        link: baseLink + "anmeldung-" + urlName + "-abend"
+                        link: baseLink + "anmeldung-" + urlName + "-tag"
                     },
                     {
                         icon: "registration", 
                         title: "Aufnahme", 
                         content: "Informationen zum ersten Schultag", 
-                        link: baseLink + "aufnahme-" + urlName + "-abend"
+                        link: baseLink + "aufnahme-" + urlName + "-tag"
                     },
                     {
                         icon: "graduate", 
                         title: "Abschluss", 
                         content: "Das Ergebnis Ihrer Ausbildung", 
-                        link: baseLink + "abschluss-" + urlName + "-abend"
+                        link: baseLink + "abschluss-" + urlName + "-tag"
                     }
                 ]
             },
@@ -66,7 +66,7 @@ export default abstract class AbendschulAusmachtSection extends AusmachtSection 
                     heading: "Unterricht",
                     note: "unser",
                     thumbnail: "lecture",
-                    href: baseLink + "unterricht-" + urlName + "-abend",
+                    href: baseLink + "unterricht-" + urlName + "-tag",
                     contenttitle: "Unterricht",
                     content: "Wir sind bemüht, den Studierenden das Grundrüstzeug für die Ingenieurstätigkeit möglichst breit gestreut mitzugeben, damit die universelle Einsetzbarkeit "
                 }

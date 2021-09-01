@@ -71,7 +71,7 @@ export default abstract class TagPage extends LazySectionedPage {
           let imageTextBlob = new _ImageTextblob('right');
 
           imageTextBlob.heading("Kontakt");
-          imageTextBlob.subheading("zu Ihrem Ansprechpartner");
+          imageTextBlob.subheading("zu Ihren Ansprechpartnern");
           imageTextBlob.content(`Wir stehen Ihnen gerne außerhalb der Unterrichtszeiten nach Terminvereinbarung für ein persönliches Gespräch zur Verfügung. Bitte besuchen Sie die <c-link link="./team">Teamseite</c-link>, um Ihre Ansprechpartner zu finden.`)
           // imageTextBlob.linktext("Einen Besuch planen")
           // imageTextBlob.linkhref("tagesschule/informationstechnologie")

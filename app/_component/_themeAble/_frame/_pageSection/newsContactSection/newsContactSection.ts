@@ -13,6 +13,8 @@ import "../../../../_themeAble/_card/_infoCard/infoCard"
 import { scrollAnimationEndWithMargin, scrollAnimationStart, scrollAnimationEnd, pointerFadinPos, tgmPosition } from "./conf";
 import "./../../../../image/image"
 import "./../../../../_themeAble/_card/_infoCard/newsCard/newsCard"
+import OverflowX from "../../../overflowX/overflowX"
+import NewsCard from "./../../../../_themeAble/_card/_infoCard/newsCard/newsCard";
 
 
 
@@ -101,9 +103,23 @@ export default class NewsContactSection extends PageSection {
     this.mapTextBlob.tel("33126 0")
     this.mapTextBlob.stellvertreterAlias("Emails");
     this.mapTextBlob.stellvertreter([{name:"Info", email:"info@tgm.ac.at"}, {name:"Versuchsanstalt", email: "va@tgm.ac.at"}])
+    this.mapTextBlob.addClass("noMidMobile")
 
 
     this.allFrame.insertBefore(this.mapTextBlobFadin, this.overlay)
+
+
+
+
+    const overflowX = new OverflowX(true, ["news", "home"], NewsCard.apiParser, { left: 80}, 1200)
+    overflowX.apiQuery.then(() => {
+      overflowX.padding(false, 25)
+      overflowX.theme(this.theme())
+      this.cardContainer.append(overflowX)
+      
+    }).catch(() => {
+      console.error("No home news found")
+    })
 
 
 

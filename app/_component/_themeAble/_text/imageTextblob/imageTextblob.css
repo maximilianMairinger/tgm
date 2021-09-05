@@ -172,21 +172,21 @@ image-text-blob.left image-container{
     border-radius: 10px 0 0 10px;
 }
 
-@media only screen and (max-width: 1100px) {
+@media (max-width: 1100px) {
 
-    image-text-blob.right{
+    :not(.noMidMobile) image-text-blob.right{
         padding: 10vw 0 10vw 7vw;
     }
 
-    image-text-blob.right image-container {
+    :not(.noMidMobile) image-text-blob.right image-container {
         margin-left: -10vw;
     }
 
-    image-text-blob.left{
+    :not(.noMidMobile) image-text-blob.left{
         padding: 10vw 7vw 10vw 0;
     }
 
-    image-text-blob.left image-container{
+    :not(.noMidMobile) image-text-blob.left image-container{
         margin-right: -10vw;
     }
 }

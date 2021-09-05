@@ -1,13 +1,9 @@
 :host {
-  height: 850px;
+  height: min-content;
+  
 }
 
-@media only screen and (max-width: 768px) {
-  :host{
-    height: 1100px;
-    margin-bottom: 100px;
-  }
-}
+
 
 
 component-body {

@@ -36,7 +36,7 @@ blog-html{
 }
 
 blog-html > *{
-    max-width: var(--tuersteher);
+    max-width: 100%;
     margin-left: 0;
 }
 
@@ -113,22 +113,26 @@ blog-image{
     display: none;
     width: 105%;
     margin: 0 -2.5%;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
     
 }
 
 h1, h2, h3, h4, h5, h6{
+    margin-bottom: 0;
     display: flex;
     /* margin-left: calc(var(--offset) + (-.75em + -10px)); */
     line-height: initial;
+    position: relative;
 }
 
-h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
+h1::before, h2::before, h3::before, h4::before, h5::before, h6::before{
     display: block;
     flex-shrink: 0;
     content: "";
     background-image: url("../../../../res/svg/heading_deco.svg");
     background-repeat: no-repeat;
+    position: absolute;
+    right: 100%;
     background-size: contain;
     height: .75em;
     width: .75em;
@@ -156,6 +160,10 @@ blockquote::before{
 
 h2{
     font-size: 35px;
+}
+
+p {
+    margin-top: 0;
 }
 
 p + p{
@@ -287,7 +295,7 @@ figcaption:before{
         margin-left: 0;
     }
 
-    h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
+    h1::before, h2::before, h3::before, h4::before, h5::before, h6::before{
         display: none;
     }
 }

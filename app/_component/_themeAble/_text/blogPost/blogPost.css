@@ -13,6 +13,7 @@ blog-post{
     width: calc(var(--tuersteher) + (2 * var(--offset)));
     margin: 0 auto;
     justify-content: center;
+    max-width: 83vw;
 }
 
 blog-header{
@@ -40,8 +41,13 @@ blog-html > *{
     margin-left: 0;
 }
 
+
 hr {
+    margin: 35px 0;
     border: 1px solid #d6d6d6;
+}
+hr + * {
+    margin-top: 0 !important;
 }
 
 blog-html figure{
@@ -88,6 +94,7 @@ blog-html th, blog-html td {
 
 
 blog-extra{
+    margin: 0;
     margin-top: 15px;
     display: flex;
     flex-direction: row;
@@ -103,6 +110,7 @@ blog-extra hr{
     flex-grow: 1;
     align-self: stretch;
     height: 2px;
+    margin: auto;
     margin-left: 10px;
     border: none;
     background: var(--strong-text-color);
@@ -119,6 +127,7 @@ blog-image{
 
 h1, h2, h3, h4, h5, h6{
     margin-bottom: 0;
+    margin-top: .6em;
     display: flex;
     /* margin-left: calc(var(--offset) + (-.75em + -10px)); */
     line-height: initial;
@@ -162,12 +171,12 @@ h2{
     font-size: 35px;
 }
 
-p {
-    margin-top: 0;
+p, ul {
+    margin: 0;
+    margin-top: .4em;
 }
-
-p + p{
-    margin-top: 40px;
+ul {
+    padding-left: 20px;
 }
 
 /*ghost.css gallery*/
@@ -270,13 +279,20 @@ figcaption{
 figcaption:before{
     content: "- ";
 }
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
 
     blog-post{
         min-width: unset;
         width: 100%;
-        padding: 0 10vw;
+        padding: 0 5vw;
         box-sizing: border-box;
+        margin: 0;
+        max-width: unset;
+    }
+
+    blog-header, blog-image {
+        width: 100%;
+        margin-left: 0;
     }
 
     blog-html{

@@ -20,8 +20,8 @@ blog-header{
     flex-direction: column;
     justify-content: stretch;
     align-items: flex-start;
-    margin-left: -5%;
-    width: 100%;
+    margin: 0 -2.5%;
+    width: 105%;
     font-weight: bold;
     margin-bottom: 40px;
 }
@@ -37,7 +37,7 @@ blog-html{
 
 blog-html > *{
     max-width: var(--tuersteher);
-    margin-left: var(--offset);
+    /* margin-left: var(--offset); */
 }
 
 blog-html figure{
@@ -107,9 +107,10 @@ blog-extra hr{
 blog-image{
     position: relative;
     display: none;
-    width: 110%;
-    left: -5%;
+    width: 105%;
+    margin: 0 -2.5%;
     margin-bottom: 50px;
+    
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -198,11 +199,13 @@ blog-image img{
     height: auto;
     pointer-events: none;
     user-select: none;
-    border-radius: 8px;
     box-shadow: var(--medium-shadow);
     z-index: 1;
     background: white;
-    border-radius: 50px;
+    border-radius: 3vw;
+    max-height: 80vh;
+    object-fit: cover;
+    object-position: center;
 }
 
 blog-html figure{
@@ -232,7 +235,8 @@ figure.kg-image-card::after, blog-image::after{
     width: 100%;
     top: 50px;
     left: 100px;
-    content: "";
+    /* needs work before we add this again */
+    /* content: ""; */
     background-image: url("../../../../res/svg/image_deco.svg");
     background-size: contain;
     background-repeat: no-repeat;

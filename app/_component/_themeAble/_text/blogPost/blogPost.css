@@ -115,7 +115,7 @@ blog-image{
 
 h1, h2, h3, h4, h5, h6{
     display: flex;
-    margin-left: calc(var(--offset) + (-.75em + -10px));
+    /* margin-left: calc(var(--offset) + (-.75em + -10px)); */
     line-height: initial;
 }
 
@@ -135,7 +135,7 @@ h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
 blockquote{
     min-height: 166px;
     margin-right: 0;
-    margin-left: calc(var(--offset) + .5em);
+    /* margin-left: calc(var(--offset) + .5em); */
     background-image: url('../../../../res/svg/cite_back.svg');
     background-position: top left;
     background-repeat: no-repeat;
@@ -248,7 +248,7 @@ blog-image::after{
 }
 
 figcaption{
-    margin-left: var(--offset);
+    /* margin-left: var(--offset); */
     font-weight: bold;
 }
 

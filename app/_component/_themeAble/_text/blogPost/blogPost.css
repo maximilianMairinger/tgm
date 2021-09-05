@@ -226,7 +226,7 @@ blog-image img{
     box-shadow: var(--medium-shadow);
     z-index: 1;
     background: white;
-    border-radius: 3vw;
+    border-radius: 2vw;
     max-height: 80vh;
     object-fit: cover;
     object-position: center;

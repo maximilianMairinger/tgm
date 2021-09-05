@@ -37,7 +37,11 @@ blog-html{
 
 blog-html > *{
     max-width: var(--tuersteher);
-    /* margin-left: var(--offset); */
+    margin-left: 0;
+}
+
+hr {
+    border: 1px solid #d6d6d6;
 }
 
 blog-html figure{
@@ -133,18 +137,21 @@ h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
 }
 
 blockquote{
+    position: relative;
+    padding-left: 110px;
     min-height: 166px;
     margin-right: 0;
-    /* margin-left: calc(var(--offset) + .5em); */
+
     background-image: url('../../../../res/svg/cite_back.svg');
     background-position: top left;
     background-repeat: no-repeat;
 }
 
 blockquote::before{
-    float: left;
+    left: 0;
+    position: absolute;
     content: url("../../../../res/svg/cite_front.svg");
-    margin-right: 1.2em;
+    
 }
 
 h2{

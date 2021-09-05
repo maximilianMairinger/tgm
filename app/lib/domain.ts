@@ -136,8 +136,8 @@ let inDomainSet = false
  * Set the path or the current domain at runtime. Control the pathLevel, weather or not to push to the history stack or not and event propergation as seperate parameters.
  * Or redirect to an entirely external page.
  * 
- * Warning this is non standard! A path **without** a preceding "/" will still be interpreted as beeing origin level. Relative subdomians must be explicitly set
- * by prefixing the path with a "./" or "..". Additionally the second function argument level can be used to set a url index from which path should be interpreted from.
+ * Warning this is non standard! A path **without** a preceding "/" will **still** be interpreted as beeing origin level. Relative subdomians must be explicitly set
+ * by prefixing the path with a "./" or "..". Additionally the second function argument "level" can be used to set a url index from which path should be interpreted from.
  */
 export async function set(path: string, level: number = 0, push: boolean = true, notify = push) {
   if (level < 0) level = domainIndex.length - level
@@ -147,7 +147,7 @@ export async function set(path: string, level: number = 0, push: boolean = true,
     let pathname = document.location.pathname
     if (pathname.startsWith(dirString)) pathname = pathname.slice(1)
     if (pathname.endsWith(dirString)) pathname = pathname.slice(0, -1)
-    let currentUrlLvl = pathname.split(dirString).length - 1
+    let currentUrlLvl = pathname.split(dirString).length
     level = level + currentUrlLvl
     if (path.startsWith("./")) path = path.slice(2)
     while(path.startsWith("../")) {

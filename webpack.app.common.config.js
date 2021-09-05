@@ -14,6 +14,7 @@ module.exports = (env) => {
             publicPath: "/",
         },
         plugins: [
+            // The values here are the default values. When an environment variable is set, it will override these values.
             new webpack.EnvironmentPlugin({
                 ghostHost: "https://dev.tgmrebrand.xyz",
                 ghostApiKey: "062f128c326e0312972d41f705"

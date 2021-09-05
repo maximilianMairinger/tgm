@@ -50,5 +50,5 @@ deployUAT:
   only:
     - master
   variables:
-    ghostHost: "https://uat.tgmrebrand.xyz"
-    ghostApiKey: "1169a059ff62b6cd9997764a0d"
+    ghostHost: "https://www.tgm.ac.at"
+    ghostApiKey: "847d73bd7838dfa199ed2c16cb"

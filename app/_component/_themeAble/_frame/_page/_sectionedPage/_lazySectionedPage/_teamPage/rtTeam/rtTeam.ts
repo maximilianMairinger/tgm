@@ -26,7 +26,7 @@ export default declareComponent("rt-team", class RtTeam extends TeamPage {
                 {
                     let teamSection = new (Team as typeof TeamSection)();
                     teamSection.subheading("der RT Abteilung");
-                    teamSection.content("Die Lehrkräfte der Höheren Lehranstalt für Kunststofftechnik ermöglichen dank Erfahrung mit viel Engagement individuelle Förderung zur optimalen Entwicklung der Schülerinnen und Schüler.")
+                    teamSection.content("Die Lehrkräfte der Höheren Lehranstalt für Kunststoff- und Umwelttechnik ermöglichen dank Erfahrung mit viel Engagement individuelle Förderung zur optimalen Entwicklung der Schülerinnen und Schüler.")
                     return new WrapperSection(teamSection);
                 }
             ), val: () => import(/* webpackChunkName: "teamSection" */"../../../../../../_text/_sectionTextblob/teamSection/teamSection")

@@ -6,7 +6,11 @@
     width: auto;
     user-select: auto;
     z-index: 0;
+    cursor: pointer;
+    
 }
+
+
 
 @media only screen and (max-width: 768px) {
     :host {
@@ -30,7 +34,9 @@ info-card{
     justify-content: space-between;
     box-sizing: border-box;
     overflow: hidden;
+
 }
+
 
 note-box{
     display: block;
@@ -130,7 +136,7 @@ link-box{
 }
 
 c-link{
-    font-size: 15px;
+    font-size: 16px;
 }
 
 @media only screen and (max-width: 1450px) {

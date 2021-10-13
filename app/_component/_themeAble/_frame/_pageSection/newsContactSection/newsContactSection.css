@@ -8,10 +8,10 @@ scroll-ly {
 
 card-container {
   position: absolute;
-  width: 65%;
+  width: 70%;
   height: 100%;
   top: 0;
-  left: 35%;
+  left: 30%;
   display: flex;
   overflow-y: auto;
   transform: translateY(.1px);
@@ -21,22 +21,8 @@ card-container {
 }
 
 
-card-container > * {
-  position: relative;
-  float: left;
-  margin: auto 25px;
-  flex: 0 0 350px;
-  height: 450px;
-  scroll-snap-align: start;
-}
-
-card-container {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-}
-card-container::-webkit-scrollbar { /* WebKit */
-  width: 0;
-  height: 0;
+c-overflow-x {
+  width: 100%;
 }
 
 
@@ -257,6 +243,8 @@ mobile-overlay {
 
 
 @media (max-width: 1200px) {
+
+  
   mobile-overlay {
     opacity: 1;
   }
@@ -271,9 +259,7 @@ mobile-overlay {
   textblob-wrapper.news {
     width: 100%;
   }
-  card-container > *:first-child {
-    margin-left: 0;
-  }
+
   card-container-wrapper, card-container {
     z-index: 3;
     left: 0;
@@ -283,11 +269,22 @@ mobile-overlay {
     height: 500px;
   }
   card-container-wrapper {
-    top: 275px;
+    top: 325px;
+    padding: 0;
+  }
+  card-container {
+    left: 0;
+    padding: 0;
   }
 
   component-body {
     margin-bottom: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  c-image-textblob.news {
+    margin-top: 0px;
   }
 }
 

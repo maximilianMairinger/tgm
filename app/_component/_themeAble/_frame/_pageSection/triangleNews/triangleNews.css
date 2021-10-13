@@ -1,13 +1,9 @@
 :host {
-  height: 850px;
+  height: min-content;
+  
 }
 
-@media only screen and (max-width: 768px) {
-  :host{
-    height: 1100px;
-    margin-bottom: 100px;
-  }
-}
+
 
 
 component-body {
@@ -44,9 +40,9 @@ c-image-textblob {
 }
 
 card-container {
-  position: absolute;
+  position: relative;
   width: 65%;
-  height: 100%;
+  height: 900px;
   top: 0;
   left: 35%;
   display: flex;

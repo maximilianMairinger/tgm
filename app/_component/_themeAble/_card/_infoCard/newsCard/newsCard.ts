@@ -56,7 +56,7 @@ export default class NewsCard extends InfoCard {
             weekday(startDate),
             date,
             post.feature_image,
-            {link: post.slug, domainLevel: domain.domainIndex.length},  // TODO: This is dependent on when it is loaded
+            "./" + post.slug,
             post.title,
             post.excerpt,
         );

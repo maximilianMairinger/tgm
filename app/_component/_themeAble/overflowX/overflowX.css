@@ -119,10 +119,16 @@ filler-element{
     align-self: stretch;
 }
 
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) { 
     next-button, previous-button{
         display: none !important;
     }
+}
+
+
+/* This last mediaquery max-width is controllable by the implementor */
+@media (max-width: 768px) {
+    
 
     overflow-x-container *{
        --spacing: min(10vw, 2em);

@@ -13,6 +13,7 @@ import local from "../../../lib/formatTime";
 import {api} from "../../../lib/api";
 import { ElementList } from "extended-dom";
 import animateScrollTo from "animated-scroll-to"
+import delay from "delay";
 
 const easing = new Easing("easeInOut").function
 
@@ -103,8 +104,8 @@ export default class OverflowX extends ThemeAble {
     }
 
     constructor()
-    constructor(api: boolean, tags: string[], apiParser: (post: any) => Element, margin?: {left?: number, right?: number})
-    constructor(api?: boolean, tags?: string[], apiParser?: (post: any) => Element, margin?: {left?: number, right?: number}) {
+    constructor(api: boolean, tags: string[], apiParser: (post: any) => Element, margin?: {left?: number, right?: number}, mobileWidth?: number)
+    constructor(api?: boolean, tags?: string[], apiParser?: (post: any) => Element, margin?: {left?: number, right?: number}, mobileWidth?: number) {
         super(false)
 
         const go = () => {
@@ -130,6 +131,10 @@ export default class OverflowX extends ThemeAble {
             }, 32);
         }
 
+        if (mobileWidth) {
+            this.mobileSwitchAt(mobileWidth)
+        }
+
 
         if(api && tags && apiParser){
             this.apiData(tags, apiParser)
@@ -148,6 +153,19 @@ export default class OverflowX extends ThemeAble {
             go()
         }
     }
+
+    async mobileSwitchAt(to: number | string) {
+        const elem = this.q("style")[1]
+        let sheet: CSSStyleSheet = elem.sheet
+        while(!sheet) {
+          sheet = elem.sheet
+          await delay(0)
+        }
+        const rules = sheet.cssRules
+        const media = (rules[rules.length-1] as any).media
+        if (typeof to === "number") media.mediaText = `(max-width: ${to}px)`
+        else media.mediaText = to
+      }
 
 
 

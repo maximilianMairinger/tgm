@@ -13,6 +13,7 @@ blog-post{
     width: calc(var(--tuersteher) + (2 * var(--offset)));
     margin: 0 auto;
     justify-content: center;
+    max-width: 83vw;
 }
 
 blog-header{
@@ -20,8 +21,8 @@ blog-header{
     flex-direction: column;
     justify-content: stretch;
     align-items: flex-start;
-    margin-left: -5%;
-    width: 100%;
+    margin: 0 -2.5%;
+    width: 105%;
     font-weight: bold;
     margin-bottom: 40px;
 }
@@ -36,8 +37,17 @@ blog-html{
 }
 
 blog-html > *{
-    max-width: var(--tuersteher);
-    margin-left: var(--offset);
+    max-width: 100%;
+    margin-left: 0;
+}
+
+
+hr {
+    margin: 35px 0;
+    border: 1px solid #d6d6d6;
+}
+hr + * {
+    margin-top: 0 !important;
 }
 
 blog-html figure{
@@ -84,6 +94,7 @@ blog-html th, blog-html td {
 
 
 blog-extra{
+    margin: 0;
     margin-top: 15px;
     display: flex;
     flex-direction: row;
@@ -99,6 +110,7 @@ blog-extra hr{
     flex-grow: 1;
     align-self: stretch;
     height: 2px;
+    margin: auto;
     margin-left: 10px;
     border: none;
     background: var(--strong-text-color);
@@ -107,23 +119,29 @@ blog-extra hr{
 blog-image{
     position: relative;
     display: none;
-    width: 110%;
-    left: -5%;
-    margin-bottom: 50px;
+    width: 105%;
+    margin: 0 -2.5%;
+    margin-bottom: 25px;
+    
 }
 
 h1, h2, h3, h4, h5, h6{
+    margin-bottom: 0;
+    margin-top: .6em;
     display: flex;
-    margin-left: calc(var(--offset) + (-.75em + -10px));
+    /* margin-left: calc(var(--offset) + (-.75em + -10px)); */
     line-height: initial;
+    position: relative;
 }
 
-h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
+h1::before, h2::before, h3::before, h4::before, h5::before, h6::before{
     display: block;
     flex-shrink: 0;
     content: "";
     background-image: url("../../../../res/svg/heading_deco.svg");
     background-repeat: no-repeat;
+    position: absolute;
+    right: 100%;
     background-size: contain;
     height: .75em;
     width: .75em;
@@ -132,26 +150,33 @@ h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
 }
 
 blockquote{
+    position: relative;
+    padding-left: 110px;
     min-height: 166px;
     margin-right: 0;
-    margin-left: calc(var(--offset) + .5em);
+
     background-image: url('../../../../res/svg/cite_back.svg');
     background-position: top left;
     background-repeat: no-repeat;
 }
 
 blockquote::before{
-    float: left;
+    left: 0;
+    position: absolute;
     content: url("../../../../res/svg/cite_front.svg");
-    margin-right: 1.2em;
+    
 }
 
 h2{
     font-size: 35px;
 }
 
-p + p{
-    margin-top: 40px;
+p, ul {
+    margin: 0;
+    margin-top: .4em;
+}
+ul {
+    padding-left: 20px;
 }
 
 /*ghost.css gallery*/
@@ -198,11 +223,13 @@ blog-image img{
     height: auto;
     pointer-events: none;
     user-select: none;
-    border-radius: 8px;
     box-shadow: var(--medium-shadow);
     z-index: 1;
     background: white;
-    border-radius: 50px;
+    border-radius: 2vw;
+    max-height: 80vh;
+    object-fit: cover;
+    object-position: center;
 }
 
 blog-html figure{
@@ -232,7 +259,8 @@ figure.kg-image-card::after, blog-image::after{
     width: 100%;
     top: 50px;
     left: 100px;
-    content: "";
+    /* needs work before we add this again */
+    /* content: ""; */
     background-image: url("../../../../res/svg/image_deco.svg");
     background-size: contain;
     background-repeat: no-repeat;
@@ -244,20 +272,27 @@ blog-image::after{
 }
 
 figcaption{
-    margin-left: var(--offset);
+    /* margin-left: var(--offset); */
     font-weight: bold;
 }
 
 figcaption:before{
     content: "- ";
 }
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
 
     blog-post{
         min-width: unset;
         width: 100%;
-        padding: 0 10vw;
+        padding: 0 5vw;
         box-sizing: border-box;
+        margin: 0;
+        max-width: unset;
+    }
+
+    blog-header, blog-image {
+        width: 100%;
+        margin-left: 0;
     }
 
     blog-html{
@@ -276,7 +311,7 @@ figcaption:before{
         margin-left: 0;
     }
 
-    h1:before, h2:before, h3:before, h4:before, h5:before, h6:before{
+    h1::before, h2::before, h3::before, h4::before, h5::before, h6::before{
         display: none;
     }
 }

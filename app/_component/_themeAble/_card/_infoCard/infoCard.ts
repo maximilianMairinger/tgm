@@ -13,7 +13,8 @@ import local from "../../../../lib/formatTime";
 export default abstract class InfoCard extends Card {
 
     protected textblob = this.q("c-textblob") as Textblob;
-    private _link = this.q("c-link") as Link;
+    private linkBox = this.q("link-box")
+    private _link = new Link("Mehr erfahren", undefined, undefined, undefined, undefined, undefined, this)
     private customColor = false;
 
     constructor(){
@@ -23,9 +24,12 @@ export default abstract class InfoCard extends Card {
             if (ua.indexOf('chrome') > -1) {
                 // Chrome
             } else {
+                // safari quickfix
                 this.q("c-image").css({height: "100%", top:"2px"})
             }
         }
+
+        this.linkBox.apd(this._link)
 
     }
 

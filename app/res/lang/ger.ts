@@ -48,7 +48,7 @@ export default {
     "Elektrotechnik": "Elektrotechnik",
     "Elektronik": "Elektronik und Technische Informatik",
     "Informationstechnologie": "Informations&shy;technologie",
-    "Kunststofftechnik": "Kunststofftechnik",
+    "Kunststofftechnik": "Kunststoff- und Umwelttechnik",
     "Maschinenbau": "Maschinenbau",
     "Wirtschaftsingenieure": "Wirtschaftsingenieure"
   },

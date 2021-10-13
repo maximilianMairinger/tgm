@@ -199,6 +199,7 @@ overview-box{
     background: var(--primary-background-color);
     overflow: hidden;
     border-radius: 8px;
+    padding-bottom: 10px;
 }
 
 overview-content{
@@ -212,15 +213,16 @@ overview-content-box{
     margin-top: 20px;
 }
 
-overview-content-box c-link{
-    margin-top: 1em;
+c-link {
+    margin-top: .3em;
 }
 
 overview-img-box{
     display: block;
-    min-width: 150px;
+    min-width: 130px;
     margin-right: 25px;
     height: auto;
+    height: 143px;
 }
 
 overview-img-box *{
@@ -237,7 +239,7 @@ overview-img-box c-pruefung-icon{
     width: 125px;
     margin-top: 50px;
     margin-left: 25px;
-    margin-right: 35px;
+    /* margin-right: 35px; */
 }
 
 overview-text-box *{
@@ -248,6 +250,7 @@ overview-title{
     display: block;
     font-weight: bold;
     font-size: 20px;
+    margin-top: .3em;
 }
 
 @media only screen and (max-width: 1075px) {

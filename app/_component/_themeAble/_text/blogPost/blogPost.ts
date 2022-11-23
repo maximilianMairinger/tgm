@@ -53,6 +53,7 @@ export default class BlogPost extends Text {
   htmlcontent(html?:string){
     if(html) {
       html = html
+      // @ts-ignore
           .replaceAll("<a href", "<c-link link")
           .replaceAll("<\/a>", "<\/c-link>");
       let parser = new DOMParser();

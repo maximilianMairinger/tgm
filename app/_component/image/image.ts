@@ -38,6 +38,7 @@ export default class Image extends Component {
       const elem = ce("source") as HTMLSourceElement & {setSource: (to: string) => string}
       elem.type = typePrefix + format
       elem.setSource = (to: string) => elem.srcset = to + format
+      // @ts-ignore
       this.elems.add(elem)
     }
 
@@ -45,8 +46,10 @@ export default class Image extends Component {
     //@ts-ignore
     this.img.crossorigin = "anonymous"
     this.img.setSource = (to) => this.img.src = to + fallbackFormat
+    // @ts-ignore
     this.elems.add(this.img as any)
 
+    // @ts-ignore
     this.elementBody.apd(...this.elems)
 
 

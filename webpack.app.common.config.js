@@ -14,30 +14,20 @@ module.exports = (env) => {
             publicPath: "/",
         },
         plugins: [
-            // The values here are the default values. When an environment variable is set, it will override these values.
-            new webpack.EnvironmentPlugin({
-                ghostHost: "https://dev.tgmrebrand.xyz",
-                ghostApiKey: "062f128c326e0312972d41f705"
-            })
+            // // The values here are the default values. When an environment variable is set, it will override these values.
+            // new webpack.EnvironmentPlugin({
+            //     ghostHost: "https://dev.tgmrebrand.xyz",
+            //     ghostApiKey: "062f128c326e0312972d41f705"
+            // })
         ],
         resolve: {
             extensions: ['.ts', '.js']
         },
         module: {
-            
-                
-                  
-                
-              
             rules: [
                 {
-                    test: /\.mjs$/,
-                    include: /node_modules/,
-                    type: "javascript/auto"
-                },
-                {
                     test: /([a-zA-Z0-9\s_\\.\-\(\):])+\.static\.([a-zA-Z0-9])+$/,
-                    use: 'raw-loader',
+                    type: 'asset/source',
                 },
                 {
                     test: /\.tsx?$/,
@@ -54,22 +44,14 @@ module.exports = (env) => {
                     use: ['to-string-loader', 'css-loader'],
                 },
                 {
-
-                    test: /\.(png|jpg|gif|jpeg|woff|woff2|eot|ttf|svg)$/,
-                    use: [
-                        {
-                            loader: 'url-loader',
-                            options: {
-                                limit: 1000000000,
-                                encoding: "binary"
-                            },
-                        }
-                    ]
+                    test: /\.pug$/,
+                    use: ['raw-loader', 'pug-html-loader']
                 },
                 {
-                    test: /\.pug$/,
-                    loader: ['raw-loader', 'pug-html-loader']
-                }
+
+                    test: /\.(png|jpg|gif|jpeg|woff|woff2|eot|ttf|svg)$/,
+                    type: "asset/inline"
+                },
             ]
         }
     }

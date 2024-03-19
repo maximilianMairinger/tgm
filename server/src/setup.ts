@@ -101,7 +101,7 @@ export default function (dbName_DBConfig?: string | null | undefined | DBConfig,
     else dbConfig = dbName_DBConfig
 
     return new Promise((res) => {
-      MongoClient.connect(dbConfig.url, { useUnifiedTopology: true }).then((client) => {
+      MongoClient.connect(dbConfig.url).then((client) => {
         let db = client.db(dbConfig.dbName)
         res({db, app})
       }).catch(() => {

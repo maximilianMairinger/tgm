@@ -24,7 +24,17 @@ module.exports = (env) => {
             extensions: ['.ts', '.js']
         },
         module: {
+            
+                
+                  
+                
+              
             rules: [
+                {
+                    test: /\.mjs$/,
+                    include: /node_modules/,
+                    type: "javascript/auto"
+                },
                 {
                     test: /([a-zA-Z0-9\s_\\.\-\(\):])+\.static\.([a-zA-Z0-9])+$/,
                     use: 'raw-loader',

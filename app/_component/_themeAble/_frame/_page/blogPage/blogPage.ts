@@ -23,8 +23,12 @@ export default class BlogPage extends Page {
       this.elementBody.removeChilds()
     }
 
-
-    let blogData: PostOrPage = this.cache[query]
+    let blogData: Required<PostOrPage> = {
+      title: "My Title",
+      published_at: new Date().toISOString(),
+      feature_image: "https://picsum.photos/seed/picsum/500/300",
+      html: `<h2>lel</h2><p>My Content</p><p>lelellelel ll el elle le le l</p>`,
+    } as any
 
 
     lang.links[query] = new Data(blogData.title)
@@ -78,6 +82,7 @@ export default class BlogPage extends Page {
   private splitDomain: string[]
 
   async tryNavigationCallback(domainFragment: string) {
+
     this.splitDomain = domainFragment.split(domain.dirString)
     this.domainFrag = this.splitDomain.last
     if (this.cache[this.domainFrag]) return true
@@ -85,7 +90,7 @@ export default class BlogPage extends Page {
     try {
       blogData = await api.posts.read({slug: this.domainFrag}, {formats: ['html', 'plaintext']})
     } catch (e) {
-      return false
+      return true
     }
     this.cache[this.domainFrag] = blogData
     return true

@@ -5,7 +5,7 @@ import WaapiEasing from "waapi-easing";
 import { PriorityPromise, ResourcesMap } from "../../../../../lib/lazyLoad";
 import PageSection from "../../_pageSection/pageSection";
 import { EventListener, ScrollData } from "extended-dom";
-import { Data, DataCollection, DataSubscription } from "josm";
+import { Data, DataCollection, DataSubscription, ReadonlyData } from "josm";
 import { constructIndex } from "key-index"
 
 export const scrollToPadding = -70
@@ -479,8 +479,10 @@ export default abstract class SectionedPage extends Page {
         localSegmentScrollDataIndex(sec).get(localScrollProgressData.set.bind(localScrollProgressData))
       }
       else {
+        // @ts-ignore
         sec.getLocalScrollProgressData = () => {
           sec.getLocalScrollProgressData = () => localScrollProgressData
+          // @ts-ignore
           return localScrollProgressData = localSegmentScrollDataIndex(sec)
         }
 

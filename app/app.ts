@@ -10,3 +10,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await (await import(/* webpackChunkName: "init" */"./init")).init()
 })
+

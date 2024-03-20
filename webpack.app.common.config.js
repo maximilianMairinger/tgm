@@ -1,6 +1,7 @@
 // const InjectPlugin = require("webpack-inject-plugin")
 const path = require("path")
 const webpack = require("webpack")
+const Dotenv = require('dotenv-webpack');
 
 
 
@@ -13,13 +14,11 @@ module.exports = (env) => {
             path: path.resolve(path.dirname(''), "public"),
             publicPath: "/",
         },
-        plugins: [
-            // // The values here are the default values. When an environment variable is set, it will override these values.
-            // new webpack.EnvironmentPlugin({
-            //     ghostHost: "https://dev.tgmrebrand.xyz",
-            //     ghostApiKey: "062f128c326e0312972d41f705"
-            // })
-        ],
+        // plugins: [
+        //     new Dotenv({
+        //         systemvars: true
+        //     })
+        // ],
         resolve: {
             extensions: ['.ts', '.js']
         },

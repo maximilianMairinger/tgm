@@ -111,7 +111,7 @@ export default class NewsContactSection extends PageSection {
 
 
 
-    const overflowX = new OverflowX(true, ["news", "home"], NewsCard.apiParser, { left: 80}, 1200)
+    const overflowX = new OverflowX(true, ["tgm", "news", "home"], NewsCard.apiParser, { left: 80}, 1200)
     overflowX.apiQuery.then(() => {
       overflowX.padding(false, 25)
       overflowX.theme(this.theme())

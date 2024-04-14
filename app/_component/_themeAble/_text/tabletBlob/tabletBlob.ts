@@ -162,7 +162,7 @@ export default class TabletBlob extends Text {
         this.projectData = []
         let blogData: any
         try {
-            blogData = await api.posts.browse({filter:"tag:projekt+tag:"+abt})
+            blogData = await api.posts.browse({filter:"tag:tgm+tag:projekt+tag:"+abt})
         }
         catch(e) {
             console.error("problem with project api")
